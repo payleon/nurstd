@@ -13,7 +13,7 @@ interface TestViewProps {
 }
 
 export function TestView({ test, onBack }: TestViewProps) {
-  const { data: testContent, isLoading, error } = useQuery({
+  const { data: testContent, isLoading, error } = useQuery<string>({
     queryKey: [`/api/tests/${test.id}/content`],
   });
   
@@ -173,7 +173,7 @@ export function TestView({ test, onBack }: TestViewProps) {
               <iframe
                 id="test-iframe"
                 title={test.title}
-                srcDoc={testContent}
+                srcDoc={testContent || ''}
                 className="w-full border-0"
                 style={{ height: `${iframeHeight}px` }}
                 sandbox="allow-same-origin allow-scripts"
