@@ -5,14 +5,7 @@ import {
   Files, 
   HelpCircle, 
   Lightbulb,
-  Video, 
-  Calendar, 
-  ChevronDown,
   Search,
-  ClipboardList,
-  BookOpen,
-  BookCheck,
-  BookCopy,
   Award,
   User
 } from "lucide-react";
@@ -49,13 +42,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/questions": "Question Bank",
       "/case-studies": "Case Studies",
       "/nclex-questions": "NCLEX-Style Questions",
-      "/study-strategies": "Study Strategies",
-      "/content/medical-surgical": "Medical-Surgical",
-      "/content/obstetrics": "Obstetrics", 
-      "/content/pediatrics": "Pediatrics",
-      "/content/pharmacology": "Pharmacology",
-      "/resources/videos": "Video Tutorials",
-      "/resources/planner": "Study Planner"
+      "/study-strategies": "Study Strategies"
     };
     
     // Special case for exact matches
@@ -137,52 +124,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           icon: <Lightbulb className="h-5 w-5 mr-3" />, 
           active: activeCategory === "Study Strategies",
           path: "/study-strategies"
-        }
-      ]
-    },
-    {
-      section: "CONTENT REVIEW",
-      items: [
-        { 
-          title: "Medical-Surgical", 
-          icon: <BookOpen className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Medical-Surgical",
-          path: "/content/medical-surgical"
-        },
-        { 
-          title: "Obstetrics", 
-          icon: <BookCheck className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Obstetrics",
-          path: "/content/obstetrics"
-        },
-        { 
-          title: "Pediatrics", 
-          icon: <BookCopy className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Pediatrics",
-          path: "/content/pediatrics"
-        },
-        { 
-          title: "Pharmacology", 
-          icon: <ClipboardList className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Pharmacology",
-          path: "/content/pharmacology"
-        }
-      ]
-    },
-    {
-      section: "RESOURCES",
-      items: [
-        { 
-          title: "Video Tutorials", 
-          icon: <Video className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Video Tutorials",
-          path: "/resources/videos"
-        },
-        { 
-          title: "Study Planner", 
-          icon: <Calendar className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Study Planner",
-          path: "/resources/planner"
         }
       ]
     }
