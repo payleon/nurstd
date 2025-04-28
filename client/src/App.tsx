@@ -4,22 +4,23 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BadgeProvider } from "@/contexts/BadgeContext";
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { Loader2 } from "lucide-react";
+import { LazyRoute } from "@/components/LazyRoute";
 
-// Import all pages directly for now - we'll implement proper code splitting later when we have more time to test
-import Home from "@/pages/Home";
-import NotFound from "@/pages/not-found";
-import Achievements from "@/pages/Achievements";
-import Profile from "@/pages/Profile";
-import CaseStudies from "@/pages/CaseStudies";
-import CaseStudyDetail from "@/pages/CaseStudyDetail";
-import QuestionBank from "@/pages/QuestionBank";
-import StudyStrategies from "@/pages/StudyStrategies";
-import LearningProgress from "@/pages/LearningProgress";
-import StudyTimer from "@/pages/StudyTimer";
+// Lazy load page components
+const Home = lazy(() => import("@/pages/Home"));
+const NotFound = lazy(() => import("@/pages/not-found"));
+const Achievements = lazy(() => import("@/pages/Achievements"));
+const Profile = lazy(() => import("@/pages/Profile"));
+const CaseStudies = lazy(() => import("@/pages/CaseStudies"));
+const CaseStudyDetail = lazy(() => import("@/pages/CaseStudyDetail"));
+const QuestionBank = lazy(() => import("@/pages/QuestionBank"));
+const StudyStrategies = lazy(() => import("@/pages/StudyStrategies"));
+const LearningProgress = lazy(() => import("@/pages/LearningProgress"));
+const StudyTimer = lazy(() => import("@/pages/StudyTimer"));
 
 // Create a placeholder component for routes that aren't fully implemented yet
 function PlaceholderPage({ name }: { name: string }) {
@@ -56,14 +57,14 @@ function PlaceholderPage({ name }: { name: string }) {
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/achievements" component={Achievements} />
-      <Route path="/profile" component={Profile} />
+      <LazyRoute path="/" component={Home} />
+      <LazyRoute path="/achievements" component={Achievements} />
+      <LazyRoute path="/profile" component={Profile} />
       
       {/* Study Materials */}
-      <Route path="/question-bank" component={QuestionBank} />
-      <Route path="/case-studies" component={CaseStudies} />
-      <Route path="/case-study/:id" component={CaseStudyDetail} />
+      <LazyRoute path="/question-bank" component={QuestionBank} />
+      <LazyRoute path="/case-studies" component={CaseStudies} />
+      <LazyRoute path="/case-study/:id" component={CaseStudyDetail} />
       {/* Redirect from old path to new path */}
       <Route path="/nclex-questions">
         {() => {
@@ -72,9 +73,9 @@ function Router() {
           return null;
         }}
       </Route>
-      <Route path="/study-strategies" component={StudyStrategies} />
-      <Route path="/learning-progress" component={LearningProgress} />
-      <Route path="/study-timer" component={StudyTimer} />
+      <LazyRoute path="/study-strategies" component={StudyStrategies} />
+      <LazyRoute path="/learning-progress" component={LearningProgress} />
+      <LazyRoute path="/study-timer" component={StudyTimer} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">
@@ -99,7 +100,7 @@ function Router() {
       </Route>
       
       {/* Catch-all for not found */}
-      <Route component={NotFound} />
+      <LazyRoute path="/:rest*" component={NotFound} />
     </Switch>
   );
 }

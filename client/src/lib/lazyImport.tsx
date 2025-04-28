@@ -35,12 +35,13 @@ export function lazyImport<
 
 /**
  * Create a lazily-loaded page component with a full-page loading indicator
+ * Compatible with wouter's Route component
  * @param importFn - Dynamic import function for the page component
  * @returns Lazy page component with loading indicator
  */
 export function lazyPage<T extends React.ComponentType<any>>(
   importFn: () => Promise<{ default: T }>
-): { default: T } {
+): T {
   const LazyPage = lazy(importFn);
 
   const PageWithLoading = (props: React.ComponentProps<T>) => (
@@ -58,5 +59,5 @@ export function lazyPage<T extends React.ComponentType<any>>(
     </Suspense>
   );
 
-  return { default: PageWithLoading as T };
+  return PageWithLoading as T;
 }

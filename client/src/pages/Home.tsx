@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { TestList } from "@/components/TestList";
-import { TestView } from "@/components/TestView";
-import { QuestionTestView } from "@/components/QuestionTestView";
 import { Test } from "@shared/schema";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Loader2 } from "lucide-react";
+import { lazyImport } from "@/lib/lazyImport";
+
+// Lazy load heavier components that aren't needed on initial render
+const { TestView } = lazyImport(() => import("@/components/TestView"), "TestView");
+const { QuestionTestView } = lazyImport(() => import("@/components/QuestionTestView"), "QuestionTestView");
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
