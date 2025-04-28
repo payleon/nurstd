@@ -302,8 +302,8 @@ export default function LearningProgress() {
                           <Book className="h-5 w-5 text-green-600" />
                         </div>
                         <div>
-                          <h3 className="font-bold text-green-700">{specialtyData[0]?.name || "No data yet"}</h3>
-                          <p className="text-gray-600">Your strongest knowledge area with {specialtyData[0]?.value || 0} questions completed.</p>
+                          <h3 className="font-bold text-green-700">{specialtyData && specialtyData.length > 0 ? specialtyData[0].name : "No data yet"}</h3>
+                          <p className="text-gray-600">Your strongest knowledge area with {specialtyData && specialtyData.length > 0 ? specialtyData[0].value : 0} questions completed.</p>
                         </div>
                       </motion.div>
                       

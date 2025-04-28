@@ -62,6 +62,7 @@ function Router() {
       <Route path="/case-study/:id" component={CaseStudyDetail} />
       <Route path="/nclex-questions" component={QuestionBank} />
       <Route path="/study-strategies" component={StudyStrategies} />
+      <Route path="/learning-progress" component={LearningProgress} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">

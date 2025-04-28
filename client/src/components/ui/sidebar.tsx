@@ -7,7 +7,8 @@ import {
   Lightbulb,
   Search,
   Award,
-  User
+  User,
+  BarChart
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -37,7 +38,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/case-studies": "Case Studies",
       "/nclex-questions": "Question Bank",
       "/question-bank": "Question Bank",
-      "/study-strategies": "Study Strategies"
+      "/study-strategies": "Study Strategies",
+      "/learning-progress": "Learning Progress"
     };
     
     // Special case for exact matches
@@ -98,6 +100,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       icon: <Lightbulb className="h-5 w-5 mr-3" />,
       active: activeCategory === "Study Strategies",
       path: "/study-strategies"
+    },
+    {
+      title: "Learning Progress",
+      icon: <BarChart className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Learning Progress",
+      path: "/learning-progress"
     },
     {
       title: "Profile",
