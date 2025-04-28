@@ -12,7 +12,8 @@ import {
   ClipboardList,
   BookOpen,
   BookCheck,
-  BookCopy
+  BookCopy,
+  Award
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -51,6 +52,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       icon: <Monitor className="h-5 w-5 mr-3" />,
       active: activeCategory === "My Dashboard",
       path: "/"
+    },
+    {
+      title: "Achievements",
+      icon: <Award className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Achievements",
+      path: "/achievements"
     },
     {
       section: "STUDY MATERIALS",

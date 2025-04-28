@@ -3,8 +3,10 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { BadgeProvider } from "@/contexts/BadgeContext";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
+import Achievements from "@/pages/Achievements";
 
 // Create a placeholder component for routes that aren't fully implemented yet
 function PlaceholderPage({ name }: { name: string }) {
@@ -27,6 +29,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/achievements" component={Achievements} />
       
       {/* Study Materials */}
       <Route path="/questions">
@@ -74,8 +77,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Router />
+        <BadgeProvider>
+          <Toaster />
+          <Router />
+        </BadgeProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
