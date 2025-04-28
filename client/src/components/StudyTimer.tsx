@@ -48,10 +48,19 @@ const FOCUS_BADGES = {
 
 interface StudyTimerProps {
   onFocusComplete?: (minutesStudied: number) => void;
-  onFocusStart?: () => void;
+  onFocusStart?: (duration?: number, focusArea?: string, energy?: number, recommendations?: string[]) => void;
+  initialDuration?: number;
+  initialFocusArea?: string;
+  recommendations?: string[];
 }
 
-export function StudyTimer({ onFocusComplete, onFocusStart }: StudyTimerProps) {
+export function StudyTimer({ 
+  onFocusComplete, 
+  onFocusStart,
+  initialDuration, 
+  initialFocusArea,
+  recommendations = []
+}: StudyTimerProps) {
   // Timer state
   const [timerDuration, setTimerDuration] = useState(25); // Default to 25 minutes (Pomodoro)
   const [timeRemaining, setTimeRemaining] = useState(timerDuration * 60);
@@ -79,8 +88,28 @@ export function StudyTimer({ onFocusComplete, onFocusStart }: StudyTimerProps) {
   const { toast } = useToast();
   const { updateAfterTestCompleted } = useBadges();
   
-  // Load saved data from localStorage on component mount
+  // Load saved data from localStorage on component mount and apply initial values
   useEffect(() => {
+    // Set initial duration if provided
+    if (initialDuration) {
+      setTimerDuration(initialDuration);
+      setTimeRemaining(initialDuration * 60);
+      // Find matching preset or set to custom
+      const matchingPreset = TIMER_PRESETS.find(preset => preset.value === initialDuration.toString());
+      if (matchingPreset) {
+        setSelectedPreset(matchingPreset.value);
+      } else {
+        setSelectedPreset("custom");
+        setCustomTime(initialDuration);
+      }
+    }
+    
+    // Set focus area if provided
+    if (initialFocusArea) {
+      console.log("Setting initial focus area:", initialFocusArea);
+    }
+    
+    // Load saved user data
     const savedData = localStorage.getItem('studyTimerData');
     if (savedData) {
       const data = JSON.parse(savedData);
@@ -95,7 +124,7 @@ export function StudyTimer({ onFocusComplete, onFocusStart }: StudyTimerProps) {
     
     // Initialize audio
     audioRef.current = new Audio('/notification.mp3');
-  }, []);
+  }, [initialDuration, initialFocusArea]);
   
   // Save data to localStorage whenever relevant state changes
   useEffect(() => {
@@ -178,7 +207,7 @@ export function StudyTimer({ onFocusComplete, onFocusStart }: StudyTimerProps) {
     setIsPaused(false);
     
     if (onFocusStart) {
-      onFocusStart();
+      onFocusStart(timerDuration, initialFocusArea, undefined, recommendations);
     }
     
     toast({
