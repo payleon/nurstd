@@ -22,6 +22,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const [timer, setTimer] = useState("02:00:00");
   const [showFlaggedOnly, setShowFlaggedOnly] = useState(false);
   const [flaggedQuestions, setFlaggedQuestions] = useState<number[]>([]);
+  const [incorrectAnswers, setIncorrectAnswers] = useState<number[]>([]);
+  const [showReviewMode, setShowReviewMode] = useState(false);
   
   const questions = questionsData?.questions || [];
   const currentQuestion = questions[currentQuestionIndex];
@@ -75,6 +77,32 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
       ...userAnswers,
       [currentQuestion.id]: answer
     });
+    
+    // If this is a change to an existing answer, check if it was correct
+    checkAnswer(currentQuestion.id, answer);
+  };
+  
+  const checkAnswer = (questionId: number, answer: string | string[]) => {
+    const question = questions.find(q => q.id === questionId);
+    if (!question) return;
+    
+    let isCorrect = false;
+    
+    if (Array.isArray(question.correctAnswer) && Array.isArray(answer)) {
+      // For select all that apply questions
+      isCorrect = 
+        answer.length === question.correctAnswer.length && 
+        answer.every(a => question.correctAnswer.includes(a));
+    } else if (!Array.isArray(question.correctAnswer) && !Array.isArray(answer)) {
+      // For multiple choice and fill in blank questions
+      isCorrect = answer === question.correctAnswer;
+    }
+    
+    if (!isCorrect && !incorrectAnswers.includes(questionId)) {
+      setIncorrectAnswers([...incorrectAnswers, questionId]);
+    } else if (isCorrect && incorrectAnswers.includes(questionId)) {
+      setIncorrectAnswers(incorrectAnswers.filter(id => id !== questionId));
+    }
   };
 
   const toggleFlagQuestion = () => {
