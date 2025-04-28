@@ -11,6 +11,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Test } from "@shared/schema";
 import { FileText, FileCheck, Clock, Calendar, BarChart } from "lucide-react";
+import { Link } from "wouter";
 
 interface TestListProps {
   onSelectTest: (test: Test) => void;
@@ -215,9 +216,11 @@ export function TestList({ onSelectTest }: TestListProps) {
           </div>
           
           <div className="mt-6 text-center">
-            <button className="neuro-button-primary">
-              View Study Resources
-            </button>
+            <Link href="/study-strategies">
+              <button className="neuro-button-primary">
+                View Study Resources
+              </button>
+            </Link>
           </div>
         </div>
       </div>
