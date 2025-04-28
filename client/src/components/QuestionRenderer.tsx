@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Question } from "@shared/schema";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 
@@ -23,6 +23,12 @@ export function QuestionRenderer({
   const [textAnswer, setTextAnswer] = useState<string>(
     typeof userAnswer === 'string' ? userAnswer : ''
   );
+  
+  // Reset state when question changes
+  useEffect(() => {
+    setSelectedAnswers(Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []);
+    setTextAnswer(typeof userAnswer === 'string' ? userAnswer : '');
+  }, [question.id, userAnswer]);
   
   const isSingleChoice = question.type === "mc";
   const isMultiChoice = question.type === "sata";

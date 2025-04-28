@@ -55,21 +55,6 @@ export default function Home() {
           </div>
         </main>
       </div>
-
-      {/* Chat/Help Button */}
-      <div className="fixed bottom-6 right-6 z-10">
-        <button 
-          className="neuro-button-primary flex items-center justify-center w-14 h-14 rounded-none relative"
-          onClick={() => {
-            alert("Support chat is coming soon!\n\nOur support team will be available to help with your questions about the NCLEX exam.");
-          }}
-        >
-          <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 border-2 border-white flex items-center justify-center font-bold">
-            1
-          </span>
-          <MessageCircle className="h-6 w-6" />
-        </button>
-      </div>
     </div>
   );
 }
