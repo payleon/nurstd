@@ -224,6 +224,157 @@
       ],
       "correctAnswer": "B",
       "rationale": "The FHR pattern described is characteristic of variable decelerations, which are caused by umbilical cord compression (B). Key features include: abrupt onset, rapid drop (often below 100 bpm), variable timing in relation to contractions, and rapid return to baseline. Variable decelerations have a distinctive 'V' or 'U' shape on the monitor. Uteroplacental insufficiency (A) causes late decelerations, which have a gradual onset and recovery, occur after the peak of the contraction, and have a uniform shape. Maternal hypotension (C) typically causes prolonged decelerations. Fetal head compression (D) causes early decelerations, which mirror the contraction and rarely drop below 100 bpm."
+    },
+    {
+      "id": 17,
+      "title": "Medical-Surgical Nursing (Musculoskeletal)",
+      "type": "mc",
+      "text": "A client has just undergone a total hip arthroplasty (THA). Which instruction is crucial for the nurse to include in the client's postoperative teaching to prevent hip dislocation?",
+      "choices": [
+        {"id": "A", "text": "Avoid extending the hip beyond neutral position."},
+        {"id": "B", "text": "Cross the legs only when sitting in a chair."},
+        {"id": "C", "text": "Use an abduction pillow between the legs, especially when turning."},
+        {"id": "D", "text": "Elevate the affected leg when sitting."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Maintaining hip abduction (keeping the legs apart) is critical after THA to prevent dislocation of the new joint, especially with a posterior approach. An abduction pillow (C) helps maintain this position, particularly during turning or while in bed. Hip flexion beyond 90 degrees, adduction (crossing legs - B), and internal rotation should be avoided. Extending the hip (A) is generally not restricted. Elevating the leg (D) helps with edema but doesn't directly prevent dislocation."
+    },
+    {
+      "id": 18,
+      "title": "Pharmacology",
+      "type": "mc",
+      "text": "A client is receiving intravenous heparin therapy for a deep vein thrombosis (DVT). Which laboratory value should the nurse monitor closely to assess the therapeutic effect of heparin?",
+      "choices": [
+        {"id": "A", "text": "Prothrombin Time (PT)"},
+        {"id": "B", "text": "International Normalized Ratio (INR)"},
+        {"id": "C", "text": "Activated Partial Thromboplastin Time (aPTT)"},
+        {"id": "D", "text": "Platelet Count"}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Heparin's anticoagulant effect is primarily monitored using the activated partial thromboplastin time (aPTT) (C). The therapeutic range for aPTT during heparin therapy is typically 1.5 to 2.5 times the baseline control value. PT/INR (A, B) are used to monitor warfarin therapy. Platelet count (D) is monitored to detect heparin-induced thrombocytopenia (HIT), a potential adverse effect, but not to assess therapeutic anticoagulation."
+    },
+    {
+      "id": 19,
+      "title": "Fundamentals of Nursing",
+      "type": "mc",
+      "text": "A nurse is inserting an indwelling urinary catheter into a female client. After inserting the catheter, no urine return is observed. What is the most likely reason for this?",
+      "choices": [
+        {"id": "A", "text": "The client has severe dehydration."},
+        {"id": "B", "text": "The catheter is obstructed by sediment."},
+        {"id": "C", "text": "The catheter has been inserted into the vagina."},
+        {"id": "D", "text": "The balloon was inflated prematurely."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "In female clients, accidentally inserting the urinary catheter into the vagina instead of the urethra is a common reason for lack of urine return (C). If this occurs, the nurse should leave the misplaced catheter in the vagina as a landmark, obtain a new sterile catheter kit, and attempt insertion again, aiming slightly more anteriorly and superiorly. While dehydration (A) or obstruction (B) could cause low output, complete lack of initial return often points to incorrect placement. Premature balloon inflation (D) can cause urethral trauma but would usually allow some urine return."
+    },
+    {
+      "id": 20,
+      "title": "Pediatric Nursing",
+      "type": "mc",
+      "text": "A 4-year-old child is admitted with suspected bacterial meningitis. Which clinical sign would the nurse assess for that is characteristic of meningeal irritation?",
+      "choices": [
+        {"id": "A", "text": "Negative Kernig's sign"},
+        {"id": "B", "text": "Absence of nuchal rigidity"},
+        {"id": "C", "text": "Positive Brudzinski's sign"},
+        {"id": "D", "text": "Sunken fontanelle"}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Meningeal irritation causes inflammation of the meninges, leading to specific signs. Brudzinski's sign is positive when passive flexion of the child's neck causes flexion of the hips and knees (C). Kernig's sign is positive when resistance or pain occurs upon extending the knee while the hip is flexed. Nuchal rigidity (stiff neck) is also common (B is incorrect). A negative Kernig's sign (A) indicates absence of that specific sign of irritation. A sunken fontanelle (D) suggests dehydration rather than meningitis, and by age 4, the fontanelles have typically closed."
+    },
+    {
+      "id": 21,
+      "title": "Maternity Nursing",
+      "type": "fill_in_blank",
+      "text": "The thinning and shortening of the cervix during the first stage of labor is referred to as ____________.",
+      "choices": [],
+      "correctAnswer": "effacement",
+      "rationale": "Effacement describes the process where the cervix, normally about 2-3 cm long, progressively thins out and shortens, drawing up into the lower uterine segment. It is measured in percentages (0% to 100%). Dilation refers to the opening of the cervical os."
+    },
+    {
+      "id": 22,
+      "title": "Mental Health Nursing",
+      "type": "mc",
+      "text": "A client with anorexia nervosa has a nursing diagnosis of Imbalanced Nutrition: Less Than Body Requirements. Which intervention is most important for the nurse to implement initially?",
+      "choices": [
+        {"id": "A", "text": "Explore the client's feelings about weight gain."},
+        {"id": "B", "text": "Establish a structured meal plan with specific times and amounts."},
+        {"id": "C", "text": "Provide education on the long-term health consequences of malnutrition."},
+        {"id": "D", "text": "Encourage the client to lead group therapy sessions."}
+      ],
+      "correctAnswer": "B",
+      "rationale": "For clients with anorexia nervosa, establishing nutritional stability is a priority. Implementing a structured meal plan with clear expectations for intake (B) provides routine and minimizes negotiation or avoidance behaviors around food. While exploring feelings (A) and providing education (C) are important therapeutic interventions, addressing the immediate nutritional deficit through structured eating is often the initial focus. Leading group therapy (D) is not appropriate initially and would not address the nutritional deficit."
+    },
+    {
+      "id": 23,
+      "title": "Medical-Surgical Nursing (Immune)",
+      "type": "mc",
+      "text": "A client receiving a blood transfusion develops flushing, itching, and hives within the first 15 minutes. What is the nurse's priority action?",
+      "choices": [
+        {"id": "A", "text": "Administer an antihistamine as ordered."},
+        {"id": "B", "text": "Slow the transfusion rate."},
+        {"id": "C", "text": "Stop the transfusion immediately."},
+        {"id": "D", "text": "Assess the client's vital signs."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Flushing, itching (pruritus), and hives (urticaria) are signs of a potential allergic reaction, which can range from mild to severe (anaphylaxis). The absolute first priority when any transfusion reaction is suspected is to stop the transfusion immediately (C) to prevent further administration of the offending agent. Subsequent actions include assessing vital signs (D), maintaining IV access with normal saline, notifying the provider and blood bank, and administering medications like antihistamines (A) as ordered. Slowing the rate (B) is never appropriate when a reaction is suspected."
+    },
+    {
+      "id": 24,
+      "title": "Pharmacology",
+      "type": "sata",
+      "text": "A client is prescribed digoxin (Lanoxin) for heart failure. The nurse should instruct the client to monitor for and report which signs and symptoms of potential digoxin toxicity? (Select all that apply.)",
+      "choices": [
+        {"id": "A", "text": "Visual disturbances (e.g., yellow halos, blurred vision)"},
+        {"id": "B", "text": "Tachycardia"},
+        {"id": "C", "text": "Nausea and vomiting"},
+        {"id": "D", "text": "Muscle cramps"},
+        {"id": "E", "text": "Bradycardia"},
+        {"id": "F", "text": "Confusion"}
+      ],
+      "correctAnswer": ["A", "C", "E", "F"],
+      "rationale": "Digoxin has a narrow therapeutic range, and toxicity is a significant risk. Common signs include gastrointestinal disturbances (nausea, vomiting, anorexia) (C), cardiac rhythm changes (especially bradycardia (E) or heart block), neurological symptoms (confusion, lethargy) (F), and characteristic visual disturbances (blurred vision, yellow/green halos around lights) (A). Tachycardia (B) is less common than bradycardia. Muscle cramps (D) are often associated with electrolyte imbalances (like hypokalemia, which potentiates digoxin toxicity) but are not a direct sign of digoxin toxicity itself."
+    },
+    {
+      "id": 25,
+      "title": "Leadership & Management",
+      "type": "mc",
+      "text": "A nurse manager observes that a staff nurse consistently fails to complete documentation by the end of the shift, requiring other nurses to finish it. What is the manager's most appropriate initial action?",
+      "choices": [
+        {"id": "A", "text": "Implement disciplinary action immediately."},
+        {"id": "B", "text": "Assign a mentor to the staff nurse."},
+        {"id": "C", "text": "Discuss the observation directly with the staff nurse to identify barriers and expectations."},
+        {"id": "D", "text": "Report the nurse's behavior to the board of nursing."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Effective management involves addressing performance issues directly and seeking to understand the cause. The initial step should be a private conversation with the staff nurse to discuss the specific observations, clarify expectations regarding timely documentation, and explore potential reasons or barriers (e.g., time management issues, workload, lack of knowledge) (C). Disciplinary action (A) or reporting to the board (D) would be premature without investigation and attempts at corrective action. Assigning a mentor (B) might be part of a solution but only after understanding the root cause."
+    },
+    {
+      "id": 26,
+      "title": "Community Health Nursing",
+      "type": "mc",
+      "text": "Which level of prevention focuses on early detection and prompt treatment of disease to prevent complications?",
+      "choices": [
+        {"id": "A", "text": "Primary prevention"},
+        {"id": "B", "text": "Secondary prevention"},
+        {"id": "C", "text": "Tertiary prevention"},
+        {"id": "D", "text": "Primordial prevention"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Secondary prevention (B) aims to identify diseases in their earliest stages and intervene promptly to slow or stop their progression. Examples include screening tests (e.g., mammograms, blood pressure checks) and treating diseases early. Primary prevention (A) focuses on preventing disease occurrence in the first place (e.g., vaccinations, health education). Tertiary prevention (C) focuses on rehabilitation and reducing complications in people already diagnosed with a disease. Primordial prevention (D) involves addressing broad determinants of health to prevent risk factors from developing."
+    },
+    {
+      "id": 27,
+      "title": "Medical-Surgical Nursing (Respiratory)",
+      "type": "mc",
+      "text": "A client with pneumonia has a nursing diagnosis of Ineffective Airway Clearance. Which nursing intervention is most appropriate to help liquefy respiratory secretions?",
+      "choices": [
+        {"id": "A", "text": "Administering cough suppressants."},
+        {"id": "B", "text": "Encouraging adequate fluid intake."},
+        {"id": "C", "text": "Positioning the client flat in bed."},
+        {"id": "D", "text": "Limiting physical activity."}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Adequate hydration helps to thin and liquefy respiratory secretions, making them easier to expectorate (cough up). Encouraging fluid intake (unless contraindicated) is a key intervention for ineffective airway clearance (B). Cough suppressants (A) should generally be avoided unless the cough is nonproductive and exhausting, as coughing helps clear secretions. Positioning flat (C) can hinder lung expansion; Fowler's or Semi-Fowler's is preferred. Limiting activity (D) may be necessary based on oxygenation, but mobilization actually helps mobilize secretions."
     }
   ]
 }
