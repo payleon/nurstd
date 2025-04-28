@@ -171,13 +171,13 @@ export default function CaseStudies() {
             </div>
             
             <Tabs defaultValue="All" className="mb-6">
-              <TabsList className="mb-4 flex flex-wrap">
+              <TabsList className="mb-6 flex flex-wrap p-1 bg-white shadow-md rounded-lg border-2 border-[#e2e8f0]">
                 {categories.map(category => (
                   <TabsTrigger 
                     key={category} 
                     value={category}
                     onClick={() => setActiveCategory(category)}
-                    className="mr-2 mb-2"
+                    className="mr-2 mb-2 px-4 py-2 font-medium text-sm rounded-md bg-gray-50 data-[state=active]:bg-[#4B9CD3] data-[state=active]:text-white"
                   >
                     {category}
                   </TabsTrigger>
