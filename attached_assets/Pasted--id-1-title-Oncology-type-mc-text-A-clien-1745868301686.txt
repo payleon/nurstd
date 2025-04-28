@@ -1,0 +1,499 @@
+[
+    {
+        "id": 1,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client undergoing chemotherapy develops a neutrophil count of 450/mm³. Which nursing intervention is the highest priority?",
+        "choices": [
+            {"id": "A", "text": "Monitoring temperature every 4 hours."},
+            {"id": "B", "text": "Implementing strict neutropenic precautions."},
+            {"id": "C", "text": "Administering an antiemetic as needed."},
+            {"id": "D", "text": "Encouraging frequent ambulation."}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "A neutrophil count below 500/mm³ indicates severe neutropenia, placing the client at extremely high risk for infection. The highest priority is to implement neutropenic precautions (also known as protective isolation) (B) to minimize the client's exposure to potential pathogens. This includes measures like strict hand hygiene, restricting visitors with illnesses, avoiding fresh flowers/fruits/vegetables, and using a private room. While monitoring temperature (A) is crucial for early detection of infection, preventing infection through precautions is the priority. Antiemetics (C) address nausea, and ambulation (D) is important but secondary to infection prevention in severe neutropenia."
+    },
+    {
+        "id": 2,
+        "title": "Oncology",
+        "type": "sata",
+        "text": "A nurse is caring for a client receiving external beam radiation therapy to the abdomen. Which side effects should the nurse anticipate and monitor for? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Alopecia (hair loss) on the scalp"},
+            {"id": "B", "text": "Nausea and vomiting"},
+            {"id": "C", "text": "Diarrhea"},
+            {"id": "D", "text": "Skin erythema or desquamation in the treatment field"},
+            {"id": "E", "text": "Cystitis"},
+            {"id": "F", "text": "Bone marrow suppression"}
+        ],
+        "correctAnswer": ["B", "C", "D", "E"],
+        "rationale": "Radiation therapy side effects are typically localized to the area being treated. Radiation to the abdomen can damage rapidly dividing cells in the gastrointestinal tract, leading to nausea/vomiting (B) and diarrhea (C). The skin within the treatment field is often affected, causing erythema or desquamation (D). If the bladder is within the radiation field, cystitis (inflammation of the bladder) (E) can occur. Alopecia (A) occurs only when the scalp is irradiated. Significant bone marrow suppression (F) is more common with radiation to large areas of bone marrow (like the pelvis) or with concurrent chemotherapy, although some effect can occur with abdominal radiation."
+    },
+    {
+        "id": 3,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client with lung cancer develops facial edema, distended neck veins, and dyspnea. The nurse suspects Superior Vena Cava (SVC) syndrome. What is the initial priority nursing action?",
+        "choices": [
+            {"id": "A", "text": "Administer oxygen therapy."},
+            {"id": "B", "text": "Elevate the head of the bed."},
+            {"id": "C", "text": "Obtain a STAT chest X-ray."},
+            {"id": "D", "text": "Establish intravenous access."}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "SVC syndrome is an oncologic emergency caused by obstruction of the superior vena cava, leading to impaired venous drainage from the head, neck, and upper extremities. The initial priority is to promote venous drainage and decrease intracranial pressure by elevating the head of the bed (B), typically to a semi-Fowler's or high-Fowler's position. While oxygen (A), imaging (C), and IV access (D) are important subsequent interventions, positioning is the immediate action to alleviate pressure."
+    },
+    {
+        "id": 4,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "Which laboratory finding is the hallmark characteristic of Tumor Lysis Syndrome (TLS)?",
+        "choices": [
+            {"id": "A", "text": "Hypokalemia, hypercalcemia, hypophosphatemia"},
+            {"id": "B", "text": "Hyperkalemia, hypocalcemia, hyperphosphatemia, hyperuricemia"},
+            {"id": "C", "text": "Hypokalemia, hypocalcemia, hyperphosphatemia, hypouricemia"},
+            {"id": "D", "text": "Hyperkalemia, hypercalcemia, hypophosphatemia, hyperuricemia"}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Tumor Lysis Syndrome occurs when large numbers of cancer cells are rapidly killed (often by chemotherapy), releasing their intracellular contents into the bloodstream. This leads to a characteristic metabolic profile: Hyperkalemia (release of intracellular potassium), Hyperphosphatemia (release of intracellular phosphate), Hypocalcemia (phosphate binds with calcium, lowering serum calcium), and Hyperuricemia (release and breakdown of nucleic acids into uric acid) (B)."
+    },
+    {
+        "id": 5,
+        "title": "Oncology",
+        "type": "fill_in_the_blank",
+        "text": "A common side effect of chemotherapy that results from the destruction of rapidly dividing epithelial cells lining the gastrointestinal tract, causing inflammation and ulceration, is known as __________.",
+        "choices": [],
+        "correctAnswer": ["mucositis"],
+        "rationale": "Mucositis (or stomatitis if specifically referring to the mouth) is the inflammation and ulceration of the mucous membranes lining the digestive tract, from mouth to anus. It is a common and often debilitating side effect of many chemotherapy agents and radiation therapy to the head/neck or abdomen, caused by damage to rapidly dividing epithelial cells."
+    },
+    {
+        "id": 6,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client receiving chemotherapy has a platelet count of 18,000/mm³. Which intervention is most important for the nurse to implement?",
+        "choices": [
+            {"id": "A", "text": "Encourage the use of a soft-bristled toothbrush."},
+            {"id": "B", "text": "Monitor for signs and symptoms of infection."},
+            {"id": "C", "text": "Administer packed red blood cells as ordered."},
+            {"id": "D", "text": "Assess neurological status every shift."}
+        ],
+        "correctAnswer": ["A"],
+        "rationale": "A platelet count below 20,000/mm³ indicates severe thrombocytopenia, placing the client at high risk for spontaneous bleeding. Nursing interventions focus on preventing injury and bleeding. Using a soft-bristled toothbrush (A) helps prevent gum trauma and bleeding. Other measures include avoiding invasive procedures (IM injections, rectal temps), using electric razors, and monitoring for signs of bleeding (petechiae, ecchymosis, hematuria, melena). Monitoring for infection (B) relates to neutropenia. Administering PRBCs (C) treats anemia. Assessing neuro status (D) is important but the priority for severe thrombocytopenia is bleeding precautions."
+    },
+    {
+        "id": 7,
+        "title": "Oncology",
+        "type": "sata",
+        "text": "A nurse is teaching a client about lifestyle factors that can reduce the risk of developing cancer. Which recommendations should be included? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Maintain a healthy body weight."},
+            {"id": "B", "text": "Avoid tobacco use in all forms."},
+            {"id": "C", "text": "Limit consumption of processed meats."},
+            {"id": "D", "text": "Increase intake of red meat."},
+            {"id": "E", "text": "Protect skin from excessive sun exposure."},
+            {"id": "F", "text": "Limit alcohol consumption."}
+        ],
+        "correctAnswer": ["A", "B", "C", "E", "F"],
+        "rationale": "Several lifestyle factors are linked to cancer risk. Maintaining a healthy weight (A), avoiding tobacco (B), limiting processed meats (C) and red meat (D is incorrect), protecting skin from UV radiation (E), and limiting alcohol intake (F) are all evidence-based recommendations for cancer prevention."
+    },
+    {
+        "id": 8,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client with bone metastases from prostate cancer reports increasing back pain, leg weakness, and new onset of bowel incontinence. The nurse recognizes these symptoms as suggestive of which oncologic emergency?",
+        "choices": [
+            {"id": "A", "text": "Hypercalcemia"},
+            {"id": "B", "text": "Tumor Lysis Syndrome"},
+            {"id": "C", "text": "Spinal Cord Compression"},
+            {"id": "D", "text": "Superior Vena Cava Syndrome"}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "Spinal Cord Compression (SCC) occurs when a tumor presses on the spinal cord or cauda equina. Classic signs and symptoms include new or worsening back pain (often the earliest symptom), motor weakness or sensory loss in the extremities, and late signs like bowel or bladder dysfunction (incontinence or retention) (C). It requires immediate diagnosis and treatment (often with corticosteroids and radiation/surgery) to prevent permanent neurological damage. Hypercalcemia (A) causes fatigue, confusion, constipation. TLS (B) causes metabolic abnormalities. SVC syndrome (D) causes upper body swelling and dyspnea."
+    },
+    {
+        "id": 9,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "What is the primary mechanism of action of immunotherapy drugs known as checkpoint inhibitors (e.g., pembrolizumab, nivolumab)?",
+        "choices": [
+            {"id": "A", "text": "Directly killing cancer cells by damaging their DNA."},
+            {"id": "B", "text": "Blocking growth factor receptors on cancer cells."},
+            {"id": "C", "text": "Preventing cancer cells from forming new blood vessels."},
+            {"id": "D", "text": "Blocking signals that prevent the body's own T-cells from attacking cancer cells."}
+        ],
+        "correctAnswer": ["D"],
+        "rationale": "Immune checkpoint inhibitors work by targeting regulatory pathways in T-cells that normally dampen immune responses. Cancer cells can exploit these pathways (like PD-1/PD-L1) to evade attack by the immune system. Checkpoint inhibitors block these inhibitory signals, essentially 'releasing the brakes' on the immune system and allowing T-cells to recognize and attack cancer cells more effectively (D). Option A describes chemotherapy/radiation. Option B describes targeted therapies like EGFR inhibitors. Option C describes anti-angiogenesis drugs."
+    },
+    {
+        "id": 10,
+        "title": "Oncology",
+        "type": "fill_in_the_blank",
+        "text": "The system used most commonly for staging solid tumors, which evaluates the size/extent of the primary Tumor, lymph Node involvement, and presence of distant Metastasis, is known as the ______ staging system.",
+        "choices": [],
+        "correctAnswer": ["TNM"],
+        "rationale": "The TNM staging system, developed by the American Joint Committee on Cancer (AJCC), is the most widely used system for classifying the anatomical extent of spread for most solid tumors. T describes the size and invasiveness of the primary tumor, N describes the presence and extent of cancer spread to regional lymph nodes, and M describes the presence or absence of distant metastasis."
+    },
+    {
+        "id": 11,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client receiving doxorubicin (Adriamycin), an anthracycline chemotherapy agent, is at significant risk for developing which long-term, dose-related toxicity?",
+        "choices": [
+            {"id": "A", "text": "Peripheral neuropathy"},
+            {"id": "B", "text": "Pulmonary fibrosis"},
+            {"id": "C", "text": "Cardiomyopathy"},
+            {"id": "D", "text": "Renal failure"}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "Anthracyclines like doxorubicin are known for their potential to cause dose-dependent cardiotoxicity, leading to cardiomyopathy and potentially irreversible heart failure (C). Cumulative lifetime dose limits are strictly adhered to, and cardiac function (e.g., ejection fraction via MUGA scan or echocardiogram) is monitored regularly during and after treatment. Peripheral neuropathy (A) is common with taxanes and platinum agents. Pulmonary fibrosis (B) is associated with bleomycin. Renal failure (D) is linked to cisplatin."
+    },
+    {
+        "id": 12,
+        "title": "Oncology",
+        "type": "sata",
+        "text": "A nurse is caring for a client experiencing cancer-related fatigue. Which interventions may help manage this symptom? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Encourage moderate-intensity exercise as tolerated (e.g., walking)."},
+            {"id": "B", "text": "Recommend sleeping for most of the day to conserve energy."},
+            {"id": "C", "text": "Teach energy conservation techniques (e.g., pacing activities)."},
+            {"id": "D", "text": "Assess for and manage contributing factors like anemia or pain."},
+            {"id": "E", "text": "Suggest consuming large, infrequent meals."},
+            {"id": "F", "text": "Promote good sleep hygiene."}
+        ],
+        "correctAnswer": ["A", "C", "D", "F"],
+        "rationale": "Cancer-related fatigue is multifactorial. Management includes encouraging physical activity (A), which paradoxically can reduce fatigue. Energy conservation strategies (C) help balance rest and activity. Identifying and treating underlying causes like anemia, pain, depression, or electrolyte imbalances (D) is crucial. Promoting good sleep hygiene (F) improves restorative sleep. Prolonged daytime sleeping (B) can disrupt nighttime sleep and worsen fatigue. Small, frequent meals (not E) are often better tolerated and provide sustained energy."
+    },
+    {
+        "id": 13,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client with cancer develops a serum calcium level of 13.5 mg/dL (normal range approx. 8.5-10.5 mg/dL). The nurse recognizes this as hypercalcemia. What is the priority initial treatment?",
+        "choices": [
+            {"id": "A", "text": "Administration of oral phosphate binders."},
+            {"id": "B", "text": "Initiation of intravenous hydration with normal saline."},
+            {"id": "C", "text": "Encouraging increased dietary calcium intake."},
+            {"id": "D", "text": "Administering calcium gluconate IV."}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Hypercalcemia of malignancy is an oncologic emergency. The priority initial management is aggressive intravenous hydration with normal saline (B) to dilute serum calcium and promote renal excretion. Loop diuretics may be added after volume repletion. Bisphosphonates or calcitonin are often used subsequently to inhibit bone resorption. Phosphate binders (A) treat hyperphosphatemia. Increasing calcium intake (C) would worsen hypercalcemia. Calcium gluconate (D) is used to treat hypocalcemia or hyperkalemia."
+    },
+    {
+        "id": 14,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "Which type of biopsy involves the removal of the entire suspicious lesion or tumor?",
+        "choices": [
+            {"id": "A", "text": "Incisional biopsy"},
+            {"id": "B", "text": "Excisional biopsy"},
+            {"id": "C", "text": "Needle aspiration biopsy"},
+            {"id": "D", "text": "Shave biopsy"}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "An excisional biopsy (B) involves the surgical removal of the entire tumor or lesion, along with a margin of surrounding normal tissue if possible. It is often used for smaller, accessible tumors and can be both diagnostic and therapeutic. An incisional biopsy (A) removes only a portion of the tumor. Needle aspiration (C) removes cells or fluid. A shave biopsy (D) removes superficial layers of skin."
+    },
+    {
+        "id": 15,
+        "title": "Oncology",
+        "type": "fill_in_the_blank",
+        "text": "The administration of chemotherapy directly into the cerebrospinal fluid (CSF) via lumbar puncture or an Ommaya reservoir is known as ___________ chemotherapy.",
+        "choices": [],
+        "correctAnswer": ["intrathecal"],
+        "rationale": "Intrathecal (IT) chemotherapy involves injecting chemotherapy agents directly into the subarachnoid space (which contains CSF). This route is used to treat or prevent cancer spread to the central nervous system (CNS) because many systemic chemotherapy drugs do not effectively cross the blood-brain barrier."
+    },
+    {
+        "id": 16,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client undergoing chemotherapy reports painful sores in their mouth and difficulty swallowing. The nurse assesses the oral mucosa and notes redness and ulcerations. This condition is best described as:",
+        "choices": [
+            {"id": "A", "text": "Xerostomia"},
+            {"id": "B", "text": "Candidiasis (Thrush)"},
+            {"id": "C", "text": "Stomatitis/Mucositis"},
+            {"id": "D", "text": "Gingivitis"}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "Stomatitis or mucositis (C) refers to the inflammation and ulceration of the oral mucous membranes, a common side effect of chemotherapy and radiation. Symptoms include pain, redness, sores, and difficulty eating or swallowing. Xerostomia (A) is dry mouth. Candidiasis (B) is a fungal infection often presenting as white patches. Gingivitis (D) is inflammation of the gums."
+    },
+    {
+        "id": 17,
+        "title": "Oncology",
+        "type": "sata",
+        "text": "A nurse is caring for a client receiving palliative care for advanced cancer. What are the primary goals of palliative care? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "To cure the underlying cancer."},
+            {"id": "B", "text": "To improve the client's quality of life."},
+            {"id": "C", "text": "To provide relief from pain and other distressing symptoms."},
+            {"id": "D", "text": "To focus solely on extending the client's lifespan."},
+            {"id": "E", "text": "To support the client and family in coping with illness."},
+            {"id": "F", "text": "To replace curative treatments entirely."}
+        ],
+        "correctAnswer": ["B", "C", "E"],
+        "rationale": "Palliative care focuses on improving the quality of life (B) for clients and families facing serious illness by preventing and relieving suffering. Key goals include managing pain and other symptoms (C), addressing psychosocial and spiritual needs, and supporting the client and family (E). Palliative care can be provided alongside curative treatments (F is incorrect) and is not solely focused on curing the disease (A) or extending life at all costs (D)."
+    },
+    {
+        "id": 18,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "Which nursing action is most important when administering an intravenous vesicant chemotherapy agent?",
+        "choices": [
+            {"id": "A", "text": "Infusing the medication rapidly."},
+            {"id": "B", "text": "Using a peripheral IV site in the hand."},
+            {"id": "C", "text": "Frequently assessing the IV site for signs of extravasation."},
+            {"id": "D", "text": "Administering the drug through an existing IV line with other fluids running."}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "Vesicant chemotherapy agents can cause severe tissue damage, necrosis, and blistering if they leak out of the vein into surrounding tissue (extravasation). Therefore, frequent and careful assessment of the IV site for signs of extravasation (pain, swelling, redness, lack of blood return) (C) is the most critical nursing action during administration. Vesicants should be infused slowly (A is wrong), preferably through a central line or a large, stable peripheral vein (avoiding hand/wrist - B is wrong), and ideally through a dedicated line or with compatible fluids after confirming patency (D can be risky)."
+    },
+    {
+        "id": 19,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client asks the nurse what the 'BRCA1' gene mutation means for their cancer risk. The nurse explains that mutations in BRCA1 are most strongly associated with an increased risk of which types of cancer?",
+        "choices": [
+            {"id": "A", "text": "Lung and colorectal cancer"},
+            {"id": "B", "text": "Leukemia and lymphoma"},
+            {"id": "C", "text": "Breast and ovarian cancer"},
+            {"id": "D", "text": "Skin and brain cancer"}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "BRCA1 and BRCA2 are tumor suppressor genes. Inherited mutations in these genes significantly increase the lifetime risk of developing certain cancers, most notably breast cancer (in both women and men) and ovarian cancer (C). They are also associated with increased risks of prostate cancer, pancreatic cancer, and melanoma, but the strongest association is with breast and ovarian cancer."
+    },
+    {
+        "id": 20,
+        "title": "Oncology",
+        "type": "fill_in_the_blank",
+        "text": "The complete disappearance of all signs and symptoms of cancer in response to treatment is termed a _________ response.",
+        "choices": [],
+        "correctAnswer": ["complete"],
+        "rationale": "In oncology, treatment response is categorized based on the extent to which the cancer shrinks or disappears. A complete response (CR) or complete remission means that all detectable evidence of the cancer has disappeared based on physical examination, imaging, and laboratory tests. A partial response (PR) indicates a significant reduction in tumor size."
+    },
+    {
+        "id": 21,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client receiving chemotherapy is experiencing nausea and vomiting despite scheduled antiemetics. Which non-pharmacological intervention might the nurse suggest?",
+        "choices": [
+            {"id": "A", "text": "Drinking large amounts of fluid with meals."},
+            {"id": "B", "text": "Eating warm or hot foods with strong odors."},
+            {"id": "C", "text": "Consuming small, frequent meals of bland, cool foods."},
+            {"id": "D", "text": "Lying flat immediately after eating."}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "For chemotherapy-induced nausea and vomiting (CINV), non-pharmacological strategies can complement antiemetics. Eating small, frequent meals (C) avoids an overly full stomach. Bland, cool, or room-temperature foods are often better tolerated than hot foods with strong odors (B). Drinking fluids between meals rather than with meals (A) can help. Sitting upright after eating (D is wrong) can reduce reflux and nausea."
+    },
+    {
+        "id": 22,
+        "title": "Oncology",
+        "type": "sata",
+        "text": "A nurse is caring for a client with advanced lung cancer who has a nursing diagnosis of Impaired Gas Exchange. Which nursing interventions are appropriate? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Monitor respiratory rate, depth, and oxygen saturation."},
+            {"id": "B", "text": "Position the client in a high-Fowler's or orthopneic position."},
+            {"id": "C", "text": "Administer oxygen therapy as prescribed."},
+            {"id": "D", "text": "Encourage deep breathing and coughing exercises."},
+            {"id": "E", "text": "Administer sedatives liberally to reduce anxiety."},
+            {"id": "F", "text": "Assess lung sounds frequently."}
+        ],
+        "correctAnswer": ["A", "B", "C", "D", "F"],
+        "rationale": "Impaired gas exchange requires interventions to optimize oxygenation and ventilation. This includes close monitoring of respiratory status (A, F), positioning to facilitate lung expansion (B), administering supplemental oxygen (C), and encouraging techniques to clear airways and improve alveolar ventilation (D). While managing anxiety is important, sedatives (E) must be used cautiously as they can depress respirations."
+    },
+    {
+        "id": 23,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "Which statement accurately describes cancer cachexia?",
+        "choices": [
+            {"id": "A", "text": "Weight loss easily reversed with increased caloric intake."},
+            {"id": "B", "text": "A multifactorial syndrome characterized by ongoing loss of skeletal muscle mass (with or without fat loss) that cannot be fully reversed by conventional nutritional support."},
+            {"id": "C", "text": "Weight gain due to fluid retention secondary to treatment."},
+            {"id": "D", "text": "Temporary loss of appetite directly related to chemotherapy administration."}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Cancer cachexia (B) is a complex metabolic syndrome associated with underlying illness (cancer) and characterized by involuntary weight loss, primarily due to loss of muscle mass (sarcopenia), often accompanied by fat loss. It involves inflammation, anorexia, and altered metabolism, and simple nutritional support is often insufficient to reverse it fully. It differs from simple starvation (A) or temporary anorexia (D). Fluid retention (C) can cause weight gain but is distinct from cachexia."
+    },
+    {
+        "id": 24,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A female client is prescribed tamoxifen for estrogen receptor-positive breast cancer. The nurse should instruct the client about the potential increased risk of which serious adverse effect?",
+        "choices": [
+            {"id": "A", "text": "Osteoporosis"},
+            {"id": "B", "text": "Endometrial cancer"},
+            {"id": "C", "text": "Hypothyroidism"},
+            {"id": "D", "text": "Alopecia"}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Tamoxifen is a selective estrogen receptor modulator (SERM). While it blocks estrogen effects in breast tissue, it acts as an estrogen agonist in the uterus, increasing the risk of endometrial hyperplasia and endometrial cancer (B). It also increases the risk of thromboembolic events (DVT/PE). Tamoxifen generally has a protective effect against osteoporosis (A) in postmenopausal women. Hypothyroidism (C) and alopecia (D) are not primary serious risks associated with tamoxifen."
+    },
+    {
+        "id": 25,
+        "title": "Oncology",
+        "type": "fill_in_the_blank",
+        "text": "The lowest point that blood cell counts reach after chemotherapy administration, typically occurring 7-14 days post-treatment, is referred to as the ________.",
+        "choices": [],
+        "correctAnswer": ["nadir"],
+        "rationale": "Nadir is the term used to describe the point at which blood cell counts (particularly white blood cells, neutrophils, and platelets) are at their lowest following a cycle of chemotherapy. This is the period when the client is most susceptible to infection (due to neutropenia) and bleeding (due to thrombocytopenia)."
+    },
+    {
+        "id": 26,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client receiving radiation therapy develops dry desquamation in the treatment field. Which skin care instruction is most appropriate?",
+        "choices": [
+            {"id": "A", "text": "Apply heating pads to soothe the area."},
+            {"id": "B", "text": "Scrub the area gently with soap and water daily."},
+            {"id": "C", "text": "Use only lukewarm water and mild soap; pat dry gently."},
+            {"id": "D", "text": "Apply petroleum jelly liberally to the affected skin."}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "Skin reactions are common with radiation. For dry desquamation (dry, peeling skin), gentle skin care is essential. This includes cleansing with lukewarm water and mild, non-perfumed soap, followed by gentle patting dry (C). Avoid scrubbing (B), extreme temperatures (like heating pads - A), and harsh chemicals or lotions unless specifically prescribed. While moisturizers may be recommended, petroleum jelly (D) can sometimes trap heat; water-based, fragrance-free lotions are often preferred. Specific product recommendations should come from the radiation oncology team."
+    },
+    {
+        "id": 27,
+        "title": "Oncology",
+        "type": "sata",
+        "text": "A nurse is assessing a client for potential complications related to multiple myeloma. Which findings would be consistent with this diagnosis? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Hypocalcemia"},
+            {"id": "B", "text": "Bone pain, especially in the back or ribs"},
+            {"id": "C", "text": "Anemia"},
+            {"id": "D", "text": "Polycythemia"},
+            {"id": "E", "text": "Recurrent infections"},
+            {"id": "F", "text": "Kidney dysfunction"}
+        ],
+        "correctAnswer": ["B", "C", "E", "F"],
+        "rationale": "Multiple myeloma is a cancer of plasma cells. Key features include: Bone destruction leading to bone pain (B) and hypercalcemia (not hypocalcemia - A); infiltration of bone marrow leading to anemia (C), thrombocytopenia, and leukopenia (not polycythemia - D); production of abnormal immunoglobulins and suppression of normal antibody production leading to recurrent infections (E); and kidney damage (F) due to factors like hypercalcemia, light chain deposition, and dehydration. The acronym CRAB (Calcium elevation, Renal insufficiency, Anemia, Bone lesions) summarizes common features."
+    },
+    {
+        "id": 28,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "What is the purpose of administering filgrastim (Neupogen) or pegfilgrastim (Neulasta) to a client undergoing chemotherapy?",
+        "choices": [
+            {"id": "A", "text": "To stimulate red blood cell production."},
+            {"id": "B", "text": "To stimulate platelet production."},
+            {"id": "C", "text": "To stimulate neutrophil production."},
+            {"id": "D", "text": "To prevent nausea and vomiting."}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "Filgrastim and pegfilgrastim are granulocyte colony-stimulating factors (G-CSFs). Their primary purpose is to stimulate the bone marrow to produce more neutrophils (a type of granulocyte) (C). They are used to shorten the duration and severity of neutropenia caused by chemotherapy, thereby reducing the risk of infection. Erythropoiesis-stimulating agents (e.g., epoetin alfa) stimulate red blood cell production (A). Thrombopoietin receptor agonists (e.g., romiplostim) stimulate platelet production (B). Antiemetics (D) prevent nausea/vomiting."
+    },
+    {
+        "id": 29,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client with terminal cancer has an advance directive stating they wish to have a Do Not Resuscitate (DNR) order. The client develops respiratory arrest. What is the nurse's appropriate action?",
+        "choices": [
+            {"id": "A", "text": "Initiate cardiopulmonary resuscitation (CPR) immediately."},
+            {"id": "B", "text": "Call the rapid response team or code blue."},
+            {"id": "C", "text": "Provide comfort measures and notify the healthcare provider."},
+            {"id": "D", "text": "Administer emergency medications like epinephrine."}
+        ],
+        "correctAnswer": ["C"],
+        "rationale": "A valid DNR order means that CPR (A), emergency cardiac medications (D), and resuscitative measures typically initiated during a code blue (B) should not be performed in the event of cardiac or respiratory arrest. The nurse's responsibility is to respect the client's wishes as documented in the advance directive and DNR order, provide comfort measures (e.g., positioning, ensuring dignity), and notify the provider of the client's change in status (C)."
+    },
+    {
+        "id": 30,
+        "title": "Oncology",
+        "type": "fill_in_the_blank",
+        "text": "The spread of cancer cells from the primary tumor site to distant parts of the body through the bloodstream or lymphatic system is called __________.",
+        "choices": [],
+        "correctAnswer": ["metastasis"],
+        "rationale": "Metastasis is the process by which cancer cells break away from the original (primary) tumor, travel through the blood or lymph system, and form new tumors (metastatic tumors) in other organs or tissues. It is the defining characteristic of malignant (invasive) cancer."
+    },
+    {
+        "id": 31,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client is receiving cisplatin, a platinum-based chemotherapy agent. Which nursing intervention is critical to help prevent renal toxicity associated with this drug?",
+        "choices": [
+            {"id": "A", "text": "Administering antiemetics before infusion."},
+            {"id": "B", "text": "Ensuring vigorous pre- and post-hydration and monitoring urine output."},
+            {"id": "C", "text": "Applying cold compresses to the infusion site."},
+            {"id": "D", "text": "Monitoring for peripheral neuropathy."}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Cisplatin is highly nephrotoxic (damaging to the kidneys). A critical intervention to minimize this risk is ensuring adequate hydration before, during, and after the infusion, often involving intravenous fluids, to promote flushing of the drug through the kidneys and maintain good urine output (B). Strict monitoring of intake, output, BUN, and creatinine is essential. Antiemetics (A) manage nausea. Cold compresses (C) are irrelevant. Peripheral neuropathy (D) is another potential side effect but hydration specifically addresses renal protection."
+    },
+    {
+        "id": 32,
+        "title": "Oncology",
+        "type": "sata",
+        "text": "A nurse is providing education about colorectal cancer screening. Which screening tests are recommended for average-risk adults starting at age 45? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Annual fecal immunochemical test (FIT)"},
+            {"id": "B", "text": "Colonoscopy every 10 years"},
+            {"id": "C", "text": "Flexible sigmoidoscopy every 5 years"},
+            {"id": "D", "text": "CT colonography (virtual colonoscopy) every 5 years"},
+            {"id": "E", "text": "Stool DNA test every 3 years"},
+            {"id": "F", "text": "Annual digital rectal exam (DRE) alone"}
+        ],
+        "correctAnswer": ["A", "B", "C", "D", "E"],
+        "rationale": "Current guidelines (e.g., American Cancer Society, USPSTF) recommend colorectal cancer screening for average-risk individuals starting at age 45. Recommended options include stool-based tests like annual FIT (A) or stool DNA test every 3 years (E), OR visual exams like colonoscopy every 10 years (B), CT colonography every 5 years (D), or flexible sigmoidoscopy every 5 years (C) (often combined with stool testing). DRE alone (F) is not considered adequate screening for colorectal cancer."
+    },
+    {
+        "id": 33,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client undergoing cancer treatment develops painful, clustered vesicular lesions along a dermatome on their trunk. The nurse suspects this is:",
+        "choices": [
+            {"id": "A", "text": "Radiation dermatitis"},
+            {"id": "B", "text": "Herpes zoster (shingles)"},
+            {"id": "C", "text": "Candida infection"},
+            {"id": "D", "text": "Cellulitis"}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Herpes zoster (shingles) (B) is caused by the reactivation of the varicella-zoster virus (chickenpox virus) that lies dormant in nerve ganglia. It typically presents as a painful, unilateral, vesicular rash following the distribution of a single dermatome (nerve pathway). Immunocompromised clients, such as those undergoing cancer treatment, are at increased risk for reactivation. Radiation dermatitis (A) occurs in the treatment field. Candida (C) is a fungal infection. Cellulitis (D) is a bacterial skin infection, usually presenting as spreading erythema and warmth."
+    },
+    {
+        "id": 34,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "Which type of leukemia is characterized by the presence of the Philadelphia chromosome (a translocation between chromosomes 9 and 22)?",
+        "choices": [
+            {"id": "A", "text": "Acute Lymphoblastic Leukemia (ALL)"},
+            {"id": "B", "text": "Acute Myeloid Leukemia (AML)"},
+            {"id": "C", "text": "Chronic Lymphocytic Leukemia (CLL)"},
+            {"id": "D", "text": "Chronic Myeloid Leukemia (CML)"}
+        ],
+        "correctAnswer": ["D"],
+        "rationale": "The Philadelphia chromosome, resulting from a reciprocal translocation between the long arms of chromosome 9 and 22 [t(9;22)], creates the BCR-ABL1 fusion gene. This genetic abnormality is the hallmark characteristic of Chronic Myeloid Leukemia (CML) (D) and is present in the vast majority of cases. It can also be found in a subset of adult ALL cases, but it is most strongly associated with CML."
+    },
+    {
+        "id": 35,
+        "title": "Oncology",
+        "type": "fill_in_the_blank",
+        "text": "The surgical creation of an opening (stoma) from the ileum through the abdominal wall to divert stool, often performed after removal of the colon and rectum, is called an __________.",
+        "choices": [],
+        "correctAnswer": ["ileostomy"],
+        "rationale": "An ileostomy is a surgically created opening connecting the ileum (the final section of the small intestine) to the abdominal wall. It allows intestinal waste (stool, which is typically liquid to semi-liquid from the ileum) to bypass the colon, rectum, and anus and be collected in an external pouching system. A colostomy involves bringing part of the colon to the abdominal surface."
+    },
+    {
+        "id": 36,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client is receiving brachytherapy with a sealed radioactive implant for cervical cancer. Which safety precaution is essential for the nurse to implement?",
+        "choices": [
+            {"id": "A", "text": "Assign the client to a room with other immunocompromised clients."},
+            {"id": "B", "text": "Limit direct contact time with the client and maintain distance when possible."},
+            {"id": "C", "text": "Dispose of the client's linens in a regular trash receptacle."},
+            {"id": "D", "text": "Encourage frequent ambulation outside the room."}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Brachytherapy involves placing radioactive sources directly into or near the tumor. With sealed sources (implants), the radiation is emitted externally, posing a risk to others. Nursing care requires adherence to radiation safety principles: Time, Distance, and Shielding. Limiting the time spent in close proximity to the client and maintaining the greatest distance possible when providing care (B) minimizes the nurse's radiation exposure. The client requires a private room (A is wrong). Linens and waste may require special handling if contaminated with body fluids, but the primary risk is external radiation (C is questionable). Client activity is usually restricted, often requiring bed rest, and they cannot leave the room (D is wrong)."
+    },
+    {
+        "id": 37,
+        "title": "Oncology",
+        "type": "mc",
+        "text": "A client with cancer is experiencing persistent neuropathic pain. Which class of medication is often used as an adjuvant analgesic for this type of pain?",
+        "choices": [
+            {"id": "A", "text": "Nonsteroidal anti-inflammatory drugs (NSAIDs)"},
+            {"id": "B", "text": "Anticonvulsants (e.g., gabapentin, pregabalin)"},
+            {"id": "C", "text": "Loop diuretics"},
+            {"id": "D", "text": "Beta-blockers"}
+        ],
+        "correctAnswer": ["B"],
+        "rationale": "Neuropathic pain arises from damage to or dysfunction of the nervous system. While opioids may be used, adjuvant analgesics are often essential for effective management. Anticonvulsants like gabapentin and pregabalin (B) are commonly used first-line agents for neuropathic pain as they modulate neurotransmitter release or neuronal excitability. Antidepressants (TCAs, SNRIs) are also frequently used. NSAIDs (A) are more effective for inflammatory or nociceptive pain. Diuretics (C) and beta-blockers (D) are not used for pain management."
+    }
+]
