@@ -35,7 +35,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/profile": "Profile",
       "/achievements": "Achievements",
       "/case-studies": "Case Studies",
-      "/nclex-questions": "NCLEX-Style Questions",
+      "/nclex-questions": "Question Bank",
+      "/question-bank": "Question Bank",
       "/study-strategies": "Study Strategies"
     };
     
@@ -87,10 +88,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       path: "/case-studies"
     },
     {
-      title: "NCLEX-Style Questions",
+      title: "Question Bank",
       icon: <HelpCircle className="h-5 w-5 mr-3" />,
-      active: activeCategory === "NCLEX-Style Questions",
-      path: "/nclex-questions"
+      active: activeCategory === "Question Bank" || activeCategory === "NCLEX-Style Questions",
+      path: "/question-bank"
     },
     {
       title: "Study Strategies",

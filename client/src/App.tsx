@@ -10,6 +10,7 @@ import Achievements from "@/pages/Achievements";
 import Profile from "@/pages/Profile";
 import CaseStudies from "@/pages/CaseStudies";
 import CaseStudyDetail from "@/pages/CaseStudyDetail";
+import QuestionBank from "@/pages/QuestionBank";
 import { useState } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
@@ -54,14 +55,10 @@ function Router() {
       <Route path="/profile" component={Profile} />
       
       {/* Study Materials */}
-      <Route path="/questions">
-        {() => <PlaceholderPage name="Question Bank" />}
-      </Route>
+      <Route path="/question-bank" component={QuestionBank} />
       <Route path="/case-studies" component={CaseStudies} />
       <Route path="/case-study/:id" component={CaseStudyDetail} />
-      <Route path="/nclex-questions">
-        {() => <PlaceholderPage name="NCLEX-Style Questions" />}
-      </Route>
+      <Route path="/nclex-questions" component={QuestionBank} />
       <Route path="/study-strategies">
         {() => <PlaceholderPage name="Study Strategies" />}
       </Route>
