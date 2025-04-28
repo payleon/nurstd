@@ -15,43 +15,122 @@ import {
   BookCopy
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { useLocation } from "wouter";
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+interface MenuItem {
+  title: string;
+  icon: JSX.Element;
+  active: boolean;
+  path?: string;
+}
+
+interface MenuSection {
+  section: string;
+  items: MenuItem[];
+}
+
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const menuItems = [
+  const [, setLocation] = useLocation();
+  const [activeCategory, setActiveCategory] = useState("Practice Exams");
+
+  const handleMenuItemClick = (title: string, path: string = "/") => {
+    setActiveCategory(title);
+    setLocation(path);
+    onClose(); // Close the sidebar on mobile after clicking
+  };
+
+  const menuItems: (MenuItem | MenuSection)[] = [
     {
       title: "My Dashboard",
       icon: <Monitor className="h-5 w-5 mr-3" />,
-      active: false
+      active: activeCategory === "My Dashboard",
+      path: "/"
     },
     {
       section: "STUDY MATERIALS",
       items: [
-        { title: "Practice Exams", icon: <ShieldCheck className="h-5 w-5 mr-3 text-[#4B9CD3]" />, active: true },
-        { title: "Question Bank", icon: <FileText className="h-5 w-5 mr-3" />, active: false },
-        { title: "Case Studies", icon: <Files className="h-5 w-5 mr-3" />, active: false },
-        { title: "NCLEX-Style Questions", icon: <HelpCircle className="h-5 w-5 mr-3" />, active: false },
-        { title: "Study Strategies", icon: <Lightbulb className="h-5 w-5 mr-3" />, active: false }
+        { 
+          title: "Practice Exams", 
+          icon: <ShieldCheck className="h-5 w-5 mr-3 text-[#4B9CD3]" />, 
+          active: activeCategory === "Practice Exams",
+          path: "/"
+        },
+        { 
+          title: "Question Bank", 
+          icon: <FileText className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Question Bank",
+          path: "/questions"
+        },
+        { 
+          title: "Case Studies", 
+          icon: <Files className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Case Studies",
+          path: "/case-studies"
+        },
+        { 
+          title: "NCLEX-Style Questions", 
+          icon: <HelpCircle className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "NCLEX-Style Questions",
+          path: "/nclex-questions"
+        },
+        { 
+          title: "Study Strategies", 
+          icon: <Lightbulb className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Study Strategies",
+          path: "/study-strategies"
+        }
       ]
     },
     {
       section: "CONTENT REVIEW",
       items: [
-        { title: "Medical-Surgical", icon: <BookOpen className="h-5 w-5 mr-3" />, active: false },
-        { title: "Obstetrics", icon: <BookCheck className="h-5 w-5 mr-3" />, active: false },
-        { title: "Pediatrics", icon: <BookCopy className="h-5 w-5 mr-3" />, active: false },
-        { title: "Pharmacology", icon: <ClipboardList className="h-5 w-5 mr-3" />, active: false }
+        { 
+          title: "Medical-Surgical", 
+          icon: <BookOpen className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Medical-Surgical",
+          path: "/content/medical-surgical"
+        },
+        { 
+          title: "Obstetrics", 
+          icon: <BookCheck className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Obstetrics",
+          path: "/content/obstetrics"
+        },
+        { 
+          title: "Pediatrics", 
+          icon: <BookCopy className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Pediatrics",
+          path: "/content/pediatrics"
+        },
+        { 
+          title: "Pharmacology", 
+          icon: <ClipboardList className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Pharmacology",
+          path: "/content/pharmacology"
+        }
       ]
     },
     {
       section: "RESOURCES",
       items: [
-        { title: "Video Tutorials", icon: <Video className="h-5 w-5 mr-3" />, active: false },
-        { title: "Study Planner", icon: <Calendar className="h-5 w-5 mr-3" />, active: false }
+        { 
+          title: "Video Tutorials", 
+          icon: <Video className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Video Tutorials",
+          path: "/resources/videos"
+        },
+        { 
+          title: "Study Planner", 
+          icon: <Calendar className="h-5 w-5 mr-3" />, 
+          active: activeCategory === "Study Planner",
+          path: "/resources/planner"
+        }
       ]
     }
   ];
@@ -73,7 +152,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
-        <div className="p-4 border-b-2 border-black flex items-center bg-[#0A1E3A]">
+        <div 
+          className="p-4 border-b-2 border-black flex items-center bg-[#0A1E3A] cursor-pointer"
+          onClick={() => handleMenuItemClick("My Dashboard", "/")}
+        >
           <div className="h-10 w-10 bg-white border-2 border-black flex items-center justify-center mr-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -93,29 +175,46 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         
         <div className="p-4 border-b-2 border-black">
           <div className="relative">
-            <input 
-              type="text" 
-              placeholder="Search exams..." 
-              className="w-full bg-[#0A1E3A] border-2 border-black py-2 px-3 text-sm focus:outline-none neuro-input" 
-            />
-            <Search className="absolute right-3 top-2.5 h-4 w-4 text-gray-400" />
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              const input = e.currentTarget.querySelector('input');
+              if (input && input.value.trim()) {
+                // This would typically connect to a search API, for now just navigate to home
+                alert(`Searching for: ${input.value}`);
+                input.value = '';
+              }
+            }}>
+              <input 
+                type="text" 
+                placeholder="Search exams..." 
+                className="w-full bg-[#0A1E3A] border-2 border-black py-2 px-3 text-sm focus:outline-none neuro-input" 
+              />
+              <button type="submit" className="absolute right-3 top-2.5 bg-transparent border-none p-0 cursor-pointer">
+                <Search className="h-4 w-4 text-gray-400" />
+              </button>
+            </form>
           </div>
         </div>
         
         <nav className="mt-2">
           {menuItems.map((item, index) => (
             <div key={index}>
-              {!item.section && (
-                <div className={cn(
-                  "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b border-black/30",
-                  item.active && "bg-[#0A1E3A] text-[#4B9CD3] font-bold"
-                )}>
+              {/* Regular menu item (not in a section) */}
+              {!('section' in item) && (
+                <div 
+                  className={cn(
+                    "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b border-black/30",
+                    item.active && "bg-[#0A1E3A] text-[#4B9CD3] font-bold"
+                  )}
+                  onClick={() => handleMenuItemClick(item.title, item.path)}
+                >
                   {item.icon}
                   <span className="font-medium">{item.title}</span>
                 </div>
               )}
               
-              {item.section && (
+              {/* Section with sub-items */}
+              {'section' in item && (
                 <>
                   <div className="mt-4 px-4 py-2 text-sm font-bold text-[#4B9CD3] bg-[#0A1E3A] border-y border-black/30">
                     {item.section}
@@ -128,6 +227,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                         "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b border-black/30",
                         subItem.active && "bg-[#0A1E3A] border-l-4 border-[#4B9CD3] font-bold"
                       )}
+                      onClick={() => handleMenuItemClick(subItem.title, subItem.path)}
                     >
                       {subItem.icon}
                       <span>{subItem.title}</span>
