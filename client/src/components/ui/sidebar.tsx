@@ -38,10 +38,49 @@ interface MenuSection {
 }
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const [, setLocation] = useLocation();
-  const [activeCategory, setActiveCategory] = useState("Practice Exams");
+  const [location, setLocation] = useLocation();
+  // Set initial active category based on current URL path
+  const getInitialActiveCategory = () => {
+    // Map paths to menu item titles
+    const pathToCategoryMap: Record<string, string> = {
+      "/": "Practice Exams",
+      "/profile": "Profile",
+      "/achievements": "Achievements",
+      "/questions": "Question Bank",
+      "/case-studies": "Case Studies",
+      "/nclex-questions": "NCLEX-Style Questions",
+      "/study-strategies": "Study Strategies",
+      "/content/medical-surgical": "Medical-Surgical",
+      "/content/obstetrics": "Obstetrics", 
+      "/content/pediatrics": "Pediatrics",
+      "/content/pharmacology": "Pharmacology",
+      "/resources/videos": "Video Tutorials",
+      "/resources/planner": "Study Planner"
+    };
+    
+    // Special case for exact matches
+    if (pathToCategoryMap[location]) {
+      return pathToCategoryMap[location];
+    }
+    
+    // Check for partial matches (for nested routes)
+    for (const [path, category] of Object.entries(pathToCategoryMap)) {
+      if (location.startsWith(path) && path !== "/") {
+        return category;
+      }
+    }
+    
+    return "Practice Exams"; // Default
+  };
+  
+  const [activeCategory, setActiveCategory] = useState(getInitialActiveCategory);
 
   const handleMenuItemClick = (title: string, path: string = "/") => {
+    if (!path) {
+      console.error("Missing path for menu item:", title);
+      return;
+    }
+    
     setActiveCategory(title);
     setLocation(path);
     onClose(); // Close the sidebar on mobile after clicking

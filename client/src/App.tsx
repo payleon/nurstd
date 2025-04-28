@@ -8,19 +8,37 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Achievements from "@/pages/Achievements";
 import Profile from "@/pages/Profile";
+import { useState } from "react";
+import { Header } from "@/components/ui/header";
+import { Sidebar } from "@/components/ui/sidebar";
 
 // Create a placeholder component for routes that aren't fully implemented yet
 function PlaceholderPage({ name }: { name: string }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+  
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#f0f2f5]">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
-        <h1 className="text-2xl font-bold text-[#13294B] mb-4">{name}</h1>
-        <p className="text-gray-600 mb-6">
-          This section is coming soon! We're working hard to bring you the best learning resources for your nursing exam preparation.
-        </p>
-        <Link href="/" className="inline-block bg-[#4B9CD3] text-white px-4 py-2 rounded-md font-medium hover:bg-[#3d7eaa] transition-colors cursor-pointer">
-          Return Home
-        </Link>
+    <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
+      <Header toggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      
+      <div className="flex h-screen pt-16">
+        <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto text-center mt-8">
+              <h1 className="text-2xl font-bold text-[#13294B] mb-4">{name}</h1>
+              <p className="text-gray-600 mb-6">
+                This section is coming soon! We're working hard to bring you the best learning resources for your nursing exam preparation.
+              </p>
+              <Link href="/" className="inline-block bg-[#4B9CD3] text-white px-4 py-2 rounded-md font-medium hover:bg-[#3d7eaa] transition-colors cursor-pointer">
+                Return to Practice Exams
+              </Link>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
   );
