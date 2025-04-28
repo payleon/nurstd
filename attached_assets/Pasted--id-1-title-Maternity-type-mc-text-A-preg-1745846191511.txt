@@ -1,4 +1,4 @@
-{"questions": [
+[
     {
         "id": 1,
         "title": "Maternity",
@@ -10,7 +10,7 @@
             {"id": "C", "text": "April 3rd"},
             {"id": "D", "text": "April 17th"}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "Nägele's rule is calculated by subtracting 3 months from the first day of the LMP and adding 7 days. LMP: June 10th. Subtract 3 months: March 10th. Add 7 days: March 17th. Therefore, the EDD is March 17th."
     },
     {
@@ -24,7 +24,7 @@
             {"id": "C", "text": "Decrease in heart rate by 10 bpm."},
             {"id": "D", "text": "Improvement in lower extremity edema."}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "During pregnancy, particularly the third trimester, progesterone causes increased sensitivity of the respiratory center to CO2 and maternal oxygen demands increase, leading to increased respiratory rate and tidal volume (depth) (B). Total blood volume significantly increases (A). Heart rate typically increases by 10-15 bpm (C). Dependent edema often worsens in the third trimester due to pressure from the enlarging uterus on pelvic veins and increased fluid volume (D)."
     },
     {
@@ -54,16 +54,16 @@
             {"id": "C", "text": "Cord compression"},
             {"id": "D", "text": "Fetal sleep cycle"}
         ],
-        "correctAnswer": "C",
+        "correctAnswer": ["C"],
         "rationale": "This describes a variable deceleration, characterized by an abrupt drop and return in FHR, often V- or U-shaped. Variable decelerations are most commonly caused by umbilical cord compression. Early decelerations (A) are gradual, mirror contractions, and indicate head compression. Late decelerations (B) are gradual, start after the contraction peak, and indicate uteroplacental insufficiency. Fetal sleep cycles (D) affect variability, not cause decelerations."
     },
     {
         "id": 5,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "A postpartum patient has saturated one perineal pad within 15 minutes of delivery. The nurse recognizes this as excessive bleeding, indicative of postpartum ___________.",
         "choices": [],
-        "correctAnswer": "hemorrhage",
+        "correctAnswer": ["hemorrhage"],
         "rationale": "Postpartum hemorrhage (PPH) is commonly defined as blood loss exceeding 500 mL after vaginal birth or 1000 mL after cesarean birth. A key indicator of excessive, active bleeding is saturating a perineal pad in 15 minutes or less. This requires immediate assessment and intervention."
     },
     {
@@ -77,7 +77,7 @@
             {"id": "C", "text": "\"Quickening usually occurs late in the third trimester, around 30 weeks.\""},
             {"id": "D", "text": "\"Fetal movement isn't usually felt until just before labor begins.\""}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "Quickening, the mother's first perception of fetal movement, is typically felt between 16-20 weeks of gestation. Primigravidas (first-time mothers) often perceive it later in this range (around 18-20 weeks) compared to multigravidas, who may feel it earlier (around 16 weeks). Movement is definitely felt well before 30 weeks or just before labor."
     },
     {
@@ -107,16 +107,16 @@
             {"id": "C", "text": "To treat physiological jaundice."},
             {"id": "D", "text": "To boost the newborn's immune system."}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "Newborns have sterile intestines at birth and cannot synthesize Vitamin K, which is essential for the hepatic synthesis of certain clotting factors (II, VII, IX, X). Administering Vitamin K shortly after birth prevents Vitamin K deficiency bleeding (VKDB), also known as hemorrhagic disease of the newborn. It does not affect lung maturity (A - corticosteroids do), jaundice (C), or the general immune system (D)."
     },
     {
         "id": 9,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "During a postpartum assessment, the nurse palpates the uterine fundus. Immediately after delivery, the fundus should be palpable at the level of the __________ and feel firm.",
         "choices": [],
-        "correctAnswer": "umbilicus",
+        "correctAnswer": ["umbilicus"],
         "rationale": "Immediately following delivery, the uterine fundus typically contracts firmly and is located at the level of the umbilicus (or slightly above or below). It should feel firm, like a grapefruit. A boggy (soft) fundus indicates uterine atony and increased risk of hemorrhage."
     },
     {
@@ -130,8 +130,8 @@
             {"id": "C", "text": "Category III"},
             {"id": "D", "text": "Cannot be categorized"}
         ],
-        "correctAnswer": "B",
-        "rationale": "This tracing describes Category II, which is indeterminate - not reassuring but not ominous. Late decelerations are concerning, but moderate variability is somewhat reassuring. Category I would require absence of late decelerations. Category III would include absent variability WITH late decelerations or other severe features. Category II encompasses everything between I and III."
+        "correctAnswer": ["C"],
+        "rationale": "Category III tracings are abnormal and indicate potential fetal compromise requiring prompt intervention. The defining characteristic here is the presence of recurrent late decelerations, even with moderate variability. Category III also includes absent variability with recurrent late or variable decelerations, bradycardia, or sinusoidal pattern. Category I is normal (moderate variability, baseline 110-160, no late/variable decelerations). Category II is indeterminate (anything not I or III)."
     },
     {
         "id": 11,
@@ -147,7 +147,7 @@
             {"id": "F", "text": "Urinary tract infection"}
         ],
         "correctAnswer": ["A", "D"],
-        "rationale": "Painless, bright red vaginal bleeding, especially in the late second or third trimester, is the hallmark symptom of placenta previa (A), where the placenta implants over or near the cervical os. Vasa previa (D), where fetal vessels run unprotected across the cervical os, can also cause painless bleeding, often upon rupture of membranes. Abruptio placentae (B) typically causes painful bleeding. Gestational diabetes (C), PROM (E), and UTI (F) do not typically present with vaginal bleeding."
+        "rationale": "Painless, bright red vaginal bleeding, especially in the late second or third trimester, is the hallmark symptom of placenta previa (A), where the placenta implants over or near the cervical os. Vasa previa (D), where fetal vessels run unprotected across the cervical os, can also cause painless bleeding, often upon rupture of membranes. Abruptio placentae (B) typically causes painful bleeding. Gestational diabetes (C), PROM (E), and UTI (F) do not typically present with painless vaginal bleeding."
     },
     {
         "id": 12,
@@ -160,16 +160,16 @@
             {"id": "C", "text": "7"},
             {"id": "D", "text": "8"}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "Apgar scoring (Appearance, Pulse, Grimace, Activity, Respiration): Heart rate >100 (2 points); Slow, irregular respirations (1 point); Grimace response (1 point); Some flexion (1 point); Body pink, extremities blue (Acrocyanosis) (1 point). Total score = 2 + 1 + 1 + 1 + 1 = 6."
     },
     {
         "id": 13,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "The condition where the placenta separates prematurely from the uterine wall, often causing painful vaginal bleeding and uterine tenderness, is known as ___________ ___________.",
         "choices": [],
-        "correctAnswer": "Abruptio placentae",
+        "correctAnswer": ["Abruptio placentae"],
         "rationale": "Abruptio placentae (or placental abruption) is the premature separation of a normally implanted placenta from the uterine wall before delivery. Classic symptoms include dark red, painful vaginal bleeding (though bleeding can be concealed), uterine tenderness/rigidity, and signs of fetal distress."
     },
     {
@@ -183,7 +183,7 @@
             {"id": "C", "text": "Encouraging the patient to ambulate."},
             {"id": "D", "text": "Applying ice packs to the perineum."}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "Uterine atony (a boggy, poorly contracted uterus) is the most common cause of early postpartum hemorrhage. The priority nursing intervention is to stimulate uterine contraction by performing firm, vigorous fundal massage. This helps the uterus clamp down on blood vessels at the placental site. Administering oxygen (A) is secondary, ambulation (C) is contraindicated, and ice packs (D) are for perineal comfort/swelling, not uterine atony."
     },
     {
@@ -213,16 +213,16 @@
             {"id": "C", "text": "Check for urinary retention."},
             {"id": "D", "text": "Encourage the patient to push with contractions."}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "A common and potentially serious side effect of epidural anesthesia is maternal hypotension due to sympathetic blockade causing vasodilation. Therefore, the priority is to monitor the patient's blood pressure frequently (e.g., every 2-5 minutes initially) to detect and manage hypotension promptly, often preceded by fluid bolus administration. Assessing pain relief (A) and checking for urinary retention (C) are important but secondary to hemodynamic stability. Pushing (D) depends on the stage of labor and effectiveness, not immediately post-epidural placement."
     },
     {
         "id": 17,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "During pregnancy, the glycoprotein hormone ________ is produced, initially by the trophoblast and later by the placenta, and its detection in urine or serum is the basis for pregnancy tests.",
         "choices": [],
-        "correctAnswer": "hCG",
+        "correctAnswer": ["hCG"],
         "rationale": "Human chorionic gonadotropin (hCG) is the hormone specific to pregnancy. It is produced by the developing embryo (trophoblast) shortly after conception and later by the placenta. It maintains the corpus luteum, which produces progesterone essential for maintaining the pregnancy in the early weeks. Its presence is detected by pregnancy tests."
     },
     {
@@ -236,7 +236,7 @@
             {"id": "C", "text": "Low platelet count and elevated liver enzymes"},
             {"id": "D", "text": "Positive Group B Streptococcus culture"}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "The classic definition of preeclampsia involves new-onset hypertension (typically systolic BP ≥140 mmHg or diastolic BP ≥90 mmHg on two occasions at least 4 hours apart after 20 weeks gestation) AND proteinuria (≥300 mg/24 hours or protein/creatinine ratio ≥0.3, or dipstick 1+). Option C describes features of HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets), a severe variant of preeclampsia, but hypertension and proteinuria are the primary diagnostic criteria for preeclampsia itself. A and D are unrelated."
     },
     {
@@ -266,16 +266,16 @@
             {"id": "C", "text": "The fetal buttocks (breech presentation)"},
             {"id": "D", "text": "The fetal small parts (arms/legs)"}
         ],
-        "correctAnswer": "C",
+        "correctAnswer": ["C"],
         "rationale": "Leopold maneuvers assess fetal position. The first maneuver determines the part occupying the fundus. A hard, round, mobile object suggests the head (cephalic presentation). A softer, less defined, irregular mass suggests the buttocks (breech presentation). The back (B) is felt during the second maneuver (lateral). Small parts (D) are felt during the second maneuver opposite the back."
     },
     {
         "id": 21,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "The yellow-tinged fluid rich in antibodies and protein secreted by the breasts during the first few days after delivery, before mature milk comes in, is called ____________.",
         "choices": [],
-        "correctAnswer": "colostrum",
+        "correctAnswer": ["colostrum"],
         "rationale": "Colostrum is the early milk produced by the mother. It is lower in fat and lactose but higher in protein, minerals, and immunoglobulins (antibodies) compared to mature milk. It provides crucial nutrients and passive immunity to the newborn."
     },
     {
@@ -289,7 +289,7 @@
             {"id": "C", "text": "Low vertical incision"},
             {"id": "D", "text": "T-shaped incision"}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "The type of uterine incision (not the skin incision) is critical for VBAC consideration. A low transverse uterine incision (B) carries the lowest risk of uterine rupture during a subsequent labor and is most favorable for a trial of labor after cesarean (TOLAC)/VBAC. Classical vertical (A), low vertical (C), and T-shaped (D) incisions involve the upper, more muscular segment of the uterus and have a higher risk of rupture, making VBAC typically contraindicated."
     },
     {
@@ -319,16 +319,16 @@
             {"id": "C", "text": "Left occiput posterior (LOP)"},
             {"id": "D", "text": "Transverse lie"}
         ],
-        "correctAnswer": "C",
+        "correctAnswer": ["C"],
         "rationale": "Occiput posterior positions (LOP or ROP), where the back of the fetal head (occiput) presses against the mother's sacrum, are most commonly associated with intense back pain during labor. Anterior positions (LOA, ROA) (A, B) are generally more favorable for delivery and less associated with back labor. Transverse lie (D) requires C-section."
     },
     {
         "id": 25,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "The medication commonly administered intramuscularly to Rh-negative mothers around 28 weeks gestation and after delivery of an Rh-positive infant to prevent sensitization is _______ immunoglobulin (RhoGAM).",
         "choices": [],
-        "correctAnswer": "Rh(D)",
+        "correctAnswer": ["Rh(D)"],
         "rationale": "Rho(D) immune globulin (commonly known by brand names like RhoGAM) contains antibodies against the Rh(D) antigen. It is given to unsensitized Rh-negative mothers to prevent them from developing their own antibodies against Rh-positive fetal blood cells that may enter their circulation, thus preventing hemolytic disease of the fetus and newborn in subsequent pregnancies."
     },
     {
@@ -342,7 +342,7 @@
             {"id": "C", "text": "To stimulate uterine contractions."},
             {"id": "D", "text": "To prevent maternal hypertension."}
         ],
-        "correctAnswer": "C",
+        "correctAnswer": ["C"],
         "rationale": "Oxytocin is a hormone that causes rhythmic uterine contractions. It is used therapeutically to induce or augment labor and to control postpartum bleeding by causing the uterus to contract firmly after delivery. Prostaglandins (like misoprostol or dinoprostone) are typically used for cervical ripening (A). Tocolytics (like terbutaline or magnesium sulfate) relax the uterus (B). Oxytocin can have an antidiuretic effect and, in high doses or rapid infusion, potentially cause water intoxication or affect blood pressure, but its primary action is uterine stimulation (C)."
     },
     {
@@ -372,16 +372,16 @@
             {"id": "C", "text": "24-28 weeks"},
             {"id": "D", "text": "32-36 weeks"}
         ],
-        "correctAnswer": "C",
+        "correctAnswer": ["C"],
         "rationale": "Routine screening for GDM using a glucose challenge test (GCT) followed by a glucose tolerance test (GTT) if the screen is positive, is typically recommended between 24 and 28 weeks of gestation. This timing corresponds to when insulin resistance due to placental hormones often becomes more pronounced. Early screening may be done for high-risk women."
     },
     {
         "id": 29,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "The bluish discoloration of the cervix, vagina, and labia resulting from increased blood flow, typically observable around 6-8 weeks gestation, is known as _________ sign.",
         "choices": [],
-        "correctAnswer": "Chadwick's",
+        "correctAnswer": ["Chadwick's"],
         "rationale": "Chadwick's sign is one of the presumptive signs of pregnancy. It refers to the bluish or purplish hue of the cervix, vagina, and vulva caused by increased vascularity (congestion) under the influence of estrogen."
     },
     {
@@ -395,7 +395,7 @@
             {"id": "C", "text": "Pulmonary embolism"},
             {"id": "D", "text": "Amniotic fluid embolism"}
         ],
-        "correctAnswer": "C",
+        "correctAnswer": ["C"],
         "rationale": "Pregnancy is a hypercoagulable state, increasing the risk for venous thromboembolism (VTE), including pulmonary embolism (PE). The classic symptoms of PE - sudden dyspnea, chest pain (often pleuritic), tachypnea, tachycardia, and anxiety (C) - fit the patient's presentation. Anaphylaxis (A) involves hives, angioedema, wheezing. Onset of labor (B) involves contractions. Amniotic fluid embolism (D) is a rare, catastrophic event usually occurring during labor or delivery, presenting with abrupt respiratory failure, cardiovascular collapse, and often DIC."
     },
     {
@@ -425,16 +425,16 @@
             {"id": "C", "text": "Subgaleal hemorrhage"},
             {"id": "D", "text": "Craniosynostosis"}
         ],
-        "correctAnswer": "A",
+        "correctAnswer": ["A"],
         "rationale": "Caput succedaneum is edema of the fetal scalp caused by pressure from the cervix or vaginal wall during delivery. It is present at birth, feels soft and boggy, may cross suture lines (A), and typically resolves within a few days. A cephalohematoma (B) is a collection of blood beneath the periosteum, is firmer, does *not* cross suture lines, and may take weeks to resolve. Subgaleal hemorrhage (C) is bleeding into the potential space between the scalp aponeurosis and periosteum, is diffuse, boggy, and potentially life-threatening. Craniosynostosis (D) is premature fusion of cranial sutures."
     },
     {
         "id": 33,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "During the active phase of the first stage of labor for a primigravida, cervical dilation typically progresses at a rate of approximately ___ cm per hour or more.",
         "choices": [],
-        "correctAnswer": "1.2",
+        "correctAnswer": ["1.2"],
         "rationale": "While rates vary, classic definitions (e.g., Friedman's curve, though somewhat outdated) suggested expected progress in the active phase (traditionally starting around 4 cm, now often considered 6 cm) is about 1.2 cm/hour for nulliparas (primigravidas) and 1.5 cm/hour for multiparas. Lack of progress may indicate labor dystocia."
     },
     {
@@ -448,7 +448,7 @@
             {"id": "C", "text": "\"It's probably for the best, there may have been something wrong with the baby.\""},
             {"id": "D", "text": "\"Try not to cry, you need to stay strong.\""}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "Experiencing fetal demise is a profound loss. The most therapeutic communication involves acknowledging the difficulty of the situation and offering support and presence without judgment or clichés (B - uses empathy, offers self). Offering platitudes like 'you can try again' (A) or 'it's for the best' (C) minimizes the current grief. Discouraging crying (D) invalidates the patient's emotional response."
     },
     {
@@ -478,16 +478,16 @@
             {"id": "C", "text": "Babinski reflex"},
             {"id": "D", "text": "Grasping reflex"}
         ],
-        "correctAnswer": "C",
+        "correctAnswer": ["C"],
         "rationale": "The Babinski reflex is tested by stroking the sole of the foot. A positive (normal) response in infants is dorsiflexion of the big toe and fanning of the other toes (C). The Moro reflex (A) is the startle reflex. The rooting reflex (B) involves turning the head towards a cheek stroke. The grasping reflex (D) is elicited by placing a finger in the infant's palm or against the sole."
     },
     {
         "id": 37,
         "title": "Maternity",
-        "type": "fill_in_blank",
+        "type": "fill_in_the_blank",
         "text": "The acronym HELLP syndrome, a severe complication often associated with preeclampsia, stands for Hemolysis, Elevated Liver enzymes, and ______ __________.",
         "choices": [],
-        "correctAnswer": "Low Platelets",
+        "correctAnswer": ["Low Platelets"],
         "rationale": "HELLP syndrome is a life-threatening obstetric complication characterized by Hemolysis (H), Elevated Liver enzymes (EL), and Low Platelet count (LP). It represents severe preeclampsia involving hepatic dysfunction and coagulopathy."
     },
     {
@@ -501,362 +501,7 @@
             {"id": "C", "text": "Flexion"},
             {"id": "D", "text": "Effacement"}
         ],
-        "correctAnswer": "B",
+        "correctAnswer": ["B"],
         "rationale": "Engagement occurs when the biparietal diameter (the largest transverse diameter of the fetal head in a cephalic presentation) passes the pelvic inlet, usually corresponding to a station of 0. Lightening (A) is the descent of the fetal head into the pelvis, which may occur before labor starts. Flexion (C) is the chin-to-chest posture of the fetus. Effacement (D) is the thinning and shortening of the cervix."
-    },
-    {
-        "id": 39,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient experiencing auditory hallucinations tells the nurse, \"The voices are telling me I'm worthless.\" Which response by the nurse is most therapeutic?",
-        "choices": [
-            {"id": "A", "text": "\"Don't worry, the voices aren't real.\""},
-            {"id": "B", "text": "\"That must be frightening for you. How does hearing that make you feel?\""},
-            {"id": "C", "text": "\"Why do you think the voices are saying that?\""},
-            {"id": "D", "text": "\"Let's listen to some music to distract you from the voices.\""}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Acknowledging the patient's subjective experience ('That must be frightening') and encouraging exploration of the associated feelings ('How does hearing that make you feel?') is a key therapeutic communication technique (offering self, reflecting, exploring). Dismissing the reality of the patient's experience (A) is invalidating. Asking 'why' questions (C) can sound accusatory and is often non-therapeutic. While distraction (D) can be a useful coping strategy, directly addressing the patient's distress first is more therapeutic."
-    },
-    {
-        "id": 2,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is assessing a patient diagnosed with schizophrenia. Which findings are considered positive symptoms? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Auditory hallucinations"},
-            {"id": "B", "text": "Flat affect"},
-            {"id": "C", "text": "Anhedonia"},
-            {"id": "D", "text": "Delusions of grandeur"},
-            {"id": "E", "text": "Alogia"},
-            {"id": "F", "text": "Disorganized speech (e.g., loose associations)"}
-        ],
-        "correctAnswer": ["A", "D", "F"],
-        "rationale": "Positive symptoms of schizophrenia represent an excess or distortion of normal functions and include hallucinations (A), delusions (D), and disorganized thinking/speech (F). Negative symptoms represent a decrease or loss of normal functions and include flat affect (B - diminished emotional expression), anhedonia (C - inability to experience pleasure), and alogia (E - poverty of speech)."
-    },
-    {
-        "id": 3,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient started taking fluoxetine (Prozac) for depression two weeks ago. The patient states, \"I don't feel any better.\" What is the nurse's best response?",
-        "choices": [
-            {"id": "A", "text": "\"It often takes several weeks, sometimes 4-6 weeks, for antidepressants like fluoxetine to reach their full therapeutic effect.\""},
-            {"id": "B", "text": "\"Perhaps this medication isn't right for you; I'll notify the doctor to discuss changing it.\""},
-            {"id": "C", "text": "\"It's crucial you take the medication exactly as prescribed. Are you doing that?\""},
-            {"id": "D", "text": "\"Feeling no improvement after two weeks suggests you might need a higher dose.\""}
-        ],
-        "correctAnswer": "A",
-        "rationale": "Selective serotonin reuptake inhibitors (SSRIs) like fluoxetine have a delayed onset of action for their antidepressant effects, typically taking 4-6 weeks, or sometimes longer, to achieve full efficacy. Educating the patient about this expected timeframe (A) provides reassurance and manages expectations. Suggesting the medication isn't working (B) or needs a dose change (D) is premature at two weeks. While checking adherence (C) is important, addressing the time lag first is the most appropriate response to the patient's statement."
-    },
-    {
-        "id": 4,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient taking lithium carbonate for bipolar disorder should be monitored closely for signs of toxicity, which typically occur when serum lithium levels exceed ______ mEq/L. (Enter numerical value only)",
-        "choices": [],
-        "correctAnswer": "1.5",
-        "rationale": "The therapeutic range for maintenance lithium levels is narrow, generally accepted as 0.6 to 1.2 mEq/L. Levels above 1.2 mEq/L increase the risk of toxicity, and levels exceeding 1.5 mEq/L are generally considered toxic, requiring prompt intervention. Signs of toxicity include coarse tremors, nausea, vomiting, diarrhea, confusion, ataxia, and seizures."
-    },
-    {
-        "id": 5,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is teaching a patient about potential side effects of lorazepam (Ativan), a benzodiazepine. Which common side effects should be included in the teaching? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Drowsiness/Sedation"},
-            {"id": "B", "text": "Hypertension"},
-            {"id": "C", "text": "Dizziness"},
-            {"id": "D", "text": "Increased alertness"},
-            {"id": "E", "text": "Paradoxical excitement or agitation"},
-            {"id": "F", "text": "Decreased motor coordination/Ataxia"}
-        ],
-        "correctAnswer": ["A", "C", "E", "F"],
-        "rationale": "Benzodiazepines act as CNS depressants. Common side effects include drowsiness/sedation (A), dizziness (C), and impaired coordination/ataxia (F). Paradoxical reactions (E), such as increased excitement, anxiety, or agitation, can also occur, particularly in elderly or debilitated patients. Hypertension (B) and increased alertness (D) are not typical side effects; hypotension is more likely than hypertension."
-    },
-    {
-        "id": 6,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient, diagnosed with alcohol use disorder, states, \"I don't have a problem with alcohol. I can quit anytime I want; I just choose not to right now.\" This statement is an example of which defense mechanism?",
-        "choices": [
-            {"id": "A", "text": "Projection"},
-            {"id": "B", "text": "Rationalization"},
-            {"id": "C", "text": "Denial"},
-            {"id": "D", "text": "Sublimation"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Denial is the refusal to accept the reality of a situation or experience, despite factual evidence. The patient is refusing to acknowledge the reality of their alcohol problem and its impact. Projection involves attributing one's own unacceptable thoughts or feelings to others. Rationalization involves creating logical-sounding excuses for unacceptable behavior. Sublimation involves channeling unacceptable impulses into socially acceptable activities."
-    },
-    {
-        "id": 7,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "Which element is most essential for establishing and maintaining a therapeutic milieu on an inpatient psychiatric unit?",
-        "choices": [
-            {"id": "A", "text": "Frequent administration of PRN sedative medications to maintain quiet."},
-            {"id": "B", "text": "A structured daily schedule that includes therapeutic activities and group interactions."},
-            {"id": "C", "text": "Minimizing staff interaction with patients to promote independence."},
-            {"id": "D", "text": "Allowing patients complete freedom to choose their activities and participation levels."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "A therapeutic milieu is a structured environment designed to promote psychological health and rehabilitation. Key components include safety, structure, support, validation, and patient involvement. A predictable daily schedule with planned therapeutic activities and group interactions (B) provides structure, reduces anxiety, and facilitates social skills development. Over-reliance on PRN medications (A), minimizing staff interaction (C), or complete lack of structure (D) undermine the goals of a therapeutic milieu."
-    },
-    {
-        "id": 8,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is performing a suicide risk assessment. Which factors are considered significant indicators of increased risk? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "History of previous suicide attempts"},
-            {"id": "B", "text": "Strong social and family support"},
-            {"id": "C", "text": "Presence of a psychiatric disorder (e.g., major depression, bipolar disorder, substance use disorder)"},
-            {"id": "D", "text": "Availability and access to lethal means (e.g., firearms)"},
-            {"id": "E", "text": "Verbalization of suicidal ideation with a specific plan"},
-            {"id": "F", "text": "Feelings of hopefulness about the future"}
-        ],
-        "correctAnswer": ["A", "C", "D", "E"],
-        "rationale": "Significant risk factors for suicide include a history of prior attempts (A), the presence of mental illness (C), access to lethal means (D), and expression of suicidal thoughts, especially with a concrete plan (E). Hopelessness (not hopefulness, F) is also a major risk factor. Strong social support (B) is typically considered a protective factor against suicide."
-    },
-    {
-        "id": 9,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "Immediately following an electroconvulsive therapy (ECT) treatment, what is the nurse's priority assessment?",
-        "choices": [
-            {"id": "A", "text": "Patient's recall of events leading up to the procedure."},
-            {"id": "B", "text": "Assessment of respiratory status and level of consciousness."},
-            {"id": "C", "text": "Presence of headache or muscle soreness."},
-            {"id": "D", "text": "Evaluation of the therapeutic effect on mood."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "ECT involves general anesthesia and induced seizure activity. The immediate priority post-procedure is patient safety, focusing on basic life support functions. Assessing respiratory status (airway patency, breathing rate and depth) and level of consciousness is critical due to the effects of anesthesia (B). Memory impairment (A) and comfort issues (C) are common but secondary to airway and breathing. Evaluating therapeutic effect (D) occurs later in the treatment course, not immediately post-procedure."
-    },
-    {
-        "id": 10,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A potentially life-threatening adverse effect associated with the atypical antipsychotic clozapine (Clozaril) is ______________, necessitating regular monitoring of white blood cell counts.",
-        "choices": [],
-        "correctAnswer": "agranulocytosis",
-        "rationale": "Agranulocytosis is a severe and dangerous condition characterized by a drastic reduction in granulocytes (a type of white blood cell), severely impairing the body's ability to fight infection. It is a rare but significant risk associated with clozapine, requiring mandatory weekly (initially) then less frequent (if stable) monitoring of the absolute neutrophil count (ANC)."
-    },
-    {
-        "id": 11,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient is experiencing a panic attack in the dayroom. Which nursing action should be implemented first?",
-        "choices": [
-            {"id": "A", "text": "Explore the potential triggers for the panic attack with the patient."},
-            {"id": "B", "text": "Encourage the patient to participate in a group activity to distract them."},
-            {"id": "C", "text": "Move the patient to a quieter area and stay with them, speaking calmly."},
-            {"id": "D", "text": "Teach the patient progressive muscle relaxation techniques immediately."}
-        ],
-        "correctAnswer": "C",
-        "rationale": "During a panic attack, the patient often feels overwhelmed and fearful. The immediate priority is to ensure safety and reduce stimulation. Moving the patient to a calm, quiet environment (C) reduces external stimuli, and staying with the patient provides reassurance and support ('offering self'). Attempting complex tasks like exploring triggers (A) or teaching relaxation techniques (D) is usually ineffective during the acute phase of panic. Encouraging group participation (B) would likely increase anxiety."
-    },
-    {
-        "id": 12,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "Which clinical manifestations are commonly associated with Borderline Personality Disorder (BPD)? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Intense fear of real or imagined abandonment"},
-            {"id": "B", "text": "Stable interpersonal relationships and self-image"},
-            {"id": "C", "text": "Recurrent suicidal behavior, gestures, or threats, or self-mutilating behavior"},
-            {"id": "D", "text": "Affective instability (e.g., intense episodic mood swings)"},
-            {"id": "E", "text": "Chronic feelings of emptiness"},
-            {"id": "F", "text": "Lack of impulsivity"}
-        ],
-        "correctAnswer": ["A", "C", "D", "E"],
-        "rationale": "Core features of BPD include frantic efforts to avoid abandonment (A), patterns of unstable and intense relationships, identity disturbance, impulsivity (opposite of F), recurrent suicidal or self-harming behaviors (C), affective instability/mood swings (D), and chronic feelings of emptiness (E). Stable relationships and self-image (B) are contrary to the typical presentation of BPD."
-    },
-    {
-        "id": 13,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "An involuntarily committed patient loudly refuses to take their prescribed morning dose of haloperidol (Haldol). What is the nurse's initial action?",
-        "choices": [
-            {"id": "A", "text": "Administer the medication intramuscularly since the patient is committed."},
-            {"id": "B", "text": "Explain the potential consequences of non-adherence and calmly attempt to persuade the patient."},
-            {"id": "C", "text": "Document the refusal, assess the patient's rationale and mental status, and notify the prescriber."},
-            {"id": "D", "text": "Withhold the medication and tell the patient they cannot attend group therapy until they take it."}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Involuntarily committed patients generally retain the right to refuse treatment, including medication, unless they are deemed incompetent to make decisions or pose an imminent danger to self or others that necessitates emergency medication. Forcing medication (A) without appropriate legal or clinical justification (like an emergency or court order) is battery. Using privileges as leverage (D) can be coercive. While persuasion (B) might be part of the interaction, the essential initial steps are to respect the refusal, document it thoroughly, assess the patient's reason and current state, and inform the healthcare provider (C) for further evaluation and orders."
-    },
-    {
-        "id": 14,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient on an antipsychotic medication develops a high fever (103°F), severe muscle rigidity ('lead pipe' rigidity), diaphoresis, and confusion. The nurse recognizes these as hallmark signs of _______________ ___________ Syndrome.",
-        "choices": [],
-        "correctAnswer": "Neuroleptic Malignant",
-        "rationale": "Neuroleptic Malignant Syndrome (NMS) is a rare but potentially fatal idiosyncratic reaction to antipsychotic drugs. Key features include hyperthermia (high fever), extreme muscle rigidity, autonomic instability (tachycardia, fluctuating blood pressure, diaphoresis), and altered mental status. It requires immediate recognition, discontinuation of the offending agent, and supportive medical care."
-    },
-    {
-        "id": 15,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient is prescribed tranylcypromine (Parnate), a monoamine oxidase inhibitor (MAOI). The nurse must provide dietary education to avoid foods high in tyramine, such as aged cheeses and cured meats, to prevent which potentially life-threatening adverse reaction?",
-        "choices": [
-            {"id": "A", "text": "Neuroleptic Malignant Syndrome"},
-            {"id": "B", "text": "Serotonin Syndrome"},
-            {"id": "C", "text": "Agranulocytosis"},
-            {"id": "D", "text": "Hypertensive Crisis"}
-        ],
-        "correctAnswer": "D",
-        "rationale": "MAOIs block the enzyme that breaks down tyramine, a vasopressor that can significantly increase blood pressure when it accumulates. Consuming tyramine-rich foods while taking MAOIs can trigger a hypertensive crisis (D), a medical emergency characterized by dangerously elevated blood pressure that can lead to stroke or other complications. Neuroleptic Malignant Syndrome (A) is associated with antipsychotics, Serotonin Syndrome (B) with combining serotonergic agents, and agranulocytosis (C) with certain medications that affect white blood cell production."
-    },
-    {
-        "id": 16,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is implementing a behavior modification program for a patient with maladaptive behaviors. Which behavioral interventions are based on principles of operant conditioning? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Using token economy systems"},
-            {"id": "B", "text": "Systematic desensitization"},
-            {"id": "C", "text": "Using time-out procedures"},
-            {"id": "D", "text": "Guided imagery"},
-            {"id": "E", "text": "Positive reinforcement of appropriate behaviors"},
-            {"id": "F", "text": "Flooding technique"}
-        ],
-        "correctAnswer": ["A", "C", "E"],
-        "rationale": "Operant conditioning focuses on strengthening or weakening voluntary behaviors through consequences. Token economies (A), time-out procedures (C), and positive reinforcement (E) all use consequences to modify behavior and are based on operant conditioning principles. Systematic desensitization (B), guided imagery (D), and flooding (F) are based on classical conditioning principles and are used primarily for reducing anxiety responses."
-    },
-    {
-        "id": 17,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient in the manic phase of bipolar disorder is exhibiting pressured speech, grandiose delusions, and has not slept for 48 hours. Which nursing intervention has the highest priority?",
-        "choices": [
-            {"id": "A", "text": "Encouraging the patient to participate in group therapy"},
-            {"id": "B", "text": "Creating a quiet environment with reduced stimulation"},
-            {"id": "C", "text": "Exploring recent events that might have triggered the manic episode"},
-            {"id": "D", "text": "Providing education about bipolar disorder and medication management"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "During acute mania, patients are easily overstimulated, have difficulty focusing, and are at risk for exhaustion due to hyperactivity and insomnia. Creating a quiet environment with reduced stimulation (B) helps prevent further escalation of symptoms and promotes sleep and rest. Group therapy (A) would likely increase stimulation and agitation. Patients in acute mania typically have poor concentration and judgment, making in-depth discussion (C) or education (D) less effective at this stage."
-    },
-    {
-        "id": 18,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A nurse assesses that a patient is experiencing visual hallucinations. Which nursing approach is most appropriate?",
-        "choices": [
-            {"id": "A", "text": "Tell the patient that what they are seeing is not real."},
-            {"id": "B", "text": "Ask the patient to describe what they are seeing without validating the hallucination."},
-            {"id": "C", "text": "Suggest that the patient is probably just tired and needs rest."},
-            {"id": "D", "text": "Agree with the patient that you also see the hallucination to build rapport."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Asking the patient to describe the hallucination (B) acknowledges their experience without reinforcing the false perception. This approach allows the nurse to assess the content and impact of the hallucination while maintaining a therapeutic relationship. Directly challenging the hallucination's reality (A) can damage rapport and increase the patient's distress or defensiveness. Dismissing the experience as fatigue (C) invalidates the patient's perception. Agreeing with or validating hallucinations (D) can reinforce them and is not therapeutic."
-    },
-    {
-        "id": 19,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient diagnosed with post-traumatic stress disorder (PTSD) often experiences intrusive memories and nightmares about a traumatic event. These symptoms are specifically categorized as _____________ symptoms in the DSM-5 diagnostic criteria.",
-        "choices": [],
-        "correctAnswer": "re-experiencing",
-        "rationale": "Re-experiencing symptoms are one of the four main symptom clusters in the DSM-5 diagnostic criteria for PTSD. These include intrusive memories, nightmares, flashbacks, and psychological distress or physiological reactions when exposed to trauma-related cues. The other symptom clusters include avoidance, negative alterations in cognition and mood, and alterations in arousal and reactivity."
-    },
-    {
-        "id": 20,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is working with a patient who has anorexia nervosa. Which nursing interventions are appropriate? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Setting specific caloric intake goals"},
-            {"id": "B", "text": "Allowing the patient to exercise as much as desired"},
-            {"id": "C", "text": "Monitoring weight regularly using standardized procedures"},
-            {"id": "D", "text": "Focusing conversations primarily on food and eating habits"},
-            {"id": "E", "text": "Involving family members in the treatment process when appropriate"},
-            {"id": "F", "text": "Assessing for physical complications like electrolyte imbalances"}
-        ],
-        "correctAnswer": ["A", "C", "E", "F"],
-        "rationale": "A structured approach to nutritional rehabilitation with specific caloric goals (A) is essential for patients with anorexia. Regular weight monitoring (C) helps track progress and adjust treatment. Family involvement (E) is important, especially for younger patients (family-based treatment). Assessing for medical complications (F) is crucial due to the physical risks of malnutrition. Unlimited exercise (B) can interfere with weight restoration and may be used as a compensatory behavior. Focusing primarily on food (D) can increase anxiety and resistance; addressing underlying psychological issues is also important."
-    },
-    {
-        "id": 21,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A primary goal when implementing crisis intervention with a patient is to:",
-        "choices": [
-            {"id": "A", "text": "Explore in depth the patient's entire psychological history"},
-            {"id": "B", "text": "Provide long-term therapy addressing all the patient's mental health needs"},
-            {"id": "C", "text": "Restore the patient to their previous level of functioning or better"},
-            {"id": "D", "text": "Ensure the patient no longer requires any mental health services"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Crisis intervention is a time-limited approach focused on resolving the immediate crisis and helping the individual return to at least their pre-crisis level of functioning (C). It does not aim to provide extensive exploration of psychological history (A) or comprehensive long-term therapy (B). While crisis intervention may connect patients with ongoing support, it doesn't guarantee they'll require no further services (D), as some may need continued care after the immediate crisis is resolved."
-    },
-    {
-        "id": 22,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "When documenting a mental status examination, which observation would be categorized under 'affect'?",
-        "choices": [
-            {"id": "A", "text": "The patient states 'I feel so empty inside'"},
-            {"id": "B", "text": "The patient reports voices commanding them to harm themselves"},
-            {"id": "C", "text": "The patient demonstrates a flat facial expression with minimal emotional reactivity"},
-            {"id": "D", "text": "The patient is oriented to person, place, and time"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Affect refers to the external, observable expression of emotion, including facial expressions, vocal tone, and body language. A flat affect (C) - minimal facial expressiveness and emotional reactivity - would be documented under this category. A patient's subjective feeling state (A) would be documented under 'mood.' Auditory hallucinations (B) would be documented under 'perceptual disturbances.' Orientation assessment (D) would be documented under 'cognitive functioning' or 'orientation.'"
-    },
-    {
-        "id": 23,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "The nurse caring for a patient at risk for suicide should implement which precautions? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Removing potentially harmful objects from the patient's environment"},
-            {"id": "B", "text": "Allowing private bathroom use without supervision to maintain dignity"},
-            {"id": "C", "text": "Conducting frequent and irregular observation checks"},
-            {"id": "D", "text": "Documenting specifics of the suicidal ideation and plan"},
-            {"id": "E", "text": "Securing all windows and doors"},
-            {"id": "F", "text": "Placing the patient in a secluded room to prevent harm"}
-        ],
-        "correctAnswer": ["A", "C", "D", "E"],
-        "rationale": "Environmental safety measures for suicidal patients include removing potential harmful objects (A), conducting frequent and irregular checks (C), and securing potential exit points like windows and doors (E). Thorough documentation of specific ideation and plans (D) is essential for continuity of care and risk assessment. Bathroom use typically requires supervision for actively suicidal patients (contrary to B). Seclusion (F) is not a standard suicide precaution; it is a restrictive intervention used only in specific situations like agitation with risk of harm to others, and requires close monitoring."
-    },
-    {
-        "id": 24,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient is admitted to the psychiatric unit with a diagnosis of major depressive disorder with psychotic features. The nurse administers the first dose of an antipsychotic medication. Which statement by the patient indicates an understanding of the teaching about this medication?",
-        "choices": [
-            {"id": "A", "text": "\"I'll be sure to get up quickly when I wake up at night to use the bathroom.\""},
-            {"id": "B", "text": "\"This will cure my depression in about 48 hours.\""},
-            {"id": "C", "text": "\"I need to report symptoms like muscle stiffness, tremors, or restlessness.\""},
-            {"id": "D", "text": "\"I can stop the medication once I start feeling better.\""}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Understanding the need to report extrapyramidal side effects (EPS) like muscle stiffness, tremors, or restlessness (C) indicates proper medication teaching comprehension. These symptoms can signal potentially serious reactions requiring intervention. Orthostatic hypotension is a common side effect, so rising slowly is recommended (contrary to A). Antipsychotics may help psychotic symptoms within a few days but don't 'cure' depression, especially not within 48 hours (B). Abruptly stopping psychiatric medications can lead to withdrawal effects or symptom recurrence (D)."
-    },
-    {
-        "id": 25,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient diagnosed with schizophrenia has persistent delusions despite medication adherence. When interacting with this patient, the nurse should avoid _____________ the delusion, which neither confronts nor reinforces the false belief.",
-        "choices": [],
-        "correctAnswer": "arguing about",
-        "rationale": "When working with delusional patients, it's important to neither argue about nor reinforce delusions. Arguing about delusions can damage the therapeutic relationship, increase the patient's defensiveness, and potentially strengthen the delusion as the patient argues for its validity. Instead, nurses should acknowledge the patient's experience without reinforcing the content, focus on feelings related to the delusion, and redirect to reality-based discussions when appropriate."
-    },
-    {
-        "id": 26,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is planning care for a patient in a manic state. Which nursing interventions are appropriate? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Providing a highly stimulating environment to match the patient's energy level"},
-            {"id": "B", "text": "Setting clear, consistent limits on inappropriate behavior"},
-            {"id": "C", "text": "Serving high-caffeine beverages throughout the day"},
-            {"id": "D", "text": "Providing frequent, small meals and snacks that are easy to eat"},
-            {"id": "E", "text": "Scheduling complex decision-making activities during periods of high energy"},
-            {"id": "F", "text": "Monitoring for signs of physical exhaustion"}
-        ],
-        "correctAnswer": ["B", "D", "F"],
-        "rationale": "Patients in manic states benefit from clear, consistent limit-setting (B) to address impulsivity and poor judgment. Since these patients are often hyperactive and may neglect basic needs, providing frequent, easily consumed nutritional options (D) is important. Monitoring for exhaustion (F) is essential as patients may not recognize their physical limitations. A low-stimulation environment (contrary to A) is recommended to avoid exacerbating symptoms. Caffeine (C) should be avoided as it can worsen agitation. Complex decision-making (E) should be minimized due to impaired judgment and concentration."
     }
-]}
+]
