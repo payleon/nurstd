@@ -8,6 +8,8 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Achievements from "@/pages/Achievements";
 import Profile from "@/pages/Profile";
+import CaseStudies from "@/pages/CaseStudies";
+import CaseStudyDetail from "@/pages/CaseStudyDetail";
 import { useState } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
@@ -55,9 +57,8 @@ function Router() {
       <Route path="/questions">
         {() => <PlaceholderPage name="Question Bank" />}
       </Route>
-      <Route path="/case-studies">
-        {() => <PlaceholderPage name="Case Studies" />}
-      </Route>
+      <Route path="/case-studies" component={CaseStudies} />
+      <Route path="/case-study/:id" component={CaseStudyDetail} />
       <Route path="/nclex-questions">
         {() => <PlaceholderPage name="NCLEX-Style Questions" />}
       </Route>
