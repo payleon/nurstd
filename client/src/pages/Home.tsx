@@ -26,9 +26,9 @@ export default function Home() {
   // When in exam mode, use a different layout without header or sidebar
   if (selectedTest) {
     return (
-      <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
+      <div className="bg-[#f9fafb] font-sans text-[#333333] min-h-screen">
         <div className="flex h-screen">
-          <main className="flex-1 p-4 md:p-6 overflow-auto">
+          <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto">
             <TestView test={selectedTest} onBack={handleBackToList} />
           </main>
         </div>
