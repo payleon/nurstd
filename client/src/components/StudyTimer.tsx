@@ -466,6 +466,31 @@ export function StudyTimer({
             )}
           </div>
           
+          {/* Recommendations Section - only shown when there are recommendations */}
+          {recommendations && recommendations.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <h3 className="font-semibold text-gray-800 mb-3 flex items-center">
+                <FileText className="w-4 h-4 mr-2 text-blue-600" /> Study Recommendations
+              </h3>
+              <div className="bg-blue-50 rounded-lg p-4 space-y-2">
+                {recommendations.map((item, index) => (
+                  <div key={index} className="flex items-start">
+                    <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <p className="ml-2 text-sm text-gray-800">{item}</p>
+                  </div>
+                ))}
+                {isActive && !isPaused && (
+                  <div className="flex items-start pt-2">
+                    <AlarmClock className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <p className="ml-2 text-sm text-blue-800 font-medium">
+                      Focus on these items during your current session
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          
           {/* Stats Section */}
           <div className="mt-4 pt-4 border-t border-gray-200">
             <h3 className="font-semibold text-gray-800 mb-3 flex items-center">
