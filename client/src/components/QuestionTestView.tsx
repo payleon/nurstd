@@ -30,6 +30,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const [showReviewMode, setShowReviewMode] = useState(false);
   const [testSubmitted, setTestSubmitted] = useState(false);
   const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
+  const [showRationale, setShowRationale] = useState<Record<number, boolean>>({});
+  const [answerCorrectness, setAnswerCorrectness] = useState<Record<number, boolean>>({});
   
   const questions = questionsData?.questions || [];
   const currentQuestion = questions[currentQuestionIndex];
@@ -86,6 +88,12 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     
     // If this is a change to an existing answer, check if it was correct
     checkAnswer(currentQuestion.id, answer);
+    
+    // Show rationale after answering
+    setShowRationale({
+      ...showRationale,
+      [currentQuestion.id]: true
+    });
   };
   
   const checkAnswer = (questionId: number, answer: string | string[]) => {
@@ -104,11 +112,26 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
       isCorrect = answer === question.correctAnswer;
     }
     
+    // Update answer correctness state
+    setAnswerCorrectness({
+      ...answerCorrectness,
+      [questionId]: isCorrect
+    });
+    
+    // Track incorrect answers for review
     if (!isCorrect && !incorrectAnswers.includes(questionId)) {
       setIncorrectAnswers([...incorrectAnswers, questionId]);
     } else if (isCorrect && incorrectAnswers.includes(questionId)) {
       setIncorrectAnswers(incorrectAnswers.filter(id => id !== questionId));
     }
+    
+    // Update badge progress
+    const timeSpent = (Date.now() - questionStartTime) / 1000 / 60; // in minutes
+    const isFlagged = flaggedQuestions.includes(questionId);
+    updateAfterQuestionAnswered(question, isCorrect, timeSpent, isFlagged);
+    
+    // Reset timer for next question
+    setQuestionStartTime(Date.now());
   };
 
   const toggleFlagQuestion = () => {
@@ -308,6 +331,9 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                 <QuestionRenderer 
                   question={currentQuestion}
                   onAnswer={handleAnswerSubmit}
+                  userAnswer={userAnswers[currentQuestion.id]}
+                  showRationale={showRationale[currentQuestion.id] || false}
+                  isCorrect={answerCorrectness[currentQuestion.id] || false}
                 />
               )}
             </div>

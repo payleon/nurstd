@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { Question } from "@shared/schema";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 
 interface QuestionRendererProps {
   question: Question;
   onAnswer: (answer: string | string[]) => void;
+  userAnswer?: string | string[];
+  showRationale?: boolean;
+  isCorrect?: boolean;
 }
 
-export function QuestionRenderer({ question, onAnswer }: QuestionRendererProps) {
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-  const [textAnswer, setTextAnswer] = useState<string>("");
+export function QuestionRenderer({ 
+  question, 
+  onAnswer, 
+  userAnswer, 
+  showRationale = false,
+  isCorrect = false
+}: QuestionRendererProps) {
+  const [selectedAnswers, setSelectedAnswers] = useState<string[]>(
+    Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []
+  );
+  const [textAnswer, setTextAnswer] = useState<string>(
+    typeof userAnswer === 'string' ? userAnswer : ''
+  );
   
   const isSingleChoice = question.type === "mc";
   const isMultiChoice = question.type === "sata";
@@ -54,51 +68,76 @@ export function QuestionRenderer({ question, onAnswer }: QuestionRendererProps) 
             placeholder="Type your answer here"
             value={textAnswer}
             onChange={handleTextInputChange}
+            disabled={showRationale}
           />
         </div>
       ) : (
         <>
           <div className="answer-options space-y-3">
-            {question.choices?.map((choice) => (
-              <div 
-                key={choice.id}
-                className="flex items-start p-3 border rounded-md cursor-pointer hover:bg-gray-50 transition-colors"
-                onClick={() => handleAnswerSelect(choice.id)}
-              >
-                <div className="mr-3 mt-0.5">
-                  {isSingleChoice ? (
-                    <div 
-                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        selectedAnswers.includes(choice.id) 
-                          ? "border-[#4B9CD3] bg-[#4B9CD3]" 
-                          : "border-gray-300"
-                      }`}
-                    >
-                      {selectedAnswers.includes(choice.id) && (
-                        <div className="w-2 h-2 rounded-full bg-white"></div>
+            {question.choices?.map((choice) => {
+              const isSelected = selectedAnswers.includes(choice.id);
+              const isCorrectChoice = Array.isArray(question.correctAnswer) 
+                ? question.correctAnswer.includes(choice.id) 
+                : question.correctAnswer === choice.id;
+              
+              // Determine styling for answered questions when showing rationale
+              let choiceStyle = "border rounded-md cursor-pointer hover:bg-gray-50 transition-colors";
+              if (showRationale) {
+                if (isCorrectChoice) {
+                  choiceStyle = "border-2 border-green-400 bg-green-50 rounded-md";
+                } else if (isSelected && !isCorrectChoice) {
+                  choiceStyle = "border-2 border-red-400 bg-red-50 rounded-md";
+                }
+              }
+              
+              return (
+                <div 
+                  key={choice.id}
+                  className={`flex items-start p-3 ${choiceStyle}`}
+                  onClick={() => !showRationale && handleAnswerSelect(choice.id)}
+                >
+                  <div className="mr-3 mt-0.5">
+                    {isSingleChoice ? (
+                      <div 
+                        className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                          isSelected
+                            ? "border-[#4B9CD3] bg-[#4B9CD3]" 
+                            : "border-gray-300"
+                        }`}
+                      >
+                        {isSelected && (
+                          <div className="w-2 h-2 rounded-full bg-white"></div>
+                        )}
+                      </div>
+                    ) : (
+                      <div 
+                        className={`w-5 h-5 rounded-sm border-2 flex items-center justify-center ${
+                          isSelected
+                            ? "border-[#4B9CD3] bg-[#4B9CD3]" 
+                            : "border-gray-300"
+                        }`}
+                      >
+                        {isSelected && (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-medium">
+                      {choice.id}. {choice.text}
+                      {showRationale && isCorrectChoice && (
+                        <span className="ml-2 text-green-600 inline-flex items-center">
+                          <CheckCircle2 size={16} className="mr-1" /> Correct
+                        </span>
                       )}
                     </div>
-                  ) : (
-                    <div 
-                      className={`w-5 h-5 rounded-sm border-2 flex items-center justify-center ${
-                        selectedAnswers.includes(choice.id) 
-                          ? "border-[#4B9CD3] bg-[#4B9CD3]" 
-                          : "border-gray-300"
-                      }`}
-                    >
-                      {selectedAnswers.includes(choice.id) && (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                    </div>
-                  )}
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <div className="font-medium">{choice.id}. {choice.text}</div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           
           {isMultiChoice && (
@@ -107,6 +146,38 @@ export function QuestionRenderer({ question, onAnswer }: QuestionRendererProps) 
             </div>
           )}
         </>
+      )}
+      
+      {/* Rationale Section */}
+      {showRationale && question.rationale && (
+        <div className="mt-6 border-t pt-4">
+          <div className={`p-4 rounded-md ${isCorrect ? 'bg-green-50' : 'bg-amber-50'}`}>
+            <div className="flex items-center font-medium text-lg mb-2">
+              {isCorrect ? (
+                <CheckCircle2 className="mr-2 text-green-600" size={20} />
+              ) : (
+                <AlertCircle className="mr-2 text-amber-600" size={20} />
+              )}
+              <h4 className={isCorrect ? 'text-green-800' : 'text-amber-800'}>
+                {isCorrect ? 'Correct!' : 'Incorrect'}
+              </h4>
+            </div>
+            
+            <div className="mb-2">
+              <span className="font-medium">Correct Answer: </span>
+              {Array.isArray(question.correctAnswer) ? (
+                question.correctAnswer.join(', ')
+              ) : (
+                question.correctAnswer
+              )}
+            </div>
+            
+            <div className="rationale">
+              <h5 className="font-medium mb-1">Rationale:</h5>
+              <p className="text-gray-700">{question.rationale}</p>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
