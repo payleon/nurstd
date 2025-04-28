@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import fs from "fs/promises";
 import path from "path";
+import { QuestionsResponseSchema, QuestionSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Get all tests from the published directory
@@ -79,6 +80,75 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error reading test content:", error);
       res.status(500).json({ message: "Failed to load test content" });
+    }
+  });
+
+  // Get all questions from questions.json
+  app.get("/api/questions", async (req, res) => {
+    try {
+      const publishedDir = path.join(import.meta.dirname, "../published");
+      const questionsFilePath = path.join(publishedDir, "questions.json");
+      
+      try {
+        await fs.access(questionsFilePath);
+      } catch (error) {
+        return res.status(404).json({ message: "Questions file not found" });
+      }
+      
+      // Read the questions file
+      const questionsContent = await fs.readFile(questionsFilePath, 'utf-8');
+      const questionsData = JSON.parse(questionsContent);
+      
+      // Validate the data against our schema
+      try {
+        const validatedData = QuestionsResponseSchema.parse(questionsData);
+        res.json(validatedData);
+      } catch (error) {
+        console.error("Questions data validation error:", error);
+        res.status(500).json({ message: "Invalid questions data format" });
+      }
+    } catch (error) {
+      console.error("Error reading questions:", error);
+      res.status(500).json({ message: "Failed to load questions" });
+    }
+  });
+
+  // Get a specific question by ID
+  app.get("/api/questions/:id", async (req, res) => {
+    try {
+      const questionId = parseInt(req.params.id);
+      const publishedDir = path.join(import.meta.dirname, "../published");
+      const questionsFilePath = path.join(publishedDir, "questions.json");
+      
+      try {
+        await fs.access(questionsFilePath);
+      } catch (error) {
+        return res.status(404).json({ message: "Questions file not found" });
+      }
+      
+      // Read the questions file
+      const questionsContent = await fs.readFile(questionsFilePath, 'utf-8');
+      const questionsData = JSON.parse(questionsContent);
+      
+      // Validate the data and find the specific question
+      try {
+        const validatedData = QuestionsResponseSchema.parse(questionsData);
+        const question = validatedData.questions.find(q => q.id === questionId);
+        
+        if (!question) {
+          return res.status(404).json({ message: "Question not found" });
+        }
+        
+        // Validate the specific question
+        const validatedQuestion = QuestionSchema.parse(question);
+        res.json(validatedQuestion);
+      } catch (error) {
+        console.error("Question data validation error:", error);
+        res.status(500).json({ message: "Invalid question data format" });
+      }
+    } catch (error) {
+      console.error("Error reading question:", error);
+      res.status(500).json({ message: "Failed to load question" });
     }
   });
 
