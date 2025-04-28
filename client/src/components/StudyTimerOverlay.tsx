@@ -278,11 +278,11 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
             {/* Session Duration */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="font-medium flex items-center">
+                <label className="font-medium flex items-center text-gray-900">
                   <Clock className="mr-2 h-5 w-5 text-blue-600" />
                   Session Duration
                 </label>
-                <Badge variant="outline" className="ml-2 px-2 py-1 font-semibold">
+                <Badge variant="outline" className="ml-2 px-2 py-1 font-semibold text-gray-900 border-gray-400">
                   {duration} minutes
                 </Badge>
               </div>
@@ -290,7 +290,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
                 value={duration.toString()}
                 onValueChange={handleDurationChange}
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full border-gray-400 text-gray-900 bg-white">
                   <SelectValue placeholder="Select duration" />
                 </SelectTrigger>
                 <SelectContent>
@@ -305,7 +305,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
             
             {/* Study Area */}
             <div className="space-y-2">
-              <label className="font-medium flex items-center">
+              <label className="font-medium flex items-center text-gray-900">
                 <BookOpen className="mr-2 h-5 w-5 text-blue-600" />
                 Focus Area
               </label>
@@ -321,7 +321,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
                     onClick={() => handleAreaChange(area.value)}
                   >
                     <div className="text-lg">{area.icon}</div>
-                    <div className="text-xs font-medium">{area.label}</div>
+                    <div className="text-xs font-medium text-gray-900">{area.label}</div>
                   </div>
                 ))}
               </div>
@@ -330,7 +330,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
             {/* Energy Level */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="font-medium flex items-center">
+                <label className="font-medium flex items-center text-gray-900">
                   <Brain className="mr-2 h-5 w-5 text-blue-600" />
                   Current Energy Level
                 </label>
@@ -355,7 +355,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
                   value={[energy]}
                   onValueChange={handleEnergyChange}
                 />
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                <div className="flex justify-between text-xs text-gray-700 font-semibold mt-1">
                   <span>Low</span>
                   <span>Medium</span>
                   <span>High</span>
@@ -365,7 +365,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
             
             {/* Recommended Study Plan */}
             <div className="space-y-2 border-t border-gray-200 pt-4">
-              <h3 className="font-medium flex items-center">
+              <h3 className="font-medium flex items-center text-gray-900">
                 <FileText className="mr-2 h-5 w-5 text-blue-600" />
                 Recommended Study Plan
               </h3>
