@@ -56,7 +56,7 @@ export function TestList({ onSelectTest }: TestListProps) {
       {/* Welcome Card */}
       <div className="neuro-card mb-6 bg-[#4B9CD3] text-white overflow-hidden neuro-noise">
         <div className="p-6">
-          <h2 className="text-3xl font-bold mb-3 uppercase tracking-tight">Welcome to Nur'std NCLEX Prep</h2>
+          <h2 className="text-3xl font-bold mb-3 uppercase tracking-tight">Welcome to NURS'TD NCLEX Prep</h2>
           <p className="mb-4 text-lg">Your comprehensive nursing exam preparation platform. Choose from our available practice exams below to begin.</p>
           <div className="flex flex-wrap gap-4 mt-6">
             <div className="flex items-center bg-white bg-opacity-20 p-3 border-2 border-black">
