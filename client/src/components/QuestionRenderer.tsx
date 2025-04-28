@@ -109,7 +109,7 @@ export function QuestionRenderer({
               return (
                 <div 
                   key={choice.id}
-                  className={`flex items-start p-3 ${choiceStyle}`}
+                  className={`flex items-start p-3 ${choiceStyle} ${showRationale ? '' : 'cursor-pointer hover:bg-gray-50'}`}
                   onClick={() => !showRationale && handleAnswerSelect(choice.id)}
                 >
                   <div className="mr-3 mt-0.5">
@@ -119,7 +119,7 @@ export function QuestionRenderer({
                           isSelected
                             ? "border-[#4B9CD3] bg-[#4B9CD3]" 
                             : "border-gray-300"
-                        }`}
+                        } ${showRationale ? 'opacity-80' : ''}`}
                       >
                         {isSelected && (
                           <div className="w-2 h-2 rounded-full bg-white"></div>
@@ -131,7 +131,7 @@ export function QuestionRenderer({
                           isSelected
                             ? "border-[#4B9CD3] bg-[#4B9CD3]" 
                             : "border-gray-300"
-                        }`}
+                        } ${showRationale ? 'opacity-80' : ''}`}
                       >
                         {isSelected && (
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">

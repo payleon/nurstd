@@ -10,7 +10,8 @@ import { MessageCircle } from "lucide-react";
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedTest, setSelectedTest] = useState<Test | null>(null);
-  const [useQuestionDB, setUseQuestionDB] = useState(true); // Set to true to use questions.json
+  // Determine view mode based on test path instead of hardcoding
+  const [useQuestionDB, setUseQuestionDB] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -18,6 +19,10 @@ export default function Home() {
 
   const handleSelectTest = (test: Test) => {
     setSelectedTest(test);
+    // Determine view mode based on test path
+    // If it contains all_questions.json, use the QuestionTestView component
+    // Otherwise use the TestView component (for HTML content)
+    setUseQuestionDB(test.path.includes('all_questions.json'));
     setSidebarOpen(false); // Close sidebar on mobile when a test is selected
   };
 

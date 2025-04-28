@@ -64,7 +64,14 @@ function Router() {
       <Route path="/question-bank" component={QuestionBank} />
       <Route path="/case-studies" component={CaseStudies} />
       <Route path="/case-study/:id" component={CaseStudyDetail} />
-      <Route path="/nclex-questions" component={QuestionBank} />
+      {/* Redirect from old path to new path */}
+      <Route path="/nclex-questions">
+        {() => {
+          // Redirect to question-bank
+          window.location.href = '/question-bank';
+          return null;
+        }}
+      </Route>
       <Route path="/study-strategies" component={StudyStrategies} />
       <Route path="/learning-progress" component={LearningProgress} />
       <Route path="/study-timer" component={StudyTimer} />

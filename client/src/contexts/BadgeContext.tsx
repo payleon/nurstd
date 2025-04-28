@@ -41,35 +41,41 @@ export const BadgeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem(USER_STATS_KEY, JSON.stringify(userStats));
   }, [userStats]);
 
-  // Update streak days - check once per day
+  // Update streak days - check once per day with proper streak handling
   useEffect(() => {
     const lastVisitDate = localStorage.getItem('last-visit-date');
-    const today = new Date().toDateString();
+    const today = new Date();
+    const todayString = today.toDateString();
     
     if (lastVisitDate) {
       const lastDate = new Date(lastVisitDate);
-      const currentDate = new Date();
       
       // Calculate the difference in days
-      const diffTime = Math.abs(currentDate.getTime() - lastDate.getTime());
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const oneDayInMs = 24 * 60 * 60 * 1000;
+      const diffTime = today.getTime() - lastDate.getTime();
+      const diffDays = Math.round(diffTime / oneDayInMs);
       
       if (diffDays === 1) {
-        // Consecutive day
+        // Consecutive day - increment streak
         setUserStats(prev => ({
           ...prev,
           streakDays: prev.streakDays + 1
         }));
       } else if (diffDays > 1) {
-        // Streak broken
+        // Streak broken - reset to 1
         setUserStats(prev => ({
           ...prev,
           streakDays: 1
         }));
+      } else if (diffDays === 0) {
+        // Same day visit - do nothing to the streak
+      } else if (diffDays < 0) {
+        // Clock was changed or timezone issue
+        // Just use the current streak without changes
       }
     }
     
-    localStorage.setItem('last-visit-date', today);
+    localStorage.setItem('last-visit-date', todayString);
   }, []);
 
   const updateAfterQuestionAnswered = (question: Question, isCorrect: boolean, timeSpent: number, flagged: boolean) => {

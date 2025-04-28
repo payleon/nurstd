@@ -15,12 +15,9 @@ interface TestViewProps {
 export function TestView({ test, onBack }: TestViewProps) {
   const { data: testContent, isLoading, error } = useQuery<string>({
     queryKey: [`/api/tests/${test.id}/content`],
-    queryFn: async ({ queryKey }) => {
-      const response = await fetch(queryKey[0] as string);
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.text();
+    queryFn: async () => {
+      const response = await fetchTestContent(test.id);
+      return response;
     }
   });
   
