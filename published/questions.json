@@ -1,4 +1,3 @@
-
 {
   "questions": [
     {
@@ -19,16 +18,16 @@
       "id": 2,
       "title": "Postpartum Assessment",
       "type": "sata",
-      "text": "Which findings are normal during the fourth stage of labor? Select all that apply.",
+      "text": "A nurse is assessing a client 4 hours after vaginal delivery. Which findings should the nurse report to the healthcare provider? Select all that apply.",
       "choices": [
-        {"id": "A", "text": "Firm fundus at umbilicus"},
-        {"id": "B", "text": "Moderate lochia rubra"},
-        {"id": "C", "text": "Bladder distention"},
-        {"id": "D", "text": "Shaking chills"},
-        {"id": "E", "text": "Perineal edema"}
+        {"id": "A", "text": "Urinary output of 100 mL in 4 hours"},
+        {"id": "B", "text": "Temperature of 100.4°F (38°C)"},
+        {"id": "C", "text": "Lochia rubra with small clots"},
+        {"id": "D", "text": "Fundus firm and midline"},
+        {"id": "E", "text": "Blood pressure of 140/90 mmHg"}
       ],
-      "correctAnswer": ["A", "B", "D", "E"],
-      "rationale": "Normal findings include a firm fundus, moderate lochia rubra, physiologic shaking, and perineal edema. Bladder distention is abnormal and requires intervention."
+      "correctAnswer": ["A", "B", "E"],
+      "rationale": "Decreased urinary output, elevated temperature, and elevated blood pressure require immediate provider notification as they may indicate complications like infection or preeclampsia. Lochia rubra with small clots and a firm, midline fundus are normal findings in the immediate postpartum period."
     },
     {
       "id": 3,
@@ -36,7 +35,8 @@
       "type": "fill_in_blank",
       "text": "The healthcare provider orders Heparin 1,000 units/hour IV. The label reads 25,000 units/500 mL. Calculate the mL/hour to be administered.",
       "correctAnswer": "20",
-      "rationale": "Using dimensional analysis: (1,000 units/hour × 500 mL) ÷ 25,000 units = 20 mL/hour"
+      "rationale": "Using dimensional analysis: (1,000 units/hour × 500 mL) ÷ 25,000 units = 20 mL/hour",
+      "choices": []
     },
     {
       "id": 4,
@@ -44,13 +44,28 @@
       "type": "mc",
       "text": "A client has crackles in the lung bases. Which position should the nurse place the client in to facilitate breathing?",
       "choices": [
-        {"id": "A", "text": "Left lateral"},
-        {"id": "B", "text": "Right lateral"},
-        {"id": "C", "text": "Fowler's"},
-        {"id": "D", "text": "Trendelenburg"}
+        {"id": "A", "text": "High Fowler's position"},
+        {"id": "B", "text": "Supine position"},
+        {"id": "C", "text": "Prone position"},
+        {"id": "D", "text": "Lateral position"}
       ],
-      "correctAnswer": "C",
-      "rationale": "Fowler's position uses gravity to help lower diaphragm and expand lungs, facilitating better breathing with crackles."
+      "correctAnswer": "A",
+      "rationale": "High Fowler's position (sitting upright at a 60-90 degree angle) allows for maximum lung expansion, especially in the bases, which helps mobilize secretions and improve ventilation in clients with crackles."
+    },
+    {
+      "id": 5,
+      "title": "Pain Management",
+      "type": "sata",
+      "text": "A postoperative client reports pain of 7/10 despite receiving the prescribed opioid analgesic 2 hours ago. Which nursing interventions are appropriate? Select all that apply.",
+      "choices": [
+        {"id": "A", "text": "Administer the prescribed PRN opioid immediately"},
+        {"id": "B", "text": "Notify the healthcare provider"},
+        {"id": "C", "text": "Assess the client's pain using a comprehensive pain assessment tool"},
+        {"id": "D", "text": "Encourage the client to wait until the next scheduled dose"},
+        {"id": "E", "text": "Offer non-pharmacological pain relief measures"}
+      ],
+      "correctAnswer": ["B", "C", "E"],
+      "rationale": "Appropriate interventions include notifying the provider about inadequate pain control, performing a comprehensive pain assessment, and offering non-pharmacological measures. The nurse should not administer another dose if it's too early per orders, and should not encourage the client to simply endure uncontrolled pain."
     }
   ]
 }

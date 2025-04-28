@@ -39,15 +39,41 @@ export const QuestionChoiceSchema = z.object({
   text: z.string()
 });
 
-export const QuestionSchema = z.object({
+// Base schema with common fields
+const BaseQuestionSchema = z.object({
   id: z.number(),
   title: z.string(),
-  type: z.enum(["mc", "sata", "hotspot", "drag-drop", "fill-blank"]),
   text: z.string(),
-  choices: z.array(QuestionChoiceSchema),
-  correctAnswer: z.union([z.string(), z.array(z.string())]),
   rationale: z.string()
 });
+
+// Multiple choice question schema
+const MultipleChoiceQuestionSchema = BaseQuestionSchema.extend({
+  type: z.literal("mc"),
+  choices: z.array(QuestionChoiceSchema),
+  correctAnswer: z.string()
+});
+
+// Select all that apply question schema
+const SelectAllQuestionSchema = BaseQuestionSchema.extend({
+  type: z.literal("sata"),
+  choices: z.array(QuestionChoiceSchema),
+  correctAnswer: z.array(z.string())
+});
+
+// Fill in the blank question schema
+const FillInBlankQuestionSchema = BaseQuestionSchema.extend({
+  type: z.literal("fill_in_blank"),
+  correctAnswer: z.string(),
+  choices: z.array(QuestionChoiceSchema).optional()
+});
+
+// Union of all question types
+export const QuestionSchema = z.discriminatedUnion("type", [
+  MultipleChoiceQuestionSchema,
+  SelectAllQuestionSchema,
+  FillInBlankQuestionSchema
+]);
 
 export const QuestionsResponseSchema = z.object({
   questions: z.array(QuestionSchema)
