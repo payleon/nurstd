@@ -25,11 +25,6 @@ interface MenuItem {
   path?: string;
 }
 
-interface MenuSection {
-  section: string;
-  items: MenuItem[];
-}
-
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const [location, setLocation] = useLocation();
   // Set initial active category based on current URL path
@@ -39,7 +34,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/": "Practice Exams",
       "/profile": "Profile",
       "/achievements": "Achievements",
-      "/questions": "Question Bank",
       "/case-studies": "Case Studies",
       "/nclex-questions": "NCLEX-Style Questions",
       "/study-strategies": "Study Strategies"
@@ -73,12 +67,36 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     onClose(); // Close the sidebar on mobile after clicking
   };
 
-  const menuItems: (MenuItem | MenuSection)[] = [
+  const menuItems: MenuItem[] = [
     {
       title: "My Dashboard",
       icon: <Monitor className="h-5 w-5 mr-3" />,
       active: activeCategory === "My Dashboard",
       path: "/"
+    },
+    {
+      title: "Practice Exams",
+      icon: <ShieldCheck className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Practice Exams",
+      path: "/"
+    },
+    {
+      title: "Case Studies",
+      icon: <Files className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Case Studies",
+      path: "/case-studies"
+    },
+    {
+      title: "NCLEX-Style Questions",
+      icon: <HelpCircle className="h-5 w-5 mr-3" />,
+      active: activeCategory === "NCLEX-Style Questions",
+      path: "/nclex-questions"
+    },
+    {
+      title: "Study Strategies",
+      icon: <Lightbulb className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Study Strategies",
+      path: "/study-strategies"
     },
     {
       title: "Profile",
@@ -91,41 +109,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       icon: <Award className="h-5 w-5 mr-3" />,
       active: activeCategory === "Achievements",
       path: "/achievements"
-    },
-    {
-      section: "STUDY MATERIALS",
-      items: [
-        { 
-          title: "Practice Exams", 
-          icon: <ShieldCheck className="h-5 w-5 mr-3 text-[#4B9CD3]" />, 
-          active: activeCategory === "Practice Exams",
-          path: "/"
-        },
-        { 
-          title: "Question Bank", 
-          icon: <FileText className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Question Bank",
-          path: "/questions"
-        },
-        { 
-          title: "Case Studies", 
-          icon: <Files className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Case Studies",
-          path: "/case-studies"
-        },
-        { 
-          title: "NCLEX-Style Questions", 
-          icon: <HelpCircle className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "NCLEX-Style Questions",
-          path: "/nclex-questions"
-        },
-        { 
-          title: "Study Strategies", 
-          icon: <Lightbulb className="h-5 w-5 mr-3" />, 
-          active: activeCategory === "Study Strategies",
-          path: "/study-strategies"
-        }
-      ]
     }
   ];
 
@@ -192,43 +175,16 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         
         <nav className="mt-2">
           {menuItems.map((item, index) => (
-            <div key={index}>
-              {/* Regular menu item (not in a section) */}
-              {!('section' in item) && (
-                <div 
-                  className={cn(
-                    "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b border-black/30",
-                    item.active && "bg-[#0A1E3A] text-[#4B9CD3] font-bold"
-                  )}
-                  onClick={() => handleMenuItemClick(item.title, item.path)}
-                >
-                  {item.icon}
-                  <span className="font-medium">{item.title}</span>
-                </div>
+            <div 
+              key={index}
+              className={cn(
+                "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b border-black/30",
+                item.active && "bg-[#0A1E3A] text-[#4B9CD3] font-bold"
               )}
-              
-              {/* Section with sub-items */}
-              {'section' in item && (
-                <>
-                  <div className="mt-4 px-4 py-2 text-sm font-bold text-[#4B9CD3] bg-[#0A1E3A] border-y border-black/30">
-                    {item.section}
-                  </div>
-                  
-                  {item.items?.map((subItem, subIndex) => (
-                    <div 
-                      key={subIndex}
-                      className={cn(
-                        "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b border-black/30",
-                        subItem.active && "bg-[#0A1E3A] border-l-4 border-[#4B9CD3] font-bold"
-                      )}
-                      onClick={() => handleMenuItemClick(subItem.title, subItem.path)}
-                    >
-                      {subItem.icon}
-                      <span>{subItem.title}</span>
-                    </div>
-                  ))}
-                </>
-              )}
+              onClick={() => handleMenuItemClick(item.title, item.path)}
+            >
+              {item.icon}
+              <span className="font-medium">{item.title}</span>
             </div>
           ))}
         </nav>
