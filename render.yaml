@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: nursing-exam-app
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+    healthCheckPath: /api/tests
+    autoDeploy: true
