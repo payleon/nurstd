@@ -9,9 +9,9 @@ import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { Loader2 } from "lucide-react";
 
-// Import all pages directly to avoid issues with code splitting for now
-import NotFound from "@/pages/not-found";
+// Import all pages directly for now - we'll implement proper code splitting later when we have more time to test
 import Home from "@/pages/Home";
+import NotFound from "@/pages/not-found";
 import Achievements from "@/pages/Achievements";
 import Profile from "@/pages/Profile";
 import CaseStudies from "@/pages/CaseStudies";

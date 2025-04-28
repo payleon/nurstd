@@ -5,11 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { NCLEXTutorial } from "@/components/NCLEXTutorial";
 import { fetchQuestions } from "@/lib/api";
 import { Question } from "@shared/schema";
-import { Flashcard } from "@/components/Flashcard";
 import { Loader2 } from "lucide-react";
+import { lazyImport } from "@/lib/lazyImport";
+
+// Lazy load components that aren't needed on initial render
+const { NCLEXTutorial } = lazyImport(() => import('@/components/NCLEXTutorial'), 'NCLEXTutorial');
+const { Flashcard } = lazyImport(() => import('@/components/Flashcard'), 'Flashcard');
 
 export default function QuestionBank() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
