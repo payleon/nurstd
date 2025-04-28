@@ -26,9 +26,9 @@ export default function Home() {
   // When in exam mode, use a different layout without header or sidebar
   if (selectedTest) {
     return (
-      <div className="bg-[#f8f9fa] font-sans text-[#333333] min-h-screen">
+      <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
         <div className="flex h-screen">
-          <main className="flex-1 p-4 overflow-auto">
+          <main className="flex-1 p-4 md:p-6 overflow-auto">
             <TestView test={selectedTest} onBack={handleBackToList} />
           </main>
         </div>
@@ -38,20 +38,22 @@ export default function Home() {
 
   // Normal layout with header and sidebar for the main dashboard
   return (
-    <div className="bg-[#f8f9fa] font-sans text-[#333333] min-h-screen">
+    <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
       <Header toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex h-screen pt-14">
-        <main className="flex-1 p-4 lg:pl-64 overflow-auto">
-          <TestList onSelectTest={handleSelectTest} />
+      <div className="flex h-screen pt-16">
+        <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
+          <div className="max-w-5xl mx-auto">
+            <TestList onSelectTest={handleSelectTest} />
+          </div>
         </main>
       </div>
 
       {/* Chat/Help Button */}
       <div className="fixed bottom-6 right-6 z-10">
-        <button className="bg-[#4B9CD3] text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center relative">
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+        <button className="neuro-button-primary flex items-center justify-center w-14 h-14 rounded-none relative">
+          <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 border-2 border-white flex items-center justify-center font-bold">
             1
           </span>
           <MessageCircle className="h-6 w-6" />

@@ -122,18 +122,23 @@ export function TestList({ onSelectTest }: TestListProps) {
                 </div>
               ) : (
                 tests?.map((test) => (
-                  <div key={test.id} className="flex items-center justify-between p-4 border-b-2 border-black hover:bg-gray-50">
-                    <div className="flex items-center">
-                      <div className="bg-[#4B9CD3] text-white p-2 border-2 border-black mr-4">
-                        <FileText className="h-5 w-5" />
+                  <div key={test.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 border-b-2 border-black hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center mb-3 md:mb-0">
+                      <div className="bg-[#4B9CD3] text-white p-2 border-2 border-black mr-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                        <FileText className="h-6 w-6" />
                       </div>
                       <div>
                         <div className="font-bold text-[#13294B] text-lg">{test.title}</div>
-                        <div className="text-sm font-medium">75 questions • 2 hours</div>
+                        <div className="font-medium flex items-center mt-1">
+                          <span className="inline-block bg-[#13294B] text-white text-xs px-2 py-1 mr-2 border border-black">75 QUESTIONS</span>
+                          <span className="inline-block bg-[#13294B] text-white text-xs px-2 py-1 border border-black">2 HOURS</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <span className="text-sm font-bold hidden md:inline">Not Attempted</span>
+                    <div className="flex items-center space-x-4 ml-12 md:ml-0">
+                      <div className="hidden md:flex items-center justify-center border-2 border-black px-3 py-1 bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                        <span className="text-sm font-bold">NOT ATTEMPTED</span>
+                      </div>
                       <button 
                         className="neuro-button-primary"
                         onClick={() => handleSelectTest(test)}
