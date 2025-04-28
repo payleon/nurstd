@@ -70,12 +70,28 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
 
   const goToNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
+      // Hide rationale when moving to next question if not answered
+      const nextQuestionId = questions[currentQuestionIndex + 1]?.id;
+      if (nextQuestionId && !userAnswers[nextQuestionId]) {
+        setShowRationale({
+          ...showRationale,
+          [nextQuestionId]: false
+        });
+      }
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
 
   const goToPreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
+      // When going back to a previous question, show rationale if it was answered
+      const prevQuestionId = questions[currentQuestionIndex - 1]?.id;
+      if (prevQuestionId && userAnswers[prevQuestionId] !== undefined) {
+        setShowRationale({
+          ...showRationale,
+          [prevQuestionId]: true
+        });
+      }
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
@@ -158,6 +174,18 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   };
 
   const goToQuestion = (index: number) => {
+    // When jumping to a question from the list, ensure rationale is shown if answered
+    const question = questions[index];
+    if (question) {
+      const questionId = question.id;
+      // If the question has been answered, make sure the rationale is shown
+      if (userAnswers[questionId] !== undefined) {
+        setShowRationale({
+          ...showRationale,
+          [questionId]: true
+        });
+      }
+    }
     setCurrentQuestionIndex(index);
   };
 
