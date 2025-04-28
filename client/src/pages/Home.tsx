@@ -23,6 +23,20 @@ export default function Home() {
     setSelectedTest(null);
   };
 
+  // When in exam mode, use a different layout without header or sidebar
+  if (selectedTest) {
+    return (
+      <div className="bg-[#f8f9fa] font-sans text-[#333333] min-h-screen">
+        <div className="flex h-screen">
+          <main className="flex-1 p-4 overflow-auto">
+            <TestView test={selectedTest} onBack={handleBackToList} />
+          </main>
+        </div>
+      </div>
+    );
+  }
+
+  // Normal layout with header and sidebar for the main dashboard
   return (
     <div className="bg-[#f8f9fa] font-sans text-[#333333] min-h-screen">
       <Header toggleSidebar={toggleSidebar} />
@@ -30,17 +44,13 @@ export default function Home() {
 
       <div className="flex h-screen pt-14">
         <main className="flex-1 p-4 lg:pl-64 overflow-auto">
-          {selectedTest ? (
-            <TestView test={selectedTest} onBack={handleBackToList} />
-          ) : (
-            <TestList onSelectTest={handleSelectTest} />
-          )}
+          <TestList onSelectTest={handleSelectTest} />
         </main>
       </div>
 
       {/* Chat/Help Button */}
       <div className="fixed bottom-6 right-6 z-10">
-        <button className="bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center relative">
+        <button className="bg-[#4B9CD3] text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center relative">
           <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
             1
           </span>
