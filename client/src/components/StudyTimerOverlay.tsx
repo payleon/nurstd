@@ -254,7 +254,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
       >
         {/* Overlay Content */}
         <div 
-          className="bg-white rounded-xl shadow-2xl w-11/12 max-w-2xl overflow-hidden border-2 border-[#13294B]"
+          className="bg-white rounded-xl shadow-2xl w-11/12 max-w-xl overflow-auto max-h-[90vh] border-2 border-[#13294B]"
           onClick={e => e.stopPropagation()}
         >
           {/* Header */}
@@ -274,7 +274,7 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
           </div>
           
           {/* Body */}
-          <div className="p-6 space-y-6">
+          <div className="p-4 space-y-4">
             {/* Session Duration */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
@@ -309,19 +309,19 @@ export function StudyTimerOverlay({ isOpen, onClose }: StudyTimerOverlayProps) {
                 <BookOpen className="mr-2 h-5 w-5 text-blue-600" />
                 Focus Area
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-1">
                 {studyAreas.map((area) => (
                   <div
                     key={area.value}
-                    className={`p-3 border-2 rounded-lg cursor-pointer text-center transition-all ${
+                    className={`p-2 border rounded-lg cursor-pointer text-center transition-all ${
                       focusArea === area.value 
                         ? 'border-blue-500 bg-blue-50' 
                         : 'border-gray-200 hover:border-blue-300'
                     }`}
                     onClick={() => handleAreaChange(area.value)}
                   >
-                    <div className="text-2xl mb-1">{area.icon}</div>
-                    <div className="text-sm font-medium">{area.label}</div>
+                    <div className="text-lg">{area.icon}</div>
+                    <div className="text-xs font-medium">{area.label}</div>
                   </div>
                 ))}
               </div>
