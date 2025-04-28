@@ -147,14 +147,8 @@ export default function QuestionBank() {
                     </Button>
                   </Card>
                 ) : (
-                  <div className="flex flex-col gap-4">
-                    <div className="bg-white border-2 border-black rounded-md p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                      <div className="flex justify-between items-center mb-2">
-                        <div>
-                          <span className="font-bold">Question {currentQuestionIndex + 1} of {filteredQuestions.length}</span>
-                          <span className="ml-4 text-sm text-gray-500">{selectedCategory}</span>
-                        </div>
-                      </div>
+                  <div className="flex flex-col">
+                    <div className="bg-gradient-to-r from-[#EEF2F5] to-[#F8FAFC] rounded-2xl p-6 shadow-lg">
                       {filteredQuestions.length > 0 && (
                         <Flashcard
                           question={filteredQuestions[currentQuestionIndex]}
@@ -164,6 +158,37 @@ export default function QuestionBank() {
                           totalCards={filteredQuestions.length}
                         />
                       )}
+                    </div>
+                    
+                    {/* Study Tips */}
+                    <div className="mt-8 bg-white border-2 border-[#13294B] rounded-lg p-5 shadow-md">
+                      <h3 className="text-lg font-bold mb-3 text-[#13294B]">Study Tips</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mr-3">
+                            1
+                          </div>
+                          <p className="text-sm">Create flashcards with key concepts to reinforce your understanding of important nursing topics.</p>
+                        </div>
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mr-3">
+                            2
+                          </div>
+                          <p className="text-sm">Focus on understanding the rationale for each answer, not just memorizing correct options.</p>
+                        </div>
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mr-3">
+                            3
+                          </div>
+                          <p className="text-sm">Study in short, frequent sessions rather than marathon study periods for better retention.</p>
+                        </div>
+                        <div className="flex items-start">
+                          <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center mr-3">
+                            4
+                          </div>
+                          <p className="text-sm">Use the flag feature to mark difficult questions that you want to revisit later.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
