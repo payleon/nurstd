@@ -13,7 +13,8 @@ import {
   BookOpen,
   BookCheck,
   BookCopy,
-  Award
+  Award,
+  User
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
