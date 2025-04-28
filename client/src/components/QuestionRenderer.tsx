@@ -46,14 +46,24 @@ export function QuestionRenderer({
         : [...selectedAnswers, answerId];
       
       setSelectedAnswers(updatedAnswers);
-      onAnswer(updatedAnswers);
+      // Don't submit answer automatically for SATA questions
+      // User will need to click a submit button
     }
   };
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setTextAnswer(value);
-    onAnswer(value);
+    // Don't submit answer automatically for fill-in-blank
+    // User will need to press Enter or click a submit button
+  };
+  
+  const handleSubmitAnswer = () => {
+    if (isMultiChoice) {
+      onAnswer(selectedAnswers);
+    } else if (isFillInBlank) {
+      onAnswer(textAnswer);
+    }
   };
 
   return (
@@ -152,6 +162,22 @@ export function QuestionRenderer({
             </div>
           )}
         </>
+      )}
+      
+      {/* Submit Button for SATA and Fill in Blank questions */}
+      {!showRationale && (isMultiChoice || isFillInBlank) && (
+        <div className="mt-6">
+          <button
+            onClick={handleSubmitAnswer}
+            className="px-6 py-2 bg-[#13294B] text-white rounded-md hover:bg-[#0A1E3A] transition-colors"
+            disabled={
+              (isMultiChoice && selectedAnswers.length === 0) || 
+              (isFillInBlank && textAnswer.trim() === '')
+            }
+          >
+            Submit Answer
+          </button>
+        </div>
       )}
       
       {/* Rationale Section */}
