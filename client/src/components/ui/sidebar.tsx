@@ -8,7 +8,8 @@ import {
   Search,
   Award,
   User,
-  BarChart
+  BarChart,
+  AlarmClock
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -39,7 +40,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/nclex-questions": "Question Bank",
       "/question-bank": "Question Bank",
       "/study-strategies": "Study Strategies",
-      "/learning-progress": "Learning Progress"
+      "/learning-progress": "Learning Progress",
+      "/study-timer": "Study Timer"
     };
     
     // Special case for exact matches

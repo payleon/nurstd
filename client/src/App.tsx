@@ -19,6 +19,7 @@ import CaseStudyDetail from "@/pages/CaseStudyDetail";
 import QuestionBank from "@/pages/QuestionBank";
 import StudyStrategies from "@/pages/StudyStrategies";
 import LearningProgress from "@/pages/LearningProgress";
+import StudyTimer from "@/pages/StudyTimer";
 
 // Create a placeholder component for routes that aren't fully implemented yet
 function PlaceholderPage({ name }: { name: string }) {
@@ -66,6 +67,7 @@ function Router() {
       <Route path="/nclex-questions" component={QuestionBank} />
       <Route path="/study-strategies" component={StudyStrategies} />
       <Route path="/learning-progress" component={LearningProgress} />
+      <Route path="/study-timer" component={StudyTimer} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">

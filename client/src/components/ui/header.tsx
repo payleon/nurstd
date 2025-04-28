@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Bell, ChevronDown, Cog, User } from "lucide-react";
+import { AlarmClock, ChevronDown, Cog, User } from "lucide-react";
 import { useLocation } from "wouter";
+import { StudyTimerOverlay } from "@/components/StudyTimerOverlay";
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -8,6 +9,7 @@ interface HeaderProps {
 
 export function Header({ toggleSidebar }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [timerOverlayOpen, setTimerOverlayOpen] = useState(false);
   const [, setLocation] = useLocation();
 
   return (
@@ -70,8 +72,12 @@ export function Header({ toggleSidebar }: HeaderProps) {
         <button className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" aria-label="Settings">
           <Cog className="h-5 w-5" />
         </button>
-        <button className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" aria-label="Notifications">
-          <Bell className="h-5 w-5" />
+        <button 
+          className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" 
+          aria-label="Study Timer"
+          onClick={() => setTimerOverlayOpen(true)}
+        >
+          <AlarmClock className="h-5 w-5" />
         </button>
         <div 
           className="ml-3 flex items-center cursor-pointer border-2 border-white px-2 py-1 hover:bg-[#3d7eaa] transition-colors"
@@ -114,6 +120,12 @@ export function Header({ toggleSidebar }: HeaderProps) {
           </div>
         )}
       </div>
+      
+      {/* Study Timer Overlay */}
+      <StudyTimerOverlay 
+        isOpen={timerOverlayOpen} 
+        onClose={() => setTimerOverlayOpen(false)} 
+      />
     </header>
   );
 }
