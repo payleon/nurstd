@@ -3,12 +3,14 @@ import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { TestList } from "@/components/TestList";
 import { TestView } from "@/components/TestView";
+import { QuestionTestView } from "@/components/QuestionTestView";
 import { Test } from "@shared/schema";
 import { MessageCircle } from "lucide-react";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedTest, setSelectedTest] = useState<Test | null>(null);
+  const [useQuestionDB, setUseQuestionDB] = useState(true); // Set to true to use questions.json
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -29,7 +31,11 @@ export default function Home() {
       <div className="bg-[#f9fafb] font-sans text-[#333333] min-h-screen">
         <div className="flex h-screen">
           <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto">
-            <TestView test={selectedTest} onBack={handleBackToList} />
+            {useQuestionDB ? (
+              <QuestionTestView test={selectedTest} onBack={handleBackToList} />
+            ) : (
+              <TestView test={selectedTest} onBack={handleBackToList} />
+            )}
           </main>
         </div>
       </div>
