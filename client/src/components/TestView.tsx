@@ -103,73 +103,58 @@ export function TestView({ test, onBack }: TestViewProps) {
 
   return (
     <div>
-      {/* Exam Header */}
-      <div className="bg-[#13294B] text-white p-4 rounded-t-lg mb-1 flex justify-between items-center">
-        <div className="flex items-center">
-          <Button 
-            onClick={onBack}
-            className="bg-[#4B9CD3] text-white flex items-center hover:bg-[#3d7eaa] mr-4"
-            size="sm"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Exit Exam
-          </Button>
-          <h2 className="font-semibold text-lg">{test.title}</h2>
-        </div>
-        <div className="flex items-center space-x-4">
+      {/* Exam Header - NeurobrutalBox Style */}
+      <div className="neuro-card mb-0 border-b-0 overflow-hidden">
+        <div className="bg-[#13294B] text-white p-4 neuro-header flex justify-between items-center">
           <div className="flex items-center">
-            <Clock className="h-4 w-4 mr-1" />
-            <span className="font-mono">{timer}</span>
+            <button 
+              onClick={onBack}
+              className="neuro-button-primary mr-4 py-1 px-3 flex items-center"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              <span className="font-bold">EXIT EXAM</span>
+            </button>
+            <h2 className="font-bold text-xl uppercase">{test.title}</h2>
           </div>
-          <div>
-            Question {questionNumber} of {totalQuestions}
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center bg-[#4B9CD3] py-1 px-3 border-2 border-black">
+              <Clock className="h-4 w-4 mr-2" />
+              <span className="font-mono font-bold">{timer}</span>
+            </div>
+            <div className="font-bold uppercase">
+              Question {questionNumber} of {totalQuestions}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Exam Navigation */}
-      <div className="bg-[#4B9CD3] text-white p-2 rounded-b-lg mb-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <Button 
-            variant="ghost"
-            className="text-white hover:bg-[#3d7eaa] py-1 h-8" 
-            size="sm"
-          >
-            <PanelLeftClose className="h-4 w-4 mr-1" />
-            <span className="text-sm">Question List</span>
-          </Button>
-          <Button 
-            variant="ghost"
-            className="text-white hover:bg-[#3d7eaa] py-1 h-8" 
-            size="sm"
-          >
-            <Flag className="h-4 w-4 mr-1" />
-            <span className="text-sm">Flag Question</span>
-          </Button>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Button 
-            variant="ghost"
-            className="text-white hover:bg-[#3d7eaa] py-1 h-8" 
-            size="sm"
-          >
-            <HelpCircle className="h-4 w-4 mr-1" />
-            <span className="text-sm">Help</span>
-          </Button>
-          <Button 
-            variant="ghost"
-            className="text-white hover:bg-[#3d7eaa] py-1 h-8" 
-            size="sm"
-          >
-            <Save className="h-4 w-4 mr-1" />
-            <span className="text-sm">Save Progress</span>
-          </Button>
+        {/* Exam Navigation */}
+        <div className="bg-[#4B9CD3] text-white p-3 flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <button className="border-2 border-black bg-[#13294B] text-white py-1 px-3 flex items-center hover:bg-[#0e2038] transition-colors">
+              <PanelLeftClose className="h-4 w-4 mr-2" />
+              <span className="font-bold">QUESTION LIST</span>
+            </button>
+            <button className="border-2 border-black bg-[#13294B] text-white py-1 px-3 flex items-center hover:bg-[#0e2038] transition-colors">
+              <Flag className="h-4 w-4 mr-2" />
+              <span className="font-bold">FLAG</span>
+            </button>
+          </div>
+          <div className="flex items-center space-x-3">
+            <button className="border-2 border-black bg-[#13294B] text-white py-1 px-3 flex items-center hover:bg-[#0e2038] transition-colors">
+              <HelpCircle className="h-4 w-4 mr-2" />
+              <span className="font-bold">HELP</span>
+            </button>
+            <button className="border-2 border-black bg-[#13294B] text-white py-1 px-3 flex items-center hover:bg-[#0e2038] transition-colors">
+              <Save className="h-4 w-4 mr-2" />
+              <span className="font-bold">SAVE</span>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Exam Content */}
-      <Card className="border overflow-hidden shadow-md">
-        <CardContent className="p-0 overflow-hidden">
+      <div className="neuro-card mt-0 pt-0 border-t-0 mb-6 overflow-hidden">
+        <div className="bg-white p-0">
           {isLoading ? (
             <div className="p-6">
               <Skeleton className="h-8 w-1/2 mb-4" />
@@ -187,23 +172,23 @@ export function TestView({ test, onBack }: TestViewProps) {
               />
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       {/* Question Navigation */}
       <div className="mt-4 flex justify-between">
-        <Button 
-          className="bg-[#13294B] text-white hover:bg-[#0A1E3A]"
+        <button 
+          className={`neuro-button-secondary ${questionNumber === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={questionNumber === 1}
         >
           Previous Question
-        </Button>
-        <Button 
-          className="bg-[#4B9CD3] text-white hover:bg-[#3d7eaa]"
+        </button>
+        <button 
+          className={`neuro-button-primary ${questionNumber === totalQuestions ? 'opacity-50 cursor-not-allowed' : ''}`}
           disabled={questionNumber === totalQuestions}
         >
           Next Question
-        </Button>
+        </button>
       </div>
     </div>
   );
