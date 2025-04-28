@@ -52,5 +52,14 @@
     "questionCount": 40,
     "timeLimit": 60,
     "category": "Mixed"
+  },
+  {
+    "id": 7,
+    "title": "Oncology Nursing",
+    "path": "published/oncology_questions.json",
+    "description": "Comprehensive oncology nursing exam covering cancer treatments, oncologic emergencies, symptom management, and specialized care considerations for patients with cancer.",
+    "questionCount": 37,
+    "timeLimit": 45,
+    "category": "Medical-Surgical"
   }
 ]

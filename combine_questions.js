@@ -4,6 +4,7 @@ import fs from 'fs';
 const mainQuestions = JSON.parse(fs.readFileSync('./published/questions.json', 'utf-8'));
 const importedQuestions = JSON.parse(fs.readFileSync('./published/imported_questions.json', 'utf-8'));
 const newQuestions = JSON.parse(fs.readFileSync('./published/new_questions.json', 'utf-8'));
+const oncologyQuestions = JSON.parse(fs.readFileSync('./published/oncology_questions.json', 'utf-8'));
 
 // Function to deduplicate questions by title
 function deduplicateQuestions(questionsList) {
@@ -22,7 +23,8 @@ function deduplicateQuestions(questionsList) {
 const allQuestions = [
   ...mainQuestions.questions,
   ...importedQuestions.questions,
-  ...newQuestions.questions
+  ...newQuestions.questions,
+  ...oncologyQuestions
 ];
 
 // Deduplicate questions
@@ -38,7 +40,8 @@ uniqueQuestions.sort((a, b) => {
     'Mental Health': 4,
     'Cardiovascular': 5,
     'Medical-Surgical': 6,
-    'Pharmacology': 7
+    'Pharmacology': 7,
+    'Oncology': 8
   };
   
   const titleA = a.title.split(' ')[0];
