@@ -44,7 +44,8 @@ const BaseQuestionSchema = z.object({
   id: z.number(),
   title: z.string(),
   text: z.string(),
-  rationale: z.string()
+  rationale: z.string(),
+  category: z.string().optional()
 });
 
 // Multiple choice question schema
