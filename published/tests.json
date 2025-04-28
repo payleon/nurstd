@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Bootcamp Maternal",
-    "path": "published/questions.json",
+    "path": "published/all_questions.json",
     "description": "Comprehensive maternal nursing exam with multiple-choice and select-all questions. Tests your knowledge of pregnancy, labor, delivery, and postpartum care.",
     "questionCount": 16,
     "timeLimit": 20,
@@ -11,7 +11,7 @@
   {
     "id": 2,
     "title": "Fundamentals of Nursing",
-    "path": "published/questions.json",
+    "path": "published/all_questions.json",
     "description": "Core nursing concepts exam covering medication administration, assessment, ethics, and basic nursing procedures.",
     "questionCount": 16,
     "timeLimit": 20,
@@ -20,7 +20,7 @@
   {
     "id": 3,
     "title": "Combined NCLEX Practice",
-    "path": "published/questions.json",
+    "path": "published/all_questions.json",
     "description": "Comprehensive NCLEX-style exam covering all nursing specialties including maternity, pediatrics, mental health, medical-surgical, and fundamentals.",
     "questionCount": 16,
     "timeLimit": 30,
@@ -29,7 +29,7 @@
   {
     "id": 4,
     "title": "Medical-Surgical: Musculoskeletal",
-    "path": "published/questions.json",
+    "path": "published/all_questions.json",
     "description": "Focused exam on medical-surgical nursing concepts related to the musculoskeletal system. Covers orthopedic conditions, treatments, and nursing interventions.",
     "questionCount": 10,
     "timeLimit": 15,
@@ -38,10 +38,19 @@
   {
     "id": 5,
     "title": "Cardiovascular Nursing",
-    "path": "published/questions.json",
+    "path": "published/all_questions.json",
     "description": "Comprehensive cardiovascular nursing exam covering heart failure, cardiac rhythms, myocardial infarction, and cardiovascular pharmacology.",
     "questionCount": 10,
     "timeLimit": 15,
     "category": "Medical-Surgical"
+  },
+  {
+    "id": 6,
+    "title": "Comprehensive Question Bank",
+    "path": "published/all_questions.json",
+    "description": "Access all 354 questions in our comprehensive question bank covering all nursing specialties. Perfect for thorough NCLEX preparation.",
+    "questionCount": 40,
+    "timeLimit": 60,
+    "category": "Mixed"
   }
 ]

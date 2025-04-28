@@ -83,11 +83,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all questions from questions.json
+  // Get all questions from all_questions.json
   app.get("/api/questions", async (req, res) => {
     try {
       const publishedDir = path.join(import.meta.dirname, "../published");
-      const questionsFilePath = path.join(publishedDir, "questions.json");
+      const questionsFilePath = path.join(publishedDir, "all_questions.json");
       
       try {
         await fs.access(questionsFilePath);
@@ -118,7 +118,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const questionId = parseInt(req.params.id);
       const publishedDir = path.join(import.meta.dirname, "../published");
-      const questionsFilePath = path.join(publishedDir, "questions.json");
+      const questionsFilePath = path.join(publishedDir, "all_questions.json");
       
       try {
         await fs.access(questionsFilePath);
