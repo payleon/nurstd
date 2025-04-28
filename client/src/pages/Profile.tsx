@@ -27,11 +27,11 @@ export default function Profile() {
   return (
     <div className="max-w-5xl mx-auto p-4">
       <div className="flex items-center mb-6">
-        <Link href="/">
-          <a className="mr-4 p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <div className="mr-4">
+          <Link href="/" className="inline-block p-2 hover:bg-gray-100 rounded-full transition-colors">
             <ArrowLeft className="h-5 w-5 text-[#13294B]" />
-          </a>
-        </Link>
+          </Link>
+        </div>
         <h1 className="text-2xl font-bold text-[#13294B]">Your Profile</h1>
       </div>
       
