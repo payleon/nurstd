@@ -1,359 +1,357 @@
-{
-  "questions": [
+{"questions": [
     {
-      "id": 1,
-      "title": "Medication Calculation",
-      "type": "mc",
-      "text": "A patient is prescribed digoxin 0.125 mg daily. The medication is available in 0.25 mg tablets. How many tablets should the nurse administer?",
-      "choices": [
-        {"id": "A", "text": "0.5 tablets"},
-        {"id": "B", "text": "1 tablet"},
-        {"id": "C", "text": "2 tablets"},
-        {"id": "D", "text": "0.25 tablets"}
-      ],
-      "correctAnswer": "A",
-      "rationale": "0.125 mg / 0.25 mg/tablet = 0.5 tablets. The nurse would administer half a tablet."
+        "id": 1,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A patient experiencing auditory hallucinations tells the nurse, \"The voices are telling me I'm worthless.\" Which response by the nurse is most therapeutic?",
+        "choices": [
+            {"id": "A", "text": "\"Don't worry, the voices aren't real.\""},
+            {"id": "B", "text": "\"That must be frightening for you. How does hearing that make you feel?\""},
+            {"id": "C", "text": "\"Why do you think the voices are saying that?\""},
+            {"id": "D", "text": "\"Let's listen to some music to distract you from the voices.\""}
+        ],
+        "correctAnswer": "B",
+        "rationale": "Acknowledging the patient's subjective experience ('That must be frightening') and encouraging exploration of the associated feelings ('How does hearing that make you feel?') is a key therapeutic communication technique (offering self, reflecting, exploring). Dismissing the reality of the patient's experience (A) is invalidating. Asking 'why' questions (C) can sound accusatory and is often non-therapeutic. While distraction (D) can be a useful coping strategy, directly addressing the patient's distress first is more therapeutic."
     },
     {
-      "id": 2,
-      "title": "Infection Control",
-      "type": "sata",
-      "text": "Which of the following are standard precautions used to prevent the spread of infection? Select all that apply.",
-      "choices": [
-        {"id": "A", "text": "Hand hygiene"},
-        {"id": "B", "text": "Use of personal protective equipment (PPE)"},
-        {"id": "C", "text": "Proper disposal of sharps"},
-        {"id": "D", "text": "Airborne precautions for all patients"},
-        {"id": "E", "text": "Contact precautions for all patients"},
-        {"id": "F", "text": "Sterile technique for all procedures"}
-      ],
-      "correctAnswer": ["A", "B", "C"],
-      "rationale": "Standard precautions apply to all patients regardless of their diagnosis. Airborne and contact precautions are used in addition to standard precautions for specific infections. Sterile technique is not always required."
+        "id": 2,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "A nurse is assessing a patient diagnosed with schizophrenia. Which findings are considered positive symptoms? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Auditory hallucinations"},
+            {"id": "B", "text": "Flat affect"},
+            {"id": "C", "text": "Anhedonia"},
+            {"id": "D", "text": "Delusions of grandeur"},
+            {"id": "E", "text": "Alogia"},
+            {"id": "F", "text": "Disorganized speech (e.g., loose associations)"}
+        ],
+        "correctAnswer": ["A", "D", "F"],
+        "rationale": "Positive symptoms of schizophrenia represent an excess or distortion of normal functions and include hallucinations (A), delusions (D), and disorganized thinking/speech (F). Negative symptoms represent a decrease or loss of normal functions and include flat affect (B - diminished emotional expression), anhedonia (C - inability to experience pleasure), and alogia (E - poverty of speech)."
     },
     {
-      "id": 3,
-      "title": "Cardiac Assessment",
-      "type": "mc",
-      "text": "A patient experiencing angina reports chest pain radiating to the jaw and left arm. What is the priority nursing intervention?",
-      "choices": [
-        {"id": "A", "text": "Administer morphine sulfate as ordered."},
-        {"id": "B", "text": "Assess vital signs and oxygen saturation."},
-        {"id": "C", "text": "Obtain a 12-lead electrocardiogram (ECG)."},
-        {"id": "D", "text": "Instruct the patient to take deep breaths."}
-      ],
-      "correctAnswer": "B",
-      "rationale": "While all options are appropriate, assessing vital signs and oxygen saturation is the immediate priority to determine the severity of the situation and guide further interventions."
+        "id": 3,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A patient started taking fluoxetine (Prozac) for depression two weeks ago. The patient states, \"I don't feel any better.\" What is the nurse's best response?",
+        "choices": [
+            {"id": "A", "text": "\"It often takes several weeks, sometimes 4-6 weeks, for antidepressants like fluoxetine to reach their full therapeutic effect.\""},
+            {"id": "B", "text": "\"Perhaps this medication isn't right for you; I'll notify the doctor to discuss changing it.\""},
+            {"id": "C", "text": "\"It's crucial you take the medication exactly as prescribed. Are you doing that?\""},
+            {"id": "D", "text": "\"Feeling no improvement after two weeks suggests you might need a higher dose.\""}
+        ],
+        "correctAnswer": "A",
+        "rationale": "Selective serotonin reuptake inhibitors (SSRIs) like fluoxetine have a delayed onset of action for their antidepressant effects, typically taking 4-6 weeks, or sometimes longer, to achieve full efficacy. Educating the patient about this expected timeframe (A) provides reassurance and manages expectations. Suggesting the medication isn't working (B) or needs a dose change (D) is premature at two weeks. While checking adherence (C) is important, addressing the time lag first is the most appropriate response to the patient's statement."
     },
     {
-      "id": 4,
-      "title": "Respiratory Assessment",
-      "type": "mc",
-      "text": "A patient with chronic obstructive pulmonary disease (COPD) is experiencing increased shortness of breath and wheezing. Which assessment finding would require immediate attention?",
-      "choices": [
-        {"id": "A", "text": "Increased sputum production"},
-        {"id": "B", "text": "Use of accessory muscles for breathing"},
-        {"id": "C", "text": "Oxygen saturation of 88% on 2L oxygen"},
-        {"id": "D", "text": "Bilateral crackles heard on auscultation"}
-      ],
-      "correctAnswer": "C",
-      "rationale": "An oxygen saturation of 88% indicates hypoxemia, a life-threatening condition requiring immediate intervention. The other findings are concerning but not as immediately life-threatening."
+        "id": 4,
+        "title": "Mental Health",
+        "type": "fill_in_blank",
+        "text": "A patient taking lithium carbonate for bipolar disorder should be monitored closely for signs of toxicity, which typically occur when serum lithium levels exceed ______ mEq/L. (Enter numerical value only)",
+        "choices": [],
+        "correctAnswer": "1.5",
+        "rationale": "The therapeutic range for maintenance lithium levels is narrow, generally accepted as 0.6 to 1.2 mEq/L. Levels above 1.2 mEq/L increase the risk of toxicity, and levels exceeding 1.5 mEq/L are generally considered toxic, requiring prompt intervention. Signs of toxicity include coarse tremors, nausea, vomiting, diarrhea, confusion, ataxia, and seizures."
     },
     {
-      "id": 5,
-      "title": "Diabetes Management",
-      "type": "sata",
-      "text": "A patient with type 1 diabetes is exhibiting signs of hypoglycemia. Which of the following are appropriate nursing interventions? Select all that apply.",
-      "choices": [
-        {"id": "A", "text": "Administer rapid-acting insulin."},
-        {"id": "B", "text": "Offer the patient 15 grams of carbohydrates."},
-        {"id": "C", "text": "Monitor blood glucose levels frequently."},
-        {"id": "D", "text": "Encourage the patient to rest."},
-        {"id": "E", "text": "Check for ketones in the urine."}
-      ],
-      "correctAnswer": ["B", "C", "D"],
-      "rationale": "Administering rapid-acting insulin would worsen hypoglycemia. Checking for ketones is relevant for hyperglycemia, not hypoglycemia."
+        "id": 5,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "A nurse is teaching a patient about potential side effects of lorazepam (Ativan), a benzodiazepine. Which common side effects should be included in the teaching? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Drowsiness/Sedation"},
+            {"id": "B", "text": "Hypertension"},
+            {"id": "C", "text": "Dizziness"},
+            {"id": "D", "text": "Increased alertness"},
+            {"id": "E", "text": "Paradoxical excitement or agitation"},
+            {"id": "F", "text": "Decreased motor coordination/Ataxia"}
+        ],
+        "correctAnswer": ["A", "C", "E", "F"],
+        "rationale": "Benzodiazepines act as CNS depressants. Common side effects include drowsiness/sedation (A), dizziness (C), and impaired coordination/ataxia (F). Paradoxical reactions (E), such as increased excitement, anxiety, or agitation, can also occur, particularly in elderly or debilitated patients. Hypertension (B) and increased alertness (D) are not typical side effects; hypotension is more likely than hypertension."
     },
     {
-      "id": 6,
-      "title": "Fluid Volume Assessment",
-      "type": "mc",
-      "text": "A patient with severe dehydration would likely exhibit which of the following symptoms?",
-      "choices": [
-        {"id": "A", "text": "Hypotension"},
-        {"id": "B", "text": "Bradycardia"},
-        {"id": "C", "text": "Edema"},
-        {"id": "D", "text": "Bounding pulses"}
-      ],
-      "correctAnswer": "A",
-      "rationale": "Dehydration leads to decreased blood volume, resulting in hypotension. Bradycardia, edema, and bounding pulses are not associated with dehydration."
+        "id": 6,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A patient, diagnosed with alcohol use disorder, states, \"I don't have a problem with alcohol. I can quit anytime I want; I just choose not to right now.\" This statement is an example of which defense mechanism?",
+        "choices": [
+            {"id": "A", "text": "Projection"},
+            {"id": "B", "text": "Rationalization"},
+            {"id": "C", "text": "Denial"},
+            {"id": "D", "text": "Sublimation"}
+        ],
+        "correctAnswer": "C",
+        "rationale": "Denial is the refusal to accept the reality of a situation or experience, despite factual evidence. The patient is refusing to acknowledge the reality of their alcohol problem and its impact. Projection involves attributing one's own unacceptable thoughts or feelings to others. Rationalization involves creating logical-sounding excuses for unacceptable behavior. Sublimation involves channeling unacceptable impulses into socially acceptable activities."
     },
     {
-      "id": 7,
-      "title": "Pain Management",
-      "type": "mc",
-      "text": "A patient reports a pain level of 8/10 after surgery. Which of the following is the most appropriate initial action?",
-      "choices": [
-        {"id": "A", "text": "Administer a prescribed opioid analgesic."},
-        {"id": "B", "text": "Reassess the patient's pain in 30 minutes."},
-        {"id": "C", "text": "Teach the patient about nonpharmacological pain management techniques."},
-        {"id": "D", "text": "Tell the patient to try to tough it out."}
-      ],
-      "correctAnswer": "A",
-      "rationale": "Given the high pain level, administering the prescribed analgesic is the most appropriate initial action."
+        "id": 7,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "Which element is most essential for establishing and maintaining a therapeutic milieu on an inpatient psychiatric unit?",
+        "choices": [
+            {"id": "A", "text": "Frequent administration of PRN sedative medications to maintain quiet."},
+            {"id": "B", "text": "A structured daily schedule that includes therapeutic activities and group interactions."},
+            {"id": "C", "text": "Minimizing staff interaction with patients to promote independence."},
+            {"id": "D", "text": "Allowing patients complete freedom to choose their activities and participation levels."}
+        ],
+        "correctAnswer": "B",
+        "rationale": "A therapeutic milieu is a structured environment designed to promote psychological health and rehabilitation. Key components include safety, structure, support, validation, and patient involvement. A predictable daily schedule with planned therapeutic activities and group interactions (B) provides structure, reduces anxiety, and facilitates social skills development. Over-reliance on PRN medications (A), minimizing staff interaction (C), or complete lack of structure (D) undermine the goals of a therapeutic milieu."
     },
     {
-      "id": 8,
-      "title": "Wound Care",
-      "type": "mc",
-      "text": "Which of the following is the best method for cleaning a wound?",
-      "choices": [
-        {"id": "A", "text": "Using hydrogen peroxide"},
-        {"id": "B", "text": "Using sterile saline solution"},
-        {"id": "C", "text": "Using rubbing alcohol"},
-        {"id": "D", "text": "Using tap water"}
-      ],
-      "correctAnswer": "B",
-      "rationale": "Sterile saline solution is the most appropriate solution for wound cleaning to minimize tissue damage and infection risk."
+        "id": 8,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "A nurse is performing a suicide risk assessment. Which factors are considered significant indicators of increased risk? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "History of previous suicide attempts"},
+            {"id": "B", "text": "Strong social and family support"},
+            {"id": "C", "text": "Presence of a psychiatric disorder (e.g., major depression, bipolar disorder, substance use disorder)"},
+            {"id": "D", "text": "Availability and access to lethal means (e.g., firearms)"},
+            {"id": "E", "text": "Verbalization of suicidal ideation with a specific plan"},
+            {"id": "F", "text": "Feelings of hopefulness about the future"}
+        ],
+        "correctAnswer": ["A", "C", "D", "E"],
+        "rationale": "Significant risk factors for suicide include a history of prior attempts (A), the presence of mental illness (C), access to lethal means (D), and expression of suicidal thoughts, especially with a concrete plan (E). Hopelessness (not hopefulness, F) is also a major risk factor. Strong social support (B) is typically considered a protective factor against suicide."
     },
     {
-      "id": 9,
-      "title": "Neurological Assessment",
-      "type": "sata",
-      "text": "A patient with a head injury is exhibiting signs of increased intracranial pressure (ICP). Which of the following are indicative of increased ICP? Select all that apply.",
-      "choices": [
-        {"id": "A", "text": "Decreased level of consciousness"},
-        {"id": "B", "text": "Bradycardia"},
-        {"id": "C", "text": "Widening pulse pressure"},
-        {"id": "D", "text": "Irregular respirations"},
-        {"id": "E", "text": "Hypertension"},
-        {"id": "F", "text": "Pinpoint pupils"}
-      ],
-      "correctAnswer": ["A", "C", "D", "E"],
-      "rationale": "Increased ICP typically presents with changes in level of consciousness, widening pulse pressure (Cushing's triad), irregular respirations (Cheyne-Stokes), and hypertension. Bradycardia and pinpoint pupils are not typical signs of increased ICP."
+        "id": 9,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "Immediately following an electroconvulsive therapy (ECT) treatment, what is the nurse's priority assessment?",
+        "choices": [
+            {"id": "A", "text": "Patient's recall of events leading up to the procedure."},
+            {"id": "B", "text": "Assessment of respiratory status and level of consciousness."},
+            {"id": "C", "text": "Presence of headache or muscle soreness."},
+            {"id": "D", "text": "Evaluation of the therapeutic effect on mood."}
+        ],
+        "correctAnswer": "B",
+        "rationale": "ECT involves general anesthesia and induced seizure activity. The immediate priority post-procedure is patient safety, focusing on basic life support functions. Assessing respiratory status (airway patency, breathing rate and depth) and level of consciousness is critical due to the effects of anesthesia (B). Memory impairment (A) and comfort issues (C) are common but secondary to airway and breathing. Evaluating therapeutic effect (D) occurs later in the treatment course, not immediately post-procedure."
     },
     {
-      "id": 10,
-      "title": "Nasogastric Tube Management",
-      "type": "mc",
-      "text": "A patient with a nasogastric (NG) tube is experiencing nausea and vomiting. What is the priority nursing action?",
-      "choices": [
-        {"id": "A", "text": "Increase the rate of NG tube feeding."},
-        {"id": "B", "text": "Check the placement of the NG tube."},
-        {"id": "C", "text": "Administer an antiemetic medication as ordered."},
-        {"id": "D", "text": "Encourage the patient to drink clear liquids."}
-      ],
-      "correctAnswer": "B",
-      "rationale": "Checking NG tube placement is the priority to ensure that the feeding is not entering the lungs."
+        "id": 10,
+        "title": "Mental Health",
+        "type": "fill_in_blank",
+        "text": "A potentially life-threatening adverse effect associated with the atypical antipsychotic clozapine (Clozaril) is ______________, necessitating regular monitoring of white blood cell counts.",
+        "choices": [],
+        "correctAnswer": "agranulocytosis",
+        "rationale": "Agranulocytosis is a severe and dangerous condition characterized by a drastic reduction in granulocytes (a type of white blood cell), severely impairing the body's ability to fight infection. It is a rare but significant risk associated with clozapine, requiring mandatory weekly (initially) then less frequent (if stable) monitoring of the absolute neutrophil count (ANC)."
     },
     {
-      "id": 11,
-      "title": "Medication Administration",
-      "type": "mc",
-      "text": "Before administering any medication, the nurse should:",
-      "choices": [
-        {"id": "A", "text": "Ask the patient their name and date of birth."},
-        {"id": "B", "text": "Check the medication expiration date."},
-        {"id": "C", "text": "Verify the medication order with the MAR."},
-        {"id": "D", "text": "All of the above."}
-      ],
-      "correctAnswer": "D",
-      "rationale": "All three actions are essential steps in medication administration to ensure patient safety."
+        "id": 11,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A patient is experiencing a panic attack in the dayroom. Which nursing action should be implemented first?",
+        "choices": [
+            {"id": "A", "text": "Explore the potential triggers for the panic attack with the patient."},
+            {"id": "B", "text": "Encourage the patient to participate in a group activity to distract them."},
+            {"id": "C", "text": "Move the patient to a quieter area and stay with them, speaking calmly."},
+            {"id": "D", "text": "Teach the patient progressive muscle relaxation techniques immediately."}
+        ],
+        "correctAnswer": "C",
+        "rationale": "During a panic attack, the patient often feels overwhelmed and fearful. The immediate priority is to ensure safety and reduce stimulation. Moving the patient to a calm, quiet environment (C) reduces external stimuli, and staying with the patient provides reassurance and support ('offering self'). Attempting complex tasks like exploring triggers (A) or teaching relaxation techniques (D) is usually ineffective during the acute phase of panic. Encouraging group participation (B) would likely increase anxiety."
     },
     {
-      "id": 12,
-      "title": "Oxygen Therapy",
-      "type": "mc",
-      "text": "A patient is receiving oxygen via a nasal cannula. What is the maximum flow rate typically used with a nasal cannula?",
-      "choices": [
-        {"id": "A", "text": "10 L/min"},
-        {"id": "B", "text": "6 L/min"},
-        {"id": "C", "text": "15 L/min"},
-        {"id": "D", "text": "2 L/min"}
-      ],
-      "correctAnswer": "B",
-      "rationale": "Higher flow rates with nasal cannulas can cause nasal dryness and irritation, and may not increase oxygen saturation significantly."
+        "id": 12,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "Which clinical manifestations are commonly associated with Borderline Personality Disorder (BPD)? (Select all that apply.)",
+        "choices": [
+            {"id": "A", "text": "Intense fear of real or imagined abandonment"},
+            {"id": "B", "text": "Stable interpersonal relationships and self-image"},
+            {"id": "C", "text": "Recurrent suicidal behavior, gestures, or threats, or self-mutilating behavior"},
+            {"id": "D", "text": "Affective instability (e.g., intense episodic mood swings)"},
+            {"id": "E", "text": "Chronic feelings of emptiness"},
+            {"id": "F", "text": "Lack of impulsivity"}
+        ],
+        "correctAnswer": ["A", "C", "D", "E"],
+        "rationale": "Core features of BPD include frantic efforts to avoid abandonment (A), patterns of unstable and intense relationships, identity disturbance, impulsivity (opposite of F), recurrent suicidal or self-harming behaviors (C), affective instability/mood swings (D), and chronic feelings of emptiness (E). Stable relationships and self-image (B) are contrary to the typical presentation of BPD."
     },
     {
-      "id": 13,
-      "title": "Postoperative Assessment",
-      "type": "mc",
-      "text": "A priority assessment for a postoperative patient is:",
-      "choices": [
-        {"id": "A", "text": "Pain level"},
-        {"id": "B", "text": "Respiratory status"},
-        {"id": "C", "text": "Wound drainage"},
-        {"id": "D", "text": "All of the above"}
-      ],
-      "correctAnswer": "D",
-      "rationale": "All three are crucial for postoperative patient safety and recovery."
+        "id": 13,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "An involuntarily committed patient loudly refuses to take their prescribed morning dose of haloperidol (Haldol). What is the nurse's initial action?",
+        "choices": [
+            {"id": "A", "text": "Administer the medication intramuscularly since the patient is committed."},
+            {"id": "B", "text": "Explain the potential consequences of non-adherence and calmly attempt to persuade the patient."},
+            {"id": "C", "text": "Document the refusal, assess the patient's rationale and mental status, and notify the prescriber."},
+            {"id": "D", "text": "Withhold the medication and tell the patient they cannot attend group therapy until they take it."}
+        ],
+        "correctAnswer": "C",
+        "rationale": "Involuntarily committed patients generally retain the right to refuse treatment, including medication, unless they are deemed incompetent to make decisions or pose an imminent danger to self or others that necessitates emergency medication. Forcing medication (A) without appropriate legal or clinical justification (like an emergency or court order) is battery. Using privileges as leverage (D) can be coercive. While persuasion (B) might be part of the interaction, the essential initial steps are to respect the refusal, document it thoroughly, assess the patient's reason and current state, and inform the healthcare provider (C) for further evaluation and orders."
     },
     {
-      "id": 14,
-      "title": "Wound Management",
-      "type": "mc",
-      "text": "What is the best way to clean a new wound?",
-      "choices": [
-        {"id": "A", "text": "Use hydrogen peroxide."},
-        {"id": "B", "text": "Use soap and water."},
-        {"id": "C", "text": "Use an antiseptic solution."},
-        {"id": "D", "text": "Leave the wound uncovered to air dry."}
-      ],
-      "correctAnswer": "B",
-      "rationale": "Soap and water are the best way to clean a new wound to minimize infection."
+        "id": 14,
+        "title": "Mental Health",
+        "type": "fill_in_blank",
+        "text": "A patient on an antipsychotic medication develops a high fever (103°F), severe muscle rigidity ('lead pipe' rigidity), diaphoresis, and confusion. The nurse recognizes these as hallmark signs of _______________ ___________ Syndrome.",
+        "choices": [],
+        "correctAnswer": "Neuroleptic Malignant",
+        "rationale": "Neuroleptic Malignant Syndrome (NMS) is a rare but potentially fatal idiosyncratic reaction to antipsychotic drugs. Key features include hyperthermia (high fever), extreme muscle rigidity, autonomic instability (tachycardia, fluctuating blood pressure, diaphoresis), and altered mental status. It requires immediate recognition, discontinuation of the offending agent, and supportive medical care."
     },
     {
-      "id": 15,
-      "title": "Thyroid Assessment",
-      "type": "sata",
-      "text": "Signs and symptoms of hyperthyroidism include: Select all that apply.",
-      "choices": [
-        {"id": "A", "text": "Weight loss"},
-        {"id": "B", "text": "Bradycardia"},
-        {"id": "C", "text": "Heat intolerance"},
-        {"id": "D", "text": "Constipation"},
-        {"id": "E", "text": "Tremors"},
-        {"id": "F", "text": "Goiter"}
-      ],
-      "correctAnswer": ["A", "C", "E", "F"],
-      "rationale": "Hyperthyroidism causes increased metabolism, leading to weight loss, heat intolerance, and tremors. A goiter may also be present. Bradycardia and constipation are associated with hypothyroidism."
+        "id": 15,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A patient is prescribed tranylcypromine (Parnate), a monoamine oxidase inhibitor (MAOI). The nurse must provide dietary education to avoid foods high in tyramine, such as aged cheeses and cured meats, to prevent which potentially life-threatening adverse reaction?",
+        "choices": [
+            {"id": "A", "text": "Neuroleptic Malignant Syndrome"},
+            {"id": "B", "text": "Serotonin Syndrome"},
+            {"id": "C", "text": "Agranulocytosis"},
+            {"id": "D", "text": "Hypertensive Crisis"}
+        ],
+        "correctAnswer": "D",
+        "rationale": "MAOIs block the enzyme that breaks down tyramine, a vasopressor that can significantly increase blood pressure when it accumulates. Consuming tyramine-rich foods while taking MAOIs can trigger a hypertensive crisis (D), a medical emergency characterized by dangerously elevated blood pressure that can lead to stroke or other complications. Neuroleptic Malignant Syndrome (A) is associated with antipsychotics, Serotonin Syndrome (B) with combining serotonergic agents, and agranulocytosis (C) with certain medications that affect white blood cell production."
     },
     {
-      "id": 16,
-      "title": "Urinary Catheter Care",
-      "type": "mc",
-      "text": "A patient with a urinary catheter should have their intake and output monitored closely. Why is this important?",
-      "choices": [
-        {"id": "A", "text": "To ensure adequate hydration."},
-        {"id": "B", "text": "To detect urinary tract infections."},
-        {"id": "C", "text": "To monitor for fluid balance."},
-        {"id": "D", "text": "All of the above."}
-      ],
-      "correctAnswer": "D",
-      "rationale": "Accurate I&O monitoring is crucial for all three reasons."
+        "id": 16,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "A nurse is implementing a behavior modification program for a patient with maladaptive behaviors. Which behavioral interventions are based on principles of operant conditioning? Select all that apply.",
+        "choices": [
+            {"id": "A", "text": "Using token economy systems"},
+            {"id": "B", "text": "Systematic desensitization"},
+            {"id": "C", "text": "Using time-out procedures"},
+            {"id": "D", "text": "Guided imagery"},
+            {"id": "E", "text": "Positive reinforcement of appropriate behaviors"},
+            {"id": "F", "text": "Flooding technique"}
+        ],
+        "correctAnswer": ["A", "C", "E"],
+        "rationale": "Operant conditioning focuses on strengthening or weakening voluntary behaviors through consequences. Token economies (A), time-out procedures (C), and positive reinforcement (E) all use consequences to modify behavior and are based on operant conditioning principles. Systematic desensitization (B), guided imagery (D), and flooding (F) are based on classical conditioning principles and are used primarily for reducing anxiety responses."
     },
     {
-      "id": 17,
-      "title": "Holistic Nursing Care",
-      "type": "mc",
-      "text": "A patient is experiencing significant anxiety related to a recent diagnosis. Which nursing intervention demonstrates a holistic approach to care?",
-      "choices": [
-        {"id": "A", "text": "Administering prescribed anxiolytics."},
-        {"id": "B", "text": "Providing education about coping mechanisms."},
-        {"id": "C", "text": "Facilitating communication with family and support systems."},
-        {"id": "D", "text": "All of the above."}
-      ],
-      "correctAnswer": "D",
-      "rationale": "A holistic approach involves addressing the patient's physical, emotional, and social needs."
+        "id": 17,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A patient in the manic phase of bipolar disorder is exhibiting pressured speech, grandiose delusions, and has not slept for 48 hours. Which nursing intervention has the highest priority?",
+        "choices": [
+            {"id": "A", "text": "Encouraging the patient to participate in group therapy"},
+            {"id": "B", "text": "Creating a quiet environment with reduced stimulation"},
+            {"id": "C", "text": "Exploring recent events that might have triggered the manic episode"},
+            {"id": "D", "text": "Providing education about bipolar disorder and medication management"}
+        ],
+        "correctAnswer": "B",
+        "rationale": "During acute mania, patients are easily overstimulated, have difficulty focusing, and are at risk for exhaustion due to hyperactivity and insomnia. Creating a quiet environment with reduced stimulation (B) helps prevent further escalation of symptoms and promotes sleep and rest. Group therapy (A) would likely increase stimulation and agitation. Patients in acute mania typically have poor concentration and judgment, making in-depth discussion (C) or education (D) less effective at this stage."
     },
     {
-      "id": 18,
-      "title": "Hypertension Management",
-      "type": "mc",
-      "text": "A patient has a blood pressure of 160/95 mmHg. What is the priority intervention?",
-      "choices": [
-        {"id": "A", "text": "Administer a PRN antihypertensive medication."},
-        {"id": "B", "text": "Reassess the blood pressure in 5 minutes."},
-        {"id": "C", "text": "Place the patient in a supine position."},
-        {"id": "D", "text": "Notify the healthcare provider."}
-      ],
-      "correctAnswer": "B",
-      "rationale": "Reassessing the blood pressure to confirm the reading is the priority intervention before taking further action."
+        "id": 18,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A nurse assesses that a patient is experiencing visual hallucinations. Which nursing approach is most appropriate?",
+        "choices": [
+            {"id": "A", "text": "Tell the patient that what they are seeing is not real."},
+            {"id": "B", "text": "Ask the patient to describe what they are seeing without validating the hallucination."},
+            {"id": "C", "text": "Suggest that the patient is probably just tired and needs rest."},
+            {"id": "D", "text": "Agree with the patient that you also see the hallucination to build rapport."}
+        ],
+        "correctAnswer": "B",
+        "rationale": "Asking the patient to describe the hallucination (B) acknowledges their experience without reinforcing the false perception. This approach allows the nurse to assess the content and impact of the hallucination while maintaining a therapeutic relationship. Directly challenging the hallucination's reality (A) can damage rapport and increase the patient's distress or defensiveness. Dismissing the experience as fatigue (C) invalidates the patient's perception. Agreeing with or validating hallucinations (D) can reinforce them and is not therapeutic."
     },
     {
-      "id": 19,
-      "title": "Blood Transfusion",
-      "type": "sata",
-      "text": "Which of the following are appropriate nursing interventions during a blood transfusion? Select all that apply.",
-      "choices": [
-        {"id": "A", "text": "Monitor vital signs every 15 minutes for the first hour."},
-        {"id": "B", "text": "Administer the blood with 5% dextrose solution."},
-        {"id": "C", "text": "Keep emergency medications nearby."},
-        {"id": "D", "text": "Slow the infusion if the patient develops a fever."},
-        {"id": "E", "text": "Complete the transfusion within 4 hours."}
-      ],
-      "correctAnswer": ["A", "C", "D", "E"],
-      "rationale": "Blood should never be administered with dextrose solutions as they can cause hemolysis of red blood cells."
+        "id": 19,
+        "title": "Mental Health",
+        "type": "fill_in_blank",
+        "text": "A patient diagnosed with post-traumatic stress disorder (PTSD) often experiences intrusive memories and nightmares about a traumatic event. These symptoms are specifically categorized as _____________ symptoms in the DSM-5 diagnostic criteria.",
+        "choices": [],
+        "correctAnswer": "re-experiencing",
+        "rationale": "Re-experiencing symptoms are one of the four main symptom clusters in the DSM-5 diagnostic criteria for PTSD. These include intrusive memories, nightmares, flashbacks, and psychological distress or physiological reactions when exposed to trauma-related cues. The other symptom clusters include avoidance, negative alterations in cognition and mood, and alterations in arousal and reactivity."
     },
     {
-      "id": 20,
-      "title": "Seizure Management",
-      "type": "mc",
-      "text": "During a seizure, the priority nursing action is to:",
-      "choices": [
-        {"id": "A", "text": "Restrain the patient."},
-        {"id": "B", "text": "Place something in the patient's mouth."},
-        {"id": "C", "text": "Ensure patient safety by removing nearby objects."},
-        {"id": "D", "text": "Administer a sedative."}
-      ],
-      "correctAnswer": "C",
-      "rationale": "The priority during a seizure is to protect the patient from injury by removing nearby objects that could cause harm."
+        "id": 20,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "A nurse is working with a patient who has anorexia nervosa. Which nursing interventions are appropriate? Select all that apply.",
+        "choices": [
+            {"id": "A", "text": "Setting specific caloric intake goals"},
+            {"id": "B", "text": "Allowing the patient to exercise as much as desired"},
+            {"id": "C", "text": "Monitoring weight regularly using standardized procedures"},
+            {"id": "D", "text": "Focusing conversations primarily on food and eating habits"},
+            {"id": "E", "text": "Involving family members in the treatment process when appropriate"},
+            {"id": "F", "text": "Assessing for physical complications like electrolyte imbalances"}
+        ],
+        "correctAnswer": ["A", "C", "E", "F"],
+        "rationale": "A structured approach to nutritional rehabilitation with specific caloric goals (A) is essential for patients with anorexia. Regular weight monitoring (C) helps track progress and adjust treatment. Family involvement (E) is important, especially for younger patients (family-based treatment). Assessing for medical complications (F) is crucial due to the physical risks of malnutrition. Unlimited exercise (B) can interfere with weight restoration and may be used as a compensatory behavior. Focusing primarily on food (D) can increase anxiety and resistance; addressing underlying psychological issues is also important."
     },
     {
-      "id": 21,
-      "title": "Diabetes Management",
-      "type": "mc",
-      "text": "A client with type 2 diabetes has a blood glucose level of 45 mg/dL and is confused. Which intervention should the nurse implement first?",
-      "choices": [
-        {"id": "A", "text": "Administer glucagon injection"},
-        {"id": "B", "text": "Give orange juice with added sugar"},
-        {"id": "C", "text": "Start an IV with D5W"},
-        {"id": "D", "text": "Call the healthcare provider"}
-      ],
-      "correctAnswer": "B",
-      "rationale": "For conscious clients with hypoglycemia, oral glucose is the first intervention. Orange juice with sugar provides fast-acting carbohydrates to quickly raise blood glucose levels."
+        "id": 21,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A primary goal when implementing crisis intervention with a patient is to:",
+        "choices": [
+            {"id": "A", "text": "Explore in depth the patient's entire psychological history"},
+            {"id": "B", "text": "Provide long-term therapy addressing all the patient's mental health needs"},
+            {"id": "C", "text": "Restore the patient to their previous level of functioning or better"},
+            {"id": "D", "text": "Ensure the patient no longer requires any mental health services"}
+        ],
+        "correctAnswer": "C",
+        "rationale": "Crisis intervention is a time-limited approach focused on resolving the immediate crisis and helping the individual return to at least their pre-crisis level of functioning (C). It does not aim to provide extensive exploration of psychological history (A) or comprehensive long-term therapy (B). While crisis intervention may connect patients with ongoing support, it doesn't guarantee they'll require no further services (D), as some may need continued care after the immediate crisis is resolved."
     },
     {
-      "id": 22,
-      "title": "Postpartum Assessment",
-      "type": "sata",
-      "text": "A nurse is assessing a client 4 hours after vaginal delivery. Which findings should the nurse report to the healthcare provider? Select all that apply.",
-      "choices": [
-        {"id": "A", "text": "Urinary output of 100 mL in 4 hours"},
-        {"id": "B", "text": "Temperature of 100.4°F (38°C)"},
-        {"id": "C", "text": "Lochia rubra with small clots"},
-        {"id": "D", "text": "Fundus firm and midline"},
-        {"id": "E", "text": "Blood pressure of 140/90 mmHg"}
-      ],
-      "correctAnswer": ["A", "B", "E"],
-      "rationale": "Decreased urinary output, elevated temperature, and elevated blood pressure require immediate provider notification as they may indicate complications like infection or preeclampsia. Lochia rubra with small clots and a firm, midline fundus are normal findings in the immediate postpartum period."
+        "id": 22,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "When documenting a mental status examination, which observation would be categorized under 'affect'?",
+        "choices": [
+            {"id": "A", "text": "The patient states 'I feel so empty inside'"},
+            {"id": "B", "text": "The patient reports voices commanding them to harm themselves"},
+            {"id": "C", "text": "The patient demonstrates a flat facial expression with minimal emotional reactivity"},
+            {"id": "D", "text": "The patient is oriented to person, place, and time"}
+        ],
+        "correctAnswer": "C",
+        "rationale": "Affect refers to the external, observable expression of emotion, including facial expressions, vocal tone, and body language. A flat affect (C) - minimal facial expressiveness and emotional reactivity - would be documented under this category. A patient's subjective feeling state (A) would be documented under 'mood.' Auditory hallucinations (B) would be documented under 'perceptual disturbances.' Orientation assessment (D) would be documented under 'cognitive functioning' or 'orientation.'"
     },
     {
-      "id": 23,
-      "title": "Medication Calculation",
-      "type": "fill_in_blank",
-      "text": "The healthcare provider orders Heparin 1,000 units/hour IV. The label reads 25,000 units/500 mL. Calculate the mL/hour to be administered.",
-      "correctAnswer": "20",
-      "rationale": "Using dimensional analysis: (1,000 units/hour × 500 mL) ÷ 25,000 units = 20 mL/hour",
-      "choices": []
+        "id": 23,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "The nurse caring for a patient at risk for suicide should implement which precautions? Select all that apply.",
+        "choices": [
+            {"id": "A", "text": "Removing potentially harmful objects from the patient's environment"},
+            {"id": "B", "text": "Allowing private bathroom use without supervision to maintain dignity"},
+            {"id": "C", "text": "Conducting frequent and irregular observation checks"},
+            {"id": "D", "text": "Documenting specifics of the suicidal ideation and plan"},
+            {"id": "E", "text": "Securing all windows and doors"},
+            {"id": "F", "text": "Placing the patient in a secluded room to prevent harm"}
+        ],
+        "correctAnswer": ["A", "C", "D", "E"],
+        "rationale": "Environmental safety measures for suicidal patients include removing potential harmful objects (A), conducting frequent and irregular checks (C), and securing potential exit points like windows and doors (E). Thorough documentation of specific ideation and plans (D) is essential for continuity of care and risk assessment. Bathroom use typically requires supervision for actively suicidal patients (contrary to B). Seclusion (F) is not a standard suicide precaution; it is a restrictive intervention used only in specific situations like agitation with risk of harm to others, and requires close monitoring."
     },
     {
-      "id": 24,
-      "title": "Respiratory Assessment",
-      "type": "mc",
-      "text": "A client has crackles in the lung bases. Which position should the nurse place the client in to facilitate breathing?",
-      "choices": [
-        {"id": "A", "text": "High Fowler's position"},
-        {"id": "B", "text": "Supine position"},
-        {"id": "C", "text": "Prone position"},
-        {"id": "D", "text": "Lateral position"}
-      ],
-      "correctAnswer": "A",
-      "rationale": "High Fowler's position (sitting upright at a 60-90 degree angle) allows for maximum lung expansion, especially in the bases, which helps mobilize secretions and improve ventilation in clients with crackles."
+        "id": 24,
+        "title": "Mental Health",
+        "type": "mc",
+        "text": "A patient is admitted to the psychiatric unit with a diagnosis of major depressive disorder with psychotic features. The nurse administers the first dose of an antipsychotic medication. Which statement by the patient indicates an understanding of the teaching about this medication?",
+        "choices": [
+            {"id": "A", "text": "\"I'll be sure to get up quickly when I wake up at night to use the bathroom.\""},
+            {"id": "B", "text": "\"This will cure my depression in about 48 hours.\""},
+            {"id": "C", "text": "\"I need to report symptoms like muscle stiffness, tremors, or restlessness.\""},
+            {"id": "D", "text": "\"I can stop the medication once I start feeling better.\""}
+        ],
+        "correctAnswer": "C",
+        "rationale": "Understanding the need to report extrapyramidal side effects (EPS) like muscle stiffness, tremors, or restlessness (C) indicates proper medication teaching comprehension. These symptoms can signal potentially serious reactions requiring intervention. Orthostatic hypotension is a common side effect, so rising slowly is recommended (contrary to A). Antipsychotics may help psychotic symptoms within a few days but don't 'cure' depression, especially not within 48 hours (B). Abruptly stopping psychiatric medications can lead to withdrawal effects or symptom recurrence (D)."
     },
     {
-      "id": 25,
-      "title": "Pain Management in Post-Op",
-      "type": "sata",
-      "text": "A postoperative client reports pain of 7/10 despite receiving the prescribed opioid analgesic 2 hours ago. Which nursing interventions are appropriate? Select all that apply.",
-      "choices": [
-        {"id": "A", "text": "Administer the prescribed PRN opioid immediately"},
-        {"id": "B", "text": "Notify the healthcare provider"},
-        {"id": "C", "text": "Assess the client's pain using a comprehensive pain assessment tool"},
-        {"id": "D", "text": "Encourage the client to wait until the next scheduled dose"},
-        {"id": "E", "text": "Offer non-pharmacological pain relief measures"}
-      ],
-      "correctAnswer": ["B", "C", "E"],
-      "rationale": "Appropriate interventions include notifying the provider about inadequate pain control, performing a comprehensive pain assessment, and offering non-pharmacological measures. The nurse should not administer another dose if it's too early per orders, and should not encourage the client to simply endure uncontrolled pain."
+        "id": 25,
+        "title": "Mental Health",
+        "type": "fill_in_blank",
+        "text": "A patient diagnosed with schizophrenia has persistent delusions despite medication adherence. When interacting with this patient, the nurse should avoid _____________ the delusion, which neither confronts nor reinforces the false belief.",
+        "choices": [],
+        "correctAnswer": "arguing about",
+        "rationale": "When working with delusional patients, it's important to neither argue about nor reinforce delusions. Arguing about delusions can damage the therapeutic relationship, increase the patient's defensiveness, and potentially strengthen the delusion as the patient argues for its validity. Instead, nurses should acknowledge the patient's experience without reinforcing the content, focus on feelings related to the delusion, and redirect to reality-based discussions when appropriate."
+    },
+    {
+        "id": 26,
+        "title": "Mental Health",
+        "type": "sata",
+        "text": "A nurse is planning care for a patient in a manic state. Which nursing interventions are appropriate? Select all that apply.",
+        "choices": [
+            {"id": "A", "text": "Providing a highly stimulating environment to match the patient's energy level"},
+            {"id": "B", "text": "Setting clear, consistent limits on inappropriate behavior"},
+            {"id": "C", "text": "Serving high-caffeine beverages throughout the day"},
+            {"id": "D", "text": "Providing frequent, small meals and snacks that are easy to eat"},
+            {"id": "E", "text": "Scheduling complex decision-making activities during periods of high energy"},
+            {"id": "F", "text": "Monitoring for signs of physical exhaustion"}
+        ],
+        "correctAnswer": ["B", "D", "F"],
+        "rationale": "Patients in manic states benefit from clear, consistent limit-setting (B) to address impulsivity and poor judgment. Since these patients are often hyperactive and may neglect basic needs, providing frequent, easily consumed nutritional options (D) is important. Monitoring for exhaustion (F) is essential as patients may not recognize their physical limitations. A low-stimulation environment (contrary to A) is recommended to avoid exacerbating symptoms. Caffeine (C) should be avoided as it can worsen agitation. Complex decision-making (E) should be minimized due to impaired judgment and concentration."
     }
-  ]
-}
+]}
