@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { Settings, Bell, ChevronDown, Cog, User } from "lucide-react";
+import { Bell, ChevronDown, Cog, User } from "lucide-react";
 import { useLocation } from "wouter";
-import { useBadges } from "@/contexts/BadgeContext";
-import { StudyMascot } from "@/components/mascot/StudyMascot";
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -11,7 +9,6 @@ interface HeaderProps {
 export function Header({ toggleSidebar }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [, setLocation] = useLocation();
-  const { userStats } = useBadges();
 
   return (
     <header className="bg-[#4B9CD3] text-white border-b-2 border-black fixed top-0 w-full z-10 flex items-center justify-between px-4 h-16 neuro-noise">
@@ -47,17 +44,19 @@ export function Header({ toggleSidebar }: HeaderProps) {
         </div>
       </div>
       
-      {/* Mascot and User Controls */}
+      {/* User Controls */}
       <div className="flex items-center">
-        {/* Study Mascot */}
+        {/* Profile Button */}
         <div 
           className="hidden md:flex items-center mr-4 cursor-pointer hover:bg-[#3d7eaa] transition-colors px-2 py-1 rounded border-2 border-white"
           onClick={() => setLocation("/profile")}
         >
-          <StudyMascot userStats={userStats} size="sm" />
+          <div className="w-8 h-8 rounded-full bg-white text-[#13294B] flex items-center justify-center border-2 border-[#13294B]">
+            <User size={16} />
+          </div>
           <div className="ml-2 text-sm">
-            <p className="font-bold">Study Buddy</p>
-            <p className="text-xs">Level {userStats.questionsAnswered > 300 ? 5 : userStats.questionsAnswered > 200 ? 4 : userStats.questionsAnswered > 100 ? 3 : userStats.questionsAnswered > 30 ? 2 : 1}</p>
+            <p className="font-bold">Profile</p>
+            <p className="text-xs">View Mascot</p>
           </div>
         </div>
 
@@ -85,7 +84,7 @@ export function Header({ toggleSidebar }: HeaderProps) {
           <ChevronDown className="h-4 w-4 ml-1" />
         </div>
         
-        {/* User menu dropdown could be added here */}
+        {/* User menu dropdown */}
         {userMenuOpen && (
           <div className="absolute right-4 top-16 w-48 bg-white shadow-lg border-2 border-black z-50">
             <div className="p-2 border-b border-gray-200">
