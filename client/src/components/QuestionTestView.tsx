@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Test, Question } from "@shared/schema";
 import { fetchQuestions } from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, ChevronRight, Check, Award } from "lucide-react";
 import { QuestionRenderer } from "./QuestionRenderer";
+import { useBadges } from "@/contexts/BadgeContext";
+import { toast } from "@/hooks/use-toast";
 
 interface QuestionTestViewProps {
   test: Test;
@@ -17,6 +19,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     queryFn: fetchQuestions
   });
   
+  const { updateAfterQuestionAnswered, updateAfterTestCompleted } = useBadges();
+  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, string | string[]>>({});
   const [timer, setTimer] = useState("02:00:00");
@@ -24,6 +28,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const [flaggedQuestions, setFlaggedQuestions] = useState<number[]>([]);
   const [incorrectAnswers, setIncorrectAnswers] = useState<number[]>([]);
   const [showReviewMode, setShowReviewMode] = useState(false);
+  const [testSubmitted, setTestSubmitted] = useState(false);
+  const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
   
   const questions = questionsData?.questions || [];
   const currentQuestion = questions[currentQuestionIndex];

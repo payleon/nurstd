@@ -288,7 +288,7 @@ export function updateStatsAfterQuestion(stats: UserStats, question: any, isCorr
     updatedStats.questionsIncorrect = stats.questionsIncorrect + 1;
   }
   
-  if (flagged && !stats.flaggedQuestions.includes?.(question.id)) {
+  if (flagged) {
     updatedStats.flaggedQuestions = stats.flaggedQuestions + 1;
   }
   
