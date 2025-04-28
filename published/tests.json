@@ -25,5 +25,23 @@
     "questionCount": 16,
     "timeLimit": 30,
     "category": "Mixed"
+  },
+  {
+    "id": 4,
+    "title": "Medical-Surgical: Musculoskeletal",
+    "path": "published/questions.json",
+    "description": "Focused exam on medical-surgical nursing concepts related to the musculoskeletal system. Covers orthopedic conditions, treatments, and nursing interventions.",
+    "questionCount": 10,
+    "timeLimit": 15,
+    "category": "Medical-Surgical"
+  },
+  {
+    "id": 5,
+    "title": "Cardiovascular Nursing",
+    "path": "published/questions.json",
+    "description": "Comprehensive cardiovascular nursing exam covering heart failure, cardiac rhythms, myocardial infarction, and cardiovascular pharmacology.",
+    "questionCount": 10,
+    "timeLimit": 15,
+    "category": "Medical-Surgical"
   }
 ]

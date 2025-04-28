@@ -375,6 +375,140 @@
       ],
       "correctAnswer": "B",
       "rationale": "Adequate hydration helps to thin and liquefy respiratory secretions, making them easier to expectorate (cough up). Encouraging fluid intake (unless contraindicated) is a key intervention for ineffective airway clearance (B). Cough suppressants (A) should generally be avoided unless the cough is nonproductive and exhausting, as coughing helps clear secretions. Positioning flat (C) can hinder lung expansion; Fowler's or Semi-Fowler's is preferred. Limiting activity (D) may be necessary based on oxygenation, but mobilization actually helps mobilize secretions."
+    },
+    {
+      "id": 28,
+      "title": "Cardiovascular",
+      "type": "mc",
+      "text": "A client admitted with heart failure reports shortness of breath when lying flat. The nurse documents this finding as:",
+      "choices": [
+        {"id": "A", "text": "Dyspnea on exertion"},
+        {"id": "B", "text": "Orthopnea"},
+        {"id": "C", "text": "Paroxysmal nocturnal dyspnea"},
+        {"id": "D", "text": "Tachypnea"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Orthopnea (B) is the term specifically used to describe difficulty breathing when lying flat, which is relieved by sitting or standing up. It's a common symptom of left-sided heart failure due to increased pulmonary venous pressure and congestion when supine. Dyspnea on exertion (A) is shortness of breath with activity. Paroxysmal nocturnal dyspnea (C) is sudden awakening at night with shortness of breath. Tachypnea (D) is rapid breathing."
+    },
+    {
+      "id": 29,
+      "title": "Cardiovascular",
+      "type": "sata",
+      "text": "A nurse is assessing a client with suspected right-sided heart failure. Which clinical manifestations would support this diagnosis? (Select all that apply.)",
+      "choices": [
+        {"id": "A", "text": "Crackles in bilateral lung bases"},
+        {"id": "B", "text": "Jugular vein distention (JVD)"},
+        {"id": "C", "text": "Dependent peripheral edema"},
+        {"id": "D", "text": "Orthopnea"},
+        {"id": "E", "text": "Ascites"},
+        {"id": "F", "text": "Hepatosplenomegaly"}
+      ],
+      "correctAnswer": ["B", "C", "E", "F"],
+      "rationale": "Right-sided heart failure results in systemic venous congestion. Manifestations include JVD (B) due to increased pressure in the superior vena cava, dependent edema (C) in the lower extremities or sacrum, ascites (E - fluid in the peritoneal cavity), and enlargement of the liver and spleen (hepatosplenomegaly) (F) due to venous engorgement. Crackles (A) and orthopnea (D) are primarily associated with left-sided heart failure due to pulmonary congestion."
+    },
+    {
+      "id": 30,
+      "title": "Cardiovascular",
+      "type": "mc",
+      "text": "A client presents to the emergency department with severe chest pain described as crushing and radiating to the left arm. An ECG shows ST-segment elevation. Which condition should the nurse suspect?",
+      "choices": [
+        {"id": "A", "text": "Stable angina"},
+        {"id": "B", "text": "Pericarditis"},
+        {"id": "C", "text": "ST-segment elevation myocardial infarction (STEMI)"},
+        {"id": "D", "text": "Aortic dissection"}
+      ],
+      "correctAnswer": "C",
+      "rationale": "The classic presentation of severe, crushing chest pain, often radiating, combined with ST-segment elevation on the ECG is highly indicative of an ST-segment elevation myocardial infarction (STEMI) (C). This signifies transmural myocardial injury requiring immediate reperfusion therapy. Stable angina (A) is typically relieved by rest or nitroglycerin. Pericarditis (B) often presents with pleuritic chest pain relieved by leaning forward and may show diffuse ST elevation. Aortic dissection (D) typically causes tearing/ripping pain that radiates to the back."
+    },
+    {
+      "id": 31,
+      "title": "Cardiovascular",
+      "type": "mc",
+      "text": "Which cardiac biomarker is the most sensitive and specific indicator of myocardial damage?",
+      "choices": [
+        {"id": "A", "text": "Creatine kinase (CK)"},
+        {"id": "B", "text": "Myoglobin"},
+        {"id": "C", "text": "Lactate dehydrogenase (LDH)"},
+        {"id": "D", "text": "Troponin I or Troponin T"}
+      ],
+      "correctAnswer": "D",
+      "rationale": "Cardiac troponins (Troponin I and Troponin T) (D) are proteins found in heart muscle that are released into the bloodstream when there is myocardial injury, such as during an MI. They are highly specific to cardiac muscle and remain elevated longer than other biomarkers, making them the preferred indicators for diagnosing MI. CK (A) and specifically CK-MB are less specific as they can be elevated with skeletal muscle injury. Myoglobin (B) rises early but is not cardiac-specific. LDH (C) is non-specific and has largely been replaced by more specific markers."
+    },
+    {
+      "id": 32,
+      "title": "Cardiovascular",
+      "type": "fill_in_blank",
+      "text": "A client is prescribed sublingual nitroglycerin for angina. The nurse instructs the client to take one tablet under the tongue at the onset of chest pain and, if pain persists, repeat the dose every 5 minutes for a maximum of ______ doses.",
+      "choices": [],
+      "correctAnswer": "3",
+      "rationale": "Standard instructions for sublingual nitroglycerin for acute angina are to take one dose immediately. If pain is not relieved within 5 minutes, a second dose can be taken. If pain still persists after another 5 minutes, a third dose can be taken. If pain continues after three doses (total), the client should seek emergency medical attention immediately as this may indicate an MI."
+    },
+    {
+      "id": 33,
+      "title": "Cardiovascular",
+      "type": "mc",
+      "text": "A nurse is monitoring a client receiving a heparin infusion. The client's activated partial thromboplastin time (aPTT) is 110 seconds (control value 25-35 seconds). What is the nurse's priority action?",
+      "choices": [
+        {"id": "A", "text": "Increase the heparin infusion rate."},
+        {"id": "B", "text": "Continue the infusion at the current rate."},
+        {"id": "C", "text": "Stop the heparin infusion and notify the provider."},
+        {"id": "D", "text": "Administer vitamin K."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "The therapeutic range for aPTT during heparin therapy is typically 1.5 to 2.5 times the control value (approximately 40-85 seconds in this case). An aPTT of 110 seconds is significantly elevated above the therapeutic range, indicating excessive anticoagulation and placing the client at high risk for bleeding. The priority action is to stop the infusion immediately and notify the healthcare provider (C). Increasing the rate (A) would worsen the situation. Continuing the current rate (B) would maintain the excessive anticoagulation. Vitamin K (D) antagonizes warfarin, not heparin (protamine sulfate is heparin's antidote)."
+    },
+    {
+      "id": 34,
+      "title": "Cardiovascular",
+      "type": "sata",
+      "text": "A nurse is teaching a client newly diagnosed with hypertension about lifestyle modifications. Which recommendations should be included? (Select all that apply.)",
+      "choices": [
+        {"id": "A", "text": "Adopt the DASH (Dietary Approaches to Stop Hypertension) diet."},
+        {"id": "B", "text": "Limit sodium intake."},
+        {"id": "C", "text": "Increase intake of saturated fats."},
+        {"id": "D", "text": "Engage in regular aerobic exercise."},
+        {"id": "E", "text": "Limit alcohol consumption."},
+        {"id": "F", "text": "Increase caffeine intake."}
+      ],
+      "correctAnswer": ["A", "B", "D", "E"],
+      "rationale": "Lifestyle modifications are crucial for managing hypertension. Key recommendations include adopting the DASH diet (A - rich in fruits, vegetables, whole grains, low-fat dairy), limiting sodium intake (B - usually <1500-2300 mg/day), engaging in regular aerobic exercise (D - e.g., brisk walking for at least 150 minutes/week), and limiting alcohol consumption (E - ≤1 drink/day for women, ≤2 drinks/day for men). Increasing saturated fats (C) contributes to atherosclerosis and can worsen cardiovascular health. Caffeine (F) can cause temporary BP spikes, so limiting (not increasing) intake may be advised."
+    },
+    {
+      "id": 35,
+      "title": "Cardiovascular",
+      "type": "mc",
+      "text": "A nurse observes the following rhythm on a client's cardiac monitor: irregular rhythm, no discernible P waves, fibrillatory waves present, ventricular rate of 130 bpm. This rhythm is identified as:",
+      "choices": [
+        {"id": "A", "text": "Sinus tachycardia"},
+        {"id": "B", "text": "Atrial fibrillation"},
+        {"id": "C", "text": "Ventricular tachycardia"},
+        {"id": "D", "text": "Atrial flutter"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Atrial fibrillation (B) is characterized by chaotic atrial activity (fibrillatory waves instead of P waves), resulting in an irregularly irregular ventricular rhythm. The atrial rate is typically >350 bpm (not measurable), and the ventricular rate varies depending on AV node conduction (in this case, 130 bpm, indicating rapid ventricular response). Sinus tachycardia (A) has regular rhythm with P waves preceding each QRS. Ventricular tachycardia (C) originates in the ventricles and has wide QRS complexes. Atrial flutter (D) has distinct, regular 'sawtooth' flutter waves (usually 250-350 bpm), often with regular ventricular response."
+    },
+    {
+      "id": 36,
+      "title": "Cardiovascular",
+      "type": "mc",
+      "text": "What is the primary purpose of administering aspirin to a client experiencing an acute myocardial infarction (MI)?",
+      "choices": [
+        {"id": "A", "text": "To dissolve the existing coronary thrombus."},
+        {"id": "B", "text": "To relieve chest pain."},
+        {"id": "C", "text": "To prevent further platelet aggregation."},
+        {"id": "D", "text": "To reduce myocardial oxygen demand."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Aspirin is an antiplatelet agent. In the context of an acute MI, which is usually caused by thrombus formation on a ruptured atherosclerotic plaque, aspirin works by inhibiting platelet aggregation (clumping), thereby helping to prevent further clot formation and extension (C). Thrombolytics or PCI are used to dissolve/remove the existing clot (A). Nitroglycerin and morphine relieve pain (B). Beta-blockers reduce oxygen demand (D)."
+    },
+    {
+      "id": 37,
+      "title": "Cardiovascular",
+      "type": "fill_in_blank",
+      "text": "When assessing a client's peripheral pulses, a finding described as '2+' typically indicates a pulse that is _________ and easily palpable.",
+      "choices": [],
+      "correctAnswer": "normal",
+      "rationale": "Peripheral pulses are often graded on a scale (e.g., 0 to 3+ or 0 to 4+). A common scale is: 0 = Absent, 1+ = Weak/Thready, 2+ = Normal/Easily Palpable, 3+ = Bounding. Therefore, a 2+ pulse is considered the expected, normal finding."
     }
   ]
 }
