@@ -110,6 +110,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       path: "/learning-progress"
     },
     {
+      title: "Study Timer",
+      icon: <AlarmClock className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Study Timer",
+      path: "/study-timer"
+    },
+    {
       title: "Profile",
       icon: <User className="h-5 w-5 mr-3" />,
       active: activeCategory === "Profile",
