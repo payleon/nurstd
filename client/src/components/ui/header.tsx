@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { Settings, Bell, ChevronDown, Cog } from "lucide-react";
+import { Settings, Bell, ChevronDown, Cog, User } from "lucide-react";
+import { useLocation } from "wouter";
+import { useBadges } from "@/contexts/BadgeContext";
+import { StudyMascot } from "@/components/mascot/StudyMascot";
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -7,6 +10,8 @@ interface HeaderProps {
 
 export function Header({ toggleSidebar }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
+  const { userStats } = useBadges();
 
   return (
     <header className="bg-[#4B9CD3] text-white border-b-2 border-black fixed top-0 w-full z-10 flex items-center justify-between px-4 h-16 neuro-noise">
@@ -42,8 +47,27 @@ export function Header({ toggleSidebar }: HeaderProps) {
         </div>
       </div>
       
-      {/* User Controls */}
+      {/* Mascot and User Controls */}
       <div className="flex items-center">
+        {/* Study Mascot */}
+        <div 
+          className="hidden md:flex items-center mr-4 cursor-pointer hover:bg-[#3d7eaa] transition-colors px-2 py-1 rounded border-2 border-white"
+          onClick={() => setLocation("/profile")}
+        >
+          <StudyMascot userStats={userStats} size="sm" />
+          <div className="ml-2 text-sm">
+            <p className="font-bold">Study Buddy</p>
+            <p className="text-xs">Level {userStats.questionsAnswered > 300 ? 5 : userStats.questionsAnswered > 200 ? 4 : userStats.questionsAnswered > 100 ? 3 : userStats.questionsAnswered > 30 ? 2 : 1}</p>
+          </div>
+        </div>
+
+        <button 
+          className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" 
+          aria-label="Profile"
+          onClick={() => setLocation("/profile")}
+        >
+          <User className="h-5 w-5" />
+        </button>
         <button className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" aria-label="Settings">
           <Cog className="h-5 w-5" />
         </button>
@@ -60,6 +84,36 @@ export function Header({ toggleSidebar }: HeaderProps) {
           <span className="ml-2 hidden md:inline font-bold">Ranyn</span>
           <ChevronDown className="h-4 w-4 ml-1" />
         </div>
+        
+        {/* User menu dropdown could be added here */}
+        {userMenuOpen && (
+          <div className="absolute right-4 top-16 w-48 bg-white shadow-lg border-2 border-black z-50">
+            <div className="p-2 border-b border-gray-200">
+              <p className="font-bold text-gray-800">Ranyn</p>
+              <p className="text-xs text-gray-500">Student Nurse</p>
+            </div>
+            <ul>
+              <li className="border-b border-gray-200">
+                <button
+                  onClick={() => {
+                    setLocation("/profile");
+                    setUserMenuOpen(false);
+                  }}
+                  className="w-full text-left p-3 hover:bg-gray-100 text-gray-800 flex items-center"
+                >
+                  <User className="h-4 w-4 mr-2" /> Profile
+                </button>
+              </li>
+              <li>
+                <button
+                  className="w-full text-left p-3 hover:bg-gray-100 text-gray-800 flex items-center"
+                >
+                  <Cog className="h-4 w-4 mr-2" /> Settings
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   );

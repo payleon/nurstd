@@ -55,6 +55,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       path: "/"
     },
     {
+      title: "Profile",
+      icon: <User className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Profile",
+      path: "/profile"
+    },
+    {
       title: "Achievements",
       icon: <Award className="h-5 w-5 mr-3" />,
       active: activeCategory === "Achievements",

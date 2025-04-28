@@ -1,6 +1,6 @@
-import React from 'react';
-import { Badge, badges } from '@/lib/badges';
-import { BadgeIcon } from './BadgeIcon';
+import React from "react";
+import { Badge, badges } from "@/lib/badges";
+import { BadgeIcon } from "./BadgeIcon";
 
 interface BadgeCollectionProps {
   unlockedBadges: Badge[];
@@ -10,41 +10,53 @@ interface BadgeCollectionProps {
 
 export function BadgeCollection({ 
   unlockedBadges, 
-  showLocked = true,
-  filterCategory = 'all'
+  showLocked = false, 
+  filterCategory = 'all' 
 }: BadgeCollectionProps) {
-  const unlockedBadgeIds = unlockedBadges.map(badge => badge.id);
+  // Filter badges based on the selected category
+  const filteredBadges = badges.filter(badge => 
+    filterCategory === 'all' || badge.category === filterCategory
+  );
   
-  const filteredBadges = badges.filter(badge => {
-    if (filterCategory !== 'all' && badge.category !== filterCategory) {
-      return false;
-    }
-    return true;
-  });
+  // Create a map of unlocked badges for quick lookup
+  const unlockedBadgeMap = new Map(unlockedBadges.map(badge => [badge.id, badge]));
   
   return (
-    <div className="py-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {filteredBadges.map(badge => {
-          const isUnlocked = unlockedBadgeIds.includes(badge.id);
-          
-          if (!isUnlocked && !showLocked) return null;
-          
-          return (
-            <div key={badge.id} className="flex flex-col items-center">
-              <BadgeIcon 
-                badge={badge} 
-                unlocked={isUnlocked}
-                size="md" 
-              />
-              <div className="mt-2 text-center">
-                <p className="text-sm font-medium">{badge.name}</p>
-                <p className="text-xs text-gray-500 line-clamp-2">{badge.description}</p>
+    <div className="p-1">
+      {filteredBadges.length === 0 ? (
+        <div className="text-center py-8 text-gray-500">
+          <p>No badges in this category yet.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+          {filteredBadges.map(badge => {
+            const isUnlocked = unlockedBadgeMap.has(badge.id);
+            
+            // If not showing locked badges and this badge is locked, skip it
+            if (!showLocked && !isUnlocked) {
+              return null;
+            }
+            
+            return (
+              <div key={badge.id} className="flex flex-col items-center">
+                <BadgeIcon 
+                  badge={badge} 
+                  size="md" 
+                  unlocked={isUnlocked} 
+                />
+                <div className="text-center mt-2">
+                  <p className="text-xs font-semibold text-gray-800">
+                    {isUnlocked ? badge.name : "???"}
+                  </p>
+                  {!isUnlocked && (
+                    <p className="text-xs text-gray-500">Locked</p>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

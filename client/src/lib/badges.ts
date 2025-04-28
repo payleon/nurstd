@@ -29,7 +29,7 @@ export const badges: Badge[] = [
     id: 'first_steps',
     name: 'First Steps',
     description: 'Answered your first question',
-    icon: '🏁',
+    icon: 'target',
     category: 'achievement',
     level: 'bronze',
     condition: (stats) => stats.questionsAnswered >= 1
@@ -38,7 +38,7 @@ export const badges: Badge[] = [
     id: 'getting_started',
     name: 'Getting Started',
     description: 'Answered 10 questions',
-    icon: '🔄',
+    icon: 'zap',
     category: 'achievement',
     level: 'bronze',
     condition: (stats) => stats.questionsAnswered >= 10
@@ -47,7 +47,7 @@ export const badges: Badge[] = [
     id: 'consistent_learner',
     name: 'Consistent Learner',
     description: 'Maintained a 3-day study streak',
-    icon: '🔥',
+    icon: 'flame',
     category: 'achievement',
     level: 'silver',
     condition: (stats) => stats.streakDays >= 3
@@ -56,7 +56,7 @@ export const badges: Badge[] = [
     id: 'dedicated_student',
     name: 'Dedicated Student',
     description: 'Maintained a 7-day study streak',
-    icon: '🔥',
+    icon: 'flame',
     category: 'achievement',
     level: 'gold',
     condition: (stats) => stats.streakDays >= 7
@@ -65,7 +65,7 @@ export const badges: Badge[] = [
     id: 'test_taker',
     name: 'Test Taker',
     description: 'Completed your first practice test',
-    icon: '📝',
+    icon: 'check',
     category: 'achievement',
     level: 'bronze',
     condition: (stats) => stats.testsCompleted >= 1
@@ -74,7 +74,7 @@ export const badges: Badge[] = [
     id: 'test_master',
     name: 'Test Master',
     description: 'Completed 5 practice tests',
-    icon: '📚',
+    icon: 'book',
     category: 'achievement',
     level: 'silver',
     condition: (stats) => stats.testsCompleted >= 5
@@ -83,7 +83,7 @@ export const badges: Badge[] = [
     id: 'perfect_score',
     name: 'Perfect Score',
     description: 'Achieved a perfect score on a practice test',
-    icon: '🌟',
+    icon: 'star',
     category: 'achievement',
     level: 'gold',
     condition: (stats) => stats.perfectScores >= 1
@@ -94,7 +94,7 @@ export const badges: Badge[] = [
     id: 'nursing_novice',
     name: 'Nursing Novice',
     description: 'Answered 25 questions correctly',
-    icon: '👶',
+    icon: 'target',
     category: 'progress',
     level: 'bronze',
     condition: (stats) => stats.questionsCorrect >= 25
@@ -103,7 +103,7 @@ export const badges: Badge[] = [
     id: 'nursing_student',
     name: 'Nursing Student',
     description: 'Answered 50 questions correctly',
-    icon: '👩‍⚕️',
+    icon: 'brain',
     category: 'progress',
     level: 'silver',
     condition: (stats) => stats.questionsCorrect >= 50
@@ -112,7 +112,7 @@ export const badges: Badge[] = [
     id: 'nursing_graduate',
     name: 'Nursing Graduate',
     description: 'Answered 100 questions correctly',
-    icon: '🎓',
+    icon: 'award',
     category: 'progress',
     level: 'gold',
     condition: (stats) => stats.questionsCorrect >= 100
@@ -121,7 +121,7 @@ export const badges: Badge[] = [
     id: 'quick_study',
     name: 'Quick Study',
     description: 'Answered 10 questions in less than 10 minutes',
-    icon: '⚡',
+    icon: 'zap',
     category: 'progress',
     level: 'silver',
     condition: (stats) => stats.questionsAnswered >= 10 && stats.timeSpent <= 10
@@ -130,7 +130,7 @@ export const badges: Badge[] = [
     id: 'careful_reviewer',
     name: 'Careful Reviewer',
     description: 'Flagged 5 questions for review',
-    icon: '🔍',
+    icon: 'alert',
     category: 'progress',
     level: 'bronze',
     condition: (stats) => stats.flaggedQuestions >= 5
@@ -141,7 +141,7 @@ export const badges: Badge[] = [
     id: 'maternity_explorer',
     name: 'Maternity Explorer',
     description: 'Completed 10 Maternity nursing questions',
-    icon: '👶',
+    icon: 'heart',
     category: 'specialty',
     level: 'bronze',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Maternity'] || 0) >= 10
@@ -150,7 +150,7 @@ export const badges: Badge[] = [
     id: 'maternity_specialist',
     name: 'Maternity Specialist',
     description: 'Completed 25 Maternity nursing questions',
-    icon: '👶',
+    icon: 'heart',
     category: 'specialty',
     level: 'silver',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Maternity'] || 0) >= 25
@@ -159,7 +159,7 @@ export const badges: Badge[] = [
     id: 'mental_health_explorer',
     name: 'Mental Health Explorer',
     description: 'Completed 10 Mental Health nursing questions',
-    icon: '🧠',
+    icon: 'brain',
     category: 'specialty',
     level: 'bronze',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Mental Health'] || 0) >= 10
@@ -168,7 +168,7 @@ export const badges: Badge[] = [
     id: 'mental_health_specialist',
     name: 'Mental Health Specialist',
     description: 'Completed 25 Mental Health nursing questions',
-    icon: '🧠',
+    icon: 'brain',
     category: 'specialty',
     level: 'silver',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Mental Health'] || 0) >= 25
@@ -177,7 +177,7 @@ export const badges: Badge[] = [
     id: 'medical_surgical_explorer',
     name: 'Medical-Surgical Explorer',
     description: 'Completed 10 Medical-Surgical nursing questions',
-    icon: '🏥',
+    icon: 'heart',
     category: 'specialty',
     level: 'bronze',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Medical-Surgical'] || 0) >= 10
@@ -186,7 +186,7 @@ export const badges: Badge[] = [
     id: 'fundamentals_explorer',
     name: 'Fundamentals Explorer',
     description: 'Completed 10 Fundamentals of Nursing questions',
-    icon: '📋',
+    icon: 'book',
     category: 'specialty',
     level: 'bronze',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Fundamentals'] || 0) >= 10
@@ -195,7 +195,7 @@ export const badges: Badge[] = [
     id: 'pharmacology_explorer',
     name: 'Pharmacology Explorer',
     description: 'Completed 10 Pharmacology questions',
-    icon: '💊',
+    icon: 'zap',
     category: 'specialty',
     level: 'bronze',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Pharmacology'] || 0) >= 10
@@ -204,7 +204,7 @@ export const badges: Badge[] = [
     id: 'pediatric_explorer',
     name: 'Pediatric Explorer',
     description: 'Completed 10 Pediatric nursing questions',
-    icon: '👧',
+    icon: 'heart',
     category: 'specialty',
     level: 'bronze',
     condition: (stats) => (stats.specialtyQuestionsCompleted['Pediatric'] || 0) >= 10
