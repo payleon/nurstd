@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nursing RN Study Quiz</title>
+  <style>
+    /* Styles for the quiz */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f8f9fa;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    .question-block {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question-text {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+    .choices ul {
+      list-style: none;
+      padding: 0;
+    }
+    .choices li {
+      padding: 12px 15px;
+      background: #e9ecef;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .choices li:hover {
+      background: #d6d8db;
+    }
+    .correct-choice {
+      background-color: #2ecc71 !important;
+      color: #fff;
+    }
+    .incorrect-choice {
+      background-color: #e74c3c !important;
+      color: #fff;
+    }
+    .feedback {
+      margin-top: 15px;
+      padding: 10px;
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      border-radius: 5px;
+      display: none;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      margin: 10% auto;
+      width: 60%;
+      max-width: 600px;
+      border-radius: 8px;
+      position: relative;
+    }
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #aaa;
+    }
+    .close-button:hover {
+      color: #000;
+    }
+    .guidance-section {
+      background: #fff9e6;
+      border-left: 4px solid #f39c12;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Nursing RN Study Quiz</h1>
+  <form id="quiz-form">
+    <!-- Question 1 -->
+    <div class="question-block" data-question-id="1" data-correct-answer="B">
+      <p class="question-text">1. A patient with a history of chronic obstructive pulmonary disease (COPD) presents with increased shortness of breath and wheezing. Which intervention should be prioritized?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Administer a sedative</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Administer a bronchodilator</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Encourage deep breathing exercises</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Increase fluid intake</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: B</strong>
+        <p><em>Administering a bronchodilator is crucial for relieving bronchospasm and improving airflow in COPD exacerbations.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question-block" data-question-id="2" data-correct-answer="C">
+      <p class="question-text">2. A patient with diabetes mellitus type 1 is experiencing hypoglycemia. What is the most appropriate initial intervention?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Administer insulin</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Provide a high-protein snack</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Administer 15g of fast-acting carbohydrate</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Encourage physical activity</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: C</strong>
+        <p><em>Administering 15g of fast-acting carbohydrate is the recommended initial treatment for hypoglycemia to quickly raise blood glucose levels.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question-block" data-question-id="3" data-correct-answer="D">
+      <p class="question-text">3. A patient with a history of myocardial infarction is prescribed a beta-blocker. What is the primary purpose of this medication?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Increase heart rate</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Increase blood pressure</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Increase myocardial oxygen demand</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Decrease myocardial oxygen demand</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: D</strong>
+        <p><em>Beta-blockers decrease myocardial oxygen demand by reducing heart rate and contractility, which is beneficial post-myocardial infarction.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question-block" data-question-id="4" data-correct-answer="B">
+      <p class="question-text">4. A patient with a central line presents with fever and chills. What is the most appropriate initial action?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Administer antipyretics</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Draw blood cultures from the line</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Remove the central line</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Start broad-spectrum antibiotics</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: B</strong>
+        <p><em>Draw blood cultures from the line before starting antibiotics to identify the causative organism and guide treatment.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question-block" data-question-id="5" data-correct-answer="A">
+      <p class="question-text">5. A patient with a head injury is being monitored for increased intracranial pressure (ICP). Which assessment finding is most concerning?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Decreased level of consciousness</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Pupil constriction</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Increased heart rate</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Decreased blood pressure</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: A</strong>
+        <p><em>A decreased level of consciousness is a critical sign of increased ICP and requires immediate intervention.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="question-block" data-question-id="6" data-correct-answer="C">
+      <p class="question-text">6. A patient with a history of asthma is prescribed a corticosteroid inhaler. What is the primary benefit of this medication?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Immediate relief of bronchospasm</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Reduction of airway inflammation</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Increase in mucus production</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Increase in airway resistance</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: B</strong>
+        <p><em>Corticosteroids reduce airway inflammation, which helps prevent asthma exacerbations.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="question-block" data-question-id="7" data-correct-answer="D">
+      <p class="question-text">7. A patient with a urinary tract infection (UTI) is prescribed an antibiotic. What is the most important nursing action?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Monitor for allergic reactions</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Ensure the patient completes the full course</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Encourage increased fluid intake</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Both B and C</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: D</strong>
+        <p><em>Ensuring the patient completes the full course of antibiotics and encouraging increased fluid intake are both crucial for effective treatment of a UTI.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="question-block" data-question-id="8" data-correct-answer="B">
+      <p class="question-text">8. A patient with heart failure is prescribed a loop diuretic. What is the primary therapeutic effect?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Increase blood pressure</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Reduce fluid overload</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Increase potassium levels</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Increase sodium retention</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: B</strong>
+        <p><em>Loop diuretics reduce fluid overload by promoting diuresis, which is essential in managing heart failure.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="question-block" data-question-id="9" data-correct-answer="A">
+      <p class="question-text">9. A patient with a history of peptic ulcer disease is prescribed a proton pump inhibitor (PPI). What is the primary action of this medication?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Reduce gastric acid secretion</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Increase gastric acid secretion</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Neutralize stomach acid</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Increase gastric motility</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: A</strong>
+        <p><em>PPIs reduce gastric acid secretion, promoting ulcer healing and preventing recurrence.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="question-block" data-question-id="10" data-correct-answer="C">
+      <p class="question-text">10. A patient with a history of stroke is prescribed anticoagulation therapy. What is the primary purpose of this medication?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Prevent blood clots</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Increase blood clotting</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Reduce blood pressure</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Increase heart rate</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: A</strong>
+        <p><em>Anticoagulation therapy is used to prevent the formation of blood clots, reducing the risk of recurrent stroke.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 11 -->
+    <div class="question-block" data-question-id="11" data-correct-answer="B">
+      <p class="question-text">11. A patient with chronic kidney disease (CKD) is prescribed a phosphate binder. What is the primary purpose of this medication?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Increase phosphate absorption</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Decrease phosphate absorption</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Increase calcium absorption</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Decrease calcium absorption</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: B</strong>
+        <p><em>Phosphate binders decrease phosphate absorption in the gut, helping to manage hyperphosphatemia in CKD patients.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 12 -->
+    <div class="question-block" data-question-id="12" data-correct-answer="D">
+      <p class="question-text">12. A patient with a history of hypertension is prescribed an ACE inhibitor. What is the primary mechanism of action?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Increase angiotensin II levels</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Increase aldosterone secretion</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Increase blood volume</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Inhibit the conversion of angiotensin I to angiotensin II</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: D</strong>
+        <p><em>ACE inhibitors inhibit the conversion of angiotensin I to angiotensin II, leading to vasodilation and reduced blood pressure.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 13 -->
+    <div class="question-block" data-question-id="13" data-correct-answer="A">
+      <p class="question-text">13. A patient with a history of deep vein thrombosis (DVT) is prescribed compression stockings. What is the primary benefit?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Prevent blood clots</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Increase blood flow to the legs</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Reduce leg swelling</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Both A and C</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: D</strong>
+        <p><em>Compression stockings help prevent blood clots and reduce leg swelling by improving venous return.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 14 -->
+    <div class="question-block" data-question-id="14" data-correct-answer="C">
+      <p class="question-text">14. A patient with a history of gastroesophageal reflux disease (GERD) is prescribed an H2 receptor antagonist. What is the primary action of this medication?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Increase gastric acid secretion</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Neutralize stomach acid</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Reduce gastric acid secretion</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Increase gastric motility</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: C</strong>
+        <p><em>H2 receptor antagonists reduce gastric acid secretion, alleviating symptoms of GERD.</em></p>
+      </div>
+    </div>
+
+    <!-- Question 15 -->
+    <div class="question-block" data-question-id="15" data-correct-answer="B">
+      <p class="question-text">15. A patient with a history of atrial fibrillation is prescribed warfarin. What is the primary purpose of this medication?</p>
+      <div class="choices">
+        <ul>
+          <li data-choice="A" onclick="checkAnswer(this)">Increase blood clotting</li>
+          <li data-choice="B" onclick="checkAnswer(this)">Prevent blood clots</li>
+          <li data-choice="C" onclick="checkAnswer(this)">Increase heart rate</li>
+          <li data-choice="D" onclick="checkAnswer(this)">Reduce heart rate</li>
+        </ul>
+      </div>
+      <div class="feedback">
+        <strong>Correct Answer: B</strong>
+<p><em>Warfarin is an anticoagulant used to prevent blood clots, reducing the risk of stroke in patients with atrial fibrillation.</em></p>
+      </div>
+    </div>
+  </form>
+
+  <!-- Feedback Modal -->
+  <div id="feedback-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <h2>Let’s Rethink That</h2>
+      <div id="modal-feedback-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const detailedFeedback = {
+      "1": {
+        "A": {
+          reasoning: "You might have thought this because sedatives can help with anxiety.",
+          guidance: "<em>However, in COPD exacerbations, bronchodilators are prioritized to relieve airway constriction.</em>"
+        },
+        "C": {
+          reasoning: "You might have considered this because deep breathing can help with lung function.",
+          guidance: "<em>But in acute exacerbations, immediate bronchodilation is more critical.</em>"
+        },
+        "D": {
+          reasoning: "Increased fluid intake can help with mucus clearance.",
+          guidance: "<em>However, it does not address the immediate need for bronchodilation.</em>"
+        }
+      },
+      "2": {
+        "A": {
+          reasoning: "You might have thought this because insulin lowers blood glucose.",
+          guidance: "<em>But in hypoglycemia, insulin would further decrease blood glucose levels.</em>"
+        },
+        "B": {
+          reasoning: "A high-protein snack might seem beneficial for energy.",
+          guidance: "<em>However, it does not provide the rapid glucose needed to correct hypoglycemia.</em>"
+        },
+        "D": {
+          reasoning: "Physical activity can increase glucose uptake.",
+          guidance: "<em>But it would worsen hypoglycemia by further lowering blood glucose levels.</em>"
+        }
+      },
+      "3": {
+        "A": {
+          reasoning: "You might have thought this because increasing heart rate can improve cardiac output.",
+          guidance: "<em>However, beta-blockers decrease heart rate to reduce myocardial oxygen demand.</em>"
+        },
+        "B": {
+          reasoning: "Increasing blood pressure might seem beneficial for perfusion.",
+          guidance: "<em>But beta-blockers lower blood pressure by reducing cardiac output.</em>"
+        },
+        "C": {
+          reasoning: "You might have considered this because increased demand could improve function.",
+          guidance: "<em>However, reducing oxygen demand is crucial to prevent further cardiac damage.</em>"
+        }
+      },
+      "4": {
+        "A": {
+          reasoning: "Antipyretics can reduce fever.",
+          guidance: "<em>But identifying the infection source is more critical before starting antibiotics.</em>"
+        },
+        "C": {
+          reasoning: "Removing the line might seem like a solution to infection.",
+          guidance: "<em>However, blood cultures should be drawn first to guide treatment.</em>"
+        },
+        "D": {
+          reasoning: "Starting antibiotics seems urgent for infection control.",
+          guidance: "<em>But blood cultures should be drawn before antibiotics to avoid false negatives.</em>"
+        }
+      },
+      "5": {
+        "B": {
+          reasoning: "Pupil constriction might seem related to neurological changes.",
+          guidance: "<em>However, decreased consciousness is a more direct indicator of increased ICP.</em>"
+        },
+        "C": {
+          reasoning: "Increased heart rate might be associated with compensatory mechanisms.",
+          guidance: "<em>But decreased consciousness is a more critical sign of increased ICP.</em>"
+        },
+        "D": {
+          reasoning: "Decreased blood pressure might seem related to shock.",
+          guidance: "<em>However, decreased consciousness is a more immediate concern for increased ICP.</em>"
+        }
+      },
+      "6": {
+        "A": {
+          reasoning: "Immediate relief might seem necessary for acute symptoms.",
+          guidance: "<em>But corticosteroids are for long-term control of inflammation.</em>"
+        },
+        "C": {
+          reasoning: "Increased mucus production might seem beneficial for clearing airways.",
+          guidance: "<em>However, corticosteroids reduce inflammation, not mucus production.</em>"
+        },
+        "D": {
+          reasoning: "Increased airway resistance might seem related to asthma symptoms.",
+          guidance: "<em>But corticosteroids reduce inflammation, decreasing resistance.</em>"
+        }
+      },
+      "7": {
+        "A": {
+          reasoning: "Monitoring for allergic reactions is important.",
+          guidance: "<em>But ensuring the full course and fluid intake are more critical for UTI treatment.</em>"
+        },
+        "C": {
+          reasoning: "Increased fluid intake is beneficial.",
+          guidance: "<em>But it must be combined with completing the antibiotic course.</em>"
+        }
+      },
+      "8": {
+        "A": {
+          reasoning: "Increasing blood pressure might seem beneficial for perfusion.",
+          guidance: "<em>But loop diuretics reduce fluid overload, lowering blood pressure.</em>"
+        },
+        "C": {
+          reasoning: "Increasing potassium levels might seem beneficial for electrolyte balance.",
+          guidance: "<em>But loop diuretics can cause hypokalemia, not hyperkalemia.</em>"
+        },
+        "D": {
+          reasoning: "Increasing sodium retention might seem beneficial for fluid balance.",
+          guidance: "<em>But loop diuretics promote sodium excretion to reduce fluid overload.</em>"
+        }
+      },
+      "9": {
+        "B": {
+          reasoning: "Increasing gastric acid might seem related to digestion.",
+          guidance: "<em>But PPIs reduce acid to promote ulcer healing.</em>"
+        },
+        "C": {
+          reasoning: "Neutralizing stomach acid might seem beneficial for symptom relief.",
+          guidance: "<em>But PPIs reduce acid production, not just neutralize it.</em>"
+        },
+        "D": {
+          reasoning: "Increasing gastric motility might seem beneficial for digestion.",
+          guidance: "<em>But PPIs focus on reducing acid secretion.</em>"
+        }
+      },
+      "10": {
+        "B": {
+          reasoning: "Increasing blood clotting might seem beneficial for preventing bleeding.",
+          guidance: "<em>But anticoagulants prevent clot formation to reduce stroke risk.</em>"
+        },
+        "C": {
+          reasoning: "Reducing blood pressure might seem beneficial for cardiovascular health.",
+          guidance: "<em>But anticoagulants focus on preventing clots, not lowering blood pressure.</em>"
+        },
+        "D": {
+          reasoning: "Increasing heart rate might seem beneficial for cardiac output.",
+          guidance: "<em>But anticoagulants prevent clots, not affect heart rate.</em>"
+        }
+      },
+      "11": {
+        "A": {
+          reasoning: "Increasing phosphate absorption might seem beneficial for mineral balance.",
+          guidance: "<em>But phosphate binders reduce absorption to manage hyperphosphatemia.</em>"
+        },
+        "C": {
+          reasoning: "Increasing calcium absorption might seem beneficial for bone health.",
+          guidance: "<em>But phosphate binders focus on reducing phosphate, not calcium.</em>"
+        },
+        "D": {
+          reasoning: "Reducing calcium absorption might seem related to phosphate management.",
+          guidance: "<em>But phosphate binders specifically target phosphate absorption.</em>"
+        }
+      },
+      "12": {
+        "A": {
+          reasoning: "Increasing angiotensin II might seem beneficial for vasoconstriction.",
+          guidance: "<em>But ACE inhibitors reduce angiotensin II to lower blood pressure.</em>"
+        },
+        "B": {
+          reasoning: "Increasing aldosterone might seem beneficial for fluid balance.",
+          guidance: "<em>But ACE inhibitors reduce aldosterone to decrease fluid retention.</em>"
+        },
+        "C": {
+          reasoning: "Increasing blood volume might seem beneficial for perfusion.",
+          guidance: "<em>But ACE inhibitors reduce volume to lower blood pressure.</em>"
+        }
+      },
+      "13": {
+        "A": {
+          reasoning: "Preventing blood clots might seem the sole purpose.",
+          guidance: "<em>But reducing leg swelling is also a critical benefit of compression stockings.</em>"
+        },
+        "B": {
+          reasoning: "Increasing blood flow might seem beneficial for circulation.",
+          guidance: "<em>But compression stockings improve venous return, not just increase flow.</em>"
+        },
+        "C": {
+          reasoning: "Reducing leg swelling might seem the sole purpose.",
+          guidance: "<em>But preventing clots is also a key benefit.</em>"
+        }
+      },
+      "14": {
+        "A": {
+          reasoning: "Increasing gastric acid might seem related to digestion.",
+          guidance: "<em>But H2 receptor antagonists reduce acid to alleviate GERD symptoms.</em>"
+        },
+        "B": {
+          reasoning: "Neutralizing stomach acid might seem beneficial for symptom relief.",
+          guidance: "<em>But H2 receptor antagonists reduce acid production, not just neutralize it.</em>"
+        },
+        "D": {
+          reasoning: "Increasing gastric motility might seem beneficial for digestion.",
+          guidance: "<em>But H2 receptor antagonists focus on reducing acid secretion.</em>"
+        }
+      },
+      "15": {
+        "A": {
+          reasoning: "Increasing blood clotting might seem beneficial for preventing bleeding.",
+          guidance: "<em>But warfarin prevents clot formation to reduce stroke risk in atrial fibrillation.</em>"
+        },
+        "C": {
+          reasoning: "Increasing heart rate might seem beneficial for cardiac output.",
+          guidance: "<em>But warfarin focuses on preventing clots, not affecting heart rate.</em>"
+        },
+        "D": {
+          reasoning: "Reducing heart rate might seem beneficial for cardiac workload.",
+          guidance: "<em>But warfarin prevents clots, not directly affecting heart rate.</em>"
+        }
+      }
+    };
+
+    function checkAnswer(selectedItem) {
+      const block = selectedItem.closest('.question-block');
+      const questionId = block.getAttribute('data-question-id');
+      const correctAnswer = block.getAttribute('data-correct-answer');
+      const selectedChoice = selectedItem.getAttribute('data-choice');
+
+      const allChoices = block.querySelectorAll('.choices li');
+      allChoices.forEach(c => c.style.pointerEvents = 'none'); // Disable selection after choice made
+
+      if (selectedChoice === correctAnswer) {
+        selectedItem.classList.add('correct-choice');
+        block.querySelector('.feedback').style.display = 'block';
+      } else {
+        selectedItem.classList.add('incorrect-choice');
+        const feedback = detailedFeedback[questionId]?.[selectedChoice];
+        let message = '';
+
+        if (feedback) {
+          message = `<p>${feedback.reasoning}</p>
+                     <div class="guidance-section">${feedback.guidance}</div>`;
+        } else {
+          message = `<p>No specific feedback for this option. Check the correct answer rationale.</p>`;
+        }
+        showModal(message);
+      }
+    }
+
+    function showModal(content) {
+      document.getElementById('modal-feedback-content').innerHTML = content;
+      document.getElementById('feedback-modal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('feedback-modal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
