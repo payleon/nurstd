@@ -12,6 +12,7 @@ import CaseStudies from "@/pages/CaseStudies";
 import CaseStudyDetail from "@/pages/CaseStudyDetail";
 import QuestionBank from "@/pages/QuestionBank";
 import StudyStrategies from "@/pages/StudyStrategies";
+import LearningProgress from "@/pages/LearningProgress";
 import { useState } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";

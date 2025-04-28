@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useBadges } from "@/contexts/BadgeContext";
 import { MascotEvolutionCard } from "@/components/mascot/MascotEvolutionCard";
 import { BadgeCollection } from "@/components/badges/BadgeCollection";
+import { LearningProgressChart } from "@/components/progress/LearningProgressChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, Award, BookOpen, Clock, Medal, RotateCcw, User } from "lucide-react";
 import { Link } from "wouter";
@@ -41,6 +42,11 @@ export default function Profile() {
           <div className="max-w-6xl mx-auto">
             <h1 className="text-2xl font-bold mb-6 text-[#13294B]">Your Profile</h1>
       
+            {/* Top section with Animated Learning Progress */}
+            <div className="mb-8">
+              <LearningProgressChart userStats={userStats} />
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Left column - Study Stats */}
               <div>
