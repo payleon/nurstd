@@ -1,0 +1,42 @@
+
+{
+  "questions": [
+    {
+      "id": 1,
+      "title": "COPD Management",
+      "type": "mc",
+      "text": "A patient with a history of chronic obstructive pulmonary disease (COPD) presents with increased shortness of breath and wheezing. Which intervention should be prioritized?",
+      "choices": [
+        {"id": "A", "text": "Administer a sedative"},
+        {"id": "B", "text": "Administer a bronchodilator"},
+        {"id": "C", "text": "Encourage deep breathing exercises"},
+        {"id": "D", "text": "Increase fluid intake"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Administering a bronchodilator is crucial for relieving bronchospasm and improving airflow in COPD exacerbations. While other interventions may be helpful, bronchodilation is the priority to improve respiratory function."
+    },
+    {
+      "id": 2,
+      "title": "Pain Assessment",
+      "type": "sata",
+      "text": "A post-operative patient reports pain of 8/10. Which interventions should the nurse implement? Select all that apply.",
+      "choices": [
+        {"id": "A", "text": "Assess pain characteristics"},
+        {"id": "B", "text": "Document pain score"},
+        {"id": "C", "text": "Administer prescribed analgesics"},
+        {"id": "D", "text": "Provide non-pharmacological interventions"},
+        {"id": "E", "text": "Wait for the next scheduled assessment"}
+      ],
+      "correctAnswer": ["A", "B", "C", "D"],
+      "rationale": "Proper pain management requires comprehensive assessment, documentation, medication administration, and non-pharmacological interventions. Waiting for the next scheduled assessment would delay necessary pain relief."
+    },
+    {
+      "id": 3,
+      "title": "IV Flow Rate",
+      "type": "fill_in_blank",
+      "text": "If a patient needs to receive 1000mL of IV fluid over 8 hours, what should the drip rate be in drops per minute? (Assume drop factor is 15 gtts/mL)",
+      "correctAnswer": "31",
+      "rationale": "Calculation: (1000mL × 15gtts/mL) ÷ (8hrs × 60min) = 31.25 drops/min, rounded to 31 drops/min"
+    }
+  ]
+}
