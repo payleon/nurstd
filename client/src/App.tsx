@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Link } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -15,12 +15,9 @@ function PlaceholderPage({ name }: { name: string }) {
         <p className="text-gray-600 mb-6">
           This section is coming soon! We're working hard to bring you the best learning resources for your nursing exam preparation.
         </p>
-        <a 
-          href="/"
-          className="inline-block bg-[#4B9CD3] text-white px-4 py-2 rounded-md font-medium hover:bg-[#3d7eaa] transition-colors"
-        >
+        <Link href="/" className="inline-block bg-[#4B9CD3] text-white px-4 py-2 rounded-md font-medium hover:bg-[#3d7eaa] transition-colors cursor-pointer">
           Return Home
-        </a>
+        </Link>
       </div>
     </div>
   );
