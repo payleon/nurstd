@@ -26,7 +26,31 @@ export default function QuestionBank() {
       try {
         setLoading(true);
         const response = await fetchQuestions();
-        setQuestions(response.questions);
+        
+        // Add category information to questions if missing
+        const processedQuestions = response.questions.map(question => {
+          if (question.category) return question;
+          
+          // Determine category based on the question title
+          const title = question.title.toLowerCase();
+          let category = "fund"; // default to fundamentals
+          
+          if (title.includes("med") || title.includes("surg") || title.includes("medical") || title.includes("surgical")) {
+            category = "med-surg";
+          } else if (title.includes("peds") || title.includes("pediatric") || title.includes("child")) {
+            category = "peds";
+          } else if (title.includes("ob") || title.includes("obstetric") || title.includes("maternal") || title.includes("pregnancy")) {
+            category = "ob";
+          } else if (title.includes("pharm") || title.includes("medication") || title.includes("drug")) {
+            category = "pharm";
+          } else if (title.includes("psych") || title.includes("mental")) {
+            category = "psych";
+          }
+          
+          return { ...question, category };
+        });
+        
+        setQuestions(processedQuestions);
         setLoading(false);
       } catch (err) {
         console.error("Failed to fetch questions:", err);
