@@ -1,862 +1,229 @@
-{"questions": [
+{
+  "questions": [
     {
-        "id": 1,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A pregnant patient's last menstrual period (LMP) began on June 10th. Using Nägele's rule, what is the estimated date of delivery (EDD)?",
-        "choices": [
-            {"id": "A", "text": "March 3rd"},
-            {"id": "B", "text": "March 17th"},
-            {"id": "C", "text": "April 3rd"},
-            {"id": "D", "text": "April 17th"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Nägele's rule is calculated by subtracting 3 months from the first day of the LMP and adding 7 days. LMP: June 10th. Subtract 3 months: March 10th. Add 7 days: March 17th. Therefore, the EDD is March 17th."
+      "id": 1,
+      "title": "Fundamentals of Nursing",
+      "type": "mc",
+      "text": "A nurse is preparing to administer medications to a client. To ensure client safety, which action should the nurse perform FIRST?",
+      "choices": [
+        {"id": "A", "text": "Document the medication administration."},
+        {"id": "B", "text": "Check the client's identification using two identifiers."},
+        {"id": "C", "text": "Explain the purpose of the medication to the client."},
+        {"id": "D", "text": "Perform the third medication check at the bedside."}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Ensuring the 'Right Patient' is a crucial first step in the medication administration process according to the 'Rights of Medication Administration'. This is accomplished by using at least two client identifiers (e.g., name and date of birth, name and medical record number) and comparing them against the medication administration record (MAR). While explaining the medication (C) and performing checks (D) are vital, verifying the patient's identity (B) must occur before proceeding. Documentation (A) occurs after administration."
     },
     {
-        "id": 2,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A nurse is assessing a patient in the third trimester of pregnancy. Which physiological change is considered normal during this period?",
-        "choices": [
-            {"id": "A", "text": "Decrease in total blood volume."},
-            {"id": "B", "text": "Increase in respiratory rate and depth."},
-            {"id": "C", "text": "Decrease in heart rate by 10 bpm."},
-            {"id": "D", "text": "Improvement in lower extremity edema."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "During pregnancy, particularly the third trimester, progesterone causes increased sensitivity of the respiratory center to CO2 and maternal oxygen demands increase, leading to increased respiratory rate and tidal volume (depth) (B). Total blood volume significantly increases (A). Heart rate typically increases by 10-15 bpm (C). Dependent edema often worsens in the third trimester due to pressure from the enlarging uterus on pelvic veins and increased fluid volume (D)."
+      "id": 2,
+      "title": "Pharmacology",
+      "type": "mc",
+      "text": "A client is prescribed warfarin (Coumadin), an oral anticoagulant. Which laboratory test result requires monitoring specifically for this medication's therapeutic effect?",
+      "choices": [
+        {"id": "A", "text": "Activated partial thromboplastin time (aPTT)"},
+        {"id": "B", "text": "Hemoglobin and Hematocrit (H&H)"},
+        {"id": "C", "text": "Platelet count"},
+        {"id": "D", "text": "Prothrombin Time (PT) / International Normalized Ratio (INR)"}
+      ],
+      "correctAnswer": "D",
+      "rationale": "Warfarin inhibits vitamin K-dependent clotting factors. Its therapeutic effect is monitored using the Prothrombin Time (PT) and, more commonly, the International Normalized Ratio (INR) (D). The aPTT (A) is used to monitor heparin therapy. H&H (B) assesses for anemia or blood loss but not warfarin's anticoagulant effect directly. Platelet count (C) assesses for thrombocytopenia, not warfarin efficacy."
     },
     {
-        "id": 3,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A nurse is educating a pregnant client about danger signs that require immediate reporting to the healthcare provider. Which signs should be included? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Vaginal bleeding"},
-            {"id": "B", "text": "Mild ankle edema at the end of the day"},
-            {"id": "C", "text": "Sudden gush of fluid from the vagina"},
-            {"id": "D", "text": "Severe headache unrelieved by acetaminophen"},
-            {"id": "E", "text": "Occasional nausea in the first trimester"},
-            {"id": "F", "text": "Absence of fetal movement for >12 hours"}
-        ],
-        "correctAnswer": ["A", "C", "D", "F"],
-        "rationale": "Vaginal bleeding (A) can indicate issues like placenta previa or abruption. Sudden gush of fluid (C) suggests rupture of membranes. Severe headache (D) can be a sign of preeclampsia. Decreased or absent fetal movement (F) can indicate fetal distress. Mild ankle edema (B) is common and usually benign. Occasional nausea (E) is typical morning sickness."
+      "id": 3,
+      "title": "Medical-Surgical Nursing",
+      "type": "sata",
+      "text": "A nurse is caring for a client diagnosed with heart failure. Which assessment findings would indicate worsening of the condition? (Select all that apply.)",
+      "choices": [
+        {"id": "A", "text": "Weight loss of 1 kg in 24 hours"},
+        {"id": "B", "text": "Presence of crackles in the lung bases"},
+        {"id": "C", "text": "Pitting edema rated at 3+ in lower extremities"},
+        {"id": "D", "text": "Client reports increased shortness of breath when lying flat"},
+        {"id": "E", "text": "Decrease in abdominal girth"},
+        {"id": "F", "text": "Jugular vein distention (JVD) at 45 degrees"}
+      ],
+      "correctAnswer": ["B", "C", "D", "F"],
+      "rationale": "Worsening heart failure typically involves increased fluid volume overload. Crackles (B) indicate pulmonary edema (left-sided failure). Increased pitting edema (C) and JVD (F) indicate systemic venous congestion (right-sided failure). Orthopnea (shortness of breath when lying flat) (D) indicates increased pulmonary congestion. Weight gain (not loss, A) and increased abdominal girth (due to ascites, not E) would also signify worsening fluid retention."
     },
     {
-        "id": 4,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A patient in active labor has ruptured membranes. The nurse notes a baseline fetal heart rate (FHR) of 135 bpm. During a contraction, the FHR drops abruptly to 90 bpm and returns quickly to baseline after the contraction ends. What is the most likely cause of this FHR pattern?",
-        "choices": [
-            {"id": "A", "text": "Head compression"},
-            {"id": "B", "text": "Uteroplacental insufficiency"},
-            {"id": "C", "text": "Cord compression"},
-            {"id": "D", "text": "Fetal sleep cycle"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "This describes a variable deceleration, characterized by an abrupt drop and return in FHR, often V- or U-shaped. Variable decelerations are most commonly caused by umbilical cord compression. Early decelerations (A) are gradual, mirror contractions, and indicate head compression. Late decelerations (B) are gradual, start after the contraction peak, and indicate uteroplacental insufficiency. Fetal sleep cycles (D) affect variability, not cause decelerations."
+      "id": 4,
+      "title": "Pediatric Nursing",
+      "type": "mc",
+      "text": "According to Erikson's stages of psychosocial development, which developmental task is characteristic of the toddler age group (1-3 years)?",
+      "choices": [
+        {"id": "A", "text": "Trust vs. Mistrust"},
+        {"id": "B", "text": "Initiative vs. Guilt"},
+        {"id": "C", "text": "Industry vs. Inferiority"},
+        {"id": "D", "text": "Autonomy vs. Shame and Doubt"}
+      ],
+      "correctAnswer": "D",
+      "rationale": "Erikson's stage for toddlers (1-3 years) is Autonomy vs. Shame and Doubt (D). During this stage, toddlers focus on developing a sense of personal control over physical skills and a sense of independence. Trust vs. Mistrust (A) is infancy (birth-1 year). Initiative vs. Guilt (B) is preschool (3-6 years). Industry vs. Inferiority (C) is school-age (6-12 years)."
     },
     {
-        "id": 5,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "A postpartum patient has saturated one perineal pad within 15 minutes of delivery. The nurse recognizes this as excessive bleeding, indicative of postpartum ___________.",
-        "choices": [],
-        "correctAnswer": "hemorrhage",
-        "rationale": "Postpartum hemorrhage (PPH) is commonly defined as blood loss exceeding 500 mL after vaginal birth or 1000 mL after cesarean birth. A key indicator of excessive, active bleeding is saturating a perineal pad in 15 minutes or less. This requires immediate assessment and intervention."
+      "id": 5,
+      "title": "Maternity Nursing",
+      "type": "mc",
+      "text": "A laboring client's membranes rupture spontaneously. The nurse notes the amniotic fluid is greenish-brown. What is the nurse's priority action?",
+      "choices": [
+        {"id": "A", "text": "Administer oxygen to the mother via non-rebreather mask."},
+        {"id": "B", "text": "Perform a vaginal examination to assess cervical dilation."},
+        {"id": "C", "text": "Assess the fetal heart rate (FHR) and pattern."},
+        {"id": "D", "text": "Notify the healthcare provider immediately."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Greenish-brown amniotic fluid indicates the presence of meconium, which can be a sign of fetal distress (hypoxia) either past or present. Meconium aspiration syndrome is a potential complication for the newborn. The immediate priority is to assess fetal well-being by evaluating the FHR and pattern (C) for signs of distress (e.g., bradycardia, late decelerations, decreased variability). While notifying the provider (D) and potentially administering oxygen (A) are important, assessing the FHR takes precedence. A vaginal examination (B) is contraindicated when membranes are ruptured and meconium is present due to increased infection risk and potential to advance cord/meconium."
     },
     {
-        "id": 6,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A primigravida patient asks the nurse when she can expect to first feel fetal movement (quickening). What is the nurse's best response?",
-        "choices": [
-            {"id": "A", "text": "\"You should feel movement by 10-12 weeks.\""},
-            {"id": "B", "text": "\"Most first-time mothers feel movement around 18-20 weeks.\""},
-            {"id": "C", "text": "\"Quickening usually occurs late in the third trimester, around 30 weeks.\""},
-            {"id": "D", "text": "\"Fetal movement isn't usually felt until just before labor begins.\""}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Quickening, the mother's first perception of fetal movement, is typically felt between 16-20 weeks of gestation. Primigravidas (first-time mothers) often perceive it later in this range (around 18-20 weeks) compared to multigravidas, who may feel it earlier (around 16 weeks). Movement is definitely felt well before 30 weeks or just before labor."
+      "id": 6,
+      "title": "Mental Health Nursing",
+      "type": "mc",
+      "text": "A client diagnosed with major depressive disorder states, \"Nothing matters anymore. It's hopeless.\" Which response by the nurse is most therapeutic?",
+      "choices": [
+        {"id": "A", "text": "\"You shouldn't feel that way; things will get better.\""},
+        {"id": "B", "text": "\"Why do you think everything is hopeless?\""},
+        {"id": "C", "text": "\"It sounds like you're feeling very discouraged right now.\""},
+        {"id": "D", "text": "\"Let's focus on something positive, like your hobbies.\""}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Reflecting the client's feelings ('feeling very discouraged') validates their experience and opens the door for further exploration (C). Offering false reassurance (A) dismisses the client's feelings. Asking 'why' questions (B) can sound accusatory and put the client on the defensive. Changing the subject abruptly (D) avoids the client's expressed concern."
     },
     {
-        "id": 7,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A nurse is administering magnesium sulfate IV to a patient with severe preeclampsia. Which assessments are critical for monitoring for magnesium toxicity? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Respiratory rate"},
-            {"id": "B", "text": "Blood glucose levels"},
-            {"id": "C", "text": "Deep tendon reflexes (DTRs)"},
-            {"id": "D", "text": "Urinary output"},
-            {"id": "E", "text": "Pupil reactivity"},
-            {"id": "F", "text": "Level of consciousness"}
-        ],
-        "correctAnswer": ["A", "C", "D", "F"],
-        "rationale": "Magnesium sulfate is a CNS depressant used to prevent seizures in preeclampsia. Toxicity manifests as CNS depression. Critical assessments include respiratory rate (A - depression is a late sign), DTRs (C - absence indicates toxicity), urinary output (D - magnesium is excreted by kidneys, oliguria increases risk of toxicity), and level of consciousness (F - lethargy/coma). Blood glucose (B) and pupil reactivity (E) are not primary indicators of magnesium toxicity."
+      "id": 7,
+      "title": "Medical-Surgical Nursing",
+      "type": "mc",
+      "text": "A nurse is caring for a client with Chronic Obstructive Pulmonary Disease (COPD). Which finding would indicate a potential need for oxygen therapy adjustment or evaluation?",
+      "choices": [
+        {"id": "A", "text": "Respiratory rate of 18 breaths/minute"},
+        {"id": "B", "text": "Oxygen saturation (SpO2) of 91% on room air at rest"},
+        {"id": "C", "text": "Increased confusion or drowsiness"},
+        {"id": "D", "text": "Client reports minimal sputum production"}
+      ],
+      "correctAnswer": "C",
+      "rationale": "In some COPD clients, particularly those with chronic hypercapnia (CO2 retention), excessive oxygen administration can depress the hypoxic drive to breathe, leading to increased CO2 retention, respiratory acidosis, and CNS effects like confusion or drowsiness (carbon dioxide narcosis) (C). While SpO2 of 91% (B) might be acceptable or baseline for some COPD clients, a change in mental status is a more urgent sign requiring assessment. A respiratory rate of 18 (A) and minimal sputum production (D) are not concerning findings in this context."
     },
     {
-        "id": 8,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "What is the primary purpose of administering Vitamin K injection (phytonadione) to a newborn?",
-        "choices": [
-            {"id": "A", "text": "To enhance lung maturity."},
-            {"id": "B", "text": "To prevent hemorrhagic disease of the newborn."},
-            {"id": "C", "text": "To treat physiological jaundice."},
-            {"id": "D", "text": "To boost the newborn's immune system."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Newborns have sterile intestines at birth and cannot synthesize Vitamin K, which is essential for the hepatic synthesis of certain clotting factors (II, VII, IX, X). Administering Vitamin K shortly after birth prevents Vitamin K deficiency bleeding (VKDB), also known as hemorrhagic disease of the newborn. It does not affect lung maturity (A - corticosteroids do), jaundice (C), or the general immune system (D)."
+      "id": 8,
+      "title": "Pharmacology",
+      "type": "sata",
+      "text": "A nurse is teaching a client about taking gentamicin, an aminoglycoside antibiotic. Which potential adverse effects should the nurse emphasize? (Select all that apply.)",
+      "choices": [
+        {"id": "A", "text": "Nephrotoxicity (kidney damage)"},
+        {"id": "B", "text": "Hepatotoxicity (liver damage)"},
+        {"id": "C", "text": "Photosensitivity"},
+        {"id": "D", "text": "Ototoxicity (hearing or balance problems)"},
+        {"id": "E", "text": "Gastrointestinal upset (nausea, vomiting)"},
+        {"id": "F", "text": "Constipation"}
+      ],
+      "correctAnswer": ["A", "D"],
+      "rationale": "Aminoglycosides like gentamicin carry significant risks of nephrotoxicity (damage to kidneys) (A) and ototoxicity (damage to the inner ear affecting hearing and balance) (D). These require close monitoring of renal function (BUN, creatinine) and assessing for hearing loss, tinnitus, or vertigo. While GI upset (E) can occur with many antibiotics, kidney and ear toxicity are the major concerns specific to aminoglycosides. Hepatotoxicity (B), photosensitivity (C), and constipation (F) are not typical adverse effects of aminoglycosides."
     },
     {
-        "id": 9,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "During a postpartum assessment, the nurse palpates the uterine fundus. Immediately after delivery, the fundus should be palpable at the level of the __________ and feel firm.",
-        "choices": [],
-        "correctAnswer": "umbilicus",
-        "rationale": "Immediately following delivery, the uterine fundus typically contracts firmly and is located at the level of the umbilicus (or slightly above or below). It should feel firm, like a grapefruit. A boggy (soft) fundus indicates uterine atony and increased risk of hemorrhage."
+      "id": 9,
+      "title": "Fundamentals of Nursing",
+      "type": "mc",
+      "text": "A nurse witnesses another healthcare provider failing to follow proper hand hygiene protocols before caring for a client. What is the nurse's primary ethical responsibility in this situation?",
+      "choices": [
+        {"id": "A", "text": "Report the incident directly to the hospital administrator."},
+        {"id": "B", "text": "Document the observation in the client's medical record."},
+        {"id": "C", "text": "Address the issue directly with the healthcare provider involved."},
+        {"id": "D", "text": "Ignore the observation as it was a single occurrence."}
+      ],
+      "correctAnswer": "C",
+      "rationale": "The primary ethical responsibility is patient safety. The most direct and often most effective initial step is to address the concern directly and professionally with the colleague (C). This provides an opportunity for immediate correction and education. If the behavior persists or is egregious, escalating the concern through the chain of command (e.g., charge nurse, manager) is necessary. Reporting directly to administration (A) without attempting collegial correction is not the first step. Documenting in the patient record (B) is not appropriate for staff issues. Ignoring a breach in infection control practice (D) puts patients at risk and fails to uphold professional standards."
     },
     {
-        "id": 10,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A nurse is interpreting a fetal heart rate tracing showing a baseline of 140 bpm, moderate variability, no accelerations, and presence of late decelerations with 50% of contractions. How should this tracing be categorized according to NICHD guidelines?",
-        "choices": [
-            {"id": "A", "text": "Category I"},
-            {"id": "B", "text": "Category II"},
-            {"id": "C", "text": "Category III"},
-            {"id": "D", "text": "Cannot be categorized"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "This tracing describes Category II, which is indeterminate - not reassuring but not ominous. Late decelerations are concerning, but moderate variability is somewhat reassuring. Category I would require absence of late decelerations. Category III would include absent variability WITH late decelerations or other severe features. Category II encompasses everything between I and III."
+      "id": 10,
+      "title": "Pediatric Nursing",
+      "type": "fill_in_blank",
+      "text": "A common childhood illness characterized by a high fever for several days followed by the appearance of a maculopapular rash after the fever breaks is known as Roseola infantum, caused by Human __________ 6 or 7.",
+      "choices": [],
+      "correctAnswer": "Herpesvirus",
+      "rationale": "Roseola infantum (also called sixth disease or exanthem subitum) is typically caused by Human Herpesvirus 6 (HHV-6) or less commonly HHV-7. The classic presentation involves 3-5 days of high fever which resolves abruptly, followed by the onset of a non-itchy, pinkish-red maculopapular rash that often starts on the trunk and spreads."
     },
     {
-        "id": 11,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A pregnant client at 30 weeks gestation reports painless vaginal bleeding. Which conditions should the nurse suspect? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Placenta previa"},
-            {"id": "B", "text": "Abruptio placentae"},
-            {"id": "C", "text": "Gestational diabetes"},
-            {"id": "D", "text": "Vasa previa"},
-            {"id": "E", "text": "Premature rupture of membranes"},
-            {"id": "F", "text": "Urinary tract infection"}
-        ],
-        "correctAnswer": ["A", "D"],
-        "rationale": "Painless, bright red vaginal bleeding, especially in the late second or third trimester, is the hallmark symptom of placenta previa (A), where the placenta implants over or near the cervical os. Vasa previa (D), where fetal vessels run unprotected across the cervical os, can also cause painless bleeding, often upon rupture of membranes. Abruptio placentae (B) typically causes painful bleeding. Gestational diabetes (C), PROM (E), and UTI (F) do not typically present with vaginal bleeding."
+      "id": 11,
+      "title": "Maternity Nursing",
+      "type": "mc",
+      "text": "A nurse is assessing a postpartum client 24 hours after a vaginal delivery. The nurse palpates the uterine fundus. Where should the nurse expect to locate the fundus?",
+      "choices": [
+        {"id": "A", "text": "At the level of the symphysis pubis"},
+        {"id": "B", "text": "Approximately 1 cm below the umbilicus"},
+        {"id": "C", "text": "Midway between the umbilicus and the symphysis pubis"},
+        {"id": "D", "text": "2 cm above the umbilicus"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "After delivery, the uterus begins the process of involution. By 24 hours postpartum, the fundus should typically be firm and located approximately 1 cm (or one fingerbreadth) below the umbilicus (B). It continues to descend about 1 cm per day, becoming non-palpable abdominally by around day 10-14. Locating it at the symphysis (A) occurs much later. Midway (C) would be around day 6. Above the umbilicus (D) immediately post-delivery is possible, but it should be below the umbilicus by 24 hours."
     },
     {
-        "id": 12,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A nurse is assessing a newborn's Apgar score at 1 minute after birth. The infant has a heart rate of 110 bpm, slow and irregular respirations, some flexion of extremities, a grimace response to stimulation, and the body is pink with blue extremities. What is the Apgar score?",
-        "choices": [
-            {"id": "A", "text": "5"},
-            {"id": "B", "text": "6"},
-            {"id": "C", "text": "7"},
-            {"id": "D", "text": "8"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Apgar scoring (Appearance, Pulse, Grimace, Activity, Respiration): Heart rate >100 (2 points); Slow, irregular respirations (1 point); Grimace response (1 point); Some flexion (1 point); Body pink, extremities blue (Acrocyanosis) (1 point). Total score = 2 + 1 + 1 + 1 + 1 = 6."
+      "id": 12,
+      "title": "Mental Health Nursing",
+      "type": "mc",
+      "text": "A client taking haloperidol (Haldol) develops uncontrollable restlessness, pacing, and fidgeting. The nurse recognizes these symptoms as indicative of which extrapyramidal side effect (EPS)?",
+      "choices": [
+        {"id": "A", "text": "Tardive dyskinesia"},
+        {"id": "B", "text": "Akathisia"},
+        {"id": "C", "text": "Acute dystonia"},
+        {"id": "D", "text": "Pseudoparkinsonism"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Akathisia (B) is characterized by motor restlessness, with an inability to sit still, constant pacing, fidgeting, and agitation. This differs from tardive dyskinesia (A), which involves involuntary, repetitive movements, particularly of the face and mouth. Acute dystonia (C) presents as sudden muscle spasms and abnormal posturing. Pseudoparkinsonism (D) involves tremor, rigidity, bradykinesia, and shuffling gait."
     },
     {
-        "id": 13,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "The condition where the placenta separates prematurely from the uterine wall, often causing painful vaginal bleeding and uterine tenderness, is known as ___________ ___________.",
-        "choices": [],
-        "correctAnswer": "Abruptio placentae",
-        "rationale": "Abruptio placentae (or placental abruption) is the premature separation of a normally implanted placenta from the uterine wall before delivery. Classic symptoms include dark red, painful vaginal bleeding (though bleeding can be concealed), uterine tenderness/rigidity, and signs of fetal distress."
+      "id": 13,
+      "title": "Maternity",
+      "type": "mc",
+      "text": "A pregnant patient's last menstrual period (LMP) began on June 10th. Using Nägele's rule, what is the estimated date of delivery (EDD)?",
+      "choices": [
+        {"id": "A", "text": "March 3rd"},
+        {"id": "B", "text": "March 17th"},
+        {"id": "C", "text": "April 3rd"},
+        {"id": "D", "text": "April 17th"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Nägele's rule is calculated by subtracting 3 months from the first day of the LMP and adding 7 days. LMP: June 10th. Subtract 3 months: March 10th. Add 7 days: March 17th. Therefore, the EDD is March 17th."
     },
     {
-        "id": 14,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "What is the priority nursing intervention for a patient experiencing uterine atony immediately postpartum?",
-        "choices": [
-            {"id": "A", "text": "Administering oxygen via face mask."},
-            {"id": "B", "text": "Performing vigorous fundal massage."},
-            {"id": "C", "text": "Encouraging the patient to ambulate."},
-            {"id": "D", "text": "Applying ice packs to the perineum."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Uterine atony (a boggy, poorly contracted uterus) is the most common cause of early postpartum hemorrhage. The priority nursing intervention is to stimulate uterine contraction by performing firm, vigorous fundal massage. This helps the uterus clamp down on blood vessels at the placental site. Administering oxygen (A) is secondary, ambulation (C) is contraindicated, and ice packs (D) are for perineal comfort/swelling, not uterine atony."
+      "id": 14,
+      "title": "Maternity",
+      "type": "mc",
+      "text": "A nurse is assessing a patient in the third trimester of pregnancy. Which physiological change is considered normal during this period?",
+      "choices": [
+        {"id": "A", "text": "Decrease in total blood volume."},
+        {"id": "B", "text": "Increase in respiratory rate and depth."},
+        {"id": "C", "text": "Decrease in heart rate by 10 bpm."},
+        {"id": "D", "text": "Improvement in lower extremity edema."}
+      ],
+      "correctAnswer": "B",
+      "rationale": "During pregnancy, particularly the third trimester, progesterone causes increased sensitivity of the respiratory center to CO2 and maternal oxygen demands increase, leading to increased respiratory rate and tidal volume (depth) (B). Total blood volume significantly increases (A). Heart rate typically increases by 10-15 bpm (C). Dependent edema often worsens in the third trimester due to pressure from the enlarging uterus on pelvic veins and increased fluid volume (D)."
     },
     {
-        "id": 15,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A nurse is providing discharge teaching to a new mother about breastfeeding. Which points should be included? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Ensure the baby has a wide latch, covering most of the areola."},
-            {"id": "B", "text": "Feed the baby every 4-5 hours on a strict schedule."},
-            {"id": "C", "text": "Listen for audible swallowing during feeding."},
-            {"id": "D", "text": "Expect at least 6-8 wet diapers per day after day 4."},
-            {"id": "E", "text": "Apply petroleum jelly to nipples after each feeding to prevent cracking."},
-            {"id": "F", "text": "Offer both breasts at each feeding, starting on the alternate breast each time."}
-        ],
-        "correctAnswer": ["A", "C", "D", "F"],
-        "rationale": "Successful breastfeeding involves a proper latch (A), signs of milk transfer like audible swallowing (C), and adequate output (6-8 wet diapers) indicating sufficient intake (D). Offering both breasts ensures adequate stimulation and emptying (F). Feeding should be on demand (every 2-3 hours), not a strict schedule (B). Expressed colostrum/breast milk or purified lanolin, not petroleum jelly (E), is recommended for nipple soreness."
+      "id": 15,
+      "title": "Maternity",
+      "type": "sata",
+      "text": "A nurse is educating a pregnant client about danger signs that require immediate reporting to the healthcare provider. Which signs should be included? (Select all that apply.)",
+      "choices": [
+        {"id": "A", "text": "Vaginal bleeding"},
+        {"id": "B", "text": "Mild ankle edema at the end of the day"},
+        {"id": "C", "text": "Sudden gush of fluid from the vagina"},
+        {"id": "D", "text": "Severe headache unrelieved by acetaminophen"},
+        {"id": "E", "text": "Occasional nausea in the first trimester"},
+        {"id": "F", "text": "Absence of fetal movement for >12 hours"}
+      ],
+      "correctAnswer": ["A", "C", "D", "F"],
+      "rationale": "Vaginal bleeding (A) can indicate issues like placenta previa or abruption. Sudden gush of fluid (C) suggests rupture of membranes. Severe headache (D) can be a sign of preeclampsia. Decreased or absent fetal movement (F) can indicate fetal distress. Mild ankle edema (B) is common and usually benign. Occasional nausea (E) is typical morning sickness."
     },
     {
-        "id": 16,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A laboring patient receives an epidural anesthetic. What is the priority nursing action immediately following administration?",
-        "choices": [
-            {"id": "A", "text": "Assess the patient's level of pain relief."},
-            {"id": "B", "text": "Monitor the patient's blood pressure frequently."},
-            {"id": "C", "text": "Check for urinary retention."},
-            {"id": "D", "text": "Encourage the patient to push with contractions."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "A common and potentially serious side effect of epidural anesthesia is maternal hypotension due to sympathetic blockade causing vasodilation. Therefore, the priority is to monitor the patient's blood pressure frequently (e.g., every 2-5 minutes initially) to detect and manage hypotension promptly, often preceded by fluid bolus administration. Assessing pain relief (A) and checking for urinary retention (C) are important but secondary to hemodynamic stability. Pushing (D) depends on the stage of labor and effectiveness, not immediately post-epidural placement."
-    },
-    {
-        "id": 17,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "During pregnancy, the glycoprotein hormone ________ is produced, initially by the trophoblast and later by the placenta, and its detection in urine or serum is the basis for pregnancy tests.",
-        "choices": [],
-        "correctAnswer": "hCG",
-        "rationale": "Human chorionic gonadotropin (hCG) is the hormone specific to pregnancy. It is produced by the developing embryo (trophoblast) shortly after conception and later by the placenta. It maintains the corpus luteum, which produces progesterone essential for maintaining the pregnancy in the early weeks. Its presence is detected by pregnancy tests."
-    },
-    {
-        "id": 18,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A patient presents with symptoms of preeclampsia. Which finding is essential for the diagnosis?",
-        "choices": [
-            {"id": "A", "text": "Maternal hypoglycemia"},
-            {"id": "B", "text": "Elevated blood pressure and proteinuria"},
-            {"id": "C", "text": "Low platelet count and elevated liver enzymes"},
-            {"id": "D", "text": "Positive Group B Streptococcus culture"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "The classic definition of preeclampsia involves new-onset hypertension (typically systolic BP ≥140 mmHg or diastolic BP ≥90 mmHg on two occasions at least 4 hours apart after 20 weeks gestation) AND proteinuria (≥300 mg/24 hours or protein/creatinine ratio ≥0.3, or dipstick 1+). Option C describes features of HELLP syndrome (Hemolysis, Elevated Liver enzymes, Low Platelets), a severe variant of preeclampsia, but hypertension and proteinuria are the primary diagnostic criteria for preeclampsia itself. A and D are unrelated."
-    },
-    {
-        "id": 19,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A nurse is reviewing the GTPAL classification for a client who is currently pregnant, has had one previous birth at 39 weeks gestation resulting in a live infant, one miscarriage at 10 weeks, and one elective abortion at 8 weeks. What is the correct GTPAL designation? (Select the numbers for each category.)",
-        "choices": [
-            {"id": "A", "text": "G: 3"},
-            {"id": "B", "text": "G: 4"},
-            {"id": "C", "text": "T: 1"},
-            {"id": "D", "text": "P: 0"},
-            {"id": "E", "text": "A: 2"},
-            {"id": "F", "text": "L: 1"}
-        ],
-        "correctAnswer": ["B", "C", "D", "E", "F"],
-        "rationale": "G (Gravida): Total number of pregnancies, including current one (Current pregnancy + 39-week birth + miscarriage + abortion = 4). T (Term births): Number of births at 37 weeks or later (One at 39 weeks = 1). P (Preterm births): Number of births between 20 and 36 6/7 weeks (None = 0). A (Abortions/Miscarriages): Number of pregnancy losses before 20 weeks (Miscarriage + abortion = 2). L (Living children): Number of currently living children (One from the 39-week birth = 1). Thus, GTPAL = 4-1-0-2-1."
-    },
-    {
-        "id": 20,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "The nurse is performing Leopold maneuvers on a patient in labor. During the first maneuver (fundal grip), the nurse feels a soft, irregular mass. What does this finding most likely indicate?",
-        "choices": [
-            {"id": "A", "text": "The fetal head"},
-            {"id": "B", "text": "The fetal back"},
-            {"id": "C", "text": "The fetal buttocks (breech presentation)"},
-            {"id": "D", "text": "The fetal small parts (arms/legs)"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Leopold maneuvers assess fetal position. The first maneuver determines the part occupying the fundus. A hard, round, mobile object suggests the head (cephalic presentation). A softer, less defined, irregular mass suggests the buttocks (breech presentation). The back (B) is felt during the second maneuver (lateral). Small parts (D) are felt during the second maneuver opposite the back."
-    },
-    {
-        "id": 21,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "The yellow-tinged fluid rich in antibodies and protein secreted by the breasts during the first few days after delivery, before mature milk comes in, is called ____________.",
-        "choices": [],
-        "correctAnswer": "colostrum",
-        "rationale": "Colostrum is the early milk produced by the mother. It is lower in fat and lactose but higher in protein, minerals, and immunoglobulins (antibodies) compared to mature milk. It provides crucial nutrients and passive immunity to the newborn."
-    },
-    {
-        "id": 22,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "Which type of C-section incision allows for the greatest possibility of a future vaginal birth (VBAC)?",
-        "choices": [
-            {"id": "A", "text": "Classical vertical incision"},
-            {"id": "B", "text": "Low transverse incision"},
-            {"id": "C", "text": "Low vertical incision"},
-            {"id": "D", "text": "T-shaped incision"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "The type of uterine incision (not the skin incision) is critical for VBAC consideration. A low transverse uterine incision (B) carries the lowest risk of uterine rupture during a subsequent labor and is most favorable for a trial of labor after cesarean (TOLAC)/VBAC. Classical vertical (A), low vertical (C), and T-shaped (D) incisions involve the upper, more muscular segment of the uterus and have a higher risk of rupture, making VBAC typically contraindicated."
-    },
-    {
-        "id": 23,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A newborn is assessed to have jaundice within the first 24 hours of life. Which factors could contribute to this pathological jaundice? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Physiological immaturity of the liver"},
-            {"id": "B", "text": "ABO incompatibility between mother and infant"},
-            {"id": "C", "text": "Rh incompatibility (isoimmunization)"},
-            {"id": "D", "text": "Exclusive breastfeeding with adequate intake"},
-            {"id": "E", "text": "Sepsis"},
-            {"id": "F", "text": "Cephalohematoma"}
-        ],
-        "correctAnswer": ["B", "C", "E", "F"],
-        "rationale": "Jaundice appearing within the first 24 hours is considered pathological and requires investigation. Common causes include hemolysis due to ABO incompatibility (B) or Rh isoimmunization (C), leading to rapid bilirubin buildup. Sepsis (E) can impair liver function and increase hemolysis. Cephalohematoma (F) involves trapped blood that breaks down, releasing bilirubin. Physiological jaundice (A) appears after 24 hours. Adequate breastfeeding (D) does not cause pathological jaundice; breastfeeding jaundice is usually due to insufficient intake."
-    },
-    {
-        "id": 24,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A patient in labor is experiencing intense back pain (back labor). Which fetal position is most commonly associated with this?",
-        "choices": [
-            {"id": "A", "text": "Left occiput anterior (LOA)"},
-            {"id": "B", "text": "Right occiput anterior (ROA)"},
-            {"id": "C", "text": "Left occiput posterior (LOP)"},
-            {"id": "D", "text": "Transverse lie"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Occiput posterior positions (LOP or ROP), where the back of the fetal head (occiput) presses against the mother's sacrum, are most commonly associated with intense back pain during labor. Anterior positions (LOA, ROA) (A, B) are generally more favorable for delivery and less associated with back labor. Transverse lie (D) requires C-section."
-    },
-    {
-        "id": 25,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "The medication commonly administered intramuscularly to Rh-negative mothers around 28 weeks gestation and after delivery of an Rh-positive infant to prevent sensitization is _______ immunoglobulin (RhoGAM).",
-        "choices": [],
-        "correctAnswer": "Rh(D)",
-        "rationale": "Rho(D) immune globulin (commonly known by brand names like RhoGAM) contains antibodies against the Rh(D) antigen. It is given to unsensitized Rh-negative mothers to prevent them from developing their own antibodies against Rh-positive fetal blood cells that may enter their circulation, thus preventing hemolytic disease of the fetus and newborn in subsequent pregnancies."
-    },
-    {
-        "id": 26,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "What is the primary action of oxytocin (Pitocin) when administered during labor or postpartum?",
-        "choices": [
-            {"id": "A", "text": "To cause cervical ripening."},
-            {"id": "B", "text": "To relax the uterine muscle."},
-            {"id": "C", "text": "To stimulate uterine contractions."},
-            {"id": "D", "text": "To prevent maternal hypertension."}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Oxytocin is a hormone that causes rhythmic uterine contractions. It is used therapeutically to induce or augment labor and to control postpartum bleeding by causing the uterus to contract firmly after delivery. Prostaglandins (like misoprostol or dinoprostone) are typically used for cervical ripening (A). Tocolytics (like terbutaline or magnesium sulfate) relax the uterus (B). Oxytocin can have an antidiuretic effect and, in high doses or rapid infusion, potentially cause water intoxication or affect blood pressure, but its primary action is uterine stimulation (C)."
-    },
-    {
-        "id": 27,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A nurse is assessing a postpartum client using the BUBBLE-HE mnemonic. Which assessments are included in this? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Blood Pressure"},
-            {"id": "B", "text": "Uterus (Fundal height, firmness, position)"},
-            {"id": "C", "text": "Bowel function"},
-            {"id": "D", "text": "Lungs (Breath sounds)"},
-            {"id": "E", "text": "Lochia (Amount, color, odor)"},
-            {"id": "F", "text": "Episiotomy/Laceration/Incision (Perineum or C/S)"}
-        ],
-        "correctAnswer": ["B", "C", "E", "F"],
-        "rationale": "BUBBLE-HE stands for: Breasts, Uterus (B), Bowel (C), Bladder, Lochia (E), Episiotomy/Laceration/Incision (F), Homan's sign (or Hemorrhoids/Hematoma), and Emotional status. While blood pressure (A) and lung sounds (D) are part of the overall assessment, they are not specifically components of the BUBBLE-HE focused postpartum assessment."
-    },
-    {
-        "id": 28,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "Screening for Gestational Diabetes Mellitus (GDM) is typically performed between which weeks of gestation for average-risk pregnant women?",
-        "choices": [
-            {"id": "A", "text": "12-16 weeks"},
-            {"id": "B", "text": "18-22 weeks"},
-            {"id": "C", "text": "24-28 weeks"},
-            {"id": "D", "text": "32-36 weeks"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Routine screening for GDM using a glucose challenge test (GCT) followed by a glucose tolerance test (GTT) if the screen is positive, is typically recommended between 24 and 28 weeks of gestation. This timing corresponds to when insulin resistance due to placental hormones often becomes more pronounced. Early screening may be done for high-risk women."
-    },
-    {
-        "id": 29,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "The bluish discoloration of the cervix, vagina, and labia resulting from increased blood flow, typically observable around 6-8 weeks gestation, is known as _________ sign.",
-        "choices": [],
-        "correctAnswer": "Chadwick's",
-        "rationale": "Chadwick's sign is one of the presumptive signs of pregnancy. It refers to the bluish or purplish hue of the cervix, vagina, and vulva caused by increased vascularity (congestion) under the influence of estrogen."
-    },
-    {
-        "id": 30,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A patient at 34 weeks gestation presents with sudden onset of shortness of breath, pleuritic chest pain, anxiety, and tachycardia. The nurse should suspect which potential complication?",
-        "choices": [
-            {"id": "A", "text": "Anaphylactic reaction"},
-            {"id": "B", "text": "Onset of labor"},
-            {"id": "C", "text": "Pulmonary embolism"},
-            {"id": "D", "text": "Amniotic fluid embolism"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Pregnancy is a hypercoagulable state, increasing the risk for venous thromboembolism (VTE), including pulmonary embolism (PE). The classic symptoms of PE - sudden dyspnea, chest pain (often pleuritic), tachypnea, tachycardia, and anxiety (C) - fit the patient's presentation. Anaphylaxis (A) involves hives, angioedema, wheezing. Onset of labor (B) involves contractions. Amniotic fluid embolism (D) is a rare, catastrophic event usually occurring during labor or delivery, presenting with abrupt respiratory failure, cardiovascular collapse, and often DIC."
-    },
-    {
-        "id": 31,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "Which non-pharmacological measures can a nurse suggest to help alleviate nausea and vomiting ('morning sickness') in early pregnancy? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Eat small, frequent meals throughout the day."},
-            {"id": "B", "text": "Consume dry crackers or toast before getting out of bed."},
-            {"id": "C", "text": "Drink large amounts of fluids with meals."},
-            {"id": "D", "text": "Avoid strong odors and greasy or spicy foods."},
-            {"id": "E", "text": "Increase intake of high-fat foods to coat the stomach."},
-            {"id": "F", "text": "Try ginger supplements or ginger ale."}
-        ],
-        "correctAnswer": ["A", "B", "D", "F"],
-        "rationale": "Managing morning sickness often involves dietary and lifestyle adjustments. Small, frequent meals (A) prevent an empty or overly full stomach. Dry carbohydrates before rising (B) can help settle the stomach. Avoiding trigger odors and irritating foods (D) is beneficial. Ginger (F) is a known anti-emetic. Drinking fluids between meals, not with meals (C), is often better tolerated. High-fat foods (E) can worsen nausea."
-    },
-    {
-        "id": 32,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A nurse notes that a newborn has a localized swelling on the head that crosses suture lines and feels soft and boggy. This finding is characteristic of:",
-        "choices": [
-            {"id": "A", "text": "Caput succedaneum"},
-            {"id": "B", "text": "Cephalohematoma"},
-            {"id": "C", "text": "Subgaleal hemorrhage"},
-            {"id": "D", "text": "Craniosynostosis"}
-        ],
-        "correctAnswer": "A",
-        "rationale": "Caput succedaneum is edema of the fetal scalp caused by pressure from the cervix or vaginal wall during delivery. It is present at birth, feels soft and boggy, may cross suture lines (A), and typically resolves within a few days. A cephalohematoma (B) is a collection of blood beneath the periosteum, is firmer, does *not* cross suture lines, and may take weeks to resolve. Subgaleal hemorrhage (C) is bleeding into the potential space between the scalp aponeurosis and periosteum, is diffuse, boggy, and potentially life-threatening. Craniosynostosis (D) is premature fusion of cranial sutures."
-    },
-    {
-        "id": 33,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "During the active phase of the first stage of labor for a primigravida, cervical dilation typically progresses at a rate of approximately ___ cm per hour or more.",
-        "choices": [],
-        "correctAnswer": "1.2",
-        "rationale": "While rates vary, classic definitions (e.g., Friedman's curve, though somewhat outdated) suggested expected progress in the active phase (traditionally starting around 4 cm, now often considered 6 cm) is about 1.2 cm/hour for nulliparas (primigravidas) and 1.5 cm/hour for multiparas. Lack of progress may indicate labor dystocia."
-    },
-    {
-        "id": 34,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "A nurse is caring for a patient who has just experienced a fetal demise (stillbirth). Which communication technique is most appropriate for the nurse to use?",
-        "choices": [
-            {"id": "A", "text": "\"You can always try to have another baby later.\""},
-            {"id": "B", "text": "\"This must be incredibly difficult for you. I am here to listen if you want to talk.\""},
-            {"id": "C", "text": "\"It's probably for the best, there may have been something wrong with the baby.\""},
-            {"id": "D", "text": "\"Try not to cry, you need to stay strong.\""}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Experiencing fetal demise is a profound loss. The most therapeutic communication involves acknowledging the difficulty of the situation and offering support and presence without judgment or clichés (B - uses empathy, offers self). Offering platitudes like 'you can try again' (A) or 'it's for the best' (C) minimizes the current grief. Discouraging crying (D) invalidates the patient's emotional response."
-    },
-    {
-        "id": 35,
-        "title": "Maternity",
-        "type": "sata",
-        "text": "A pregnant client at 36 weeks gestation is diagnosed with mild preeclampsia. Which instructions should the nurse include in the client's home care plan? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Maintain strict bed rest at all times."},
-            {"id": "B", "text": "Monitor blood pressure twice daily."},
-            {"id": "C", "text": "Perform daily fetal kick counts."},
-            {"id": "D", "text": "Restrict fluid intake to less than 1 liter per day."},
-            {"id": "E", "text": "Report any headache, visual disturbances, or epigastric pain immediately."},
-            {"id": "F", "text": "Check urine for protein using dipsticks daily."}
-        ],
-        "correctAnswer": ["B", "C", "E", "F"],
-        "rationale": "Home management of mild preeclampsia involves close monitoring. This includes regular BP checks (B), monitoring fetal well-being via kick counts (C), understanding and reporting warning signs of worsening disease (headache, visual changes, epigastric pain) (E), and monitoring proteinuria (F). Strict bed rest (A) is generally no longer recommended; modified activity or rest periods are typical. Fluid restriction (D) is not usually necessary unless severe edema or other complications are present; adequate hydration is important."
-    },
-    {
-        "id": 36,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "Which reflex is elicited by stroking the lateral aspect of the sole of the newborn's foot from the heel upwards towards the toes?",
-        "choices": [
-            {"id": "A", "text": "Moro reflex"},
-            {"id": "B", "text": "Rooting reflex"},
-            {"id": "C", "text": "Babinski reflex"},
-            {"id": "D", "text": "Grasping reflex"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "The Babinski reflex is tested by stroking the sole of the foot. A positive (normal) response in infants is dorsiflexion of the big toe and fanning of the other toes (C). The Moro reflex (A) is the startle reflex. The rooting reflex (B) involves turning the head towards a cheek stroke. The grasping reflex (D) is elicited by placing a finger in the infant's palm or against the sole."
-    },
-    {
-        "id": 37,
-        "title": "Maternity",
-        "type": "fill_in_blank",
-        "text": "The acronym HELLP syndrome, a severe complication often associated with preeclampsia, stands for Hemolysis, Elevated Liver enzymes, and ______ __________.",
-        "choices": [],
-        "correctAnswer": "Low Platelets",
-        "rationale": "HELLP syndrome is a life-threatening obstetric complication characterized by Hemolysis (H), Elevated Liver enzymes (EL), and Low Platelet count (LP). It represents severe preeclampsia involving hepatic dysfunction and coagulopathy."
-    },
-    {
-        "id": 38,
-        "title": "Maternity",
-        "type": "mc",
-        "text": "During labor, the point where the largest transverse diameter of the fetal presenting part has passed through the maternal pelvic inlet is known as:",
-        "choices": [
-            {"id": "A", "text": "Lightening"},
-            {"id": "B", "text": "Engagement"},
-            {"id": "C", "text": "Flexion"},
-            {"id": "D", "text": "Effacement"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Engagement occurs when the biparietal diameter (the largest transverse diameter of the fetal head in a cephalic presentation) passes the pelvic inlet, usually corresponding to a station of 0. Lightening (A) is the descent of the fetal head into the pelvis, which may occur before labor starts. Flexion (C) is the chin-to-chest posture of the fetus. Effacement (D) is the thinning and shortening of the cervix."
-    },
-    {
-        "id": 39,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient experiencing auditory hallucinations tells the nurse, \"The voices are telling me I'm worthless.\" Which response by the nurse is most therapeutic?",
-        "choices": [
-            {"id": "A", "text": "\"Don't worry, the voices aren't real.\""},
-            {"id": "B", "text": "\"That must be frightening for you. How does hearing that make you feel?\""},
-            {"id": "C", "text": "\"Why do you think the voices are saying that?\""},
-            {"id": "D", "text": "\"Let's listen to some music to distract you from the voices.\""}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Acknowledging the patient's subjective experience ('That must be frightening') and encouraging exploration of the associated feelings ('How does hearing that make you feel?') is a key therapeutic communication technique (offering self, reflecting, exploring). Dismissing the reality of the patient's experience (A) is invalidating. Asking 'why' questions (C) can sound accusatory and is often non-therapeutic. While distraction (D) can be a useful coping strategy, directly addressing the patient's distress first is more therapeutic."
-    },
-    {
-        "id": 2,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is assessing a patient diagnosed with schizophrenia. Which findings are considered positive symptoms? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Auditory hallucinations"},
-            {"id": "B", "text": "Flat affect"},
-            {"id": "C", "text": "Anhedonia"},
-            {"id": "D", "text": "Delusions of grandeur"},
-            {"id": "E", "text": "Alogia"},
-            {"id": "F", "text": "Disorganized speech (e.g., loose associations)"}
-        ],
-        "correctAnswer": ["A", "D", "F"],
-        "rationale": "Positive symptoms of schizophrenia represent an excess or distortion of normal functions and include hallucinations (A), delusions (D), and disorganized thinking/speech (F). Negative symptoms represent a decrease or loss of normal functions and include flat affect (B - diminished emotional expression), anhedonia (C - inability to experience pleasure), and alogia (E - poverty of speech)."
-    },
-    {
-        "id": 3,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient started taking fluoxetine (Prozac) for depression two weeks ago. The patient states, \"I don't feel any better.\" What is the nurse's best response?",
-        "choices": [
-            {"id": "A", "text": "\"It often takes several weeks, sometimes 4-6 weeks, for antidepressants like fluoxetine to reach their full therapeutic effect.\""},
-            {"id": "B", "text": "\"Perhaps this medication isn't right for you; I'll notify the doctor to discuss changing it.\""},
-            {"id": "C", "text": "\"It's crucial you take the medication exactly as prescribed. Are you doing that?\""},
-            {"id": "D", "text": "\"Feeling no improvement after two weeks suggests you might need a higher dose.\""}
-        ],
-        "correctAnswer": "A",
-        "rationale": "Selective serotonin reuptake inhibitors (SSRIs) like fluoxetine have a delayed onset of action for their antidepressant effects, typically taking 4-6 weeks, or sometimes longer, to achieve full efficacy. Educating the patient about this expected timeframe (A) provides reassurance and manages expectations. Suggesting the medication isn't working (B) or needs a dose change (D) is premature at two weeks. While checking adherence (C) is important, addressing the time lag first is the most appropriate response to the patient's statement."
-    },
-    {
-        "id": 4,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient taking lithium carbonate for bipolar disorder should be monitored closely for signs of toxicity, which typically occur when serum lithium levels exceed ______ mEq/L. (Enter numerical value only)",
-        "choices": [],
-        "correctAnswer": "1.5",
-        "rationale": "The therapeutic range for maintenance lithium levels is narrow, generally accepted as 0.6 to 1.2 mEq/L. Levels above 1.2 mEq/L increase the risk of toxicity, and levels exceeding 1.5 mEq/L are generally considered toxic, requiring prompt intervention. Signs of toxicity include coarse tremors, nausea, vomiting, diarrhea, confusion, ataxia, and seizures."
-    },
-    {
-        "id": 5,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is teaching a patient about potential side effects of lorazepam (Ativan), a benzodiazepine. Which common side effects should be included in the teaching? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Drowsiness/Sedation"},
-            {"id": "B", "text": "Hypertension"},
-            {"id": "C", "text": "Dizziness"},
-            {"id": "D", "text": "Increased alertness"},
-            {"id": "E", "text": "Paradoxical excitement or agitation"},
-            {"id": "F", "text": "Decreased motor coordination/Ataxia"}
-        ],
-        "correctAnswer": ["A", "C", "E", "F"],
-        "rationale": "Benzodiazepines act as CNS depressants. Common side effects include drowsiness/sedation (A), dizziness (C), and impaired coordination/ataxia (F). Paradoxical reactions (E), such as increased excitement, anxiety, or agitation, can also occur, particularly in elderly or debilitated patients. Hypertension (B) and increased alertness (D) are not typical side effects; hypotension is more likely than hypertension."
-    },
-    {
-        "id": 6,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient, diagnosed with alcohol use disorder, states, \"I don't have a problem with alcohol. I can quit anytime I want; I just choose not to right now.\" This statement is an example of which defense mechanism?",
-        "choices": [
-            {"id": "A", "text": "Projection"},
-            {"id": "B", "text": "Rationalization"},
-            {"id": "C", "text": "Denial"},
-            {"id": "D", "text": "Sublimation"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Denial is the refusal to accept the reality of a situation or experience, despite factual evidence. The patient is refusing to acknowledge the reality of their alcohol problem and its impact. Projection involves attributing one's own unacceptable thoughts or feelings to others. Rationalization involves creating logical-sounding excuses for unacceptable behavior. Sublimation involves channeling unacceptable impulses into socially acceptable activities."
-    },
-    {
-        "id": 7,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "Which element is most essential for establishing and maintaining a therapeutic milieu on an inpatient psychiatric unit?",
-        "choices": [
-            {"id": "A", "text": "Frequent administration of PRN sedative medications to maintain quiet."},
-            {"id": "B", "text": "A structured daily schedule that includes therapeutic activities and group interactions."},
-            {"id": "C", "text": "Minimizing staff interaction with patients to promote independence."},
-            {"id": "D", "text": "Allowing patients complete freedom to choose their activities and participation levels."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "A therapeutic milieu is a structured environment designed to promote psychological health and rehabilitation. Key components include safety, structure, support, validation, and patient involvement. A predictable daily schedule with planned therapeutic activities and group interactions (B) provides structure, reduces anxiety, and facilitates social skills development. Over-reliance on PRN medications (A), minimizing staff interaction (C), or complete lack of structure (D) undermine the goals of a therapeutic milieu."
-    },
-    {
-        "id": 8,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is performing a suicide risk assessment. Which factors are considered significant indicators of increased risk? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "History of previous suicide attempts"},
-            {"id": "B", "text": "Strong social and family support"},
-            {"id": "C", "text": "Presence of a psychiatric disorder (e.g., major depression, bipolar disorder, substance use disorder)"},
-            {"id": "D", "text": "Availability and access to lethal means (e.g., firearms)"},
-            {"id": "E", "text": "Verbalization of suicidal ideation with a specific plan"},
-            {"id": "F", "text": "Feelings of hopefulness about the future"}
-        ],
-        "correctAnswer": ["A", "C", "D", "E"],
-        "rationale": "Significant risk factors for suicide include a history of prior attempts (A), the presence of mental illness (C), access to lethal means (D), and expression of suicidal thoughts, especially with a concrete plan (E). Hopelessness (not hopefulness, F) is also a major risk factor. Strong social support (B) is typically considered a protective factor against suicide."
-    },
-    {
-        "id": 9,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "Immediately following an electroconvulsive therapy (ECT) treatment, what is the nurse's priority assessment?",
-        "choices": [
-            {"id": "A", "text": "Patient's recall of events leading up to the procedure."},
-            {"id": "B", "text": "Assessment of respiratory status and level of consciousness."},
-            {"id": "C", "text": "Presence of headache or muscle soreness."},
-            {"id": "D", "text": "Evaluation of the therapeutic effect on mood."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "ECT involves general anesthesia and induced seizure activity. The immediate priority post-procedure is patient safety, focusing on basic life support functions. Assessing respiratory status (airway patency, breathing rate and depth) and level of consciousness is critical due to the effects of anesthesia (B). Memory impairment (A) and comfort issues (C) are common but secondary to airway and breathing. Evaluating therapeutic effect (D) occurs later in the treatment course, not immediately post-procedure."
-    },
-    {
-        "id": 10,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A potentially life-threatening adverse effect associated with the atypical antipsychotic clozapine (Clozaril) is ______________, necessitating regular monitoring of white blood cell counts.",
-        "choices": [],
-        "correctAnswer": "agranulocytosis",
-        "rationale": "Agranulocytosis is a severe and dangerous condition characterized by a drastic reduction in granulocytes (a type of white blood cell), severely impairing the body's ability to fight infection. It is a rare but significant risk associated with clozapine, requiring mandatory weekly (initially) then less frequent (if stable) monitoring of the absolute neutrophil count (ANC)."
-    },
-    {
-        "id": 11,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient is experiencing a panic attack in the dayroom. Which nursing action should be implemented first?",
-        "choices": [
-            {"id": "A", "text": "Explore the potential triggers for the panic attack with the patient."},
-            {"id": "B", "text": "Encourage the patient to participate in a group activity to distract them."},
-            {"id": "C", "text": "Move the patient to a quieter area and stay with them, speaking calmly."},
-            {"id": "D", "text": "Teach the patient progressive muscle relaxation techniques immediately."}
-        ],
-        "correctAnswer": "C",
-        "rationale": "During a panic attack, the patient often feels overwhelmed and fearful. The immediate priority is to ensure safety and reduce stimulation. Moving the patient to a calm, quiet environment (C) reduces external stimuli, and staying with the patient provides reassurance and support ('offering self'). Attempting complex tasks like exploring triggers (A) or teaching relaxation techniques (D) is usually ineffective during the acute phase of panic. Encouraging group participation (B) would likely increase anxiety."
-    },
-    {
-        "id": 12,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "Which clinical manifestations are commonly associated with Borderline Personality Disorder (BPD)? (Select all that apply.)",
-        "choices": [
-            {"id": "A", "text": "Intense fear of real or imagined abandonment"},
-            {"id": "B", "text": "Stable interpersonal relationships and self-image"},
-            {"id": "C", "text": "Recurrent suicidal behavior, gestures, or threats, or self-mutilating behavior"},
-            {"id": "D", "text": "Affective instability (e.g., intense episodic mood swings)"},
-            {"id": "E", "text": "Chronic feelings of emptiness"},
-            {"id": "F", "text": "Lack of impulsivity"}
-        ],
-        "correctAnswer": ["A", "C", "D", "E"],
-        "rationale": "Core features of BPD include frantic efforts to avoid abandonment (A), patterns of unstable and intense relationships, identity disturbance, impulsivity (opposite of F), recurrent suicidal or self-harming behaviors (C), affective instability/mood swings (D), and chronic feelings of emptiness (E). Stable relationships and self-image (B) are contrary to the typical presentation of BPD."
-    },
-    {
-        "id": 13,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "An involuntarily committed patient loudly refuses to take their prescribed morning dose of haloperidol (Haldol). What is the nurse's initial action?",
-        "choices": [
-            {"id": "A", "text": "Administer the medication intramuscularly since the patient is committed."},
-            {"id": "B", "text": "Explain the potential consequences of non-adherence and calmly attempt to persuade the patient."},
-            {"id": "C", "text": "Document the refusal, assess the patient's rationale and mental status, and notify the prescriber."},
-            {"id": "D", "text": "Withhold the medication and tell the patient they cannot attend group therapy until they take it."}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Involuntarily committed patients generally retain the right to refuse treatment, including medication, unless they are deemed incompetent to make decisions or pose an imminent danger to self or others that necessitates emergency medication. Forcing medication (A) without appropriate legal or clinical justification (like an emergency or court order) is battery. Using privileges as leverage (D) can be coercive. While persuasion (B) might be part of the interaction, the essential initial steps are to respect the refusal, document it thoroughly, assess the patient's reason and current state, and inform the healthcare provider (C) for further evaluation and orders."
-    },
-    {
-        "id": 14,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient on an antipsychotic medication develops a high fever (103°F), severe muscle rigidity ('lead pipe' rigidity), diaphoresis, and confusion. The nurse recognizes these as hallmark signs of _______________ ___________ Syndrome.",
-        "choices": [],
-        "correctAnswer": "Neuroleptic Malignant",
-        "rationale": "Neuroleptic Malignant Syndrome (NMS) is a rare but potentially fatal idiosyncratic reaction to antipsychotic drugs. Key features include hyperthermia (high fever), extreme muscle rigidity, autonomic instability (tachycardia, fluctuating blood pressure, diaphoresis), and altered mental status. It requires immediate recognition, discontinuation of the offending agent, and supportive medical care."
-    },
-    {
-        "id": 15,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient is prescribed tranylcypromine (Parnate), a monoamine oxidase inhibitor (MAOI). The nurse must provide dietary education to avoid foods high in tyramine, such as aged cheeses and cured meats, to prevent which potentially life-threatening adverse reaction?",
-        "choices": [
-            {"id": "A", "text": "Neuroleptic Malignant Syndrome"},
-            {"id": "B", "text": "Serotonin Syndrome"},
-            {"id": "C", "text": "Agranulocytosis"},
-            {"id": "D", "text": "Hypertensive Crisis"}
-        ],
-        "correctAnswer": "D",
-        "rationale": "MAOIs block the enzyme that breaks down tyramine, a vasopressor that can significantly increase blood pressure when it accumulates. Consuming tyramine-rich foods while taking MAOIs can trigger a hypertensive crisis (D), a medical emergency characterized by dangerously elevated blood pressure that can lead to stroke or other complications. Neuroleptic Malignant Syndrome (A) is associated with antipsychotics, Serotonin Syndrome (B) with combining serotonergic agents, and agranulocytosis (C) with certain medications that affect white blood cell production."
-    },
-    {
-        "id": 16,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is implementing a behavior modification program for a patient with maladaptive behaviors. Which behavioral interventions are based on principles of operant conditioning? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Using token economy systems"},
-            {"id": "B", "text": "Systematic desensitization"},
-            {"id": "C", "text": "Using time-out procedures"},
-            {"id": "D", "text": "Guided imagery"},
-            {"id": "E", "text": "Positive reinforcement of appropriate behaviors"},
-            {"id": "F", "text": "Flooding technique"}
-        ],
-        "correctAnswer": ["A", "C", "E"],
-        "rationale": "Operant conditioning focuses on strengthening or weakening voluntary behaviors through consequences. Token economies (A), time-out procedures (C), and positive reinforcement (E) all use consequences to modify behavior and are based on operant conditioning principles. Systematic desensitization (B), guided imagery (D), and flooding (F) are based on classical conditioning principles and are used primarily for reducing anxiety responses."
-    },
-    {
-        "id": 17,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient in the manic phase of bipolar disorder is exhibiting pressured speech, grandiose delusions, and has not slept for 48 hours. Which nursing intervention has the highest priority?",
-        "choices": [
-            {"id": "A", "text": "Encouraging the patient to participate in group therapy"},
-            {"id": "B", "text": "Creating a quiet environment with reduced stimulation"},
-            {"id": "C", "text": "Exploring recent events that might have triggered the manic episode"},
-            {"id": "D", "text": "Providing education about bipolar disorder and medication management"}
-        ],
-        "correctAnswer": "B",
-        "rationale": "During acute mania, patients are easily overstimulated, have difficulty focusing, and are at risk for exhaustion due to hyperactivity and insomnia. Creating a quiet environment with reduced stimulation (B) helps prevent further escalation of symptoms and promotes sleep and rest. Group therapy (A) would likely increase stimulation and agitation. Patients in acute mania typically have poor concentration and judgment, making in-depth discussion (C) or education (D) less effective at this stage."
-    },
-    {
-        "id": 18,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A nurse assesses that a patient is experiencing visual hallucinations. Which nursing approach is most appropriate?",
-        "choices": [
-            {"id": "A", "text": "Tell the patient that what they are seeing is not real."},
-            {"id": "B", "text": "Ask the patient to describe what they are seeing without validating the hallucination."},
-            {"id": "C", "text": "Suggest that the patient is probably just tired and needs rest."},
-            {"id": "D", "text": "Agree with the patient that you also see the hallucination to build rapport."}
-        ],
-        "correctAnswer": "B",
-        "rationale": "Asking the patient to describe the hallucination (B) acknowledges their experience without reinforcing the false perception. This approach allows the nurse to assess the content and impact of the hallucination while maintaining a therapeutic relationship. Directly challenging the hallucination's reality (A) can damage rapport and increase the patient's distress or defensiveness. Dismissing the experience as fatigue (C) invalidates the patient's perception. Agreeing with or validating hallucinations (D) can reinforce them and is not therapeutic."
-    },
-    {
-        "id": 19,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient diagnosed with post-traumatic stress disorder (PTSD) often experiences intrusive memories and nightmares about a traumatic event. These symptoms are specifically categorized as _____________ symptoms in the DSM-5 diagnostic criteria.",
-        "choices": [],
-        "correctAnswer": "re-experiencing",
-        "rationale": "Re-experiencing symptoms are one of the four main symptom clusters in the DSM-5 diagnostic criteria for PTSD. These include intrusive memories, nightmares, flashbacks, and psychological distress or physiological reactions when exposed to trauma-related cues. The other symptom clusters include avoidance, negative alterations in cognition and mood, and alterations in arousal and reactivity."
-    },
-    {
-        "id": 20,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is working with a patient who has anorexia nervosa. Which nursing interventions are appropriate? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Setting specific caloric intake goals"},
-            {"id": "B", "text": "Allowing the patient to exercise as much as desired"},
-            {"id": "C", "text": "Monitoring weight regularly using standardized procedures"},
-            {"id": "D", "text": "Focusing conversations primarily on food and eating habits"},
-            {"id": "E", "text": "Involving family members in the treatment process when appropriate"},
-            {"id": "F", "text": "Assessing for physical complications like electrolyte imbalances"}
-        ],
-        "correctAnswer": ["A", "C", "E", "F"],
-        "rationale": "A structured approach to nutritional rehabilitation with specific caloric goals (A) is essential for patients with anorexia. Regular weight monitoring (C) helps track progress and adjust treatment. Family involvement (E) is important, especially for younger patients (family-based treatment). Assessing for medical complications (F) is crucial due to the physical risks of malnutrition. Unlimited exercise (B) can interfere with weight restoration and may be used as a compensatory behavior. Focusing primarily on food (D) can increase anxiety and resistance; addressing underlying psychological issues is also important."
-    },
-    {
-        "id": 21,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A primary goal when implementing crisis intervention with a patient is to:",
-        "choices": [
-            {"id": "A", "text": "Explore in depth the patient's entire psychological history"},
-            {"id": "B", "text": "Provide long-term therapy addressing all the patient's mental health needs"},
-            {"id": "C", "text": "Restore the patient to their previous level of functioning or better"},
-            {"id": "D", "text": "Ensure the patient no longer requires any mental health services"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Crisis intervention is a time-limited approach focused on resolving the immediate crisis and helping the individual return to at least their pre-crisis level of functioning (C). It does not aim to provide extensive exploration of psychological history (A) or comprehensive long-term therapy (B). While crisis intervention may connect patients with ongoing support, it doesn't guarantee they'll require no further services (D), as some may need continued care after the immediate crisis is resolved."
-    },
-    {
-        "id": 22,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "When documenting a mental status examination, which observation would be categorized under 'affect'?",
-        "choices": [
-            {"id": "A", "text": "The patient states 'I feel so empty inside'"},
-            {"id": "B", "text": "The patient reports voices commanding them to harm themselves"},
-            {"id": "C", "text": "The patient demonstrates a flat facial expression with minimal emotional reactivity"},
-            {"id": "D", "text": "The patient is oriented to person, place, and time"}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Affect refers to the external, observable expression of emotion, including facial expressions, vocal tone, and body language. A flat affect (C) - minimal facial expressiveness and emotional reactivity - would be documented under this category. A patient's subjective feeling state (A) would be documented under 'mood.' Auditory hallucinations (B) would be documented under 'perceptual disturbances.' Orientation assessment (D) would be documented under 'cognitive functioning' or 'orientation.'"
-    },
-    {
-        "id": 23,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "The nurse caring for a patient at risk for suicide should implement which precautions? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Removing potentially harmful objects from the patient's environment"},
-            {"id": "B", "text": "Allowing private bathroom use without supervision to maintain dignity"},
-            {"id": "C", "text": "Conducting frequent and irregular observation checks"},
-            {"id": "D", "text": "Documenting specifics of the suicidal ideation and plan"},
-            {"id": "E", "text": "Securing all windows and doors"},
-            {"id": "F", "text": "Placing the patient in a secluded room to prevent harm"}
-        ],
-        "correctAnswer": ["A", "C", "D", "E"],
-        "rationale": "Environmental safety measures for suicidal patients include removing potential harmful objects (A), conducting frequent and irregular checks (C), and securing potential exit points like windows and doors (E). Thorough documentation of specific ideation and plans (D) is essential for continuity of care and risk assessment. Bathroom use typically requires supervision for actively suicidal patients (contrary to B). Seclusion (F) is not a standard suicide precaution; it is a restrictive intervention used only in specific situations like agitation with risk of harm to others, and requires close monitoring."
-    },
-    {
-        "id": 24,
-        "title": "Mental Health",
-        "type": "mc",
-        "text": "A patient is admitted to the psychiatric unit with a diagnosis of major depressive disorder with psychotic features. The nurse administers the first dose of an antipsychotic medication. Which statement by the patient indicates an understanding of the teaching about this medication?",
-        "choices": [
-            {"id": "A", "text": "\"I'll be sure to get up quickly when I wake up at night to use the bathroom.\""},
-            {"id": "B", "text": "\"This will cure my depression in about 48 hours.\""},
-            {"id": "C", "text": "\"I need to report symptoms like muscle stiffness, tremors, or restlessness.\""},
-            {"id": "D", "text": "\"I can stop the medication once I start feeling better.\""}
-        ],
-        "correctAnswer": "C",
-        "rationale": "Understanding the need to report extrapyramidal side effects (EPS) like muscle stiffness, tremors, or restlessness (C) indicates proper medication teaching comprehension. These symptoms can signal potentially serious reactions requiring intervention. Orthostatic hypotension is a common side effect, so rising slowly is recommended (contrary to A). Antipsychotics may help psychotic symptoms within a few days but don't 'cure' depression, especially not within 48 hours (B). Abruptly stopping psychiatric medications can lead to withdrawal effects or symptom recurrence (D)."
-    },
-    {
-        "id": 25,
-        "title": "Mental Health",
-        "type": "fill_in_blank",
-        "text": "A patient diagnosed with schizophrenia has persistent delusions despite medication adherence. When interacting with this patient, the nurse should avoid _____________ the delusion, which neither confronts nor reinforces the false belief.",
-        "choices": [],
-        "correctAnswer": "arguing about",
-        "rationale": "When working with delusional patients, it's important to neither argue about nor reinforce delusions. Arguing about delusions can damage the therapeutic relationship, increase the patient's defensiveness, and potentially strengthen the delusion as the patient argues for its validity. Instead, nurses should acknowledge the patient's experience without reinforcing the content, focus on feelings related to the delusion, and redirect to reality-based discussions when appropriate."
-    },
-    {
-        "id": 26,
-        "title": "Mental Health",
-        "type": "sata",
-        "text": "A nurse is planning care for a patient in a manic state. Which nursing interventions are appropriate? Select all that apply.",
-        "choices": [
-            {"id": "A", "text": "Providing a highly stimulating environment to match the patient's energy level"},
-            {"id": "B", "text": "Setting clear, consistent limits on inappropriate behavior"},
-            {"id": "C", "text": "Serving high-caffeine beverages throughout the day"},
-            {"id": "D", "text": "Providing frequent, small meals and snacks that are easy to eat"},
-            {"id": "E", "text": "Scheduling complex decision-making activities during periods of high energy"},
-            {"id": "F", "text": "Monitoring for signs of physical exhaustion"}
-        ],
-        "correctAnswer": ["B", "D", "F"],
-        "rationale": "Patients in manic states benefit from clear, consistent limit-setting (B) to address impulsivity and poor judgment. Since these patients are often hyperactive and may neglect basic needs, providing frequent, easily consumed nutritional options (D) is important. Monitoring for exhaustion (F) is essential as patients may not recognize their physical limitations. A low-stimulation environment (contrary to A) is recommended to avoid exacerbating symptoms. Caffeine (C) should be avoided as it can worsen agitation. Complex decision-making (E) should be minimized due to impaired judgment and concentration."
+      "id": 16,
+      "title": "Maternity",
+      "type": "mc",
+      "text": "A patient in active labor has ruptured membranes. The nurse notes a baseline fetal heart rate (FHR) of 135 bpm. During a contraction, the FHR drops abruptly to 90 bpm and returns quickly to baseline after the contraction ends. What is the most likely cause of this FHR pattern?",
+      "choices": [
+        {"id": "A", "text": "Uteroplacental insufficiency"},
+        {"id": "B", "text": "Umbilical cord compression"},
+        {"id": "C", "text": "Maternal hypotension"},
+        {"id": "D", "text": "Fetal head compression"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "The FHR pattern described is characteristic of variable decelerations, which are caused by umbilical cord compression (B). Key features include: abrupt onset, rapid drop (often below 100 bpm), variable timing in relation to contractions, and rapid return to baseline. Variable decelerations have a distinctive 'V' or 'U' shape on the monitor. Uteroplacental insufficiency (A) causes late decelerations, which have a gradual onset and recovery, occur after the peak of the contraction, and have a uniform shape. Maternal hypotension (C) typically causes prolonged decelerations. Fetal head compression (D) causes early decelerations, which mirror the contraction and rarely drop below 100 bpm."
     }
-]}
+  ]
+}

@@ -6,10 +6,11 @@ import path from "path";
 import { QuestionsResponseSchema, QuestionSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Get all tests from the published directory
+  // Get all tests from tests.json
   app.get("/api/tests", async (req, res) => {
     try {
       const publishedDir = path.join(import.meta.dirname, "../published");
+      const testsFilePath = path.join(publishedDir, "tests.json");
       
       // Make sure the published directory exists
       try {
@@ -19,31 +20,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
         await fs.mkdir(publishedDir, { recursive: true });
       }
       
-      // Read the directory
-      const files = await fs.readdir(publishedDir);
+      // Check if tests.json exists
+      try {
+        await fs.access(testsFilePath);
+      } catch (error) {
+        // Return empty array if it doesn't exist
+        return res.json([]);
+      }
       
-      // Filter for HTML files
-      const htmlFiles = files.filter(file => file.endsWith('.html'));
-      
-      // Create test objects
-      const tests = htmlFiles.map((file, index) => {
-        // Get the file name without extension to use as title
-        const fileName = path.basename(file, '.html');
-        const title = fileName
-          .replace(/_/g, ' ')
-          .replace(/\b\w/g, c => c.toUpperCase());
-        
-        return {
-          id: index + 1,
-          title: title,
-          path: `published/${file}`,
-          createdAt: new Date().toISOString(),
-        };
-      });
+      // Read and parse tests.json
+      const testsContent = await fs.readFile(testsFilePath, 'utf-8');
+      const tests = JSON.parse(testsContent);
       
       res.json(tests);
     } catch (error) {
-      console.error("Error reading tests directory:", error);
+      console.error("Error reading tests:", error);
       res.status(500).json({ message: "Failed to load tests" });
     }
   });
@@ -53,30 +44,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const testId = parseInt(req.params.id);
       
-      // First get all tests to find the one with the matching ID
+      // Get tests from tests.json
       const publishedDir = path.join(import.meta.dirname, "../published");
-      const files = await fs.readdir(publishedDir);
-      const htmlFiles = files.filter(file => file.endsWith('.html'));
+      const testsFilePath = path.join(publishedDir, "tests.json");
       
-      // Map files to test objects with IDs
-      const tests = htmlFiles.map((file, index) => ({
-        id: index + 1,
-        path: file
-      }));
+      try {
+        await fs.access(testsFilePath);
+      } catch (error) {
+        return res.status(404).json({ message: "Tests file not found" });
+      }
+      
+      // Read and parse tests.json
+      const testsContent = await fs.readFile(testsFilePath, 'utf-8');
+      const tests = JSON.parse(testsContent);
       
       // Find the test with the matching ID
-      const test = tests.find(test => test.id === testId);
+      const test = tests.find((test: any) => test.id === testId);
       
       if (!test) {
         return res.status(404).json({ message: "Test not found" });
       }
       
-      // Read the HTML content
-      const filePath = path.join(publishedDir, test.path);
-      const content = await fs.readFile(filePath, 'utf-8');
-      
-      // Send the HTML content
-      res.type('text/html').send(content);
+      // If the test points to a json file like questions.json, return it's structure
+      if (test.path.endsWith('.json')) {
+        const filePath = path.join(import.meta.dirname, "..", test.path);
+        const content = await fs.readFile(filePath, 'utf-8');
+        const jsonContent = JSON.parse(content);
+        res.json(jsonContent);
+      } else {
+        // For HTML content
+        const filePath = path.join(import.meta.dirname, "..", test.path);
+        const content = await fs.readFile(filePath, 'utf-8');
+        res.type('text/html').send(content);
+      }
     } catch (error) {
       console.error("Error reading test content:", error);
       res.status(500).json({ message: "Failed to load test content" });
