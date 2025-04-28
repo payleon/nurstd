@@ -9,17 +9,25 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Book, BookOpen, Calendar, Clock, PercentIcon, Target } from "lucide-react";
 import { motion } from "framer-motion";
+import { UserStats } from "@/lib/badges";
+
+// Define types for our chart data
+interface ChartDataItem {
+  name: string;
+  value: number;
+  color?: string;
+}
 
 // Helper function to get specialty data formatted for charts
-function getSpecialtyData(stats: any) {
+function getSpecialtyData(stats: UserStats): ChartDataItem[] {
   return Object.entries(stats.specialtyQuestionsCompleted || {}).map(([name, count]) => ({
     name,
-    value: count,
+    value: count as number,
   }));
 }
 
 // Helper function to get performance data formatted for charts
-function getPerformanceData(stats: any) {
+function getPerformanceData(stats: UserStats): ChartDataItem[] {
   return [
     { name: "Correct", value: stats.questionsCorrect, color: "#4ade80" },
     { name: "Incorrect", value: stats.questionsIncorrect, color: "#f87171" },
@@ -302,8 +310,8 @@ export default function LearningProgress() {
                           <Book className="h-5 w-5 text-green-600" />
                         </div>
                         <div>
-                          <h3 className="font-bold text-green-700">{specialtyData && specialtyData.length > 0 ? specialtyData[0].name : "No data yet"}</h3>
-                          <p className="text-gray-600">Your strongest knowledge area with {specialtyData && specialtyData.length > 0 ? specialtyData[0].value : 0} questions completed.</p>
+                          <h3 className="font-bold text-green-700">{specialtyData.length > 0 ? specialtyData[0].name : "No data yet"}</h3>
+                          <p className="text-gray-600">Your strongest knowledge area with {specialtyData.length > 0 ? String(specialtyData[0].value) : "0"} questions completed.</p>
                         </div>
                       </motion.div>
                       
