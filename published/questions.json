@@ -3,40 +3,54 @@
   "questions": [
     {
       "id": 1,
-      "title": "COPD Management",
+      "title": "Diabetes Management",
       "type": "mc",
-      "text": "A patient with a history of chronic obstructive pulmonary disease (COPD) presents with increased shortness of breath and wheezing. Which intervention should be prioritized?",
+      "text": "A client with type 2 diabetes has a blood glucose level of 45 mg/dL and is confused. Which intervention should the nurse implement first?",
       "choices": [
-        {"id": "A", "text": "Administer a sedative"},
-        {"id": "B", "text": "Administer a bronchodilator"},
-        {"id": "C", "text": "Encourage deep breathing exercises"},
-        {"id": "D", "text": "Increase fluid intake"}
+        {"id": "A", "text": "Administer glucagon injection"},
+        {"id": "B", "text": "Give orange juice with added sugar"},
+        {"id": "C", "text": "Start an IV with D5W"},
+        {"id": "D", "text": "Call the healthcare provider"}
       ],
       "correctAnswer": "B",
-      "rationale": "Administering a bronchodilator is crucial for relieving bronchospasm and improving airflow in COPD exacerbations. While other interventions may be helpful, bronchodilation is the priority to improve respiratory function."
+      "rationale": "For conscious clients with hypoglycemia, oral glucose is the first intervention. Orange juice with sugar provides fast-acting carbohydrates to quickly raise blood glucose levels."
     },
     {
       "id": 2,
-      "title": "Pain Assessment",
+      "title": "Postpartum Assessment",
       "type": "sata",
-      "text": "A post-operative patient reports pain of 8/10. Which interventions should the nurse implement? Select all that apply.",
+      "text": "Which findings are normal during the fourth stage of labor? Select all that apply.",
       "choices": [
-        {"id": "A", "text": "Assess pain characteristics"},
-        {"id": "B", "text": "Document pain score"},
-        {"id": "C", "text": "Administer prescribed analgesics"},
-        {"id": "D", "text": "Provide non-pharmacological interventions"},
-        {"id": "E", "text": "Wait for the next scheduled assessment"}
+        {"id": "A", "text": "Firm fundus at umbilicus"},
+        {"id": "B", "text": "Moderate lochia rubra"},
+        {"id": "C", "text": "Bladder distention"},
+        {"id": "D", "text": "Shaking chills"},
+        {"id": "E", "text": "Perineal edema"}
       ],
-      "correctAnswer": ["A", "B", "C", "D"],
-      "rationale": "Proper pain management requires comprehensive assessment, documentation, medication administration, and non-pharmacological interventions. Waiting for the next scheduled assessment would delay necessary pain relief."
+      "correctAnswer": ["A", "B", "D", "E"],
+      "rationale": "Normal findings include a firm fundus, moderate lochia rubra, physiologic shaking, and perineal edema. Bladder distention is abnormal and requires intervention."
     },
     {
       "id": 3,
-      "title": "IV Flow Rate",
+      "title": "Medication Calculation",
       "type": "fill_in_blank",
-      "text": "If a patient needs to receive 1000mL of IV fluid over 8 hours, what should the drip rate be in drops per minute? (Assume drop factor is 15 gtts/mL)",
-      "correctAnswer": "31",
-      "rationale": "Calculation: (1000mL × 15gtts/mL) ÷ (8hrs × 60min) = 31.25 drops/min, rounded to 31 drops/min"
+      "text": "The healthcare provider orders Heparin 1,000 units/hour IV. The label reads 25,000 units/500 mL. Calculate the mL/hour to be administered.",
+      "correctAnswer": "20",
+      "rationale": "Using dimensional analysis: (1,000 units/hour × 500 mL) ÷ 25,000 units = 20 mL/hour"
+    },
+    {
+      "id": 4,
+      "title": "Respiratory Assessment",
+      "type": "mc",
+      "text": "A client has crackles in the lung bases. Which position should the nurse place the client in to facilitate breathing?",
+      "choices": [
+        {"id": "A", "text": "Left lateral"},
+        {"id": "B", "text": "Right lateral"},
+        {"id": "C", "text": "Fowler's"},
+        {"id": "D", "text": "Trendelenburg"}
+      ],
+      "correctAnswer": "C",
+      "rationale": "Fowler's position uses gravity to help lower diaphragm and expand lungs, facilitating better breathing with crackles."
     }
   ]
 }
