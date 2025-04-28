@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>NCLEX Question Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .question-block {
+      margin-bottom: 20px;
+    }
+    .choices li {
+      list-style: none;
+      padding: 10px;
+      margin: 5px 0;
+      cursor: pointer;
+      border: 1px solid #ddd;
+    }
+    .feedback {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background: #f0f0f0;
+    }
+    .correct-choice {
+      background: #d4edda;
+    }
+    .incorrect-choice {
+      background: #f8d7da;
+    }
+  </style>
+</head>
+<body>
+  <div class="question-block" data-correct-answer="B">
+    <h3>Question 1</h3>
+    <p>What is the most appropriate nursing intervention for a patient experiencing acute pain?</p>
+    
+    <ul class="choices">
+      <li onclick="checkAnswer(this)" data-choice="A">Administer PRN medication without assessing pain level</li>
+      <li onclick="checkAnswer(this)" data-choice="B">Assess pain level using a standardized scale</li>
+      <li onclick="checkAnswer(this)" data-choice="C">Tell the patient to wait for the next scheduled dose</li>
+      <li onclick="checkAnswer(this)" data-choice="D">Notify the physician immediately</li>
+    </ul>
+    
+    <div class="feedback">
+      <strong>Correct Answer: B</strong>
+      <p><em>Pain assessment using a standardized scale is the first step in pain management. This helps determine the appropriate intervention and establishes a baseline for evaluating the effectiveness of treatment.</em></p>
+    </div>
+  </div>
+
+  <script>
+    function checkAnswer(element) {
+      const questionBlock = element.closest('.question-block');
+      const correctAnswer = questionBlock.getAttribute('data-correct-answer');
+      const selectedAnswer = element.getAttribute('data-choice');
+      const feedbackDiv = questionBlock.querySelector('.feedback');
+      
+      const allChoices = questionBlock.querySelectorAll('.choices li');
+      allChoices.forEach(choice => {
+        choice.classList.remove('correct-choice', 'incorrect-choice');
+      });
+      
+      if (selectedAnswer === correctAnswer) {
+        element.classList.add('correct-choice');
+      } else {
+        element.classList.add('incorrect-choice');
+        allChoices.forEach(choice => {
+          if (choice.getAttribute('data-choice') === correctAnswer) {
+            choice.classList.add('correct-choice');
+          }
+        });
+      }
+      
+      feedbackDiv.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
