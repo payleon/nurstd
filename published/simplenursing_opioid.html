@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SimpleNursing Opioid Case Study</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f4f8;
+      color: #333;
+    }
+    .header {
+      background: #0070ba;
+      color: white;
+      padding: 15px;
+      border-radius: 8px 8px 0 0;
+    }
+    .question-container {
+      background: white;
+      border-radius: 0 0 8px 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .question-text {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .tutor-mode {
+      background: #0070ba;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    .tutor-mode span {
+      margin-right: 15px;
+    }
+    .answer-option {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-radius: 5px;
+      background: #f8f9fa;
+    }
+    .answer-option:hover {
+      background: #e9ecef;
+    }
+    .answer-option input[type="radio"] {
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+    .selected {
+      background: #d4edda;
+    }
+    .correct {
+      background: #d4edda;
+    }
+    .incorrect {
+      background: #f8d7da;
+    }
+    .submit-btn {
+      background: #0070ba;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      background: #005999;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .navigation-btn {
+      background: #0070ba;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="question-info">
+      <span>Question: </span>
+      <select>
+        <option>1 of 75</option>
+      </select>
+    </div>
+    <div class="time-info">
+      <span>Time: 00:00:32</span>
+      <span>Question: 1 of 75</span>
+    </div>
+  </div>
+  
+  <div class="tutor-mode">
+    <span>Tutor Mode:</span>
+    <span>On ✓</span>
+    <span>Off</span>
+  </div>
+  
+  <div class="question-container">
+    <div class="question-text">
+      <p>The nurse is caring for a client who is experiencing unresponsiveness following the administration of an opioid analgesic. The client has received a dose of naloxone but is currently difficult to arouse.</p>
+      <p>➡️Which intervention(s) should the nurse implement next? Select all that apply.</p>
+    </div>
+    
+    <div class="answer-options">
+      <div class="answer-option" onclick="selectOption(this)">
+        <input type="checkbox" id="option1">
+        <label for="option1">Reassess the client's level of consciousness.</label>
+      </div>
+      
+      <div class="answer-option" onclick="selectOption(this)">
+        <input type="checkbox" id="option2">
+        <label for="option2">Contact the client's health care provider (HCP).</label>
+      </div>
+      
+      <div class="answer-option correct" onclick="selectOption(this)">
+        <input type="checkbox" id="option3" checked>
+        <label for="option3">Give the client supplemental oxygen per protocol.</label>
+      </div>
+      
+      <div class="answer-option" onclick="selectOption(this)">
+        <input type="checkbox" id="option4">
+        <label for="option4">Get a second dose of naloxone ready for administration.</label>
+      </div>
+      
+      <div class="answer-option" onclick="selectOption(this)">
+        <input type="checkbox" id="option5">
+        <label for="option5">Monitor the rate of the client's respirations.</label>
+      </div>
+      
+      <div class="answer-option" onclick="selectOption(this)">
+        <input type="checkbox" id="option6">
+        <label for="option6">Notify the unit manager immediately of the client's condition.</label>
+      </div>
+    </div>
+    
+    <button class="submit-btn">Submit</button>
+  </div>
+  
+  <div class="footer">
+    <button class="navigation-btn">⬅️ End</button>
+    <button class="navigation-btn">Next ➡️</button>
+  </div>
+
+  <script>
+    function selectOption(element) {
+      const checkbox = element.querySelector('input[type="checkbox"]');
+      checkbox.checked = !checkbox.checked;
+      
+      if (checkbox.checked) {
+        element.classList.add('selected');
+      } else {
+        element.classList.remove('selected');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bootcamp NCLEX - Maternal Health</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f4f8;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .header {
+      background: #6c5ce7;
+      color: white;
+      padding: 15px;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .tab-container {
+      display: flex;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+    }
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-right: 1px solid #ddd;
+    }
+    .tab.active {
+      background: white;
+      font-weight: bold;
+    }
+    .content-container {
+      background: white;
+      padding: 20px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .scenario {
+      background: #f0f0f0;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .item-header {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .section-tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .section-tab {
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      margin-right: -1px;
+      cursor: pointer;
+    }
+    .section-tab.active {
+      background: white;
+      border-bottom-color: white;
+    }
+    .section-content {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: -1px;
+    }
+    .question {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .options-container {
+      margin-top: 15px;
+    }
+    .option {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .option input {
+      margin-right: 10px;
+      margin-top: 3px;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .nav-button {
+      background: #6c5ce7;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>Item 1 of 6</div>
+      <div>
+        <button class="icon-button">⚙️</button>
+        <button class="icon-button">🔖</button>
+      </div>
+    </div>
+    
+    <div class="content-container">
+      <div class="scenario">
+        <p>The following scenario applies to the next 6 items.</p>
+        <div class="item-header">Item 1 of 6</div>
+        <p>The nurse is caring for a 31-year-old pregnant client.</p>
+      </div>
+      
+      <div class="section-tabs">
+        <div class="section-tab active">Health History</div>
+        <div class="section-tab">Assessment</div>
+        <div class="section-tab">Vital Signs</div>
+      </div>
+      
+      <div class="section-content">
+        <p>A 31-year-old client at 38 weeks gestation delivered twin boys vaginally at 0830 after 20 hours of labor. Client is a G5P6 with a body mass index (body mass index [BMI]) of 24.9. Quantitative blood loss was 890 mL at delivery. Placenta was manually removed in pieces. Client's previous pregnancies were uncomplicated. The client reports abdominal cramping but does not want any pain medication. She is tired after a long labor and worried about getting sleep and having to feed the twins. She has been able to void without difficulty.</p>
+      </div>
+      
+      <div class="question">
+        <p>➡️ Select the top 5 findings that would require immediate follow-up.</p>
+      </div>
+      
+      <div class="options-container">
+        <div class="option">
+          <input type="checkbox" id="option1">
+          <label for="option1">1. Pulse</label>
+        </div>
+        
+        <div class="option">
+          <input type="checkbox" id="option2">
+          <label for="option2">2. Headache</label>
+        </div>
+        
+        <div class="option">
+          <input type="checkbox" id="option3">
+          <label for="option3">3. Blood pressure</label>
+        </div>
+        
+        <div class="option">
+          <input type="checkbox" id="option4">
+          <label for="option4">4. Last time voided</label>
+        </div>
+        
+        <div class="option">
+          <input type="checkbox" id="option5">
+          <label for="option5">5. Lochia assessment</label>
+        </div>
+        
+        <div class="option">
+          <input type="checkbox" id="option6">
+          <label for="option6">6. Fundal assessment</label>
+        </div>
+        
+        <div class="option">
+          <input type="checkbox" id="option7">
+          <label for="option7">7. Lower extremity findings</label>
+        </div>
+        
+        <div class="option">
+          <input type="checkbox" id="option8">
+          <label for="option8">8. Burning sensation when voiding</label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="navigation">
+      <button class="nav-button">⬅️</button>
+      <button class="nav-button">➡️</button>
+    </div>
+  </div>
+
+  <script>
+    // Toggle section tabs
+    const sectionTabs = document.querySelectorAll('.section-tab');
+    sectionTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        sectionTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+    
+    // Make checkboxes clickable
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', function() {
+        const checkbox = this.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+      });
+    });
+  </script>
+</body>
+</html>
