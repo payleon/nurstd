@@ -6,6 +6,21 @@ export async function fetchTests(): Promise<Test[]> {
   return response.json();
 }
 
+export async function fetchTest(testId: number): Promise<Test | null> {
+  try {
+    console.log(`Fetching test with ID: ${testId}`);
+    const response = await apiRequest("GET", `/api/tests/${testId}`, undefined);
+    if (!response.ok) {
+      console.error(`Error fetching test ID ${testId}: ${response.status}`);
+      return null;
+    }
+    return response.json();
+  } catch (error) {
+    console.error(`Error fetching test ID ${testId}:`, error);
+    return null;
+  }
+}
+
 export async function fetchTestContent(testId: number): Promise<string | QuestionsResponse> {
   console.log(`Making API request for test ID: ${testId}`);
   try {

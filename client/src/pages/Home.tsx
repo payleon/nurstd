@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { TestList } from "@/components/TestList";
@@ -10,6 +10,8 @@ import { MessageCircle, Loader2 } from "lucide-react";
 import { lazyImport } from "@/lib/lazyImport";
 import { useBadges } from "@/contexts/BadgeContext";
 import { SimpleTestViewer } from "@/components/SimpleTestViewer";
+import { useLocation } from "wouter";
+import { fetchTest } from "@/lib/api";
 
 // Lazy load heavier components that aren't needed on initial render
 const { TestView } = lazyImport(() => import("@/components/TestView"), "TestView");
@@ -18,10 +20,40 @@ const { QuestionTestView } = lazyImport(() => import("@/components/QuestionTestV
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [selectedTest, setSelectedTest] = useState<Test | null>(null);
-  // Determine view mode based on test path instead of hardcoding
   const [useQuestionDB, setUseQuestionDB] = useState(false);
+  const [location] = useLocation();
+  const [loading, setLoading] = useState(false);
   // Get user stats from the badge context
   const { userStats, unlockedBadges } = useBadges();
+  
+  // Check for testId in URL query parameter and load the test if present
+  useEffect(() => {
+    const loadTestFromUrl = async () => {
+      // Extract testId from URL query parameter
+      const searchParams = new URLSearchParams(window.location.search);
+      const testId = searchParams.get('testId');
+      
+      if (testId) {
+        try {
+          setLoading(true);
+          console.log('Loading test from URL with ID:', testId);
+          const test = await fetchTest(Number(testId));
+          if (test) {
+            console.log('Test loaded successfully:', test);
+            handleSelectTest(test);
+          } else {
+            console.error('Test not found with ID:', testId);
+          }
+        } catch (error) {
+          console.error('Error loading test:', error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+    
+    loadTestFromUrl();
+  }, [location]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -43,6 +75,19 @@ export default function Home() {
     setSelectedTest(null);
   };
 
+  // Show loading state while fetching test
+  if (loading) {
+    return (
+      <div className="bg-[#f9fafb] font-sans text-[#333333] min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 animate-spin mb-4 mx-auto text-[#4B9CD3]" />
+          <h2 className="text-xl font-bold text-[#13294B]">Loading your test...</h2>
+          <p className="text-gray-600 mt-2">Preparing your exam. This will only take a moment.</p>
+        </div>
+      </div>
+    );
+  }
+  
   // When in exam mode, use a different layout without header or sidebar
   if (selectedTest) {
     return (

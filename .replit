@@ -29,10 +29,6 @@ args = "Production Build"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Start Production Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Development Server"
 
 [[workflows.workflow]]
@@ -42,15 +38,6 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run build && cp -r published dist/ && cp public/sitemap.xml dist/ && cp public/robots.txt dist/ && echo \"Production build completed! Use 'NODE_ENV=production node dist/index.js' to start the server.\""
-
-[[workflows.workflow]]
-name = "Start Production Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "NODE_ENV=production node dist/index.js"
-waitForPort = 5000
 
 [[workflows.workflow]]
 name = "Development Server"
