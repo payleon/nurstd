@@ -46,30 +46,6 @@ export function Header({ toggleSidebar }: HeaderProps) {
       
       {/* User Controls */}
       <div className="flex items-center">
-        {/* Profile Button */}
-        <div 
-          className="hidden md:flex items-center mr-4 cursor-pointer hover:bg-[#3d7eaa] transition-colors px-2 py-1 rounded border-2 border-white"
-          onClick={() => setLocation("/profile")}
-        >
-          <div className="w-8 h-8 rounded-full bg-white text-[#13294B] flex items-center justify-center border-2 border-[#13294B]">
-            <User size={16} />
-          </div>
-          <div className="ml-2 text-sm">
-            <p className="font-bold">Profile</p>
-            <p className="text-xs">View Mascot</p>
-          </div>
-        </div>
-
-        <button 
-          className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" 
-          aria-label="Profile"
-          onClick={() => setLocation("/profile")}
-        >
-          <User className="h-5 w-5" />
-        </button>
-        <button className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" aria-label="Settings">
-          <Cog className="h-5 w-5" />
-        </button>
         <div 
           className="ml-3 flex items-center cursor-pointer border-2 border-white px-2 py-1 hover:bg-[#3d7eaa] transition-colors"
           onClick={() => setUserMenuOpen(!userMenuOpen)}
