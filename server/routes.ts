@@ -76,6 +76,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to load tests" });
     }
   });
+  
+  // Get a single test by ID
+  app.get("/api/tests/:id", async (req, res) => {
+    try {
+      const testId = parseInt(req.params.id);
+      
+      // Get tests from tests.json
+      const publishedDir = path.join(import.meta.dirname, "../published");
+      const testsFilePath = path.join(publishedDir, "tests.json");
+      
+      try {
+        await fs.access(testsFilePath);
+      } catch (error) {
+        return res.status(404).json({ message: "Tests file not found" });
+      }
+      
+      // Read and parse tests.json
+      const testsContent = await fs.readFile(testsFilePath, 'utf-8');
+      const tests = JSON.parse(testsContent);
+      
+      // Find the test by ID
+      const test = tests.find((t: any) => t.id === testId);
+      
+      if (!test) {
+        return res.status(404).json({ message: "Test not found" });
+      }
+      
+      res.json(test);
+    } catch (error) {
+      console.error(`Error fetching test ID ${req.params.id}:`, error);
+      res.status(500).json({ message: "Failed to load test" });
+    }
+  });
 
   // Get the content of a specific test
   app.get("/api/tests/:id/content", async (req, res) => {
