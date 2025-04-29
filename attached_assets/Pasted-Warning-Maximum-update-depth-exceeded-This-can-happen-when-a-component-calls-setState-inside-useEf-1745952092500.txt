@@ -1,0 +1,23 @@
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn&#x27;t have a dependency array, or one of the dependencies changes on every render.
+    at MicrolearningProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/src/contexts/MicrolearningContext.tsx?t=1745951949473:23:3)
+    at BadgeProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+    at Provider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XIZKKOCE.js?v=3a1d1f17:22:15)
+    at TooltipProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=3a1d1f17:59:5)
+    at QueryClientProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=3a1d1f17:2805:3)
+    at App
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn&#x27;t have a dependency array, or one of the dependencies changes on every render.
+    at MicrolearningProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/src/contexts/MicrolearningContext.tsx?t=1745951949473:23:3)
+    at BadgeProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+    at Provider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XIZKKOCE.js?v=3a1d1f17:22:15)
+    at TooltipProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=3a1d1f17:59:5)
+    at QueryClientProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=3a1d1f17:2805:3)
+    at App
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render.
+Warning: Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn&#x27;t have a dependency array, or one of the dependencies changes on every render.
+    at MicrolearningProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/src/contexts/MicrolearningContext.tsx?t=1745951949473:23:3)
+    at BadgeProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+    at Provider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XIZKKOCE.js?v=3a1d1f17:22:15)
+    at TooltipProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=3a1d1f17:59:5)
+    at QueryClientProvider (https://07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=3a1d1f17:2805:3)
+    at App
