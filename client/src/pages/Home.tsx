@@ -27,11 +27,14 @@ export default function Home() {
   };
 
   const handleSelectTest = (test: Test) => {
+    console.log('Test selected:', test);
     setSelectedTest(test);
     // Determine view mode based on test path
     // If it ends with .json, use the QuestionTestView component
     // Otherwise use the TestView component (for HTML content)
-    setUseQuestionDB(test.path.endsWith('.json'));
+    const shouldUseQuestionDB = test.path.endsWith('.json');
+    console.log('Using QuestionDB view:', shouldUseQuestionDB, 'for path:', test.path);
+    setUseQuestionDB(shouldUseQuestionDB);
     setSidebarOpen(false); // Close sidebar on mobile when a test is selected
   };
 

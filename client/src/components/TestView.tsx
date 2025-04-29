@@ -19,8 +19,15 @@ export function TestView({ test, onBack }: TestViewProps) {
   const { data: testContent, isLoading, error } = useQuery<string | QuestionsResponse>({
     queryKey: [`/api/tests/${test.id}/content`],
     queryFn: async () => {
-      const response = await fetchTestContent(test.id);
-      return response;
+      console.log(`Fetching test content for test ID ${test.id}`);
+      try {
+        const response = await fetchTestContent(test.id);
+        console.log('Test content received:', response);
+        return response;
+      } catch (err) {
+        console.error('Error fetching test content:', err);
+        throw err;
+      }
     }
   });
   
