@@ -113,8 +113,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BadgeProvider>
-          <Toaster />
-          <Router />
+          <MicrolearningProvider>
+            <Toaster />
+            <Router />
+          </MicrolearningProvider>
         </BadgeProvider>
       </TooltipProvider>
     </QueryClientProvider>

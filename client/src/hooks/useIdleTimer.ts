@@ -20,9 +20,10 @@ export function useIdleTimer({
   const [lastActivity, setLastActivity] = useState<number>(Date.now());
   const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
 
-  // Track last activity time
+  // Track last activity time - memoized to prevent rerenders
   const handleActivity = useCallback(() => {
-    setLastActivity(Date.now());
+    const now = Date.now();
+    setLastActivity(now);
     
     if (isIdle) {
       setIsIdle(false);
@@ -34,26 +35,26 @@ export function useIdleTimer({
       clearTimeout(timer);
     }
     
-    setTimer(
-      setTimeout(() => {
-        setIsIdle(true);
-        onIdle();
-      }, timeout)
-    );
-  }, [isIdle, onActive, onIdle, timer, timeout]);
+    const newTimer = setTimeout(() => {
+      setIsIdle(true);
+      onIdle();
+    }, timeout);
+    
+    setTimer(newTimer);
+  }, [isIdle, onActive, onIdle, timeout]);
 
-  // Debounced event handler
+  // Debounced event handler with refs to avoid dependency issues
   const debouncedActivity = useCallback(() => {
     if (debounceTimer) {
       clearTimeout(debounceTimer);
     }
     
-    setDebounceTimer(
-      setTimeout(() => {
-        handleActivity();
-      }, debounce)
-    );
-  }, [debounce, debounceTimer, handleActivity]);
+    const newDebounceTimer = setTimeout(() => {
+      handleActivity();
+    }, debounce);
+    
+    setDebounceTimer(newDebounceTimer);
+  }, [debounce, handleActivity]);
 
   useEffect(() => {
     // Initialize the timer
@@ -83,7 +84,8 @@ export function useIdleTimer({
         window.removeEventListener(event, debouncedActivity);
       });
     };
-  }, [debouncedActivity, events, onIdle, timeout, timer, debounceTimer]);
+    // Remove timer and debounceTimer from dependencies to prevent unnecessary re-renders
+  }, [debouncedActivity, events, onIdle, timeout]);
 
   // Manual reset of the idle timer
   const reset = useCallback(() => {

@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { AlarmClock, ChevronDown, Cog, User, GamepadIcon } from "lucide-react";
+import { ChevronDown, Cog, User } from "lucide-react";
 import { useLocation } from "wouter";
-import { StudyTimerOverlay } from "@/components/StudyTimerOverlay";
-import { NCLEXGameModal } from "@/components/NCLEXGameModal";
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -10,8 +8,6 @@ interface HeaderProps {
 
 export function Header({ toggleSidebar }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [timerOverlayOpen, setTimerOverlayOpen] = useState(false);
-  const [gameModalOpen, setGameModalOpen] = useState(false);
   const [, setLocation] = useLocation();
 
   return (
@@ -74,20 +70,6 @@ export function Header({ toggleSidebar }: HeaderProps) {
         <button className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" aria-label="Settings">
           <Cog className="h-5 w-5" />
         </button>
-        <button 
-          className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" 
-          aria-label="Study Timer"
-          onClick={() => setTimerOverlayOpen(true)}
-        >
-          <AlarmClock className="h-5 w-5" />
-        </button>
-        <button 
-          className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" 
-          aria-label="NCLEX Games"
-          onClick={() => setGameModalOpen(true)}
-        >
-          <GamepadIcon className="h-5 w-5" />
-        </button>
         <div 
           className="ml-3 flex items-center cursor-pointer border-2 border-white px-2 py-1 hover:bg-[#3d7eaa] transition-colors"
           onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -129,18 +111,6 @@ export function Header({ toggleSidebar }: HeaderProps) {
           </div>
         )}
       </div>
-      
-      {/* Study Timer Overlay */}
-      <StudyTimerOverlay 
-        isOpen={timerOverlayOpen} 
-        onClose={() => setTimerOverlayOpen(false)} 
-      />
-      
-      {/* NCLEX Game Modal */}
-      <NCLEXGameModal 
-        isOpen={gameModalOpen} 
-        onClose={() => setGameModalOpen(false)} 
-      />
     </header>
   );
 }

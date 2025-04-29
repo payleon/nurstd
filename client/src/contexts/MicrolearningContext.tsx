@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { useIdleTimer } from '../hooks/useIdleTimer';
 import { MicrolearningTipOverlay } from '../components/MicrolearningTip';
 
@@ -18,26 +18,32 @@ interface MicrolearningProviderProps {
   maxTipsPerSession?: number; // Maximum number of tips to show per session
 }
 
-export const MicrolearningProvider: React.FC<MicrolearningProviderProps> = ({
+export function MicrolearningProvider({
   children,
   idleTimeout = 120000, // 2 minutes by default
   maxTipsPerSession = 5, // Show max 5 tips per session by default
-}) => {
+}: MicrolearningProviderProps) {
   const [isShowingTip, setIsShowingTip] = useState(false);
   const [isIdleTimerEnabled, setIdleTimerEnabled] = useState(true);
   const [sessionTipCount, setSessionTipCount] = useState(0);
+  const initialized = useRef(false);
   
-  // Check local storage for user preference on idle tips
+  // Check local storage for user preference on idle tips - only on first mount
   useEffect(() => {
-    const storedPreference = localStorage.getItem('microlearning_tips_enabled');
-    if (storedPreference !== null) {
-      setIdleTimerEnabled(storedPreference === 'true');
+    if (!initialized.current) {
+      initialized.current = true;
+      const storedPreference = localStorage.getItem('microlearning_tips_enabled');
+      if (storedPreference !== null) {
+        setIdleTimerEnabled(storedPreference === 'true');
+      }
     }
   }, []);
 
-  // Save preference when it changes
+  // Save preference when it changes, but prevent effects on first render
   useEffect(() => {
-    localStorage.setItem('microlearning_tips_enabled', isIdleTimerEnabled.toString());
+    if (initialized.current) {
+      localStorage.setItem('microlearning_tips_enabled', isIdleTimerEnabled.toString());
+    }
   }, [isIdleTimerEnabled]);
 
   const showTip = () => {
@@ -51,14 +57,16 @@ export const MicrolearningProvider: React.FC<MicrolearningProviderProps> = ({
     setIsShowingTip(false);
   };
 
-  // Setup idle timer
+  // Setup idle timer with memoized callback
+  const idleCallback = useRef(() => {
+    if (isIdleTimerEnabled && !isShowingTip) {
+      showTip();
+    }
+  }).current;
+
   useIdleTimer({
     timeout: idleTimeout,
-    onIdle: () => {
-      if (isIdleTimerEnabled && !isShowingTip) {
-        showTip();
-      }
-    },
+    onIdle: idleCallback,
     onActive: () => {
       // Optional: do something when user becomes active again
     },
@@ -80,10 +88,10 @@ export const MicrolearningProvider: React.FC<MicrolearningProviderProps> = ({
   );
 };
 
-export const useMicrolearning = (): MicrolearningContextType => {
+export function useMicrolearning(): MicrolearningContextType {
   const context = useContext(MicrolearningContext);
   if (context === undefined) {
     throw new Error('useMicrolearning must be used within a MicrolearningProvider');
   }
   return context;
-};
+}
