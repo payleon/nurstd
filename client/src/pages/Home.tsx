@@ -49,15 +49,15 @@ export default function Home() {
       <div className="bg-[#f9fafb] font-sans text-[#333333] min-h-screen">
         <div className="flex h-screen">
           <main className="flex-1 p-4 md:p-6 lg:p-8 overflow-auto">
-            {/* Use our simple test viewer that manually loads content */}
-            <SimpleTestViewer test={selectedTest} onBack={handleBackToList} />
+            {/* For debugging */}
+            {/* <SimpleTestViewer test={selectedTest} onBack={handleBackToList} /> */}
             
-            {/* Original components - currently not working
-            {useQuestionDB ? (
+            {/* Restore original components now that we've fixed the issue */}
+            {selectedTest.path.endsWith('.json') ? (
               <QuestionTestView test={selectedTest} onBack={handleBackToList} />
             ) : (
               <TestView test={selectedTest} onBack={handleBackToList} />
-            )} */}
+            )}
           </main>
         </div>
       </div>
