@@ -34,7 +34,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const getInitialActiveCategory = () => {
     // Map paths to menu item titles
     const pathToCategoryMap: Record<string, string> = {
-      "/": "Practice Exams",
+      "/": "My Dashboard",
       "/profile": "Profile",
       "/achievements": "Achievements",
       "/case-studies": "Case Studies",
@@ -58,7 +58,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       }
     }
     
-    return "Practice Exams"; // Default
+    return "My Dashboard"; // Default
   };
   
   const [activeCategory, setActiveCategory] = useState(getInitialActiveCategory);
@@ -78,13 +78,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     {
       title: "My Dashboard",
       icon: <Monitor className="h-5 w-5 mr-3" />,
-      active: activeCategory === "My Dashboard",
-      path: "/"
-    },
-    {
-      title: "Practice Exams",
-      icon: <ShieldCheck className="h-5 w-5 mr-3" />,
-      active: activeCategory === "Practice Exams",
+      active: activeCategory === "My Dashboard" || activeCategory === "Practice Exams",
       path: "/"
     },
     {
