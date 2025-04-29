@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { AlarmClock, ChevronDown, Cog, User } from "lucide-react";
+import { AlarmClock, ChevronDown, Cog, User, GamepadIcon } from "lucide-react";
 import { useLocation } from "wouter";
 import { StudyTimerOverlay } from "@/components/StudyTimerOverlay";
+import { NCLEXGameModal } from "@/components/NCLEXGameModal";
 
 interface HeaderProps {
   toggleSidebar: () => void;
