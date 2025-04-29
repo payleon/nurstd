@@ -1,0 +1,17 @@
+Refused to load the stylesheet '<URL>' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.
+
+07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/:63 Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.
+
+client:797 Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.
+
+updateStyle @ client:797
+client:797 Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.
+
+updateStyle @ client:797
+07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/:1 Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.
+
+07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/:1 Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.
+
+07469d78-a5ec-4b74-9ae3-d4f20c2b36f8-00-3rxucwass8nos.janeway.replit.dev/:1 Refused to load the stylesheet 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap' because it violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.
+
+chunk-WERSD76P.js?v=c571e71c:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
