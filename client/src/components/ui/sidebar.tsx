@@ -126,15 +126,15 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       {mobileOverlay}
       <aside 
         className={cn(
-          "w-64 bg-[#13294B] text-white h-full fixed overflow-auto transition-all duration-300 ease-in-out z-30 border-r-2 border-black",
+          "w-64 bg-[#13294B] text-white h-full fixed overflow-auto transition-all duration-300 ease-in-out z-30 border-r-4 border-black",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
         <div 
-          className="p-4 border-b-2 border-black flex items-center bg-[#0A1E3A] cursor-pointer"
+          className="p-4 border-b-3 border-black flex items-center bg-[#0A1E3A] cursor-pointer"
           onClick={() => handleMenuItemClick("My Dashboard", "/")}
         >
-          <div className="h-10 w-10 bg-white border-2 border-black flex items-center justify-center mr-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <div className="h-10 w-10 bg-white border-3 border-black flex items-center justify-center mr-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               className="h-7 w-7 text-[#13294B]" 
@@ -151,7 +151,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           <span className="text-xl font-bold uppercase tracking-tight">NURS'TD</span>
         </div>
         
-        <div className="p-4 border-b-2 border-black">
+        <div className="p-4 border-b-3 border-black">
           <div className="relative">
             <form onSubmit={(e) => {
               e.preventDefault();
@@ -165,10 +165,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <input 
                 type="text" 
                 placeholder="Search exams..." 
-                className="w-full bg-[#0A1E3A] border-2 border-black py-2 px-3 text-sm focus:outline-none neuro-input" 
+                className="w-full bg-white text-black border-3 border-black py-2 px-3 text-sm focus:outline-none neuro-input font-medium shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]" 
               />
               <button type="submit" className="absolute right-3 top-2.5 bg-transparent border-none p-0 cursor-pointer">
-                <Search className="h-4 w-4 text-gray-400" />
+                <Search className="h-4 w-4 text-black" />
               </button>
             </form>
           </div>
@@ -179,13 +179,16 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             <div 
               key={index}
               className={cn(
-                "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b border-black/30",
-                item.active && "bg-[#0A1E3A] text-[#4B9CD3] font-bold"
+                "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b-3 border-black transition-all",
+                item.active ? "bg-[#0A1E3A] text-[#FFE45C] font-bold shadow-inner" : "border-opacity-70"
               )}
               onClick={() => handleMenuItemClick(item.title, item.path)}
             >
               {item.icon}
               <span className="font-medium">{item.title}</span>
+              {item.active && (
+                <div className="ml-auto w-2 h-8 bg-[#FFE45C]"></div>
+              )}
             </div>
           ))}
         </nav>

@@ -11,12 +11,12 @@ export function Header({ toggleSidebar }: HeaderProps) {
   const [, setLocation] = useLocation();
 
   return (
-    <header className="bg-[#4B9CD3] text-white border-b-2 border-black fixed top-0 w-full z-10 flex items-center justify-between px-4 h-16 neuro-noise">
+    <header className="bg-[#4B9CD3] text-white border-b-4 border-black fixed top-0 w-full z-10 flex items-center justify-between px-4 h-16 neuro-noise neuro-header">
       <div className="flex items-center">
         {/* Mobile Menu Toggle */}
         <button 
           onClick={toggleSidebar}
-          className="lg:hidden mr-3 border-2 border-white p-1" 
+          className="lg:hidden mr-3 border-3 border-black p-1 bg-white text-black hover:bg-[#FFE45C] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]" 
           aria-label="Toggle Menu"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,7 +26,7 @@ export function Header({ toggleSidebar }: HeaderProps) {
         
         {/* Logo */}
         <div className="flex items-center">
-          <div className="h-10 w-10 bg-white border-2 border-black flex items-center justify-center mr-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <div className="h-10 w-10 bg-white border-3 border-black flex items-center justify-center mr-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               className="h-7 w-7 text-[#13294B]" 
@@ -47,38 +47,38 @@ export function Header({ toggleSidebar }: HeaderProps) {
       {/* User Controls */}
       <div className="flex items-center">
         <div 
-          className="ml-3 flex items-center cursor-pointer border-2 border-white px-2 py-1 hover:bg-[#3d7eaa] transition-colors"
+          className="ml-3 flex items-center cursor-pointer border-3 border-black px-3 py-1 bg-[#FFE45C] text-black font-bold hover:bg-white transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
           onClick={() => setUserMenuOpen(!userMenuOpen)}
         >
-          <div className="h-8 w-8 bg-white border-2 border-black text-[#13294B] flex items-center justify-center font-bold">
+          <div className="h-8 w-8 bg-white border-3 border-black text-[#13294B] flex items-center justify-center font-bold mr-2">
             R
           </div>
-          <span className="ml-2 hidden md:inline font-bold">Ranyn</span>
+          <span className="hidden md:inline font-bold">Ranyn</span>
           <ChevronDown className="h-4 w-4 ml-1" />
         </div>
         
         {/* User menu dropdown */}
         {userMenuOpen && (
-          <div className="absolute right-4 top-16 w-48 bg-white shadow-lg border-2 border-black z-50">
-            <div className="p-2 border-b border-gray-200">
-              <p className="font-bold text-gray-800">Ranyn</p>
-              <p className="text-xs text-gray-500">Student Nurse</p>
+          <div className="absolute right-4 top-16 w-48 bg-white border-3 border-black z-50 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+            <div className="p-3 border-b-3 border-black">
+              <p className="font-bold text-black text-lg">Ranyn</p>
+              <p className="text-sm text-gray-700">Student Nurse</p>
             </div>
             <ul>
-              <li className="border-b border-gray-200">
+              <li className="border-b-2 border-black">
                 <button
                   onClick={() => {
                     setLocation("/profile");
                     setUserMenuOpen(false);
                   }}
-                  className="w-full text-left p-3 hover:bg-gray-100 text-gray-800 flex items-center"
+                  className="w-full text-left p-3 hover:bg-[#FFE45C] text-black font-medium flex items-center transition-colors"
                 >
                   <User className="h-4 w-4 mr-2" /> Profile
                 </button>
               </li>
               <li>
                 <button
-                  className="w-full text-left p-3 hover:bg-gray-100 text-gray-800 flex items-center"
+                  className="w-full text-left p-3 hover:bg-[#FFE45C] text-black font-medium flex items-center transition-colors"
                 >
                   <Cog className="h-4 w-4 mr-2" /> Settings
                 </button>
