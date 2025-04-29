@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/ui/header';
 import { Sidebar } from '@/components/ui/sidebar';
-import { NCLEXGameHub } from '@/components/games/NCLEXGameHub';
+import { lazyLoad } from '@/utils/lazyLoad';
+import { LazyComponentLoader } from '@/components/ui/LazyComponentLoader';
+
+const NCLEXGameHub = lazyLoad(() => 
+  import('@/components/games/NCLEXGameHub').then(mod => ({ default: mod.NCLEXGameHub }))
+);
 
 export default function Games() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -25,7 +30,9 @@ export default function Games() {
               </p>
             </div>
             
-            <NCLEXGameHub />
+            <LazyComponentLoader spinnerType="pulse" text="Loading NCLEX games..." minHeight="600px">
+              <NCLEXGameHub />
+            </LazyComponentLoader>
           </div>
         </main>
       </div>

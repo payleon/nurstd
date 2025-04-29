@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, Activity, Calculator, BrainCircuit, Award, PanelRight, ArrowRight, Stethoscope, ListTodo } from 'lucide-react';
-import { NursingPriorityGame } from './NursingPriorityGame';
-import { MedicationDosageGame } from './MedicationDosageGame';
+import { lazyLoad } from '@/utils/lazyLoad';
+import { LazyComponentLoader } from '@/components/ui/LazyComponentLoader';
+
+const NursingPriorityGame = lazyLoad(() => 
+  import('./NursingPriorityGame').then(mod => ({ default: mod.NursingPriorityGame }))
+);
+
+const MedicationDosageGame = lazyLoad(() => 
+  import('./MedicationDosageGame').then(mod => ({ default: mod.MedicationDosageGame }))
+);
 
 interface NCLEXGameHubProps {
   onClose?: () => void;
@@ -21,7 +29,7 @@ export function NCLEXGameHub({ onClose }: NCLEXGameHubProps) {
   const [gameHistory, setGameHistory] = useState<GameScore[]>([]);
   const [totalPoints, setTotalPoints] = useState(0);
   
-  const handleGameComplete = (game: string, score: number) => {
+  const handleGameComplete = (game: string, score: number): void => {
     const newScore = {
       name: game,
       score,
@@ -38,19 +46,23 @@ export function NCLEXGameHub({ onClose }: NCLEXGameHubProps) {
   
   if (currentGame === 'prioritization') {
     return (
-      <NursingPriorityGame 
-        onComplete={(score) => handleGameComplete('Nursing Priority', score)} 
-        onClose={returnToHub}
-      />
+      <LazyComponentLoader spinnerType="stethoscope" text="Loading nursing priority game..." minHeight="600px">
+        <NursingPriorityGame 
+          onComplete={(score: number) => handleGameComplete('Nursing Priority', score)} 
+          onClose={returnToHub}
+        />
+      </LazyComponentLoader>
     );
   }
   
   if (currentGame === 'dosage') {
     return (
-      <MedicationDosageGame
-        onComplete={(score) => handleGameComplete('Medication Dosage', score)}
-        onClose={returnToHub}
-      />
+      <LazyComponentLoader spinnerType="pulse" text="Loading medication dosage game..." minHeight="600px">
+        <MedicationDosageGame
+          onComplete={(score: number) => handleGameComplete('Medication Dosage', score)}
+          onClose={returnToHub}
+        />
+      </LazyComponentLoader>
     );
   }
   
