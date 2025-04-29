@@ -6,6 +6,44 @@ import path from "path";
 import { QuestionsResponseSchema, QuestionSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve sitemap.xml and robots.txt at root level
+  app.get('/sitemap.xml', async (req, res) => {
+    try {
+      const rootDir = path.join(import.meta.dirname, '..');
+      const sitemapPath = path.join(rootDir, 'public', 'sitemap.xml');
+      
+      try {
+        await fs.access(sitemapPath);
+        const sitemapContent = await fs.readFile(sitemapPath, 'utf-8');
+        res.type('application/xml').send(sitemapContent);
+      } catch (error) {
+        console.error("Sitemap not found:", error);
+        res.status(404).send('Sitemap not found');
+      }
+    } catch (error) {
+      console.error("Error serving sitemap:", error);
+      res.status(500).send('Error serving sitemap');
+    }
+  });
+  
+  app.get('/robots.txt', async (req, res) => {
+    try {
+      const rootDir = path.join(import.meta.dirname, '..');
+      const robotsPath = path.join(rootDir, 'public', 'robots.txt');
+      
+      try {
+        await fs.access(robotsPath);
+        const robotsContent = await fs.readFile(robotsPath, 'utf-8');
+        res.type('text/plain').send(robotsContent);
+      } catch (error) {
+        console.error("Robots.txt not found:", error);
+        res.status(404).send('Robots.txt not found');
+      }
+    } catch (error) {
+      console.error("Error serving robots.txt:", error);
+      res.status(500).send('Error serving robots.txt');
+    }
+  });
   // Get all tests from tests.json
   app.get("/api/tests", async (req, res) => {
     try {

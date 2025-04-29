@@ -41,7 +41,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run build && cp -r published dist/ && cp public/sitemap.xml dist/public/ && cp public/robots.txt dist/public/ && echo \"Production build completed! Use 'NODE_ENV=production node dist/index.js' to start the server.\""
+args = "npm run build && cp -r published dist/ && cp public/sitemap.xml dist/ && cp public/robots.txt dist/ && echo \"Production build completed! Use 'NODE_ENV=production node dist/index.js' to start the server.\""
 
 [[workflows.workflow]]
 name = "Start Production Server"

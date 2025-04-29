@@ -190,7 +190,7 @@ export function TestView({ test, onBack }: TestViewProps) {
                   // We have a questions object, render the QuestionTestView
                   <div className="w-full">
                     <QuestionTestView 
-                      test={test as Test & { questionsData: QuestionsResponse }} 
+                      test={{...test, questionsData: testContent as QuestionsResponse}}
                       onBack={onBack} 
                     />
                   </div>
