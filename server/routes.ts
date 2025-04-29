@@ -70,7 +70,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const filePath = path.join(import.meta.dirname, "..", test.path);
         const content = await fs.readFile(filePath, 'utf-8');
         const jsonContent = JSON.parse(content);
-        res.json(jsonContent);
+        
+        // Validate the data against our schema if it matches the expected format
+        try {
+          // Check if data has a 'questions' array
+          if (jsonContent && typeof jsonContent === 'object' && Array.isArray(jsonContent.questions)) {
+            const validatedData = QuestionsResponseSchema.parse(jsonContent);
+            res.json(validatedData);
+          } else {
+            // Just return the data as-is
+            res.json(jsonContent);
+          }
+        } catch (error) {
+          console.error("Test content validation error:", error);
+          // Still return the data even if validation fails
+          res.json(jsonContent);
+        }
       } else {
         // For HTML content
         const filePath = path.join(import.meta.dirname, "..", test.path);
