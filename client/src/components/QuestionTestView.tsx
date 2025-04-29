@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Test, Question, QuestionsResponse } from "@shared/schema";
 import { fetchQuestions } from "@/lib/api";
-import { MedicalSpinner, QuestionLoader, LoadingScreen } from "@/components/ui/medical-spinner";
+import { MedicalSpinner, LoadingScreen, QuestionLoader } from "@/components/ui/medical-spinner";
 import { 
   ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
   ChevronRight, Check, Award, BookOpen, Lightbulb, Bell, AlertTriangle,

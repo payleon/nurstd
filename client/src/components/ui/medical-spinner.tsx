@@ -9,13 +9,15 @@ interface MedicalSpinnerProps {
   size?: SpinnerSize;
   text?: string;
   className?: string;
+  color?: string;
 }
 
 export function MedicalSpinner({ 
   type = 'pulse', 
   size = 'md',
   text,
-  className
+  className,
+  color
 }: MedicalSpinnerProps) {
   const sizeClasses = {
     sm: 'h-6 w-6',
@@ -195,6 +197,31 @@ function StethoscopeSpinner({ size }: { size: string }) {
           }}
         />
       </motion.svg>
+    </div>
+  );
+}
+
+interface LoadingScreenProps {
+  text?: string;
+  minHeight?: string;
+}
+
+export function LoadingScreen({ text = "Loading...", minHeight = "400px" }: LoadingScreenProps) {
+  return (
+    <div className={`flex flex-col items-center justify-center w-full min-h-[${minHeight}]`} style={{ minHeight }}>
+      <MedicalSpinner type="pulse" size="lg" text={text} />
+    </div>
+  );
+}
+
+interface QuestionLoaderProps {
+  text?: string;
+}
+
+export function QuestionLoader({ text = "Loading question..." }: QuestionLoaderProps) {
+  return (
+    <div className="flex flex-col items-center justify-center w-full py-8">
+      <MedicalSpinner type="heartbeat" size="md" text={text} />
     </div>
   );
 }
