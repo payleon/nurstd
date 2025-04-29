@@ -530,6 +530,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                   userAnswer={userAnswers[currentQuestion.id]}
                   showRationale={showRationale[currentQuestion.id] || false}
                   isCorrect={answerCorrectness[currentQuestion.id] || false}
+                  hideSubmitButton={true} // Hide submit button since we have it in the test view
                 />
               )}
             </div>

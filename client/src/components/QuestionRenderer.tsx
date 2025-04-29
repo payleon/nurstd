@@ -9,6 +9,7 @@ interface QuestionRendererProps {
   userAnswer?: string | string[];
   showRationale?: boolean;
   isCorrect?: boolean;
+  hideSubmitButton?: boolean; // Add this to hide submit button when in test view
 }
 
 export function QuestionRenderer({ 
@@ -16,7 +17,8 @@ export function QuestionRenderer({
   onAnswer, 
   userAnswer, 
   showRationale = false,
-  isCorrect = false
+  isCorrect = false,
+  hideSubmitButton = false
 }: QuestionRendererProps) {
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>(
     Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []
@@ -587,8 +589,8 @@ export function QuestionRenderer({
           </div>
         )}
         
-        {/* Submit Button for SATA and Fill in Blank questions */}
-        {!showRationale && (isMultiChoice || isFillInBlank) && (
+        {/* Submit Button for SATA and Fill in Blank questions - hidden in test view */}
+        {!showRationale && (isMultiChoice || isFillInBlank) && !hideSubmitButton && (
           <div className="mt-6">
             <button
               onClick={handleSubmitAnswer}
