@@ -22,12 +22,20 @@ export const tests = pgTable("tests", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   path: varchar("path", { length: 255 }).notNull(),
+  description: varchar("description", { length: 1000 }),
+  questionCount: integer("question_count"),
+  timeLimit: integer("time_limit"),
+  category: varchar("category", { length: 100 }),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const insertTestSchema = createInsertSchema(tests).pick({
   title: true,
   path: true,
+  description: true,
+  questionCount: true,
+  timeLimit: true,
+  category: true,
 });
 
 export type InsertTest = z.infer<typeof insertTestSchema>;

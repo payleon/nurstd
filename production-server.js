@@ -93,6 +93,58 @@ app.use((req, res, next) => {
   next();
 });
 
+// Serve robots.txt and sitemap.xml at the root
+app.get('/robots.txt', (req, res) => {
+  const robotsPath = path.join(__dirname, 'public/robots.txt');
+  try {
+    if (fs.existsSync(robotsPath)) {
+      const robotsContent = fs.readFileSync(robotsPath, 'utf8');
+      res.type('text/plain').send(robotsContent);
+    } else {
+      // Fallback in case the file is in a different location
+      const alternateRobotsPath = path.join(__dirname, 'dist/robots.txt');
+      if (fs.existsSync(alternateRobotsPath)) {
+        const robotsContent = fs.readFileSync(alternateRobotsPath, 'utf8');
+        res.type('text/plain').send(robotsContent);
+      } else {
+        // Generate a default robots.txt if file not found
+        res.type('text/plain').send(
+          "# Allow all crawlers\n" +
+          "User-agent: *\n" +
+          "Allow: /\n\n" +
+          "# Sitemap location\n" +
+          "Sitemap: https://nclexxx.me/sitemap.xml"
+        );
+      }
+    }
+  } catch (error) {
+    console.error('Error serving robots.txt:', error);
+    res.status(500).send('Error serving robots.txt');
+  }
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  const sitemapPath = path.join(__dirname, 'public/sitemap.xml');
+  try {
+    if (fs.existsSync(sitemapPath)) {
+      const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
+      res.type('application/xml').send(sitemapContent);
+    } else {
+      // Fallback in case the file is in a different location
+      const alternateSitemapPath = path.join(__dirname, 'dist/sitemap.xml');
+      if (fs.existsSync(alternateSitemapPath)) {
+        const sitemapContent = fs.readFileSync(alternateSitemapPath, 'utf8');
+        res.type('application/xml').send(sitemapContent);
+      } else {
+        res.status(404).send('Sitemap not found');
+      }
+    }
+  } catch (error) {
+    console.error('Error serving sitemap.xml:', error);
+    res.status(500).send('Error serving sitemap.xml');
+  }
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname, 'dist/public')));
 

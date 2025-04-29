@@ -1,0 +1,163 @@
+
+Eliminate render-blocking resources Potential savings of 100 ms
+Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. Learn how to eliminate render-blocking resources.LCPFCP
+URL
+Transfer Size
+Potential Savings
+nclexxx.me 1st party
+16.3 KiB	80 ms
+/assets/index-CtQBACDV.css(nclexxx.me)
+16.3 KiB
+80 ms
+Google Fonts cdn 
+1.5 KiB	200 ms
+/css2?family=Inter:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+1.5 KiB
+200 ms
+Reduce unused CSS Potential savings of 12 KiB
+Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. Learn how to reduce unused CSS.LCPFCP
+URL
+Transfer Size
+Potential Savings
+nclexxx.me 1st party
+15.2 KiB	12.2 KiB
+/assets/index-CtQBACDV.css(nclexxx.me)
+15.2 KiB
+12.2 KiB
+Reduce unused JavaScript Potential savings of 57 KiB
+Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how to reduce unused JavaScript.LCPFCP
+URL
+Transfer Size
+Potential Savings
+nclexxx.me 1st party
+127.2 KiB	57.2 KiB
+/assets/index-CPEOHiw_.js(nclexxx.me)
+90.1 KiB
+35.8 KiB
+/assets/proxy-DbM3X8US.js(nclexxx.me)
+37.1 KiB
+21.5 KiB
+Avoid long main-thread tasks 2 long tasks found
+Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. Learn how to avoid long main-thread tasksTBT
+URL
+Start Time
+Duration
+nclexxx.me 1st party
+148 ms
+/assets/proxy-DbM3X8US.js(nclexxx.me)
+640 ms
+97 ms
+/assets/index-CPEOHiw_.js(nclexxx.me)
+454 ms
+51 ms
+Avoid non-composited animations 4 animated elements found
+Animations which are not composited can be janky and increase CLS. Learn how to avoid non-composited animationsCLS
+Element
+Name
+Bootcamp Maternal 75 QUESTIONS 2 HOURS NOT ATTEMPTED Take Exam
+<div class="flex flex-col md:flex-row md:items-center justify-between p-4 border-b-2 b…">
+Unsupported CSS Property: border-bottom-color
+border-bottom-color
+Unsupported CSS Property: border-left-color
+border-left-color
+Unsupported CSS Property: border-right-color
+border-right-color
+Unsupported CSS Property: border-top-color
+border-top-color
+Combined NCLEX Practice 75 QUESTIONS 2 HOURS NOT ATTEMPTED Take Exam
+<div class="flex flex-col md:flex-row md:items-center justify-between p-4 border-b-2 b…">
+Unsupported CSS Property: border-bottom-color
+border-bottom-color
+Unsupported CSS Property: border-left-color
+border-left-color
+Unsupported CSS Property: border-right-color
+border-right-color
+Unsupported CSS Property: border-top-color
+border-top-color
+Fundamentals of Nursing 75 QUESTIONS 2 HOURS NOT ATTEMPTED Take Exam
+<div class="flex flex-col md:flex-row md:items-center justify-between p-4 border-b-2 b…">
+Unsupported CSS Property: border-bottom-color
+border-bottom-color
+Unsupported CSS Property: border-left-color
+border-left-color
+Unsupported CSS Property: border-right-color
+border-right-color
+Unsupported CSS Property: border-top-color
+border-top-color
+Medical-Surgical: Musculoskeletal 75 QUESTIONS 2 HOURS NOT ATTEMPTED Take Exam
+<div class="flex flex-col md:flex-row md:items-center justify-between p-4 border-b-2 b…">
+Unsupported CSS Property: border-bottom-color
+border-bottom-color
+Unsupported CSS Property: border-left-color
+border-left-color
+Unsupported CSS Property: border-right-color
+border-right-color
+Unsupported CSS Property: border-top-color
+border-top-color
+Avoid chaining critical requests 20 chains found
+The Critical Request Chains below show you what resources are loaded with a high priority. Consider reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load. Learn how to avoid chaining critical requests.
+Maximum critical path latency: 1,268.246 ms
+Initial Navigation
+https://nclexxx.me
+/css2?family=Inter:wght@300;400;500;600;700&display=swap(fonts.googleapis.com) - 10.831 ms, 1.50 KiB
+/assets/index-CPEOHiw_.js(nclexxx.me)
+/assets/Home-CDdw7Tgf.js(nclexxx.me) - 122.894 ms, 12.23 KiB
+/assets/card-QV02-T4Q.js(nclexxx.me) - 137.844 ms, 1.36 KiB
+/assets/file-text-F8YzQg1_.js(nclexxx.me) - 295.663 ms, 1.32 KiB
+/assets/clock-xEYML9__.js(nclexxx.me) - 281.598 ms, 1.29 KiB
+/assets/LearningP….js(nclexxx.me) - 144.537 ms, 3.36 KiB
+/assets/BadgeIcon-DUaEhZr0.js(nclexxx.me) - 282.685 ms, 2.49 KiB
+/assets/zap-DHRSoxda.js(nclexxx.me) - 118.77 ms, 1.48 KiB
+/assets/heart-JdFRluqk.js(nclexxx.me) - 286.961 ms, 1.32 KiB
+/assets/brain-dDE1_c-U.js(nclexxx.me) - 242.541 ms, 1.46 KiB
+/assets/book-open-CyUzy6o_.js(nclexxx.me) - 135.791 ms, 1.32 KiB
+/assets/circle-check-big-WAZhktZO.js(nclexxx.me) - 288.733 ms, 1.29 KiB
+/assets/proxy-DbM3X8US.js(nclexxx.me) - 153.859 ms, 38.16 KiB
+/assets/arrow-right-BTuVPNeY.js(nclexxx.me) - 125.479 ms, 1.26 KiB
+/assets/circle-ch….js(nclexxx.me) - 141.513 ms, 1.28 KiB
+/assets/calendar-mzk1aCl2.js(nclexxx.me) - 127.628 ms, 1.31 KiB
+/assets/index-BaefKTTZ.js(nclexxx.me) - 307.518 ms, 2.41 KiB
+/assets/button-Bb6ERw5m.js(nclexxx.me) - 129.88 ms, 1.54 KiB
+/assets/index-CtQBACDV.css(nclexxx.me)
+/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+…v21/V8mDoQDjQ….woff2(fonts.gstatic.com) - 6.087 ms, 22.56 KiB
+/css2?family=Space+Mono:wght@400;700&display=swap(fonts.googleapis.com) - 9.738 ms, 1.23 KiB
+Minimize third-party usage Third-party code blocked the main thread for 0 ms
+Third-party code can significantly impact load performance. Limit the number of redundant third-party providers and try to load third-party code after your page has primarily finished loading. Learn how to minimize third-party impact.TBT
+Third-Party
+Transfer Size
+Main-Thread Blocking Time
+Google Fonts cdn 
+27 KiB	0 ms
+…v21/V8mDoQDjQ….woff2(fonts.gstatic.com)
+23 KiB
+0 ms
+/css2?family=Inter:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+2 KiB
+0 ms
+/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+1 KiB
+0 ms
+/css2?family=Space+Mono:wght@400;700&display=swap(fonts.googleapis.com)
+1 KiB
+0 ms
+Largest Contentful Paint element 720 ms
+This is the largest contentful element painted within the viewport. Learn more about the Largest Contentful Paint elementLCP
+Element
+You're collecting badges for your achievements in different topics.
+<p class="text-sm text-gray-600">
+Phase
+% of LCP
+Timing
+TTFB
+22%
+160 ms
+Load Delay
+0%
+0 ms
+Load Time
+0%
+0 ms
+Render Delay
+78%
+560 ms
