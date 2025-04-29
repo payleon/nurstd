@@ -3,10 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Test, Question } from "@shared/schema";
 import { fetchQuestions } from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, ChevronRight, Check, Award } from "lucide-react";
+import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, ChevronRight, Check, Award, BookOpen, Lightbulb } from "lucide-react";
 import { QuestionRenderer } from "./QuestionRenderer";
+import { FlashcardReview } from "./FlashcardReview";
 import { useBadges } from "@/contexts/BadgeContext";
 import { toast } from "@/hooks/use-toast";
+import { Button } from "./ui/button";
 
 interface QuestionTestViewProps {
   test: Test;
@@ -271,6 +273,15 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                   {isQuestionFlagged(currentQuestion?.id) ? "Unflag Question" : "Flag Question"}
                 </span>
                 <Flag className={`h-4 w-4 ${isQuestionFlagged(currentQuestion?.id) ? "fill-[#4B9CD3] text-[#4B9CD3]" : ""}`} />
+              </button>
+              
+              <button 
+                className="w-full text-[#13294B] py-2 px-3 flex items-center justify-between rounded border border-gray-200 hover:bg-gray-50 transition-colors"
+                onClick={() => setShowReviewMode(true)}
+                disabled={questions.length === 0}
+              >
+                <span className="font-medium">Quick Review Mode</span>
+                <BookOpen className="h-4 w-4" />
               </button>
               
               <div className="py-2">
