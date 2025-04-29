@@ -156,8 +156,8 @@ export function MicrolearningTipOverlay({ onClose }: MicrolearningTipOverlayProp
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 animate-fadeIn">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 mb-4 sm:mb-0 overflow-hidden transform transition-all animate-slideUp">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-fadeIn">
+      <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 overflow-hidden transform transition-all animate-slideUp">
         <div className="flex justify-between items-center p-4 border-b">
           <div className="flex items-center gap-2">
             {getCategoryIcon(tip.category)}

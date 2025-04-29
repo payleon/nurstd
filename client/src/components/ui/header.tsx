@@ -17,10 +17,10 @@ export function Header({ toggleSidebar }: HeaderProps) {
   return (
     <header className="bg-[#4B9CD3] text-white border-b-2 border-black fixed top-0 w-full z-10 flex items-center justify-between px-4 h-16 neuro-noise">
       <div className="flex items-center">
-        {/* Sidebar Toggle Button (visible on all screen sizes) */}
+        {/* Mobile Menu Toggle */}
         <button 
           onClick={toggleSidebar}
-          className="mr-3 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" 
+          className="lg:hidden mr-3 border-2 border-white p-1" 
           aria-label="Toggle Menu"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

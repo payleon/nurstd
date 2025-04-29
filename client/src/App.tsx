@@ -113,10 +113,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BadgeProvider>
-          <MicrolearningProvider idleTimeout={120000} maxTipsPerSession={5}>
-            <Toaster />
-            <Router />
-          </MicrolearningProvider>
+          <Toaster />
+          <Router />
         </BadgeProvider>
       </TooltipProvider>
     </QueryClientProvider>
