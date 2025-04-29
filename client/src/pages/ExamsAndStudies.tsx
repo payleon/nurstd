@@ -5,8 +5,9 @@ import { Input } from '../components/ui/input';
 import { Search, Book, FileText, HelpCircle, BookOpen } from 'lucide-react';
 import { Header } from '../components/ui/header';
 import { Sidebar } from '../components/ui/sidebar';
-import { fetchQuestions } from '../utils/api'; 
+import { fetchQuestions, fetchTests } from '../utils/api'; 
 import { Question } from '../types/question';
+import { Test } from '@shared/schema';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -61,6 +62,7 @@ export default function ExamsAndStudies() {
   const [filteredStudies, setFilteredStudies] = useState<CaseStudy[]>([]);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
+  const [tests, setTests] = useState<Test[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -179,6 +181,21 @@ export default function ExamsAndStudies() {
     
     setFilteredStudies(filtered);
   }, [searchQuery, activeCategory, caseStudies]);
+
+  // Load tests data
+  useEffect(() => {
+    async function loadTests() {
+      try {
+        const testsData = await fetchTests();
+        setTests(testsData);
+      } catch (error) {
+        console.error("Error loading tests:", error);
+        setError("Failed to load tests. Please try again later.");
+      }
+    }
+    
+    loadTests();
+  }, []);
 
   // Load questions data
   useEffect(() => {
@@ -520,62 +537,106 @@ export default function ExamsAndStudies() {
               
               <TabsContent value="practice-tests">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <div className="neuro-card p-4 flex flex-col h-full">
-                    <h3 className="font-bold text-[#13294B] mb-2 text-lg">Full NCLEX Practice Test</h3>
-                    <div className="mb-2">
-                      <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">
-                        175 Questions
-                      </span>
-                      <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
-                        5 Hours
-                      </span>
-                    </div>
-                    <p className="text-gray-700 mb-4 text-sm flex-grow">
-                      A comprehensive exam that simulates the full NCLEX experience with adaptive difficulty.
-                    </p>
-                    <div className="mt-auto">
-                      <button className="neuro-button-primary inline-block w-full text-center">
-                        Start Test
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="neuro-card p-4 flex flex-col h-full">
-                    <h3 className="font-bold text-[#13294B] mb-2 text-lg">Mini NCLEX Practice</h3>
-                    <div className="mb-2">
-                      <span className="inline-block bg-green-100 text-green-800 px-2 py-1 text-xs rounded">
-                        75 Questions
-                      </span>
-                      <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
-                        2 Hours
-                      </span>
-                    </div>
-                    <p className="text-gray-700 mb-4 text-sm flex-grow">
-                      A shorter version of the NCLEX exam, perfect for when you're short on time.
-                    </p>
-                    <div className="mt-auto">
-                      <button className="neuro-button-primary inline-block w-full text-center">
-                        Start Test
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="neuro-card p-4 flex flex-col h-full">
-                    <h3 className="font-bold text-[#13294B] mb-2 text-lg">Custom Practice Test</h3>
-                    <div className="mb-2">
-                      <span className="inline-block bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">
-                        Customizable
-                      </span>
-                    </div>
-                    <p className="text-gray-700 mb-4 text-sm flex-grow">
-                      Create your own practice test by selecting the number of questions, time limit, and specific content areas.
-                    </p>
-                    <div className="mt-auto">
-                      <button className="neuro-button-primary inline-block w-full text-center">
-                        Create Test
-                      </button>
-                    </div>
-                  </div>
+                  {/* Dynamic test cards from API */}
+                  {tests && tests.length > 0 ? (
+                    tests.map((test) => (
+                      <div key={test.id} className="neuro-card p-4 flex flex-col h-full">
+                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">{test.title}</h3>
+                        <div className="mb-2">
+                          <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">
+                            {test.questionCount || 75} Questions
+                          </span>
+                          <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
+                            {test.timeLimit || 2} {test.timeLimit === 1 ? 'Hour' : 'Hours'}
+                          </span>
+                        </div>
+                        <p className="text-gray-700 mb-4 text-sm flex-grow">
+                          {test.description || `Practice test covering ${test.category || 'nursing'} content.`}
+                        </p>
+                        <div className="mt-auto">
+                          <button 
+                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
+                            onClick={() => setLocation(`/?testId=${test.id}`)}
+                            aria-label={`Start ${test.title} Test`}
+                          >
+                            Start Test
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      {/* Fallback for when no tests are available or loading */}
+                      <div className="neuro-card p-4 flex flex-col h-full">
+                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">Full NCLEX Practice Test</h3>
+                        <div className="mb-2">
+                          <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">
+                            175 Questions
+                          </span>
+                          <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
+                            5 Hours
+                          </span>
+                        </div>
+                        <p className="text-gray-700 mb-4 text-sm flex-grow">
+                          A comprehensive exam that simulates the full NCLEX experience with adaptive difficulty.
+                        </p>
+                        <div className="mt-auto">
+                          <button 
+                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
+                            onClick={() => setLocation("/")}
+                            aria-label="Start Full NCLEX Practice Test"
+                          >
+                            Start Test
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="neuro-card p-4 flex flex-col h-full">
+                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">Mini NCLEX Practice</h3>
+                        <div className="mb-2">
+                          <span className="inline-block bg-green-100 text-green-800 px-2 py-1 text-xs rounded">
+                            75 Questions
+                          </span>
+                          <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
+                            2 Hours
+                          </span>
+                        </div>
+                        <p className="text-gray-700 mb-4 text-sm flex-grow">
+                          A shorter version of the NCLEX exam, perfect for when you're short on time.
+                        </p>
+                        <div className="mt-auto">
+                          <button 
+                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
+                            onClick={() => setLocation("/")}
+                            aria-label="Start Mini NCLEX Practice Test"
+                          >
+                            Start Test
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="neuro-card p-4 flex flex-col h-full">
+                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">Custom Practice Test</h3>
+                        <div className="mb-2">
+                          <span className="inline-block bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">
+                            Customizable
+                          </span>
+                        </div>
+                        <p className="text-gray-700 mb-4 text-sm flex-grow">
+                          Create your own practice test by selecting the number of questions, time limit, and specific content areas.
+                        </p>
+                        <div className="mt-auto">
+                          <button 
+                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
+                            onClick={() => setLocation("/")}
+                            aria-label="Create Custom Practice Test"
+                          >
+                            Create Test
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </TabsContent>
             </Tabs>
