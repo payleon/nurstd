@@ -6,9 +6,16 @@ export async function fetchTests(): Promise<Test[]> {
   return response.json();
 }
 
-export async function fetchTestContent(testId: number): Promise<string> {
+export async function fetchTestContent(testId: number): Promise<string | any> {
   const response = await apiRequest("GET", `/api/tests/${testId}/content`, undefined);
-  return response.text();
+  
+  // Check if response is JSON or text
+  const contentType = response.headers.get('content-type');
+  if (contentType && contentType.includes('application/json')) {
+    return response.json();
+  } else {
+    return response.text();
+  }
 }
 
 export async function fetchQuestions(): Promise<QuestionsResponse> {
