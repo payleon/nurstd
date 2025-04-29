@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   // Content Security Policy (CSP)
   res.setHeader(
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests;"
+    "default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests;"
   );
 
   // HTTP Strict Transport Security (HSTS)
