@@ -37,11 +37,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/": "My Dashboard",
       "/profile": "Profile",
       "/achievements": "Achievements",
-      "/case-studies": "Case Studies",
-      "/nclex-questions": "Question Bank",
-      "/question-bank": "Question Bank",
+      "/case-studies": "Exams & Studies",
+      "/nclex-questions": "Exams & Studies",
+      "/question-bank": "Exams & Studies",
       "/study-strategies": "Study Strategies",
-      "/learning-progress": "Learning Progress",
       "/study-timer": "Study Timer",
       "/games": "Learning Games"
     };
@@ -82,16 +81,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       path: "/"
     },
     {
-      title: "Case Studies",
+      title: "Exams & Studies",
       icon: <Files className="h-5 w-5 mr-3" />,
-      active: activeCategory === "Case Studies",
+      active: activeCategory === "Case Studies" || activeCategory === "Exams & Studies",
       path: "/case-studies"
-    },
-    {
-      title: "Question Bank",
-      icon: <HelpCircle className="h-5 w-5 mr-3" />,
-      active: activeCategory === "Question Bank" || activeCategory === "NCLEX-Style Questions",
-      path: "/question-bank"
     },
     {
       title: "Study Strategies",
@@ -99,12 +92,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       active: activeCategory === "Study Strategies",
       path: "/study-strategies"
     },
-    {
-      title: "Learning Progress",
-      icon: <BarChart className="h-5 w-5 mr-3" />,
-      active: activeCategory === "Learning Progress",
-      path: "/learning-progress"
-    },
+
     {
       title: "Study Timer",
       icon: <AlarmClock className="h-5 w-5 mr-3" />,
