@@ -42,7 +42,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/question-bank": "Question Bank",
       "/study-strategies": "Study Strategies",
       "/learning-progress": "Learning Progress",
-      "/study-timer": "Study Timer"
+      "/study-timer": "Study Timer",
+      "/games": "Learning Games"
     };
     
     // Special case for exact matches
@@ -115,6 +116,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       icon: <AlarmClock className="h-5 w-5 mr-3" />,
       active: activeCategory === "Study Timer",
       path: "/study-timer"
+    },
+    {
+      title: "Learning Games",
+      icon: <GamepadIcon className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Learning Games",
+      path: "/games"
     },
     {
       title: "Profile",

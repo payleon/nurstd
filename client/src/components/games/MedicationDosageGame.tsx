@@ -359,13 +359,13 @@ export function MedicationDosageGame({ onComplete, onClose }: MedicationDosageGa
           <h3 className="text-lg font-bold text-[#13294B] mb-2">{currentQuestion.questionText}</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-blue-50 border border-blue-200 p-3 rounded-md">
-              <p className="text-sm font-medium text-blue-800 mb-1">Patient Information:</p>
-              <p className="text-blue-700">{currentQuestion.patientInfo}</p>
+            <div className="bg-blue-100 border border-blue-300 p-3 rounded-md">
+              <p className="text-sm font-medium text-blue-900 mb-1">Patient Information:</p>
+              <p className="text-blue-900">{currentQuestion.patientInfo}</p>
             </div>
-            <div className="bg-purple-50 border border-purple-200 p-3 rounded-md">
-              <p className="text-sm font-medium text-purple-800 mb-1">Medication Information:</p>
-              <p className="text-purple-700">{currentQuestion.medicationInfo}</p>
+            <div className="bg-purple-100 border border-purple-300 p-3 rounded-md">
+              <p className="text-sm font-medium text-purple-900 mb-1">Medication Information:</p>
+              <p className="text-purple-900">{currentQuestion.medicationInfo}</p>
             </div>
           </div>
           
@@ -393,9 +393,9 @@ export function MedicationDosageGame({ onComplete, onClose }: MedicationDosageGa
                 exit={{ opacity: 0, height: 0 }}
                 className="mb-4 overflow-hidden"
               >
-                <div className="bg-gray-50 border border-gray-200 rounded-md p-3">
-                  <p className="text-sm font-medium text-gray-700 mb-1">Formula:</p>
-                  <p className="font-mono text-sm bg-white p-2 rounded border border-gray-300">
+                <div className="bg-gray-100 border border-gray-300 rounded-md p-3">
+                  <p className="text-sm font-medium text-gray-900 mb-1">Formula:</p>
+                  <p className="font-mono text-sm bg-white p-2 rounded border border-gray-300 text-gray-900">
                     {currentQuestion.formula}
                   </p>
                 </div>
@@ -455,17 +455,17 @@ export function MedicationDosageGame({ onComplete, onClose }: MedicationDosageGa
               className="mb-6 overflow-hidden"
             >
               <div className={`rounded-md p-4 ${
-                isCorrect ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200'
+                isCorrect ? 'bg-green-100 border border-green-300' : 'bg-amber-100 border border-amber-300'
               }`}>
                 <div className="flex items-start">
                   {isCorrect ? (
-                    <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mr-2 flex-shrink-0 mt-0.5" />
                   ) : (
-                    <XCircle className="h-5 w-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" />
+                    <XCircle className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
                   )}
                   <div>
-                    <p className="font-medium mb-2">{isCorrect ? 'Great job!' : 'Solution:'}</p>
-                    <p className="whitespace-pre-line">{currentQuestion.explanation}</p>
+                    <p className="font-medium text-gray-900 mb-2">{isCorrect ? 'Great job!' : 'Solution:'}</p>
+                    <p className="whitespace-pre-line text-gray-800">{currentQuestion.explanation}</p>
                   </div>
                 </div>
               </div>

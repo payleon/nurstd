@@ -294,8 +294,8 @@ export function NursingPriorityGame({ onComplete, onClose }: NursingPriorityGame
       <div className="p-6">
         <div className="mb-4">
           <h3 className="text-lg font-bold text-[#13294B] mb-2">{currentScenario.title}</h3>
-          <div className="bg-blue-50 border border-blue-200 p-4 rounded-md mb-4">
-            <p className="text-blue-800">{currentScenario.patientInfo}</p>
+          <div className="bg-blue-100 border border-blue-300 p-4 rounded-md mb-4">
+            <p className="text-blue-900">{currentScenario.patientInfo}</p>
           </div>
           
           <p className="text-sm font-medium mb-2">
@@ -356,12 +356,12 @@ export function NursingPriorityGame({ onComplete, onClose }: NursingPriorityGame
               exit={{ opacity: 0, height: 0 }}
               className="mb-6 overflow-hidden"
             >
-              <div className="bg-amber-50 border border-amber-200 rounded-md p-4">
+              <div className="bg-amber-100 border border-amber-300 rounded-md p-4">
                 <div className="flex items-start">
-                  <Lightbulb className="h-5 w-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <Lightbulb className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-medium text-amber-800 mb-2">Explanation:</p>
-                    <p className="text-amber-700">{currentScenario.explanation}</p>
+                    <p className="font-medium text-amber-900 mb-2">Explanation:</p>
+                    <p className="text-amber-900">{currentScenario.explanation}</p>
                   </div>
                 </div>
               </div>
