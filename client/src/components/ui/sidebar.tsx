@@ -9,7 +9,8 @@ import {
   Award,
   User,
   BarChart,
-  AlarmClock
+  AlarmClock,
+  GamepadIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";

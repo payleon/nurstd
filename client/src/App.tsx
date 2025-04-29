@@ -21,6 +21,7 @@ const QuestionBank = lazy(() => import("@/pages/QuestionBank"));
 const StudyStrategies = lazy(() => import("@/pages/StudyStrategies"));
 const LearningProgress = lazy(() => import("@/pages/LearningProgress"));
 const StudyTimer = lazy(() => import("@/pages/StudyTimer"));
+const Games = lazy(() => import("@/pages/Games"));
 
 // Create a placeholder component for routes that aren't fully implemented yet
 function PlaceholderPage({ name }: { name: string }) {
@@ -76,6 +77,7 @@ function Router() {
       <LazyRoute path="/study-strategies" component={StudyStrategies} />
       <LazyRoute path="/learning-progress" component={LearningProgress} />
       <LazyRoute path="/study-timer" component={StudyTimer} />
+      <LazyRoute path="/games" component={Games} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">

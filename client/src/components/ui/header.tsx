@@ -11,6 +11,7 @@ interface HeaderProps {
 export function Header({ toggleSidebar }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [timerOverlayOpen, setTimerOverlayOpen] = useState(false);
+  const [gameModalOpen, setGameModalOpen] = useState(false);
   const [, setLocation] = useLocation();
 
   return (
@@ -80,6 +81,13 @@ export function Header({ toggleSidebar }: HeaderProps) {
         >
           <AlarmClock className="h-5 w-5" />
         </button>
+        <button 
+          className="mx-2 border-2 border-white p-1 hover:bg-[#3d7eaa] transition-colors" 
+          aria-label="NCLEX Games"
+          onClick={() => setGameModalOpen(true)}
+        >
+          <GamepadIcon className="h-5 w-5" />
+        </button>
         <div 
           className="ml-3 flex items-center cursor-pointer border-2 border-white px-2 py-1 hover:bg-[#3d7eaa] transition-colors"
           onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -126,6 +134,12 @@ export function Header({ toggleSidebar }: HeaderProps) {
       <StudyTimerOverlay 
         isOpen={timerOverlayOpen} 
         onClose={() => setTimerOverlayOpen(false)} 
+      />
+      
+      {/* NCLEX Game Modal */}
+      <NCLEXGameModal 
+        isOpen={gameModalOpen} 
+        onClose={() => setGameModalOpen(false)} 
       />
     </header>
   );
