@@ -16,11 +16,9 @@ const Home = lazy(() => import("@/pages/Home"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Achievements = lazy(() => import("@/pages/Achievements"));
 const Profile = lazy(() => import("@/pages/Profile"));
-const CaseStudies = lazy(() => import("@/pages/CaseStudies"));
+const ExamsAndStudies = lazy(() => import("@/pages/ExamsAndStudies"));
 const CaseStudyDetail = lazy(() => import("@/pages/CaseStudyDetail"));
-const QuestionBank = lazy(() => import("@/pages/QuestionBank"));
 const StudyStrategies = lazy(() => import("@/pages/StudyStrategies"));
-const LearningProgress = lazy(() => import("@/pages/LearningProgress"));
 const StudyTimer = lazy(() => import("@/pages/StudyTimer"));
 const Games = lazy(() => import("@/pages/Games"));
 
@@ -64,19 +62,24 @@ function Router() {
       <LazyRoute path="/profile" component={Profile} />
       
       {/* Study Materials */}
-      <LazyRoute path="/question-bank" component={QuestionBank} />
-      <LazyRoute path="/case-studies" component={CaseStudies} />
+      <LazyRoute path="/case-studies" component={ExamsAndStudies} />
       <LazyRoute path="/case-study/:id" component={CaseStudyDetail} />
-      {/* Redirect from old path to new path */}
+      {/* Redirects from old paths to new path */}
+      <Route path="/question-bank">
+        {() => {
+          // Redirect to unified exams and studies page
+          window.location.href = '/case-studies';
+          return null;
+        }}
+      </Route>
       <Route path="/nclex-questions">
         {() => {
-          // Redirect to question-bank
-          window.location.href = '/question-bank';
+          // Redirect to unified exams and studies page
+          window.location.href = '/case-studies';
           return null;
         }}
       </Route>
       <LazyRoute path="/study-strategies" component={StudyStrategies} />
-      <LazyRoute path="/learning-progress" component={LearningProgress} />
       <LazyRoute path="/study-timer" component={StudyTimer} />
       <LazyRoute path="/games" component={Games} />
       
