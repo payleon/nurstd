@@ -3,12 +3,19 @@ import { useQuery } from "@tanstack/react-query";
 import { Test, Question, QuestionsResponse } from "@shared/schema";
 import { fetchQuestions } from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, ChevronRight, Check, Award, BookOpen, Lightbulb } from "lucide-react";
+import { 
+  ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
+  ChevronRight, Check, Award, BookOpen, Lightbulb, Bell, AlertTriangle,
+  User, LogOut, Monitor, Maximize, Minimize, Meh, Smile, Frown, Clipboard,
+  CheckSquare, PauseCircle, PlayCircle, RotateCcw, X, Menu
+} from "lucide-react";
 import { QuestionRenderer } from "./QuestionRenderer";
 import { FlashcardReview } from "./FlashcardReview";
 import { useBadges } from "@/contexts/BadgeContext";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
+import { Progress } from "./ui/progress";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface QuestionTestViewProps {
   test: Test & { questionsData?: QuestionsResponse };
