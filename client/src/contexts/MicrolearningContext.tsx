@@ -52,10 +52,32 @@ export const MicrolearningProvider: React.FC<MicrolearningProviderProps> = ({
   };
 
   // Setup idle timer
+  // Position check - don't show tips when cursor is near the sidebar
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isNearSidebar, setIsNearSidebar] = useState(false);
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const newPosition = { x: e.clientX, y: e.clientY };
+      setMousePosition(newPosition);
+      
+      // Only update isNearSidebar when it actually changes to avoid re-renders
+      const nearSidebar = newPosition.x < 250;
+      if (nearSidebar !== isNearSidebar) {
+        setIsNearSidebar(nearSidebar);
+      }
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [isNearSidebar]);
+  
   useIdleTimer({
     timeout: idleTimeout,
     onIdle: () => {
-      if (isIdleTimerEnabled && !isShowingTip) {
+      if (isIdleTimerEnabled && !isShowingTip && !isNearSidebar) {
         showTip();
       }
     },

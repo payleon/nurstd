@@ -151,7 +151,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside 
         className={cn(
           "w-64 bg-[#13294B] text-white h-full fixed overflow-auto transition-all duration-300 ease-in-out z-30 border-r-2 border-black",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div 

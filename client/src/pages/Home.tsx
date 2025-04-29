@@ -1,6 +1,7 @@
 import { useState, lazy, Suspense } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
+import { ContentContainer } from "@/components/ui/content-container";
 import { TestList } from "@/components/TestList";
 import { LearningRecommendations } from "@/components/LearningRecommendations";
 import { Test } from "@shared/schema";
@@ -56,15 +57,11 @@ export default function Home() {
     <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
       <Header toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      <div className="flex h-screen pt-16">
-        <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
-          <div className="max-w-5xl mx-auto">
-            <TestList onSelectTest={handleSelectTest} />
-            <LearningRecommendations />
-          </div>
-        </main>
-      </div>
+      
+      <ContentContainer isSidebarOpen={sidebarOpen}>
+        <TestList onSelectTest={handleSelectTest} />
+        <LearningRecommendations />
+      </ContentContainer>
     </div>
   );
 }
