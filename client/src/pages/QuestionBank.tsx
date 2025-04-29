@@ -13,6 +13,9 @@ import { lazyImport } from "@/lib/lazyImport";
 // Lazy load components that aren't needed on initial render
 const { NCLEXTutorial } = lazyImport(() => import('@/components/NCLEXTutorial'), 'NCLEXTutorial');
 const { Flashcard } = lazyImport(() => import('@/components/Flashcard'), 'Flashcard');
+const { NCLEXPriorityDrills } = lazyImport(() => import('@/components/NCLEXPriorityDrills'), 'NCLEXPriorityDrills');
+const { NCLEXLabValuesQuiz } = lazyImport(() => import('@/components/NCLEXLabValuesQuiz'), 'NCLEXLabValuesQuiz');
+const { MedicationCalculationPractice } = lazyImport(() => import('@/components/MedicationCalculationPractice'), 'MedicationCalculationPractice');
 
 export default function QuestionBank() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -250,19 +253,84 @@ export default function QuestionBank() {
                   </TabsContent>
                   
                   <TabsContent value="nclex-style">
-                    <Card className="border-2 border-black neuro-shadow mb-6">
-                      <CardHeader>
-                        <CardTitle>Interactive NCLEX Question Type Tutorial</CardTitle>
-                        <CardDescription>
-                          Learn about and practice the various question formats on the NCLEX examination with our interactive tutorial
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-6">The NCLEX uses several different question formats to test nursing knowledge. This interactive tutorial will help you understand each question type and develop strategies to approach them confidently.</p>
-                        
-                        <NCLEXTutorial />
-                      </CardContent>
-                    </Card>
+                    <div className="space-y-8">
+                      <Card className="border-2 border-black neuro-shadow">
+                        <CardHeader>
+                          <CardTitle>Interactive NCLEX Question Type Tutorial</CardTitle>
+                          <CardDescription>
+                            Learn about and practice the various question formats on the NCLEX examination with our interactive tutorial
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-6">The NCLEX uses several different question formats to test nursing knowledge. This interactive tutorial will help you understand each question type and develop strategies to approach them confidently.</p>
+                          
+                          <NCLEXTutorial />
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="border-2 border-black neuro-shadow">
+                        <CardHeader>
+                          <CardTitle>Nursing Priority Setting Practice</CardTitle>
+                          <CardDescription>
+                            Master the crucial skill of prioritizing patient care - a critical component of NCLEX success
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-6">Priority setting is one of the most challenging aspects of the NCLEX-RN. This interactive tool helps you practice determining which patient situations require immediate attention versus those that can wait.</p>
+                          
+                          <NCLEXPriorityDrills 
+                            onComplete={(score, total) => 
+                              toast({
+                                title: "Practice Complete",
+                                description: `You scored ${score} out of ${total} on the priority setting practice.`
+                              })
+                            }
+                          />
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="border-2 border-black neuro-shadow">
+                        <CardHeader>
+                          <CardTitle>Lab Values Quiz & Reference</CardTitle>
+                          <CardDescription>
+                            Master essential laboratory values for confident NCLEX performance
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-6">Understanding normal ranges and nursing implications for common lab values is essential for NCLEX success. This tool provides both study materials and practice quizzes to reinforce your knowledge.</p>
+                          
+                          <NCLEXLabValuesQuiz 
+                            onComplete={(score, total) => 
+                              toast({
+                                title: "Quiz Complete",
+                                description: `You scored ${score} out of ${total} on the lab values quiz.`
+                              })
+                            }
+                          />
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="border-2 border-black neuro-shadow">
+                        <CardHeader>
+                          <CardTitle>Medication Calculation Practice</CardTitle>
+                          <CardDescription>
+                            Build confidence in dosage calculations with interactive practice exercises
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-6">Medication calculation is a critical nursing skill tested on the NCLEX. This tool provides practice with weight-based dosing, flow rates, dilutions, and dosage conversions to ensure you're prepared for calculation questions.</p>
+                          
+                          <MedicationCalculationPractice 
+                            onComplete={(score, total) => 
+                              toast({
+                                title: "Practice Complete",
+                                description: `You scored ${score} out of ${total} on the medication calculations.`
+                              })
+                            }
+                          />
+                        </CardContent>
+                      </Card>
+                    </div>
                   </TabsContent>
                   
                   {["med-surg", "peds", "ob", "pharm"].map((tab) => (
