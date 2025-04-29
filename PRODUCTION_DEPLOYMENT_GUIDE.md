@@ -26,6 +26,20 @@ npm run build
 # This will:
 # - Build the client-side React application into dist/public/
 # - Bundle the server-side code into dist/index.js
+# - Copy additional files (sitemap.xml, robots.txt) to the dist/public/ directory
+```
+
+### SEO Files
+
+The build process should include copying the following SEO-related files to the dist/public/ directory:
+
+- **sitemap.xml** - Helps search engines discover and index your content
+- **robots.txt** - Provides crawling instructions for search engine bots
+
+If these files are not being copied automatically, you can add them to your build command:
+
+```bash
+npm run build && cp public/sitemap.xml dist/public/ && cp public/robots.txt dist/public/
 ```
 
 ## Production Configuration
