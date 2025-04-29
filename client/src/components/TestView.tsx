@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, BookOpen, Lightbulb } from "lucide-react";
-import { Test } from "@shared/schema";
+import { Test, Question, QuestionsResponse } from "@shared/schema";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTestContent } from "@/lib/api";
 import { FlashcardReview } from "./FlashcardReview";
+import { QuestionTestView } from "./QuestionTestView";
 import { toast } from "@/hooks/use-toast";
 
 interface TestViewProps {
@@ -15,7 +16,7 @@ interface TestViewProps {
 }
 
 export function TestView({ test, onBack }: TestViewProps) {
-  const { data: testContent, isLoading, error } = useQuery<string>({
+  const { data: testContent, isLoading, error } = useQuery<string | QuestionsResponse>({
     queryKey: [`/api/tests/${test.id}/content`],
     queryFn: async () => {
       const response = await fetchTestContent(test.id);
@@ -183,16 +184,30 @@ export function TestView({ test, onBack }: TestViewProps) {
                   <Skeleton className="h-96 w-full" />
                 </div>
               ) : (
-                <div className="w-full">
-                  <iframe
-                    id="test-iframe"
-                    title={test.title}
-                    srcDoc={testContent || ''}
-                    className="w-full border-0 rounded bg-white"
-                    style={{ height: `${iframeHeight}px`, minHeight: '500px' }}
-                    sandbox="allow-same-origin allow-scripts"
-                  />
-                </div>
+                <>
+                {/* If the content is JSON with questions */}
+                {testContent && typeof testContent === 'object' && 'questions' in testContent ? (
+                  // We have a questions object, render the QuestionTestView
+                  <div className="w-full">
+                    <QuestionTestView 
+                      test={test as Test & { questionsData: QuestionsResponse }} 
+                      onBack={onBack} 
+                    />
+                  </div>
+                ) : (
+                  // Otherwise, render the iframe with HTML content
+                  <div className="w-full">
+                    <iframe
+                      id="test-iframe"
+                      title={test.title}
+                      srcDoc={typeof testContent === 'string' ? testContent : ''}
+                      className="w-full border-0 rounded bg-white"
+                      style={{ height: `${iframeHeight}px`, minHeight: '500px' }}
+                      sandbox="allow-same-origin allow-scripts"
+                    />
+                  </div>
+                )}
+                </>
               )}
             </div>
             

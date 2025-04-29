@@ -11,14 +11,17 @@ import { toast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
 
 interface QuestionTestViewProps {
-  test: Test;
+  test: Test & { questionsData?: QuestionsResponse };
   onBack: () => void;
 }
 
 export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
-  const { data: questionsData, isLoading, error } = useQuery({
+  // Use the directly passed questions data if available, otherwise fetch from API
+  const { data: apiQuestionsData, isLoading: apiLoading, error: apiError } = useQuery({
     queryKey: ['/api/questions'],
-    queryFn: fetchQuestions
+    queryFn: fetchQuestions,
+    // Skip this query if we already have the questions data
+    enabled: !test.questionsData
   });
   
   const { updateAfterQuestionAnswered, updateAfterTestCompleted } = useBadges();
@@ -34,6 +37,11 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
   const [showRationale, setShowRationale] = useState<Record<number, boolean>>({});
   const [answerCorrectness, setAnswerCorrectness] = useState<Record<number, boolean>>({});
+  
+  // Use the direct questionsData if available, otherwise use API data
+  const questionsData = test.questionsData || apiQuestionsData;
+  const isLoading = !test.questionsData && apiLoading;
+  const error = apiError;
   
   const questions = questionsData?.questions || [];
   const currentQuestion = questions[currentQuestionIndex];
