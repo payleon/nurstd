@@ -136,6 +136,14 @@ app.use((req, res, next) => {
     throw err;
   });
 
+  // Configure MIME types for XML files
+  app.use((req, res, next) => {
+    if (req.path.endsWith('.xml')) {
+      res.type('application/xml');
+    }
+    next();
+  });
+
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes

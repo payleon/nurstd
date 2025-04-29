@@ -85,6 +85,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Configure MIME types for XML files
+app.use((req, res, next) => {
+  if (req.path.endsWith('.xml')) {
+    res.type('application/xml');
+  }
+  next();
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname, 'dist/public')));
 
