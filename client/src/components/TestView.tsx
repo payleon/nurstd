@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save } from "lucide-react";
+import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, BookOpen, Lightbulb } from "lucide-react";
 import { Test } from "@shared/schema";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTestContent } from "@/lib/api";
+import { FlashcardReview } from "./FlashcardReview";
+import { toast } from "@/hooks/use-toast";
 
 interface TestViewProps {
   test: Test;
@@ -25,6 +27,7 @@ export function TestView({ test, onBack }: TestViewProps) {
   const [timer, setTimer] = useState("02:00:00");
   const [questionNumber, setQuestionNumber] = useState(1);
   const [totalQuestions, setTotalQuestions] = useState(75);
+  const [showReviewMode, setShowReviewMode] = useState(false);
 
   // Adjust iframe height based on content
   useEffect(() => {
@@ -146,6 +149,13 @@ export function TestView({ test, onBack }: TestViewProps) {
                 <span className="font-medium">Question List</span>
                 <PanelLeftClose className="h-4 w-4" />
               </button>
+              <button 
+                className="w-full text-[#13294B] py-2 px-3 flex items-center justify-between rounded border border-gray-200 hover:bg-gray-50 transition-colors"
+                onClick={() => setShowReviewMode(true)}
+              >
+                <span className="font-medium">Quick Review Mode</span>
+                <BookOpen className="h-4 w-4" />
+              </button>
               <button className="w-full text-[#13294B] py-2 px-3 flex items-center justify-between rounded border border-gray-200 hover:bg-gray-50 transition-colors">
                 <span className="font-medium">Get Help</span>
                 <HelpCircle className="h-4 w-4" />
@@ -228,6 +238,76 @@ export function TestView({ test, onBack }: TestViewProps) {
           Use the navigation buttons or question list to move between questions.
         </p>
       </div>
+      
+      {/* Quick Review Mode */}
+      {showReviewMode && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-xl w-full max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+            <div className="p-4 bg-[#13294B] text-white flex justify-between items-center">
+              <h2 className="text-xl font-bold">Quick Review Mode</h2>
+              <div className="space-x-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-white hover:bg-white/20"
+                  onClick={() => setShowReviewMode(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+            
+            <div className="p-6 flex-grow overflow-y-auto">
+              <div className="mb-6 text-center">
+                <Lightbulb className="h-16 w-16 text-amber-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold mb-2">Welcome to Quick Review Mode</h3>
+                <p className="text-gray-600">
+                  The Quick Review feature allows you to study material in a flashcard format. 
+                  It's perfect for quick review sessions before an exam.
+                </p>
+              </div>
+              
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                <h4 className="font-medium text-lg mb-3 text-[#13294B]">How to use Quick Review Mode:</h4>
+                <ul className="text-left space-y-3 text-gray-700 max-w-lg mx-auto">
+                  <li className="flex items-start">
+                    <div className="bg-[#13294B] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">1</div>
+                    <p>Start a practice test to generate flashcards from actual NCLEX questions</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-[#13294B] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">2</div>
+                    <p>Use arrow keys to navigate between cards or click the buttons</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-[#13294B] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">3</div>
+                    <p>Click on a card or press spacebar to flip between question and answer</p>
+                  </li>
+                  <li className="flex items-start">
+                    <div className="bg-[#13294B] text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">4</div>
+                    <p>Study rationales to understand the reasoning behind answers</p>
+                  </li>
+                </ul>
+              </div>
+              
+              <div className="mt-6 text-center">
+                <Button
+                  onClick={() => {
+                    setShowReviewMode(false);
+                    toast({
+                      title: "Start a Practice Test",
+                      description: "To use Quick Review mode with real NCLEX questions, start a practice test and answer questions to generate flashcards.",
+                      variant: "default",
+                    });
+                  }}
+                  className="bg-[#4B9CD3] hover:bg-[#3d7eaa] text-white"
+                >
+                  Got it!
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

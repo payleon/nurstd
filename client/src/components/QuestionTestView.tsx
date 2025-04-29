@@ -429,6 +429,14 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
           Use the navigation buttons or question list to move between questions.
         </p>
       </div>
+      
+      {/* Flashcard Review Mode */}
+      {showReviewMode && questions.length > 0 && (
+        <FlashcardReview 
+          questions={questions} 
+          onClose={() => setShowReviewMode(false)} 
+        />
+      )}
     </div>
   );
 }
