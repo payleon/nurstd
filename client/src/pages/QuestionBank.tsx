@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { fetchQuestions } from "@/lib/api";
 import { Question } from "@shared/schema";
-import { Loader2 } from "lucide-react";
+import { Loader2, Search, Filter, ChevronRight, ArrowRight, Bookmark, Clock, CheckCircle, XCircle, BarChart, Tag } from "lucide-react";
 import { lazyImport } from "@/lib/lazyImport";
 
 // Lazy load components that aren't needed on initial render
@@ -17,6 +17,22 @@ const { NCLEXPriorityDrills } = lazyImport(() => import('@/components/NCLEXPrior
 const { NCLEXLabValuesQuiz } = lazyImport(() => import('@/components/NCLEXLabValuesQuiz'), 'NCLEXLabValuesQuiz');
 const { MedicationCalculationPractice } = lazyImport(() => import('@/components/MedicationCalculationPractice'), 'MedicationCalculationPractice');
 
+// Define interface for category data
+interface CategoryData {
+  title: string;
+  code: string;
+  questions: number;
+  icon: string;
+  color: string;
+  iconBg: string;
+  progressColor: string;
+  description: string;
+  subtopics: string[];
+}
+
+// Define view mode types
+type ViewMode = 'practice' | 'explore' | 'subtopic';
+
 export default function QuestionBank() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -25,6 +41,10 @@ export default function QuestionBank() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
+  const [viewMode, setViewMode] = useState<ViewMode>('practice');
+  const [selectedSubtopic, setSelectedSubtopic] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [difficultyFilter, setDifficultyFilter] = useState('');
   const { toast } = useToast();
   
   useEffect(() => {
@@ -90,11 +110,101 @@ export default function QuestionBank() {
     setSidebarOpen(!sidebarOpen);
   };
   
+  // Define an array of categories with their data for easy reference
+  const categoryData: CategoryData[] = [
+    { 
+      title: "Medical-Surgical", 
+      code: "med-surg",
+      questions: questions.filter(q => q.category === "med-surg").length || 425, 
+      icon: "🏥", 
+      color: "from-blue-50 to-blue-100 border-blue-200",
+      iconBg: "bg-blue-100",
+      progressColor: "bg-blue-500",
+      description: "Critical care, cardiovascular, respiratory, and more",
+      subtopics: ["Cardiovascular", "Respiratory", "Gastrointestinal", "Musculoskeletal", "Neurological", "Endocrine"]
+    },
+    { 
+      title: "Pediatrics", 
+      code: "peds",
+      questions: questions.filter(q => q.category === "peds").length || 245, 
+      icon: "👶", 
+      color: "from-green-50 to-green-100 border-green-200",
+      iconBg: "bg-green-100",
+      progressColor: "bg-green-500",
+      description: "Growth & development, pediatric conditions, and interventions",
+      subtopics: ["Growth & Development", "Common Conditions", "Pediatric Medications", "Special Needs", "Emergency Care", "Congenital Disorders"]
+    },
+    { 
+      title: "Obstetrics", 
+      code: "ob",
+      questions: questions.filter(q => q.category === "ob").length || 180, 
+      icon: "🤰", 
+      color: "from-purple-50 to-purple-100 border-purple-200",
+      iconBg: "bg-purple-100",
+      progressColor: "bg-purple-500",
+      description: "Pregnancy, labor & delivery, postpartum, and newborn care",
+      subtopics: ["Prenatal Care", "Labor & Delivery", "Postpartum", "Newborn Care", "Complications", "High-Risk Pregnancy"]
+    },
+    { 
+      title: "Pharmacology", 
+      code: "pharm",
+      questions: questions.filter(q => q.category === "pharm").length || 350, 
+      icon: "💊", 
+      color: "from-red-50 to-red-100 border-red-200",
+      iconBg: "bg-red-100",
+      progressColor: "bg-red-500",
+      description: "Drug classifications, administration, and side effects",
+      subtopics: ["Antibiotics", "Cardiovascular Meds", "Pain Management", "Psychiatric Meds", "Endocrine Meds", "Antineoplastics"]
+    },
+    { 
+      title: "Mental Health", 
+      code: "psych",
+      questions: questions.filter(q => q.category === "psych").length || 120, 
+      icon: "🧠", 
+      color: "from-yellow-50 to-yellow-100 border-yellow-200",
+      iconBg: "bg-yellow-100",
+      progressColor: "bg-yellow-500",
+      description: "Psychiatric disorders, therapeutic communication",
+      subtopics: ["Mood Disorders", "Anxiety Disorders", "Psychotic Disorders", "Substance Abuse", "Crisis Intervention", "Therapeutic Communication"]
+    },
+    { 
+      title: "Fundamentals", 
+      code: "fund",
+      questions: questions.filter(q => q.category === "fund").length || 200, 
+      icon: "📚", 
+      color: "from-gray-50 to-gray-100 border-gray-200",
+      iconBg: "bg-gray-100",
+      progressColor: "bg-gray-500",
+      description: "Basic nursing concepts and principles",
+      subtopics: ["Safety & Infection Control", "Vital Signs", "Health Assessment", "Nursing Process", "Documentation", "Basic Skills"]
+    }
+  ];
+
   const handleStartQuiz = (category: string) => {
     setSelectedCategory(category);
+    setViewMode('practice');
     toast({
       title: "Starting Quiz",
       description: `Loading ${category} questions...`,
+    });
+  };
+  
+  const handleExploreTopics = (category: string) => {
+    setSelectedCategory(category);
+    setViewMode('explore');
+    toast({
+      title: "Exploring Topics",
+      description: `Browsing ${category} subtopics...`,
+    });
+  };
+  
+  const handleSelectSubtopic = (category: string, subtopic: string) => {
+    setSelectedCategory(category);
+    setSelectedSubtopic(subtopic);
+    setViewMode('subtopic');
+    toast({
+      title: "Loading Questions",
+      description: `${subtopic} questions in ${category}...`,
     });
   };
 
@@ -112,6 +222,21 @@ export default function QuestionBank() {
 
   const handleBack = () => {
     setSelectedCategory(null);
+    setViewMode('practice');
+    setSelectedSubtopic(null);
+  };
+  
+  // Function to convert category code to readable label
+  const getCategoryLabel = (categoryCode: string) => {
+    switch(categoryCode) {
+      case "med-surg": return "Medical-Surgical";
+      case "peds": return "Pediatrics";
+      case "ob": return "Obstetrics";
+      case "pharm": return "Pharmacology";
+      case "psych": return "Mental Health";
+      case "fund": return "Fundamentals";
+      default: return "General";
+    }
   };
   
   return (
@@ -152,6 +277,120 @@ export default function QuestionBank() {
                       Go Back
                     </Button>
                   </Card>
+                ) : viewMode === 'explore' ? (
+                  <div className="flex flex-col">
+                    <div className="bg-white rounded-lg border-2 border-black p-6 shadow-lg">
+                      <div className="flex items-center gap-3 mb-6">
+                        {categoryData.find(cat => cat.title === selectedCategory)?.icon && (
+                          <div className={`text-4xl ${categoryData.find(cat => cat.title === selectedCategory)?.iconBg} p-3 rounded-full`}>
+                            {categoryData.find(cat => cat.title === selectedCategory)?.icon}
+                          </div>
+                        )}
+                        <div>
+                          <h2 className="text-2xl font-bold">{selectedCategory} Topics</h2>
+                          <p className="text-gray-600">Select a specific topic to practice targeted questions</p>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        {categoryData.find(cat => cat.title === selectedCategory)?.subtopics.map((subtopic, index) => (
+                          <Card 
+                            key={index}
+                            className={`border border-gray-200 hover:border-${categoryData.find(cat => cat.title === selectedCategory)?.progressColor.replace('bg-', '')} transition-all duration-300 cursor-pointer hover:shadow-md`}
+                            onClick={() => handleSelectSubtopic(selectedCategory || '', subtopic)}
+                          >
+                            <CardContent className="p-4 flex items-center gap-4">
+                              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${categoryData.find(cat => cat.title === selectedCategory)?.iconBg}`}>
+                                <span className="text-xl">{index + 1}</span>
+                              </div>
+                              <div>
+                                <h3 className="font-medium">{subtopic}</h3>
+                                <p className="text-sm text-gray-500">
+                                  {Math.floor(Math.random() * 30) + 10} questions • {Math.floor(Math.random() * 40) + 10}% completed
+                                </p>
+                              </div>
+                              <div className="ml-auto">
+                                <ArrowRight size={20} />
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                      
+                      <div className="flex space-x-4 mb-6">
+                        <Button variant="outline" onClick={() => setViewMode('practice')} className="flex items-center">
+                          <CheckCircle size={16} className="mr-2" />
+                          Practice All {selectedCategory} Questions
+                        </Button>
+                        <Button onClick={handleBack}>
+                          Back to All Categories
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-8 bg-white border-2 border-[#13294B] rounded-lg p-5 shadow-md">
+                      <h3 className="text-lg font-bold mb-3 text-[#13294B]">Study Resources</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="border rounded-lg p-4 flex flex-col items-center text-center hover:bg-gray-50 cursor-pointer">
+                          <Bookmark className="h-8 w-8 mb-2 text-[#4B9CD3]" />
+                          <h4 className="font-medium">Key Concepts</h4>
+                          <p className="text-xs text-gray-600 mt-1">Essential information to understand {selectedCategory} topics</p>
+                        </div>
+                        <div className="border rounded-lg p-4 flex flex-col items-center text-center hover:bg-gray-50 cursor-pointer">
+                          <BarChart className="h-8 w-8 mb-2 text-[#4B9CD3]" />
+                          <h4 className="font-medium">Performance Stats</h4>
+                          <p className="text-xs text-gray-600 mt-1">Review your progress in {selectedCategory} topics</p>
+                        </div>
+                        <div className="border rounded-lg p-4 flex flex-col items-center text-center hover:bg-gray-50 cursor-pointer">
+                          <Clock className="h-8 w-8 mb-2 text-[#4B9CD3]" />
+                          <h4 className="font-medium">Timed Quiz</h4>
+                          <p className="text-xs text-gray-600 mt-1">Test yourself with time constraints</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : viewMode === 'subtopic' ? (
+                  <div className="flex flex-col">
+                    <div className="bg-white rounded-lg border-2 border-black p-6 shadow-lg mb-6">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className={`text-2xl ${categoryData.find(cat => cat.title === selectedCategory)?.iconBg} p-2 rounded-full`}>
+                          {categoryData.find(cat => cat.title === selectedCategory)?.icon}
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2">
+                            <h2 className="text-lg font-medium">{selectedCategory}</h2>
+                            <ChevronRight size={18} />
+                            <h2 className="text-lg font-bold">{selectedSubtopic}</h2>
+                          </div>
+                          <p className="text-sm text-gray-600">Questions focused on {selectedSubtopic} within {selectedCategory}</p>
+                        </div>
+                        <div>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            onClick={() => setViewMode('explore')}
+                            className="font-medium"
+                          >
+                            Back to Topics
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="mb-6">
+                        <div className="bg-gradient-to-r from-[#EEF2F5] to-[#F8FAFC] rounded-2xl p-6 shadow-lg">
+                          {filteredQuestions.length > 0 && (
+                            <Flashcard
+                              question={filteredQuestions[currentQuestionIndex]}
+                              onNext={handleNextQuestion}
+                              onPrev={handlePrevQuestion}
+                              currentIndex={currentQuestionIndex}
+                              totalCards={filteredQuestions.length}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ) : (
                   <div className="flex flex-col">
                     <div className="bg-gradient-to-r from-[#EEF2F5] to-[#F8FAFC] rounded-2xl p-6 shadow-lg">
@@ -201,12 +440,94 @@ export default function QuestionBank() {
               </>
             ) : (
               <>
-                <h1 className="text-3xl font-bold mb-6 text-[#13294B]">Question Bank</h1>
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                  <h1 className="text-3xl font-bold text-[#13294B]">Question Bank</h1>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2 mt-4 md:mt-0">
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        placeholder="Search questions..." 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="py-2 pl-10 pr-4 w-full sm:w-64 border-2 border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                      />
+                      <Search 
+                        className="h-5 w-5 absolute left-3 top-3 text-gray-400"
+                      />
+                      {searchQuery && (
+                        <button 
+                          onClick={() => setSearchQuery('')}
+                          className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                        >
+                          <XCircle size={16} />
+                        </button>
+                      )}
+                    </div>
+                    
+                    <select 
+                      className="py-2 px-4 border-2 border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3] bg-white"
+                      value={difficultyFilter}
+                      onChange={(e) => setDifficultyFilter(e.target.value)}
+                    >
+                      <option value="">Difficulty: All</option>
+                      <option value="easy">Beginner</option>
+                      <option value="medium">Intermediate</option>
+                      <option value="hard">Advanced</option>
+                    </select>
+                    
+                    {(searchQuery || difficultyFilter) && (
+                      <Button 
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setSearchQuery('');
+                          setDifficultyFilter('');
+                        }}
+                        className="flex items-center"
+                      >
+                        <Filter className="w-4 h-4 mr-2" />
+                        Clear Filters
+                      </Button>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="bg-[#EEF2F5] p-4 rounded-lg mb-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="bg-[#13294B] text-white p-1 rounded">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-[#13294B]">Recent Question Activity</h3>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {[
+                      { category: "med-surg", title: "Cardiovascular Assessment", date: "1 day ago", correct: true },
+                      { category: "pharm", title: "Medication Administration", date: "2 days ago", correct: false },
+                      { category: "peds", title: "Growth & Development", date: "3 days ago", correct: true }
+                    ].map((item, i) => (
+                      <div key={i} className="bg-white rounded-md p-3 border border-gray-200 flex items-center gap-3">
+                        <div className={`w-2 h-10 rounded-full ${item.correct ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium truncate">{item.title}</div>
+                          <div className="flex items-center text-xs text-gray-500">
+                            <span className="truncate">{getCategoryLabel(item.category)}</span>
+                            <span className="mx-1">•</span>
+                            <span>{item.date}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 
                 <Tabs defaultValue="all" className="w-full">
                   <TabsList className="mb-6">
                     <TabsTrigger value="all">All Categories</TabsTrigger>
-                    <TabsTrigger value="nclex-style">NCLEX Style Questions</TabsTrigger>
+                    <TabsTrigger value="nclex-style">NCLEX Style</TabsTrigger>
                     <TabsTrigger value="med-surg">Medical-Surgical</TabsTrigger>
                     <TabsTrigger value="peds">Pediatrics</TabsTrigger>
                     <TabsTrigger value="ob">Obstetrics</TabsTrigger>
@@ -221,30 +542,73 @@ export default function QuestionBank() {
                       </div>
                     ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[
-                          { title: "Medical-Surgical", questions: questions.filter(q => q.category === "med-surg").length || 425, icon: "🏥", description: "Critical care, cardiovascular, respiratory, and more" },
-                          { title: "Pediatrics", questions: questions.filter(q => q.category === "peds").length || 245, icon: "👶", description: "Growth & development, pediatric conditions, and interventions" },
-                          { title: "Obstetrics", questions: questions.filter(q => q.category === "ob").length || 180, icon: "🤰", description: "Pregnancy, labor & delivery, postpartum, and newborn care" },
-                          { title: "Pharmacology", questions: questions.filter(q => q.category === "pharm").length || 350, icon: "💊", description: "Drug classifications, administration, and side effects" },
-                          { title: "Mental Health", questions: questions.filter(q => q.category === "psych").length || 120, icon: "🧠", description: "Psychiatric disorders, therapeutic communication" },
-                          { title: "Fundamentals", questions: questions.filter(q => q.category === "fund").length || 200, icon: "📚", description: "Basic nursing concepts and principles" }
-                        ].map((category, index) => (
-                          <Card key={index} className="border-2 border-black neuro-shadow">
-                            <CardHeader className="pb-3">
+                        {categoryData.map((category, index) => (
+                          <Card 
+                            key={index} 
+                            className={`border-2 border-black neuro-shadow overflow-hidden transition-all duration-300 hover:shadow-xl group bg-gradient-to-br ${category.color}`}
+                          >
+                            <CardHeader className="pb-2">
                               <div className="flex justify-between items-center">
-                                <CardTitle className="text-lg">{category.title}</CardTitle>
-                                <span className="text-3xl">{category.icon}</span>
+                                <div>
+                                  <CardTitle className="text-lg font-bold">{category.title}</CardTitle>
+                                  <CardDescription className="text-sm font-medium">{category.questions} Questions</CardDescription>
+                                </div>
+                                <div className={`p-3 rounded-full ${category.iconBg} text-3xl`}>
+                                  {category.icon}
+                                </div>
                               </div>
-                              <CardDescription>{category.questions} Questions</CardDescription>
                             </CardHeader>
                             <CardContent>
-                              <p className="text-sm mb-4">{category.description}</p>
-                              <Button 
-                                onClick={() => handleStartQuiz(category.title)}
-                                className="w-full"
-                              >
-                                Start Practice Quiz
-                              </Button>
+                              <p className="text-sm mb-3">{category.description}</p>
+                              
+                              <div className="space-y-2 mb-4">
+                                <div className="flex justify-between text-xs font-medium">
+                                  <span>Progress</span>
+                                  <span>12%</span>
+                                </div>
+                                <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                  <div className={`h-full ${category.progressColor}`} style={{ width: '12%' }}></div>
+                                </div>
+                              </div>
+                              
+                              <div className="flex flex-wrap gap-1 mb-4">
+                                {category.subtopics.slice(0, 3).map((subtopic, idx) => (
+                                  <span 
+                                    key={idx} 
+                                    className={`text-xs px-2 py-1 rounded-full ${category.iconBg} font-medium cursor-pointer hover:opacity-80`}
+                                    onClick={() => handleSelectSubtopic(category.title, subtopic)}
+                                  >
+                                    {subtopic}
+                                  </span>
+                                ))}
+                                {category.subtopics.length > 3 && (
+                                  <span 
+                                    className="text-xs px-2 py-1 rounded-full bg-gray-100 font-medium cursor-pointer hover:opacity-80"
+                                    onClick={() => handleExploreTopics(category.title)}
+                                  >
+                                    +{category.subtopics.length - 3} more
+                                  </span>
+                                )}
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-2">
+                                <Button 
+                                  onClick={() => handleStartQuiz(category.title)}
+                                  className="w-full flex items-center justify-center"
+                                  variant="default"
+                                >
+                                  <CheckCircle className="w-4 h-4 mr-2" />
+                                  Practice All
+                                </Button>
+                                <Button 
+                                  onClick={() => handleExploreTopics(category.title)}
+                                  className="w-full flex items-center justify-center"
+                                  variant="outline"
+                                >
+                                  <Tag className="w-4 h-4 mr-2" />
+                                  Explore Topics
+                                </Button>
+                              </div>
                             </CardContent>
                           </Card>
                         ))}
@@ -333,46 +697,80 @@ export default function QuestionBank() {
                     </div>
                   </TabsContent>
                   
-                  {["med-surg", "peds", "ob", "pharm"].map((tab) => (
-                    <TabsContent key={tab} value={tab}>
-                      <Card className="border-2 border-black neuro-shadow">
-                        <CardHeader>
-                          <CardTitle>
-                            {tab === "med-surg" && "Medical-Surgical Questions"}
-                            {tab === "peds" && "Pediatrics Questions"}
-                            {tab === "ob" && "Obstetrics Questions"}
-                            {tab === "pharm" && "Pharmacology Questions"}
-                          </CardTitle>
-                          <CardDescription>
-                            Practice questions specific to this category
-                          </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="mb-4">Select a subtopic to begin practicing:</p>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {[1, 2, 3, 4].map((i) => (
-                              <Button 
-                                key={i} 
-                                variant="outline" 
-                                onClick={() => handleStartQuiz(`Subtopic ${i}`)}
-                                className="justify-start border-2 border-black h-auto py-3"
-                              >
-                                <div className="text-left">
-                                  <div className="font-medium">
-                                    {tab === "med-surg" && [`Cardiovascular`, `Respiratory`, `Gastrointestinal`, `Musculoskeletal`][i-1]}
-                                    {tab === "peds" && [`Growth & Development`, `Common Conditions`, `Pediatric Medications`, `Special Needs`][i-1]}
-                                    {tab === "ob" && [`Prenatal Care`, `Labor & Delivery`, `Postpartum`, `Newborn Care`][i-1]}
-                                    {tab === "pharm" && [`Antibiotics`, `Cardiovascular Meds`, `Pain Management`, `Psychiatric Meds`][i-1]}
+                  {["med-surg", "peds", "ob", "pharm", "psych", "fund"].map((tab) => {
+                    const category = categoryData.find(cat => cat.code === tab);
+                    if (!category) return null;
+                    
+                    return (
+                      <TabsContent key={tab} value={tab}>
+                        <Card className="border-2 border-black neuro-shadow">
+                          <CardHeader className="pb-2">
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <CardTitle>{category.title} Questions</CardTitle>
+                                <CardDescription>Practice questions specific to this category</CardDescription>
+                              </div>
+                              <div className={`p-3 rounded-full ${category.iconBg} text-3xl`}>
+                                {category.icon}
+                              </div>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-2 mb-4">
+                              <div className="flex justify-between text-xs font-medium">
+                                <span>Overall Progress</span>
+                                <span>12%</span>
+                              </div>
+                              <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div className={`h-full ${category.progressColor}`} style={{ width: '12%' }}></div>
+                              </div>
+                            </div>
+                          
+                            <p className="mb-4">Select a subtopic to begin practicing:</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {category.subtopics.map((subtopic, index) => (
+                                <Button 
+                                  key={index} 
+                                  variant="outline" 
+                                  onClick={() => handleSelectSubtopic(category.title, subtopic)}
+                                  className="justify-start border-2 border-gray-200 hover:border-black h-auto py-3 group"
+                                >
+                                  <div className="flex items-center gap-3 w-full">
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${category.iconBg} group-hover:bg-opacity-80`}>
+                                      <span className="text-lg font-medium">{index + 1}</span>
+                                    </div>
+                                    <div className="text-left flex-1">
+                                      <div className="font-medium">{subtopic}</div>
+                                      <div className="text-sm text-muted-foreground">{Math.floor(Math.random() * 30) + 10} questions</div>
+                                    </div>
+                                    <ChevronRight size={18} className="text-gray-400 group-hover:text-black transition-colors" />
                                   </div>
-                                  <div className="text-sm text-muted-foreground">25 questions</div>
-                                </div>
+                                </Button>
+                              ))}
+                            </div>
+                            
+                            <div className="mt-6 flex justify-between">
+                              <Button 
+                                onClick={() => handleStartQuiz(category.title)} 
+                                className="flex items-center"
+                                variant="default"
+                              >
+                                <CheckCircle size={16} className="mr-2" />
+                                Practice All {category.title} Questions
                               </Button>
-                            ))}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </TabsContent>
-                  ))}
+                              
+                              <Button 
+                                onClick={() => handleExploreTopics(category.title)}
+                                variant="outline"
+                              >
+                                View Learning Resources
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </TabsContent>
+                    );
+                  })}
                 </Tabs>
               </>
             )}
