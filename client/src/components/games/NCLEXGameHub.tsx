@@ -55,7 +55,7 @@ export function NCLEXGameHub({ onClose }: NCLEXGameHubProps) {
   }
   
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden min-h-[600px]">
       <div className="bg-[#13294B] text-white p-4 flex justify-between items-center">
         <h2 className="text-xl font-bold flex items-center">
           <BrainCircuit className="mr-2 h-5 w-5" />

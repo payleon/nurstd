@@ -267,7 +267,7 @@ export function MedicationDosageGame({ onComplete, onClose }: MedicationDosageGa
   
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-96 bg-white rounded-lg shadow-md p-8">
+      <div className="flex flex-col items-center justify-center h-[600px] bg-white rounded-lg shadow-md p-8">
         <MedicalSpinner type="pulse" size="lg" text="Loading dosage calculation..." />
       </div>
     );
@@ -277,7 +277,7 @@ export function MedicationDosageGame({ onComplete, onClose }: MedicationDosageGa
     const accuracy = Math.round((correctAnswers / dosageQuestions.length) * 100);
     
     return (
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden min-h-[600px]">
         <div className="bg-[#13294B] text-white p-4">
           <h2 className="text-xl font-bold">Medication Calculation Results</h2>
         </div>
@@ -331,7 +331,7 @@ export function MedicationDosageGame({ onComplete, onClose }: MedicationDosageGa
   }
   
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden min-h-[600px]">
       <div className="bg-[#13294B] text-white p-4">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-bold">Medication Calculation Challenge</h2>
