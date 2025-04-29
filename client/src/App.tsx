@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { BadgeProvider } from "@/contexts/BadgeContext";
-import { MicrolearningProvider } from "@/contexts/MicrolearningContext";
+
 import { useState, Suspense, lazy } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
@@ -113,10 +113,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BadgeProvider>
-          <MicrolearningProvider>
-            <Toaster />
-            <Router />
-          </MicrolearningProvider>
+          <Toaster />
+          <Router />
         </BadgeProvider>
       </TooltipProvider>
     </QueryClientProvider>
