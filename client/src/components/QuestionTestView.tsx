@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Test, Question, QuestionsResponse } from "@shared/schema";
 import { fetchQuestions } from "@/lib/api";
-import { Skeleton } from "@/components/ui/skeleton";
+import { MedicalSpinner, QuestionLoader, LoadingScreen } from "@/components/ui/medical-spinner";
 import { 
   ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
   ChevronRight, Check, Award, BookOpen, Lightbulb, Bell, AlertTriangle,
@@ -41,6 +41,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const [incorrectAnswers, setIncorrectAnswers] = useState<number[]>([]);
   const [showReviewMode, setShowReviewMode] = useState(false);
   const [testSubmitted, setTestSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [questionStartTime, setQuestionStartTime] = useState<number>(Date.now());
   const [showRationale, setShowRationale] = useState<Record<number, boolean>>({});
   const [answerCorrectness, setAnswerCorrectness] = useState<Record<number, boolean>>({});
@@ -205,6 +206,41 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     }
     setCurrentQuestionIndex(index);
   };
+  
+  const handleSubmitExam = () => {
+    // Only allow submission if all questions are answered
+    if (Object.keys(userAnswers).length !== totalQuestions) {
+      toast({
+        title: "Incomplete Exam",
+        description: "Please answer all questions before submitting the exam.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Show loading animation
+    setIsSubmitting(true);
+    
+    // Simulate processing time for the submission
+    setTimeout(() => {
+      // Calculate score
+      const correctCount = Object.entries(answerCorrectness).filter(([_, isCorrect]) => isCorrect).length;
+      const isPerfectScore = correctCount === totalQuestions;
+      
+      // Update badges and progress
+      updateAfterTestCompleted(correctCount, totalQuestions, isPerfectScore);
+      
+      // Set test as submitted
+      setTestSubmitted(true);
+      setIsSubmitting(false);
+      
+      toast({
+        title: "Exam Submitted Successfully",
+        description: `You scored ${correctCount} out of ${totalQuestions} questions correctly.`,
+        variant: "default"
+      });
+    }, 3000); // 3 second delay to show the loading animation
+  };
 
   if (error) {
     return (
@@ -217,6 +253,38 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
         >
           Return to Dashboard
         </button>
+      </div>
+    );
+  }
+  
+  // Show loading screen when initially loading test data
+  if (isLoading && questions.length === 0) {
+    return (
+      <div className="max-w-5xl mx-auto">
+        <div className="bg-white rounded-lg shadow-md p-8">
+          <LoadingScreen text="Preparing your NCLEX practice exam..." />
+          
+          <div className="mt-8 space-y-3">
+            <div className="bg-gray-100 p-3 rounded-md flex items-center animate-pulse">
+              <div className="w-6 h-6 rounded-full bg-[#4B9CD3] mr-3 flex items-center justify-center text-white">
+                1
+              </div>
+              <div className="text-gray-600">Loading exam questions...</div>
+            </div>
+            <div className="bg-gray-100 p-3 rounded-md flex items-center animate-pulse">
+              <div className="w-6 h-6 rounded-full bg-[#4B9CD3] mr-3 flex items-center justify-center text-white">
+                2
+              </div>
+              <div className="text-gray-600">Preparing test environment...</div>
+            </div>
+            <div className="bg-gray-100 p-3 rounded-md flex items-center animate-pulse">
+              <div className="w-6 h-6 rounded-full bg-[#4B9CD3] mr-3 flex items-center justify-center text-white">
+                3
+              </div>
+              <div className="text-gray-600">Setting up learning analytics...</div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -414,10 +482,20 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                     ? "bg-green-600 hover:bg-green-700 text-white" 
                     : "bg-gray-200 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={Object.keys(userAnswers).length !== totalQuestions}
+                disabled={Object.keys(userAnswers).length !== totalQuestions || isSubmitting}
+                onClick={handleSubmitExam}
               >
-                <CheckSquare className="mr-2 h-4 w-4" />
-                Submit Exam
+                {isSubmitting ? (
+                  <>
+                    <MedicalSpinner type="pulse" size="sm" color="white" />
+                    <span className="ml-2">Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    <CheckSquare className="mr-2 h-4 w-4" />
+                    Submit Exam
+                  </>
+                )}
               </button>
               
               <div className="mt-3 text-center">
@@ -435,18 +513,13 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
             {/* Question Content */}
             <div className="p-6 border-b border-gray-200 min-h-[500px]">
               {isLoading || !currentQuestion ? (
-                <div className="space-y-6">
-                  <Skeleton className="h-6 w-3/4" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-full" />
-                  
-                  <div className="space-y-3 mt-8">
-                    <Skeleton className="h-12 w-full" />
-                    <Skeleton className="h-12 w-full" />
-                    <Skeleton className="h-12 w-full" />
-                    <Skeleton className="h-12 w-full" />
-                  </div>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <QuestionLoader />
+                </motion.div>
               ) : (
                 <QuestionRenderer 
                   question={currentQuestion}
@@ -552,6 +625,50 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
           onClose={() => setShowReviewMode(false)} 
         />
       )}
+      
+      {/* Submit Loading Overlay */}
+      <AnimatePresence>
+        {isSubmitting && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center"
+          >
+            <div className="bg-white rounded-lg shadow-xl p-8 max-w-md">
+              <div className="flex flex-col items-center">
+                <MedicalSpinner type="heartbeat" size="lg" color="#13294B" />
+                <h3 className="mt-6 text-xl font-bold text-[#13294B]">Submitting Your Exam</h3>
+                <p className="mt-3 text-gray-600 text-center">
+                  Your answers are being processed and your performance is being analyzed.
+                </p>
+                
+                <div className="w-full mt-8 space-y-3">
+                  <div className="flex items-center">
+                    <div className="w-6 h-6 rounded-full bg-[#4B9CD3] mr-3 flex items-center justify-center text-white text-xs">
+                      <Check className="h-3 w-3" />
+                    </div>
+                    <div className="text-sm">Calculating score...</div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-6 h-6 rounded-full bg-gray-200 mr-3 flex items-center justify-center text-white text-xs">
+                      <span className="animate-pulse">2</span>
+                    </div>
+                    <div className="text-sm">Analyzing performance...</div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-6 h-6 rounded-full bg-gray-200 mr-3 flex items-center justify-center text-white text-xs">
+                      <span className="animate-pulse">3</span>
+                    </div>
+                    <div className="text-sm">Generating results...</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
