@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Test, Question } from "@shared/schema";
+import { Test, Question, QuestionsResponse } from "@shared/schema";
 import { fetchQuestions } from "@/lib/api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, ChevronRight, Check, Award, BookOpen, Lightbulb } from "lucide-react";
@@ -123,7 +123,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   };
   
   const checkAnswer = (questionId: number, answer: string | string[]) => {
-    const question = questions.find(q => q.id === questionId);
+    const question = questions.find((q: Question) => q.id === questionId);
     if (!question) return;
     
     let isCorrect = false;
@@ -312,7 +312,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                 </div>
                 
                 <div className="grid grid-cols-5 gap-1 max-h-48 overflow-y-auto p-1">
-                  {questions.map((question, index) => {
+                  {questions.map((question: Question, index: number) => {
                     if (showFlaggedOnly && !isQuestionFlagged(question.id)) {
                       return null;
                     }
