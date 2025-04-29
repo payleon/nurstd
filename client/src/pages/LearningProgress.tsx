@@ -4,6 +4,7 @@ import { LearningProgressChart } from "@/components/progress/LearningProgressCha
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { BadgeCollection } from "@/components/badges/BadgeCollection";
+import { LearningAchievementsSection } from "@/components/LearningAchievementsSection";
 import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -268,6 +269,17 @@ export default function LearningProgress() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+            
+            {/* Learning Achievements with Sparkle Effects */}
+            <div className="mb-8">
+              <LearningAchievementsSection 
+                currentStreak={daysActive}
+                totalQuestions={userStats.questionsAnswered}
+                correctPercentage={correctPercentage}
+                badgesEarned={unlockedBadges.length}
+                improvementRate={12} // This would typically be calculated based on historical data
+              />
             </div>
             
             {/* Learning Insights */}
