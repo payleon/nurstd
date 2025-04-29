@@ -359,11 +359,11 @@ export function NCLEXLabValuesQuiz({ onComplete }: LabValuesQuizProps) {
         type: 'assessment',
         lab: item.lab,
         question: `Which assessment finding would you expect in a patient with ${condition}?`,
-        options: generateAssessmentOptions(item.lab, item.high),
+        options: generateAssessmentOptions(item.lab, item.high === true),
         correctAnswer: 0,
-        explanation: `The correct assessment finding for ${condition} is ${generateAssessmentOptions(item.lab, item.high)[0]}. This relates to ${item.lab.nursingImplications.find(imp => 
-          (item.high && (imp.toLowerCase().includes("hyper") || imp.toLowerCase().includes("high"))) || 
-          (item.low && (imp.toLowerCase().includes("hypo") || imp.toLowerCase().includes("low")))
+        explanation: `The correct assessment finding for ${condition} is ${generateAssessmentOptions(item.lab, item.high === true)[0]}. This relates to ${item.lab.nursingImplications.find(imp => 
+          (item.high === true && (imp.toLowerCase().includes("hyper") || imp.toLowerCase().includes("high"))) || 
+          (item.low === true && (imp.toLowerCase().includes("hypo") || imp.toLowerCase().includes("low")))
         ) || item.lab.nursingImplications[0]}`
       };
       
@@ -455,7 +455,7 @@ export function NCLEXLabValuesQuiz({ onComplete }: LabValuesQuizProps) {
       },
       'Calcium (Ca++)': {
         high: ['Confusion and lethargy', 'Constipation', 'Shortened QT interval on ECG'],
-        low: ['Positive Chvostek's sign', 'Tetany and muscle cramping', 'Prolonged QT interval on ECG']
+        low: ['Positive Chvostek\'s sign', 'Tetany and muscle cramping', 'Prolonged QT interval on ECG']
       },
       'Glucose (fasting)': {
         high: ['Polyuria and polydipsia', 'Fruity breath odor', 'Kussmaul respirations'],
