@@ -1,7 +1,10 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import { NCLEXGameHub } from './games/NCLEXGameHub';
 import { motion, AnimatePresence } from 'framer-motion';
+import { lazyLoad } from '../utils/lazyLoad';
+import { LazyComponentLoader } from './ui/LazyComponentLoader';
+
+const NCLEXGameHub = lazyLoad(() => import('./games/NCLEXGameHub').then(mod => ({ default: mod.NCLEXGameHub })));
 
 interface NCLEXGameModalProps {
   isOpen: boolean;
@@ -33,7 +36,9 @@ export function NCLEXGameModal({ isOpen, onClose }: NCLEXGameModalProps) {
               className="w-full max-w-5xl relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <NCLEXGameHub onClose={onClose} />
+              <LazyComponentLoader spinnerType="pulse" text="Loading NCLEX games..." minHeight="600px">
+                <NCLEXGameHub onClose={onClose} />
+              </LazyComponentLoader>
               
               <button
                 className="absolute top-4 right-4 text-white p-2 rounded-full hover:bg-white/20 transition-colors"
