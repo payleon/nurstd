@@ -35,7 +35,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
     // Map paths to menu item titles
     const pathToCategoryMap: Record<string, string> = {
       "/": "My Dashboard",
-      "/profile": "Profile",
       "/achievements": "Achievements",
       "/case-studies": "Exams & Studies",
       "/nclex-questions": "Exams & Studies",
@@ -105,12 +104,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       active: activeCategory === "Learning Games",
       path: "/games"
     },
-    {
-      title: "Profile",
-      icon: <User className="h-5 w-5 mr-3" />,
-      active: activeCategory === "Profile",
-      path: "/profile"
-    },
+
     {
       title: "Achievements",
       icon: <Award className="h-5 w-5 mr-3" />,
