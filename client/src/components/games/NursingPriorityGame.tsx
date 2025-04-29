@@ -313,17 +313,17 @@ export function NursingPriorityGame({ onComplete, onClose }: NursingPriorityGame
             <Reorder.Item
               key={intervention.id}
               value={intervention}
-              className={`p-3 rounded-md border-2 cursor-move ${
+              className={`p-3 rounded-md border-2 cursor-move text-gray-900 ${
                 gameState === 'checking' 
                   ? intervention.id === correctOrder[index].id 
-                    ? 'border-green-500 bg-green-50' 
-                    : 'border-red-500 bg-red-50'
-                  : 'border-gray-200 hover:border-[#4B9CD3] hover:bg-blue-50'
+                    ? 'border-green-500 bg-green-100' 
+                    : 'border-red-500 bg-red-100'
+                  : 'border-gray-300 hover:border-[#4B9CD3] hover:bg-blue-100'
               }`}
               disabled={gameState !== 'playing'}
             >
               <div className="flex items-center">
-                <div className="mr-3 flex-shrink-0 h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center font-medium">
+                <div className="mr-3 flex-shrink-0 h-6 w-6 rounded-full bg-gray-300 flex items-center justify-center font-medium text-gray-900">
                   {gameState === 'checking' ? (
                     intervention.id === correctOrder[index].id ? (
                       <CheckCircle2 className="h-5 w-5 text-green-600" />
@@ -336,8 +336,8 @@ export function NursingPriorityGame({ onComplete, onClose }: NursingPriorityGame
                 </div>
                 <div className="flex-1">{intervention.text}</div>
                 {gameState === 'checking' && correctOrder.findIndex(i => i.id === intervention.id) !== index && (
-                  <div className="text-sm flex items-center ml-2">
-                    <span className="text-gray-700">Should be </span>
+                  <div className="text-sm flex items-center ml-2 bg-gray-100 px-2 py-1 rounded border border-gray-300">
+                    <span className="text-gray-900">Should be </span>
                     <span className="font-bold ml-1 text-[#13294B]">
                       #{correctOrder.findIndex(i => i.id === intervention.id) + 1}
                     </span>
