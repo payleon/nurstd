@@ -223,151 +223,217 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
 
   return (
     <div className="max-w-5xl mx-auto">
-      {/* Professional Exam Header - Top Bar */}
-      <div className="bg-white rounded-lg shadow-md mb-4 overflow-hidden">
-        <div className="bg-[#13294B] text-white py-3 px-6 flex flex-col md:flex-row md:justify-between md:items-center">
-          <div className="flex items-center mb-3 md:mb-0">
-            <h2 className="font-bold text-xl">NCLEX Exam: {test.title}</h2>
+      {/* NCLEX-style header with tools */}
+      <div className="bg-white rounded-lg border-2 border-gray-200 shadow-md mb-4">
+        <div className="flex justify-between items-center bg-[#f3f4f6] p-2 border-b border-gray-200">
+          <div className="flex items-center">
+            <button 
+              className="p-2 text-gray-600 hover:bg-gray-200 rounded-md"
+              title="Full Screen Mode"
+            >
+              <Maximize className="h-5 w-5" />
+            </button>
+            <div className="mx-2 h-6 border-r border-gray-300"></div>
+            <button className="p-2 text-gray-600 hover:bg-gray-200 rounded-md" title="Test Settings">
+              <Menu className="h-5 w-5" />
+            </button>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center bg-[#0A1E3A] py-2 px-4 rounded-md border border-[#4B9CD3]">
-              <Clock className="h-5 w-5 mr-2 text-[#4B9CD3]" />
-              <span className="font-mono font-bold">{timer}</span>
+          
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center border border-gray-300 rounded bg-white py-1 px-3 text-sm">
+              <span className="text-gray-500 mr-2">Questions Answered:</span>
+              <span className="font-semibold">{Object.keys(userAnswers).length}/{totalQuestions}</span>
+            </div>
+            <div className="flex items-center border border-gray-300 rounded bg-white py-1 px-3 text-sm">
+              <Clock className="h-4 w-4 mr-1 text-gray-500" />
+              <span className="font-mono">{timer}</span>
             </div>
             <button 
               onClick={onBack}
-              className="bg-[#4B9CD3] hover:bg-[#3d7eaa] text-white py-2 px-4 rounded-md flex items-center transition-colors"
+              className="border border-red-300 text-red-600 hover:bg-red-50 py-1 px-3 rounded flex items-center text-sm"
             >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              <span className="font-medium">Exit</span>
+              <LogOut className="h-4 w-4 mr-1" />
+              Exit
+            </button>
+          </div>
+        </div>
+        
+        <div className="flex items-center justify-between px-4 py-3">
+          <div>
+            <h2 className="font-bold text-lg text-[#13294B]">NCLEX-RN: {test.title}</h2>
+            <div className="text-sm text-gray-500 flex items-center mt-1">
+              <User className="h-4 w-4 mr-1" />
+              <span>NURS'TD Practice Exam</span>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <button 
+              className={`p-2 rounded-full border ${isQuestionFlagged(currentQuestion?.id) ? 'bg-amber-50 border-amber-300 text-amber-600' : 'border-gray-300 hover:bg-gray-100 text-gray-600'}`} 
+              onClick={toggleFlagQuestion}
+              title="Flag for Review"
+            >
+              <Flag className="h-5 w-5" />
+            </button>
+            <button 
+              className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600"
+              onClick={() => setShowReviewMode(true)}
+              title="Review Flashcards"
+            >
+              <BookOpen className="h-5 w-5" />
+            </button>
+            <button className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600" title="Help">
+              <HelpCircle className="h-5 w-5" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Exam Content Container */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {/* Left side: Question number & tools */}
-        <div className="md:col-span-1">
-          <div className="bg-white rounded-lg shadow-md p-4 mb-4">
-            <h3 className="font-bold text-[#13294B] text-lg border-b pb-2 mb-3">Question Navigator</h3>
-            
-            {/* Question number indicator */}
-            <div className="bg-[#f3f4f6] p-3 rounded-md mb-3 text-center">
-              <span className="block text-sm text-gray-500 mb-1">Question</span>
-              <span className="text-3xl font-bold text-[#13294B]">{currentQuestionIndex + 1}</span>
-              <span className="block text-sm text-gray-500 mt-1">of {totalQuestions}</span>
+      {/* Exam Content Container with improved layout */}
+      <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
+        {/* Left side: Question navigator */}
+        <div className="md:col-span-2">
+          <div className="bg-white rounded-lg border-2 border-gray-200 shadow-md overflow-hidden sticky top-4">
+            <div className="bg-[#13294B] text-white p-3 flex justify-between items-center">
+              <h3 className="font-medium">Question Navigator</h3>
+              <span className="text-sm bg-[#4B9CD3] py-1 px-2 rounded">
+                {currentQuestionIndex + 1} of {totalQuestions}
+              </span>
             </div>
             
-            {/* Progress bar */}
-            <div className="mb-4">
-              <div className="flex justify-between text-sm mb-1">
-                <span>Progress</span>
-                <span>{Math.round(calculateProgress())}%</span>
+            {/* Progress indicator */}
+            <div className="px-4 pt-4 pb-2">
+              <div className="mb-1 flex items-center justify-between text-sm">
+                <span>Completion Progress</span>
+                <span className="font-medium">{Math.round(calculateProgress())}%</span>
               </div>
-              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-[#4B9CD3]"
-                  style={{ width: `${calculateProgress()}%` }}
-                ></div>
+              <Progress value={calculateProgress()} className="h-2" />
+            </div>
+            
+            {/* Question list tabs */}
+            <div className="p-3 border-b border-gray-200">
+              <div className="flex p-1 bg-gray-100 rounded-md">
+                <button 
+                  className={`flex-1 py-1.5 px-2 text-sm font-medium rounded ${!showFlaggedOnly ? 'bg-white shadow text-[#13294B]' : 'text-gray-600'}`}
+                  onClick={() => setShowFlaggedOnly(false)}
+                >
+                  All Questions
+                </button>
+                <button 
+                  className={`flex-1 py-1.5 px-2 text-sm font-medium rounded flex items-center justify-center ${showFlaggedOnly ? 'bg-white shadow text-[#13294B]' : 'text-gray-600'}`}
+                  onClick={() => setShowFlaggedOnly(true)}
+                >
+                  <Flag className="h-3.5 w-3.5 mr-1" />
+                  Flagged
+                </button>
               </div>
             </div>
             
-            {/* Action buttons */}
-            <div className="space-y-2">
-              <button 
-                className={`w-full py-2 px-3 flex items-center justify-between rounded border transition-colors ${
-                  isQuestionFlagged(currentQuestion?.id) 
-                    ? "border-[#4B9CD3] bg-[#4B9CD3]/10 text-[#13294B]"
-                    : "border-gray-200 text-[#13294B] hover:bg-gray-50"
-                }`}
-                onClick={toggleFlagQuestion}
-                disabled={isLoading || !currentQuestion}
-              >
-                <span className="font-medium">
-                  {isQuestionFlagged(currentQuestion?.id) ? "Unflag Question" : "Flag Question"}
-                </span>
-                <Flag className={`h-4 w-4 ${isQuestionFlagged(currentQuestion?.id) ? "fill-[#4B9CD3] text-[#4B9CD3]" : ""}`} />
-              </button>
-              
-              <button 
-                className="w-full text-[#13294B] py-2 px-3 flex items-center justify-between rounded border border-gray-200 hover:bg-gray-50 transition-colors"
-                onClick={() => setShowReviewMode(true)}
-                disabled={questions.length === 0}
-              >
-                <span className="font-medium">Quick Review Mode</span>
-                <BookOpen className="h-4 w-4" />
-              </button>
-              
-              <div className="py-2">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-medium text-sm">Question List</h4>
-                  <div className="flex text-xs">
-                    <button 
-                      className={`px-2 py-1 rounded-l ${!showFlaggedOnly ? "bg-[#13294B] text-white" : "bg-gray-100"}`}
-                      onClick={() => setShowFlaggedOnly(false)}
-                    >
-                      All
-                    </button>
-                    <button 
-                      className={`px-2 py-1 rounded-r ${showFlaggedOnly ? "bg-[#13294B] text-white" : "bg-gray-100"}`}
-                      onClick={() => setShowFlaggedOnly(true)}
-                    >
-                      Flagged
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-5 gap-1 max-h-48 overflow-y-auto p-1">
-                  {questions.map((question: Question, index: number) => {
-                    if (showFlaggedOnly && !isQuestionFlagged(question.id)) {
-                      return null;
+            {/* Question grid with color-coded status */}
+            <div className="max-h-[400px] overflow-y-auto p-3">
+              <div className="grid grid-cols-5 gap-1.5">
+                {questions.map((question: Question, index: number) => {
+                  if (showFlaggedOnly && !isQuestionFlagged(question.id)) {
+                    return null;
+                  }
+                  
+                  // Determine button style based on status
+                  let buttonStyle = "flex items-center justify-center h-9 w-full rounded font-medium text-sm";
+                  let textContent = (index + 1).toString();
+                  let icon = null;
+                  
+                  if (currentQuestionIndex === index) {
+                    // Current question
+                    buttonStyle += " bg-[#13294B] text-white";
+                  } else if (isQuestionAnswered(question.id)) {
+                    if (answerCorrectness[question.id]) {
+                      // Answered correctly
+                      buttonStyle += " bg-green-600 text-white";
+                      icon = <Check className="h-3 w-3" />;
+                    } else {
+                      // Answered incorrectly
+                      buttonStyle += " bg-red-500 text-white";
+                      icon = <X className="h-3 w-3" />;
                     }
-                    
-                    return (
-                      <button
-                        key={question.id}
-                        className={`h-8 w-full flex items-center justify-center rounded text-sm font-medium ${
-                          currentQuestionIndex === index
-                            ? "bg-[#13294B] text-white"
-                            : isQuestionAnswered(question.id)
-                              ? "bg-[#4B9CD3]/80 text-white"
-                              : isQuestionFlagged(question.id)
-                                ? "bg-amber-100 border border-amber-300"
-                                : "bg-gray-100 hover:bg-gray-200"
-                        }`}
-                        onClick={() => goToQuestion(index)}
-                      >
-                        {index + 1}
-                      </button>
-                    );
-                  })}
+                  } else if (isQuestionFlagged(question.id)) {
+                    // Flagged but not answered
+                    buttonStyle += " bg-amber-100 border border-amber-300 text-[#13294B]";
+                    icon = <Flag className="h-3 w-3" />;
+                  } else {
+                    // Not answered or flagged
+                    buttonStyle += " bg-gray-100 border border-gray-300 hover:bg-gray-200 text-gray-700";
+                  }
+                  
+                  return (
+                    <button
+                      key={question.id}
+                      className={buttonStyle}
+                      onClick={() => goToQuestion(index)}
+                    >
+                      {icon ? (
+                        <div className="flex items-center">
+                          <span className="mr-1">{textContent}</span>
+                          {icon}
+                        </div>
+                      ) : textContent}
+                    </button>
+                  );
+                })}
+              </div>
+              
+              {/* Legend */}
+              <div className="mt-4 pt-3 border-t border-gray-200 text-xs text-gray-500 space-y-1.5">
+                <div className="flex items-center">
+                  <div className="h-4 w-4 bg-[#13294B] rounded mr-2"></div>
+                  <span>Current Question</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="h-4 w-4 bg-gray-100 border border-gray-300 rounded mr-2"></div>
+                  <span>Unanswered</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="h-4 w-4 bg-amber-100 border border-amber-300 rounded mr-2"></div>
+                  <span>Flagged for Review</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="h-4 w-4 bg-green-600 rounded mr-2"></div>
+                  <span>Answered Correctly</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="h-4 w-4 bg-red-500 rounded mr-2"></div>
+                  <span>Answered Incorrectly</span>
                 </div>
               </div>
             </div>
-          </div>
-          
-          {/* Submit exam button */}
-          <div className="bg-[#13294B] text-white rounded-lg shadow-md p-4 text-center hidden md:block">
-            <p className="mb-3 text-sm">When you've completed all questions:</p>
-            <button 
-              className={`w-full py-2 px-4 rounded-md font-medium transition-colors ${
-                Object.keys(userAnswers).length === totalQuestions
-                  ? "bg-[#4B9CD3] hover:bg-[#3d7eaa]" 
-                  : "bg-gray-400 cursor-not-allowed"
-              }`}
-              disabled={Object.keys(userAnswers).length !== totalQuestions}
-            >
-              Submit Exam
-            </button>
+            
+            {/* Submit exam button */}
+            <div className="p-4 bg-gray-50 border-t border-gray-200">
+              <button 
+                className={`w-full py-2.5 px-4 rounded font-medium transition-colors flex items-center justify-center ${
+                  Object.keys(userAnswers).length === totalQuestions
+                    ? "bg-green-600 hover:bg-green-700 text-white" 
+                    : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                }`}
+                disabled={Object.keys(userAnswers).length !== totalQuestions}
+              >
+                <CheckSquare className="mr-2 h-4 w-4" />
+                Submit Exam
+              </button>
+              
+              <div className="mt-3 text-center">
+                <button className="text-xs text-[#4B9CD3] hover:underline">
+                  Pause Exam
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         
         {/* Right side: Question Content */}
-        <div className="md:col-span-3">
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="md:col-span-5">
+          <div className="bg-white rounded-lg border-2 border-gray-200 shadow-md overflow-hidden">
             {/* Question Content */}
-            <div className="p-6 border-b border-gray-200">
+            <div className="p-6 border-b border-gray-200 min-h-[500px]">
               {isLoading || !currentQuestion ? (
                 <div className="space-y-6">
                   <Skeleton className="h-6 w-3/4" />
@@ -392,46 +458,80 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
               )}
             </div>
             
-            {/* Question Navigation - Professional Style */}
-            <div className="bg-gray-50 p-4 flex justify-between items-center">
-              <button 
-                className={`bg-[#13294B] text-white py-2 px-6 rounded-md flex items-center transition-colors ${
-                  currentQuestionIndex === 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-[#0A1E3A]"
-                }`}
-                onClick={goToPreviousQuestion}
-                disabled={currentQuestionIndex === 0 || isLoading}
-              >
-                <ChevronLeft className="mr-2 h-4 w-4" />
-                Previous
-              </button>
-              <div className="text-sm text-gray-500 font-medium hidden md:block">
-                Question {currentQuestionIndex + 1} of {totalQuestions}
+            {/* Question Navigation - Improved professional style */}
+            <div className="bg-[#f3f4f6] p-4 border-t border-gray-200 flex justify-between items-center">
+              <div className="flex items-center">
+                <button 
+                  className={`py-2.5 px-5 rounded-md flex items-center transition-colors ${
+                    currentQuestionIndex === 0 
+                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed' 
+                      : 'bg-[#13294B] text-white hover:bg-[#0A1E3A]'
+                  }`}
+                  onClick={goToPreviousQuestion}
+                  disabled={currentQuestionIndex === 0}
+                >
+                  <ChevronLeft className="mr-1.5 h-4 w-4" />
+                  Previous
+                </button>
+                
+                {/* Extra button for marking for review */}
+                <button 
+                  className={`ml-2 py-2.5 px-4 rounded-md flex items-center ${
+                    isQuestionFlagged(currentQuestion?.id)
+                      ? 'bg-amber-100 border border-amber-300 text-amber-700 hover:bg-amber-200'
+                      : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'
+                  }`}
+                  onClick={toggleFlagQuestion}
+                >
+                  <Flag className="mr-1.5 h-4 w-4" />
+                  {isQuestionFlagged(currentQuestion?.id) ? 'Flagged' : 'Flag for Review'}
+                </button>
               </div>
+              
+              <div className="hidden md:flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
+                  <button className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600">
+                    <Smile className="h-4 w-4" />
+                  </button>
+                  <button className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600">
+                    <Meh className="h-4 w-4" />
+                  </button>
+                  <button className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600">
+                    <Frown className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+              
               <button 
-                className={`bg-[#4B9CD3] text-white py-2 px-6 rounded-md transition-colors flex items-center ${
-                  currentQuestionIndex === totalQuestions - 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-[#3d7eaa]"
+                className={`py-2.5 px-5 rounded-md flex items-center ${
+                  currentQuestionIndex === totalQuestions - 1 
+                    ? 'bg-green-600 hover:bg-green-700 text-white'
+                    : 'bg-[#4B9CD3] hover:bg-[#3d7eaa] text-white'
                 }`}
                 onClick={goToNextQuestion}
-                disabled={currentQuestionIndex === totalQuestions - 1 || isLoading}
               >
-                Next
-                <ChevronRight className="ml-2 h-4 w-4" />
+                {currentQuestionIndex === totalQuestions - 1 ? 'Finish' : 'Next'}
+                <ChevronRight className="ml-1.5 h-4 w-4" />
               </button>
             </div>
           </div>
           
-          {/* Mobile submit button */}
-          <div className="mt-4 md:hidden">
-            <button 
-              className={`w-full py-3 px-4 rounded-md font-medium text-white transition-colors ${
-                Object.keys(userAnswers).length === totalQuestions
-                  ? "bg-[#4B9CD3] hover:bg-[#3d7eaa]" 
-                  : "bg-gray-400 cursor-not-allowed"
-              }`}
-              disabled={Object.keys(userAnswers).length !== totalQuestions}
-            >
-              Submit Exam
-            </button>
+          {/* Mobile-only answer status */}
+          <div className="mt-4 md:hidden bg-white rounded-lg border-2 border-gray-200 p-3">
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="bg-blue-50 border border-blue-200 rounded p-2">
+                <div className="text-xs text-blue-500 mb-1">Answered</div>
+                <div className="font-bold text-blue-700">{Object.keys(userAnswers).length}/{totalQuestions}</div>
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded p-2">
+                <div className="text-xs text-amber-500 mb-1">Flagged</div>
+                <div className="font-bold text-amber-700">{flaggedQuestions.length}</div>
+              </div>
+              <div className="bg-green-50 border border-green-200 rounded p-2">
+                <div className="text-xs text-green-500 mb-1">Correct</div>
+                <div className="font-bold text-green-700">{Object.values(answerCorrectness).filter(Boolean).length}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
