@@ -15,10 +15,17 @@ app.use(xssClean());
 
 // CORS middleware - restrict to specific origins in production
 app.use((req, res, next) => {
-  // Allow specific origins or use '*' for development
-  const allowedOrigins = process.env.NODE_ENV === 'production' 
-    ? ['https://your-app-domain.com', 'https://*.replit.app']
-    : ['*'];
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  
+  // Allow specific origins in production, more permissive in development
+  const allowedOrigins = isDevelopment
+    ? ['*'] 
+    : [
+        'https://nursing-nclex-prep.replit.app',
+        'https://*.replit.app',
+        'https://nurs-td-nclex-prep.com',
+        'https://*.nurs-td-nclex-prep.com'
+      ];
     
   const origin = req.headers.origin;
   
@@ -33,11 +40,13 @@ app.use((req, res, next) => {
         return false;
       }))) {
     res.setHeader('Access-Control-Allow-Origin', origin);
+    
+    // Only set additional CORS headers if origin is allowed
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
   }
-  
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
   
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
@@ -50,10 +59,14 @@ app.use((req, res, next) => {
 // Security headers middleware
 app.use((req, res, next) => {
   // Content Security Policy (CSP)
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://*.replit.dev wss://*.replit.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self';"
-  );
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  
+  // In development we need more permissive settings for HMR and debugging
+  const cspValue = isDevelopment 
+    ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://*.replit.dev wss://*.replit.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self';"
+    : "default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests;";
+  
+  res.setHeader('Content-Security-Policy', cspValue);
 
   // HTTP Strict Transport Security (HSTS)
   res.setHeader(

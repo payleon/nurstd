@@ -11,8 +11,82 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Security headers middleware
+app.use((req, res, next) => {
+  // Content Security Policy (CSP)
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests;"
+  );
+
+  // HTTP Strict Transport Security (HSTS)
+  res.setHeader(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains'
+  );
+
+  // Cross-Origin-Opener-Policy (COOP)
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+
+  // X-Frame-Options (XFO) to prevent clickjacking
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+
+  // X-Content-Type-Options to prevent MIME type sniffing
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+
+  // Referrer-Policy
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+  // Permissions-Policy
+  res.setHeader(
+    'Permissions-Policy',
+    'camera=(), microphone=(), geolocation=()'
+  );
+
+  next();
+});
+
+// CORS middleware
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    'https://nursing-nclex-prep.replit.app',
+    'https://*.replit.app',
+    'https://nurs-td-nclex-prep.com',
+    'https://*.nurs-td-nclex-prep.com'
+  ];
+  
+  const origin = req.headers.origin;
+  
+  // Set CORS headers
+  if (origin && (allowedOrigins.includes(origin) || 
+      allowedOrigins.some(allowed => {
+        if (allowed.startsWith('*.') && origin) {
+          const allowedDomain = allowed.slice(2); // Remove *. prefix
+          return origin.endsWith(allowedDomain);
+        }
+        return false;
+      }))) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
+  }
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+  
+  next();
+});
+
 // Serve static files
-app.use(express.static(path.join(__dirname, 'dist/client')));
+app.use(express.static(path.join(__dirname, 'dist/public')));
 
 // API routes - add your API routes here or import them
 app.get('/api/tests', (req, res) => {
@@ -41,7 +115,7 @@ app.get('/api/questions', (req, res) => {
 
 // Handle SPA routing - always return index.html for client routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/client/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/public/index.html'));
 });
 
 // Error handling
