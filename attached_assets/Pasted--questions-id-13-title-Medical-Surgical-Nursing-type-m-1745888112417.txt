@@ -1,0 +1,596 @@
+{
+  "questions": [
+    {
+      "id": 13,
+      "title": "Medical-Surgical Nursing",
+      "type": "mc",
+      "text": "A patient with cirrhosis develops ascites. What is the primary pathophysiological mechanism that contributes to the development of ascites in this patient?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Decreased aldosterone levels"
+        },
+        {
+          "id": "B",
+          "text": "Increased oncotic pressure in the capillaries"
+        },
+        {
+          "id": "C",
+          "text": "Portal hypertension and decreased serum albumin"
+        },
+        {
+          "id": "D",
+          "text": "Increased renal excretion of sodium"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Ascites in cirrhosis is primarily caused by portal hypertension, which increases hydrostatic pressure in the capillaries, and decreased serum albumin, which reduces oncotic pressure. These two factors lead to fluid leaking from the capillaries into the peritoneal cavity. Aldosterone levels are actually increased, renal excretion of sodium is decreased, and oncotic pressure is decreased.  "
+    },
+    {
+      "id": 14,
+      "title": "Nutrition",
+      "type": "mc",
+      "text": "A patient with cirrhosis is being discharged home. Which dietary modification is most important for the nurse to emphasize to the patient and their family?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Increase protein intake significantly to promote liver regeneration"
+        },
+        {
+          "id": "B",
+          "text": "Restrict sodium intake to manage fluid retention"
+        },
+        {
+          "id": "C",
+          "text": "Consume a high-fat diet for energy"
+        },
+        {
+          "id": "D",
+          "text": "Eliminate all sugar from the diet to prevent further liver damage"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Sodium restriction is crucial in managing fluid retention (ascites and edema) associated with cirrhosis. While adequate protein intake is important, it needs to be balanced and individualized. High-fat diets can be difficult for the liver to process.  While minimizing excessive sugar intake is helpful for overall health, sodium restriction is the priority in managing cirrhosis-related complications."
+    },
+    {
+      "id": 15,
+      "title": "Medical-Surgical Nursing",
+      "type": "mc",
+      "text": "A nurse is caring for a patient with cirrhosis who has developed hepatic encephalopathy. Which laboratory finding would the nurse expect to see elevated?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Serum creatinine"
+        },
+        {
+          "id": "B",
+          "text": "Serum ammonia"
+        },
+        {
+          "id": "C",
+          "text": "Serum albumin"
+        },
+        {
+          "id": "D",
+          "text": "Serum potassium"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Hepatic encephalopathy is caused by the liver's inability to detoxify ammonia.  Elevated serum ammonia levels are a key indicator of hepatic encephalopathy. Serum creatinine reflects kidney function. Serum albumin is usually decreased in cirrhosis. Serum potassium may fluctuate but is not the primary indicator of encephalopathy."
+    },
+    {
+      "id": 16,
+      "title": "Pharmacology",
+      "type": "mc",
+      "text": "A patient with cirrhosis and ascites is prescribed spironolactone. What is the primary reason for using spironolactone in this patient?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "To increase potassium excretion and prevent hyperkalemia"
+        },
+        {
+          "id": "B",
+          "text": "To promote sodium and water excretion while sparing potassium"
+        },
+        {
+          "id": "C",
+          "text": "To lower blood pressure and reduce portal hypertension"
+        },
+        {
+          "id": "D",
+          "text": "To improve liver function and promote healing"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Spironolactone is a potassium-sparing diuretic that is commonly used in cirrhosis to promote sodium and water excretion, thereby reducing ascites, while minimizing the risk of hypokalemia. It also blocks the effects of aldosterone which is often elevated in cirrhosis. It is not used primarily to lower blood pressure or improve liver function."
+    },
+    {
+      "id": 17,
+      "title": "Assessment",
+      "type": "mc",
+      "text": "Which physical assessment finding is most indicative of portal hypertension in a patient with cirrhosis?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Crackles in the lungs"
+        },
+        {
+          "id": "B",
+          "text": "Peripheral edema"
+        },
+        {
+          "id": "C",
+          "text": "Ascites and splenomegaly"
+        },
+        {
+          "id": "D",
+          "text": "Jaundice and pruritus"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Portal hypertension is increased pressure in the portal venous system. This leads to ascites (fluid accumulation in the abdomen) and splenomegaly (enlargement of the spleen) due to backflow of blood. Peripheral edema can occur due to low albumin, and jaundice and pruritus are due to impaired liver function, but these are not as directly indicative of portal hypertension as ascites and splenomegaly."
+    },
+    {
+      "id": 18,
+      "title": "Medical-Surgical Nursing",
+      "type": "mc",
+      "text": "A patient with cirrhosis is undergoing a paracentesis. What is the most important nursing action during this procedure?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administering a bolus of intravenous fluids after the procedure"
+        },
+        {
+          "id": "B",
+          "text": "Monitoring the patient for hypotension and signs of hypovolemia"
+        },
+        {
+          "id": "C",
+          "text": "Encouraging the patient to ambulate immediately after the procedure"
+        },
+        {
+          "id": "D",
+          "text": "Applying a warm compress to the insertion site"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Paracentesis involves removing fluid from the peritoneal cavity. Rapid removal of large amounts of fluid can lead to hypotension and hypovolemia due to fluid shifts.  Monitoring for these signs is crucial. IV fluids are sometimes given during or after, but vigilant monitoring is the priority.  Ambulation should be gradual and monitored.  A sterile dressing is applied, not a warm compress."
+    },
+    {
+      "id": 19,
+      "title": "Pharmacology",
+      "type": "mc",
+      "text": "Which medication is commonly used to treat hepatic encephalopathy by reducing ammonia levels?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Furosemide"
+        },
+        {
+          "id": "B",
+          "text": "Lactulose"
+        },
+        {
+          "id": "C",
+          "text": "Ondansetron"
+        },
+        {
+          "id": "D",
+          "text": "Metoprolol"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Lactulose is a synthetic disaccharide that is used to treat hepatic encephalopathy. It works by acidifying the colon, which converts ammonia (NH3) to ammonium (NH4+), which is then trapped in the colon and excreted in the feces. Furosemide is a diuretic. Ondansetron is an antiemetic. Metoprolol can be used for portal hypertension but does not directly reduce ammonia."
+    },
+    {
+      "id": 20,
+      "title": "Patient Education",
+      "type": "mc",
+      "text": "A patient with cirrhosis asks the nurse about the cause of their jaundice. Which explanation is most accurate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"It's due to an increase in red blood cell production.\""
+        },
+        {
+          "id": "B",
+          "text": "\"It's caused by the liver's inability to process bilirubin.\""
+        },
+        {
+          "id": "C",
+          "text": "\"It's a result of an infection in your gallbladder.\""
+        },
+        {
+          "id": "D",
+          "text": "\"It's due to a decrease in the amount of iron in your blood.\""
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Jaundice in cirrhosis is caused by the liver's impaired ability to conjugate and excrete bilirubin, a byproduct of red blood cell breakdown. This leads to a buildup of bilirubin in the blood, causing the yellow discoloration of the skin and eyes. Jaundice is not directly related to red blood cell production, gallbladder infection, or iron levels."
+    },
+    {
+      "id": 21,
+      "title": "Complications",
+      "type": "mc",
+      "text": "A patient with cirrhosis develops esophageal varices. What is the most life-threatening risk associated with esophageal varices?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Abdominal pain"
+        },
+        {
+          "id": "B",
+          "text": "Gastrointestinal bleeding"
+        },
+        {
+          "id": "C",
+          "text": "Nausea and vomiting"
+        },
+        {
+          "id": "D",
+          "text": "Difficulty swallowing"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Esophageal varices are dilated veins in the esophagus that are prone to rupture and cause massive gastrointestinal bleeding. This bleeding can be life-threatening. While the other options can occur, they are not as immediately dangerous as hemorrhage."
+    },
+    {
+      "id": 22,
+      "title": "Nursing Interventions",
+      "type": "mc",
+      "text": "What nursing intervention is most important to implement for a patient with cirrhosis who has ascites?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Encourage a high-sodium diet"
+        },
+        {
+          "id": "B",
+          "text": "Measure abdominal girth daily"
+        },
+        {
+          "id": "C",
+          "text": "Limit fluid intake to 3 liters per day"
+        },
+        {
+          "id": "D",
+          "text": "Elevate the head of the bed to 30 degrees only"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Measuring abdominal girth daily is important to monitor the progression or resolution of ascites. A low-sodium diet is essential. Fluid restriction is often necessary but is individualized. Elevating the head of the bed assists with breathing; a higher elevation (semi-Fowler's or Fowler's) may be beneficial. "
+    },
+    {
+      "id": 23,
+      "title": "Pharmacology",
+      "type": "mc",
+      "text": "A patient with cirrhosis is prescribed propranolol. What is the primary purpose of administering propranolol to this patient?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "To treat hepatic encephalopathy"
+        },
+        {
+          "id": "B",
+          "text": "To reduce portal hypertension"
+        },
+        {
+          "id": "C",
+          "text": "To prevent jaundice"
+        },
+        {
+          "id": "D",
+          "text": "To improve liver function"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Propranolol is a beta-blocker used to reduce portal hypertension by decreasing portal venous pressure. This helps prevent complications such as esophageal varices bleeding. Propranolol does not directly treat hepatic encephalopathy, prevent jaundice, or improve liver function."
+    },
+    {
+      "id": 24,
+      "title": "Assessment",
+      "type": "mc",
+      "text": "Which sign or symptom is most indicative of worsening hepatic encephalopathy in a patient with cirrhosis?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Increased abdominal girth"
+        },
+        {
+          "id": "B",
+          "text": "Asterixis"
+        },
+        {
+          "id": "C",
+          "text": "Elevated serum bilirubin"
+        },
+        {
+          "id": "D",
+          "text": "Decreased urine output"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Asterixis (flapping tremor of the hands) is a classic sign of worsening hepatic encephalopathy due to increased ammonia levels affecting brain function. Increased abdominal girth indicates worsening ascites. Elevated bilirubin indicates impaired liver function. Decreased urine output suggests renal problems."
+    },
+    {
+      "id": 25,
+      "title": "Nutrition",
+      "type": "mc",
+      "text": "A patient with cirrhosis is at risk for malnutrition. What dietary recommendation is most appropriate to address this risk?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Restrict protein intake to minimize ammonia production"
+        },
+        {
+          "id": "B",
+          "text": "Provide small, frequent meals"
+        },
+        {
+          "id": "C",
+          "text": "Encourage a high-fiber diet to prevent constipation"
+        },
+        {
+          "id": "D",
+          "text": "Administer intravenous fluids only"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Small, frequent meals are easier to tolerate and can help maximize nutrient intake in patients with cirrhosis who often have decreased appetite and early satiety. While protein restriction may be necessary in some cases of encephalopathy, it should not be routine as it contributes to malnutrition. A high-fiber diet may be helpful but is not the primary intervention. IV fluids alone do not address the need for adequate nutrition."
+    },
+    {
+      "id": 26,
+      "title": "Medical-Surgical Nursing",
+      "type": "mc",
+      "text": "A patient with cirrhosis is undergoing endoscopic variceal ligation (banding). What is the primary purpose of this procedure?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "To remove fluid from the abdomen"
+        },
+        {
+          "id": "B",
+          "text": "To prevent bleeding from esophageal varices"
+        },
+        {
+          "id": "C",
+          "text": "To improve liver function"
+        },
+        {
+          "id": "D",
+          "text": "To reduce ammonia levels"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Endoscopic variceal ligation (banding) is a procedure used to treat esophageal varices by placing bands around the varices to compress them and prevent bleeding. It does not directly remove abdominal fluid, improve liver function, or reduce ammonia levels."
+    },
+        {
+        "id": 27,
+        "title": "Cirrhosis & Fluid Balance",
+        "type": "sata",
+        "text": "Which assessment findings would support a diagnosis of fluid volume excess in a client with cirrhosis? Select all that apply.",
+        "choices": [
+            {"id": "A", "text": "Increased abdominal girth"},
+            {"id": "B", "text": "Decreased heart rate"},
+            {"id": "C", "text": "Pitting edema in the lower extremities"},
+            {"id": "D", "text": "Increased blood pressure"},
+            {"id": "E", "text": "Dry mucous membranes"},
+            {"id": "F", "text": "Jugular vein distention"}
+        ],
+        "correctAnswer": ["A", "C", "D", "F"],
+        "rationale": "Fluid volume excess in cirrhosis is evidenced by increased abdominal girth (ascites), pitting edema, increased blood pressure, and jugular vein distention. Tachycardia (increased heart rate) is more common with fluid overload. Dry mucous membranes indicate fluid volume deficit."
+    },
+    {
+        "id": 28,
+        "title": "Cirrhosis & Hepatic Encephalopathy",
+        "type": "mc",
+        "text": "A client with cirrhosis is confused and exhibits asterixis. The nurse understands these findings are most likely caused by:",
+        "choices": [
+            {"id": "A", "text": "Elevated serum sodium levels"},
+            {"id": "B", "text": "Elevated serum ammonia levels"},
+            {"id": "C", "text": "Decreased serum potassium levels"},
+            {"id": "D", "text": "Decreased serum glucose levels"}
+        ],
+        "correctAnswer": "B",
+        "rationale": "Confusion and asterixis in cirrhosis are characteristic signs of hepatic encephalopathy, caused by the liver's inability to detoxify ammonia, leading to elevated serum ammonia levels that affect brain function."
+    },
+    {
+        "id": 29,
+        "title": "Cirrhosis & Medication",
+        "type": "mc",
+        "text": "A client with cirrhosis is prescribed lactulose. The nurse understands the primary goal of this medication is to:",
+        "choices": [
+            {"id": "A", "text": "Promote sodium excretion"},
+            {"id": "B", "text": "Decrease esophageal varices pressure"},
+            {"id": "C", "text": "Lower serum ammonia levels"},
+            {"id": "D", "text": "Increase potassium levels"}
+        ],
+        "correctAnswer": "C",
+        "rationale": "Lactulose is used to treat hepatic encephalopathy by reducing serum ammonia levels. It works by acidifying the colon, trapping ammonia, and promoting its excretion through bowel movements."
+    },
+    {
+        "id": 30,
+        "title": "Cirrhosis & Nursing Care",
+        "type": "mc",
+        "text": "A client with cirrhosis is scheduled for a paracentesis. The nurse should instruct the client to:",
+        "choices": [
+            {"id": "A", "text": "Eat a high-protein meal before the procedure"},
+            {"id": "B", "text": "Empty their bladder before the procedure"},
+            {"id": "C", "text": "Lie flat during the procedure"},
+            {"id": "D", "text": "Hold their breath during needle insertion"}
+        ],
+        "correctAnswer": "B",
+        "rationale": "The client should empty their bladder before a paracentesis to reduce the risk of bladder perforation during the procedure.  A high-protein meal is not necessary.  The client is usually positioned upright or semi-Fowler's. Breath-holding is not typically necessary."
+    },
+    {
+        "id": 31,
+        "title": "Cirrhosis & Complications",
+        "type": "sata",
+        "text": "A client with cirrhosis is at risk for developing esophageal varices. Which of the following measures can help prevent or manage this complication? Select all that apply.",
+        "choices": [
+            {"id": "A", "text": "Avoiding alcohol consumption"},
+            {"id": "B", "text": "Taking medications to reduce portal hypertension"},
+            {"id": "C", "text": "Consuming a high-fiber diet"},
+            {"id": "D", "text": "Avoiding straining during bowel movements"},
+            {"id": "E", "text": "Elevating the head of the bed"},
+            {"id": "F", "text": "Limiting fluid intake"}
+        ],
+        "correctAnswer": ["A", "B", "D"],
+        "rationale": "Esophageal varices are managed by avoiding alcohol, taking medications to reduce portal hypertension (like beta-blockers), and preventing straining during bowel movements (which increases intra-abdominal pressure). High-fiber diets help prevent constipation and straining. Elevating the head of the bed may help with ascites-related dyspnea, but doesn't directly affect varices. Fluid restriction is for ascites/hyponatremia, not varices directly."
+    },
+    {
+        "id": 32,
+        "title": "Cirrhosis & Laboratory Values",
+        "type": "mc",
+        "text": "Which set of laboratory results would be most consistent with a client experiencing complications from cirrhosis?",
+        "choices": [
+            {"id": "A", "text": "Elevated albumin, decreased PT/INR, elevated bilirubin"},
+            {"id": "B", "text": "Decreased albumin, increased PT/INR, elevated bilirubin"},
+            {"id": "C", "text": "Elevated albumin, increased PT/INR, decreased bilirubin"},
+            {"id": "D", "text": "Decreased albumin, decreased PT/INR, decreased bilirubin"}
+        ],
+        "correctAnswer": "B",
+        "rationale": "In cirrhosis, the liver's ability to synthesize albumin is impaired, leading to decreased albumin levels. Liver damage also affects the production of clotting factors, resulting in an increased PT/INR (prolonged clotting time). Bilirubin metabolism is also impaired, leading to elevated bilirubin levels."
+    },
+    {
+      "id": 33,
+      "title": "Cirrhosis & Patient Teaching",
+      "type": "mc",
+      "text": "A client with cirrhosis is experiencing pruritus. Which of the following nursing interventions is most appropriate to provide relief?",
+      "choices": [
+        {"id": "A", "text": "Apply warm compresses to the skin"},
+        {"id": "B", "text": "Administer antihistamines as prescribed"},
+        {"id": "C", "text": "Encourage frequent hot showers"},
+        {"id": "D", "text": "Recommend wearing tight-fitting clothing"}
+      ],
+      "correctAnswer": "B",
+      "rationale": "Pruritus in cirrhosis is often related to elevated bilirubin levels. Antihistamines can help relieve itching. Warm compresses and hot showers can exacerbate itching. Loose-fitting clothing is preferable to tight-fitting clothing."
+    },
+    {
+      "id": 34,
+      "title": "Cirrhosis & Collaborative Care",
+      "type": "mc",
+      "text": "A client with cirrhosis is being evaluated for a liver transplant. The nurse understands that a primary contraindication for liver transplantation is:",
+      "choices": [
+        {"id": "A", "text": "Active alcoholism"},
+        {"id": "B", "text": "Ascites"},
+        {"id": "C", "text": "Esophageal varices"},
+        {"id": "D", "text": "Hepatic encephalopathy"}
+      ],
+      "correctAnswer": "A",
+      "rationale": "Active alcoholism is a major contraindication for liver transplantation because continued alcohol use will damage the new liver. While ascites, esophageal varices, and hepatic encephalopathy are complications of cirrhosis, they are not absolute contraindications for transplantation."
+    },
+    {
+      "id": 35,
+      "title": "Cirrhosis & Nutrition",
+      "type": "mc",
+      "text": "A nurse is providing dietary education to a client with cirrhosis who does not have hepatic encephalopathy. Which of the following is the most appropriate recommendation regarding protein intake?",
+      "choices": [
+        {"id": "A", "text": "Restrict protein intake to 20 grams per day"},
+        {"id": "B", "text": "Encourage a high-protein diet"},
+        {"id": "C", "text": "Maintain a moderate protein intake"},
+        {"id": "D", "text": "Eliminate protein from the diet"}
+      ],
+      "correctAnswer": "C",
+      "rationale": "For clients with cirrhosis but without hepatic encephalopathy, a moderate protein intake is generally recommended. Protein restriction is only necessary if the client develops hepatic encephalopathy. A high-protein diet can increase the risk of encephalopathy. Protein elimination is not recommended."
+    },
+    {
+      "id": 36,
+      "title": "Cirrhosis & Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing a client with cirrhosis and observes small, spider-like blood vessels on the client's abdomen. The nurse should document this finding as:",
+      "choices": [
+        {"id": "A", "text": "Petechiae"},
+        {"id": "B", "text": "Ecchymosis"},
+        {"id": "C", "text": "Spider angiomas"},
+        {"id": "D", "text": "Purpura"}
+      ],
+      "correctAnswer": "C",
+      "rationale": "The small, spider-like blood vessels on the abdomen are characteristic of spider angiomas, which are commonly seen in clients with cirrhosis due to increased estrogen levels. Petechiae are small, pinpoint hemorrhages. Ecchymosis is bruising. Purpura is larger areas of discoloration due to bleeding under the skin."
+    },
+    {
+        "id": 37,
+        "title": "Cirrhosis & Infection Risk",
+        "type": "mc",
+        "text": "A client with cirrhosis is at increased risk for infection. Which intervention is most important for the nurse to implement to minimize this risk?",
+        "choices": [
+            {"id": "A", "text": "Restrict visitors"},
+            {"id": "B", "text": "Administer prophylactic antibiotics"},
+            {"id": "C", "text": "Ensure meticulous hand hygiene"},
+            {"id": "D", "text": "Limit the client's activity"}
+        ],
+        "correctAnswer": "C",
+        "rationale": "Meticulous hand hygiene is the most effective way to prevent the spread of infection. While restricting visitors might seem helpful, it can negatively impact the client's emotional well-being. Prophylactic antibiotics can lead to antibiotic resistance. Limiting activity is not a primary intervention for preventing infection."
+    },
+    {
+        "id": 38,
+        "title": "Cirrhosis & Management",
+        "type": "mc",
+        "text": "A client with cirrhosis is experiencing ascites and dyspnea. Which position is most appropriate for the nurse to place the client in to promote optimal respiratory function?",
+        "choices": [
+            {"id": "A", "text": "Supine"},
+            {"id": "B", "text": "Prone"},
+            {"id": "C", "text": "High Fowler's"},
+            {"id": "D", "text": "Trendelenburg"}
+        ],
+        "correctAnswer": "C",
+        "rationale": "High Fowler's position (sitting upright with the head of the bed elevated) allows for maximal lung expansion and reduces pressure on the diaphragm from the ascites, thereby improving respiratory function. Supine and prone positions can worsen dyspnea. Trendelenburg is contraindicated due to increased abdominal pressure."
+    },
+    {
+        "id": 39,
+        "title": "Cirrhosis & Assessment",
+        "type": "mc",
+        "text": "When assessing a client with cirrhosis, the nurse palpates the abdomen. Which finding is most likely related to the liver?",
+        "choices": [
+            {"id": "A", "text": "Soft and non-tender"},
+            {"id": "B", "text": "Hard and nodular"},
+            {"id": "C", "text": "Hyperactive bowel sounds"},
+            {"id": "D", "text": "Absent bowel sounds"}
+        ],
+        "correctAnswer": "B",
+        "rationale": "In cirrhosis, the liver typically becomes hard and nodular due to the formation of scar tissue. A soft and non-tender liver is normal, but not typical in cirrhosis. Bowel sounds are related to the intestines, not the liver directly."
+    },
+    {
+       "id": 40,
+        "title": "Cirrhosis & Dietary Management",
+        "type": "mc",
+        "text": "A client with cirrhosis is discussing their diet with the nurse. Which food choice indicates a need for further teaching?",
+        "choices": [
+            {"id": "A", "text": "Fresh fruit"},
+            {"id": "B", "text": "Canned soup"},
+            {"id": "C", "text": "Grilled chicken"},
+            {"id": "D", "text": "Steamed vegetables"}
+        ],
+        "correctAnswer": "B",
+        "rationale": "Canned soup is typically high in sodium, which should be restricted in clients with cirrhosis to manage ascites and edema. Fresh fruit, grilled chicken, and steamed vegetables are generally appropriate choices."
+    },
+    {
+        "id": 41,
+        "title": "Cirrhosis & Collaborative Care",
+        "type": "mc",
+        "text": "A client with cirrhosis is scheduled for a transjugular intrahepatic portosystemic shunt (TIPS) procedure. The nurse understands that the primary goal of this procedure is to:",
+        "choices": [
+            {"id": "A", "text": "Remove fluid from the abdomen"},
+            {"id": "B", "text": "Reduce portal hypertension"},
+            {"id": "C", "text": "Improve liver function"},
+            {"id": "D", "text": "Decrease ammonia levels"}
+        ],
+        "correctAnswer": "B",
+        "rationale": "The TIPS procedure creates a channel between the portal vein and the hepatic vein, which reduces portal hypertension and its complications, such as esophageal varices and ascites. It does not directly improve liver function, remove fluid from the abdomen (though it can help), or decrease ammonia levels (and can sometimes worsen hepatic encephalopathy)."
+    },
+    {
+        "id": 42,
+        "title": "Cirrhosis & Respiratory Complications",
+        "type": "mc",
+        "text": "Which nursing intervention is most important for preventing pneumonia in a client with cirrhosis and ascites?",
+        "choices": [
+            {"id": "A", "text": "Encouraging deep breathing and coughing exercises"},
+            {"id": "B", "text": "Restricting fluid intake"},
+            {"id": "C", "text": "Administering antibiotics"},
+            {"id": "D", "text": "Limiting activity"}
+        ],
+        "correctAnswer": "A",
+        "rationale": "Encouraging deep breathing and coughing exercises helps to prevent pneumonia by promoting lung expansion and clearing secretions. Ascites can put pressure on the diaphragm, making it difficult to breathe deeply. Restricting fluid intake is not indicated for pneumonia prevention. Antibiotics are used to treat pneumonia, not prevent it. Limiting activity can contribute to atelectasis and pneumonia."
+    }
+  ]
+}

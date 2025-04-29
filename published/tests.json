@@ -61,5 +61,14 @@
     "questionCount": 37,
     "timeLimit": 45,
     "category": "Medical-Surgical"
+  },
+  {
+    "id": 8,
+    "title": "Cirrhosis Nursing Care",
+    "path": "published/cirrhosis_questions.json",
+    "description": "Focused exam on nursing care for patients with cirrhosis. Covers pathophysiology, complications, medications, and nursing interventions for patients with liver cirrhosis.",
+    "questionCount": 15,
+    "timeLimit": 20,
+    "category": "Medical-Surgical"
   }
 ]
