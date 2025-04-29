@@ -70,5 +70,14 @@
     "questionCount": 15,
     "timeLimit": 20,
     "category": "Medical-Surgical"
+  },
+  {
+    "id": 9,
+    "title": "Advanced NCLEX Question Types",
+    "path": "published/expanded_question_types.json",
+    "description": "Experience the latest NCLEX question formats including hotspot, ordered-response, and chart/exhibit questions. Perfect for practicing with next-generation testing formats.",
+    "questionCount": 3,
+    "timeLimit": 10,
+    "category": "Mixed"
   }
 ]

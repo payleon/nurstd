@@ -69,11 +69,59 @@ const FillInBlankQuestionSchema = BaseQuestionSchema.extend({
   choices: z.array(QuestionChoiceSchema).optional()
 });
 
+// Hotspot question schema (for identifying areas on an image)
+const HotspotQuestionSchema = BaseQuestionSchema.extend({
+  type: z.literal("hotspot"),
+  imagePath: z.string(),
+  correctAreas: z.array(z.object({
+    id: z.string(),
+    x: z.number(),  // x coordinate percentage from left
+    y: z.number(),  // y coordinate percentage from top
+    width: z.number(), // width percentage
+    height: z.number(), // height percentage
+    label: z.string().optional()
+  })),
+  distractorAreas: z.array(z.object({
+    id: z.string(),
+    x: z.number(),
+    y: z.number(),
+    width: z.number(),
+    height: z.number(),
+    label: z.string().optional()
+  })).optional()
+});
+
+// Ordered response question schema (drag and drop in correct order)
+const OrderedResponseQuestionSchema = BaseQuestionSchema.extend({
+  type: z.literal("ordered-response"),
+  items: z.array(z.object({
+    id: z.string(),
+    text: z.string()
+  })),
+  correctOrder: z.array(z.string())
+});
+
+// Chart/exhibit question schema (questions based on a chart, graph, or medical record)
+const ChartExhibitQuestionSchema = BaseQuestionSchema.extend({
+  type: z.literal("chart-exhibit"),
+  exhibitType: z.enum(["lab-results", "vital-signs", "medication-record", "assessment-findings", "diagnostic-results"]),
+  exhibitData: z.record(z.string(), z.any()),
+  questions: z.array(z.object({
+    id: z.string(),
+    text: z.string(),
+    choices: z.array(QuestionChoiceSchema),
+    correctAnswer: z.union([z.string(), z.array(z.string())])
+  }))
+});
+
 // Union of all question types
 export const QuestionSchema = z.discriminatedUnion("type", [
   MultipleChoiceQuestionSchema,
   SelectAllQuestionSchema,
-  FillInBlankQuestionSchema
+  FillInBlankQuestionSchema,
+  HotspotQuestionSchema,
+  OrderedResponseQuestionSchema,
+  ChartExhibitQuestionSchema
 ]);
 
 export const QuestionsResponseSchema = z.object({

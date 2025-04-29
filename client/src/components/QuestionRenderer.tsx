@@ -46,6 +46,36 @@ export function QuestionRenderer({
   const isSingleChoice = question.type === "mc";
   const isMultiChoice = question.type === "sata";
   const isFillInBlank = question.type === "fill_in_blank";
+  const isHotspot = question.type === "hotspot";
+  const isOrderedResponse = question.type === "ordered-response";
+  const isChartExhibit = question.type === "chart-exhibit";
+  
+  // Type guards for type safety
+  const hasMCChoices = (q: Question): q is Extract<Question, { type: "mc" }> => q.type === "mc";
+  const hasSATAChoices = (q: Question): q is Extract<Question, { type: "sata" }> => q.type === "sata";
+  const hasHotspotAreas = (q: Question): q is Extract<Question, { type: "hotspot" }> => q.type === "hotspot";
+  const hasOrderedItems = (q: Question): q is Extract<Question, { type: "ordered-response" }> => q.type === "ordered-response";
+  const hasChartExhibit = (q: Question): q is Extract<Question, { type: "chart-exhibit" }> => q.type === "chart-exhibit";
+  
+  // Helper function to get correct answer(s) regardless of question type
+  const getCorrectAnswer = (q: Question): string | string[] => {
+    if (hasMCChoices(q)) {
+      return q.correctAnswer;
+    } else if (hasSATAChoices(q)) {
+      return q.correctAnswer;
+    } else if (q.type === "fill_in_blank") {
+      return q.correctAnswer;
+    } else if (hasHotspotAreas(q)) {
+      return q.correctAreas.map(area => area.id);
+    } else if (hasOrderedItems(q)) {
+      return q.correctOrder;
+    } else if (hasChartExhibit(q)) {
+      // This assumes we're showing the first sub-question by default
+      const firstQuestion = q.questions[0];
+      return firstQuestion.correctAnswer;
+    }
+    return "";
+  };
   
   // Mock data for demonstration
   const hint = "Look for interventions that ensure patient safety first.";
@@ -204,7 +234,15 @@ export function QuestionRenderer({
         <div className="question-stem">
           <div className="flex justify-between items-start mb-3">
             <span className="inline-flex items-center justify-center rounded-md bg-[#13294B] text-xs font-medium text-white px-2 py-1">NCLEX-RN Style</span>
-            <span className="text-xs text-gray-500">{question.type === "mc" ? "Multiple Choice" : question.type === "sata" ? "Select All That Apply" : "Fill in the Blank"}</span>
+            <span className="text-xs text-gray-500">
+              {question.type === "mc" ? "Multiple Choice" : 
+              question.type === "sata" ? "Select All That Apply" : 
+              question.type === "fill_in_blank" ? "Fill in the Blank" :
+              question.type === "hotspot" ? "Hotspot" :
+              question.type === "ordered-response" ? "Ordered Response" :
+              question.type === "chart-exhibit" ? "Chart/Exhibit" : 
+              "Unknown Question Type"}
+            </span>
           </div>
           
           <h3 className="text-lg font-bold text-[#13294B] mb-3">{question.title}</h3>
@@ -242,6 +280,18 @@ export function QuestionRenderer({
               <span className="flex items-center">
                 <span className="font-medium mr-1">Instructions:</span> Select all answer choices that apply
               </span>
+            ) : isHotspot ? (
+              <span className="flex items-center">
+                <span className="font-medium mr-1">Instructions:</span> Click on the correct area(s) in the image
+              </span>
+            ) : isOrderedResponse ? (
+              <span className="flex items-center">
+                <span className="font-medium mr-1">Instructions:</span> Drag and drop the items in the correct order
+              </span>
+            ) : isChartExhibit ? (
+              <span className="flex items-center">
+                <span className="font-medium mr-1">Instructions:</span> Review the chart data and answer the questions
+              </span>
             ) : (
               <span className="flex items-center">
                 <span className="font-medium mr-1">Instructions:</span> Select the correct answer
@@ -250,7 +300,8 @@ export function QuestionRenderer({
           </p>
         </div>
         
-        {isFillInBlank ? (
+        {/* Fill in the Blank Question */}
+        {isFillInBlank && (
           <div className="fill-blank-container">
             <input
               type="text"
@@ -261,70 +312,193 @@ export function QuestionRenderer({
               disabled={showRationale}
             />
           </div>
-        ) : (
-          <>
-            <div className="answer-options space-y-3">
-              {question.choices?.map((choice, index) => {
-                const isSelected = selectedAnswers.includes(choice.id);
-                const isCorrectChoice = Array.isArray(question.correctAnswer) 
-                  ? question.correctAnswer.includes(choice.id) 
-                  : question.correctAnswer === choice.id;
-                
-                // Determine styling for answered questions when showing rationale
-                let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
-                if (showRationale) {
-                  if (isCorrectChoice) {
-                    choiceStyle = "border-2 border-green-500 bg-green-50";
-                  } else if (isSelected && !isCorrectChoice) {
-                    choiceStyle = "border-2 border-red-500 bg-red-50";
-                  }
-                } else if (isSelected) {
-                  choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
+        )}
+        
+        {/* Multiple Choice or Select All Questions */}
+        {(isSingleChoice || isMultiChoice) && hasMCChoices(question) && (
+          <div className="answer-options space-y-3">
+            {question.choices.map((choice, index) => {
+              const isSelected = selectedAnswers.includes(choice.id);
+              const isCorrectChoice = Array.isArray(question.correctAnswer) 
+                ? question.correctAnswer.includes(choice.id) 
+                : question.correctAnswer === choice.id;
+              
+              // Determine styling for answered questions when showing rationale
+              let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
+              if (showRationale) {
+                if (isCorrectChoice) {
+                  choiceStyle = "border-2 border-green-500 bg-green-50";
+                } else if (isSelected && !isCorrectChoice) {
+                  choiceStyle = "border-2 border-red-500 bg-red-50";
                 }
-                
-                return (
-                  <div 
-                    key={choice.id}
-                    className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
-                    onClick={() => !showRationale && handleAnswerSelect(choice.id)}
-                  >
-                    <div className="flex items-start p-4">
-                      <div className="flex-shrink-0 mr-3">
-                        <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium ${
-                          isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'
-                        }`}>
-                          {letters[index]}
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-[15px] leading-relaxed">{choice.text}</p>
+              } else if (isSelected) {
+                choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
+              }
+              
+              return (
+                <div 
+                  key={choice.id}
+                  className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
+                  onClick={() => !showRationale && handleAnswerSelect(choice.id)}
+                >
+                  <div className="flex items-start p-4">
+                    <div className="flex-shrink-0 mr-3">
+                      <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium ${
+                        isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'
+                      }`}>
+                        {letters[index]}
                       </div>
                     </div>
-                    
-                    {/* Rationale specific to each option - shown when the answer is revealed */}
-                    {showRationale && (
-                      <div className={`text-sm p-3 rounded-b-md ${
-                        isCorrectChoice ? 'bg-green-100 text-green-800' : 
-                        (isSelected && !isCorrectChoice) ? 'bg-red-100 text-red-800' : 'hidden'
-                      }`}>
-                        {isCorrectChoice ? (
-                          <div className="flex items-start">
-                            <CheckCircle2 className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                            <span><span className="font-semibold">Correct. </span>This answer represents the best nursing action for the situation described.</span>
-                          </div>
-                        ) : (isSelected && !isCorrectChoice) ? (
-                          <div className="flex items-start">
-                            <XCircle className="h-4 w-4 text-red-600 mr-2 mt-0.5" />
-                            <span><span className="font-semibold">Incorrect. </span>This option is not the best nursing action for this scenario.</span>
-                          </div>
-                        ) : null}
-                      </div>
-                    )}
+                    <div className="flex-1">
+                      <p className="text-[15px] leading-relaxed">{choice.text}</p>
+                    </div>
                   </div>
-                );
-              })}
+                  
+                  {/* Rationale specific to each option - shown when the answer is revealed */}
+                  {showRationale && (
+                    <div className={`text-sm p-3 rounded-b-md ${
+                      isCorrectChoice ? 'bg-green-100 text-green-800' : 
+                      (isSelected && !isCorrectChoice) ? 'bg-red-100 text-red-800' : 'hidden'
+                    }`}>
+                      {isCorrectChoice ? (
+                        <div className="flex items-start">
+                          <CheckCircle2 className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
+                          <span><span className="font-semibold">Correct. </span>This answer represents the best nursing action for the situation described.</span>
+                        </div>
+                      ) : (isSelected && !isCorrectChoice) ? (
+                        <div className="flex items-start">
+                          <XCircle className="h-4 w-4 text-red-600 mr-2 mt-0.5" />
+                          <span><span className="font-semibold">Incorrect. </span>This option is not the best nursing action for this scenario.</span>
+                        </div>
+                      ) : null}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+        
+        {/* Hotspot Question */}
+        {isHotspot && hasHotspotAreas(question) && (
+          <div className="hotspot-container">
+            <div className="relative border border-gray-300 rounded-md overflow-hidden max-w-full">
+              <div className="hotspot-image-wrapper relative">
+                <img 
+                  src={question.imagePath} 
+                  alt={question.title} 
+                  className="max-w-full h-auto"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://placehold.co/600x400/e2e8f0/475569?text=Image+Not+Found";
+                  }}
+                />
+                {/* Clickable hotspot areas would be rendered here */}
+                <div className="absolute inset-0">
+                  {/* We'll implement the interactive hotspot areas in the next iteration */}
+                  <div className="text-center p-4 bg-gray-100 bg-opacity-70">
+                    <p className="text-gray-700">Image interaction will be implemented soon</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </>
+          </div>
+        )}
+        
+        {/* Ordered Response Question */}
+        {isOrderedResponse && hasOrderedItems(question) && (
+          <div className="ordered-response-container">
+            <div className="space-y-2">
+              {question.items.map((item, index) => (
+                <div 
+                  key={item.id}
+                  className="p-3 bg-white border border-gray-300 rounded-md flex items-center"
+                >
+                  <div className="flex-shrink-0 mr-3">
+                    <div className="h-7 w-7 rounded-full bg-gray-100 flex items-center justify-center font-medium text-gray-700">
+                      {index + 1}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[15px]">{item.text}</p>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <Menu className="h-5 w-5 text-gray-400" />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 text-center text-sm text-gray-500">
+              <p>Drag and drop functionality will be implemented soon</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Chart/Exhibit Question */}
+        {isChartExhibit && hasChartExhibit(question) && (
+          <div className="chart-exhibit-container">
+            <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
+              <h4 className="font-medium text-gray-700 mb-3">{question.exhibitType.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
+              
+              {/* Lab Results Table */}
+              {question.exhibitType === 'lab-results' && (
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                        <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Result</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {Object.entries(question.exhibitData).map(([category, tests]) => (
+                        <React.Fragment key={category}>
+                          <tr className="bg-gray-50">
+                            <td colSpan={2} className="px-4 py-2 text-sm font-medium text-gray-700">{category}</td>
+                          </tr>
+                          {Object.entries(tests as Record<string, string>).map(([test, result]) => (
+                            <tr key={`${category}-${test}`}>
+                              <td className="px-4 py-2 text-sm text-gray-700">{test}</td>
+                              <td className="px-4 py-2 text-sm text-gray-700">{result}</td>
+                            </tr>
+                          ))}
+                        </React.Fragment>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              
+              {/* Other exhibit types would be handled here */}
+            </div>
+            
+            {/* Sub-questions for this chart/exhibit */}
+            <div className="space-y-6">
+              {question.questions.map((subQuestion, idx) => (
+                <div key={subQuestion.id} className="p-4 border border-gray-200 rounded-md">
+                  <p className="font-medium text-gray-800 mb-3">{idx + 1}. {subQuestion.text}</p>
+                  
+                  <div className="space-y-2">
+                    {subQuestion.choices.map((choice, choiceIdx) => (
+                      <div 
+                        key={choice.id}
+                        className="flex items-start p-3 border border-gray-200 rounded-md hover:border-blue-300 cursor-pointer"
+                      >
+                        <div className="flex-shrink-0 mr-3">
+                          <div className="h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center font-medium text-gray-700 text-sm">
+                            {letters[choiceIdx]}
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm">{choice.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
         
         {/* Submit Button for SATA and Fill in Blank questions */}
@@ -362,10 +536,10 @@ export function QuestionRenderer({
             <div className="mb-4 pb-4 border-b border-dashed border-gray-300">
               <span className="font-medium text-gray-700">Expected Answer: </span>
               <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium">
-                {Array.isArray(question.correctAnswer) ? (
-                  question.correctAnswer.join(', ')
+                {Array.isArray(getCorrectAnswer(question)) ? (
+                  (getCorrectAnswer(question) as string[]).join(', ')
                 ) : (
-                  question.correctAnswer
+                  getCorrectAnswer(question)
                 )}
               </span>
             </div>
