@@ -13,6 +13,10 @@ type LearningStyle = 'visual' | 'auditory' | 'reading' | 'kinesthetic';
 type TimeCommitment = 'minimal' | 'moderate' | 'intensive';
 type StrengthArea = 'med-surg' | 'pediatrics' | 'obstetrics' | 'psych' | 'pharmacology' | 'fundamentals';
 type WeaknessArea = StrengthArea;
+type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced';
+
+// Days of week for scheduler
+type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
 // User preferences interface
 interface UserPreferences {
@@ -22,16 +26,22 @@ interface UserPreferences {
   weaknessAreas: WeaknessArea[];
   daysUntilExam: number;
   confidenceLevel: number;
+  difficultyLevel: DifficultyLevel;
+  studyName: string;
 }
 
 // Study plan interface
 interface StudyPlan {
+  name: string;
+  createdAt: string;
+  lastEdited: string;
   dailySchedule: {
     morning: string;
     afternoon: string;
     evening: string;
   };
   weeklyGoals: string[];
+  customGoals: string[];
   recommendedResources: {
     title: string;
     description: string;
@@ -42,6 +52,23 @@ interface StudyPlan {
     percentage: number;
   }[];
   studyTips: string[];
+  customTips: string[];
+  weekSchedule: {
+    [key in DayOfWeek]: {
+      tasks: string[];
+      focus: string;
+      completed: boolean;
+    }
+  };
+}
+
+// Saved plan type
+interface SavedPlan {
+  id: string;
+  name: string;
+  createdAt: string;
+  preferences: UserPreferences;
+  plan: StudyPlan;
 }
 
 export function StudyStrategyPlanner() {
@@ -53,7 +80,26 @@ export function StudyStrategyPlanner() {
     weaknessAreas: ['pharmacology'],
     daysUntilExam: 30,
     confidenceLevel: 50,
+    difficultyLevel: 'intermediate',
+    studyName: 'My NCLEX Study Plan',
   });
+  
+  // State for saved study plans
+  const [savedPlans, setSavedPlans] = useState<SavedPlan[]>([]);
+  
+  // State for editing daily schedule
+  const [isEditingSchedule, setIsEditingSchedule] = useState(false);
+  const [editedSchedule, setEditedSchedule] = useState<{morning: string; afternoon: string; evening: string}>({
+    morning: "",
+    afternoon: "",
+    evening: ""
+  });
+  
+  // State for custom tips and goals
+  const [customTip, setCustomTip] = useState("");
+  const [customGoal, setCustomGoal] = useState("");
+  const [customTips, setCustomTips] = useState<string[]>([]);
+  const [customGoals, setCustomGoals] = useState<string[]>([]);
   
   // Track which step of the planner we're on
   const [currentStep, setCurrentStep] = useState<'preferences' | 'plan'>('preferences');
@@ -82,6 +128,11 @@ export function StudyStrategyPlanner() {
         afternoon: "Complete 50 practice questions and analyze results",
         evening: "Study summary notes and prepare for tomorrow"
       };
+    }
+    
+    // Override with edited schedule if available
+    if (isEditingSchedule && editedSchedule.morning && editedSchedule.afternoon && editedSchedule.evening) {
+      dailySchedule = editedSchedule;
     }
     
     // Weekly goals based on days until exam
@@ -126,7 +177,49 @@ export function StudyStrategyPlanner() {
     // Get study tips based on learning style
     const studyTips = getLearningStyleTips(preferences.learningStyle);
     
+    // Setup weekly schedule
+    const weekSchedule: {[key in DayOfWeek]: {tasks: string[], focus: string, completed: boolean}} = {
+      monday: {
+        tasks: [`Review ${getAreaLabel(preferences.weaknessAreas[0] || 'med-surg')}`, 'Practice 30 questions'],
+        focus: getAreaLabel(preferences.weaknessAreas[0] || 'med-surg'),
+        completed: false
+      },
+      tuesday: {
+        tasks: [`Study ${getAreaLabel(preferences.weaknessAreas[1] || 'pharmacology')}`, 'Complete 20 questions'],
+        focus: getAreaLabel(preferences.weaknessAreas[1] || 'pharmacology'),
+        completed: false
+      },
+      wednesday: {
+        tasks: ['Review incorrect questions', 'Study weak areas'],
+        focus: 'Review',
+        completed: false
+      },
+      thursday: {
+        tasks: [`Focus on ${getAreaLabel(preferences.strengthAreas[0] || 'fundamentals')}`, 'Complete 30 questions'],
+        focus: getAreaLabel(preferences.strengthAreas[0] || 'fundamentals'),
+        completed: false
+      },
+      friday: {
+        tasks: ['Complete mini exam', 'Review results'],
+        focus: 'Assessment',
+        completed: false
+      },
+      saturday: {
+        tasks: ['Focused review of weak areas', 'Complete 50 questions'],
+        focus: 'Weak Areas',
+        completed: false
+      },
+      sunday: {
+        tasks: ['Rest day', 'Light review of key concepts'],
+        focus: 'Rest & Review',
+        completed: false
+      }
+    };
+    
     return {
+      name: preferences.studyName,
+      createdAt: new Date().toISOString(),
+      lastEdited: new Date().toISOString(),
       dailySchedule,
       weeklyGoals: [
         `Complete ${weeklyQuestions} practice questions`,
@@ -134,9 +227,12 @@ export function StudyStrategyPlanner() {
         `Create summary notes for ${preferences.weaknessAreas.map(getAreaLabel).join(' and ')}`,
         `Set aside 3 blocks of time for simulated mini-exams`
       ],
+      customGoals: customGoals,
       recommendedResources: getRecommendedResources(preferences),
       focusAreas,
-      studyTips
+      studyTips,
+      customTips,
+      weekSchedule
     };
   };
   
@@ -462,6 +558,50 @@ export function StudyStrategyPlanner() {
             </div>
           </div>
         </div>
+
+        {/* Study Plan Name */}
+        <div>
+          <h3 className="text-lg font-medium mb-3">Name your study plan</h3>
+          <div className="space-y-3">
+            <input
+              type="text"
+              value={preferences.studyName}
+              onChange={(e) => setPreferences({...preferences, studyName: e.target.value})}
+              placeholder="Enter a name for your study plan"
+              className="w-full p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+            />
+            <p className="text-sm text-gray-500">
+              Give your study plan a name to help you identify it later.
+            </p>
+          </div>
+        </div>
+
+        {/* Difficulty Level */}
+        <div>
+          <h3 className="text-lg font-medium mb-3">Select your difficulty level</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {[
+              { value: 'beginner', label: 'Beginner', description: 'Just starting to prepare for NCLEX' },
+              { value: 'intermediate', label: 'Intermediate', description: 'Some preparation completed' },
+              { value: 'advanced', label: 'Advanced', description: 'Well-prepared, focusing on weak areas' }
+            ].map((difficulty) => (
+              <div
+                key={difficulty.value}
+                className={cn(
+                  "relative border-2 border-black rounded-md p-4 cursor-pointer",
+                  preferences.difficultyLevel === difficulty.value ? "bg-blue-50" : "bg-white"
+                )}
+                onClick={() => setPreferences({...preferences, difficultyLevel: difficulty.value as DifficultyLevel})}
+              >
+                <h4 className="font-medium">{difficulty.label}</h4>
+                <p className="text-sm text-gray-600">{difficulty.description}</p>
+                {preferences.difficultyLevel === difficulty.value && (
+                  <CheckCircle2 className="h-5 w-5 text-blue-500 absolute top-2 right-2" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       </CardContent>
       <CardFooter>
         <Button 
@@ -509,20 +649,90 @@ export function StudyStrategyPlanner() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-medium">Morning:</span>
-                    <span>{studyPlan.dailySchedule.morning}</span>
+                {isEditingSchedule ? (
+                  <div className="space-y-3">
+                    <div className="space-y-2">
+                      <label className="font-medium">Morning:</label>
+                      <input
+                        type="text"
+                        value={editedSchedule.morning}
+                        onChange={(e) => setEditedSchedule({...editedSchedule, morning: e.target.value})}
+                        placeholder="Enter morning activity"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="font-medium">Afternoon:</label>
+                      <input
+                        type="text"
+                        value={editedSchedule.afternoon}
+                        onChange={(e) => setEditedSchedule({...editedSchedule, afternoon: e.target.value})}
+                        placeholder="Enter afternoon activity"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="font-medium">Evening:</label>
+                      <input
+                        type="text"
+                        value={editedSchedule.evening}
+                        onChange={(e) => setEditedSchedule({...editedSchedule, evening: e.target.value})}
+                        placeholder="Enter evening activity"
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                      />
+                    </div>
+                    <div className="flex gap-2 mt-2">
+                      <Button 
+                        size="sm" 
+                        onClick={() => {
+                          setIsEditingSchedule(false);
+                        }}
+                      >
+                        Save Changes
+                      </Button>
+                      <Button 
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          setIsEditingSchedule(false);
+                          setEditedSchedule({
+                            morning: studyPlan.dailySchedule.morning,
+                            afternoon: studyPlan.dailySchedule.afternoon,
+                            evening: studyPlan.dailySchedule.evening
+                          });
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
                   </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-medium">Afternoon:</span>
-                    <span>{studyPlan.dailySchedule.afternoon}</span>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="font-medium">Morning:</span>
+                      <span>{studyPlan.dailySchedule.morning}</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="font-medium">Afternoon:</span>
+                      <span>{studyPlan.dailySchedule.afternoon}</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="font-medium">Evening:</span>
+                      <span>{studyPlan.dailySchedule.evening}</span>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      onClick={() => {
+                        setEditedSchedule(studyPlan.dailySchedule);
+                        setIsEditingSchedule(true);
+                      }}
+                      className="w-full mt-2"
+                    >
+                      Customize Schedule
+                    </Button>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium">Evening:</span>
-                    <span>{studyPlan.dailySchedule.evening}</span>
-                  </div>
-                </div>
+                )}
               </CardContent>
             </Card>
             
@@ -537,12 +747,62 @@ export function StudyStrategyPlanner() {
               <CardContent>
                 <ul className="space-y-2">
                   {studyPlan.weeklyGoals.map((goal, index) => (
-                    <li key={index} className="flex items-start">
+                    <li key={`preset-${index}`} className="flex items-start">
                       <CheckCircle2 className="mr-2 h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
                       <span>{goal}</span>
                     </li>
                   ))}
+                  
+                  {studyPlan.customGoals && studyPlan.customGoals.map((goal, index) => (
+                    <li key={`custom-${index}`} className="flex items-start">
+                      <CheckCircle2 className="mr-2 h-4 w-4 text-blue-500 mt-1 flex-shrink-0" />
+                      <span className="flex-1">{goal}</span>
+                      <button 
+                        onClick={() => {
+                          const newCustomGoals = [...customGoals];
+                          newCustomGoals.splice(index, 1);
+                          setCustomGoals(newCustomGoals);
+                        }}
+                        className="text-gray-400 hover:text-red-500"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </li>
+                  ))}
                 </ul>
+                
+                <div className="mt-4 space-y-2">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={customGoal}
+                      onChange={(e) => setCustomGoal(e.target.value)}
+                      placeholder="Add a custom goal..."
+                      className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && customGoal.trim() !== '') {
+                          setCustomGoals([...customGoals, customGoal]);
+                          setCustomGoal('');
+                        }
+                      }}
+                    />
+                    <Button 
+                      size="sm"
+                      onClick={() => {
+                        if (customGoal.trim() !== '') {
+                          setCustomGoals([...customGoals, customGoal]);
+                          setCustomGoal('');
+                        }
+                      }}
+                    >
+                      Add
+                    </Button>
+                  </div>
+                  <p className="text-xs text-gray-500">Press Enter or click Add to save your custom goal</p>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -611,17 +871,144 @@ export function StudyStrategyPlanner() {
             <CardContent>
               <ul className="space-y-2">
                 {studyPlan.studyTips.map((tip, index) => (
-                  <li key={index} className="flex items-start">
+                  <li key={`preset-tip-${index}`} className="flex items-start">
                     <CheckCircle2 className="mr-2 h-4 w-4 text-yellow-500 mt-1 flex-shrink-0" />
                     <span>{tip}</span>
                   </li>
                 ))}
+                
+                {studyPlan.customTips && studyPlan.customTips.map((tip, index) => (
+                  <li key={`custom-tip-${index}`} className="flex items-start">
+                    <CheckCircle2 className="mr-2 h-4 w-4 text-purple-500 mt-1 flex-shrink-0" />
+                    <span className="flex-1">{tip}</span>
+                    <button 
+                      onClick={() => {
+                        const newCustomTips = [...customTips];
+                        newCustomTips.splice(index, 1);
+                        setCustomTips(newCustomTips);
+                      }}
+                      className="text-gray-400 hover:text-red-500"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  </li>
+                ))}
               </ul>
+              
+              <div className="mt-4 space-y-2">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={customTip}
+                    onChange={(e) => setCustomTip(e.target.value)}
+                    placeholder="Add your own study tip..."
+                    className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && customTip.trim() !== '') {
+                        setCustomTips([...customTips, customTip]);
+                        setCustomTip('');
+                      }
+                    }}
+                  />
+                  <Button 
+                    size="sm"
+                    onClick={() => {
+                      if (customTip.trim() !== '') {
+                        setCustomTips([...customTips, customTip]);
+                        setCustomTip('');
+                      }
+                    }}
+                  >
+                    Add
+                  </Button>
+                </div>
+                <p className="text-xs text-gray-500">Add your own tips based on what works for you</p>
+              </div>
             </CardContent>
           </Card>
           
-          {/* Print Button */}
-          <div className="flex justify-center">
+          {/* Weekly Schedule */}
+          <Card className="border border-gray-200">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex items-center">
+                <Calendar className="mr-2 h-5 w-5 text-indigo-500" />
+                Weekly Schedule
+              </CardTitle>
+              <CardDescription>Your personalized weekly study plan</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th className="border px-2 py-2 bg-gray-100 text-left">Day</th>
+                      <th className="border px-2 py-2 bg-gray-100 text-left">Focus Area</th>
+                      <th className="border px-2 py-2 bg-gray-100 text-left">Tasks</th>
+                      <th className="border px-2 py-2 bg-gray-100 text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(studyPlan.weekSchedule).map(([day, data]) => (
+                      <tr key={day}>
+                        <td className="border px-2 py-2 font-medium capitalize">{day}</td>
+                        <td className="border px-2 py-2">{data.focus}</td>
+                        <td className="border px-2 py-2">
+                          <ul className="list-disc pl-5 space-y-1">
+                            {data.tasks.map((task, i) => (
+                              <li key={i}>{task}</li>
+                            ))}
+                          </ul>
+                        </td>
+                        <td className="border px-2 py-2 text-center">
+                          <button
+                            onClick={() => {
+                              // Clone the schedule and update the completion status
+                              const newSchedule = { ...studyPlan.weekSchedule };
+                              newSchedule[day as DayOfWeek].completed = !data.completed;
+                              
+                              // We would normally update the state here
+                              // This is just a UI demonstration for now
+                            }}
+                            className={`w-6 h-6 rounded-full ${
+                              data.completed ? 'bg-green-500' : 'bg-gray-200'
+                            } flex items-center justify-center`}
+                          >
+                            {data.completed && (
+                              <CheckCircle2 className="h-4 w-4 text-white" />
+                            )}
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+          
+          {/* Save and Print Buttons */}
+          <div className="flex justify-center gap-4">
+            <Button 
+              variant="outline"
+              onClick={() => {
+                // Generate a unique ID for the plan
+                const id = `plan-${Date.now()}`;
+                const newSavedPlan: SavedPlan = {
+                  id,
+                  name: studyPlan.name,
+                  createdAt: studyPlan.createdAt,
+                  preferences,
+                  plan: studyPlan
+                };
+                setSavedPlans([...savedPlans, newSavedPlan]);
+                alert("Study plan saved! You can access it later from your saved plans.");
+              }}
+            >
+              Save Plan
+            </Button>
             <Button>
               Print Study Plan
             </Button>
