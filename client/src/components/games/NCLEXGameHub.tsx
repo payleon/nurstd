@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, Activity, Calculator, BrainCircuit, Award, PanelRight, ArrowRight, Stethoscope, ListTodo } from 'lucide-react';
+import { X, Activity, Calculator, BrainCircuit, Award, PanelRight, ArrowRight, Stethoscope, ListTodo, FileText, Heart, BookOpen } from 'lucide-react';
 import { lazyLoad } from '@/utils/lazyLoad';
 import { LazyComponentLoader } from '@/components/ui/LazyComponentLoader';
 
@@ -12,11 +12,23 @@ const MedicationDosageGame = lazyLoad(() =>
   import('./MedicationDosageGame').then(mod => ({ default: mod.MedicationDosageGame }))
 );
 
+const MedicalTerminologyGame = lazyLoad(() => 
+  import('./MedicalTerminologyGame').then(mod => ({ default: mod.MedicalTerminologyGame }))
+);
+
+const ECGRhythmGame = lazyLoad(() => 
+  import('./ECGRhythmGame').then(mod => ({ default: mod.ECGRhythmGame }))
+);
+
+const PatientAssessmentGame = lazyLoad(() => 
+  import('./PatientAssessmentGame').then(mod => ({ default: mod.PatientAssessmentGame }))
+);
+
 interface NCLEXGameHubProps {
   onClose?: () => void;
 }
 
-type GameType = 'prioritization' | 'dosage' | 'hub';
+type GameType = 'prioritization' | 'dosage' | 'terminology' | 'ecg' | 'assessment' | 'hub';
 
 interface GameScore {
   name: string;
@@ -60,6 +72,39 @@ export function NCLEXGameHub({ onClose }: NCLEXGameHubProps) {
       <LazyComponentLoader spinnerType="pulse" text="Loading medication dosage game..." minHeight="600px">
         <MedicationDosageGame
           onComplete={(score: number) => handleGameComplete('Medication Dosage', score)}
+          onClose={returnToHub}
+        />
+      </LazyComponentLoader>
+    );
+  }
+  
+  if (currentGame === 'terminology') {
+    return (
+      <LazyComponentLoader spinnerType="stethoscope" text="Loading medical terminology game..." minHeight="600px">
+        <MedicalTerminologyGame
+          onComplete={(score: number) => handleGameComplete('Medical Terminology', score)}
+          onClose={returnToHub}
+        />
+      </LazyComponentLoader>
+    );
+  }
+  
+  if (currentGame === 'ecg') {
+    return (
+      <LazyComponentLoader spinnerType="pulse" text="Loading ECG rhythm game..." minHeight="600px">
+        <ECGRhythmGame
+          onComplete={(score: number) => handleGameComplete('ECG Rhythm', score)}
+          onClose={returnToHub}
+        />
+      </LazyComponentLoader>
+    );
+  }
+  
+  if (currentGame === 'assessment') {
+    return (
+      <LazyComponentLoader spinnerType="stethoscope" text="Loading patient assessment game..." minHeight="600px">
+        <PatientAssessmentGame
+          onComplete={(score: number) => handleGameComplete('Patient Assessment', score)}
           onClose={returnToHub}
         />
       </LazyComponentLoader>
@@ -168,6 +213,114 @@ export function NCLEXGameHub({ onClose }: NCLEXGameHubProps) {
                 className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md flex items-center justify-center transition-colors"
               >
                 Start Game <ArrowRight className="ml-1.5 h-4 w-4" />
+              </button>
+            </div>
+          </motion.div>
+          
+          {/* Medical Terminology Game Card */}
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-200 overflow-hidden shadow-sm"
+          >
+            <div className="p-5">
+              <div className="flex items-center mb-3">
+                <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center text-white">
+                  <BookOpen className="h-5 w-5" />
+                </div>
+                <h3 className="ml-3 text-lg font-bold text-green-800">Medical Terminology</h3>
+              </div>
+              
+              <p className="text-green-700 mb-4">
+                Master essential medical terms with this matching and flashcard game. Build your vocabulary
+                for successful NCLEX performance and professional practice.
+              </p>
+              
+              <div className="flex items-center text-sm text-green-600 mb-4">
+                <Activity className="h-4 w-4 mr-1.5" />
+                <span>Matching challenges</span>
+                <span className="mx-1.5">•</span>
+                <BookOpen className="h-4 w-4 mr-1.5" />
+                <span>Digital flashcards</span>
+              </div>
+              
+              <button
+                onClick={() => setCurrentGame('terminology')}
+                className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md flex items-center justify-center transition-colors"
+              >
+                Start Game <ArrowRight className="ml-1.5 h-4 w-4" />
+              </button>
+            </div>
+          </motion.div>
+          
+          {/* ECG Rhythm Game Card */}
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-br from-red-50 to-red-100 rounded-lg border border-red-200 overflow-hidden shadow-sm"
+          >
+            <div className="p-5">
+              <div className="flex items-center mb-3">
+                <div className="h-10 w-10 rounded-full bg-red-500 flex items-center justify-center text-white">
+                  <Heart className="h-5 w-5" />
+                </div>
+                <h3 className="ml-3 text-lg font-bold text-red-800">ECG Rhythm Identification</h3>
+              </div>
+              
+              <p className="text-red-700 mb-4">
+                Learn to recognize critical ECG rhythms and appropriate nursing interventions. Practice with
+                interactive quizzes and detailed explanations of each rhythm.
+              </p>
+              
+              <div className="flex items-center text-sm text-red-600 mb-4">
+                <Activity className="h-4 w-4 mr-1.5" />
+                <span>Study mode</span>
+                <span className="mx-1.5">•</span>
+                <Heart className="h-4 w-4 mr-1.5" />
+                <span>10 common rhythms</span>
+              </div>
+              
+              <button
+                onClick={() => setCurrentGame('ecg')}
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md flex items-center justify-center transition-colors"
+              >
+                Start Game <ArrowRight className="ml-1.5 h-4 w-4" />
+              </button>
+            </div>
+          </motion.div>
+          
+          {/* Patient Assessment Game Card */}
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg border border-amber-200 overflow-hidden shadow-sm md:col-span-2"
+          >
+            <div className="p-5">
+              <div className="flex items-center mb-3">
+                <div className="h-10 w-10 rounded-full bg-amber-500 flex items-center justify-center text-white">
+                  <FileText className="h-5 w-5" />
+                </div>
+                <h3 className="ml-3 text-lg font-bold text-amber-800">Patient Assessment Simulation</h3>
+              </div>
+              
+              <p className="text-amber-700 mb-4">
+                Practice comprehensive patient assessments with realistic case scenarios. Review assessment findings,
+                interpret data, and answer clinical judgment questions about each patient case.
+              </p>
+              
+              <div className="flex items-center text-sm text-amber-600 mb-4">
+                <Activity className="h-4 w-4 mr-1.5" />
+                <span>Realistic patient cases</span>
+                <span className="mx-1.5">•</span>
+                <FileText className="h-4 w-4 mr-1.5" />
+                <span>Critical thinking questions</span>
+                <span className="mx-1.5">•</span>
+                <Stethoscope className="h-4 w-4 mr-1.5" />
+                <span>Comprehensive assessments</span>
+              </div>
+              
+              <button
+                onClick={() => setCurrentGame('assessment')}
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white py-2 rounded-md flex items-center justify-center transition-colors"
+              >
+                Start Simulation <ArrowRight className="ml-1.5 h-4 w-4" />
               </button>
             </div>
           </motion.div>
