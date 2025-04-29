@@ -568,7 +568,7 @@ export function StudyStrategyPlanner() {
               value={preferences.studyName}
               onChange={(e) => setPreferences({...preferences, studyName: e.target.value})}
               placeholder="Enter a name for your study plan"
-              className="w-full p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+              className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
             />
             <p className="text-sm text-gray-500">
               Give your study plan a name to help you identify it later.
@@ -641,7 +641,7 @@ export function StudyStrategyPlanner() {
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Daily Schedule */}
-            <Card className="border border-gray-200">
+            <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
                   <Clock className="mr-2 h-5 w-5 text-blue-500" />
@@ -658,7 +658,7 @@ export function StudyStrategyPlanner() {
                         value={editedSchedule.morning}
                         onChange={(e) => setEditedSchedule({...editedSchedule, morning: e.target.value})}
                         placeholder="Enter morning activity"
-                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                        className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                       />
                     </div>
                     <div className="space-y-2">
@@ -668,7 +668,7 @@ export function StudyStrategyPlanner() {
                         value={editedSchedule.afternoon}
                         onChange={(e) => setEditedSchedule({...editedSchedule, afternoon: e.target.value})}
                         placeholder="Enter afternoon activity"
-                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                        className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                       />
                     </div>
                     <div className="space-y-2">
@@ -678,7 +678,7 @@ export function StudyStrategyPlanner() {
                         value={editedSchedule.evening}
                         onChange={(e) => setEditedSchedule({...editedSchedule, evening: e.target.value})}
                         placeholder="Enter evening activity"
-                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                        className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                       />
                     </div>
                     <div className="flex gap-2 mt-2">
@@ -737,7 +737,7 @@ export function StudyStrategyPlanner() {
             </Card>
             
             {/* Weekly Goals */}
-            <Card className="border border-gray-200">
+            <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg flex items-center">
                   <Calendar className="mr-2 h-5 w-5 text-green-500" />
@@ -781,7 +781,7 @@ export function StudyStrategyPlanner() {
                       value={customGoal}
                       onChange={(e) => setCustomGoal(e.target.value)}
                       placeholder="Add a custom goal..."
-                      className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                      className="flex-1 p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && customGoal.trim() !== '') {
                           setCustomGoals([...customGoals, customGoal]);
@@ -808,7 +808,7 @@ export function StudyStrategyPlanner() {
           </div>
           
           {/* Focus Areas with Progress Bars */}
-          <Card className="border border-gray-200">
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Recommended Focus Areas</CardTitle>
               <CardDescription>Allocate your study time according to these percentages</CardDescription>
@@ -834,7 +834,7 @@ export function StudyStrategyPlanner() {
           </Card>
           
           {/* Recommended Resources */}
-          <Card className="border border-gray-200">
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg">Recommended Resources</CardTitle>
               <CardDescription>Based on your learning style preferences</CardDescription>
@@ -842,7 +842,7 @@ export function StudyStrategyPlanner() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {studyPlan.recommendedResources.map((resource, index) => (
-                  <Card key={index} className="border border-gray-200">
+                  <Card key={index} className="border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-base flex items-center">
                         {resource.icon}
@@ -859,7 +859,7 @@ export function StudyStrategyPlanner() {
           </Card>
           
           {/* Study Tips */}
-          <Card className="border border-gray-200">
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg flex items-center">
                 <Lightbulb className="mr-2 h-5 w-5 text-yellow-500" />
@@ -905,7 +905,7 @@ export function StudyStrategyPlanner() {
                     value={customTip}
                     onChange={(e) => setCustomTip(e.target.value)}
                     placeholder="Add your own study tip..."
-                    className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#4B9CD3]"
+                    className="flex-1 p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && customTip.trim() !== '') {
                         setCustomTips([...customTips, customTip]);
@@ -931,7 +931,7 @@ export function StudyStrategyPlanner() {
           </Card>
           
           {/* Weekly Schedule */}
-          <Card className="border border-gray-200">
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg flex items-center">
                 <Calendar className="mr-2 h-5 w-5 text-indigo-500" />
