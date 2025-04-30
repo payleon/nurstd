@@ -106,13 +106,19 @@ export default {
         },
         "liquid-wave": {
           "0%": {
-            d: "path('M6.5 15.5c0 0 2.286-0.975 5.5-0.5c3.214 0.475 5.5 0.5 5.5 0.5v4.5h-11v-4.5z')",
+            d: "path('M3,11 C5,10.5 7,12 9,11.5 C11,11 13,10.5 15,11 C17,11.5 19,11 21,11.5 L21,12.5 L3,12.5 Z')",
+          },
+          "25%": {
+            d: "path('M3,11 C5,10.7 7,11.8 9,11.3 C11,10.8 13,11.2 15,11.5 C17,11.8 19,10.7 21,11.2 L21,12.5 L3,12.5 Z')",
           },
           "50%": {
-            d: "path('M6.5 15.5c0 0 2.286-0.675 5.5-0.2c3.214 0.475 5.5 0.2 5.5 0.2v4.5h-11v-4.5z')",
+            d: "path('M3,11 C5,11.2 7,11.5 9,11 C11,10.5 13,11.8 15,11.3 C17,10.8 19,11.2 21,10.8 L21,12.5 L3,12.5 Z')",
+          },
+          "75%": {
+            d: "path('M3,11 C5,11.5 7,11 9,10.8 C11,10.6 13,11.5 15,11 C17,10.5 19,11.8 21,11.3 L21,12.5 L3,12.5 Z')",
           },
           "100%": {
-            d: "path('M6.5 15.5c0 0 2.286-0.975 5.5-0.5c3.214 0.475 5.5 0.5 5.5 0.5v4.5h-11v-4.5z')",
+            d: "path('M3,11 C5,10.5 7,12 9,11.5 C11,11 13,10.5 15,11 C17,11.5 19,11 21,11.5 L21,12.5 L3,12.5 Z')",
           },
         },
         "bubble-float-1": {
@@ -162,10 +168,10 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "flask": "flask-bubble 3s ease-in-out infinite",
-        "liquid": "liquid-wave 3s ease-in-out infinite",
+        "liquid": "liquid-wave 5s ease-in-out infinite",
         "bubble-1": "bubble-float-1 4s ease-in-out infinite",
-        "bubble-2": "bubble-float-2 3.5s ease-in-out infinite 0.5s",
-        "bubble-3": "bubble-float-3 3s ease-in-out infinite 1s",
+        "bubble-2": "bubble-float-2 4.5s ease-in-out infinite 0.5s",
+        "bubble-3": "bubble-float-3 3.7s ease-in-out infinite 1s",
       },
     },
   },

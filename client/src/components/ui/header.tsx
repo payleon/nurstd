@@ -34,7 +34,18 @@ export function Header({ toggleSidebar }: HeaderProps) {
               strokeLinecap="round" 
               strokeLinejoin="round"
             >
-              {/* Flask outline */}
+              {/* Flask glass container */}
+              <defs>
+                <clipPath id="flask-clip">
+                  <path d="M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </clipPath>
+                <linearGradient id="liquid-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#6FB7E9" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#3D8AC7" stopOpacity="0.9" />
+                </linearGradient>
+              </defs>
+              
+              {/* Glass container outline */}
               <path 
                 d="M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" 
                 stroke="#13294B"
@@ -42,39 +53,74 @@ export function Header({ toggleSidebar }: HeaderProps) {
                 fill="none"
               />
               
-              {/* Blue liquid inside the flask with wave animation */}
-              <path 
-                className="animate-liquid"
-                d="M6.5 15.5c0 0 2.286-0.975 5.5-0.5c3.214 0.475 5.5 0.5 5.5 0.5v4.5h-11v-4.5z" 
-                fill="#4B9CD3" 
-                opacity="0.8"
-              />
-              
-              {/* Bubbles in the liquid with float animation */}
-              <circle 
-                className="animate-bubble-1" 
-                cx="10" 
-                cy="16" 
-                r="0.6" 
-                fill="#ffffff" 
-                opacity="0.6"
-              />
-              <circle 
-                className="animate-bubble-2" 
-                cx="14" 
-                cy="17" 
-                r="0.4" 
-                fill="#ffffff" 
-                opacity="0.5"
-              />
-              <circle 
-                className="animate-bubble-3" 
-                cx="12" 
-                cy="15.5" 
-                r="0.3" 
-                fill="#ffffff" 
-                opacity="0.7"
-              />
+              {/* Liquid fill level - 2/3 full */}
+              <g clipPath="url(#flask-clip)">
+                {/* Background liquid fill */}
+                <rect 
+                  x="4" 
+                  y="11" 
+                  width="16" 
+                  height="10" 
+                  fill="url(#liquid-gradient)" 
+                />
+                
+                {/* Top wave animation */}
+                <path 
+                  className="animate-liquid"
+                  d="M3,11 C5,10.5 7,12 9,11.5 C11,11 13,10.5 15,11 C17,11.5 19,11 21,11.5 L21,12.5 L3,12.5 Z" 
+                  fill="#4B9CD3" 
+                  opacity="0.6"
+                />
+                
+                {/* Light reflection */}
+                <path 
+                  d="M6,13 L7,13 C8,14 7.5,15 9,15.5 C10.5,16 11,15 11.5,14 L14,15 L6,15.5 Z" 
+                  fill="#FFFFFF" 
+                  opacity="0.3"
+                />
+                
+                {/* Bubbles in the liquid with float animation */}
+                <circle 
+                  className="animate-bubble-1" 
+                  cx="10" 
+                  cy="16" 
+                  r="0.5" 
+                  fill="#ffffff" 
+                  opacity="0.6"
+                />
+                <circle 
+                  className="animate-bubble-2" 
+                  cx="14" 
+                  cy="17" 
+                  r="0.4" 
+                  fill="#ffffff" 
+                  opacity="0.7"
+                />
+                <circle 
+                  className="animate-bubble-3" 
+                  cx="12" 
+                  cy="15" 
+                  r="0.3" 
+                  fill="#ffffff" 
+                  opacity="0.8"
+                />
+                <circle 
+                  className="animate-bubble-2" 
+                  cx="8" 
+                  cy="17" 
+                  r="0.25" 
+                  fill="#ffffff" 
+                  opacity="0.5"
+                />
+                <circle 
+                  className="animate-bubble-3" 
+                  cx="16" 
+                  cy="14" 
+                  r="0.2" 
+                  fill="#ffffff" 
+                  opacity="0.6"
+                />
+              </g>
             </svg>
           </div>
           <span className="text-2xl font-bold tracking-tight uppercase">NURS'TD</span>
