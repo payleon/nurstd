@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Test, Question, QuestionsResponse } from "@shared/schema";
-import { fetchQuestions } from "@/lib/api";
+import { fetchQuestions, fetchTestContent } from "@/lib/api";
 import { MedicalSpinner, LoadingScreen, QuestionLoader } from "@/components/ui/medical-spinner";
 import { 
   ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
@@ -23,10 +23,10 @@ interface QuestionTestViewProps {
 }
 
 export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
-  // Use the directly passed questions data if available, otherwise fetch from API
+  // Use the directly passed questions data if available, otherwise fetch from API for the specific test
   const { data: apiQuestionsData, isLoading: apiLoading, error: apiError } = useQuery({
-    queryKey: ['/api/questions'],
-    queryFn: fetchQuestions,
+    queryKey: [`/api/tests/${test.id}/content`],
+    queryFn: () => fetchTestContent(test.id),
     // Skip this query if we already have the questions data
     enabled: !test.questionsData
   });
