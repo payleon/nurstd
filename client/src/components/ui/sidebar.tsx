@@ -180,14 +180,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               key={index}
               className={cn(
                 "px-4 py-3 flex items-center cursor-pointer hover:bg-[#0A1E3A] border-b-3 border-black transition-all",
-                item.active ? "bg-[#0A1E3A] text-[#FFE45C] font-bold shadow-inner" : "border-opacity-70"
+                item.active ? "bg-[#0A1E3A] text-[#FFB6C1] font-bold shadow-inner" : "border-opacity-70"
               )}
               onClick={() => handleMenuItemClick(item.title, item.path)}
             >
               {item.icon}
               <span className="font-medium">{item.title}</span>
               {item.active && (
-                <div className="ml-auto w-2 h-8 bg-[#FFE45C]"></div>
+                <div className="ml-auto w-2 h-8 bg-[#FFB6C1]"></div>
               )}
             </div>
           ))}
