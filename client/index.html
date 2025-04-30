@@ -26,15 +26,66 @@
     <meta property="og:url" content="https://nclexxx.me/" />
     <meta property="og:image" content="https://nclexxx.me/og-image.svg" />
     <link rel="canonical" href="https://nclexxx.me/" />
-    <!-- Preload fonts to improve performance -->
+    
+    <!-- Optimized Font Loading Strategy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload the most critical fonts first -->
+    <link 
+      rel="preload" 
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" 
+      as="style" 
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    
+    <!-- Load non-critical fonts asynchronously -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" 
+      rel="stylesheet" 
+      media="print" 
+      onload="this.media='all'"
+    />
+    
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" 
+      rel="stylesheet" 
+      media="print" 
+      onload="this.media='all'"
+    />
+    
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
+    
+    <!-- Font fallback to prevent layout shifts -->
+    <style>
+      /* Critical styles to avoid layout shifts while fonts are loading */
+      @font-face {
+        font-family: 'Space Grotesk Fallback';
+        size-adjust: 100%;
+        ascent-override: 90%;
+        src: local('Arial');
+      }
+      
+      @font-face {
+        font-family: 'Space Mono Fallback';
+        size-adjust: 105%;
+        ascent-override: 95%;
+        src: local('Courier New');
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
+      }
+      
+      code, pre {
+        font-family: 'Space Mono', 'Space Mono Fallback', monospace;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

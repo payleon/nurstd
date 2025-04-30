@@ -1,0 +1,144 @@
+
+Eliminate render-blocking resources Potential savings of 560 ms
+Resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles. Learn how to eliminate render-blocking resources.LCPFCP
+URL
+Transfer Size
+Potential Savings
+nclexxx.me 1st party
+16.3 KiB	300 ms
+/assets/index-BISIAD95.css(nclexxx.me)
+16.3 KiB
+300 ms
+Google Fonts cdn 
+1.3 KiB	750 ms
+/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+1.3 KiB
+750 ms
+Largest Contentful Paint element 2,920 ms
+This is the largest contentful element painted within the viewport. Learn more about the Largest Contentful Paint elementLCP
+Element
+Complete questions in different specialties to see your skills grow!
+<p>
+Phase
+% of LCP
+Timing
+TTFB
+21%
+600 ms
+Load Delay
+0%
+0 ms
+Load Time
+0%
+0 ms
+Render Delay
+79%
+2,320 ms
+Reduce unused JavaScript Potential savings of 57 KiB
+Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how to reduce unused JavaScript.LCPFCP
+URL
+Transfer Size
+Potential Savings
+nclexxx.me 1st party
+127.2 KiB	57.3 KiB
+/assets/index-C2pElsWY.js(nclexxx.me)
+90.1 KiB
+35.8 KiB
+/assets/proxy-CWo9Rh4-.js(nclexxx.me)
+37.1 KiB
+21.5 KiB
+Reduce unused CSS Potential savings of 12 KiB
+Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. Learn how to reduce unused CSS.LCPFCP
+URL
+Transfer Size
+Potential Savings
+nclexxx.me 1st party
+15.3 KiB	12.3 KiB
+/assets/index-BISIAD95.css(nclexxx.me)
+15.3 KiB
+12.3 KiB
+Avoid chaining critical requests 19 chains found
+The Critical Request Chains below show you what resources are loaded with a high priority. Consider reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load. Learn how to avoid chaining critical requests.
+Maximum critical path latency: 1,008.19 ms
+Initial Navigation
+https://nclexxx.me
+/assets/index-C2pElsWY.js(nclexxx.me)
+/assets/Home-O3Xw6e1J.js(nclexxx.me) - 106.737 ms, 12.94 KiB
+/assets/card-C7Ymdf4f.js(nclexxx.me) - 175.502 ms, 1.36 KiB
+/assets/file-text-BHf4VmFw.js(nclexxx.me) - 133.232 ms, 1.32 KiB
+/assets/clock-B9KiKdVW.js(nclexxx.me) - 212.762 ms, 1.28 KiB
+/assets/LearningP….js(nclexxx.me) - 271.514 ms, 3.36 KiB
+/assets/BadgeIcon-D1ecy2OC.js(nclexxx.me) - 299.105 ms, 2.49 KiB
+/assets/zap-DiMDgYIg.js(nclexxx.me) - 100.182 ms, 1.48 KiB
+/assets/heart-wYC6Xo7O.js(nclexxx.me) - 173.651 ms, 1.31 KiB
+/assets/brain-Bu94p5vO.js(nclexxx.me) - 173.581 ms, 1.46 KiB
+/assets/book-open-OZcNtO2Q.js(nclexxx.me) - 138.945 ms, 1.32 KiB
+/assets/circle-ch….js(nclexxx.me) - 168.179 ms, 1.29 KiB
+/assets/proxy-CWo9Rh4-.js(nclexxx.me) - 120.762 ms, 38.16 KiB
+/assets/arrow-rig….js(nclexxx.me) - 128.108 ms, 1.27 KiB
+/assets/circle-ch….js(nclexxx.me) - 171.622 ms, 1.28 KiB
+/assets/calendar-XvdFBvII.js(nclexxx.me) - 170.468 ms, 1.31 KiB
+/assets/index-CC_nfmF8.js(nclexxx.me) - 102.557 ms, 2.41 KiB
+/assets/button-DxHSzEBl.js(nclexxx.me) - 170.233 ms, 1.54 KiB
+/assets/index-BISIAD95.css(nclexxx.me)
+/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+…v21/V8mDoQDjQ….woff2(fonts.gstatic.com) - 3.551 ms, 22.56 KiB
+/css2?family=Space+Mono:wght@400;700&display=swap(fonts.googleapis.com) - 5.94 ms, 1.23 KiB
+Minimize third-party usage Third-party code blocked the main thread for 0 ms
+Third-party code can significantly impact load performance. Limit the number of redundant third-party providers and try to load third-party code after your page has primarily finished loading. Learn how to minimize third-party impact.TBT
+Third-Party
+Transfer Size
+Main-Thread Blocking Time
+Google Fonts cdn 
+27 KiB	0 ms
+…v21/V8mDoQDjQ….woff2(fonts.gstatic.com)
+23 KiB
+0 ms
+/css2?family=Inter:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+2 KiB
+0 ms
+/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap(fonts.googleapis.com)
+1 KiB
+0 ms
+/css2?family=Space+Mono:wght@400;700&display=swap(fonts.googleapis.com)
+1 KiB
+0 ms
+More information about the performance of your application. These numbers don't directly affect the Performance score.
+Passed audits (30)
+Hide
+Properly size images
+Defer offscreen images
+Minify CSS
+Minify JavaScript
+Efficiently encode images
+Serve images in next-gen formats
+Enable text compression
+Preconnect to required origins
+Initial server response time was short Root document took 100 ms
+Avoid multiple page redirects
+Use video formats for animated content
+Remove duplicate modules in JavaScript bundles
+Avoid serving legacy JavaScript to modern browsers
+Preload Largest Contentful Paint image
+Avoids enormous network payloads Total size was 213 KiB
+Uses efficient cache policy on static assets 0 resources found
+Avoids an excessive DOM size 583 elements
+User Timing marks and measures
+JavaScript execution time 0.3 s
+Minimizes main-thread work 0.9 s
+All text remains visible during webfont loads
+Lazy load third-party resources with facades
+Largest Contentful Paint image was not lazily loaded
+Avoid large layout shifts
+Uses passive listeners to improve scrolling performance
+Avoids document.write()
+Avoid long main-thread tasks
+Avoid non-composited animations
+Image elements have explicit width and height
+Has a <meta name="viewport"> tag with width or initial-scale
+94
+Accessibility
+These checks highlight opportunities to improve the accessibility of your web app. Automatic detection can only detect a subset of issues and does not guarantee the accessibility of your web app, so manual testing is also encouraged.
+Names and labels
+Buttons do not have an accessible name
+These are opportunities to improve the semantics of the controls in your application. This may enhance the experience for users of assistive technology, like a screen reader.
