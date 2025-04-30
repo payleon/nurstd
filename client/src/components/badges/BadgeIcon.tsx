@@ -15,7 +15,7 @@ import {
   Target,
   Trophy
 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { SimpleBadgeTooltip } from "./SimpleBadgeTooltip";
 import { cn } from "@/lib/utils";
 
 interface BadgeIconProps {
@@ -96,23 +96,8 @@ export function BadgeIcon({
   }
   
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          {badgeContent}
-        </TooltipTrigger>
-        <TooltipContent className="max-w-xs">
-          <div className="text-center">
-            <h3 className="font-bold">{badge.name}</h3>
-            <p className="text-sm text-gray-600">{badge.description}</p>
-            {badge.level && (
-              <p className="text-xs mt-1 capitalize" style={{ color: getLevelColor(badge.level) }}>
-                {badge.level} Level
-              </p>
-            )}
-          </div>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <SimpleBadgeTooltip badge={badge} getLevelColor={getLevelColor}>
+      {badgeContent}
+    </SimpleBadgeTooltip>
   );
 }

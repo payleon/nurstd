@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip, TooltipProvider } from '../ui/animated-tooltip';
+import { Tooltip, TooltipProvider } from '../ui/simple-tooltip';
 import { InfoIcon, AlertCircle, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

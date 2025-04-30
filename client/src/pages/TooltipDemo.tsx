@@ -1,7 +1,6 @@
 import React from 'react';
 import { ContextualHelp } from '@/components/ui/contextual-help';
-import { Tooltip } from '@/components/ui/animated-tooltip';
-import { TooltipProvider } from '@/components/ui/animated-tooltip';
+import { Tooltip, TooltipProvider } from '@/components/ui/simple-tooltip';
 import { Button } from '@/components/ui/button';
 
 export default function TooltipDemo() {

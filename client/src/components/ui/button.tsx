@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
 // Define button styles
@@ -38,7 +39,7 @@ export interface ButtonProps
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? React.Fragment : "button";
+    const Comp = asChild ? Slot : "button";
     return (
       <Comp
         className={cn(buttonVariantStyles({ variant, size, className }))}

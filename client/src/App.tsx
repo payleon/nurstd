@@ -2,7 +2,7 @@ import { Switch, Route, Link } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { BadgeProvider } from "@/contexts/BadgeContext";
 
 import { useState, Suspense, lazy } from "react";
@@ -119,12 +119,12 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
+      <RadixTooltip.Provider delayDuration={300}>
         <BadgeProvider>
           <Toaster />
           <Router />
         </BadgeProvider>
-      </TooltipProvider>
+      </RadixTooltip.Provider>
     </QueryClientProvider>
   );
 }
