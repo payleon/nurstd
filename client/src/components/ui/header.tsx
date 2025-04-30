@@ -13,20 +13,13 @@ export function Header({ toggleSidebar }: HeaderProps) {
   return (
     <header className="bg-[#4B9CD3] text-white border-b-4 border-black fixed top-0 w-full z-10 flex items-center justify-between px-4 h-16 neuro-noise neuro-header">
       <div className="flex items-center">
-        {/* Mobile Menu Toggle */}
-        <button 
-          onClick={toggleSidebar}
-          className="lg:hidden mr-3 border-3 border-black p-1 bg-white text-black hover:bg-[#FFE45C] transition-colors shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]" 
-          aria-label="Toggle Menu"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        
-        {/* Logo */}
+        {/* Logo with Menu Toggle functionality */}
         <div className="flex items-center">
-          <div className="h-10 w-10 bg-white border-3 border-black flex items-center justify-center mr-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+          <div 
+            className="h-10 w-10 bg-white border-3 border-black flex items-center justify-center mr-3 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] overflow-hidden cursor-pointer hover:bg-[#FFE45C] transition-colors"
+            onClick={toggleSidebar}
+            aria-label="Toggle Menu"
+          >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               className="h-7 w-7 animate-flask" 
