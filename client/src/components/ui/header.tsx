@@ -55,26 +55,33 @@ export function Header({ toggleSidebar }: HeaderProps) {
               
               {/* Liquid fill level - 2/3 full */}
               <g clipPath="url(#flask-clip)">
-                {/* Background liquid fill */}
-                <rect 
-                  x="4" 
-                  y="11" 
-                  width="16" 
-                  height="10" 
+                {/* Main liquid body with slosh animation */}
+                <path 
+                  className="animate-liquid-body"
+                  d="M4,20 L4,12 C5.5,11.5 7,13 8.5,12.5 C11,11.8 13.5,11.2 15,11.8 C17,12.5 19,11.8 20,11.8 L20,20 L4,20 Z" 
                   fill="url(#liquid-gradient)" 
                 />
                 
-                {/* Top wave animation */}
+                {/* Top wave animation - more pronounced wave */}
                 <path 
                   className="animate-liquid"
-                  d="M3,11 C5,10.5 7,12 9,11.5 C11,11 13,10.5 15,11 C17,11.5 19,11 21,11.5 L21,12.5 L3,12.5 Z" 
+                  d="M3,11.5 C5,10.5 7,12.5 9,11 C11,9.5 13,11.5 15,10 C17,8.8 19,10.5 21,11 L21,12.5 L3,12.5 Z" 
                   fill="#4B9CD3" 
+                  opacity="0.8"
+                />
+                
+                {/* Second wave layer for more dynamic effect */}
+                <path 
+                  className="animate-liquid-2"
+                  d="M3,12 C5,11.5 7,13 9,12 C11,11 13,12 15,11.5 C17,11 19,12 21,11.5 L21,13 L3,13 Z" 
+                  fill="#6FB7E9" 
                   opacity="0.6"
                 />
                 
-                {/* Light reflection */}
+                {/* Light reflection that follows the movement */}
                 <path 
-                  d="M6,13 L7,13 C8,14 7.5,15 9,15.5 C10.5,16 11,15 11.5,14 L14,15 L6,15.5 Z" 
+                  className="animate-reflection"
+                  d="M6,14 L8,13.5 C9,14 10,15 11,14.5 C12,14 13,15 14,14.5 L15,15 L6,15.5 Z" 
                   fill="#FFFFFF" 
                   opacity="0.3"
                 />
