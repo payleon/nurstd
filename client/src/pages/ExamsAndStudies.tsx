@@ -202,10 +202,27 @@ export default function ExamsAndStudies() {
     async function loadQuestions() {
       try {
         setLoading(true);
+        setError(null); // Clear any previous errors
+        
         const response = await fetchQuestions();
+        
+        // Validate response structure
+        if (!response || !response.questions || !Array.isArray(response.questions)) {
+          console.error("Invalid question data format:", response);
+          setError("Failed to load questions: Invalid data format");
+          setQuestions([]);
+          setFilteredQuestions([]);
+          setLoading(false);
+          return;
+        }
         
         // Add category information to questions if missing
         const processedQuestions = response.questions.map((question: Question) => {
+          if (!question || typeof question !== 'object') {
+            console.warn("Invalid question data:", question);
+            return null;
+          }
+          
           if (question.category) return question;
           
           // Determine category based on the question title or content
@@ -229,7 +246,7 @@ export default function ExamsAndStudies() {
           }
           
           return { ...question, category };
-        });
+        }).filter(Boolean) as Question[]; // Filter out any null entries
         
         setQuestions(processedQuestions);
         setFilteredQuestions(processedQuestions);
@@ -237,6 +254,8 @@ export default function ExamsAndStudies() {
       } catch (error) {
         console.error("Error loading questions:", error);
         setError("Failed to load questions. Please try again later.");
+        setQuestions([]);
+        setFilteredQuestions([]);
         setLoading(false);
       }
     }

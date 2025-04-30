@@ -176,14 +176,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const questionsFilePath = path.join(publishedDir, "all_questions.json");
       
       try {
+        await fs.access(publishedDir);
+      } catch (error) {
+        // Create the directory if it doesn't exist
+        await fs.mkdir(publishedDir, { recursive: true });
+      }
+      
+      try {
         await fs.access(questionsFilePath);
       } catch (error) {
-        return res.status(404).json({ message: "Questions file not found" });
+        console.error("Questions file not found at", questionsFilePath);
+        // Use a minimal skeleton response structure
+        return res.json({ 
+          questions: [] 
+        });
       }
       
       // Read the questions file
       const questionsContent = await fs.readFile(questionsFilePath, 'utf-8');
-      const questionsData = JSON.parse(questionsContent);
+      
+      // Validate JSON format
+      let questionsData;
+      try {
+        questionsData = JSON.parse(questionsContent);
+      } catch (error) {
+        console.error("Error parsing questions JSON:", error);
+        return res.status(500).json({ 
+          message: "Invalid JSON format in questions file",
+          error: (error as Error).message 
+        });
+      }
       
       // Validate the data against our schema
       try {
@@ -191,11 +213,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.json(validatedData);
       } catch (error) {
         console.error("Questions data validation error:", error);
-        res.status(500).json({ message: "Invalid questions data format" });
+        
+        // Try to return partial data if possible
+        if (questionsData && typeof questionsData === 'object' && 'questions' in questionsData && Array.isArray(questionsData.questions)) {
+          console.log("Returning unvalidated question data");
+          res.json(questionsData);
+        } else {
+          res.status(500).json({ 
+            message: "Invalid questions data format", 
+            error: (error as Error).message 
+          });
+        }
       }
     } catch (error) {
       console.error("Error reading questions:", error);
-      res.status(500).json({ message: "Failed to load questions" });
+      res.status(500).json({ 
+        message: "Failed to load questions",
+        error: (error as Error).message 
+      });
     }
   });
 
