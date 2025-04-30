@@ -4,6 +4,22 @@ import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
+// Import separate tooltip primitives for better composition
+export function TooltipProvider({ 
+  children, 
+  delayDuration = 300 
+}: { 
+  children: React.ReactNode; 
+  delayDuration?: number;
+}) {
+  return (
+    <RadixTooltip.Provider delayDuration={delayDuration}>
+      {children}
+    </RadixTooltip.Provider>
+  );
+}
+
+// Main tooltip component with animation
 interface TooltipProps {
   content: React.ReactNode;
   children: React.ReactElement;
@@ -15,30 +31,6 @@ interface TooltipProps {
   contentClassName?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-}
-
-export function TooltipProvider({ children, delayDuration }: { children: React.ReactNode, delayDuration?: number }) {
-  return (
-    <RadixTooltip.Provider delayDuration={delayDuration}>
-      {children}
-    </RadixTooltip.Provider>
-  );
-}
-
-export function TooltipTrigger({ children }: { children: React.ReactNode }) {
-  return (
-    <RadixTooltip.Trigger asChild>
-      {children}
-    </RadixTooltip.Trigger>
-  );
-}
-
-export function TooltipContent({ children, className }: { children: React.ReactNode, className?: string }) {
-  return (
-    <RadixTooltip.Content className={className}>
-      {children}
-    </RadixTooltip.Content>
-  );
 }
 
 export function Tooltip({
@@ -87,44 +79,42 @@ export function Tooltip({
   };
 
   return (
-    <RadixTooltip.Provider delayDuration={delay}>
-      <RadixTooltip.Root open={isOpen} onOpenChange={handleOpenChange}>
-        <RadixTooltip.Trigger asChild>
-          {children}
-        </RadixTooltip.Trigger>
-        
-        <AnimatePresence>
-          {isOpen && (
-            <RadixTooltip.Portal forceMount>
-              <RadixTooltip.Content
-                side={side}
-                align={align}
-                sideOffset={5}
-                asChild
-                className={className}
+    <RadixTooltip.Root open={isOpen} onOpenChange={handleOpenChange}>
+      <RadixTooltip.Trigger asChild>
+        {children}
+      </RadixTooltip.Trigger>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <RadixTooltip.Portal forceMount>
+            <RadixTooltip.Content
+              side={side}
+              align={align}
+              sideOffset={5}
+              asChild
+              className={className}
+            >
+              <motion.div
+                className={cn(
+                  "z-50 overflow-hidden rounded-md bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] px-3 py-1.5 text-sm text-black font-medium font-inter",
+                  contentClassName
+                )}
+                variants={tooltipAnimation}
+                initial="initial"
+                animate="animate"
+                exit="exit"
               >
-                <motion.div
-                  className={cn(
-                    "z-50 overflow-hidden rounded-md bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] px-3 py-1.5 text-sm text-black font-medium font-inter",
-                    contentClassName
-                  )}
-                  variants={tooltipAnimation}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  {content}
-                  <RadixTooltip.Arrow 
-                    className={cn("fill-white stroke-black stroke-2", arrowClassName)} 
-                    width={12} 
-                    height={6} 
-                  />
-                </motion.div>
-              </RadixTooltip.Content>
-            </RadixTooltip.Portal>
-          )}
-        </AnimatePresence>
-      </RadixTooltip.Root>
-    </RadixTooltip.Provider>
+                {content}
+                <RadixTooltip.Arrow 
+                  className={cn("fill-white stroke-black stroke-2", arrowClassName)} 
+                  width={12} 
+                  height={6} 
+                />
+              </motion.div>
+            </RadixTooltip.Content>
+          </RadixTooltip.Portal>
+        )}
+      </AnimatePresence>
+    </RadixTooltip.Root>
   );
 }
