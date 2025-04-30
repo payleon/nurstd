@@ -211,7 +211,7 @@
       "choices": [
         {
           "id": "A",
-          "text": "Temperature of 101.2°F (38.4°C)"
+          "text": "Temperature of 101.2\u00b0F (38.4\u00b0C)"
         },
         {
           "id": "B",
@@ -227,7 +227,7 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "Blood pressure of 180/100 mmHg with bradycardia is a classic presentation of autonomic dysreflexia, a life-threatening condition that can occur in individuals with spinal cord injuries at T6 level or above. It requires immediate intervention to prevent potential complications such as seizures, stroke, or death. A temperature of 101.2°F might indicate infection but is not specifically related to autonomic dysreflexia. Blood pressure of 90/60 mmHg would be more consistent with neurogenic shock, which can occur immediately after spinal cord injury, not autonomic dysreflexia. Urinary output of 30 mL/hour is within normal limits and not specifically indicative of autonomic dysreflexia, although a distended bladder could trigger this condition.",
+      "rationale": "Blood pressure of 180/100 mmHg with bradycardia is a classic presentation of autonomic dysreflexia, a life-threatening condition that can occur in individuals with spinal cord injuries at T6 level or above. It requires immediate intervention to prevent potential complications such as seizures, stroke, or death. A temperature of 101.2\u00b0F might indicate infection but is not specifically related to autonomic dysreflexia. Blood pressure of 90/60 mmHg would be more consistent with neurogenic shock, which can occur immediately after spinal cord injury, not autonomic dysreflexia. Urinary output of 30 mL/hour is within normal limits and not specifically indicative of autonomic dysreflexia, although a distended bladder could trigger this condition.",
       "category": "med-surg",
       "subcategory": "musculoskeletal",
       "difficulty": "hard"
@@ -289,6 +289,870 @@
       "category": "med-surg",
       "subcategory": "musculoskeletal",
       "difficulty": "medium"
+    },
+    {
+      "id": 129,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with systemic lupus erythematosus (SLE) reports new joint pain and swelling. What is the most appropriate initial nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer prescribed NSAIDs."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's pain level and joints."
+        },
+        {
+          "id": "C",
+          "text": "Apply warm compresses to the affected joints."
+        },
+        {
+          "id": "D",
+          "text": "Encourage the patient to increase physical activity."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A thorough assessment of the pain and affected joints is crucial before initiating any treatment. While NSAIDs may be prescribed, assessment guides the intervention and determines if additional actions are required.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 215,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with end-stage renal disease (ESRD) is experiencing muscle cramps. Which electrolyte imbalance is most likely the cause?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hypernatremia"
+        },
+        {
+          "id": "B",
+          "text": "Hypokalemia"
+        },
+        {
+          "id": "C",
+          "text": "Hypercalcemia"
+        },
+        {
+          "id": "D",
+          "text": "Hypocalcemia"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Muscle cramps are a common symptom of hypokalemia, which is frequently seen in patients with ESRD due to impaired potassium regulation by the kidneys.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 222,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with a fractured femur is complaining of severe pain despite receiving prescribed analgesics. What should the nurse assess first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The patient's pain scale rating."
+        },
+        {
+          "id": "B",
+          "text": "The location and characteristics of the pain."
+        },
+        {
+          "id": "C",
+          "text": "The effectiveness of the current analgesia."
+        },
+        {
+          "id": "D",
+          "text": "The neurovascular status of the affected extremity."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "Neurovascular compromise is a serious complication of fractures; assessment of distal pulses, skin color, temperature, and sensation is crucial before further pain management strategies are implemented.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 262,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A 2-year-old child presents with a barking cough, inspiratory stridor, and retractions.  Which nursing interventions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer oxygen via nasal cannula."
+        },
+        {
+          "id": "B",
+          "text": "Monitor respiratory rate and oxygen saturation."
+        },
+        {
+          "id": "C",
+          "text": "Place the child in a cool mist tent."
+        },
+        {
+          "id": "D",
+          "text": "Encourage fluid intake."
+        },
+        {
+          "id": "E",
+          "text": "Restrict activity."
+        },
+        {
+          "id": "F",
+          "text": "Administer a bronchodilator as ordered."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D",
+        "F"
+      ],
+      "rationale": "The symptoms suggest croup.  Oxygen is crucial to maintain adequate oxygen saturation.  Close monitoring of respiratory status is essential. Fluids help thin secretions.  Bronchodilators can help relieve airway obstruction. A cool mist humidifier is preferred over a tent.  Restricting activity helps conserve energy.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 458,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with systemic lupus erythematosus (SLE) reports new joint pain and swelling. What is the most appropriate initial nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer prescribed NSAIDs."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's pain level and joints."
+        },
+        {
+          "id": "C",
+          "text": "Apply warm compresses to the affected joints."
+        },
+        {
+          "id": "D",
+          "text": "Encourage the patient to increase physical activity."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A thorough assessment of the pain and affected joints is crucial before initiating any treatment. While NSAIDs may be prescribed, assessment guides the intervention and determines if additional actions are required.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 544,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with end-stage renal disease (ESRD) is experiencing muscle cramps. Which electrolyte imbalance is most likely the cause?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hypernatremia"
+        },
+        {
+          "id": "B",
+          "text": "Hypokalemia"
+        },
+        {
+          "id": "C",
+          "text": "Hypercalcemia"
+        },
+        {
+          "id": "D",
+          "text": "Hypocalcemia"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Muscle cramps are a common symptom of hypokalemia, which is frequently seen in patients with ESRD due to impaired potassium regulation by the kidneys.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 551,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with a fractured femur is complaining of severe pain despite receiving prescribed analgesics. What should the nurse assess first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The patient's pain scale rating."
+        },
+        {
+          "id": "B",
+          "text": "The location and characteristics of the pain."
+        },
+        {
+          "id": "C",
+          "text": "The effectiveness of the current analgesia."
+        },
+        {
+          "id": "D",
+          "text": "The neurovascular status of the affected extremity."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "Neurovascular compromise is a serious complication of fractures; assessment of distal pulses, skin color, temperature, and sensation is crucial before further pain management strategies are implemented.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 591,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A 2-year-old child presents with a barking cough, inspiratory stridor, and retractions.  Which nursing interventions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer oxygen via nasal cannula."
+        },
+        {
+          "id": "B",
+          "text": "Monitor respiratory rate and oxygen saturation."
+        },
+        {
+          "id": "C",
+          "text": "Place the child in a cool mist tent."
+        },
+        {
+          "id": "D",
+          "text": "Encourage fluid intake."
+        },
+        {
+          "id": "E",
+          "text": "Restrict activity."
+        },
+        {
+          "id": "F",
+          "text": "Administer a bronchodilator as ordered."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D",
+        "F"
+      ],
+      "rationale": "The symptoms suggest croup.  Oxygen is crucial to maintain adequate oxygen saturation.  Close monitoring of respiratory status is essential. Fluids help thin secretions.  Bronchodilators can help relieve airway obstruction. A cool mist humidifier is preferred over a tent.  Restricting activity helps conserve energy.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 691,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "\"My knees hurt so much; I can hardly walk,\" says an elderly patient with osteoarthritis.  Which nursing intervention should be prioritized?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer prescribed analgesics."
+        },
+        {
+          "id": "B",
+          "text": "Teach the patient about joint protection techniques."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's pain level using a validated pain scale."
+        },
+        {
+          "id": "D",
+          "text": "Refer the patient to physical therapy."
+        },
+        {
+          "id": "E",
+          "text": "Encourage increased fluid intake."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "While all options are relevant for managing osteoarthritis, a thorough pain assessment (C) using a validated scale is the crucial first step.  This guides the appropriate analgesic choice (A), the effectiveness of joint protection techniques (B), and the need for physical therapy (D).  Increased fluid intake (E) is generally beneficial but not the immediate priority for pain management.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 692,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A patient with a new diagnosis of multiple sclerosis (MS) reports fatigue, muscle weakness, and numbness in her legs. Which nursing diagnoses are most appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Impaired physical mobility"
+        },
+        {
+          "id": "B",
+          "text": "Risk for falls"
+        },
+        {
+          "id": "C",
+          "text": "Deficient knowledge regarding disease management"
+        },
+        {
+          "id": "D",
+          "text": "Disturbed sensory perception"
+        },
+        {
+          "id": "E",
+          "text": "Ineffective coping"
+        },
+        {
+          "id": "F",
+          "text": "Acute pain"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "The patient's symptoms directly support Impaired physical mobility (A) and Disturbed sensory perception (D).  Muscle weakness and numbness increase the Risk for falls (B).  A new diagnosis indicates a need for Deficient knowledge regarding disease management (C).  While fatigue and potential pain might lead to Ineffective coping (E) or Acute pain (F), these are less direct consequences of the initial presentation compared to mobility, sensory, and knowledge deficits.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 719,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A child presents with a barking cough, inspiratory stridor, and retractions.  Select all the nursing assessments that are priority:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Oxygen saturation."
+        },
+        {
+          "id": "B",
+          "text": "Respiratory rate and effort."
+        },
+        {
+          "id": "C",
+          "text": "Hydration status."
+        },
+        {
+          "id": "D",
+          "text": "Level of consciousness."
+        },
+        {
+          "id": "E",
+          "text": "Heart rate."
+        },
+        {
+          "id": "F",
+          "text": "Temperature."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "rationale": "The child's symptoms suggest croup, a serious respiratory condition.  Oxygen saturation (A) is crucial to assess the severity of hypoxia. Respiratory rate and effort (B) help determine the effectiveness of breathing and the need for intervention. Level of consciousness (D) is an indicator of the brain's oxygenation status.  While hydration (C), heart rate (E), and temperature (F) are important assessments, they are not the immediate priorities in this acute respiratory distress situation.  Airway patency and oxygenation are paramount.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 919,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with systemic lupus erythematosus (SLE) reports new joint pain and swelling. What is the most appropriate initial nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer prescribed NSAIDs."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's pain level and joints."
+        },
+        {
+          "id": "C",
+          "text": "Apply warm compresses to the affected joints."
+        },
+        {
+          "id": "D",
+          "text": "Encourage the patient to increase physical activity."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A thorough assessment of the pain and affected joints is crucial before initiating any treatment. While NSAIDs may be prescribed, assessment guides the intervention and determines if additional actions are required.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1005,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with end-stage renal disease (ESRD) is experiencing muscle cramps. Which electrolyte imbalance is most likely the cause?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hypernatremia"
+        },
+        {
+          "id": "B",
+          "text": "Hypokalemia"
+        },
+        {
+          "id": "C",
+          "text": "Hypercalcemia"
+        },
+        {
+          "id": "D",
+          "text": "Hypocalcemia"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Muscle cramps are a common symptom of hypokalemia, which is frequently seen in patients with ESRD due to impaired potassium regulation by the kidneys.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1012,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with a fractured femur is complaining of severe pain despite receiving prescribed analgesics. What should the nurse assess first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The patient's pain scale rating."
+        },
+        {
+          "id": "B",
+          "text": "The location and characteristics of the pain."
+        },
+        {
+          "id": "C",
+          "text": "The effectiveness of the current analgesia."
+        },
+        {
+          "id": "D",
+          "text": "The neurovascular status of the affected extremity."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "Neurovascular compromise is a serious complication of fractures; assessment of distal pulses, skin color, temperature, and sensation is crucial before further pain management strategies are implemented.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1052,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A 2-year-old child presents with a barking cough, inspiratory stridor, and retractions.  Which nursing interventions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer oxygen via nasal cannula."
+        },
+        {
+          "id": "B",
+          "text": "Monitor respiratory rate and oxygen saturation."
+        },
+        {
+          "id": "C",
+          "text": "Place the child in a cool mist tent."
+        },
+        {
+          "id": "D",
+          "text": "Encourage fluid intake."
+        },
+        {
+          "id": "E",
+          "text": "Restrict activity."
+        },
+        {
+          "id": "F",
+          "text": "Administer a bronchodilator as ordered."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D",
+        "F"
+      ],
+      "rationale": "The symptoms suggest croup.  Oxygen is crucial to maintain adequate oxygen saturation.  Close monitoring of respiratory status is essential. Fluids help thin secretions.  Bronchodilators can help relieve airway obstruction. A cool mist humidifier is preferred over a tent.  Restricting activity helps conserve energy.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1152,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "\"My knees hurt so much; I can hardly walk,\" says an elderly patient with osteoarthritis.  Which nursing intervention should be prioritized?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer prescribed analgesics."
+        },
+        {
+          "id": "B",
+          "text": "Teach the patient about joint protection techniques."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's pain level using a validated pain scale."
+        },
+        {
+          "id": "D",
+          "text": "Refer the patient to physical therapy."
+        },
+        {
+          "id": "E",
+          "text": "Encourage increased fluid intake."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "While all options are relevant for managing osteoarthritis, a thorough pain assessment (C) using a validated scale is the crucial first step.  This guides the appropriate analgesic choice (A), the effectiveness of joint protection techniques (B), and the need for physical therapy (D).  Increased fluid intake (E) is generally beneficial but not the immediate priority for pain management.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1153,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A patient with a new diagnosis of multiple sclerosis (MS) reports fatigue, muscle weakness, and numbness in her legs. Which nursing diagnoses are most appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Impaired physical mobility"
+        },
+        {
+          "id": "B",
+          "text": "Risk for falls"
+        },
+        {
+          "id": "C",
+          "text": "Deficient knowledge regarding disease management"
+        },
+        {
+          "id": "D",
+          "text": "Disturbed sensory perception"
+        },
+        {
+          "id": "E",
+          "text": "Ineffective coping"
+        },
+        {
+          "id": "F",
+          "text": "Acute pain"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "The patient's symptoms directly support Impaired physical mobility (A) and Disturbed sensory perception (D).  Muscle weakness and numbness increase the Risk for falls (B).  A new diagnosis indicates a need for Deficient knowledge regarding disease management (C).  While fatigue and potential pain might lead to Ineffective coping (E) or Acute pain (F), these are less direct consequences of the initial presentation compared to mobility, sensory, and knowledge deficits.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1180,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A child presents with a barking cough, inspiratory stridor, and retractions.  Select all the nursing assessments that are priority:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Oxygen saturation."
+        },
+        {
+          "id": "B",
+          "text": "Respiratory rate and effort."
+        },
+        {
+          "id": "C",
+          "text": "Hydration status."
+        },
+        {
+          "id": "D",
+          "text": "Level of consciousness."
+        },
+        {
+          "id": "E",
+          "text": "Heart rate."
+        },
+        {
+          "id": "F",
+          "text": "Temperature."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "rationale": "The child's symptoms suggest croup, a serious respiratory condition.  Oxygen saturation (A) is crucial to assess the severity of hypoxia. Respiratory rate and effort (B) help determine the effectiveness of breathing and the need for intervention. Level of consciousness (D) is an indicator of the brain's oxygenation status.  While hydration (C), heart rate (E), and temperature (F) are important assessments, they are not the immediate priorities in this acute respiratory distress situation.  Airway patency and oxygenation are paramount.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1380,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with systemic lupus erythematosus (SLE) reports new joint pain and swelling. What is the most appropriate initial nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer prescribed NSAIDs."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's pain level and joints."
+        },
+        {
+          "id": "C",
+          "text": "Apply warm compresses to the affected joints."
+        },
+        {
+          "id": "D",
+          "text": "Encourage the patient to increase physical activity."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A thorough assessment of the pain and affected joints is crucial before initiating any treatment. While NSAIDs may be prescribed, assessment guides the intervention and determines if additional actions are required.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1466,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with end-stage renal disease (ESRD) is experiencing muscle cramps. Which electrolyte imbalance is most likely the cause?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hypernatremia"
+        },
+        {
+          "id": "B",
+          "text": "Hypokalemia"
+        },
+        {
+          "id": "C",
+          "text": "Hypercalcemia"
+        },
+        {
+          "id": "D",
+          "text": "Hypocalcemia"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Muscle cramps are a common symptom of hypokalemia, which is frequently seen in patients with ESRD due to impaired potassium regulation by the kidneys.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1473,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with a fractured femur is complaining of severe pain despite receiving prescribed analgesics. What should the nurse assess first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "The patient's pain scale rating."
+        },
+        {
+          "id": "B",
+          "text": "The location and characteristics of the pain."
+        },
+        {
+          "id": "C",
+          "text": "The effectiveness of the current analgesia."
+        },
+        {
+          "id": "D",
+          "text": "The neurovascular status of the affected extremity."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "Neurovascular compromise is a serious complication of fractures; assessment of distal pulses, skin color, temperature, and sensation is crucial before further pain management strategies are implemented.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1513,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A 2-year-old child presents with a barking cough, inspiratory stridor, and retractions.  Which nursing interventions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer oxygen via nasal cannula."
+        },
+        {
+          "id": "B",
+          "text": "Monitor respiratory rate and oxygen saturation."
+        },
+        {
+          "id": "C",
+          "text": "Place the child in a cool mist tent."
+        },
+        {
+          "id": "D",
+          "text": "Encourage fluid intake."
+        },
+        {
+          "id": "E",
+          "text": "Restrict activity."
+        },
+        {
+          "id": "F",
+          "text": "Administer a bronchodilator as ordered."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D",
+        "F"
+      ],
+      "rationale": "The symptoms suggest croup.  Oxygen is crucial to maintain adequate oxygen saturation.  Close monitoring of respiratory status is essential. Fluids help thin secretions.  Bronchodilators can help relieve airway obstruction. A cool mist humidifier is preferred over a tent.  Restricting activity helps conserve energy.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1613,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "\"My knees hurt so much; I can hardly walk,\" says an elderly patient with osteoarthritis.  Which nursing intervention should be prioritized?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer prescribed analgesics."
+        },
+        {
+          "id": "B",
+          "text": "Teach the patient about joint protection techniques."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's pain level using a validated pain scale."
+        },
+        {
+          "id": "D",
+          "text": "Refer the patient to physical therapy."
+        },
+        {
+          "id": "E",
+          "text": "Encourage increased fluid intake."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "While all options are relevant for managing osteoarthritis, a thorough pain assessment (C) using a validated scale is the crucial first step.  This guides the appropriate analgesic choice (A), the effectiveness of joint protection techniques (B), and the need for physical therapy (D).  Increased fluid intake (E) is generally beneficial but not the immediate priority for pain management.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1614,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A patient with a new diagnosis of multiple sclerosis (MS) reports fatigue, muscle weakness, and numbness in her legs. Which nursing diagnoses are most appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Impaired physical mobility"
+        },
+        {
+          "id": "B",
+          "text": "Risk for falls"
+        },
+        {
+          "id": "C",
+          "text": "Deficient knowledge regarding disease management"
+        },
+        {
+          "id": "D",
+          "text": "Disturbed sensory perception"
+        },
+        {
+          "id": "E",
+          "text": "Ineffective coping"
+        },
+        {
+          "id": "F",
+          "text": "Acute pain"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "The patient's symptoms directly support Impaired physical mobility (A) and Disturbed sensory perception (D).  Muscle weakness and numbness increase the Risk for falls (B).  A new diagnosis indicates a need for Deficient knowledge regarding disease management (C).  While fatigue and potential pain might lead to Ineffective coping (E) or Acute pain (F), these are less direct consequences of the initial presentation compared to mobility, sensory, and knowledge deficits.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1641,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A child presents with a barking cough, inspiratory stridor, and retractions.  Select all the nursing assessments that are priority:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Oxygen saturation."
+        },
+        {
+          "id": "B",
+          "text": "Respiratory rate and effort."
+        },
+        {
+          "id": "C",
+          "text": "Hydration status."
+        },
+        {
+          "id": "D",
+          "text": "Level of consciousness."
+        },
+        {
+          "id": "E",
+          "text": "Heart rate."
+        },
+        {
+          "id": "F",
+          "text": "Temperature."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "rationale": "The child's symptoms suggest croup, a serious respiratory condition.  Oxygen saturation (A) is crucial to assess the severity of hypoxia. Respiratory rate and effort (B) help determine the effectiveness of breathing and the need for intervention. Level of consciousness (D) is an indicator of the brain's oxygenation status.  While hydration (C), heart rate (E), and temperature (F) are important assessments, they are not the immediate priorities in this acute respiratory distress situation.  Airway patency and oxygenation are paramount.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
     }
   ]
 }

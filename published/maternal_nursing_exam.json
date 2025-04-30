@@ -161,7 +161,7 @@
         },
         {
           "id": "C",
-          "text": "Temperature of 101.2°F (38.4°C)"
+          "text": "Temperature of 101.2\u00b0F (38.4\u00b0C)"
         },
         {
           "id": "D",
@@ -169,7 +169,7 @@
         }
       ],
       "correctAnswer": "A",
-      "rationale": "A firm fundus located at the level of the umbilicus is a normal finding in the immediate postpartum period. The firm consistency indicates that the uterus is contracted, which helps control bleeding from the placental site. Lochia rubra (bright red vaginal discharge) is normal, but the presence of large clots is abnormal and may indicate excessive bleeding. A temperature of 101.2°F (38.4°C) at 2 hours postpartum is elevated and may indicate infection or dehydration; normal temperature range is 97.7-99.5°F (36.5-37.5°C). A soft, boggy uterus indicates uterine atony, which can lead to postpartum hemorrhage and requires immediate intervention.",
+      "rationale": "A firm fundus located at the level of the umbilicus is a normal finding in the immediate postpartum period. The firm consistency indicates that the uterus is contracted, which helps control bleeding from the placental site. Lochia rubra (bright red vaginal discharge) is normal, but the presence of large clots is abnormal and may indicate excessive bleeding. A temperature of 101.2\u00b0F (38.4\u00b0C) at 2 hours postpartum is elevated and may indicate infection or dehydration; normal temperature range is 97.7-99.5\u00b0F (36.5-37.5\u00b0C). A soft, boggy uterus indicates uterine atony, which can lead to postpartum hemorrhage and requires immediate intervention.",
       "category": "maternity",
       "subcategory": "postpartum",
       "difficulty": "medium"
@@ -207,7 +207,7 @@
       "id": 308,
       "title": "Postpartum Complications",
       "type": "mc",
-      "text": "A postpartum client develops a temperature of 102.5°F (39.2°C) on day 3 after a vaginal delivery. She reports lower abdominal pain and has a foul-smelling lochia. The nurse suspects which condition?",
+      "text": "A postpartum client develops a temperature of 102.5\u00b0F (39.2\u00b0C) on day 3 after a vaginal delivery. She reports lower abdominal pain and has a foul-smelling lochia. The nurse suspects which condition?",
       "choices": [
         {
           "id": "A",
@@ -463,6 +463,3243 @@
       "category": "maternity",
       "subcategory": "complications",
       "difficulty": "medium"
+    },
+    {
+      "id": 123,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with chronic kidney disease (CKD) reports increasing fatigue and shortness of breath.  Which laboratory result should the nurse prioritize reviewing?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Potassium level"
+        },
+        {
+          "id": "B",
+          "text": "Hemoglobin level"
+        },
+        {
+          "id": "C",
+          "text": "Blood urea nitrogen (BUN)"
+        },
+        {
+          "id": "D",
+          "text": "Creatinine level"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Fatigue and shortness of breath are common symptoms of anemia, a frequent complication of CKD.  Checking the hemoglobin level (B) is crucial to assess for anemia. While the other options are relevant to CKD management, anemia is the most likely explanation for these symptoms.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 126,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing heavy vaginal bleeding. Which nursing interventions are appropriate? Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs frequently."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Encourage ambulation."
+        },
+        {
+          "id": "E",
+          "text": "Assess for bladder distention."
+        },
+        {
+          "id": "F",
+          "text": "Monitor urine output."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage requires prompt interventions to control bleeding.  Fundal massage (A) helps to contract the uterus, reducing blood flow. Frequent vital signs (B) are essential to monitor for shock. Oxytocin (C) is commonly used to stimulate uterine contractions. A distended bladder (E) can impede uterine contraction, so assessment is vital.  While monitoring urine output (F) is important for overall hydration, it isn\u2019t a direct intervention for immediate postpartum hemorrhage management. Encouraging ambulation (D) is appropriate in many cases, but the priority is controlling the bleeding first.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 140,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding. Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Measure the amount of blood loss."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "E",
+          "text": "Encourage the patient to ambulate frequently."
+        },
+        {
+          "id": "F",
+          "text": "Apply ice packs to the perineum."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Heavy postpartum bleeding requires prompt assessment and intervention. Assessing fundal firmness and position helps identify uterine atony (A), a common cause of postpartum hemorrhage. Measuring blood loss accurately is crucial (B). Oxytocin is often used to stimulate uterine contractions (C). Monitoring vital signs helps detect signs of hypovolemic shock (D). E and F are less immediate interventions in the context of heavy bleeding.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 147,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing.  What is the priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Immediately suction the patient's airway.\nA) Check the ventilator tubing for kinks or obstructions.\nC) Assess the patient's oxygen saturation.\nD) Increase the ventilator's tidal volume.\nCorrect Answer: B\nRationale: High pressure ventilator alarms typically indicate an obstruction in the airway or ventilator tubing.  Checking for kinks or obstructions is the immediate priority to alleviate the high pressure and improve ventilation.  While suctioning (A) might be necessary, it's not the first step; the cause of the obstruction must be identified and resolved first.  (C) is important but doesn't address the root cause, and (D) could worsen the situation if the problem is an obstruction.\n\n--- End Question ---\nQuestion Number: 3.\nCategory: Neurology\nType: Select All That Apply\nDifficulty: Medium\nQuestion: Potassium level is 5.8 mEq/L. Which assessment findings would the nurse expect to find in a patient with hyperkalemia?\nA)  Muscle weakness"
+        },
+        {
+          "id": "B",
+          "text": "Bradycardia"
+        },
+        {
+          "id": "C",
+          "text": "Hyperreflexia"
+        },
+        {
+          "id": "D",
+          "text": "Hypotension"
+        },
+        {
+          "id": "E",
+          "text": "Peaked T waves on ECG"
+        },
+        {
+          "id": "F",
+          "text": "Increased bowel sounds"
+        }
+      ],
+      "correctAnswer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Hyperkalemia (high potassium) causes alterations in cardiac rhythm (bradycardia, peaked T waves), neuromuscular excitability (hyperreflexia), and potentially muscle weakness (although profound weakness can also indicate hypokalemia). Hypotension is not a direct effect of hyperkalemia, and bowel sounds are not directly related to potassium levels.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 149,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding and dizziness.  Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the patient's vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxygen via face mask."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "F",
+          "text": "Check the patient's hemoglobin and hematocrit levels."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing vital signs (A) is crucial to monitor the patient's stability. Fundal massage (B) helps to contract the uterus and control bleeding. Oxygen (C) is administered to increase oxygenation to tissues.  Notifying the physician (E) is essential due to the severity of the situation. Checking hemoglobin and hematocrit (F) helps to assess the extent of blood loss. Increasing IV fluids (D) might be considered but is not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 155,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and is saturating a perineal pad in less than 15 minutes.  Her blood pressure is 80/50 mmHg. What is the priority nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "C",
+          "text": "Assess for lacerations."
+        },
+        {
+          "id": "D",
+          "text": "Begin rapid fluid resuscitation."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "The patient is exhibiting signs of postpartum hemorrhage (PPH) with hypotension. Rapid fluid resuscitation is crucial to stabilize the patient's circulatory status. While the other options are appropriate interventions for PPH management, restoring blood volume is the immediate priority to prevent shock.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 167,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy bleeding. Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess fundal height and firmness."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Prepare for a blood transfusion."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing fundal height and firmness helps identify the cause of bleeding.  Monitoring vital signs is crucial to detect signs of shock. Fundal massage helps to contract the uterus, reducing bleeding. Oxytocin is a medication used to stimulate uterine contractions.  Preparing for a blood transfusion might be necessary if bleeding is severe, but assessment and intervention should occur first. Increasing IV fluids is not typically the first action taken.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 178,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  Her fundus is boggy and midline.  Which nursing action should be taken FIRST?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxytocin as ordered."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A boggy, midline fundus indicates uterine atony, the most common cause of postpartum hemorrhage.  The FIRST action is to massage the fundus (B) to stimulate uterine contractions and reduce bleeding. Assessing vital signs (A) is important but should follow the immediate action of massaging the fundus to control bleeding. While notifying the physician (C) and administering oxytocin (D) are necessary, they are secondary to the immediate intervention of fundal massage.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 213,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing excessive vaginal bleeding.  Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor for signs of hypovolemic shock."
+        },
+        {
+          "id": "E",
+          "text": "Place the patient in Trendelenburg position."
+        },
+        {
+          "id": "F",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Postpartum hemorrhage requires immediate action.  Fundal massage helps to contract the uterus and decrease bleeding.  Vital signs monitoring is crucial to detect early signs of hypovolemic shock. Oxytocin is a medication used to stimulate uterine contractions.  Monitoring for shock (tachycardia, hypotension, pallor) is critical.  Trendelenburg position is generally avoided as it can impede venous return and worsen bleeding.  Intravenous fluids may be necessary later to replace fluid loss but are not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 220,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with hypothyroidism is experiencing fatigue and weight gain. Which laboratory value would the nurse expect to be abnormal?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated TSH"
+        },
+        {
+          "id": "B",
+          "text": "Elevated T3"
+        },
+        {
+          "id": "C",
+          "text": "Elevated T4"
+        },
+        {
+          "id": "D",
+          "text": "Decreased TSH"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "In hypothyroidism, the thyroid gland doesn't produce enough thyroid hormones (T3 and T4), leading to an increase in TSH.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 233,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "Upon admission, a patient reports taking warfarin (Coumadin) daily. Which laboratory test is essential to monitor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "International Normalized Ratio (INR)"
+        },
+        {
+          "id": "B",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "C",
+          "text": "Partial thromboplastin time (PTT)"
+        },
+        {
+          "id": "D",
+          "text": "Complete blood count (CBC)"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "INR is the most commonly used test to monitor warfarin's anticoagulant effect.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 242,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy bleeding and saturates a perineal pad in 15 minutes. What is the nurse's priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "Postpartum hemorrhage (PPH) is a life-threatening emergency.  Immediate notification of the physician (C) is the priority to initiate rapid intervention.  While the other options (A, B, D) are important aspects of managing PPH, they must follow prompt physician notification.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 259,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Which signs indicate potential complications during labor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal bradycardia."
+        },
+        {
+          "id": "B",
+          "text": "Maternal fever."
+        },
+        {
+          "id": "C",
+          "text": "Decreased variability in fetal heart rate."
+        },
+        {
+          "id": "D",
+          "text": "Late decelerations in fetal heart rate."
+        },
+        {
+          "id": "E",
+          "text": "Increased maternal blood pressure."
+        },
+        {
+          "id": "F",
+          "text": "Frequent, strong uterine contractions."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "rationale": "Fetal bradycardia (A), maternal fever (B), decreased variability in fetal heart rate (C), late decelerations (D), and increased maternal blood pressure (E) are all signs of potential complications during labor, requiring immediate intervention.  Frequent, strong contractions (F) may be normal, depending on the context.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 266,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and a sudden drop in blood pressure.  What is the nurse's immediate priority?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Increase the intravenous fluid rate."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxygen via face mask."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "This suggests postpartum hemorrhage, a life-threatening emergency requiring immediate medical intervention.  While the other actions are appropriate parts of management, notifying the physician immediately is the priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 287,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing. Which actions should the nurse immediately take?  Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Check for kinks in the ventilator tubing."
+        },
+        {
+          "id": "B",
+          "text": "Suction the patient's airway."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's oxygen saturation."
+        },
+        {
+          "id": "D",
+          "text": "Check the ventilator settings."
+        },
+        {
+          "id": "E",
+          "text": "Administer a bronchodilator as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Increase the ventilator's tidal volume."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "A high-pressure alarm on a ventilator indicates increased resistance to airflow.  This could be due to several factors, including kinks in the tubing (A), secretions in the airway requiring suctioning (B), patient coughing or struggling against the ventilator (requiring assessment of oxygen saturation (C) and ventilator settings (D) to rule out mechanical issues or patient-ventilator asynchrony).  Administering a bronchodilator (E) might be considered after assessing the situation, but is not an immediate action.  Increasing tidal volume (F) without understanding the cause of the high pressure could worsen the situation, potentially causing lung injury (volutrauma).",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 452,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with chronic kidney disease (CKD) reports increasing fatigue and shortness of breath.  Which laboratory result should the nurse prioritize reviewing?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Potassium level"
+        },
+        {
+          "id": "B",
+          "text": "Hemoglobin level"
+        },
+        {
+          "id": "C",
+          "text": "Blood urea nitrogen (BUN)"
+        },
+        {
+          "id": "D",
+          "text": "Creatinine level"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Fatigue and shortness of breath are common symptoms of anemia, a frequent complication of CKD.  Checking the hemoglobin level (B) is crucial to assess for anemia. While the other options are relevant to CKD management, anemia is the most likely explanation for these symptoms.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 455,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing heavy vaginal bleeding. Which nursing interventions are appropriate? Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs frequently."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Encourage ambulation."
+        },
+        {
+          "id": "E",
+          "text": "Assess for bladder distention."
+        },
+        {
+          "id": "F",
+          "text": "Monitor urine output."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage requires prompt interventions to control bleeding.  Fundal massage (A) helps to contract the uterus, reducing blood flow. Frequent vital signs (B) are essential to monitor for shock. Oxytocin (C) is commonly used to stimulate uterine contractions. A distended bladder (E) can impede uterine contraction, so assessment is vital.  While monitoring urine output (F) is important for overall hydration, it isn\u2019t a direct intervention for immediate postpartum hemorrhage management. Encouraging ambulation (D) is appropriate in many cases, but the priority is controlling the bleeding first.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 469,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding. Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Measure the amount of blood loss."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "E",
+          "text": "Encourage the patient to ambulate frequently."
+        },
+        {
+          "id": "F",
+          "text": "Apply ice packs to the perineum."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Heavy postpartum bleeding requires prompt assessment and intervention. Assessing fundal firmness and position helps identify uterine atony (A), a common cause of postpartum hemorrhage. Measuring blood loss accurately is crucial (B). Oxytocin is often used to stimulate uterine contractions (C). Monitoring vital signs helps detect signs of hypovolemic shock (D). E and F are less immediate interventions in the context of heavy bleeding.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 476,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing.  What is the priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Immediately suction the patient's airway.\nA) Check the ventilator tubing for kinks or obstructions.\nC) Assess the patient's oxygen saturation.\nD) Increase the ventilator's tidal volume.\nCorrect Answer: B\nRationale: High pressure ventilator alarms typically indicate an obstruction in the airway or ventilator tubing.  Checking for kinks or obstructions is the immediate priority to alleviate the high pressure and improve ventilation.  While suctioning (A) might be necessary, it's not the first step; the cause of the obstruction must be identified and resolved first.  (C) is important but doesn't address the root cause, and (D) could worsen the situation if the problem is an obstruction.\n\n--- End Question ---\nQuestion Number: 3.\nCategory: Neurology\nType: Select All That Apply\nDifficulty: Medium\nQuestion: Potassium level is 5.8 mEq/L. Which assessment findings would the nurse expect to find in a patient with hyperkalemia?\nA)  Muscle weakness"
+        },
+        {
+          "id": "B",
+          "text": "Bradycardia"
+        },
+        {
+          "id": "C",
+          "text": "Hyperreflexia"
+        },
+        {
+          "id": "D",
+          "text": "Hypotension"
+        },
+        {
+          "id": "E",
+          "text": "Peaked T waves on ECG"
+        },
+        {
+          "id": "F",
+          "text": "Increased bowel sounds"
+        }
+      ],
+      "correctAnswer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Hyperkalemia (high potassium) causes alterations in cardiac rhythm (bradycardia, peaked T waves), neuromuscular excitability (hyperreflexia), and potentially muscle weakness (although profound weakness can also indicate hypokalemia). Hypotension is not a direct effect of hyperkalemia, and bowel sounds are not directly related to potassium levels.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 478,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding and dizziness.  Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the patient's vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxygen via face mask."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "F",
+          "text": "Check the patient's hemoglobin and hematocrit levels."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing vital signs (A) is crucial to monitor the patient's stability. Fundal massage (B) helps to contract the uterus and control bleeding. Oxygen (C) is administered to increase oxygenation to tissues.  Notifying the physician (E) is essential due to the severity of the situation. Checking hemoglobin and hematocrit (F) helps to assess the extent of blood loss. Increasing IV fluids (D) might be considered but is not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 484,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and is saturating a perineal pad in less than 15 minutes.  Her blood pressure is 80/50 mmHg. What is the priority nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "C",
+          "text": "Assess for lacerations."
+        },
+        {
+          "id": "D",
+          "text": "Begin rapid fluid resuscitation."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "The patient is exhibiting signs of postpartum hemorrhage (PPH) with hypotension. Rapid fluid resuscitation is crucial to stabilize the patient's circulatory status. While the other options are appropriate interventions for PPH management, restoring blood volume is the immediate priority to prevent shock.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 496,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy bleeding. Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess fundal height and firmness."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Prepare for a blood transfusion."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing fundal height and firmness helps identify the cause of bleeding.  Monitoring vital signs is crucial to detect signs of shock. Fundal massage helps to contract the uterus, reducing bleeding. Oxytocin is a medication used to stimulate uterine contractions.  Preparing for a blood transfusion might be necessary if bleeding is severe, but assessment and intervention should occur first. Increasing IV fluids is not typically the first action taken.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 507,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  Her fundus is boggy and midline.  Which nursing action should be taken FIRST?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxytocin as ordered."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A boggy, midline fundus indicates uterine atony, the most common cause of postpartum hemorrhage.  The FIRST action is to massage the fundus (B) to stimulate uterine contractions and reduce bleeding. Assessing vital signs (A) is important but should follow the immediate action of massaging the fundus to control bleeding. While notifying the physician (C) and administering oxytocin (D) are necessary, they are secondary to the immediate intervention of fundal massage.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 542,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing excessive vaginal bleeding.  Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor for signs of hypovolemic shock."
+        },
+        {
+          "id": "E",
+          "text": "Place the patient in Trendelenburg position."
+        },
+        {
+          "id": "F",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Postpartum hemorrhage requires immediate action.  Fundal massage helps to contract the uterus and decrease bleeding.  Vital signs monitoring is crucial to detect early signs of hypovolemic shock. Oxytocin is a medication used to stimulate uterine contractions.  Monitoring for shock (tachycardia, hypotension, pallor) is critical.  Trendelenburg position is generally avoided as it can impede venous return and worsen bleeding.  Intravenous fluids may be necessary later to replace fluid loss but are not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 549,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with hypothyroidism is experiencing fatigue and weight gain. Which laboratory value would the nurse expect to be abnormal?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated TSH"
+        },
+        {
+          "id": "B",
+          "text": "Elevated T3"
+        },
+        {
+          "id": "C",
+          "text": "Elevated T4"
+        },
+        {
+          "id": "D",
+          "text": "Decreased TSH"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "In hypothyroidism, the thyroid gland doesn't produce enough thyroid hormones (T3 and T4), leading to an increase in TSH.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 562,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "Upon admission, a patient reports taking warfarin (Coumadin) daily. Which laboratory test is essential to monitor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "International Normalized Ratio (INR)"
+        },
+        {
+          "id": "B",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "C",
+          "text": "Partial thromboplastin time (PTT)"
+        },
+        {
+          "id": "D",
+          "text": "Complete blood count (CBC)"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "INR is the most commonly used test to monitor warfarin's anticoagulant effect.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 571,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy bleeding and saturates a perineal pad in 15 minutes. What is the nurse's priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "Postpartum hemorrhage (PPH) is a life-threatening emergency.  Immediate notification of the physician (C) is the priority to initiate rapid intervention.  While the other options (A, B, D) are important aspects of managing PPH, they must follow prompt physician notification.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 588,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Which signs indicate potential complications during labor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal bradycardia."
+        },
+        {
+          "id": "B",
+          "text": "Maternal fever."
+        },
+        {
+          "id": "C",
+          "text": "Decreased variability in fetal heart rate."
+        },
+        {
+          "id": "D",
+          "text": "Late decelerations in fetal heart rate."
+        },
+        {
+          "id": "E",
+          "text": "Increased maternal blood pressure."
+        },
+        {
+          "id": "F",
+          "text": "Frequent, strong uterine contractions."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "rationale": "Fetal bradycardia (A), maternal fever (B), decreased variability in fetal heart rate (C), late decelerations (D), and increased maternal blood pressure (E) are all signs of potential complications during labor, requiring immediate intervention.  Frequent, strong contractions (F) may be normal, depending on the context.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 595,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and a sudden drop in blood pressure.  What is the nurse's immediate priority?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Increase the intravenous fluid rate."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxygen via face mask."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "This suggests postpartum hemorrhage, a life-threatening emergency requiring immediate medical intervention.  While the other actions are appropriate parts of management, notifying the physician immediately is the priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 616,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing. Which actions should the nurse immediately take?  Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Check for kinks in the ventilator tubing."
+        },
+        {
+          "id": "B",
+          "text": "Suction the patient's airway."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's oxygen saturation."
+        },
+        {
+          "id": "D",
+          "text": "Check the ventilator settings."
+        },
+        {
+          "id": "E",
+          "text": "Administer a bronchodilator as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Increase the ventilator's tidal volume."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "A high-pressure alarm on a ventilator indicates increased resistance to airflow.  This could be due to several factors, including kinks in the tubing (A), secretions in the airway requiring suctioning (B), patient coughing or struggling against the ventilator (requiring assessment of oxygen saturation (C) and ventilator settings (D) to rule out mechanical issues or patient-ventilator asynchrony).  Administering a bronchodilator (E) might be considered after assessing the situation, but is not an immediate action.  Increasing tidal volume (F) without understanding the cause of the high pressure could worsen the situation, potentially causing lung injury (volutrauma).",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 630,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "During labor, a patient's membranes rupture.  What is the nurse's priority assessment?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal heart rate."
+        },
+        {
+          "id": "B",
+          "text": "Maternal blood pressure."
+        },
+        {
+          "id": "C",
+          "text": "Amount and color of amniotic fluid."
+        },
+        {
+          "id": "D",
+          "text": "Cervical dilation and effacement."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Following rupture of membranes, the priority is to assess fetal heart rate (A) to detect any signs of fetal distress such as bradycardia or variable decelerations which may indicate umbilical cord compression. While the other assessments are also important, the fetal well-being is paramount.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 753,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient is taking warfarin.  What is the most important laboratory value to monitor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "International Normalized Ratio (INR)"
+        },
+        {
+          "id": "B",
+          "text": "Partial thromboplastin time (PTT)"
+        },
+        {
+          "id": "C",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "D",
+          "text": "Activated partial thromboplastin time (aPTT)"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Warfarin is an anticoagulant.  The INR (A) is the standardized measure of the PT used to monitor warfarin therapy.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 665,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  Her fundus is boggy and above the umbilicus. Which intervention should the nurse perform first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "C",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "D",
+          "text": "Notify the physician."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "A boggy, elevated fundus indicates uterine atony, the most common cause of postpartum hemorrhage.  Fundal massage is the immediate intervention to stimulate uterine contractions and reduce bleeding. While assessing vital signs (C), administering oxytocin (B), and notifying the physician (D) are also necessary, massaging the fundus is the first action to directly address the bleeding.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 671,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with hypothyroidism reports persistent fatigue and cold intolerance. Which laboratory finding would support this diagnosis?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated TSH levels"
+        },
+        {
+          "id": "B",
+          "text": "Elevated T3 and T4 levels"
+        },
+        {
+          "id": "C",
+          "text": "Decreased TSH levels"
+        },
+        {
+          "id": "D",
+          "text": "Decreased cortisol levels"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "In hypothyroidism, the pituitary gland produces more TSH in an attempt to stimulate the thyroid to produce more hormones. This leads to elevated TSH levels.  Options B, C, and D are associated with hyperthyroidism or other endocrine disorders.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 696,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Following a postpartum hemorrhage, which interventions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fundal massage"
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin"
+        },
+        {
+          "id": "C",
+          "text": "Monitor vital signs"
+        },
+        {
+          "id": "D",
+          "text": "Assess for bladder distention"
+        },
+        {
+          "id": "E",
+          "text": "Administer IV fluids"
+        },
+        {
+          "id": "F",
+          "text": "Monitor for signs of hypovolemic shock"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "rationale": "Postpartum hemorrhage requires immediate interventions to control bleeding. Fundal massage (A) helps contract the uterus. Oxytocin (B) is a uterotonic drug that stimulates uterine contractions.  Monitoring vital signs (C) is essential to detect hypovolemic shock. A distended bladder (D) can impede uterine contraction, worsening bleeding. Close monitoring for signs of hypovolemic shock (F) is crucial.  While IV fluids (E) may be necessary for fluid resuscitation, this is less immediate than addressing uterine atony and monitoring for shock.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 725,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "Following a forceps delivery, the neonate has a cephalohematoma.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Apply ice packs to the affected area."
+        },
+        {
+          "id": "B",
+          "text": "Monitor for jaundice."
+        },
+        {
+          "id": "C",
+          "text": "Administer Vitamin K."
+        },
+        {
+          "id": "D",
+          "text": "Perform a cranial ultrasound."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A cephalohematoma is a collection of blood between the skull and periosteum. It typically resolves spontaneously.  The primary concern is the risk of jaundice (B) due to the potential for hemolysis. While ice packs (A) might provide comfort, they are not essential. Vitamin K (C) is given prophylactically to prevent hemorrhagic disease of the newborn, unrelated to the cephalohematoma. A cranial ultrasound (D) may be indicated if there are other concerns, but jaundice is the primary risk.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 737,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy bleeding and is saturating a perineal pad in less than 15 minutes.  Which interventions should the nurse perform?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "C",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "D",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "E",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "F",
+          "text": "Administer oxytocin as prescribed."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "rationale": "Heavy postpartum bleeding (postpartum hemorrhage) is a life-threatening emergency. Assessing fundal firmness and position (A) helps identify the cause of bleeding. Fundal massage (B) helps to contract the uterus and reduce bleeding. Monitoring vital signs (D) is essential to assess for shock.  Notifying the physician (E) is crucial, and administering oxytocin (F) as prescribed helps to contract the uterus. Increasing IV fluids (C) is important to combat hypovolemic shock but is secondary to the other actions.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 769,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  The nurse's priority action is to:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin."
+        },
+        {
+          "id": "D",
+          "text": "Assess the perineum."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Postpartum hemorrhage is a serious complication. Fundal massage (A) is the immediate priority to help control bleeding by contracting the uterine muscles.  While monitoring vital signs (B), administering oxytocin (C), and assessing the perineum (D) are all important, fundal massage is the first intervention to address the immediate threat.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 780,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient is prescribed warfarin.  Which laboratory value should the nurse monitor most closely?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "B",
+          "text": "Activated partial thromboplastin time (aPTT)"
+        },
+        {
+          "id": "C",
+          "text": "International normalized ratio (INR)"
+        },
+        {
+          "id": "D",
+          "text": "Complete blood count (CBC)"
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "Warfarin is an anticoagulant, and the INR (C) is used to monitor its effectiveness and prevent excessive bleeding.  While PT (A) and aPTT (B) are related to coagulation, INR provides a standardized measure for warfarin therapy.  CBC (D) is not directly related to warfarin's therapeutic effect.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 782,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A newborn infant exhibits signs of respiratory distress.  What is the nurse's priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Obtain an apical pulse."
+        },
+        {
+          "id": "B",
+          "text": "Assess the infant's oxygen saturation."
+        },
+        {
+          "id": "C",
+          "text": "Initiate oxygen therapy."
+        },
+        {
+          "id": "D",
+          "text": "Suction the infant's airway."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Assessing oxygen saturation (B) is the priority to determine the severity of respiratory compromise. While all the options are important, determining the level of hypoxemia guides immediate interventions.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "1"
+    },
+    {
+      "id": 786,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A patient in labor is receiving an epidural. Which assessment findings require immediate attention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hypotension"
+        },
+        {
+          "id": "B",
+          "text": "Fetal bradycardia"
+        },
+        {
+          "id": "C",
+          "text": "Increased fetal heart rate variability"
+        },
+        {
+          "id": "D",
+          "text": "Respiratory depression"
+        },
+        {
+          "id": "E",
+          "text": "Urinary retention"
+        },
+        {
+          "id": "F",
+          "text": "Itching"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "rationale": "Hypotension (A), fetal bradycardia (B), and respiratory depression (D) are serious complications that may occur with epidural analgesia and necessitate immediate action.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1023,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "Upon admission, a patient reports taking warfarin (Coumadin) daily. Which laboratory test is essential to monitor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "International Normalized Ratio (INR)"
+        },
+        {
+          "id": "B",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "C",
+          "text": "Partial thromboplastin time (PTT)"
+        },
+        {
+          "id": "D",
+          "text": "Complete blood count (CBC)"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "INR is the most commonly used test to monitor warfarin's anticoagulant effect.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 913,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with chronic kidney disease (CKD) reports increasing fatigue and shortness of breath.  Which laboratory result should the nurse prioritize reviewing?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Potassium level"
+        },
+        {
+          "id": "B",
+          "text": "Hemoglobin level"
+        },
+        {
+          "id": "C",
+          "text": "Blood urea nitrogen (BUN)"
+        },
+        {
+          "id": "D",
+          "text": "Creatinine level"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Fatigue and shortness of breath are common symptoms of anemia, a frequent complication of CKD.  Checking the hemoglobin level (B) is crucial to assess for anemia. While the other options are relevant to CKD management, anemia is the most likely explanation for these symptoms.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 916,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing heavy vaginal bleeding. Which nursing interventions are appropriate? Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs frequently."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Encourage ambulation."
+        },
+        {
+          "id": "E",
+          "text": "Assess for bladder distention."
+        },
+        {
+          "id": "F",
+          "text": "Monitor urine output."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage requires prompt interventions to control bleeding.  Fundal massage (A) helps to contract the uterus, reducing blood flow. Frequent vital signs (B) are essential to monitor for shock. Oxytocin (C) is commonly used to stimulate uterine contractions. A distended bladder (E) can impede uterine contraction, so assessment is vital.  While monitoring urine output (F) is important for overall hydration, it isn\u2019t a direct intervention for immediate postpartum hemorrhage management. Encouraging ambulation (D) is appropriate in many cases, but the priority is controlling the bleeding first.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 930,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding. Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Measure the amount of blood loss."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "E",
+          "text": "Encourage the patient to ambulate frequently."
+        },
+        {
+          "id": "F",
+          "text": "Apply ice packs to the perineum."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Heavy postpartum bleeding requires prompt assessment and intervention. Assessing fundal firmness and position helps identify uterine atony (A), a common cause of postpartum hemorrhage. Measuring blood loss accurately is crucial (B). Oxytocin is often used to stimulate uterine contractions (C). Monitoring vital signs helps detect signs of hypovolemic shock (D). E and F are less immediate interventions in the context of heavy bleeding.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 937,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing.  What is the priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Immediately suction the patient's airway.\nA) Check the ventilator tubing for kinks or obstructions.\nC) Assess the patient's oxygen saturation.\nD) Increase the ventilator's tidal volume.\nCorrect Answer: B\nRationale: High pressure ventilator alarms typically indicate an obstruction in the airway or ventilator tubing.  Checking for kinks or obstructions is the immediate priority to alleviate the high pressure and improve ventilation.  While suctioning (A) might be necessary, it's not the first step; the cause of the obstruction must be identified and resolved first.  (C) is important but doesn't address the root cause, and (D) could worsen the situation if the problem is an obstruction.\n\n--- End Question ---\nQuestion Number: 3.\nCategory: Neurology\nType: Select All That Apply\nDifficulty: Medium\nQuestion: Potassium level is 5.8 mEq/L. Which assessment findings would the nurse expect to find in a patient with hyperkalemia?\nA)  Muscle weakness"
+        },
+        {
+          "id": "B",
+          "text": "Bradycardia"
+        },
+        {
+          "id": "C",
+          "text": "Hyperreflexia"
+        },
+        {
+          "id": "D",
+          "text": "Hypotension"
+        },
+        {
+          "id": "E",
+          "text": "Peaked T waves on ECG"
+        },
+        {
+          "id": "F",
+          "text": "Increased bowel sounds"
+        }
+      ],
+      "correctAnswer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Hyperkalemia (high potassium) causes alterations in cardiac rhythm (bradycardia, peaked T waves), neuromuscular excitability (hyperreflexia), and potentially muscle weakness (although profound weakness can also indicate hypokalemia). Hypotension is not a direct effect of hyperkalemia, and bowel sounds are not directly related to potassium levels.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 939,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding and dizziness.  Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the patient's vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxygen via face mask."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "F",
+          "text": "Check the patient's hemoglobin and hematocrit levels."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing vital signs (A) is crucial to monitor the patient's stability. Fundal massage (B) helps to contract the uterus and control bleeding. Oxygen (C) is administered to increase oxygenation to tissues.  Notifying the physician (E) is essential due to the severity of the situation. Checking hemoglobin and hematocrit (F) helps to assess the extent of blood loss. Increasing IV fluids (D) might be considered but is not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 945,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and is saturating a perineal pad in less than 15 minutes.  Her blood pressure is 80/50 mmHg. What is the priority nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "C",
+          "text": "Assess for lacerations."
+        },
+        {
+          "id": "D",
+          "text": "Begin rapid fluid resuscitation."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "The patient is exhibiting signs of postpartum hemorrhage (PPH) with hypotension. Rapid fluid resuscitation is crucial to stabilize the patient's circulatory status. While the other options are appropriate interventions for PPH management, restoring blood volume is the immediate priority to prevent shock.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 957,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy bleeding. Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess fundal height and firmness."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Prepare for a blood transfusion."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing fundal height and firmness helps identify the cause of bleeding.  Monitoring vital signs is crucial to detect signs of shock. Fundal massage helps to contract the uterus, reducing bleeding. Oxytocin is a medication used to stimulate uterine contractions.  Preparing for a blood transfusion might be necessary if bleeding is severe, but assessment and intervention should occur first. Increasing IV fluids is not typically the first action taken.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 968,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  Her fundus is boggy and midline.  Which nursing action should be taken FIRST?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxytocin as ordered."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A boggy, midline fundus indicates uterine atony, the most common cause of postpartum hemorrhage.  The FIRST action is to massage the fundus (B) to stimulate uterine contractions and reduce bleeding. Assessing vital signs (A) is important but should follow the immediate action of massaging the fundus to control bleeding. While notifying the physician (C) and administering oxytocin (D) are necessary, they are secondary to the immediate intervention of fundal massage.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1003,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing excessive vaginal bleeding.  Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor for signs of hypovolemic shock."
+        },
+        {
+          "id": "E",
+          "text": "Place the patient in Trendelenburg position."
+        },
+        {
+          "id": "F",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Postpartum hemorrhage requires immediate action.  Fundal massage helps to contract the uterus and decrease bleeding.  Vital signs monitoring is crucial to detect early signs of hypovolemic shock. Oxytocin is a medication used to stimulate uterine contractions.  Monitoring for shock (tachycardia, hypotension, pallor) is critical.  Trendelenburg position is generally avoided as it can impede venous return and worsen bleeding.  Intravenous fluids may be necessary later to replace fluid loss but are not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1010,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with hypothyroidism is experiencing fatigue and weight gain. Which laboratory value would the nurse expect to be abnormal?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated TSH"
+        },
+        {
+          "id": "B",
+          "text": "Elevated T3"
+        },
+        {
+          "id": "C",
+          "text": "Elevated T4"
+        },
+        {
+          "id": "D",
+          "text": "Decreased TSH"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "In hypothyroidism, the thyroid gland doesn't produce enough thyroid hormones (T3 and T4), leading to an increase in TSH.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1032,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy bleeding and saturates a perineal pad in 15 minutes. What is the nurse's priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "Postpartum hemorrhage (PPH) is a life-threatening emergency.  Immediate notification of the physician (C) is the priority to initiate rapid intervention.  While the other options (A, B, D) are important aspects of managing PPH, they must follow prompt physician notification.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1049,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Which signs indicate potential complications during labor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal bradycardia."
+        },
+        {
+          "id": "B",
+          "text": "Maternal fever."
+        },
+        {
+          "id": "C",
+          "text": "Decreased variability in fetal heart rate."
+        },
+        {
+          "id": "D",
+          "text": "Late decelerations in fetal heart rate."
+        },
+        {
+          "id": "E",
+          "text": "Increased maternal blood pressure."
+        },
+        {
+          "id": "F",
+          "text": "Frequent, strong uterine contractions."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "rationale": "Fetal bradycardia (A), maternal fever (B), decreased variability in fetal heart rate (C), late decelerations (D), and increased maternal blood pressure (E) are all signs of potential complications during labor, requiring immediate intervention.  Frequent, strong contractions (F) may be normal, depending on the context.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1214,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient is taking warfarin.  What is the most important laboratory value to monitor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "International Normalized Ratio (INR)"
+        },
+        {
+          "id": "B",
+          "text": "Partial thromboplastin time (PTT)"
+        },
+        {
+          "id": "C",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "D",
+          "text": "Activated partial thromboplastin time (aPTT)"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Warfarin is an anticoagulant.  The INR (A) is the standardized measure of the PT used to monitor warfarin therapy.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1056,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and a sudden drop in blood pressure.  What is the nurse's immediate priority?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Increase the intravenous fluid rate."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxygen via face mask."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "This suggests postpartum hemorrhage, a life-threatening emergency requiring immediate medical intervention.  While the other actions are appropriate parts of management, notifying the physician immediately is the priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1077,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing. Which actions should the nurse immediately take?  Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Check for kinks in the ventilator tubing."
+        },
+        {
+          "id": "B",
+          "text": "Suction the patient's airway."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's oxygen saturation."
+        },
+        {
+          "id": "D",
+          "text": "Check the ventilator settings."
+        },
+        {
+          "id": "E",
+          "text": "Administer a bronchodilator as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Increase the ventilator's tidal volume."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "A high-pressure alarm on a ventilator indicates increased resistance to airflow.  This could be due to several factors, including kinks in the tubing (A), secretions in the airway requiring suctioning (B), patient coughing or struggling against the ventilator (requiring assessment of oxygen saturation (C) and ventilator settings (D) to rule out mechanical issues or patient-ventilator asynchrony).  Administering a bronchodilator (E) might be considered after assessing the situation, but is not an immediate action.  Increasing tidal volume (F) without understanding the cause of the high pressure could worsen the situation, potentially causing lung injury (volutrauma).",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1091,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "During labor, a patient's membranes rupture.  What is the nurse's priority assessment?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal heart rate."
+        },
+        {
+          "id": "B",
+          "text": "Maternal blood pressure."
+        },
+        {
+          "id": "C",
+          "text": "Amount and color of amniotic fluid."
+        },
+        {
+          "id": "D",
+          "text": "Cervical dilation and effacement."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Following rupture of membranes, the priority is to assess fetal heart rate (A) to detect any signs of fetal distress such as bradycardia or variable decelerations which may indicate umbilical cord compression. While the other assessments are also important, the fetal well-being is paramount.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1126,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  Her fundus is boggy and above the umbilicus. Which intervention should the nurse perform first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "C",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "D",
+          "text": "Notify the physician."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "A boggy, elevated fundus indicates uterine atony, the most common cause of postpartum hemorrhage.  Fundal massage is the immediate intervention to stimulate uterine contractions and reduce bleeding. While assessing vital signs (C), administering oxytocin (B), and notifying the physician (D) are also necessary, massaging the fundus is the first action to directly address the bleeding.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1132,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with hypothyroidism reports persistent fatigue and cold intolerance. Which laboratory finding would support this diagnosis?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated TSH levels"
+        },
+        {
+          "id": "B",
+          "text": "Elevated T3 and T4 levels"
+        },
+        {
+          "id": "C",
+          "text": "Decreased TSH levels"
+        },
+        {
+          "id": "D",
+          "text": "Decreased cortisol levels"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "In hypothyroidism, the pituitary gland produces more TSH in an attempt to stimulate the thyroid to produce more hormones. This leads to elevated TSH levels.  Options B, C, and D are associated with hyperthyroidism or other endocrine disorders.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1157,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Following a postpartum hemorrhage, which interventions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fundal massage"
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin"
+        },
+        {
+          "id": "C",
+          "text": "Monitor vital signs"
+        },
+        {
+          "id": "D",
+          "text": "Assess for bladder distention"
+        },
+        {
+          "id": "E",
+          "text": "Administer IV fluids"
+        },
+        {
+          "id": "F",
+          "text": "Monitor for signs of hypovolemic shock"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "rationale": "Postpartum hemorrhage requires immediate interventions to control bleeding. Fundal massage (A) helps contract the uterus. Oxytocin (B) is a uterotonic drug that stimulates uterine contractions.  Monitoring vital signs (C) is essential to detect hypovolemic shock. A distended bladder (D) can impede uterine contraction, worsening bleeding. Close monitoring for signs of hypovolemic shock (F) is crucial.  While IV fluids (E) may be necessary for fluid resuscitation, this is less immediate than addressing uterine atony and monitoring for shock.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1186,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "Following a forceps delivery, the neonate has a cephalohematoma.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Apply ice packs to the affected area."
+        },
+        {
+          "id": "B",
+          "text": "Monitor for jaundice."
+        },
+        {
+          "id": "C",
+          "text": "Administer Vitamin K."
+        },
+        {
+          "id": "D",
+          "text": "Perform a cranial ultrasound."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A cephalohematoma is a collection of blood between the skull and periosteum. It typically resolves spontaneously.  The primary concern is the risk of jaundice (B) due to the potential for hemolysis. While ice packs (A) might provide comfort, they are not essential. Vitamin K (C) is given prophylactically to prevent hemorrhagic disease of the newborn, unrelated to the cephalohematoma. A cranial ultrasound (D) may be indicated if there are other concerns, but jaundice is the primary risk.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1198,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy bleeding and is saturating a perineal pad in less than 15 minutes.  Which interventions should the nurse perform?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "C",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "D",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "E",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "F",
+          "text": "Administer oxytocin as prescribed."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "rationale": "Heavy postpartum bleeding (postpartum hemorrhage) is a life-threatening emergency. Assessing fundal firmness and position (A) helps identify the cause of bleeding. Fundal massage (B) helps to contract the uterus and reduce bleeding. Monitoring vital signs (D) is essential to assess for shock.  Notifying the physician (E) is crucial, and administering oxytocin (F) as prescribed helps to contract the uterus. Increasing IV fluids (C) is important to combat hypovolemic shock but is secondary to the other actions.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1230,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  The nurse's priority action is to:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin."
+        },
+        {
+          "id": "D",
+          "text": "Assess the perineum."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Postpartum hemorrhage is a serious complication. Fundal massage (A) is the immediate priority to help control bleeding by contracting the uterine muscles.  While monitoring vital signs (B), administering oxytocin (C), and assessing the perineum (D) are all important, fundal massage is the first intervention to address the immediate threat.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1241,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient is prescribed warfarin.  Which laboratory value should the nurse monitor most closely?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "B",
+          "text": "Activated partial thromboplastin time (aPTT)"
+        },
+        {
+          "id": "C",
+          "text": "International normalized ratio (INR)"
+        },
+        {
+          "id": "D",
+          "text": "Complete blood count (CBC)"
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "Warfarin is an anticoagulant, and the INR (C) is used to monitor its effectiveness and prevent excessive bleeding.  While PT (A) and aPTT (B) are related to coagulation, INR provides a standardized measure for warfarin therapy.  CBC (D) is not directly related to warfarin's therapeutic effect.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1243,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A newborn infant exhibits signs of respiratory distress.  What is the nurse's priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Obtain an apical pulse."
+        },
+        {
+          "id": "B",
+          "text": "Assess the infant's oxygen saturation."
+        },
+        {
+          "id": "C",
+          "text": "Initiate oxygen therapy."
+        },
+        {
+          "id": "D",
+          "text": "Suction the infant's airway."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Assessing oxygen saturation (B) is the priority to determine the severity of respiratory compromise. While all the options are important, determining the level of hypoxemia guides immediate interventions.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "1"
+    },
+    {
+      "id": 1247,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A patient in labor is receiving an epidural. Which assessment findings require immediate attention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hypotension"
+        },
+        {
+          "id": "B",
+          "text": "Fetal bradycardia"
+        },
+        {
+          "id": "C",
+          "text": "Increased fetal heart rate variability"
+        },
+        {
+          "id": "D",
+          "text": "Respiratory depression"
+        },
+        {
+          "id": "E",
+          "text": "Urinary retention"
+        },
+        {
+          "id": "F",
+          "text": "Itching"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "rationale": "Hypotension (A), fetal bradycardia (B), and respiratory depression (D) are serious complications that may occur with epidural analgesia and necessitate immediate action.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1374,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with chronic kidney disease (CKD) reports increasing fatigue and shortness of breath.  Which laboratory result should the nurse prioritize reviewing?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Potassium level"
+        },
+        {
+          "id": "B",
+          "text": "Hemoglobin level"
+        },
+        {
+          "id": "C",
+          "text": "Blood urea nitrogen (BUN)"
+        },
+        {
+          "id": "D",
+          "text": "Creatinine level"
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Fatigue and shortness of breath are common symptoms of anemia, a frequent complication of CKD.  Checking the hemoglobin level (B) is crucial to assess for anemia. While the other options are relevant to CKD management, anemia is the most likely explanation for these symptoms.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1377,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing heavy vaginal bleeding. Which nursing interventions are appropriate? Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs frequently."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Encourage ambulation."
+        },
+        {
+          "id": "E",
+          "text": "Assess for bladder distention."
+        },
+        {
+          "id": "F",
+          "text": "Monitor urine output."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage requires prompt interventions to control bleeding.  Fundal massage (A) helps to contract the uterus, reducing blood flow. Frequent vital signs (B) are essential to monitor for shock. Oxytocin (C) is commonly used to stimulate uterine contractions. A distended bladder (E) can impede uterine contraction, so assessment is vital.  While monitoring urine output (F) is important for overall hydration, it isn\u2019t a direct intervention for immediate postpartum hemorrhage management. Encouraging ambulation (D) is appropriate in many cases, but the priority is controlling the bleeding first.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1391,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding. Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Measure the amount of blood loss."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "E",
+          "text": "Encourage the patient to ambulate frequently."
+        },
+        {
+          "id": "F",
+          "text": "Apply ice packs to the perineum."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Heavy postpartum bleeding requires prompt assessment and intervention. Assessing fundal firmness and position helps identify uterine atony (A), a common cause of postpartum hemorrhage. Measuring blood loss accurately is crucial (B). Oxytocin is often used to stimulate uterine contractions (C). Monitoring vital signs helps detect signs of hypovolemic shock (D). E and F are less immediate interventions in the context of heavy bleeding.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1398,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing.  What is the priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Immediately suction the patient's airway.\nA) Check the ventilator tubing for kinks or obstructions.\nC) Assess the patient's oxygen saturation.\nD) Increase the ventilator's tidal volume.\nCorrect Answer: B\nRationale: High pressure ventilator alarms typically indicate an obstruction in the airway or ventilator tubing.  Checking for kinks or obstructions is the immediate priority to alleviate the high pressure and improve ventilation.  While suctioning (A) might be necessary, it's not the first step; the cause of the obstruction must be identified and resolved first.  (C) is important but doesn't address the root cause, and (D) could worsen the situation if the problem is an obstruction.\n\n--- End Question ---\nQuestion Number: 3.\nCategory: Neurology\nType: Select All That Apply\nDifficulty: Medium\nQuestion: Potassium level is 5.8 mEq/L. Which assessment findings would the nurse expect to find in a patient with hyperkalemia?\nA)  Muscle weakness"
+        },
+        {
+          "id": "B",
+          "text": "Bradycardia"
+        },
+        {
+          "id": "C",
+          "text": "Hyperreflexia"
+        },
+        {
+          "id": "D",
+          "text": "Hypotension"
+        },
+        {
+          "id": "E",
+          "text": "Peaked T waves on ECG"
+        },
+        {
+          "id": "F",
+          "text": "Increased bowel sounds"
+        }
+      ],
+      "correctAnswer": [
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Hyperkalemia (high potassium) causes alterations in cardiac rhythm (bradycardia, peaked T waves), neuromuscular excitability (hyperreflexia), and potentially muscle weakness (although profound weakness can also indicate hypokalemia). Hypotension is not a direct effect of hyperkalemia, and bowel sounds are not directly related to potassium levels.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1400,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy vaginal bleeding and dizziness.  Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the patient's vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxygen via face mask."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "F",
+          "text": "Check the patient's hemoglobin and hematocrit levels."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E",
+        "F"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing vital signs (A) is crucial to monitor the patient's stability. Fundal massage (B) helps to contract the uterus and control bleeding. Oxygen (C) is administered to increase oxygenation to tissues.  Notifying the physician (E) is essential due to the severity of the situation. Checking hemoglobin and hematocrit (F) helps to assess the extent of blood loss. Increasing IV fluids (D) might be considered but is not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1406,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and is saturating a perineal pad in less than 15 minutes.  Her blood pressure is 80/50 mmHg. What is the priority nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "C",
+          "text": "Assess for lacerations."
+        },
+        {
+          "id": "D",
+          "text": "Begin rapid fluid resuscitation."
+        }
+      ],
+      "correctAnswer": "\"D\"",
+      "rationale": "The patient is exhibiting signs of postpartum hemorrhage (PPH) with hypotension. Rapid fluid resuscitation is crucial to stabilize the patient's circulatory status. While the other options are appropriate interventions for PPH management, restoring blood volume is the immediate priority to prevent shock.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1418,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy bleeding. Which actions should the nurse take?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess fundal height and firmness."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "E",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Prepare for a blood transfusion."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "E"
+      ],
+      "rationale": "Postpartum hemorrhage is a serious complication.  Assessing fundal height and firmness helps identify the cause of bleeding.  Monitoring vital signs is crucial to detect signs of shock. Fundal massage helps to contract the uterus, reducing bleeding. Oxytocin is a medication used to stimulate uterine contractions.  Preparing for a blood transfusion might be necessary if bleeding is severe, but assessment and intervention should occur first. Increasing IV fluids is not typically the first action taken.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1429,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  Her fundus is boggy and midline.  Which nursing action should be taken FIRST?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxytocin as ordered."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A boggy, midline fundus indicates uterine atony, the most common cause of postpartum hemorrhage.  The FIRST action is to massage the fundus (B) to stimulate uterine contractions and reduce bleeding. Assessing vital signs (A) is important but should follow the immediate action of massaging the fundus to control bleeding. While notifying the physician (C) and administering oxytocin (D) are necessary, they are secondary to the immediate intervention of fundal massage.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1464,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient is experiencing excessive vaginal bleeding.  Which nursing actions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the uterine fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed."
+        },
+        {
+          "id": "D",
+          "text": "Monitor for signs of hypovolemic shock."
+        },
+        {
+          "id": "E",
+          "text": "Place the patient in Trendelenburg position."
+        },
+        {
+          "id": "F",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "Postpartum hemorrhage requires immediate action.  Fundal massage helps to contract the uterus and decrease bleeding.  Vital signs monitoring is crucial to detect early signs of hypovolemic shock. Oxytocin is a medication used to stimulate uterine contractions.  Monitoring for shock (tachycardia, hypotension, pallor) is critical.  Trendelenburg position is generally avoided as it can impede venous return and worsen bleeding.  Intravenous fluids may be necessary later to replace fluid loss but are not the immediate priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1471,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with hypothyroidism is experiencing fatigue and weight gain. Which laboratory value would the nurse expect to be abnormal?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated TSH"
+        },
+        {
+          "id": "B",
+          "text": "Elevated T3"
+        },
+        {
+          "id": "C",
+          "text": "Elevated T4"
+        },
+        {
+          "id": "D",
+          "text": "Decreased TSH"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "In hypothyroidism, the thyroid gland doesn't produce enough thyroid hormones (T3 and T4), leading to an increase in TSH.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1484,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "Upon admission, a patient reports taking warfarin (Coumadin) daily. Which laboratory test is essential to monitor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "International Normalized Ratio (INR)"
+        },
+        {
+          "id": "B",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "C",
+          "text": "Partial thromboplastin time (PTT)"
+        },
+        {
+          "id": "D",
+          "text": "Complete blood count (CBC)"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "INR is the most commonly used test to monitor warfarin's anticoagulant effect.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1493,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy bleeding and saturates a perineal pad in 15 minutes. What is the nurse's priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Increase intravenous fluids."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "Postpartum hemorrhage (PPH) is a life-threatening emergency.  Immediate notification of the physician (C) is the priority to initiate rapid intervention.  While the other options (A, B, D) are important aspects of managing PPH, they must follow prompt physician notification.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1510,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Which signs indicate potential complications during labor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal bradycardia."
+        },
+        {
+          "id": "B",
+          "text": "Maternal fever."
+        },
+        {
+          "id": "C",
+          "text": "Decreased variability in fetal heart rate."
+        },
+        {
+          "id": "D",
+          "text": "Late decelerations in fetal heart rate."
+        },
+        {
+          "id": "E",
+          "text": "Increased maternal blood pressure."
+        },
+        {
+          "id": "F",
+          "text": "Frequent, strong uterine contractions."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "rationale": "Fetal bradycardia (A), maternal fever (B), decreased variability in fetal heart rate (C), late decelerations (D), and increased maternal blood pressure (E) are all signs of potential complications during labor, requiring immediate intervention.  Frequent, strong contractions (F) may be normal, depending on the context.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1517,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding and a sudden drop in blood pressure.  What is the nurse's immediate priority?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Increase the intravenous fluid rate."
+        },
+        {
+          "id": "C",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "D",
+          "text": "Administer oxygen via face mask."
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "This suggests postpartum hemorrhage, a life-threatening emergency requiring immediate medical intervention.  While the other actions are appropriate parts of management, notifying the physician immediately is the priority.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1538,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Ventilator alarms high pressure.  The patient is receiving mechanical ventilation and suddenly exhibits increased respiratory rate and labored breathing. Which actions should the nurse immediately take?  Select all that apply.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Check for kinks in the ventilator tubing."
+        },
+        {
+          "id": "B",
+          "text": "Suction the patient's airway."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's oxygen saturation."
+        },
+        {
+          "id": "D",
+          "text": "Check the ventilator settings."
+        },
+        {
+          "id": "E",
+          "text": "Administer a bronchodilator as ordered."
+        },
+        {
+          "id": "F",
+          "text": "Increase the ventilator's tidal volume."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "rationale": "A high-pressure alarm on a ventilator indicates increased resistance to airflow.  This could be due to several factors, including kinks in the tubing (A), secretions in the airway requiring suctioning (B), patient coughing or struggling against the ventilator (requiring assessment of oxygen saturation (C) and ventilator settings (D) to rule out mechanical issues or patient-ventilator asynchrony).  Administering a bronchodilator (E) might be considered after assessing the situation, but is not an immediate action.  Increasing tidal volume (F) without understanding the cause of the high pressure could worsen the situation, potentially causing lung injury (volutrauma).",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1552,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "During labor, a patient's membranes rupture.  What is the nurse's priority assessment?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal heart rate."
+        },
+        {
+          "id": "B",
+          "text": "Maternal blood pressure."
+        },
+        {
+          "id": "C",
+          "text": "Amount and color of amniotic fluid."
+        },
+        {
+          "id": "D",
+          "text": "Cervical dilation and effacement."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Following rupture of membranes, the priority is to assess fetal heart rate (A) to detect any signs of fetal distress such as bradycardia or variable decelerations which may indicate umbilical cord compression. While the other assessments are also important, the fetal well-being is paramount.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1675,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient is taking warfarin.  What is the most important laboratory value to monitor?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "International Normalized Ratio (INR)"
+        },
+        {
+          "id": "B",
+          "text": "Partial thromboplastin time (PTT)"
+        },
+        {
+          "id": "C",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "D",
+          "text": "Activated partial thromboplastin time (aPTT)"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Warfarin is an anticoagulant.  The INR (A) is the standardized measure of the PT used to monitor warfarin therapy.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1587,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  Her fundus is boggy and above the umbilicus. Which intervention should the nurse perform first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin as ordered."
+        },
+        {
+          "id": "C",
+          "text": "Assess vital signs."
+        },
+        {
+          "id": "D",
+          "text": "Notify the physician."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "A boggy, elevated fundus indicates uterine atony, the most common cause of postpartum hemorrhage.  Fundal massage is the immediate intervention to stimulate uterine contractions and reduce bleeding. While assessing vital signs (C), administering oxytocin (B), and notifying the physician (D) are also necessary, massaging the fundus is the first action to directly address the bleeding.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1593,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient with hypothyroidism reports persistent fatigue and cold intolerance. Which laboratory finding would support this diagnosis?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated TSH levels"
+        },
+        {
+          "id": "B",
+          "text": "Elevated T3 and T4 levels"
+        },
+        {
+          "id": "C",
+          "text": "Decreased TSH levels"
+        },
+        {
+          "id": "D",
+          "text": "Decreased cortisol levels"
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "In hypothyroidism, the pituitary gland produces more TSH in an attempt to stimulate the thyroid to produce more hormones. This leads to elevated TSH levels.  Options B, C, and D are associated with hyperthyroidism or other endocrine disorders.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1618,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "Following a postpartum hemorrhage, which interventions are appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fundal massage"
+        },
+        {
+          "id": "B",
+          "text": "Administer oxytocin"
+        },
+        {
+          "id": "C",
+          "text": "Monitor vital signs"
+        },
+        {
+          "id": "D",
+          "text": "Assess for bladder distention"
+        },
+        {
+          "id": "E",
+          "text": "Administer IV fluids"
+        },
+        {
+          "id": "F",
+          "text": "Monitor for signs of hypovolemic shock"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "rationale": "Postpartum hemorrhage requires immediate interventions to control bleeding. Fundal massage (A) helps contract the uterus. Oxytocin (B) is a uterotonic drug that stimulates uterine contractions.  Monitoring vital signs (C) is essential to detect hypovolemic shock. A distended bladder (D) can impede uterine contraction, worsening bleeding. Close monitoring for signs of hypovolemic shock (F) is crucial.  While IV fluids (E) may be necessary for fluid resuscitation, this is less immediate than addressing uterine atony and monitoring for shock.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1647,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "Following a forceps delivery, the neonate has a cephalohematoma.",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Apply ice packs to the affected area."
+        },
+        {
+          "id": "B",
+          "text": "Monitor for jaundice."
+        },
+        {
+          "id": "C",
+          "text": "Administer Vitamin K."
+        },
+        {
+          "id": "D",
+          "text": "Perform a cranial ultrasound."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "A cephalohematoma is a collection of blood between the skull and periosteum. It typically resolves spontaneously.  The primary concern is the risk of jaundice (B) due to the potential for hemolysis. While ice packs (A) might provide comfort, they are not essential. Vitamin K (C) is given prophylactically to prevent hemorrhagic disease of the newborn, unrelated to the cephalohematoma. A cranial ultrasound (D) may be indicated if there are other concerns, but jaundice is the primary risk.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1659,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A postpartum patient reports heavy bleeding and is saturating a perineal pad in less than 15 minutes.  Which interventions should the nurse perform?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Assess the fundus for firmness and position."
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "C",
+          "text": "Increase intravenous fluids."
+        },
+        {
+          "id": "D",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "E",
+          "text": "Notify the physician immediately."
+        },
+        {
+          "id": "F",
+          "text": "Administer oxytocin as prescribed."
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D",
+        "E",
+        "F"
+      ],
+      "rationale": "Heavy postpartum bleeding (postpartum hemorrhage) is a life-threatening emergency. Assessing fundal firmness and position (A) helps identify the cause of bleeding. Fundal massage (B) helps to contract the uterus and reduce bleeding. Monitoring vital signs (D) is essential to assess for shock.  Notifying the physician (E) is crucial, and administering oxytocin (F) as prescribed helps to contract the uterus. Increasing IV fluids (C) is important to combat hypovolemic shock but is secondary to the other actions.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "3"
+    },
+    {
+      "id": 1691,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A postpartum patient reports heavy vaginal bleeding.  The nurse's priority action is to:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Massage the fundus."
+        },
+        {
+          "id": "B",
+          "text": "Monitor vital signs."
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin."
+        },
+        {
+          "id": "D",
+          "text": "Assess the perineum."
+        }
+      ],
+      "correctAnswer": "\"A\"",
+      "rationale": "Postpartum hemorrhage is a serious complication. Fundal massage (A) is the immediate priority to help control bleeding by contracting the uterine muscles.  While monitoring vital signs (B), administering oxytocin (C), and assessing the perineum (D) are all important, fundal massage is the first intervention to address the immediate threat.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1702,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A patient is prescribed warfarin.  Which laboratory value should the nurse monitor most closely?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Prothrombin time (PT)"
+        },
+        {
+          "id": "B",
+          "text": "Activated partial thromboplastin time (aPTT)"
+        },
+        {
+          "id": "C",
+          "text": "International normalized ratio (INR)"
+        },
+        {
+          "id": "D",
+          "text": "Complete blood count (CBC)"
+        }
+      ],
+      "correctAnswer": "\"C\"",
+      "rationale": "Warfarin is an anticoagulant, and the INR (C) is used to monitor its effectiveness and prevent excessive bleeding.  While PT (A) and aPTT (B) are related to coagulation, INR provides a standardized measure for warfarin therapy.  CBC (D) is not directly related to warfarin's therapeutic effect.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
+    },
+    {
+      "id": 1704,
+      "title": "Nursing Question",
+      "type": "mc",
+      "text": "A newborn infant exhibits signs of respiratory distress.  What is the nurse's priority action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Obtain an apical pulse."
+        },
+        {
+          "id": "B",
+          "text": "Assess the infant's oxygen saturation."
+        },
+        {
+          "id": "C",
+          "text": "Initiate oxygen therapy."
+        },
+        {
+          "id": "D",
+          "text": "Suction the infant's airway."
+        }
+      ],
+      "correctAnswer": "\"B\"",
+      "rationale": "Assessing oxygen saturation (B) is the priority to determine the severity of respiratory compromise. While all the options are important, determining the level of hypoxemia guides immediate interventions.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "1"
+    },
+    {
+      "id": 1708,
+      "title": "Nursing Question",
+      "type": "sata",
+      "text": "A patient in labor is receiving an epidural. Which assessment findings require immediate attention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hypotension"
+        },
+        {
+          "id": "B",
+          "text": "Fetal bradycardia"
+        },
+        {
+          "id": "C",
+          "text": "Increased fetal heart rate variability"
+        },
+        {
+          "id": "D",
+          "text": "Respiratory depression"
+        },
+        {
+          "id": "E",
+          "text": "Urinary retention"
+        },
+        {
+          "id": "F",
+          "text": "Itching"
+        }
+      ],
+      "correctAnswer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "rationale": "Hypotension (A), fetal bradycardia (B), and respiratory depression (D) are serious complications that may occur with epidural analgesia and necessitate immediate action.",
+      "category": "physiological-integrity",
+      "subcategory": "general",
+      "difficulty": "2"
     }
   ]
 }
