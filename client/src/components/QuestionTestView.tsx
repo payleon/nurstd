@@ -53,7 +53,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   
   // Handle both string and object response types
   const questions = typeof questionsData === 'object' && questionsData?.questions ? questionsData.questions : [];
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = questions[currentQuestionIndex] || null;
   const totalQuestions = questions.length;
   
   // Mock decreasing timer for demo purposes
@@ -116,6 +116,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   };
 
   const handleAnswerSubmit = (answer: string | string[]) => {
+    if (!currentQuestion) return;
+    
     setUserAnswers({
       ...userAnswers,
       [currentQuestion.id]: answer
@@ -195,6 +197,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   };
 
   const toggleFlagQuestion = () => {
+    if (!currentQuestion) return;
+    
     const questionId = currentQuestion.id;
     
     if (flaggedQuestions.includes(questionId)) {
@@ -363,7 +367,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
           
           <div className="flex items-center space-x-2">
             <button 
-              className={`p-2 rounded-full border ${isQuestionFlagged(currentQuestion?.id) ? 'bg-amber-50 border-amber-300 text-amber-600' : 'border-gray-300 hover:bg-gray-100 text-gray-600'}`} 
+              className={`p-2 rounded-full border ${currentQuestion && isQuestionFlagged(currentQuestion.id) ? 'bg-amber-50 border-amber-300 text-amber-600' : 'border-gray-300 hover:bg-gray-100 text-gray-600'}`} 
               onClick={toggleFlagQuestion}
               title="Flag for Review"
               aria-label="Flag this question for review"
