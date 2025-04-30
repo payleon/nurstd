@@ -396,71 +396,86 @@ export function QuestionRenderer({
                     </div>
                   );
                 }
+                
                 const isSelected = selectedAnswers.includes(choice.id);
                 const isCorrectChoice = question.correctAnswer === choice.id;
-              
-              // Determine styling for answered questions when showing rationale
-              let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
-              if (showRationale) {
-                if (isCorrectChoice) {
-                  choiceStyle = "border-2 border-green-500 bg-green-50";
-                } else if (isSelected && !isCorrectChoice) {
-                  choiceStyle = "border-2 border-red-500 bg-red-50";
+                
+                // Determine styling for answered questions when showing rationale
+                let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
+                if (showRationale) {
+                  if (isCorrectChoice) {
+                    choiceStyle = "border-2 border-green-500 bg-green-50";
+                  } else if (isSelected && !isCorrectChoice) {
+                    choiceStyle = "border-2 border-red-500 bg-red-50";
+                  }
+                } else if (isSelected) {
+                  choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
                 }
-              } else if (isSelected) {
-                choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
-              }
-              
-              return (
-                <div 
-                  key={choice.id}
-                  className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
-                  onClick={() => !showRationale && handleAnswerSelect(choice.id)}
-                >
-                  <div className="flex items-start p-4">
-                    <div className="flex-shrink-0 mr-3">
-                      <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium ${
-                        isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'
-                      }`}>
-                        {letters[index]}
+                
+                return (
+                  <div 
+                    key={choice.id}
+                    className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
+                    onClick={() => !showRationale && handleAnswerSelect(choice.id)}
+                  >
+                    <div className="flex items-start p-4">
+                      <div className="flex-shrink-0 mr-3">
+                        <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium ${
+                          isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'
+                        }`}>
+                          {letters[index]}
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-[15px] leading-relaxed">{choice.text}</p>
                       </div>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-[15px] leading-relaxed">{choice.text}</p>
-                    </div>
+                    
+                    {/* Rationale specific to each option - shown when the answer is revealed */}
+                    {showRationale && (
+                      <div className={`text-sm p-3 rounded-b-md ${
+                        isCorrectChoice ? 'bg-green-100 text-green-800' : 
+                        (isSelected && !isCorrectChoice) ? 'bg-red-100 text-red-800' : 'hidden'
+                      }`}>
+                        {isCorrectChoice ? (
+                          <div className="flex items-start">
+                            <CheckCircle2 className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
+                            <span><span className="font-semibold">Correct. </span>This answer represents the best nursing action for the situation described.</span>
+                          </div>
+                        ) : (isSelected && !isCorrectChoice) ? (
+                          <div className="flex items-start">
+                            <XCircle className="h-4 w-4 text-red-600 mr-2 mt-0.5" />
+                            <span><span className="font-semibold">Incorrect. </span>This option is not the best nursing action for this scenario.</span>
+                          </div>
+                        ) : null}
+                      </div>
+                    )}
                   </div>
-                  
-                  {/* Rationale specific to each option - shown when the answer is revealed */}
-                  {showRationale && (
-                    <div className={`text-sm p-3 rounded-b-md ${
-                      isCorrectChoice ? 'bg-green-100 text-green-800' : 
-                      (isSelected && !isCorrectChoice) ? 'bg-red-100 text-red-800' : 'hidden'
-                    }`}>
-                      {isCorrectChoice ? (
-                        <div className="flex items-start">
-                          <CheckCircle2 className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                          <span><span className="font-semibold">Correct. </span>This answer represents the best nursing action for the situation described.</span>
-                        </div>
-                      ) : (isSelected && !isCorrectChoice) ? (
-                        <div className="flex items-start">
-                          <XCircle className="h-4 w-4 text-red-600 mr-2 mt-0.5" />
-                          <span><span className="font-semibold">Incorrect. </span>This option is not the best nursing action for this scenario.</span>
-                        </div>
-                      ) : null}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         )}
         
         {/* Select All That Apply Questions */}
         {isMultiChoice && hasSATAChoices(question) && (
           <div className="answer-options space-y-3">
-            {question.choices.map((choice, index) => {
-              const isSelected = selectedAnswers.includes(choice.id);
-              const isCorrectChoice = question.correctAnswer.includes(choice.id);
+            {!question.choices || !Array.isArray(question.choices) || question.choices.length === 0 ? (
+              <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-md text-yellow-700">
+                <p>No answer choices available for this question.</p>
+              </div>
+            ) : (
+              question.choices.map((choice, index) => {
+                if (!choice || !choice.id) {
+                  return (
+                    <div key={`invalid-${index}`} className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700">
+                      <p>Invalid choice data at position {index + 1}</p>
+                    </div>
+                  );
+                }
+                
+                const isSelected = selectedAnswers.includes(choice.id);
+                const isCorrectChoice = Array.isArray(question.correctAnswer) && question.correctAnswer.includes(choice.id);
               
               // Determine styling for answered questions when showing rationale
               let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
@@ -514,7 +529,7 @@ export function QuestionRenderer({
                   )}
                 </div>
               );
-            })}
+            })
           </div>
         )}
         
