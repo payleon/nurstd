@@ -58,10 +58,19 @@ export function Header({ toggleSidebar }: HeaderProps) {
               
               {/* Liquid inside the flask - using mask to ensure it stays inside the outline */}
               <g mask="url(#flask-mask)">
+                {/* Background fill to ensure no gaps */}
+                <rect
+                  x="3"
+                  y="12"
+                  width="18"
+                  height="9"
+                  fill="url(#liquid-gradient)"
+                />
+                
                 {/* Main liquid body with slosh animation */}
                 <path 
                   className="animate-liquid-body"
-                  d="M3,20 L3,13 C4.5,12.2 6.5,13.5 8.5,12.5 C11,11.3 13.5,11 16,12 C18,12.8 19.5,12 21,12.5 L21,20 L3,20 Z" 
+                  d="M2,21 L2,13 C4,12.2 6.5,13.5 8.5,12.5 C11,11.3 13.5,11 16,12 C18,12.8 20,12 22,12.5 L22,21 L2,21 Z" 
                   fill="url(#liquid-gradient)" 
                 />
                 
@@ -135,6 +144,15 @@ export function Header({ toggleSidebar }: HeaderProps) {
                   opacity="0.6"
                 />
               </g>
+              
+              {/* Glass highlight/reflection */}
+              <path 
+                d="M14.5 5.5L15.5 4.5C16 6 16 7.5 15 9C14 10.5 14 12 15 13.5" 
+                stroke="white" 
+                strokeWidth="0.75" 
+                strokeLinecap="round" 
+                opacity="0.5" 
+              />
               
               {/* Glass container outline - drawn last to appear on top */}
               <path 
