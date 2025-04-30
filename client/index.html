@@ -27,65 +27,81 @@
     <meta property="og:image" content="https://nclexxx.me/og-image.svg" />
     <link rel="canonical" href="https://nclexxx.me/" />
     
-    <!-- Optimized Font Loading Strategy -->
+    <!-- Font Loading Strategy: Optimized to eliminate render blocking using the FOUT technique -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Preload the most critical fonts first -->
+    <!-- Preload critical font files directly instead of CSS -->
     <link 
       rel="preload" 
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&display=swap" 
-      as="style" 
-      onload="this.onload=null;this.rel='stylesheet'"
+      href="https://fonts.gstatic.com/s/spacegrotesk/v16/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7oUXsrPMBTTA.woff2" 
+      as="font" 
+      type="font/woff2" 
+      crossorigin
     />
     
-    <!-- Load non-critical fonts asynchronously -->
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" 
-      rel="stylesheet" 
-      media="print" 
-      onload="this.media='all'"
-    />
-    
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" 
-      rel="stylesheet" 
-      media="print" 
-      onload="this.media='all'"
-    />
-    
+    <!-- Load font CSS asynchronously with swap to prevent render blocking -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
     
-    <!-- Font fallback to prevent layout shifts -->
+    <!-- Fallback font metrics to prevent CLS (Cumulative Layout Shift) -->
     <style>
       /* Critical styles to avoid layout shifts while fonts are loading */
       @font-face {
         font-family: 'Space Grotesk Fallback';
         size-adjust: 100%;
         ascent-override: 90%;
+        descent-override: 25%;
+        line-gap-override: 0%;
         src: local('Arial');
+        font-display: swap;
       }
       
       @font-face {
         font-family: 'Space Mono Fallback';
         size-adjust: 105%;
         ascent-override: 95%;
+        descent-override: 25%;
+        line-gap-override: 0%;
         src: local('Courier New');
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: 'Inter Fallback';
+        size-adjust: 100%;
+        ascent-override: 90%;
+        descent-override: 23%;
+        line-gap-override: 0%;
+        src: local('Helvetica');
+        font-display: swap;
+      }
+      
+      /* Apply font stacks with fallbacks */
+      body {
+        font-family: 'Inter', 'Inter Fallback', system-ui, sans-serif;
       }
       
       h1, h2, h3, h4, h5, h6 {
-        font-family: 'Space Grotesk', 'Space Grotesk Fallback', sans-serif;
+        font-family: 'Space Grotesk', 'Space Grotesk Fallback', system-ui, sans-serif;
       }
       
       code, pre {
         font-family: 'Space Mono', 'Space Mono Fallback', monospace;
       }
     </style>
+    
+    <!-- Noscript fallback for browsers with JavaScript disabled -->
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
