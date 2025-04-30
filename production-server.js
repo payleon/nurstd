@@ -3,10 +3,15 @@
  * It depends on your built application files being in the dist directory
  */
 
-// Use this script if you have trouble with the ESM modules in production
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
+// Updated to use ES modules since package.json has "type": "module"
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -182,6 +187,7 @@ app.get('*', (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
+  next();
 });
 
 // Start server
