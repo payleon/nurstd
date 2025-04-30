@@ -615,16 +615,16 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                 {/* Extra button for marking for review */}
                 <button 
                   className={`ml-2 py-2.5 px-4 rounded-md flex items-center ${
-                    isQuestionFlagged(currentQuestion?.id)
+                    currentQuestion && isQuestionFlagged(currentQuestion.id)
                       ? 'bg-amber-100 border border-amber-300 text-amber-700 hover:bg-amber-200'
                       : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'
                   }`}
                   onClick={toggleFlagQuestion}
-                  aria-pressed={isQuestionFlagged(currentQuestion?.id) ? "true" : "false"}
-                  aria-label={isQuestionFlagged(currentQuestion?.id) ? "Unflag this question" : "Flag this question for review"}
+                  aria-pressed={currentQuestion && isQuestionFlagged(currentQuestion.id) ? "true" : "false"}
+                  aria-label={currentQuestion && isQuestionFlagged(currentQuestion.id) ? "Unflag this question" : "Flag this question for review"}
                 >
                   <Flag className="mr-1.5 h-4 w-4" aria-hidden="true" />
-                  {isQuestionFlagged(currentQuestion?.id) ? 'Flagged' : 'Flag for Review'}
+                  {currentQuestion && isQuestionFlagged(currentQuestion.id) ? 'Flagged' : 'Flag for Review'}
                 </button>
               </div>
               

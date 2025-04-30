@@ -20,6 +20,25 @@ export function QuestionRenderer({
   isCorrect = false,
   hideSubmitButton = false
 }: QuestionRendererProps) {
+  // Validate question data to prevent errors
+  if (!question || typeof question !== 'object') {
+    return (
+      <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+        <p className="font-medium">Error: Invalid question data</p>
+        <p className="text-sm mt-2">The question data is missing or invalid.</p>
+      </div>
+    );
+  }
+
+  if (!question.id || !question.text || !question.type) {
+    return (
+      <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-md text-yellow-700">
+        <p className="font-medium">Warning: Incomplete question data</p>
+        <p className="text-sm mt-2">The question is missing required fields (ID, text, or type).</p>
+      </div>
+    );
+  }
+
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>(
     Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []
   );
@@ -86,22 +105,42 @@ export function QuestionRenderer({
   
   // Helper function to get correct answer(s) regardless of question type
   const getCorrectAnswer = (q: Question): string | string[] => {
-    if (hasMCChoices(q)) {
-      return q.correctAnswer;
-    } else if (hasSATAChoices(q)) {
-      return q.correctAnswer;
-    } else if (q.type === "fill_in_blank") {
-      return q.correctAnswer;
-    } else if (hasHotspotAreas(q)) {
-      return q.correctAreas.map(area => area.id);
-    } else if (hasOrderedItems(q)) {
-      return q.correctOrder;
-    } else if (hasChartExhibit(q)) {
-      // This assumes we're showing the first sub-question by default
-      const firstQuestion = q.questions[0];
-      return firstQuestion.correctAnswer;
+    try {
+      if (hasMCChoices(q)) {
+        if (!q.correctAnswer) return "Missing answer";
+        return q.correctAnswer;
+      } else if (hasSATAChoices(q)) {
+        if (!q.correctAnswer || !Array.isArray(q.correctAnswer)) return ["Missing answers"];
+        return q.correctAnswer;
+      } else if (q.type === "fill_in_blank") {
+        if (!q.correctAnswer) return "Missing answer";
+        return q.correctAnswer;
+      } else if (hasHotspotAreas(q)) {
+        if (!q.correctAreas || !Array.isArray(q.correctAreas) || q.correctAreas.length === 0) {
+          return ["No correct areas defined"];
+        }
+        return q.correctAreas.map(area => area.id);
+      } else if (hasOrderedItems(q)) {
+        if (!q.correctOrder || !Array.isArray(q.correctOrder) || q.correctOrder.length === 0) {
+          return ["No correct order defined"];
+        }
+        return q.correctOrder;
+      } else if (hasChartExhibit(q)) {
+        // This assumes we're showing the first sub-question by default
+        if (!q.questions || !Array.isArray(q.questions) || q.questions.length === 0) {
+          return "No questions defined";
+        }
+        const firstQuestion = q.questions[0];
+        if (!firstQuestion || !firstQuestion.correctAnswer) {
+          return "Missing answer for first question";
+        }
+        return firstQuestion.correctAnswer;
+      }
+      return "";
+    } catch (error) {
+      console.error("Error in getCorrectAnswer:", error);
+      return "Error retrieving answer";
     }
-    return "";
   };
   
   // Mock data for demonstration
@@ -344,9 +383,21 @@ export function QuestionRenderer({
         {/* Multiple Choice Questions */}
         {isSingleChoice && hasMCChoices(question) && (
           <div className="answer-options space-y-3">
-            {question.choices.map((choice, index) => {
-              const isSelected = selectedAnswers.includes(choice.id);
-              const isCorrectChoice = question.correctAnswer === choice.id;
+            {!question.choices || !Array.isArray(question.choices) || question.choices.length === 0 ? (
+              <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-md text-yellow-700">
+                <p>No answer choices available for this question.</p>
+              </div>
+            ) : (
+              question.choices.map((choice, index) => {
+                if (!choice || !choice.id) {
+                  return (
+                    <div key={`invalid-${index}`} className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700">
+                      <p>Invalid choice data at position {index + 1}</p>
+                    </div>
+                  );
+                }
+                const isSelected = selectedAnswers.includes(choice.id);
+                const isCorrectChoice = question.correctAnswer === choice.id;
               
               // Determine styling for answered questions when showing rationale
               let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
