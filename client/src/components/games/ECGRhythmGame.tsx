@@ -548,23 +548,75 @@ export function ECGRhythmGame({ onComplete, onClose }: ECGRhythmGameProps) {
   };
   
   const resetGame = () => {
-    // Generate new quiz questions and shuffle
-    const newQuestions = ecgRhythms.map(rhythm => {
-      const otherRhythms = ecgRhythms.filter(r => r.id !== rhythm.id);
-      const shuffledOthers = [...otherRhythms].sort(() => Math.random() - 0.5);
-      const distractors = shuffledOthers.slice(0, 3).map(r => r.name);
-      const options = [rhythm.name, ...distractors].sort(() => Math.random() - 0.5);
+    // Generate quiz questions by creating choices for each rhythm
+    const generateQuizQuestions = () => {
+      const questions: QuizQuestion[] = ecgRhythms.map(rhythm => {
+        // Generate 3 random options that don't include the correct answer
+        const otherRhythms = ecgRhythms.filter(r => r.id !== rhythm.id);
+        const shuffledOthers = [...otherRhythms].sort(() => Math.random() - 0.5);
+        const distractors = shuffledOthers.slice(0, 3).map(r => r.name);
+        
+        // Combine correct answer with distractors and shuffle
+        const options = [rhythm.name, ...distractors].sort(() => Math.random() - 0.5);
+        
+        // Add clinical questions for advanced learning
+        let clinicalQuestion;
+        if (rhythm.id === 5) { // Ventricular Tachycardia
+          clinicalQuestion = {
+            question: "Your patient with ventricular tachycardia is conscious and has a blood pressure of 90/60 mmHg. What is your first nursing action?",
+            options: [
+              "Administer amiodarone 150 mg IV over 10 minutes",
+              "Prepare for immediate defibrillation",
+              "Administer a fluid bolus of 500 mL normal saline",
+              "Prepare for synchronized cardioversion"
+            ],
+            correctAnswer: "Prepare for synchronized cardioversion",
+            explanation: "For ventricular tachycardia with signs of hemodynamic compromise (low blood pressure), synchronized cardioversion is the most appropriate immediate intervention. Amiodarone would be appropriate for a more stable patient, and defibrillation is used for pulseless VT."
+          };
+        } else if (rhythm.id === 6) { // Ventricular Fibrillation
+          clinicalQuestion = {
+            question: "You find your patient unresponsive with ventricular fibrillation on the monitor. What is the correct sequence of actions?",
+            options: [
+              "Defibrillate, then begin CPR starting with chest compressions",
+              "Begin CPR with chest compressions, then defibrillate after 2 minutes",
+              "Check carotid pulse, begin CPR with airway management, then defibrillate",
+              "Call a code, wait for the code team, then assist with defibrillation"
+            ],
+            correctAnswer: "Begin CPR with chest compressions, then defibrillate after 2 minutes",
+            explanation: "According to current ACLS guidelines, when finding a patient in cardiac arrest, you should begin high-quality CPR immediately with chest compressions. Early defibrillation is critical for shockable rhythms like VF, but CPR should be initiated first while the defibrillator is being prepared."
+          };
+        } else if (rhythm.id === 4) { // Atrial Fibrillation
+          clinicalQuestion = {
+            question: "Your patient with newly diagnosed atrial fibrillation is prescribed anticoagulation therapy. Why is this important?",
+            options: [
+              "To convert the rhythm back to normal sinus rhythm",
+              "To slow the ventricular response rate",
+              "To reduce the risk of stroke from atrial thrombi",
+              "To prevent progression to ventricular fibrillation"
+            ],
+            correctAnswer: "To reduce the risk of stroke from atrial thrombi",
+            explanation: "Anticoagulation therapy in atrial fibrillation is primarily to reduce the risk of stroke. The turbulent, ineffective atrial contractions in AFib can lead to blood stasis and clot formation in the atria (particularly the left atrial appendage). These clots can embolize to the brain, causing ischemic stroke."
+          };
+        }
+        
+        return {
+          rhythm,
+          options,
+          correctAnswer: rhythm.name,
+          clinicalQuestion
+        };
+      });
       
-      return {
-        rhythm,
-        options,
-        correctAnswer: rhythm.name
-      };
-    }).sort(() => Math.random() - 0.5);
+      // Shuffle the questions
+      return questions.sort(() => Math.random() - 0.5);
+    };
     
-    setQuizQuestions(newQuestions);
+    setQuizQuestions(generateQuizQuestions());
     setSelectedAnswer(null);
     setShowExplanation(false);
+    setShowingClinicalQuestion(false);
+    setClinicalQuestionAnswer(null);
+    setShowClinicalExplanation(false);
     setCurrentQuestionIndex(0);
     setScore(0);
     setTimeLeft(30);
@@ -770,7 +822,9 @@ export function ECGRhythmGame({ onComplete, onClose }: ECGRhythmGameProps) {
     <div className="bg-white rounded-lg shadow-md overflow-hidden min-h-[600px]">
       <div className="bg-[#13294B] text-white p-4">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold">ECG Rhythm Identification</h2>
+          <h2 className="text-xl font-bold">
+            {showingClinicalQuestion ? "Clinical Reasoning Question" : "ECG Rhythm Identification"}
+          </h2>
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <Heart className="h-5 w-5 text-red-400 mr-1.5" />
@@ -797,82 +851,194 @@ export function ECGRhythmGame({ onComplete, onClose }: ECGRhythmGameProps) {
       </div>
       
       <div className="p-6">
-        <div className="mb-6">
-          <h3 className="text-lg font-bold text-[#13294B] mb-4">Identify this ECG rhythm:</h3>
-          
-          <div className="p-4 border border-gray-200 rounded-md bg-gray-50 mb-6">
-            <div dangerouslySetInnerHTML={{ __html: ecgSVGs[currentQuestion.rhythm.imagePath] || '' }} />
-          </div>
-          
-          <div className="grid grid-cols-1 gap-3 mb-6">
-            {currentQuestion.options.map((option, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.02 }}
-                className={`p-3 rounded-md cursor-pointer border-2 transition-colors ${
-                  showExplanation
-                    ? option === currentQuestion.correctAnswer
-                      ? 'bg-green-100 border-green-300'
-                      : selectedAnswer === option
-                      ? 'bg-red-100 border-red-300'
-                      : 'bg-gray-100 border-gray-200'
-                    : selectedAnswer === option
-                    ? 'bg-blue-100 border-blue-300'
-                    : 'bg-gray-100 border-gray-200 hover:border-blue-300'
-                }`}
-                onClick={() => !showExplanation && handleAnswerSelect(option)}
-              >
-                <div className="flex items-center">
-                  {showExplanation && (
-                    option === currentQuestion.correctAnswer ? (
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-2 flex-shrink-0" />
-                    ) : selectedAnswer === option ? (
-                      <XCircle className="h-5 w-5 text-red-600 mr-2 flex-shrink-0" />
-                    ) : null
-                  )}
-                  <span>{option}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          
-          {showExplanation && (
-            <div className="bg-blue-50 p-4 rounded-md border border-blue-200 mb-6">
-              <h4 className="font-bold text-blue-800 mb-2">Explanation:</h4>
-              <p className="text-blue-700 mb-4">{currentQuestion.rhythm.description}</p>
-              
-              <h4 className="font-bold text-blue-800 mb-2">Key Characteristics:</h4>
-              <ul className="list-disc list-inside text-blue-700 mb-4">
-                {currentQuestion.rhythm.characteristics.slice(0, 3).map((characteristic, index) => (
-                  <li key={index}>{characteristic}</li>
-                ))}
-              </ul>
+        {!showingClinicalQuestion ? (
+          // ECG Rhythm Identification Question
+          <div className="mb-6">
+            <h3 className="text-lg font-bold text-[#13294B] mb-4">Identify this ECG rhythm:</h3>
+            
+            <div className="p-4 border border-gray-200 rounded-md bg-gray-50 mb-6">
+              <div dangerouslySetInnerHTML={{ __html: ecgSVGs[currentQuestion.rhythm.imagePath] || '' }} />
             </div>
-          )}
-        </div>
-        
-        <div className="flex justify-center">
-          {!showExplanation ? (
-            <button
-              onClick={checkAnswer}
-              disabled={!selectedAnswer}
-              className={`flex items-center justify-center py-2 px-6 rounded-md transition-colors ${
-                selectedAnswer
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              }`}
-            >
-              Check Answer
-            </button>
-          ) : (
-            <button
-              onClick={nextQuestion}
-              className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md transition-colors"
-            >
-              Next Question <ArrowRight className="ml-2 h-5 w-5" />
-            </button>
-          )}
-        </div>
+            
+            <div className="grid grid-cols-1 gap-3 mb-6">
+              {currentQuestion.options.map((option, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.02 }}
+                  className={`p-3 rounded-md cursor-pointer border-2 transition-colors ${
+                    showExplanation
+                      ? option === currentQuestion.correctAnswer
+                        ? 'bg-green-100 border-green-300'
+                        : selectedAnswer === option
+                        ? 'bg-red-100 border-red-300'
+                        : 'bg-gray-100 border-gray-200'
+                      : selectedAnswer === option
+                      ? 'bg-blue-100 border-blue-300'
+                      : 'bg-gray-100 border-gray-200 hover:border-blue-300'
+                  }`}
+                  onClick={() => !showExplanation && handleAnswerSelect(option)}
+                >
+                  <div className="flex items-center">
+                    {showExplanation && (
+                      option === currentQuestion.correctAnswer ? (
+                        <CheckCircle2 className="h-5 w-5 text-green-600 mr-2 flex-shrink-0" />
+                      ) : selectedAnswer === option ? (
+                        <XCircle className="h-5 w-5 text-red-600 mr-2 flex-shrink-0" />
+                      ) : null
+                    )}
+                    <span>{option}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {showExplanation && (
+              <div className="bg-blue-50 p-4 rounded-md border border-blue-200 mb-6">
+                <h4 className="font-bold text-blue-800 mb-2">Explanation:</h4>
+                <p className="text-blue-700 mb-4">{currentQuestion.rhythm.description}</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-bold text-blue-800 mb-2">Key Characteristics:</h4>
+                    <ul className="list-disc list-inside text-blue-700 mb-4">
+                      {currentQuestion.rhythm.characteristics.slice(0, 3).map((characteristic, index) => (
+                        <li key={index}>{characteristic}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-bold text-blue-800 mb-2">Nursing Actions:</h4>
+                    <ul className="list-disc list-inside text-blue-700 mb-4">
+                      {currentQuestion.rhythm.nursingActions.slice(0, 2).map((action, index) => (
+                        <li key={index}>{action}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div className="flex justify-center">
+              {!showExplanation ? (
+                <button
+                  onClick={checkAnswer}
+                  disabled={!selectedAnswer}
+                  className={`flex items-center justify-center py-2 px-6 rounded-md transition-colors ${
+                    selectedAnswer
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  Check Answer
+                </button>
+              ) : (
+                <button
+                  onClick={nextQuestion}
+                  className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md transition-colors"
+                >
+                  {currentQuestion.clinicalQuestion ? "Continue to Clinical Question" : "Next Question"} <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
+              )}
+            </div>
+          </div>
+        ) : (
+          // Clinical Reasoning Question
+          <div className="mb-6">
+            <div className="flex mb-4 items-start">
+              <HelpCircle className="h-7 w-7 text-blue-600 mr-3 flex-shrink-0 mt-1" />
+              <h3 className="text-lg font-bold text-[#13294B]">
+                {currentQuestion.clinicalQuestion?.question}
+              </h3>
+            </div>
+            
+            <div className="py-3 px-4 bg-blue-50 rounded-md mb-6 border border-blue-100">
+              <p className="text-blue-700">
+                <span className="font-bold">Rhythm: </span>{currentQuestion.rhythm.name}
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 gap-3 mb-6 mt-6">
+              {currentQuestion.clinicalQuestion?.options.map((option, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.02 }}
+                  className={`p-3 rounded-md cursor-pointer border-2 transition-colors ${
+                    showClinicalExplanation
+                      ? option === currentQuestion.clinicalQuestion?.correctAnswer
+                        ? 'bg-green-100 border-green-300'
+                        : clinicalQuestionAnswer === option
+                        ? 'bg-red-100 border-red-300'
+                        : 'bg-gray-100 border-gray-200'
+                      : clinicalQuestionAnswer === option
+                      ? 'bg-blue-100 border-blue-300'
+                      : 'bg-gray-100 border-gray-200 hover:border-blue-300'
+                  }`}
+                  onClick={() => !showClinicalExplanation && handleClinicalAnswerSelect(option)}
+                >
+                  <div className="flex items-center">
+                    {showClinicalExplanation && (
+                      option === currentQuestion.clinicalQuestion?.correctAnswer ? (
+                        <CheckCircle2 className="h-5 w-5 text-green-600 mr-2 flex-shrink-0" />
+                      ) : clinicalQuestionAnswer === option ? (
+                        <XCircle className="h-5 w-5 text-red-600 mr-2 flex-shrink-0" />
+                      ) : null
+                    )}
+                    <span>{option}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {showClinicalExplanation && (
+              <div className="bg-blue-50 p-4 rounded-md border border-blue-200 mb-6">
+                <h4 className="font-bold text-blue-800 mb-2">Clinical Explanation:</h4>
+                <p className="text-blue-700 mb-4">{currentQuestion.clinicalQuestion?.explanation}</p>
+                
+                {currentQuestion.rhythm.clinicalScenario && (
+                  <div className="mt-4">
+                    <h4 className="font-bold text-blue-800 mb-2">Clinical Scenario:</h4>
+                    <p className="text-blue-700 mb-4">{currentQuestion.rhythm.clinicalScenario}</p>
+                  </div>
+                )}
+                
+                {currentQuestion.rhythm.treatmentProtocol && (
+                  <div className="mt-4">
+                    <h4 className="font-bold text-blue-800 mb-2">Treatment Protocol:</h4>
+                    <ul className="list-disc list-inside text-blue-700 mb-4">
+                      {currentQuestion.rhythm.treatmentProtocol.slice(0, 2).map((protocol, index) => (
+                        <li key={index}>{protocol}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            <div className="flex justify-center">
+              {!showClinicalExplanation ? (
+                <button
+                  onClick={checkClinicalAnswer}
+                  disabled={!clinicalQuestionAnswer}
+                  className={`flex items-center justify-center py-2 px-6 rounded-md transition-colors ${
+                    clinicalQuestionAnswer
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  Submit Answer
+                </button>
+              ) : (
+                <button
+                  onClick={afterClinicalQuestion}
+                  className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md transition-colors"
+                >
+                  Next Question <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
