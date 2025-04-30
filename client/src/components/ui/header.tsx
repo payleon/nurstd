@@ -51,18 +51,13 @@ export function Header({ toggleSidebar }: HeaderProps) {
                 <filter id="liquid-blur">
                   <feGaussianBlur in="SourceGraphic" stdDeviation="0.3" />
                 </filter>
+                <mask id="flask-mask">
+                  <path d="M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" fill="white" />
+                </mask>
               </defs>
               
-              {/* Glass container outline */}
-              <path 
-                d="M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" 
-                stroke="#13294B"
-                strokeWidth="2"
-                fill="none"
-              />
-              
-              {/* Liquid fill level - 2/3 full */}
-              <g clipPath="url(#flask-clip)">
+              {/* Liquid inside the flask - using mask to ensure it stays inside the outline */}
+              <g mask="url(#flask-mask)">
                 {/* Main liquid body with slosh animation */}
                 <path 
                   className="animate-liquid-body"
@@ -140,6 +135,14 @@ export function Header({ toggleSidebar }: HeaderProps) {
                   opacity="0.6"
                 />
               </g>
+              
+              {/* Glass container outline - drawn last to appear on top */}
+              <path 
+                d="M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" 
+                stroke="#13294B"
+                strokeWidth="2"
+                fill="none"
+              />
             </svg>
           </div>
           <span className="text-2xl font-bold tracking-tight uppercase">NURS'TD</span>
