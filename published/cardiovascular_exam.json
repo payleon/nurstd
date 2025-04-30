@@ -1,0 +1,294 @@
+{
+  "questions": [
+    {
+      "id": 201,
+      "title": "Cardiovascular Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing a patient with heart failure. Which finding would indicate right-sided heart failure?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Pulmonary edema"
+        },
+        {
+          "id": "B",
+          "text": "Peripheral edema"
+        },
+        {
+          "id": "C",
+          "text": "Paroxysmal nocturnal dyspnea"
+        },
+        {
+          "id": "D",
+          "text": "Orthopnea"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Peripheral edema is a classic sign of right-sided heart failure due to the right ventricle's inability to effectively pump blood, leading to venous congestion and fluid accumulation in the extremities. Pulmonary edema, paroxysmal nocturnal dyspnea, and orthopnea are characteristic of left-sided heart failure, which causes pulmonary congestion.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 202,
+      "title": "Myocardial Infarction",
+      "type": "mc",
+      "text": "A patient is admitted with chest pain, elevated cardiac enzymes, and ST-segment elevation on ECG. The nurse recognizes that immediate administration of which medication is most critical?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Beta blocker"
+        },
+        {
+          "id": "B",
+          "text": "Calcium channel blocker"
+        },
+        {
+          "id": "C",
+          "text": "Thrombolytic therapy"
+        },
+        {
+          "id": "D",
+          "text": "ACE inhibitor"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "In a STEMI (ST-elevation myocardial infarction), thrombolytic therapy is critical for immediate administration if percutaneous coronary intervention (PCI) is not available within 90 minutes. Thrombolytics dissolve the clot causing the coronary artery occlusion, restoring blood flow to the affected myocardium and limiting infarct size. While beta blockers, calcium channel blockers, and ACE inhibitors are useful in cardiac care, they don't directly address the occlusion causing the infarction.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 203,
+      "title": "Cardiac Arrhythmias",
+      "type": "mc",
+      "text": "A nurse is monitoring a patient with a cardiac rhythm showing regular P waves with a PR interval of 0.32 seconds. The QRS complexes are narrow and appear after each P wave. The nurse interprets this rhythm as:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "First-degree AV block"
+        },
+        {
+          "id": "B",
+          "text": "Second-degree AV block Type I (Wenckebach)"
+        },
+        {
+          "id": "C",
+          "text": "Second-degree AV block Type II"
+        },
+        {
+          "id": "D",
+          "text": "Third-degree AV block"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "First-degree AV block is characterized by a prolonged PR interval (>0.20 seconds) with each P wave followed by a QRS complex. The PR interval remains constant, and all atrial impulses are conducted to the ventricles, just with a delay. Second-degree blocks have some P waves not conducted, while third-degree block shows complete dissociation between P waves and QRS complexes.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "hard"
+    },
+    {
+      "id": 204,
+      "title": "Heart Failure Management",
+      "type": "mc",
+      "text": "A patient with heart failure is prescribed furosemide (Lasix) 40 mg IV twice daily. The nurse should prioritize which intervention when administering this medication?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Administer the medication with food to prevent GI upset"
+        },
+        {
+          "id": "B",
+          "text": "Monitor intake and output and daily weights"
+        },
+        {
+          "id": "C",
+          "text": "Ensure the patient remains supine for 30 minutes after administration"
+        },
+        {
+          "id": "D",
+          "text": "Check the patient's temperature before administration"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "When administering a loop diuretic like furosemide, monitoring intake and output and daily weights is essential to evaluate the medication's effectiveness and prevent complications such as dehydration or electrolyte imbalances. Furosemide doesn't need to be given with food, doesn't require the patient to remain supine after administration, and body temperature monitoring is not specifically indicated for this medication.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 205,
+      "title": "Cardiac Medications",
+      "type": "mc",
+      "text": "A nurse is providing education to a patient newly prescribed digoxin (Lanoxin). Which statement by the patient indicates understanding of this medication?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"I should take this medication with an antacid to prevent stomach upset.\""
+        },
+        {
+          "id": "B",
+          "text": "\"I will check my pulse before taking this medication and notify my provider if it's below 60.\""
+        },
+        {
+          "id": "C",
+          "text": "\"This medication will help lower my blood pressure quickly.\""
+        },
+        {
+          "id": "D",
+          "text": "\"I can double my dose if I feel my symptoms getting worse.\""
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Patients taking digoxin should check their pulse before each dose and notify their provider if it falls below 60 beats per minute, as bradycardia is a sign of potential digoxin toxicity. Digoxin doesn't need to be taken with an antacid, it's not used for immediate blood pressure control, and patients should never adjust their digoxin dose without provider guidance due to its narrow therapeutic range.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 206,
+      "title": "Angina Management",
+      "type": "mc",
+      "text": "A patient with stable angina experiences chest pain while walking. The nurse should instruct the patient to:",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Continue walking through the pain to build cardiovascular endurance"
+        },
+        {
+          "id": "B",
+          "text": "Immediately lie down flat and call emergency services"
+        },
+        {
+          "id": "C",
+          "text": "Stop activity, sit down, and use prescribed nitroglycerin as directed"
+        },
+        {
+          "id": "D",
+          "text": "Take an additional dose of beta-blocker medication"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "The appropriate action for angina is to stop the activity that triggered the pain, rest (preferably sitting), and use prescribed nitroglycerin as directed. Continuing activity would worsen myocardial oxygen demand and pain. Lying flat could worsen dyspnea, and immediate emergency services may not be necessary for stable, typical angina that responds to rest and nitroglycerin. Patients should not self-adjust beta-blocker dosages without provider guidance.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 207,
+      "title": "Cardiac Surgeries",
+      "type": "mc",
+      "text": "A patient is scheduled for coronary artery bypass grafting (CABG). Which finding in the patient's preoperative assessment would be most concerning to the nurse?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Blood pressure of 130/82 mmHg"
+        },
+        {
+          "id": "B",
+          "text": "Temperature of 99.1°F (37.3°C)"
+        },
+        {
+          "id": "C",
+          "text": "Active upper respiratory infection with productive cough"
+        },
+        {
+          "id": "D",
+          "text": "Anxiety about the surgical procedure"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "An active upper respiratory infection with productive cough is the most concerning finding as it increases the risk of postoperative pulmonary complications and possible spread of infection. Surgery would likely be postponed until the infection resolves. The blood pressure reading is only slightly elevated, the temperature is within normal range, and anxiety is an expected response to pending surgery that can be managed with appropriate interventions.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 208,
+      "title": "Valvular Heart Disease",
+      "type": "mc",
+      "text": "A patient has been diagnosed with mitral stenosis. The nurse would expect which of the following assessment findings?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Presence of an S3 heart sound"
+        },
+        {
+          "id": "B",
+          "text": "Bounding peripheral pulses"
+        },
+        {
+          "id": "C",
+          "text": "Diastolic rumbling murmur at the apex"
+        },
+        {
+          "id": "D",
+          "text": "Decreased jugular venous pressure"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Mitral stenosis is characterized by a diastolic rumbling murmur best heard at the apex, caused by turbulent blood flow across the narrowed mitral valve during diastole. An S3 heart sound is associated with heart failure or volume overload, bounding pulses occur with high cardiac output states, and mitral stenosis typically causes increased (not decreased) jugular venous pressure due to pulmonary hypertension and eventual right heart failure.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "hard"
+    },
+    {
+      "id": 209,
+      "title": "Cardiovascular Risk Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing modifiable cardiovascular risk factors in a patient. Which of the following findings is most critical to address?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Family history of hypertension"
+        },
+        {
+          "id": "B",
+          "text": "Blood pressure of 180/100 mmHg"
+        },
+        {
+          "id": "C",
+          "text": "Age of 65 years"
+        },
+        {
+          "id": "D",
+          "text": "Male gender"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "A blood pressure of 180/100 mmHg indicates stage 2 hypertension, which is a significant modifiable risk factor requiring immediate intervention to reduce cardiovascular risk. Family history, age, and gender are non-modifiable risk factors that cannot be changed through intervention, although they are important to consider in overall risk assessment.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 210,
+      "title": "Cardiac Rehabilitation",
+      "type": "mc",
+      "text": "A patient is enrolled in a cardiac rehabilitation program following a myocardial infarction. Which statement by the patient indicates proper understanding of the exercise program?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"I should push through chest pain to build cardiac endurance.\""
+        },
+        {
+          "id": "B",
+          "text": "\"I should exercise to the point of exhaustion for maximum benefit.\""
+        },
+        {
+          "id": "C",
+          "text": "\"I should monitor my heart rate and stay within my target range.\""
+        },
+        {
+          "id": "D",
+          "text": "\"I should only exercise when I feel completely symptom-free.\""
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Monitoring heart rate and staying within a prescribed target range is essential for safe and effective cardiac rehabilitation. Patients should never push through chest pain during exercise, as this could indicate myocardial ischemia. Exercising to exhaustion is inappropriate and potentially dangerous for cardiac patients. While patients should be relatively stable to exercise, waiting until completely symptom-free might unnecessarily delay rehabilitation.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    }
+  ]
+}

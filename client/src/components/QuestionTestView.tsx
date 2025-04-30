@@ -51,7 +51,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const isLoading = !test.questionsData && apiLoading;
   const error = apiError;
   
-  const questions = questionsData?.questions || [];
+  // Handle both string and object response types
+  const questions = typeof questionsData === 'object' && questionsData?.questions ? questionsData.questions : [];
   const currentQuestion = questions[currentQuestionIndex];
   const totalQuestions = questions.length;
   

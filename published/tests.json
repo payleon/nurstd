@@ -47,7 +47,7 @@
   {
     "id": 5,
     "title": "Cardiovascular Nursing",
-    "path": "published/all_questions.json",
+    "path": "published/cardiovascular_exam.json",
     "description": "Comprehensive cardiovascular nursing exam covering heart failure, cardiac rhythms, myocardial infarction, and cardiovascular pharmacology.",
     "questionCount": 10,
     "timeLimit": 15,
