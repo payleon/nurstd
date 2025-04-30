@@ -1,729 +1,294 @@
 {
   "questions": [
     {
-      "id": 101,
+      "id": 201,
+      "title": "Myocardial Infarction",
       "type": "mc",
-      "text": "A 58-year-old patient presents to the emergency department with crushing substernal chest pain radiating to the left arm and jaw. The ECG shows ST-segment elevation in leads II, III, and aVF. This finding is most consistent with which type of myocardial infarction?",
-      "title": "Acute Coronary Syndrome",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "ST-segment elevation in leads II, III, and aVF indicates an inferior wall myocardial infarction. These leads view the inferior portion of the heart which is primarily supplied by the right coronary artery. This finding is consistent with a STEMI (ST-elevation myocardial infarction) which represents a complete occlusion of the coronary artery with resultant myocardial tissue death.",
-      "difficulty": "medium",
+      "text": "A client is admitted to the emergency department with suspected myocardial infarction. Which electrocardiogram (ECG) change would confirm this diagnosis?",
       "choices": [
         {
           "id": "A",
-          "text": "Inferior wall STEMI"
+          "text": "ST segment depression"
         },
         {
           "id": "B",
-          "text": "Anterior wall STEMI"
+          "text": "ST segment elevation"
         },
         {
           "id": "C",
-          "text": "Non-STEMI"
+          "text": "Tall, peaked T waves"
         },
         {
           "id": "D",
-          "text": "Stable angina"
+          "text": "Presence of U waves"
         }
       ],
-      "answer": "A"
+      "correctAnswer": "B",
+      "rationale": "ST segment elevation on an ECG is the hallmark finding of an acute myocardial infarction (specifically, an ST-elevation myocardial infarction or STEMI), indicating acute injury to the myocardium. This elevation occurs in leads corresponding to the anatomical area of the heart that is experiencing infarction. ST segment depression can indicate ischemia but not necessarily infarction, or it may be seen in a non-ST-elevation myocardial infarction (NSTEMI). Tall, peaked T waves are often seen in hyperkalemia, not myocardial infarction. U waves may be present in hypokalemia, hypercalcemia, or with certain medications, but are not characteristic of myocardial infarction.",
+      "category": "cardiac",
+      "subcategory": "myocardial_infarction",
+      "difficulty": "medium"
     },
     {
-      "id": 102,
+      "id": 202,
+      "title": "Cardiac Medications",
       "type": "mc",
-      "text": "A patient with acute coronary syndrome is administered fibrinolytic therapy. Which laboratory value is most important to monitor closely during the first 24 hours following this treatment?",
-      "title": "Fibrinolytic Therapy",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "After fibrinolytic therapy, bleeding is the major complication. Hemoglobin and hematocrit are critical to monitor for acute blood loss. A falling hemoglobin/hematocrit can indicate bleeding which may be occult or internal. While cardiac markers, coagulation studies, and electrolytes are also important, detecting hemorrhage is the highest priority.",
-      "difficulty": "medium",
+      "text": "A nurse is administering nitroglycerin to a client with chest pain. Which action by the nurse is most appropriate?",
       "choices": [
         {
           "id": "A",
-          "text": "Cardiac troponin levels"
+          "text": "Have the client swallow the tablet with water"
         },
         {
           "id": "B",
-          "text": "Hemoglobin and hematocrit"
+          "text": "Instruct the client to place the tablet under the tongue"
         },
         {
           "id": "C",
-          "text": "Potassium levels"
+          "text": "Administer the medication with food"
         },
         {
           "id": "D",
-          "text": "Blood glucose"
+          "text": "Apply the tablet topically to the chest"
         }
       ],
-      "answer": "B"
+      "correctAnswer": "B",
+      "rationale": "Sublingual nitroglycerin tablets should be placed under the tongue where they dissolve and are rapidly absorbed into the circulation, providing quick relief of chest pain. The client should be instructed not to swallow, chew, or drink water with the tablet, as this would reduce its effectiveness. Nitroglycerin is not administered with food, as this would delay absorption. While nitroglycerin is available in topical forms (patches and ointments), these are used for prophylaxis rather than acute treatment of chest pain, and they are applied to hairless areas of the skin, not specifically to the chest.",
+      "category": "cardiac",
+      "subcategory": "medications",
+      "difficulty": "easy"
     },
     {
-      "id": 103,
+      "id": 203,
+      "title": "Cardiac Arrhythmias",
       "type": "mc",
-      "text": "The nurse is caring for a patient with unstable angina. Which statement best differentiates unstable angina from stable angina?",
-      "title": "Angina Assessment",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "Unstable angina is characterized by symptoms that are increasing in frequency, duration, and severity, often occurring at rest or with minimal exertion. It represents a progression of coronary artery disease. Stable angina typically occurs with predictable levels of exertion and is relieved with rest or nitroglycerin within 5-10 minutes. Unstable angina is considered a medical emergency and often precedes a myocardial infarction.",
-      "difficulty": "medium",
+      "text": "A client's cardiac monitor shows a regular rhythm with a rate of 50 beats per minute, P waves present before each QRS complex, and a PR interval of 0.20 seconds. The nurse interprets this as:",
       "choices": [
         {
           "id": "A",
-          "text": "Unstable angina only occurs with heavy exertion"
+          "text": "Sinus bradycardia"
         },
         {
           "id": "B",
-          "text": "Unstable angina is always accompanied by ST elevation"
+          "text": "First-degree AV block"
         },
         {
           "id": "C",
-          "text": "Unstable angina is angina that occurs at rest or with minimal exertion"
+          "text": "Second-degree AV block, Mobitz I"
         },
         {
           "id": "D",
-          "text": "Unstable angina always resolves within 5 minutes of rest"
+          "text": "Junctional rhythm"
         }
       ],
-      "answer": "C"
+      "correctAnswer": "B",
+      "rationale": "First-degree AV block is characterized by a prolonged PR interval (greater than 0.20 seconds) with a P wave before each QRS complex and a regular rhythm. In sinus bradycardia, the heart rate is less than 60 beats per minute with normal PR interval (0.12-0.20 seconds). Though the scenario describes a rate of 50 beats per minute (which is bradycardic), the prolonged PR interval of 0.20 seconds indicates first-degree AV block. Second-degree AV block, Mobitz I (Wenckebach) features progressively prolonged PR intervals until a P wave fails to conduct, resulting in a dropped QRS complex. A junctional rhythm typically has absent or inverted P waves, or P waves that occur after the QRS complex.",
+      "category": "cardiac",
+      "subcategory": "arrhythmias",
+      "difficulty": "hard"
     },
     {
-      "id": 104,
-      "type": "mc",
-      "text": "A patient presents with a heart rate of 150 beats/minute, wide QRS complexes, and hemodynamic instability with a blood pressure of 80/40 mmHg. The most appropriate immediate intervention is:",
-      "title": "Life-Threatening Arrhythmias",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "Synchronized cardioversion is the treatment of choice for a patient who is experiencing a tachyarrhythmia with hemodynamic instability. The wide QRS suggests ventricular tachycardia, which with hemodynamic compromise requires immediate electrical cardioversion. Defibrillation is used for pulseless ventricular tachycardia or ventricular fibrillation. Medication administration or oxygen therapy alone would be insufficient given the patient's unstable condition.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Immediate synchronized cardioversion"
-        },
-        {
-          "id": "B",
-          "text": "Administration of adenosine 6 mg IV push"
-        },
-        {
-          "id": "C",
-          "text": "Administer 100% oxygen via non-rebreather mask"
-        },
-        {
-          "id": "D",
-          "text": "Defibrillation at 200 joules biphasic"
-        }
-      ],
-      "answer": "A"
-    },
-    {
-      "id": 105,
-      "type": "mc",
-      "text": "A nurse is caring for a patient with heart failure who is receiving furosemide (Lasix) 40 mg IV twice daily. Which electrolyte should be monitored most closely during this therapy?",
+      "id": 204,
       "title": "Heart Failure Management",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "Furosemide (Lasix) is a loop diuretic that increases excretion of sodium, chloride, and potassium. Hypokalemia is a common side effect of loop diuretics and can lead to cardiac arrhythmias, especially in patients with heart failure who may already be at risk. Monitoring potassium levels and replacing potassium as needed is essential to prevent these complications.",
-      "difficulty": "medium",
+      "type": "mc",
+      "text": "A client with heart failure is prescribed furosemide (Lasix). Which assessment finding would indicate that the medication is effective?",
       "choices": [
         {
           "id": "A",
-          "text": "Calcium"
+          "text": "Increased urine output"
         },
         {
           "id": "B",
-          "text": "Potassium"
+          "text": "Decreased heart rate"
         },
         {
           "id": "C",
-          "text": "Phosphorus"
+          "text": "Increased blood pressure"
         },
         {
           "id": "D",
-          "text": "Magnesium"
+          "text": "Decreased respiratory rate"
         }
       ],
-      "answer": "B"
+      "correctAnswer": "A",
+      "rationale": "Furosemide (Lasix) is a loop diuretic that increases urine output by inhibiting sodium and chloride reabsorption in the kidneys. In heart failure, this helps reduce fluid overload and pulmonary congestion. While improved cardiac function may eventually lead to other positive changes such as decreased heart rate, improved blood pressure, or decreased respiratory rate, the primary indicator of furosemide's effectiveness is increased urine output.",
+      "category": "cardiac",
+      "subcategory": "heart_failure",
+      "difficulty": "easy"
     },
     {
-      "id": 106,
+      "id": 205,
+      "title": "Cardiac Tamponade",
       "type": "mc",
-      "text": "A patient with a new transcutaneous pacemaker is showing regular QRS complexes after each pacemaker spike. The nurse recognizes this finding as:",
-      "title": "Cardiac Pacemakers",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "Capture refers to the successful depolarization of the ventricles following a pacemaker stimulus, indicated by a QRS complex after each pacemaker spike. Capture indicates that the pacemaker is functioning properly and delivering sufficient energy to stimulate ventricular contraction. Failure to capture would show pacemaker spikes without following QRS complexes.",
-      "difficulty": "medium",
+      "text": "A client presents to the emergency department with chest pain, shortness of breath, and hypotension. Physical examination reveals distended neck veins, muffled heart sounds, and pulsus paradoxus. The nurse suspects:",
       "choices": [
         {
           "id": "A",
-          "text": "Pacemaker malfunction"
+          "text": "Pulmonary embolism"
         },
         {
           "id": "B",
-          "text": "Pacemaker capture"
+          "text": "Cardiac tamponade"
         },
         {
           "id": "C",
-          "text": "Pacemaker oversensing"
+          "text": "Aortic dissection"
         },
         {
           "id": "D",
-          "text": "Pacemaker undersensing"
+          "text": "Acute myocardial infarction"
         }
       ],
-      "answer": "B"
+      "correctAnswer": "B",
+      "rationale": "The classic triad of cardiac tamponade, known as Beck's triad, includes hypotension, distended neck veins (jugular venous distention), and muffled heart sounds. Pulsus paradoxus (an abnormal decrease in systolic blood pressure during inspiration) is also a key finding in cardiac tamponade. These findings occur due to fluid accumulation in the pericardial sac, which compresses the heart and reduces cardiac output. Pulmonary embolism typically presents with sudden-onset dyspnea, tachycardia, and possibly pleuritic chest pain, but not usually with muffled heart sounds or significant jugular venous distention. Aortic dissection presents with severe, tearing chest pain that often radiates to the back, but the other clinical findings mentioned are not typical. Acute myocardial infarction presents with chest pain but would not typically cause muffled heart sounds or significant jugular venous distention unless complicated by acute heart failure or rupture leading to tamponade.",
+      "category": "emergency",
+      "subcategory": "cardiac_emergency",
+      "difficulty": "medium"
     },
     {
-      "id": 107,
+      "id": 206,
+      "title": "Shock Management",
       "type": "mc",
-      "text": "A patient with infective endocarditis develops a new murmur. This finding most likely indicates:",
-      "title": "Valvular Heart Disease",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "The development of a new murmur in a patient with infective endocarditis strongly suggests valve damage or destruction. Endocarditis involves infection of the heart valves, and as vegetations grow, they can destroy valvular tissue leading to regurgitation (insufficiency). This is a serious complication that may necessitate valve replacement.",
-      "difficulty": "medium",
+      "text": "A client is admitted with hypovolemic shock following trauma. Which finding would the nurse expect to observe?",
       "choices": [
         {
           "id": "A",
-          "text": "Valve perforation or destruction causing regurgitation"
+          "text": "Warm, flushed skin"
         },
         {
           "id": "B",
-          "text": "Normal physiological finding in endocarditis"
+          "text": "Bradycardia"
         },
         {
           "id": "C",
-          "text": "Development of pericarditis"
+          "text": "Decreased capillary refill time"
         },
         {
           "id": "D",
-          "text": "Complete heart block"
+          "text": "Decreased urine output"
         }
       ],
-      "answer": "A"
+      "correctAnswer": "D",
+      "rationale": "Decreased urine output is an expected finding in hypovolemic shock due to decreased renal perfusion secondary to decreased circulatory volume and compensatory mechanisms that shunt blood away from the kidneys to vital organs (brain and heart). Warm, flushed skin would be more consistent with early septic shock or anaphylactic shock; in hypovolemic shock, the skin is typically cool and pale due to peripheral vasoconstriction. Bradycardia is not typical of hypovolemic shock; tachycardia is expected as the heart attempts to compensate for decreased stroke volume by increasing rate. Capillary refill time is increased (delayed), not decreased, in hypovolemic shock due to peripheral vasoconstriction and decreased tissue perfusion.",
+      "category": "emergency",
+      "subcategory": "shock",
+      "difficulty": "medium"
     },
     {
-      "id": 108,
+      "id": 207,
+      "title": "Coronary Artery Disease Risk Factors",
       "type": "mc",
-      "text": "A patient has been diagnosed with sepsis. Which of the following criteria is part of the definition of systemic inflammatory response syndrome (SIRS)?",
-      "title": "Sepsis and SIRS",
-      "category": "med-surg",
-      "subcategory": "infectious disease",
-      "rationale": "SIRS criteria include: temperature >38°C or <36°C, heart rate >90 beats/minute, respiratory rate >20 breaths/minute or PaCO2 <32 mmHg, and white blood cell count >12,000/mm³ or <4,000/mm³ or >10% bands. A temperature above 38°C (fever) is one of these criteria, indicating a systemic inflammatory response.",
-      "difficulty": "medium",
+      "text": "A nurse is conducting a risk assessment for coronary artery disease. Which risk factor is considered modifiable?",
       "choices": [
         {
           "id": "A",
-          "text": "Temperature >38°C"
+          "text": "Age"
         },
         {
           "id": "B",
-          "text": "Positive blood cultures"
+          "text": "Family history"
         },
         {
           "id": "C",
-          "text": "Elevated creatinine"
+          "text": "Gender"
         },
         {
           "id": "D",
-          "text": "Urine output <0.5 mL/kg/hr"
+          "text": "Smoking"
         }
       ],
-      "answer": "A"
+      "correctAnswer": "D",
+      "rationale": "Smoking is a modifiable risk factor for coronary artery disease, meaning that it can be changed through lifestyle choices or interventions. Smoking increases the risk of atherosclerosis and thrombosis, leading to coronary artery disease and acute cardiac events. Age is a non-modifiable risk factor, as the risk of coronary artery disease increases with advancing age regardless of other factors. Family history is also non-modifiable, as genetic predisposition cannot be changed. Gender is non-modifiable as well; men generally have a higher risk of coronary artery disease than women until women reach menopause, after which the risk is more similar.",
+      "category": "cardiac",
+      "subcategory": "prevention",
+      "difficulty": "easy"
     },
     {
-      "id": 109,
+      "id": 208,
+      "title": "Respiratory Distress",
       "type": "mc",
-      "text": "A patient presents with hypotension, tachycardia, decreased level of consciousness, and decreased urine output following a traumatic injury. The nurse recognizes these signs as consistent with which stage of shock?",
-      "title": "Shock Stages",
-      "category": "med-surg",
-      "subcategory": "emergency",
-      "rationale": "Progressive (compensatory) shock involves the body's compensatory mechanisms beginning to fail. Signs include hypotension, tachycardia, altered mental status, and decreased urine output. Initial (compensatory) shock would show normal blood pressure with tachycardia, while refractory shock would show profound hypotension unresponsive to interventions. Irreversible shock is characterized by cellular and organ death with multiple organ dysfunction.",
-      "difficulty": "high",
+      "text": "A client is admitted to the emergency department with acute respiratory distress. Which intervention should the nurse implement first?",
       "choices": [
         {
           "id": "A",
-          "text": "Initial (compensatory) shock"
+          "text": "Administer prescribed bronchodilators"
         },
         {
           "id": "B",
-          "text": "Progressive (decompensatory) shock"
+          "text": "Position the client upright with arms supported on overbed table"
         },
         {
           "id": "C",
-          "text": "Refractory shock"
+          "text": "Obtain arterial blood gas samples"
         },
         {
           "id": "D",
-          "text": "Irreversible shock"
+          "text": "Prepare for endotracheal intubation"
         }
       ],
-      "answer": "B"
-    },
-    {
-      "id": 110,
-      "type": "mc",
-      "text": "A patient with acute respiratory distress syndrome (ARDS) has the following arterial blood gas values: pH 7.30, PaCO2 52 mmHg, PaO2 58 mmHg, HCO3 24 mEq/L. These values indicate:",
-      "title": "ARDS Assessment",
-      "category": "med-surg",
+      "correctAnswer": "B",
+      "rationale": "The first intervention for a client in acute respiratory distress should be positioning the client upright with arms supported on an overbed table (or similar surface). This position, often called the tripod position, maximizes lung expansion and diaphragmatic excursion, reducing the work of breathing and improving oxygenation. While bronchodilators may be essential for certain causes of respiratory distress (such as asthma or COPD exacerbation), proper positioning is always the first step to optimize respiratory function. Obtaining arterial blood gases is important for assessment but would not take priority over interventions to improve oxygenation and ventilation. Preparation for endotracheal intubation may be necessary if the client's condition deteriorates, but it would not be the first intervention unless the client is in imminent respiratory failure requiring immediate airway protection.",
+      "category": "emergency",
       "subcategory": "respiratory",
-      "rationale": "The ABG values show respiratory acidosis (pH <7.35 with elevated PaCO2 >45 mmHg) combined with hypoxemia (PaO2 <80 mmHg). This is characteristic of ARDS, where impaired gas exchange leads to CO2 retention and inadequate oxygenation. The normal HCO3 indicates this is an acute process without metabolic compensation yet.",
-      "difficulty": "high",
+      "difficulty": "medium"
+    },
+    {
+      "id": 209,
+      "title": "Trauma Assessment",
+      "type": "mc",
+      "text": "A client arrives at the emergency department following a motor vehicle collision. During the primary survey, which assessment has the highest priority?",
       "choices": [
         {
           "id": "A",
-          "text": "Respiratory alkalosis with hypoxemia"
+          "text": "Neurological status"
         },
         {
           "id": "B",
-          "text": "Metabolic acidosis with hypoxemia"
+          "text": "Circulatory status"
         },
         {
           "id": "C",
-          "text": "Respiratory acidosis with hypoxemia"
+          "text": "Airway patency"
         },
         {
           "id": "D",
-          "text": "Metabolic alkalosis with hypoxemia"
+          "text": "Extremity movement"
         }
       ],
-      "answer": "C"
+      "correctAnswer": "C",
+      "rationale": "Airway patency has the highest priority during the primary survey of a trauma patient, following the ABCDE approach (Airway, Breathing, Circulation, Disability, Exposure). Ensuring an open airway is critical as even a brief period of airway obstruction can lead to hypoxia and brain damage. Circulatory status (assessment of pulses, bleeding, and perfusion) is the third priority after airway and breathing have been addressed. Neurological status (often assessed using the Glasgow Coma Scale or AVPU method) is part of the 'Disability' assessment, which follows after airway, breathing, and circulation have been addressed. Extremity movement would be assessed during the secondary survey, after the primary ABCDE assessment has been completed and immediate life threats have been addressed.",
+      "category": "emergency",
+      "subcategory": "trauma",
+      "difficulty": "medium"
     },
     {
-      "id": 111,
+      "id": 210,
+      "title": "Stroke Management",
       "type": "mc",
-      "text": "A 45-year-old patient sustained burns to the anterior chest, entire right arm, and anterior left arm following a house fire. Using the Rule of Nines, what percentage of total body surface area (TBSA) is burned?",
-      "title": "Burn Assessment",
-      "category": "med-surg",
-      "subcategory": "integumentary",
-      "rationale": "Using the Rule of Nines: anterior chest = 9%, entire right arm = 9%, anterior left arm = 4.5% (half of 9%). Total TBSA burned = 9% + 9% + 4.5% = 22.5%. The Rule of Nines assigns 9% to each arm, 18% to each leg, 9% to the head and neck, 18% to the anterior trunk, 18% to the posterior trunk, and 1% to the perineum.",
-      "difficulty": "medium",
+      "text": "A client presents to the emergency department with sudden onset of right-sided weakness and difficulty speaking. The last known well time was 2 hours ago. Which intervention is most important in the initial management?",
       "choices": [
         {
           "id": "A",
-          "text": "18%"
+          "text": "Administering aspirin"
         },
         {
           "id": "B",
-          "text": "22.5%"
+          "text": "Obtaining a CT scan of the brain"
         },
         {
           "id": "C",
-          "text": "27%"
+          "text": "Starting oxygen therapy"
         },
         {
           "id": "D",
-          "text": "31.5%"
+          "text": "Initiating seizure precautions"
         }
       ],
-      "answer": "B"
-    },
-    {
-      "id": 112,
-      "type": "mc",
-      "text": "Using the Parkland formula, how much fluid should be administered in the first 8 hours for a 70 kg patient with 30% TBSA burns?",
-      "title": "Burn Fluid Resuscitation",
-      "category": "med-surg",
-      "subcategory": "integumentary",
-      "rationale": "The Parkland formula is 4 mL × kg body weight × % TBSA burn, with half given in first 8 hours. For this patient: 4 mL × 70 kg × 30% = 8,400 mL total in 24 hours. Half (4,200 mL) should be given in the first 8 hours post-burn.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "2,100 mL"
-        },
-        {
-          "id": "B",
-          "text": "4,200 mL"
-        },
-        {
-          "id": "C",
-          "text": "8,400 mL"
-        },
-        {
-          "id": "D",
-          "text": "16,800 mL"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 113,
-      "type": "mc",
-      "text": "A patient presents to the emergency department with decreased breath sounds, hyperresonance to percussion, and tracheal deviation away from the affected side following blunt chest trauma. These findings are most consistent with:",
-      "title": "Chest Trauma Assessment",
-      "category": "med-surg",
-      "subcategory": "emergency",
-      "rationale": "Tension pneumothorax presents with decreased or absent breath sounds on the affected side, hyperresonance to percussion, and tracheal deviation away from the affected side. It's a life-threatening emergency where air enters the pleural space but cannot exit, causing increasing pressure that compresses the lung and potentially shifts the mediastinum, compromising cardiac output.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Simple pneumothorax"
-        },
-        {
-          "id": "B",
-          "text": "Tension pneumothorax"
-        },
-        {
-          "id": "C",
-          "text": "Hemothorax"
-        },
-        {
-          "id": "D",
-          "text": "Flail chest"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 114,
-      "type": "mc",
-      "text": "A patient with a spinal cord injury at C5 suddenly develops severe headache, bradycardia, hypertension, and flushing above the level of injury. The nurse recognizes these symptoms as:",
-      "title": "Spinal Cord Injury Complications",
-      "category": "med-surg",
+      "correctAnswer": "B",
+      "rationale": "Obtaining a CT scan of the brain is the most important initial intervention for a client with suspected acute stroke. The CT scan helps differentiate between ischemic and hemorrhagic stroke, which is crucial because the treatments differ significantly. For example, thrombolytic therapy (tPA) is beneficial for ischemic stroke within a certain time window but is contraindicated in hemorrhagic stroke. Administering aspirin would be appropriate for ischemic stroke but potentially harmful for hemorrhagic stroke, so it should not be given until after CT confirmation of stroke type. Oxygen therapy should be administered only if hypoxemia is present, following the principle of maintaining normal oxygenation. Seizure precautions may be implemented but are not the most important initial intervention; seizures occur in a minority of acute stroke patients.",
+      "category": "emergency",
       "subcategory": "neurological",
-      "rationale": "These symptoms are classic for autonomic dysreflexia, a life-threatening condition that can occur in patients with spinal cord injuries at T6 or above. It's caused by an exaggerated autonomic response to stimuli below the level of injury, such as a distended bladder or bowel. The body's inability to regulate autonomic responses results in vasoconstriction below the injury and subsequent bradycardia and hypertension.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Spinal shock"
-        },
-        {
-          "id": "B",
-          "text": "Neurogenic shock"
-        },
-        {
-          "id": "C",
-          "text": "Autonomic dysreflexia"
-        },
-        {
-          "id": "D",
-          "text": "Increased intracranial pressure"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 115,
-      "type": "mc",
-      "text": "During the triage of multiple casualties following a building collapse, which patient should receive the highest priority for treatment?",
-      "title": "Mass Casualty Triage",
-      "category": "med-surg",
-      "subcategory": "emergency",
-      "rationale": "In mass casualty triage, patients with compromised airway, breathing, or circulation who can be stabilized with immediate interventions receive highest priority. A patient with airway obstruction and respiratory distress needs immediate intervention to prevent death and has the highest chance of survival with prompt treatment. Patients with cardiac arrest in a mass casualty situation typically receive lower priority due to poor outcomes and resource requirements.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "A patient with multiple fractures but stable vital signs"
-        },
-        {
-          "id": "B",
-          "text": "A patient with partial airway obstruction and respiratory distress"
-        },
-        {
-          "id": "C",
-          "text": "A patient with a large scalp laceration and controlled bleeding"
-        },
-        {
-          "id": "D",
-          "text": "A patient in cardiac arrest without bystander CPR"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 116,
-      "type": "mc",
-      "text": "A patient is exhibiting signs of cardiogenic shock following a large myocardial infarction. Which hemodynamic finding would be expected in this patient?",
-      "title": "Cardiogenic Shock",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "Cardiogenic shock is characterized by pump failure leading to decreased cardiac output. This results in a decreased cardiac index (normal range is 2.5-4 L/min/m²). Elevated systemic vascular resistance (SVR) is a compensatory mechanism to maintain blood pressure despite decreased cardiac output. Increased pulmonary artery wedge pressure (PAWP) occurs due to left ventricular failure causing blood backup in the pulmonary circulation.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Decreased cardiac index (<2.2 L/min/m²)"
-        },
-        {
-          "id": "B",
-          "text": "Increased cardiac index (>4.5 L/min/m²)"
-        },
-        {
-          "id": "C",
-          "text": "Decreased systemic vascular resistance"
-        },
-        {
-          "id": "D",
-          "text": "Decreased pulmonary artery wedge pressure"
-        }
-      ],
-      "answer": "A"
-    },
-    {
-      "id": 117,
-      "type": "mc",
-      "text": "A patient with a diagnosis of heart failure with reduced ejection fraction (HFrEF) is starting a new medication regimen. Which combination of medications represents the current guideline-directed medical therapy for this condition?",
-      "title": "Heart Failure Management",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "Current guideline-directed medical therapy for heart failure with reduced ejection fraction includes an ACE inhibitor or ARB (or ARNI like sacubitril/valsartan), a beta-blocker, and a mineralocorticoid receptor antagonist (spironolactone or eplerenone). This combination has been shown to reduce mortality and hospitalizations. Digoxin is no longer considered first-line therapy, and calcium channel blockers may be harmful in HFrEF.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Lisinopril (ACE inhibitor), metoprolol (beta-blocker), and spironolactone (aldosterone antagonist)"
-        },
-        {
-          "id": "B",
-          "text": "Digoxin, furosemide (loop diuretic), and amlodipine (calcium channel blocker)"
-        },
-        {
-          "id": "C",
-          "text": "Hydralazine (vasodilator), isosorbide dinitrate (nitrate), and diltiazem (calcium channel blocker)"
-        },
-        {
-          "id": "D",
-          "text": "Furosemide (loop diuretic), amlodipine (calcium channel blocker), and atorvastatin (statin)"
-        }
-      ],
-      "answer": "A"
-    },
-    {
-      "id": 118,
-      "type": "mc",
-      "text": "A patient is admitted with hyperthermia, muscle rigidity, altered mental status, and a core temperature of 105°F (40.6°C) after hiking in hot weather. The most appropriate initial intervention is:",
-      "title": "Heat-Related Emergencies",
-      "category": "med-surg",
-      "subcategory": "emergency",
-      "rationale": "Rapid cooling is the priority intervention for heat stroke, which is a life-threatening emergency. Immersion in ice water or application of ice packs to groin, axillae, and neck along with fans provides the fastest cooling methods. Maintaining airway, breathing, and circulation is always important, but in heat stroke, rapid cooling takes precedence to prevent organ damage. Administration of antipyretics is ineffective because heat stroke is not mediated by pyrogens.",
-      "difficulty": "medium",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Administration of IV acetaminophen"
-        },
-        {
-          "id": "B",
-          "text": "Rapid cooling with ice packs to groin, axillae, and neck"
-        },
-        {
-          "id": "C",
-          "text": "Administration of warm IV fluids"
-        },
-        {
-          "id": "D",
-          "text": "Gradual cooling with tepid sponge baths"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 119,
-      "type": "mc",
-      "text": "A 72-year-old patient with a history of heart failure presents with new onset of fatigue, palpitations, and mild shortness of breath. The ECG shows an irregularly irregular rhythm without P waves. Which medication would be most appropriate to control the ventricular rate in this patient?",
-      "title": "Atrial Fibrillation Management",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "The patient is showing signs of atrial fibrillation (irregularly irregular rhythm without P waves). In a patient with heart failure, metoprolol (a beta-blocker) is appropriate for rate control. Diltiazem and verapamil (calcium channel blockers) are contraindicated in heart failure with reduced ejection fraction as they can worsen cardiac output. Amiodarone is more commonly used for rhythm control rather than initial rate control.",
-      "difficulty": "medium",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Diltiazem"
-        },
-        {
-          "id": "B",
-          "text": "Amiodarone"
-        },
-        {
-          "id": "C",
-          "text": "Metoprolol"
-        },
-        {
-          "id": "D",
-          "text": "Verapamil"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 120,
-      "type": "mc",
-      "text": "During a code blue, a patient is in pulseless ventricular tachycardia. After defibrillation and epinephrine administration, which medication should be considered next according to ACLS protocols?",
-      "title": "Code Blue Management",
-      "category": "med-surg",
-      "subcategory": "emergency",
-      "rationale": "According to ACLS protocols for pulseless ventricular tachycardia, after defibrillation and epinephrine, amiodarone is the antiarrhythmic of choice. The recommended dose is 300 mg IV push for the first dose. Lidocaine is an alternative if amiodarone is unavailable. Atropine is used for symptomatic bradycardia and asystole. Adenosine is used for stable supraventricular tachycardia.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Atropine 1 mg IV push"
-        },
-        {
-          "id": "B",
-          "text": "Amiodarone 300 mg IV push"
-        },
-        {
-          "id": "C",
-          "text": "Adenosine 6 mg rapid IV push"
-        },
-        {
-          "id": "D",
-          "text": "Calcium chloride 1 g IV push"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 121,
-      "type": "mc",
-      "text": "A patient with a suspected traumatic brain injury has the following findings: unequal pupils, declining level of consciousness, and increasing systolic blood pressure with widening pulse pressure and bradycardia. These findings suggest:",
-      "title": "Traumatic Brain Injury",
-      "category": "med-surg",
-      "subcategory": "neurological",
-      "rationale": "The classic Cushing's triad of increased systolic blood pressure, bradycardia, and irregular respirations indicates increased intracranial pressure. Along with unequal pupils and declining level of consciousness, these signs indicate the brain is being compressed, likely due to cerebral edema or intracranial bleeding following traumatic brain injury. This is a neurosurgical emergency requiring immediate intervention.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Spinal shock"
-        },
-        {
-          "id": "B",
-          "text": "Neurogenic shock"
-        },
-        {
-          "id": "C",
-          "text": "Increased intracranial pressure"
-        },
-        {
-          "id": "D",
-          "text": "Diabetic ketoacidosis"
-        }
-      ],
-      "answer": "C"
-    },
-    {
-      "id": 122,
-      "type": "mc",
-      "text": "A 50-year-old patient in the cardiac care unit has a temporary transcutaneous pacemaker with the rate set at 70 beats/minute and the milliamperes (mA) set at 50. The ECG shows pacemaker spikes but no QRS complexes following the spikes. What action should the nurse take first?",
-      "title": "Pacemaker Management",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "Pacemaker spikes without QRS complexes indicate failure to capture. The first intervention should be to increase the milliamperage (mA), which increases the electrical stimulus strength to improve capture. After ensuring proper pad placement, increasing the energy output is the most direct way to address lack of capture. Increasing the rate would not solve the capture problem.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Decrease the pacemaker rate to 60 beats/minute"
-        },
-        {
-          "id": "B",
-          "text": "Increase the milliamperes (mA) setting"
-        },
-        {
-          "id": "C",
-          "text": "Administer atropine"
-        },
-        {
-          "id": "D",
-          "text": "Change the pacemaker to asynchronous mode"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 123,
-      "type": "mc",
-      "text": "What is the most important nursing intervention when caring for a patient with a rattlesnake bite to the lower extremity?",
-      "title": "Envenomation Management",
-      "category": "med-surg",
-      "subcategory": "emergency",
-      "rationale": "For venomous snakebites, keeping the affected extremity immobilized and positioned below heart level is critical to slow venom spread. Cold therapy is contraindicated as it can increase tissue damage. Incision and suction are no longer recommended and can worsen outcomes. Elevation would increase venom circulation to the heart and central circulation. Early antivenom administration is also crucial but would be initiated after stabilization and assessment.",
-      "difficulty": "medium",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Apply a tourniquet proximal to the bite"
-        },
-        {
-          "id": "B",
-          "text": "Immobilize the extremity and keep it positioned below heart level"
-        },
-        {
-          "id": "C",
-          "text": "Apply ice to the bite area"
-        },
-        {
-          "id": "D",
-          "text": "Make incisions across the fang marks and apply suction"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 124,
-      "type": "mc",
-      "text": "A patient with multiple organ dysfunction syndrome (MODS) following severe sepsis has the following laboratory values: BUN 60 mg/dL, creatinine 3.5 mg/dL, AST 450 U/L, ALT 520 U/L, total bilirubin 4.0 mg/dL, platelets 50,000/mm³. These values indicate dysfunction of which organ systems?",
-      "title": "Multiple Organ Dysfunction Syndrome",
-      "category": "med-surg",
-      "subcategory": "emergency",
-      "rationale": "The laboratory values indicate dysfunction of the kidney (elevated BUN and creatinine), liver (elevated AST, ALT, and bilirubin), and hematologic system (thrombocytopenia with platelets <150,000/mm³). This combination represents multiple organ dysfunction syndrome, which can develop after severe sepsis or other systemic inflammatory conditions.",
-      "difficulty": "high",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Kidney, liver, and cardiovascular system"
-        },
-        {
-          "id": "B",
-          "text": "Kidney, liver, and hematologic system"
-        },
-        {
-          "id": "C",
-          "text": "Liver, lung, and neurological system"
-        },
-        {
-          "id": "D",
-          "text": "Kidney, cardiovascular system, and neurological system"
-        }
-      ],
-      "answer": "B"
-    },
-    {
-      "id": 125,
-      "type": "mc",
-      "text": "A 60-year-old patient with aortic stenosis reports episodes of syncope with exertion. Which other symptom is commonly associated with severe aortic stenosis?",
-      "title": "Valvular Heart Disease",
-      "category": "med-surg",
-      "subcategory": "cardiovascular",
-      "rationale": "The classic triad of symptoms in severe aortic stenosis includes angina, syncope, and heart failure (dyspnea). These symptoms occur due to fixed cardiac output that cannot increase with demand, leading to myocardial ischemia (angina), cerebral hypoperfusion (syncope), and pulmonary congestion (dyspnea). Palpitations and edema may be present but are less specific for aortic stenosis. Fever would suggest endocarditis, not uncomplicated aortic stenosis.",
-      "difficulty": "medium",
-      "choices": [
-        {
-          "id": "A",
-          "text": "Fever"
-        },
-        {
-          "id": "B",
-          "text": "Exertional angina"
-        },
-        {
-          "id": "C",
-          "text": "Palpitations"
-        },
-        {
-          "id": "D",
-          "text": "Peripheral edema"
-        }
-      ],
-      "answer": "B"
+      "difficulty": "medium"
     }
   ]
 }

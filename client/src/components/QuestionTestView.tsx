@@ -138,29 +138,36 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     let isCorrect = false;
     
     // Handle different question types
-    if (question.type === 'mc' || question.type === 'fill_in_blank') {
+    if (question.type === 'mc') {
       if (!Array.isArray(answer)) {
         isCorrect = answer === question.correctAnswer;
       }
+    } else if (question.type === 'fill_in_blank') {
+      if (!Array.isArray(answer) && 'correctAnswer' in question) {
+        isCorrect = answer === question.correctAnswer;
+      }
     } else if (question.type === 'sata') {
-      if (Array.isArray(answer) && Array.isArray(question.correctAnswer)) {
+      if (Array.isArray(answer) && 'correctAnswer' in question && Array.isArray(question.correctAnswer)) {
         isCorrect = 
           answer.length === question.correctAnswer.length && 
           answer.every(a => question.correctAnswer.includes(a));
       }
     } else if (question.type === 'hotspot') {
-      // Handle hotspot questions differently
+      // For hotspot questions, we'd compare the selected areas with correct areas
       // This is simplified; would need more complex validation in a real app
-      isCorrect = true; // Placeholder
+      if ('correctAreas' in question && question.correctAreas.length > 0) {
+        // Simplified validation - would need to check if selected coordinates match correct areas
+        isCorrect = true; // Placeholder
+      }
     } else if (question.type === 'ordered-response') {
-      // Handle ordered response questions
-      if (Array.isArray(answer) && Array.isArray(question.correctOrder)) {
+      // For ordered response questions
+      if (Array.isArray(answer) && 'correctOrder' in question && Array.isArray(question.correctOrder)) {
         isCorrect = JSON.stringify(answer) === JSON.stringify(question.correctOrder);
       }
     } else if (question.type === 'chart-exhibit') {
-      // Handle chart exhibit questions
-      if (question.questions && question.questions.length > 0) {
-        // Simplified validation
+      // For chart exhibit questions
+      if ('questions' in question && Array.isArray(question.questions) && question.questions.length > 0) {
+        // Simplified validation - would validate nested questions
         isCorrect = true; // Placeholder
       }
     }
