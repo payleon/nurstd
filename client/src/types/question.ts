@@ -7,7 +7,7 @@ export interface QuestionChoice {
 
 // Base Question interface
 export interface BaseQuestion {
-  id: string;
+  id: number; // Changed from string to number to match server schema
   title?: string;
   text: string;
   category?: string;
