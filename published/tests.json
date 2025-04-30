@@ -1,5 +1,14 @@
 [
   {
+    "id": 10,
+    "title": "Cardiac & Emergency Nursing",
+    "path": "published/cardiac_emergency_exam.json",
+    "description": "Comprehensive exam covering cardiac disorders, trauma care, and emergency management. Focuses on critical care topics including ACLS, shock, and multi-system disorders.",
+    "questionCount": 25,
+    "timeLimit": 40,
+    "category": "Emergency/Critical Care"
+  },
+  {
     "id": 1,
     "title": "Bootcamp Maternal",
     "path": "published/all_questions.json",
