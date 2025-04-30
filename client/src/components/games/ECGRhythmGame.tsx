@@ -15,6 +15,17 @@ interface ECGRhythm {
   description: string;
   characteristics: string[];
   nursingActions: string[];
+  clinicalScenario?: string;
+  patientPresentation?: string[];
+  differentialDiagnosis?: string[];
+  treatmentProtocol?: string[];
+  vitalsExpected?: {
+    heartRate?: string;
+    bloodPressure?: string;
+    respiration?: string;
+    oxygenSaturation?: string;
+  };
+  complications?: string[];
   difficulty: 'beginner' | 'intermediate' | 'advanced';
   urgency: 'normal' | 'urgent' | 'emergency';
 }
@@ -118,6 +129,39 @@ const ecgRhythms: ECGRhythm[] = [
       "If pulseless, begin CPR and follow ACLS protocols",
       "If pulse present, prepare for medications and possible cardioversion",
       "Provide supplemental oxygen"
+    ],
+    clinicalScenario: "A 62-year-old male with a history of myocardial infarction presents to the emergency department with severe chest pain, diaphoresis, and shortness of breath. His monitor suddenly shows ventricular tachycardia.",
+    patientPresentation: [
+      "Altered level of consciousness or unconsciousness if pulseless",
+      "Chest pain, shortness of breath, or palpitations if pulse present",
+      "Hypotension",
+      "Dizziness or lightheadedness",
+      "Possible syncope"
+    ],
+    differentialDiagnosis: [
+      "Supraventricular tachycardia with aberrant conduction",
+      "Atrial fibrillation with pre-excitation",
+      "Ventricular fibrillation (if deteriorating)",
+      "Torsades de Pointes"
+    ],
+    treatmentProtocol: [
+      "Pulseless VT: Perform CPR, defibrillate at 200J (biphasic) or 360J (monophasic), administer epinephrine and amiodarone per ACLS protocol",
+      "Stable VT with pulse: Amiodarone 150 mg IV over 10 minutes, followed by infusion",
+      "Consider lidocaine if amiodarone unavailable",
+      "Synchronized cardioversion if medications ineffective",
+      "Identify and treat underlying causes (electrolyte imbalances, ischemia, etc.)"
+    ],
+    vitalsExpected: {
+      heartRate: "100-250 bpm",
+      bloodPressure: "Hypotensive if unstable, may be normal if stable",
+      respiration: "Increased respiratory rate, possible respiratory distress",
+      oxygenSaturation: "May be decreased, especially if cardiac output compromised"
+    },
+    complications: [
+      "Progression to ventricular fibrillation",
+      "Cardiogenic shock",
+      "Cardiac arrest",
+      "Hypoxic brain injury if prolonged"
     ],
     difficulty: 'advanced',
     urgency: 'emergency'
@@ -293,6 +337,12 @@ interface QuizQuestion {
   rhythm: ECGRhythm;
   options: string[];
   correctAnswer: string;
+  clinicalQuestion?: {
+    question: string;
+    options: string[];
+    correctAnswer: string;
+    explanation: string;
+  };
 }
 
 export function ECGRhythmGame({ onComplete, onClose }: ECGRhythmGameProps) {
@@ -311,6 +361,11 @@ export function ECGRhythmGame({ onComplete, onClose }: ECGRhythmGameProps) {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   
+  // State for clinical questions
+  const [showingClinicalQuestion, setShowingClinicalQuestion] = useState(false);
+  const [clinicalQuestionAnswer, setClinicalQuestionAnswer] = useState<string | null>(null);
+  const [showClinicalExplanation, setShowClinicalExplanation] = useState(false);
+
   // Initialize the game
   useEffect(() => {
     // Generate quiz questions by creating choices for each rhythm
@@ -324,10 +379,51 @@ export function ECGRhythmGame({ onComplete, onClose }: ECGRhythmGameProps) {
         // Combine correct answer with distractors and shuffle
         const options = [rhythm.name, ...distractors].sort(() => Math.random() - 0.5);
         
+        // Add clinical questions for advanced learning
+        let clinicalQuestion;
+        if (rhythm.id === 5) { // Ventricular Tachycardia
+          clinicalQuestion = {
+            question: "Your patient with ventricular tachycardia is conscious and has a blood pressure of 90/60 mmHg. What is your first nursing action?",
+            options: [
+              "Administer amiodarone 150 mg IV over 10 minutes",
+              "Prepare for immediate defibrillation",
+              "Administer a fluid bolus of 500 mL normal saline",
+              "Prepare for synchronized cardioversion"
+            ],
+            correctAnswer: "Prepare for synchronized cardioversion",
+            explanation: "For ventricular tachycardia with signs of hemodynamic compromise (low blood pressure), synchronized cardioversion is the most appropriate immediate intervention. Amiodarone would be appropriate for a more stable patient, and defibrillation is used for pulseless VT."
+          };
+        } else if (rhythm.id === 6) { // Ventricular Fibrillation
+          clinicalQuestion = {
+            question: "You find your patient unresponsive with ventricular fibrillation on the monitor. What is the correct sequence of actions?",
+            options: [
+              "Defibrillate, then begin CPR starting with chest compressions",
+              "Begin CPR with chest compressions, then defibrillate after 2 minutes",
+              "Check carotid pulse, begin CPR with airway management, then defibrillate",
+              "Call a code, wait for the code team, then assist with defibrillation"
+            ],
+            correctAnswer: "Begin CPR with chest compressions, then defibrillate after 2 minutes",
+            explanation: "According to current ACLS guidelines, when finding a patient in cardiac arrest, you should begin high-quality CPR immediately with chest compressions. Early defibrillation is critical for shockable rhythms like VF, but CPR should be initiated first while the defibrillator is being prepared."
+          };
+        } else if (rhythm.id === 4) { // Atrial Fibrillation
+          clinicalQuestion = {
+            question: "Your patient with newly diagnosed atrial fibrillation is prescribed anticoagulation therapy. Why is this important?",
+            options: [
+              "To convert the rhythm back to normal sinus rhythm",
+              "To slow the ventricular response rate",
+              "To reduce the risk of stroke from atrial thrombi",
+              "To prevent progression to ventricular fibrillation"
+            ],
+            correctAnswer: "To reduce the risk of stroke from atrial thrombi",
+            explanation: "Anticoagulation therapy in atrial fibrillation is primarily to reduce the risk of stroke. The turbulent, ineffective atrial contractions in AFib can lead to blood stasis and clot formation in the atria (particularly the left atrial appendage). These clots can embolize to the brain, causing ischemic stroke."
+          };
+        }
+        
         return {
           rhythm,
           options,
-          correctAnswer: rhythm.name
+          correctAnswer: rhythm.name,
+          clinicalQuestion
         };
       });
       
@@ -398,11 +494,56 @@ export function ECGRhythmGame({ onComplete, onClose }: ECGRhythmGameProps) {
       return;
     }
     
-    // Reset for next question
-    setSelectedAnswer(null);
-    setShowExplanation(false);
+    // Check if there's a clinical question for this rhythm
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+    if (currentQuestion.clinicalQuestion && !showingClinicalQuestion) {
+      // Show clinical question before moving to next ECG
+      setShowingClinicalQuestion(true);
+      setShowExplanation(false);
+      setClinicalQuestionAnswer(null);
+      setShowClinicalExplanation(false);
+      setTimeLeft(30); // Reset timer for clinical question
+    } else {
+      // Reset and move to next question
+      setSelectedAnswer(null);
+      setShowExplanation(false);
+      setShowingClinicalQuestion(false);
+      setClinicalQuestionAnswer(null);
+      setShowClinicalExplanation(false);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setTimeLeft(30); // Reset timer
+      setGameState('playing');
+    }
+  };
+  
+  // Handle clinical question answers
+  const handleClinicalAnswerSelect = (answer: string) => {
+    setClinicalQuestionAnswer(answer);
+  };
+  
+  // Check clinical question answer
+  const checkClinicalAnswer = () => {
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+    if (!currentQuestion.clinicalQuestion) return;
+    
+    const isCorrect = clinicalQuestionAnswer === currentQuestion.clinicalQuestion.correctAnswer;
+    setShowClinicalExplanation(true);
+    
+    if (isCorrect) {
+      setScore(score + 15); // More points for clinical reasoning
+      setCorrectAnswers(correctAnswers + 1);
+    } else {
+      setIncorrectAnswers(incorrectAnswers + 1);
+    }
+  };
+  
+  // After clinical question, move to next rhythm
+  const afterClinicalQuestion = () => {
+    setShowingClinicalQuestion(false);
+    setClinicalQuestionAnswer(null);
+    setShowClinicalExplanation(false);
     setCurrentQuestionIndex(currentQuestionIndex + 1);
-    setTimeLeft(30); // Reset timer
+    setTimeLeft(30);
     setGameState('playing');
   };
   
