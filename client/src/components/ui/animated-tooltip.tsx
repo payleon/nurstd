@@ -1,12 +1,7 @@
-
 import React, { useState } from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-
-// Export primitive components for direct use
-export const TooltipTrigger = RadixTooltip.Trigger;
-export const TooltipContent = RadixTooltip.Content;
 
 // Provider component
 export function TooltipProvider({ 

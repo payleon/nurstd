@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip } from './tooltip';
+import { Tooltip, TooltipProvider } from '../ui/animated-tooltip';
 import { InfoIcon, AlertCircle, HelpCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -60,24 +60,26 @@ export function ContextualHelp({
 
   return (
     <span className={cn('inline-flex', inline ? 'mx-1' : '', className)}>
-      <Tooltip
-        content={
-          <div className={cn('max-w-xs')}>
-            {content}
-          </div>
-        }
-        contentClassName={contextColors[type]}
-        side={tooltipSide}
-        align={tooltipAlign}
-      >
-        <button 
-          type="button"
-          aria-label={`${type} tooltip`}
-          className="rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+      <TooltipProvider>
+        <Tooltip
+          content={
+            <div className={cn('max-w-xs')}>
+              {content}
+            </div>
+          }
+          contentClassName={contextColors[type]}
+          side={tooltipSide}
+          align={tooltipAlign}
         >
-          {getIcon()}
-        </button>
-      </Tooltip>
+          <button 
+            type="button"
+            aria-label={`${type} tooltip`}
+            className="rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+          >
+            {getIcon()}
+          </button>
+        </Tooltip>
+      </TooltipProvider>
     </span>
   );
 }

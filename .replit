@@ -16,6 +16,7 @@ localPort = 5000
 externalPort = 80
 
 [workflows]
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
@@ -29,6 +30,10 @@ args = "Production Build"
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "Secure Production Build"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Development Server"
 
 [[workflows.workflow]]
 name = "Production Build"
@@ -45,3 +50,12 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run build && node frontend-obfuscate.js && cp -r published dist/ && cp public/sitemap.xml dist/ && cp public/robots.txt dist/ && echo \"Secure production build with frontend obfuscation completed!\""
+
+[[workflows.workflow]]
+name = "Development Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
