@@ -30,7 +30,7 @@ export interface MCQuestion extends BaseQuestion {
 export interface SATAQuestion extends BaseQuestion {
   type: 'sata';
   choices: QuestionChoice[];
-  correctAnswers: string[];
+  correctAnswer: string[]; // Changed from correctAnswers to match server schema
 }
 
 // Fill in the Blank Question
