@@ -575,7 +575,7 @@ export default function ExamsAndStudies() {
                         <div className="mt-auto">
                           <button 
                             className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation(`/?testId=${test.id}`)}
+                            onClick={() => setLocation(`/tests/${test.id}`)}
                             aria-label={`Start ${test.title} Test`}
                           >
                             Start Test
@@ -602,7 +602,7 @@ export default function ExamsAndStudies() {
                         <div className="mt-auto">
                           <button 
                             className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation("/")}
+                            onClick={() => setLocation("/tests/1")}
                             aria-label="Start Full NCLEX Practice Test"
                           >
                             Start Test
@@ -626,7 +626,7 @@ export default function ExamsAndStudies() {
                         <div className="mt-auto">
                           <button 
                             className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation("/")}
+                            onClick={() => setLocation("/tests/2")}
                             aria-label="Start Mini NCLEX Practice Test"
                           >
                             Start Test
@@ -647,7 +647,7 @@ export default function ExamsAndStudies() {
                         <div className="mt-auto">
                           <button 
                             className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation("/")}
+                            onClick={() => setLocation("/tests/custom")}
                             aria-label="Create Custom Practice Test"
                           >
                             Create Test
