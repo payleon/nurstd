@@ -31,10 +31,6 @@ args = "Production Build"
 task = "workflow.run"
 args = "Secure Production Build"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Production Server"
-
 [[workflows.workflow]]
 name = "Production Build"
 author = "agent"
@@ -50,12 +46,3 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run build && node frontend-obfuscate.js && cp -r published dist/ && cp public/sitemap.xml dist/ && cp public/robots.txt dist/ && echo \"Secure production build with frontend obfuscation completed!\""
-
-[[workflows.workflow]]
-name = "Production Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "NODE_ENV=production node production-server.js"
-waitForPort = 5000

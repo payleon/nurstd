@@ -166,6 +166,59 @@ app.get('/api/tests', (req, res) => {
   }
 });
 
+app.get('/api/tests/:id', (req, res) => {
+  try {
+    const testId = parseInt(req.params.id);
+    const testsPath = path.join(__dirname, 'published/tests.json');
+    const testsData = JSON.parse(fs.readFileSync(testsPath, 'utf8'));
+    
+    const test = testsData.find(t => t.id === testId);
+    if (!test) {
+      return res.status(404).json({ message: "Test not found" });
+    }
+    
+    res.json(test);
+  } catch (error) {
+    console.error(`Error fetching test ID ${req.params.id}:`, error);
+    res.status(500).json({ message: "Failed to load test" });
+  }
+});
+
+app.get('/api/tests/:id/content', (req, res) => {
+  try {
+    const testId = parseInt(req.params.id);
+    
+    // Get tests from tests.json
+    const testsPath = path.join(__dirname, 'published/tests.json');
+    const testsData = JSON.parse(fs.readFileSync(testsPath, 'utf8'));
+    
+    // Find the test with the matching ID
+    const test = testsData.find(test => test.id === testId);
+    
+    if (!test) {
+      return res.status(404).json({ message: "Test not found" });
+    }
+    
+    // If the test points to a json file like questions.json, return its structure
+    if (test.path.endsWith('.json')) {
+      const filePath = path.join(__dirname, test.path);
+      const content = fs.readFileSync(filePath, 'utf8');
+      const jsonContent = JSON.parse(content);
+      
+      // Return the data as JSON
+      res.json(jsonContent);
+    } else {
+      // For HTML content (though we don't expect this)
+      const filePath = path.join(__dirname, test.path);
+      const content = fs.readFileSync(filePath, 'utf8');
+      res.type('text/html').send(content);
+    }
+  } catch (error) {
+    console.error("Error reading test content:", error);
+    res.status(500).json({ message: "Failed to load test content" });
+  }
+});
+
 app.get('/api/questions', (req, res) => {
   try {
     // Read from your JSON files or database
