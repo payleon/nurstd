@@ -100,7 +100,11 @@ export function QuestionRenderer({
   
   // For chart exhibit questions
   const hasChartExhibit = (q: Question): q is Extract<Question, { type: "chart-exhibit" }> => {
-    return q.type === "chart-exhibit";
+    return q.type === "chart-exhibit" && 
+           'exhibitType' in q && 
+           'exhibitData' in q && 
+           'questions' in q &&
+           Array.isArray(q.questions);
   };
   
   // Helper function to get correct answer(s) regardless of question type
