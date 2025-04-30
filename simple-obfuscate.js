@@ -15,7 +15,7 @@ const __dirname = path.dirname(__filename);
 // Files and directories to process
 const TARGET_DIRS = ['dist/public/assets', 'dist'];
 const JS_EXTENSIONS = ['.js'];
-const EXCLUDE_PATTERNS = ['node_modules', 'vendor', 'third-party', '.min.js'];
+const EXCLUDE_PATTERNS = ['node_modules', 'vendor', 'third-party', '.min.js', 'dist/index.js'];
 
 // Generate a unique identifier to use as a prefix for obfuscated names
 const OBFUSCATION_PREFIX = '_' + crypto.randomBytes(2).toString('hex');
@@ -34,9 +34,26 @@ function addCodeWatermark(code) {
     `/* ${new Date().toISOString()} */`
   ].join('\n');
   
-  // Add the watermark at a random position in the code
-  const position = Math.floor(Math.random() * code.length);
-  return code.substring(0, position) + '\n' + watermark + '\n' + code.substring(position);
+  // Find a safe position to insert the watermark (end of a line after a semicolon)
+  const safePositions = [];
+  const lines = code.split('\n');
+  let position = 0;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    // Look for lines ending with semicolon, curly brace, or comments
+    if (line.trim().endsWith(';') || line.trim().endsWith('}') || line.trim().endsWith('*/') || line.trim().endsWith('//')) {
+      safePositions.push(position + line.length);
+    }
+    position += line.length + 1; // +1 for the newline
+  }
+  
+  // If we found safe positions, use one of them, otherwise add to the beginning
+  const insertPosition = safePositions.length > 0 
+    ? safePositions[Math.floor(Math.random() * safePositions.length)]
+    : 0;
+  
+  return code.substring(0, insertPosition) + '\n' + watermark + '\n' + code.substring(insertPosition);
 }
 
 // Inject decoy functions to waste an attacker's time
@@ -70,10 +87,27 @@ function injectDecoyFunctions(code) {
     }`
   ];
   
+  // Find a safe position to insert decoy functions (after a block closing brace)
+  const safePositions = [];
+  const lines = code.split('\n');
+  let position = 0;
+  
+  for (let i = 0; i < lines.length; i++) {
+    // Look for lines that are just closing braces, indicating the end of a block
+    if (lines[i].trim() === '}') {
+      safePositions.push(position + lines[i].length);
+    }
+    position += lines[i].length + 1; // +1 for the newline
+  }
+  
+  // If we found safe positions, use one of them, otherwise add to the top
+  const insertPosition = safePositions.length > 0 
+    ? safePositions[Math.floor(Math.random() * safePositions.length)]
+    : 0;
+
   // Add a decoy function
   const decoy = decoys[Math.floor(Math.random() * decoys.length)];
-  const position = Math.floor(Math.random() * code.length);
-  return code.substring(0, position) + '\n' + decoy + '\n' + code.substring(position);
+  return code.substring(0, insertPosition) + '\n' + decoy + '\n' + code.substring(insertPosition);
 }
 
 // Main obfuscation function - simplified and more robust
@@ -107,12 +141,37 @@ function obfuscateCode(code) {
     `/* Content fingerprint: ${Math.random().toString(36).substring(2, 10)} */`
   ];
   
-  // Insert decoys randomly throughout the code
+  // Find safe positions for comments (end of lines or between statements)
+  const safePositions = [];
+  const lines = obfuscated.split('\n');
+  let position = 0;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    // Look for lines that end with punctuation or brackets
+    if (line.endsWith(';') || line.endsWith('}') || line.endsWith('{') || 
+        line.endsWith('*/') || line.endsWith('//') || line === '') {
+      safePositions.push(position + lines[i].length);
+    }
+    position += lines[i].length + 1; // +1 for the newline
+  }
+  
+  // Insert decoys at safe positions
   for (let i = 0; i < 5; i++) {
     try {
       const randomDecoy = decoys[Math.floor(Math.random() * decoys.length)];
-      const position = Math.floor(Math.random() * obfuscated.length);
-      obfuscated = obfuscated.substring(0, position) + '\n' + randomDecoy + '\n' + obfuscated.substring(position);
+      
+      if (safePositions.length > 0) {
+        // Get a random safe position and remove it from the array to avoid reusing it
+        const randomIndex = Math.floor(Math.random() * safePositions.length);
+        const insertPosition = safePositions[randomIndex];
+        safePositions.splice(randomIndex, 1);
+        
+        obfuscated = obfuscated.substring(0, insertPosition) + '\n' + randomDecoy + '\n' + obfuscated.substring(insertPosition);
+      } else {
+        // If we ran out of safe positions, just add to the end
+        obfuscated += '\n' + randomDecoy;
+      }
     } catch (error) {
       console.log(`    ⚠ Skipping a decoy comment due to error: ${error.message}`);
     }

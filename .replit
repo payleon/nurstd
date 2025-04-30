@@ -29,7 +29,11 @@ args = "Production Build"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Development Server"
+args = "Secure Production Build"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Obfuscated Production"
 
 [[workflows.workflow]]
 name = "Production Build"
@@ -40,10 +44,18 @@ task = "shell.exec"
 args = "npm run build && cp -r published dist/ && cp public/sitemap.xml dist/ && cp public/robots.txt dist/ && echo \"Production build completed! Use 'NODE_ENV=production node dist/index.js' to start the server.\""
 
 [[workflows.workflow]]
-name = "Development Server"
+name = "Secure Production Build"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "npm run build && node frontend-obfuscate.js && cp -r published dist/ && cp public/sitemap.xml dist/ && cp public/robots.txt dist/ && echo \"Secure production build with frontend obfuscation completed!\""
+
+[[workflows.workflow]]
+name = "Run Obfuscated Production"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=production node dist/index.js"
 waitForPort = 5000
