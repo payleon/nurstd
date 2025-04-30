@@ -41,8 +41,16 @@ export function Header({ toggleSidebar }: HeaderProps) {
                 </clipPath>
                 <linearGradient id="liquid-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stopColor="#6FB7E9" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#3D8AC7" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#3D8AC7" stopOpacity="0.95" />
                 </linearGradient>
+                <linearGradient id="liquid-surface" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#4B9CD3" stopOpacity="0.9" />
+                  <stop offset="50%" stopColor="#6FB7E9" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#4B9CD3" stopOpacity="0.9" />
+                </linearGradient>
+                <filter id="liquid-blur">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="0.3" />
+                </filter>
               </defs>
               
               {/* Glass container outline */}
@@ -58,32 +66,36 @@ export function Header({ toggleSidebar }: HeaderProps) {
                 {/* Main liquid body with slosh animation */}
                 <path 
                   className="animate-liquid-body"
-                  d="M4,20 L4,12 C5.5,11.5 7,13 8.5,12.5 C11,11.8 13.5,11.2 15,11.8 C17,12.5 19,11.8 20,11.8 L20,20 L4,20 Z" 
+                  d="M3,20 L3,13 C4.5,12.2 6.5,13.5 8.5,12.5 C11,11.3 13.5,11 16,12 C18,12.8 19.5,12 21,12.5 L21,20 L3,20 Z" 
                   fill="url(#liquid-gradient)" 
                 />
                 
-                {/* Top wave animation - more pronounced wave */}
-                <path 
-                  className="animate-liquid"
-                  d="M3,11.5 C5,10.5 7,12.5 9,11 C11,9.5 13,11.5 15,10 C17,8.8 19,10.5 21,11 L21,12.5 L3,12.5 Z" 
-                  fill="#4B9CD3" 
-                  opacity="0.8"
-                />
-                
-                {/* Second wave layer for more dynamic effect */}
-                <path 
-                  className="animate-liquid-2"
-                  d="M3,12 C5,11.5 7,13 9,12 C11,11 13,12 15,11.5 C17,11 19,12 21,11.5 L21,13 L3,13 Z" 
-                  fill="#6FB7E9" 
-                  opacity="0.6"
-                />
+                {/* Blended waves with blur for smoother appearance */}
+                <g filter="url(#liquid-blur)">
+                  {/* Top wave animation with gradient */}
+                  <path 
+                    className="animate-liquid"
+                    d="M3,12 C5,10.8 7,12.2 9,11 C11,9.8 13,11 15,10 C17,9 19,10.5 21,11 L21,13 L3,13 Z" 
+                    fill="url(#liquid-surface)" 
+                    opacity="0.95"
+                  />
+                  
+                  {/* Second wave layer that overlaps slightly */}
+                  <path 
+                    className="animate-liquid-2"
+                    d="M3,11.8 C5,11.2 7,12.8 9,11.8 C11,10.8 13,11.5 15,11 C17,10.5 19,11.5 21,11.2 L21,13.2 L3,13.2 Z" 
+                    fill="#5AA7DE" 
+                    opacity="0.85"
+                  />
+                </g>
                 
                 {/* Light reflection that follows the movement */}
                 <path 
                   className="animate-reflection"
-                  d="M6,14 L8,13.5 C9,14 10,15 11,14.5 C12,14 13,15 14,14.5 L15,15 L6,15.5 Z" 
+                  d="M6,14 L8,13.5 C9,14 10,14.8 11,14.5 C12,14.2 13,14.8 14,14.5 L16,15 L6,15.5 Z" 
                   fill="#FFFFFF" 
-                  opacity="0.3"
+                  opacity="0.25"
+                  filter="url(#liquid-blur)"
                 />
                 
                 {/* Bubbles in the liquid with float animation */}
