@@ -11,7 +11,7 @@
   {
     "id": 1,
     "title": "Bootcamp Maternal",
-    "path": "published/all_questions.json",
+    "path": "published/maternal_nursing_exam.json",
     "description": "Comprehensive maternal nursing exam with multiple-choice and select-all questions. Tests your knowledge of pregnancy, labor, delivery, and postpartum care.",
     "questionCount": 16,
     "timeLimit": 20,
@@ -20,7 +20,7 @@
   {
     "id": 2,
     "title": "Fundamentals of Nursing",
-    "path": "published/all_questions.json",
+    "path": "published/fundamentals_nursing_exam.json",
     "description": "Core nursing concepts exam covering medication administration, assessment, ethics, and basic nursing procedures.",
     "questionCount": 16,
     "timeLimit": 20,
@@ -29,7 +29,7 @@
   {
     "id": 3,
     "title": "Combined NCLEX Practice",
-    "path": "published/all_questions.json",
+    "path": "published/mixed_nclex_practice.json",
     "description": "Comprehensive NCLEX-style exam covering all nursing specialties including maternity, pediatrics, mental health, medical-surgical, and fundamentals.",
     "questionCount": 16,
     "timeLimit": 30,
@@ -38,7 +38,7 @@
   {
     "id": 4,
     "title": "Medical-Surgical: Musculoskeletal",
-    "path": "published/all_questions.json",
+    "path": "published/musculoskeletal_exam.json",
     "description": "Focused exam on medical-surgical nursing concepts related to the musculoskeletal system. Covers orthopedic conditions, treatments, and nursing interventions.",
     "questionCount": 10,
     "timeLimit": 15,

@@ -1,0 +1,468 @@
+{
+  "questions": [
+    {
+      "id": 401,
+      "title": "Medication Administration",
+      "type": "mc",
+      "text": "A nurse is preparing to administer medications to a client. To ensure client safety, which action should the nurse perform FIRST?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Document the medication administration."
+        },
+        {
+          "id": "B",
+          "text": "Check the client's identification using two identifiers."
+        },
+        {
+          "id": "C",
+          "text": "Explain the purpose of the medication to the client."
+        },
+        {
+          "id": "D",
+          "text": "Check drug incompatibilities."
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Ensuring the 'Right Patient' is a crucial first step in the medication administration process according to the 'Rights of Medication Administration'. This is accomplished by using at least two client identifiers (e.g., name and date of birth, name and medical record number) and comparing them against the medication administration record (MAR). While explaining the medication (C) and performing checks (D) are vital, verifying the patient's identity (B) must occur before proceeding. Documentation (A) occurs after administration.",
+      "category": "fundamentals",
+      "subcategory": "medication_administration",
+      "difficulty": "medium"
+    },
+    {
+      "id": 402,
+      "title": "Vital Signs Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing the vital signs of a client. Which assessment finding requires immediate intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Temperature of 99.1°F (37.3°C)"
+        },
+        {
+          "id": "B",
+          "text": "Respiratory rate of 8 breaths per minute"
+        },
+        {
+          "id": "C",
+          "text": "Blood pressure of 110/70 mmHg"
+        },
+        {
+          "id": "D",
+          "text": "Heart rate of 88 beats per minute"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "A respiratory rate of 8 breaths per minute indicates hypoventilation (normal adult range is 12-20 breaths per minute) and requires immediate intervention to prevent respiratory arrest and ensure adequate oxygenation. The temperature of 99.1°F is slightly elevated but not significantly abnormal. Blood pressure of 110/70 mmHg is within normal range. Heart rate of 88 beats per minute is also within normal range (60-100 beats per minute).",
+      "category": "fundamentals",
+      "subcategory": "assessment",
+      "difficulty": "medium"
+    },
+    {
+      "id": 403,
+      "title": "Fall Prevention",
+      "type": "mc",
+      "text": "A nurse is caring for an elderly client who has been identified as high risk for falls. Which intervention is most important to implement?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Maintain bed in lowest position when the client is unattended"
+        },
+        {
+          "id": "B",
+          "text": "Administer sleep medication at bedtime"
+        },
+        {
+          "id": "C",
+          "text": "Encourage the client to remain in bed"
+        },
+        {
+          "id": "D",
+          "text": "Apply restraints when the client is agitated"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Maintaining the bed in the lowest position when the client is unattended reduces the risk of injury if a fall occurs. This is an important environmental safety measure in fall prevention. Administering sleep medication can increase fall risk due to sedation and is not recommended as a fall prevention strategy. Restricting mobility by encouraging bed rest can lead to deconditioning and paradoxically increase fall risk. Restraints are not recommended as they can cause physical and psychological harm, may increase agitation, and are subject to strict regulatory requirements.",
+      "category": "fundamentals",
+      "subcategory": "safety",
+      "difficulty": "medium"
+    },
+    {
+      "id": 404,
+      "title": "Oxygen Administration",
+      "type": "mc",
+      "text": "A nurse is caring for a client receiving oxygen at 2 L/min via nasal cannula. Which assessment finding would indicate that the oxygen therapy is effective?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Oxygen saturation of 88%"
+        },
+        {
+          "id": "B",
+          "text": "Respiratory rate of 28 breaths per minute"
+        },
+        {
+          "id": "C",
+          "text": "Absence of cyanosis with oxygen saturation of 94%"
+        },
+        {
+          "id": "D",
+          "text": "Use of accessory muscles during respiration"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "The absence of cyanosis with an oxygen saturation of 94% indicates effective oxygen therapy, as it shows adequate oxygenation of tissues (normal saturation is 95-100%, but 94% may be acceptable depending on the client's condition). An oxygen saturation of 88% indicates hypoxemia and is below the target range for most patients. A respiratory rate of 28 breaths per minute indicates tachypnea, suggesting respiratory distress. Use of accessory muscles indicates increased work of breathing and respiratory distress, suggesting inadequate oxygenation.",
+      "category": "fundamentals",
+      "subcategory": "oxygenation",
+      "difficulty": "medium"
+    },
+    {
+      "id": 405,
+      "title": "Sterile Technique",
+      "type": "mc",
+      "text": "A nurse is performing a sterile dressing change. Which action would break sterile technique?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Opening sterile packages away from the face"
+        },
+        {
+          "id": "B",
+          "text": "Keeping sterile items above waist level"
+        },
+        {
+          "id": "C",
+          "text": "Reaching over the sterile field to retrieve an item"
+        },
+        {
+          "id": "D",
+          "text": "Using sterile gloves to handle sterile supplies"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Reaching over a sterile field breaks sterile technique because the sleeve and arm passing over the field are not sterile and can contaminate the field below. Opening sterile packages away from the face prevents contamination from respiratory droplets. Keeping sterile items above waist level maintains sterility as items below waist level are considered contaminated. Using sterile gloves to handle sterile supplies maintains sterile technique.",
+      "category": "fundamentals",
+      "subcategory": "infection_control",
+      "difficulty": "medium"
+    },
+    {
+      "id": 406,
+      "title": "Pain Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing a client's pain. Which assessment finding is the most reliable indicator of pain?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated blood pressure"
+        },
+        {
+          "id": "B",
+          "text": "Client's self-report of pain"
+        },
+        {
+          "id": "C",
+          "text": "Facial grimacing"
+        },
+        {
+          "id": "D",
+          "text": "Increased heart rate"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "The client's self-report of pain is considered the most reliable indicator of pain, as pain is a subjective experience that only the person experiencing it can truly describe. While physiological signs like elevated blood pressure and increased heart rate can be associated with pain, they are not specific to pain and can be caused by various factors. Behavioral cues like facial grimacing can indicate pain but are less reliable than self-reporting, especially in clients who can communicate.",
+      "category": "fundamentals",
+      "subcategory": "pain",
+      "difficulty": "easy"
+    },
+    {
+      "id": 407,
+      "title": "Enteral Nutrition",
+      "type": "mc",
+      "text": "A nurse is caring for a client receiving continuous enteral feeding via a nasogastric tube. Which nursing action is most important in preventing aspiration?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Checking tube placement every 4 hours"
+        },
+        {
+          "id": "B",
+          "text": "Maintaining head of bed elevation at 30-45 degrees"
+        },
+        {
+          "id": "C",
+          "text": "Administering the feeding at room temperature"
+        },
+        {
+          "id": "D",
+          "text": "Flushing the tube with water every 8 hours"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Maintaining the head of bed elevation at 30-45 degrees during continuous enteral feeding reduces the risk of aspiration by using gravity to help prevent reflux of gastric contents. Checking tube placement is important but is primarily to ensure proper delivery of nutrition rather than aspiration prevention. The temperature of the feeding does not significantly affect aspiration risk. Flushing the tube is important to maintain patency but is not the most important intervention for preventing aspiration.",
+      "category": "fundamentals",
+      "subcategory": "nutrition",
+      "difficulty": "medium"
+    },
+    {
+      "id": 408,
+      "title": "Wound Care",
+      "type": "mc",
+      "text": "A nurse is assessing a client's pressure ulcer and notes that the wound extends through the dermis into the subcutaneous tissue with visible yellowish slough. According to the National Pressure Ulcer Advisory Panel classification, what stage is this pressure ulcer?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Stage 1"
+        },
+        {
+          "id": "B",
+          "text": "Stage 2"
+        },
+        {
+          "id": "C",
+          "text": "Stage 3"
+        },
+        {
+          "id": "D",
+          "text": "Unstageable"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "A Stage 3 pressure ulcer extends through the dermis into the subcutaneous tissue without exposing bone, tendon, or muscle. The presence of yellowish slough does not make it unstageable unless the slough completely obscures the wound bed. Stage 1 is intact skin with non-blanchable redness. Stage 2 involves partial-thickness skin loss with exposed dermis. Unstageable pressure ulcers have full-thickness tissue loss in which the base of the ulcer is completely covered by slough or eschar, preventing direct visualization of the wound bed.",
+      "category": "fundamentals",
+      "subcategory": "wound_care",
+      "difficulty": "hard"
+    },
+    {
+      "id": 409,
+      "title": "Urinary Catheter Care",
+      "type": "mc",
+      "text": "A nurse is providing care for a client with an indwelling urinary catheter. Which action would help prevent catheter-associated urinary tract infection (CAUTI)?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Irrigating the catheter regularly with normal saline"
+        },
+        {
+          "id": "B",
+          "text": "Securing the catheter to the thigh to prevent movement"
+        },
+        {
+          "id": "C",
+          "text": "Positioning the drainage bag above the level of the bladder"
+        },
+        {
+          "id": "D",
+          "text": "Changing the catheter and drainage system weekly"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Securing the catheter to the thigh prevents movement and traction on the urethra, which can reduce urethral irritation and the risk of microorganisms ascending into the bladder. Routine irrigation is not recommended as it can introduce bacteria. The drainage bag should be positioned below, not above, the level of the bladder to prevent backflow of urine. Routine catheter changes are not recommended; catheters should only be changed based on clinical indications such as obstruction or infection.",
+      "category": "fundamentals",
+      "subcategory": "elimination",
+      "difficulty": "medium"
+    },
+    {
+      "id": 410,
+      "title": "Therapeutic Communication",
+      "type": "mc",
+      "text": "A client says to the nurse, \"No one cares about me. I might as well die.\" Which response by the nurse demonstrates therapeutic communication?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"Don't say that. Many people care about you.\""
+        },
+        {
+          "id": "B",
+          "text": "\"I understand how you feel. I've felt that way too.\""
+        },
+        {
+          "id": "C",
+          "text": "\"Are you having thoughts of harming yourself?\""
+        },
+        {
+          "id": "D",
+          "text": "\"Let's talk about something more positive.\""
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Asking \"Are you having thoughts of harming yourself?\" directly addresses the client's statement about wanting to die and assesses suicide risk, which is a priority when a client makes such statements. Saying \"Don't say that\" invalidates the client's feelings. Stating \"I understand how you feel\" when the nurse may not truly understand can be perceived as insincere. Changing the subject to something more positive avoids addressing the client's concerning statement and misses an opportunity to assess suicide risk.",
+      "category": "fundamentals",
+      "subcategory": "communication",
+      "difficulty": "medium"
+    },
+    {
+      "id": 411,
+      "title": "Prioritization of Care",
+      "type": "mc",
+      "text": "A nurse is caring for four clients. Which client should the nurse assess first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "A client who had surgery yesterday and is due for pain medication"
+        },
+        {
+          "id": "B",
+          "text": "A client with diabetes who reports feeling dizzy and sweaty"
+        },
+        {
+          "id": "C",
+          "text": "A client with pneumonia who needs to be repositioned"
+        },
+        {
+          "id": "D",
+          "text": "A client who is requesting assistance to the bathroom"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "The client with diabetes reporting dizziness and sweating should be assessed first as these symptoms suggest hypoglycemia, which can rapidly progress to loss of consciousness and is potentially life-threatening if not treated promptly. While pain management is important, it is not immediately life-threatening. Repositioning a client with pneumonia is important for prevention of complications but is not as urgent as potential hypoglycemia. Assisting a client to the bathroom is important for comfort and dignity but is not as urgent as a potentially life-threatening situation.",
+      "category": "fundamentals",
+      "subcategory": "prioritization",
+      "difficulty": "medium"
+    },
+    {
+      "id": 412,
+      "title": "Documentation",
+      "type": "mc",
+      "text": "A client reports having a headache with a pain level of 7/10. The nurse administers the prescribed analgesic. Which documentation by the nurse is most appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"Client states having headache. Medication given.\""
+        },
+        {
+          "id": "B",
+          "text": "\"Client reports headache rated 7/10. Acetaminophen 650 mg administered PO at 1400. Will reassess pain in 30 minutes.\""
+        },
+        {
+          "id": "C",
+          "text": "\"Headache present. Analgesic administered as ordered.\""
+        },
+        {
+          "id": "D",
+          "text": "\"Client uncomfortable due to headache. Appropriate intervention provided.\""
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "\"Client reports headache rated 7/10. Acetaminophen 650 mg administered PO at 1400. Will reassess pain in 30 minutes.\" is the most appropriate documentation as it includes specific details about the assessment (pain level), intervention (specific medication, dose, route, time), and plan for follow-up (reassessment time). The other options lack specific details about the medication administered, the pain assessment using a numeric scale, and/or the plan for follow-up, which are all essential components of proper nursing documentation.",
+      "category": "fundamentals",
+      "subcategory": "documentation",
+      "difficulty": "medium"
+    },
+    {
+      "id": 413,
+      "title": "Infection Control",
+      "type": "mc",
+      "text": "A nurse enters the room of a client on contact precautions for methicillin-resistant Staphylococcus aureus (MRSA) infection. Which action should the nurse take first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Put on a gown and gloves"
+        },
+        {
+          "id": "B",
+          "text": "Put on a mask"
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene"
+        },
+        {
+          "id": "D",
+          "text": "Educate the client about contact precautions"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Hand hygiene is the first step in preventing the transmission of infection in any setting, including before entering a room on contact precautions. After hand hygiene, the nurse would then don appropriate personal protective equipment (PPE), which for contact precautions typically includes a gown and gloves. A mask is not routinely required for contact precautions unless indicated for standard precautions or if the client has respiratory symptoms. Education is important but would not be performed before hand hygiene and donning appropriate PPE.",
+      "category": "fundamentals",
+      "subcategory": "infection_control",
+      "difficulty": "easy"
+    },
+    {
+      "id": 414,
+      "title": "Mobility and Transfer",
+      "type": "mc",
+      "text": "A nurse is preparing to transfer a client from the bed to a chair. Which action is most important for preventing injury to the nurse?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Twisting at the waist while lifting the client"
+        },
+        {
+          "id": "B",
+          "text": "Keeping the client close to the nurse's body during transfer"
+        },
+        {
+          "id": "C",
+          "text": "Bending at the waist to lift the client"
+        },
+        {
+          "id": "D",
+          "text": "Lifting with the back muscles"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Keeping the client close to the nurse's body during transfer reduces the strain on the nurse's back and decreases the risk of injury by minimizing the lever arm effect. Twisting at the waist while lifting increases the risk of back injury and should be avoided. Bending at the waist to lift also increases strain on the back; instead, nurses should bend at the knees and hips, keeping the back straight. Lifting should be done using the stronger leg muscles rather than back muscles, which are more prone to injury.",
+      "category": "fundamentals",
+      "subcategory": "mobility",
+      "difficulty": "medium"
+    },
+    {
+      "id": 415,
+      "title": "Ethics in Nursing",
+      "type": "mc",
+      "text": "A family member asks the nurse not to tell the client about a newly diagnosed terminal illness. How should the nurse respond?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"I understand your concern, but I am obligated to provide information if the client asks me directly.\""
+        },
+        {
+          "id": "B",
+          "text": "\"I will respect your wishes and not discuss the diagnosis with the client.\""
+        },
+        {
+          "id": "C",
+          "text": "\"I suggest we discuss this with the healthcare team to develop a plan for disclosure.\""
+        },
+        {
+          "id": "D",
+          "text": "\"I will need to inform the client immediately, as they have a right to know.\""
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Suggesting a discussion with the healthcare team to develop a plan for disclosure acknowledges the family's concerns while recognizing the ethical principles involved. This approach respects the collaborative nature of healthcare decisions and the complexity of terminal illness disclosure. Simply agreeing not to tell the client violates the principle of autonomy and the client's right to information about their health. Immediately informing the client without consideration of timing, cultural factors, or the family's concerns may not be the most compassionate approach. While the nurse is obligated to provide truthful information if asked directly, this response doesn't address the need for a coordinated approach to disclosure.",
+      "category": "fundamentals",
+      "subcategory": "ethics",
+      "difficulty": "hard"
+    },
+    {
+      "id": 416,
+      "title": "Intravenous Therapy",
+      "type": "mc",
+      "text": "A nurse is administering intravenous (IV) fluids to a client. The nurse observes redness, swelling, and pain at the IV insertion site. What is the priority nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Apply warm compresses to the site"
+        },
+        {
+          "id": "B",
+          "text": "Increase the flow rate of the IV fluid"
+        },
+        {
+          "id": "C",
+          "text": "Discontinue the IV and restart at a different site"
+        },
+        {
+          "id": "D",
+          "text": "Administer the prescribed IV push medication"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "The signs of redness, swelling, and pain at the IV insertion site indicate phlebitis or infiltration, necessitating immediate discontinuation of the IV and restarting at a different site to prevent further complications. Applying warm compresses may be appropriate after the IV is discontinued, but is not the priority action. Increasing the flow rate would worsen the condition by introducing more fluid into the tissues or irritating the vein further. Administering an IV push medication into a compromised IV site could cause significant tissue damage, especially if the medication is vesicant.",
+      "category": "fundamentals",
+      "subcategory": "iv_therapy",
+      "difficulty": "medium"
+    }
+  ]
+}

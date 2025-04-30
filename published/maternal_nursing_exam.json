@@ -1,0 +1,468 @@
+{
+  "questions": [
+    {
+      "id": 301,
+      "title": "Prenatal Assessment",
+      "type": "mc",
+      "text": "A pregnant woman at 26 weeks gestation comes to her prenatal visit. The nurse should expect which finding on assessment?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Fetal heart rate of 170 beats per minute"
+        },
+        {
+          "id": "B",
+          "text": "Fundal height at the level of the xiphoid process"
+        },
+        {
+          "id": "C",
+          "text": "Braxton Hicks contractions"
+        },
+        {
+          "id": "D",
+          "text": "Dependent edema in the face"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Braxton Hicks contractions (painless, irregular uterine contractions) are commonly present by 26 weeks gestation. The normal fetal heart rate ranges from 110-160 bpm, so 170 bpm would be tachycardic. At 26 weeks, the fundal height should be approximately 26 cm from the symphysis pubis, not at the xiphoid process (which would be more typical of a near-term pregnancy). Dependent edema in the face is an abnormal finding that could indicate preeclampsia and requires further evaluation.",
+      "category": "maternity",
+      "subcategory": "prenatal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 302,
+      "title": "Labor and Delivery",
+      "type": "mc",
+      "text": "A woman in active labor has cervical dilation of 5 cm, 80% effacement, and the fetal head at +1 station. Which phase of labor is she experiencing?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Latent phase of the first stage"
+        },
+        {
+          "id": "B",
+          "text": "Active phase of the first stage"
+        },
+        {
+          "id": "C",
+          "text": "Transition phase of the first stage"
+        },
+        {
+          "id": "D",
+          "text": "Second stage of labor"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "The active phase of the first stage of labor is characterized by cervical dilation of 4-7 cm with increasing effacement and descent of the fetal presenting part. At 5 cm dilation, 80% effacement, and +1 station, the woman is in the active phase of the first stage of labor. The latent phase is from 0-3 cm, transition phase is from 8-10 cm, and the second stage begins with complete dilation (10 cm) and ends with the birth of the baby.",
+      "category": "maternity",
+      "subcategory": "labor",
+      "difficulty": "medium"
+    },
+    {
+      "id": 303,
+      "title": "Postpartum Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing a woman who is 12 hours postpartum. Which finding would be considered normal?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Temperature of 101.2°F (38.4°C)"
+        },
+        {
+          "id": "B",
+          "text": "Firm fundus located at the umbilicus"
+        },
+        {
+          "id": "C",
+          "text": "Bright red lochia with multiple small clots"
+        },
+        {
+          "id": "D",
+          "text": "Absent bowel sounds"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "At 12 hours postpartum, a firm fundus located at the umbilicus is a normal finding indicating appropriate uterine involution. A temperature above 100.4°F (38°C) is considered a fever and could indicate infection. While small clots may be normal, bright red lochia with multiple clots could suggest excessive bleeding requiring further assessment. Bowel sounds should return within a few hours after delivery, so absent bowel sounds at 12 hours postpartum is abnormal and requires further evaluation.",
+      "category": "maternity",
+      "subcategory": "postpartum",
+      "difficulty": "medium"
+    },
+    {
+      "id": 304,
+      "title": "Newborn Assessment",
+      "type": "mc",
+      "text": "A nurse is performing an assessment on a 2-hour-old newborn. Which finding would require immediate nursing intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Respiratory rate of 58 breaths per minute"
+        },
+        {
+          "id": "B",
+          "text": "Axillary temperature of 97.8°F (36.6°C)"
+        },
+        {
+          "id": "C",
+          "text": "Acrocyanosis of the hands and feet"
+        },
+        {
+          "id": "D",
+          "text": "Central cyanosis"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Central cyanosis (bluish discoloration of the lips, mucous membranes, and trunk) is abnormal in newborns and indicates significant hypoxemia requiring immediate intervention. Respiratory rates of 30-60 breaths per minute are normal for newborns, as is an axillary temperature between 97.7-99.5°F (36.5-37.5°C). Acrocyanosis, or bluish discoloration of the hands and feet, is a normal finding in the first 24-48 hours due to peripheral circulation adjustments.",
+      "category": "maternity",
+      "subcategory": "newborn",
+      "difficulty": "medium"
+    },
+    {
+      "id": 305,
+      "title": "Pregnancy Complications",
+      "type": "mc",
+      "text": "A pregnant woman at 34 weeks gestation presents with a blood pressure of 162/108 mmHg, 3+ proteinuria, severe headache, and visual disturbances. What is the priority nursing intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Place the woman in Trendelenburg position"
+        },
+        {
+          "id": "B",
+          "text": "Administer oxygen via nasal cannula at 2 L/min"
+        },
+        {
+          "id": "C",
+          "text": "Prepare for magnesium sulfate administration"
+        },
+        {
+          "id": "D",
+          "text": "Encourage increased fluid intake"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "The woman is exhibiting signs of severe preeclampsia (hypertension, proteinuria, headache, visual disturbances) which can progress to eclampsia (seizures). The priority intervention is to prepare for magnesium sulfate administration, which is the drug of choice for seizure prophylaxis in preeclampsia/eclampsia. Trendelenburg position would increase blood pressure and intracranial pressure. Low-flow oxygen is not indicated unless hypoxemia is present. Increased fluid intake could worsen edema, as vascular permeability is increased in preeclampsia.",
+      "category": "maternity",
+      "subcategory": "complications",
+      "difficulty": "hard"
+    },
+    {
+      "id": 306,
+      "title": "Placental Abnormalities",
+      "type": "mc",
+      "text": "A 32-year-old woman, G3P2, at 38 weeks gestation presents with sudden onset of painless, bright red vaginal bleeding. Her abdomen is soft and non-tender. What is the most likely diagnosis?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Placenta previa"
+        },
+        {
+          "id": "B",
+          "text": "Placental abruption"
+        },
+        {
+          "id": "C",
+          "text": "Uterine rupture"
+        },
+        {
+          "id": "D",
+          "text": "Bloody show"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Placenta previa is characterized by painless, bright red vaginal bleeding due to the placenta implanting over or near the cervical os. As the cervix begins to dilate or thin, the placenta is disrupted, causing bleeding. Placental abruption typically presents with painful bleeding and a firm, tender uterus. Uterine rupture presents with severe pain, often loss of fetal station, and possible maternal shock. Bloody show is mucus-tinged with blood and not a significant hemorrhage.",
+      "category": "maternity",
+      "subcategory": "complications",
+      "difficulty": "medium"
+    },
+    {
+      "id": 307,
+      "title": "Gestational Diabetes",
+      "type": "mc",
+      "text": "A woman diagnosed with gestational diabetes mellitus (GDM) at 28 weeks gestation asks the nurse what complications her baby may experience after birth. Which response by the nurse is most accurate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"Your baby is likely to be small for gestational age due to placental insufficiency.\""
+        },
+        {
+          "id": "B",
+          "text": "\"Your baby may have a higher risk of hypoglycemia after birth as the excessive glucose supply is suddenly cut off.\""
+        },
+        {
+          "id": "C",
+          "text": "\"Your baby will probably develop diabetes in childhood regardless of lifestyle factors.\""
+        },
+        {
+          "id": "D",
+          "text": "\"Your baby has an increased risk of neural tube defects, which will be evaluated after birth.\""
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Babies born to mothers with GDM are at risk for hypoglycemia after birth because they have been exposed to high glucose levels in utero, causing increased insulin production. When the maternal glucose supply is cut off at birth, the neonate's high insulin levels can cause hypoglycemia. GDM typically leads to macrosomia (large for gestational age), not small for gestational age. While there is an increased lifetime risk of diabetes, it is not inevitable in childhood. Neural tube defects are associated with pregestational diabetes, not typically with GDM, and form in early pregnancy before GDM is usually diagnosed.",
+      "category": "maternity",
+      "subcategory": "complications",
+      "difficulty": "medium"
+    },
+    {
+      "id": 308,
+      "title": "Preterm Labor",
+      "type": "mc",
+      "text": "A nurse is caring for a woman at 30 weeks gestation who is experiencing preterm labor. Which medication might be administered to promote fetal lung maturity?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Magnesium sulfate"
+        },
+        {
+          "id": "B",
+          "text": "Nifedipine"
+        },
+        {
+          "id": "C",
+          "text": "Betamethasone"
+        },
+        {
+          "id": "D",
+          "text": "Terbutaline"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Betamethasone is a corticosteroid administered to promote fetal lung maturity by accelerating the production of surfactant, reducing the risk of respiratory distress syndrome in preterm neonates. Magnesium sulfate may be used for neuroprotection and as a tocolytic to inhibit uterine contractions. Nifedipine is a calcium channel blocker used as a tocolytic. Terbutaline is a beta-adrenergic agonist also used as a tocolytic to inhibit uterine contractions, though it is less commonly used now due to potential maternal cardiac side effects.",
+      "category": "maternity",
+      "subcategory": "complications",
+      "difficulty": "medium"
+    },
+    {
+      "id": 309,
+      "title": "Breastfeeding",
+      "type": "mc",
+      "text": "A first-time mother is having difficulty with breastfeeding her 2-day-old infant. The nurse observes that the baby is sucking only on the nipple. What instruction should the nurse provide?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"Continue with the current latch, as the baby will eventually get enough milk.\""
+        },
+        {
+          "id": "B",
+          "text": "\"Break the suction, reposition, and help the baby achieve a deeper latch that includes the areola.\""
+        },
+        {
+          "id": "C",
+          "text": "\"Supplement with formula after each feeding to ensure adequate nutrition.\""
+        },
+        {
+          "id": "D",
+          "text": "\"Switch to bottle feeding to prevent nipple damage.\""
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "When a baby is sucking only on the nipple, this indicates an improper latch that can cause nipple pain, trauma, and inadequate milk transfer. The nurse should instruct the mother to break the suction, reposition the baby, and help achieve a deeper latch that includes a good portion of the areola. This ensures proper compression of the milk sinuses and effective milk transfer. Continuing with the improper latch will lead to poor milk intake and nipple damage. Supplementing with formula is not the first intervention for a latch problem. Switching to bottle feeding is not necessary when the issue can be corrected with proper positioning and latch technique.",
+      "category": "maternity",
+      "subcategory": "postpartum",
+      "difficulty": "medium"
+    },
+    {
+      "id": 310,
+      "title": "Postpartum Hemorrhage",
+      "type": "mc",
+      "text": "A woman is 1 hour postpartum and the nurse notes that her perineal pad is saturated with blood within 15 minutes, her fundus is boggy despite massage, and her vital signs show tachycardia. What is the priority nursing intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevate the foot of the bed"
+        },
+        {
+          "id": "B",
+          "text": "Massage the fundus firmly until it is contracted"
+        },
+        {
+          "id": "C",
+          "text": "Administer oxytocin as prescribed"
+        },
+        {
+          "id": "D",
+          "text": "Encourage the mother to breastfeed"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "When postpartum hemorrhage occurs with a boggy (atonic) uterus, the priority intervention is to massage the fundus firmly until it contracts, as uterine atony is the most common cause of postpartum hemorrhage. This directly addresses the source of bleeding by stimulating uterine contraction. Elevating the foot of the bed may be done to manage hypotension but does not address the cause of bleeding. Administration of oxytocin is appropriate but would be done after or while attempting to contract the uterus through massage. Breastfeeding can stimulate natural oxytocin release but is not the priority intervention for active, significant bleeding.",
+      "category": "maternity",
+      "subcategory": "postpartum",
+      "difficulty": "hard"
+    },
+    {
+      "id": 311,
+      "title": "Fetal Heart Rate Monitoring",
+      "type": "mc",
+      "text": "A laboring woman at 6 cm dilation has a fetal heart rate tracing showing recurrent late decelerations with decreased variability. Which intervention should the nurse perform first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Prepare for immediate cesarean delivery"
+        },
+        {
+          "id": "B",
+          "text": "Position the woman on her left side and administer oxygen"
+        },
+        {
+          "id": "C",
+          "text": "Increase the rate of oxytocin infusion"
+        },
+        {
+          "id": "D",
+          "text": "Administer an analgesic for pain relief"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Late decelerations with decreased variability indicate uteroplacental insufficiency and potential fetal hypoxia. The first intervention should be positioning the woman on her left side to relieve potential vena cava compression and improve placental perfusion, along with administering oxygen to increase fetal oxygenation. While cesarean delivery may ultimately be necessary, it is not the first intervention before attempting corrective measures. Increasing oxytocin would worsen uteroplacental insufficiency and is contraindicated with concerning fetal heart rate patterns. An analgesic for pain relief does not address the fetal heart rate issue and could potentially further decrease variability.",
+      "category": "maternity",
+      "subcategory": "labor",
+      "difficulty": "hard"
+    },
+    {
+      "id": 312,
+      "title": "Pregnancy Nutrition",
+      "type": "mc",
+      "text": "A pregnant woman at 10 weeks gestation asks the nurse about food restrictions during pregnancy. Which food should the nurse advise her to avoid?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Pasteurized cheese"
+        },
+        {
+          "id": "B",
+          "text": "Cooked eggs"
+        },
+        {
+          "id": "C",
+          "text": "Raw sushi"
+        },
+        {
+          "id": "D",
+          "text": "Well-done beef"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Raw sushi should be avoided during pregnancy due to the risk of foodborne illness from bacteria and parasites such as Listeria and Anisakis, which can cause serious complications including miscarriage, stillbirth, or severe illness in the newborn. Pasteurized cheese is safe during pregnancy as the pasteurization process kills harmful bacteria. Cooked eggs are safe when fully cooked. Well-done beef is safe during pregnancy as thorough cooking kills harmful bacteria.",
+      "category": "maternity",
+      "subcategory": "prenatal",
+      "difficulty": "easy"
+    },
+    {
+      "id": 313,
+      "title": "Hyperemesis Gravidarum",
+      "type": "mc",
+      "text": "A pregnant woman at 10 weeks gestation is admitted with hyperemesis gravidarum. Which laboratory finding would the nurse expect?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated hematocrit"
+        },
+        {
+          "id": "B",
+          "text": "Hypokalemia"
+        },
+        {
+          "id": "C",
+          "text": "Elevated blood glucose"
+        },
+        {
+          "id": "D",
+          "text": "Decreased BUN (blood urea nitrogen)"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Hyperemesis gravidarum is characterized by severe, persistent vomiting leading to fluid and electrolyte imbalances. Hypokalemia (low potassium) is a common finding due to excessive vomiting and inadequate intake. Hematocrit may be elevated due to hemoconcentration from dehydration, but electrolyte abnormalities are more characteristic. Blood glucose would typically be decreased, not elevated, due to poor nutritional intake. BUN may be elevated, not decreased, due to dehydration causing prerenal azotemia.",
+      "category": "maternity",
+      "subcategory": "complications",
+      "difficulty": "medium"
+    },
+    {
+      "id": 314,
+      "title": "Rh Incompatibility",
+      "type": "mc",
+      "text": "A pregnant woman is Rh-negative and her partner is Rh-positive. When should the nurse plan to administer RhoGAM during pregnancy?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "At 8 weeks gestation"
+        },
+        {
+          "id": "B",
+          "text": "At 28 weeks gestation"
+        },
+        {
+          "id": "C",
+          "text": "Only after amniocentesis"
+        },
+        {
+          "id": "D",
+          "text": "Only if the newborn is Rh-positive"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "RhoGAM (Rh immunoglobulin) is routinely administered to Rh-negative pregnant women at 28 weeks gestation to prevent sensitization to the Rh antigen. It should also be given within 72 hours after delivery if the baby is Rh-positive, after any invasive procedures like amniocentesis, and after events that may cause fetal-maternal bleeding such as trauma or vaginal bleeding. Administration at 8 weeks gestation is not standard protocol. Giving RhoGAM only after amniocentesis or only if the newborn is Rh-positive would miss the important prophylactic dose at 28 weeks.",
+      "category": "maternity",
+      "subcategory": "prenatal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 315,
+      "title": "Preeclampsia Management",
+      "type": "mc",
+      "text": "A woman with preeclampsia is receiving magnesium sulfate. Which finding indicates magnesium toxicity requiring immediate intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Blood pressure 140/90 mmHg"
+        },
+        {
+          "id": "B",
+          "text": "Respiratory rate 10 breaths per minute"
+        },
+        {
+          "id": "C",
+          "text": "Deep tendon reflexes 2+"
+        },
+        {
+          "id": "D",
+          "text": "Urinary output 30 mL/hour"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "A respiratory rate of 10 breaths per minute indicates early respiratory depression, which is a sign of magnesium toxicity requiring immediate intervention, typically administration of the antidote calcium gluconate. Progressive magnesium toxicity can lead to respiratory arrest. A blood pressure of 140/90 mmHg is elevated but not indicative of magnesium toxicity. Deep tendon reflexes of 2+ are normal; diminished or absent reflexes would indicate toxicity. Urinary output of 30 mL/hour is adequate (>25 mL/hour is typically considered acceptable) for monitoring magnesium elimination.",
+      "category": "maternity",
+      "subcategory": "complications",
+      "difficulty": "hard"
+    },
+    {
+      "id": 316,
+      "title": "Newborn Jaundice",
+      "type": "mc",
+      "text": "A nurse is assessing a 2-day-old newborn who has visible jaundice extending from the face to the umbilicus. The total serum bilirubin is 13 mg/dL. What is the most appropriate nursing intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Prepare for exchange transfusion"
+        },
+        {
+          "id": "B",
+          "text": "Initiate phototherapy"
+        },
+        {
+          "id": "C",
+          "text": "Continue to monitor without intervention"
+        },
+        {
+          "id": "D",
+          "text": "Restrict breastfeeding for 24 hours"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "For a 2-day-old term newborn with a total serum bilirubin of 13 mg/dL and visible jaundice to the umbilicus, initiating phototherapy is the most appropriate intervention according to standard treatment guidelines. Exchange transfusion is typically reserved for much higher bilirubin levels or when phototherapy has failed. Monitoring without intervention would be inappropriate given the bilirubin level and extent of jaundice. Restricting breastfeeding is not recommended for managing hyperbilirubinemia; instead, increased frequency of breastfeeding is encouraged to promote bilirubin excretion through stooling.",
+      "category": "maternity",
+      "subcategory": "newborn",
+      "difficulty": "medium"
+    }
+  ]
+}

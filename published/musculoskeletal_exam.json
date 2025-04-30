@@ -1,0 +1,294 @@
+{
+  "questions": [
+    {
+      "id": 501,
+      "title": "Fracture Assessment",
+      "type": "mc",
+      "text": "A client presents to the emergency department after a fall with a suspected left femur fracture. Which assessment finding is most likely to be present?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Left leg longer than the right leg"
+        },
+        {
+          "id": "B",
+          "text": "Internal rotation of the left leg"
+        },
+        {
+          "id": "C",
+          "text": "Left leg shorter than the right leg with external rotation"
+        },
+        {
+          "id": "D",
+          "text": "No visible deformity but severe pain"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "A femur fracture typically presents with the affected leg shorter than the unaffected leg due to muscle spasms pulling the distal fragment upward. External rotation occurs because of the weight of the leg and the pull of the iliopsoas muscle. Left leg longer than right would not be expected with a femur fracture. Internal rotation would be unusual as the natural pull of muscles and gravity causes external rotation. While pain would certainly be present, a femur fracture is a major injury that almost always causes visible deformity, shortening, and rotation.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 502,
+      "title": "Compartment Syndrome",
+      "type": "mc",
+      "text": "A client with a tibial fracture has a cast applied. Four hours later, the client reports severe, unrelenting pain unrelieved by prescribed analgesics. What is the priority nursing action?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevate the affected limb above heart level"
+        },
+        {
+          "id": "B",
+          "text": "Apply ice to the cast to reduce swelling"
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider immediately"
+        },
+        {
+          "id": "D",
+          "text": "Administer a stronger analgesic"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Severe, unrelenting pain unrelieved by prescribed analgesics after a fracture and cast application is a cardinal sign of compartment syndrome, which is a medical emergency requiring immediate intervention to prevent tissue necrosis and permanent damage. The healthcare provider needs to be notified immediately for possible cast splitting or removal and intracompartmental pressure measurement. Elevating the limb would be inappropriate for suspected compartment syndrome and could potentially worsen the condition by decreasing arterial flow. Applying ice might temporarily reduce swelling but would not address the underlying problem of increased compartment pressure. Administering stronger analgesics might mask the symptoms without addressing the cause, potentially leading to delayed treatment and worse outcomes.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "hard"
+    },
+    {
+      "id": 503,
+      "title": "Total Hip Replacement",
+      "type": "mc",
+      "text": "A client has undergone a total hip replacement using a posterior approach. Which position should the nurse avoid when positioning this client?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Side-lying on the operative side with a pillow between the legs"
+        },
+        {
+          "id": "B",
+          "text": "Flexion of the hip beyond 90 degrees"
+        },
+        {
+          "id": "C",
+          "text": "Lying supine with a triangular abduction pillow between the legs"
+        },
+        {
+          "id": "D",
+          "text": "Side-lying on the non-operative side with pillows between the legs"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "After a total hip replacement with a posterior approach, flexion of the hip beyond 90 degrees must be avoided to prevent dislocation of the prosthesis. This position puts excessive stress on the posterior aspect of the hip joint where the surgical approach was made. Side-lying on the operative side with proper support between the legs is generally acceptable after the immediate post-operative period. Lying supine with an abduction pillow maintains proper alignment and prevents adduction, which is recommended. Side-lying on the non-operative side with pillows between the legs is also acceptable as it maintains proper alignment and prevents adduction.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 504,
+      "title": "Cast Care",
+      "type": "mc",
+      "text": "A nurse is providing discharge instructions to a client with a newly applied plaster cast on the forearm. Which instruction is most important?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Cover the cast with plastic when bathing"
+        },
+        {
+          "id": "B",
+          "text": "Report numbness, tingling, or blue discoloration of the fingers"
+        },
+        {
+          "id": "C",
+          "text": "Keep the cast elevated on pillows for the entire first week"
+        },
+        {
+          "id": "D",
+          "text": "Use a hair dryer on warm setting to dry the cast completely"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Reporting numbness, tingling, or blue discoloration of the fingers is the most important instruction as these symptoms could indicate neurovascular compromise, which is a medical emergency that could lead to permanent tissue damage if not addressed promptly. While covering the cast when bathing is important to prevent it from getting wet and losing integrity, it's not as critical as monitoring for neurovascular issues. Elevating the cast on pillows is recommended to reduce swelling, but it's not necessary to maintain this position continuously for an entire week. Using a hair dryer on a warm setting could actually damage a plaster cast and potentially burn the skin underneath due to uneven heating; air drying is typically recommended.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 505,
+      "title": "Osteoporosis Management",
+      "type": "mc",
+      "text": "A nurse is providing education to a 65-year-old female client who has been diagnosed with osteoporosis. Which statement by the client indicates an understanding of the dietary recommendations?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"I should avoid dairy products to reduce my risk of heart disease.\""
+        },
+        {
+          "id": "B",
+          "text": "\"I need to limit my calcium intake to prevent kidney stones.\""
+        },
+        {
+          "id": "C",
+          "text": "\"I should include calcium-rich foods like dairy, leafy greens, and fortified products in my diet.\""
+        },
+        {
+          "id": "D",
+          "text": "\"I need to reduce my protein intake to prevent calcium loss from my bones.\""
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Including calcium-rich foods like dairy products, leafy green vegetables, and calcium-fortified foods in the diet is a key dietary recommendation for osteoporosis management. Adequate calcium intake, along with vitamin D, is essential for maintaining bone density and reducing fracture risk. Avoiding dairy products would potentially reduce calcium intake and worsen osteoporosis. Limiting calcium intake would be counterproductive for someone with osteoporosis, as adequate calcium is needed for bone health. While excessive protein intake might increase calcium excretion, adequate protein is actually important for bone health, and reducing protein intake is not a standard recommendation for osteoporosis management.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "easy"
+    },
+    {
+      "id": 506,
+      "title": "Rheumatoid Arthritis",
+      "type": "mc",
+      "text": "A client with rheumatoid arthritis is prescribed methotrexate. Which laboratory value should the nurse monitor most closely during treatment?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hemoglobin and hematocrit"
+        },
+        {
+          "id": "B",
+          "text": "Liver enzymes (ALT, AST)"
+        },
+        {
+          "id": "C",
+          "text": "Blood glucose"
+        },
+        {
+          "id": "D",
+          "text": "Thyroid function tests"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Liver enzymes (ALT, AST) should be monitored most closely in a client taking methotrexate, as this medication can cause hepatotoxicity. Regular monitoring of liver function is essential to detect early signs of liver damage. While methotrexate can also cause bone marrow suppression affecting hemoglobin and hematocrit levels, hepatotoxicity is a more common and concerning side effect requiring close monitoring. Methotrexate does not significantly affect blood glucose levels. Thyroid function is not typically affected by methotrexate, so routine monitoring of thyroid function tests is not indicated specifically for this medication.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 507,
+      "title": "Traction Nursing Care",
+      "type": "mc",
+      "text": "A client is in skeletal traction for a femur fracture. Which nursing intervention is essential in the care of this client?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Remove weights during personal care"
+        },
+        {
+          "id": "B",
+          "text": "Adjust the angle of pull to promote client comfort"
+        },
+        {
+          "id": "C",
+          "text": "Provide pin site care according to protocol"
+        },
+        {
+          "id": "D",
+          "text": "Reposition the client every 2 hours"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Providing pin site care according to protocol is essential in the care of a client in skeletal traction to prevent infection at the sites where pins enter the bone. Pin site infections can lead to serious complications including osteomyelitis. Weights should never be removed during personal care as this disrupts the continuous pull needed for proper alignment and healing of the fracture. The angle of pull should not be adjusted by the nurse; it is determined by the healthcare provider based on the specific fracture pattern and required alignment. While preventing pressure injuries is important, complete repositioning every 2 hours is not possible for a client in skeletal traction; instead, partial repositioning and skin care within the constraints of the traction system would be performed.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 508,
+      "title": "Spinal Cord Injury",
+      "type": "mc",
+      "text": "A client is admitted with a suspected cervical spinal cord injury following a diving accident. Which assessment finding indicates autonomic dysreflexia requiring immediate intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Temperature of 101.2°F (38.4°C)"
+        },
+        {
+          "id": "B",
+          "text": "Blood pressure of 90/60 mmHg"
+        },
+        {
+          "id": "C",
+          "text": "Urinary output of 30 mL/hour"
+        },
+        {
+          "id": "D",
+          "text": "Blood pressure of 180/100 mmHg with bradycardia"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Blood pressure of 180/100 mmHg with bradycardia is a classic presentation of autonomic dysreflexia, a life-threatening condition that can occur in individuals with spinal cord injuries at T6 level or above. It requires immediate intervention to prevent potential complications such as seizures, stroke, or death. A temperature of 101.2°F might indicate infection but is not specifically related to autonomic dysreflexia. Blood pressure of 90/60 mmHg would be more consistent with neurogenic shock, which can occur immediately after spinal cord injury, not autonomic dysreflexia. Urinary output of 30 mL/hour is within normal limits and not specifically indicative of autonomic dysreflexia, although a distended bladder could trigger this condition.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "hard"
+    },
+    {
+      "id": 509,
+      "title": "Amputation Care",
+      "type": "mc",
+      "text": "A client has undergone a below-knee amputation. Which nursing intervention is most important during the early postoperative period?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Placing the residual limb in a dependent position to improve circulation"
+        },
+        {
+          "id": "B",
+          "text": "Applying a rigid dressing or compression bandage to the residual limb"
+        },
+        {
+          "id": "C",
+          "text": "Encouraging the client to sit in a wheelchair for extended periods"
+        },
+        {
+          "id": "D",
+          "text": "Massaging the suture line to prevent adhesions"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Applying a rigid dressing or compression bandage to the residual limb is most important during the early postoperative period after an amputation. This helps control edema, promotes proper shaping of the residual limb for future prosthetic fitting, and provides protection for the healing wound. The residual limb should be elevated, not placed in a dependent position, to reduce edema and promote venous return. Extended periods in a wheelchair would not be recommended in the early postoperative period due to the risk of residual limb edema from the dependent position. Massaging the suture line is contraindicated as it could disrupt healing, increase the risk of infection, and cause pain.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 510,
+      "title": "Multiple Myeloma",
+      "type": "mc",
+      "text": "A client is diagnosed with multiple myeloma. Which assessment finding would the nurse expect to see in this client?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated red blood cell count"
+        },
+        {
+          "id": "B",
+          "text": "Hypercalcemia"
+        },
+        {
+          "id": "C",
+          "text": "Decreased serum protein levels"
+        },
+        {
+          "id": "D",
+          "text": "Elevated platelet count"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Hypercalcemia is a common finding in multiple myeloma due to increased bone resorption as the cancer cells infiltrate and destroy bone tissue, releasing calcium into the bloodstream. Multiple myeloma typically causes anemia (decreased RBC count), not elevated red blood cells, due to bone marrow infiltration and replacement by plasma cells. Serum protein levels, particularly gamma globulins, are typically elevated in multiple myeloma due to the production of monoclonal proteins (M protein) by the cancerous plasma cells. Platelet count is usually normal or decreased (thrombocytopenia) in multiple myeloma due to bone marrow infiltration, not elevated.",
+      "category": "med-surg",
+      "subcategory": "musculoskeletal",
+      "difficulty": "medium"
+    }
+  ]
+}

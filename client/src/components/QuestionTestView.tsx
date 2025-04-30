@@ -137,14 +137,32 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     
     let isCorrect = false;
     
-    if (Array.isArray(question.correctAnswer) && Array.isArray(answer)) {
-      // For select all that apply questions
-      isCorrect = 
-        answer.length === question.correctAnswer.length && 
-        answer.every(a => question.correctAnswer.includes(a));
-    } else if (!Array.isArray(question.correctAnswer) && !Array.isArray(answer)) {
-      // For multiple choice and fill in blank questions
-      isCorrect = answer === question.correctAnswer;
+    // Handle different question types
+    if (question.type === 'mc' || question.type === 'fill_in_blank') {
+      if (!Array.isArray(answer)) {
+        isCorrect = answer === question.correctAnswer;
+      }
+    } else if (question.type === 'sata') {
+      if (Array.isArray(answer) && Array.isArray(question.correctAnswer)) {
+        isCorrect = 
+          answer.length === question.correctAnswer.length && 
+          answer.every(a => question.correctAnswer.includes(a));
+      }
+    } else if (question.type === 'hotspot') {
+      // Handle hotspot questions differently
+      // This is simplified; would need more complex validation in a real app
+      isCorrect = true; // Placeholder
+    } else if (question.type === 'ordered-response') {
+      // Handle ordered response questions
+      if (Array.isArray(answer) && Array.isArray(question.correctOrder)) {
+        isCorrect = JSON.stringify(answer) === JSON.stringify(question.correctOrder);
+      }
+    } else if (question.type === 'chart-exhibit') {
+      // Handle chart exhibit questions
+      if (question.questions && question.questions.length > 0) {
+        // Simplified validation
+        isCorrect = true; // Placeholder
+      }
     }
     
     // Update answer correctness state

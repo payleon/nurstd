@@ -1,0 +1,468 @@
+{
+  "questions": [
+    {
+      "id": 601,
+      "title": "Neurological Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing a client who experienced a head injury 24 hours ago. Which assessment finding requires immediate intervention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Pulse rate of 58 beats per minute"
+        },
+        {
+          "id": "B",
+          "text": "Unequal pupil size with sluggish reaction to light"
+        },
+        {
+          "id": "C",
+          "text": "Blood pressure of 130/86 mmHg"
+        },
+        {
+          "id": "D",
+          "text": "Complaints of mild headache"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Unequal pupil size (anisocoria) with sluggish reaction to light following a head injury indicates increased intracranial pressure and possible brain herniation, which is a life-threatening emergency requiring immediate intervention. A pulse rate of 58 beats per minute could be a sign of increasing intracranial pressure (Cushing's triad: bradycardia, hypertension, and irregular respiration), but pupillary changes are more specific and concerning. Blood pressure of 130/86 mmHg is slightly elevated but not significantly concerning in isolation. A mild headache is expected after a head injury and would be monitored but doesn't require immediate intervention unless it's sudden or severe.",
+      "category": "med-surg",
+      "subcategory": "neurological",
+      "difficulty": "medium"
+    },
+    {
+      "id": 602,
+      "title": "Pediatric Development",
+      "type": "mc",
+      "text": "A nurse is performing a developmental assessment on a 15-month-old child. Which finding is considered developmentally appropriate?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Scribbles spontaneously"
+        },
+        {
+          "id": "B",
+          "text": "Speaks in complete sentences"
+        },
+        {
+          "id": "C",
+          "text": "Rides a tricycle"
+        },
+        {
+          "id": "D",
+          "text": "Copies a circle"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Scribbling spontaneously is developmentally appropriate for a 15-month-old child as fine motor skills have developed to the point where they can grasp a crayon and make marks on paper. Speaking in complete sentences typically develops around 3 years of age; at 15 months, children usually have a vocabulary of several words but not complete sentences. Riding a tricycle requires coordination and motor skills that develop around 3 years of age. Copying a circle is a fine motor skill that typically develops around 3 years of age and requires more advanced hand-eye coordination than is present at 15 months.",
+      "category": "pediatrics",
+      "subcategory": "development",
+      "difficulty": "medium"
+    },
+    {
+      "id": 603,
+      "title": "Psychiatric Therapeutic Communication",
+      "type": "mc",
+      "text": "A client with major depression says, \"I'm such a failure. Nothing I do ever works out.\" Which response by the nurse is most therapeutic?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "\"You've accomplished many things in your life.\""
+        },
+        {
+          "id": "B",
+          "text": "\"You're being too hard on yourself.\""
+        },
+        {
+          "id": "C",
+          "text": "\"What makes you feel you are a failure?\""
+        },
+        {
+          "id": "D",
+          "text": "\"Everyone feels that way sometimes.\""
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "\"What makes you feel you are a failure?\" is the most therapeutic response as it encourages the client to explore their feelings and perceptions without judgment, validating their experience while promoting deeper reflection. Telling the client \"You've accomplished many things in your life\" contradicts their feelings, which can shut down communication and isn't based on the nurse's knowledge of the client's actual accomplishments. Saying \"You're being too hard on yourself\" dismisses the client's feelings and makes a judgment about their self-perception. Stating \"Everyone feels that way sometimes\" minimizes the client's unique experience and feelings, potentially making them feel misunderstood.",
+      "category": "psychiatric",
+      "subcategory": "communication",
+      "difficulty": "medium"
+    },
+    {
+      "id": 604,
+      "title": "Obstetric Complications",
+      "type": "mc",
+      "text": "A pregnant woman at 32 weeks gestation presents with a blood pressure of 160/110 mmHg, proteinuria, headache, and visual changes. Which medication would the nurse expect to administer first?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Labetalol"
+        },
+        {
+          "id": "B",
+          "text": "Magnesium sulfate"
+        },
+        {
+          "id": "C",
+          "text": "Oxytocin"
+        },
+        {
+          "id": "D",
+          "text": "Calcium gluconate"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Magnesium sulfate would be administered first in this case of severe preeclampsia (evidenced by the elevated blood pressure, proteinuria, headache, and visual changes) to prevent seizures (eclampsia). Magnesium sulfate is the drug of choice for seizure prophylaxis in preeclampsia/eclampsia. While labetalol may be used to control blood pressure in preeclampsia, preventing seizures takes precedence over blood pressure control in the immediate management. Oxytocin is used to induce or augment labor but is not part of the initial management of preeclampsia. Calcium gluconate is the antidote for magnesium toxicity but would not be administered prophylactically.",
+      "category": "maternity",
+      "subcategory": "complications",
+      "difficulty": "medium"
+    },
+    {
+      "id": 605,
+      "title": "Pediatric Respiratory Assessment",
+      "type": "mc",
+      "text": "A nurse is assessing a 3-year-old child with suspected epiglottitis. Which clinical finding is most consistent with this diagnosis?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Barking cough with stridor"
+        },
+        {
+          "id": "B",
+          "text": "Tripod positioning with drooling"
+        },
+        {
+          "id": "C",
+          "text": "Wheezing with prolonged expiration"
+        },
+        {
+          "id": "D",
+          "text": "Rhinorrhea with sneezing"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Tripod positioning (sitting upright, leaning forward with the chin thrust out and mouth open) with drooling is most consistent with epiglottitis. This positioning helps maximize the airway opening, and drooling occurs because swallowing is painful due to the inflamed epiglottis. A barking cough with stridor is more characteristic of croup (laryngotracheobronchitis). Wheezing with prolonged expiration suggests lower airway obstruction such as asthma or bronchiolitis. Rhinorrhea with sneezing is more indicative of an upper respiratory infection or allergic rhinitis, not epiglottitis.",
+      "category": "pediatrics",
+      "subcategory": "respiratory",
+      "difficulty": "hard"
+    },
+    {
+      "id": 606,
+      "title": "Oncology Management",
+      "type": "mc",
+      "text": "A client receiving chemotherapy has a white blood cell count of 1,500/mm³. Which nursing intervention has the highest priority?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Restricting visitors who have colds or infections"
+        },
+        {
+          "id": "B",
+          "text": "Encouraging increased fluid intake"
+        },
+        {
+          "id": "C",
+          "text": "Administering prescribed antiemetics"
+        },
+        {
+          "id": "D",
+          "text": "Providing frequent oral care"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Restricting visitors who have colds or infections has the highest priority for a client with neutropenia (WBC count < 2,000/mm³). This intervention helps prevent potentially life-threatening infections in the immunocompromised client. While encouraging increased fluid intake is important to prevent dehydration and help flush the chemotherapy agents, it is not as high a priority as infection prevention in a neutropenic client. Administering prescribed antiemetics is important for comfort and preventing complications of vomiting, but infection prevention takes precedence. Providing frequent oral care is important to prevent mucositis and detect early signs of infection, but visitor restriction is a more direct measure to prevent exposure to pathogens.",
+      "category": "med-surg",
+      "subcategory": "oncology",
+      "difficulty": "medium"
+    },
+    {
+      "id": 607,
+      "title": "Cardiac Medication Management",
+      "type": "mc",
+      "text": "A nurse is caring for a client who takes warfarin (Coumadin). Which food should the nurse advise the client to consume in consistent amounts?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Citrus fruits"
+        },
+        {
+          "id": "B",
+          "text": "Green leafy vegetables"
+        },
+        {
+          "id": "C",
+          "text": "Dairy products"
+        },
+        {
+          "id": "D",
+          "text": "Lean meats"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Green leafy vegetables are high in vitamin K, which antagonizes the anticoagulant effect of warfarin. The client should be advised to consume these foods in consistent amounts rather than avoiding them completely, as sudden changes in vitamin K intake can affect INR levels and anticoagulation control. Citrus fruits do not significantly affect warfarin metabolism or action. Dairy products do not have a significant direct effect on warfarin activity. Lean meats also do not significantly affect warfarin metabolism or activity in most cases.",
+      "category": "med-surg",
+      "subcategory": "cardiovascular",
+      "difficulty": "medium"
+    },
+    {
+      "id": 608,
+      "title": "Community Health",
+      "type": "mc",
+      "text": "A community health nurse is planning a health promotion program for a population with a high incidence of type 2 diabetes. Which intervention should the nurse prioritize?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hosting a health fair with free blood glucose screenings"
+        },
+        {
+          "id": "B",
+          "text": "Developing a support group for individuals with diabetes"
+        },
+        {
+          "id": "C",
+          "text": "Creating a walking program for community residents"
+        },
+        {
+          "id": "D",
+          "text": "Offering one-on-one counseling for clients with diabetes"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Hosting a health fair with free blood glucose screenings should be prioritized as it addresses primary prevention by identifying at-risk individuals and secondary prevention by detecting undiagnosed cases. This approach has the potential to reach the largest number of community members, including those who may be unaware they have diabetes or are at risk. Developing a support group is valuable for those already diagnosed but doesn't address undiagnosed cases. Creating a walking program promotes physical activity, which is important for diabetes prevention and management, but screening should occur first to identify those at highest risk. One-on-one counseling is resource-intensive and would reach fewer individuals than a community-wide screening event.",
+      "category": "community",
+      "subcategory": "health_promotion",
+      "difficulty": "medium"
+    },
+    {
+      "id": 609,
+      "title": "Pediatric Medication Administration",
+      "type": "mc",
+      "text": "A nurse is preparing to administer acetaminophen (Tylenol) to a 4-year-old child who weighs 18 kg. The recommended dose is 15 mg/kg every 4-6 hours. The medication is available as 160 mg/5 mL. How many milliliters should the nurse administer?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "7.5 mL"
+        },
+        {
+          "id": "B",
+          "text": "8.4 mL"
+        },
+        {
+          "id": "C",
+          "text": "9.0 mL"
+        },
+        {
+          "id": "D",
+          "text": "10.5 mL"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "To calculate the correct dose: \n1. Calculate the dose in mg: 18 kg × 15 mg/kg = 270 mg\n2. Convert to mL using the concentration: 270 mg ÷ (160 mg/5 mL) = 270 mg × (5 mL/160 mg) = 8.44 mL, which rounds to 8.4 mL\n\nTherefore, the nurse should administer 8.4 mL of acetaminophen.",
+      "category": "pediatrics",
+      "subcategory": "medication",
+      "difficulty": "medium"
+    },
+    {
+      "id": 610,
+      "title": "Mental Health Crisis",
+      "type": "mc",
+      "text": "A client presents to the emergency department expressing suicidal ideation with a specific plan and intent. Which initial nursing action has the highest priority?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Completing a full mental health assessment"
+        },
+        {
+          "id": "B",
+          "text": "Providing a psychiatric referral"
+        },
+        {
+          "id": "C",
+          "text": "Ensuring client safety through constant observation"
+        },
+        {
+          "id": "D",
+          "text": "Administering an anxiolytic medication"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Ensuring client safety through constant observation has the highest priority when a client expresses suicidal ideation with a specific plan and intent. Safety is always the first priority in a suicidal crisis to prevent self-harm. While a full mental health assessment is important, it would be conducted after ensuring immediate safety. A psychiatric referral would be part of the treatment plan but is not the highest priority initial action. Administering an anxiolytic medication might be appropriate depending on the assessment, but ensuring safety through observation would precede medication administration.",
+      "category": "psychiatric",
+      "subcategory": "crisis",
+      "difficulty": "medium"
+    },
+    {
+      "id": 611,
+      "title": "Renal Function Assessment",
+      "type": "mc",
+      "text": "A client with chronic kidney disease has the following laboratory values: BUN 65 mg/dL, creatinine 4.2 mg/dL, potassium 6.0 mEq/L, and phosphorus 6.5 mg/dL. Which electrolyte abnormality requires the most immediate attention?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Elevated BUN"
+        },
+        {
+          "id": "B",
+          "text": "Elevated creatinine"
+        },
+        {
+          "id": "C",
+          "text": "Hyperkalemia"
+        },
+        {
+          "id": "D",
+          "text": "Hyperphosphatemia"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Hyperkalemia (potassium 6.0 mEq/L) requires the most immediate attention as it can cause life-threatening cardiac arrhythmias and requires prompt intervention. Elevated BUN (blood urea nitrogen) indicates decreased renal function but is not immediately life-threatening. Elevated creatinine also indicates decreased renal function but does not require immediate intervention like hyperkalemia. Hyperphosphatemia can lead to complications such as calcium-phosphate deposits in tissues but is not as acutely dangerous as hyperkalemia.",
+      "category": "med-surg",
+      "subcategory": "renal",
+      "difficulty": "medium"
+    },
+    {
+      "id": 612,
+      "title": "Respiratory Management",
+      "type": "mc",
+      "text": "A nurse is caring for a client with chronic obstructive pulmonary disease (COPD) who is receiving oxygen therapy at 2 L/min via nasal cannula. Which assessment finding indicates the need to notify the healthcare provider?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Respiratory rate of 24 breaths per minute"
+        },
+        {
+          "id": "B",
+          "text": "Oxygen saturation of 90%"
+        },
+        {
+          "id": "C",
+          "text": "Use of pursed-lip breathing"
+        },
+        {
+          "id": "D",
+          "text": "Decreased level of consciousness"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Decreased level of consciousness in a client with COPD receiving oxygen therapy suggests possible carbon dioxide retention and impending respiratory failure, which requires immediate notification of the healthcare provider. A respiratory rate of 24 breaths per minute is elevated but not severely abnormal for a client with COPD. Oxygen saturation of 90% might be acceptable for some clients with COPD, as maintaining saturations of 88-92% is often the goal to prevent suppression of the hypoxic drive. Pursed-lip breathing is a therapeutic breathing technique often used by clients with COPD to help control dyspnea and improve ventilation.",
+      "category": "med-surg",
+      "subcategory": "respiratory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 613,
+      "title": "Nutritional Management",
+      "type": "mc",
+      "text": "A client with cirrhosis and ascites is on a sodium-restricted diet. Which meal selection contains the least amount of sodium?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Grilled chicken sandwich with tomato soup"
+        },
+        {
+          "id": "B",
+          "text": "Fresh fruit salad with yogurt and graham crackers"
+        },
+        {
+          "id": "C",
+          "text": "Vegetable omelet with whole wheat toast"
+        },
+        {
+          "id": "D",
+          "text": "Baked fish with steamed rice and vegetables"
+        }
+      ],
+      "correctAnswer": "D",
+      "rationale": "Baked fish with steamed rice and vegetables typically contains the least amount of sodium, especially if prepared without added salt. Fresh, unprocessed foods generally have lower sodium content. A grilled chicken sandwich would likely contain bread, processed meat, and condiments, all of which are typically high in sodium. Tomato soup, especially canned varieties, is notoriously high in sodium. While fresh fruit salad is low in sodium, commercial yogurt often contains significant sodium, and graham crackers are processed foods that contain added sodium. A vegetable omelet may contain cheese (high in sodium), and whole wheat bread is a processed food that typically contains added sodium.",
+      "category": "med-surg",
+      "subcategory": "nutrition",
+      "difficulty": "medium"
+    },
+    {
+      "id": 614,
+      "title": "Diabetic Ketoacidosis",
+      "type": "mc",
+      "text": "A client is admitted with diabetic ketoacidosis (DKA) and is started on an insulin drip. Which laboratory value should the nurse monitor most frequently?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Hemoglobin A1c"
+        },
+        {
+          "id": "B",
+          "text": "Blood glucose"
+        },
+        {
+          "id": "C",
+          "text": "Serum creatinine"
+        },
+        {
+          "id": "D",
+          "text": "Total cholesterol"
+        }
+      ],
+      "correctAnswer": "B",
+      "rationale": "Blood glucose should be monitored most frequently, typically hourly, when a client with DKA is on an insulin drip. This allows for titration of the insulin dose to gradually reduce blood glucose levels while avoiding hypoglycemia. Hemoglobin A1c reflects average blood glucose levels over the past 2-3 months and is not useful for monitoring acute changes in DKA management. Serum creatinine is important to monitor kidney function, especially with the risk of acute kidney injury in DKA, but it doesn't need to be monitored as frequently as blood glucose. Total cholesterol is not relevant to the acute management of DKA.",
+      "category": "med-surg",
+      "subcategory": "endocrine",
+      "difficulty": "medium"
+    },
+    {
+      "id": 615,
+      "title": "Pediatric Safety",
+      "type": "mc",
+      "text": "A nurse is providing discharge teaching to the parents of a 2-year-old child. Which safety instruction is most important?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Keep small objects and toys with small parts out of reach"
+        },
+        {
+          "id": "B",
+          "text": "Teach the child to swim"
+        },
+        {
+          "id": "C",
+          "text": "Use sunscreen with SPF 15 or higher"
+        },
+        {
+          "id": "D",
+          "text": "Install window guards on all windows"
+        }
+      ],
+      "correctAnswer": "A",
+      "rationale": "Keeping small objects and toys with small parts out of reach is most important for a 2-year-old child due to the high risk of choking, which can lead to airway obstruction and death. Children at this age explore their environment by putting objects in their mouths. While teaching a child to swim is beneficial, a 2-year-old cannot learn water safety skills sufficiently to prevent drowning; constant supervision around water is required. Using sunscreen is important for skin protection but is not as immediately life-threatening as choking hazards. Installing window guards is important to prevent falls, especially in multi-story dwellings, but choking prevention is a more universal and immediate safety concern for this age group.",
+      "category": "pediatrics",
+      "subcategory": "safety",
+      "difficulty": "medium"
+    },
+    {
+      "id": 616,
+      "title": "Gastrointestinal Assessment",
+      "type": "mc",
+      "text": "A client presents with sudden onset of severe abdominal pain, nausea, vomiting, and absence of bowel sounds. Which condition does the nurse suspect?",
+      "choices": [
+        {
+          "id": "A",
+          "text": "Gastroenteritis"
+        },
+        {
+          "id": "B",
+          "text": "Irritable bowel syndrome"
+        },
+        {
+          "id": "C",
+          "text": "Intestinal obstruction"
+        },
+        {
+          "id": "D",
+          "text": "Ulcerative colitis"
+        }
+      ],
+      "correctAnswer": "C",
+      "rationale": "Intestinal obstruction is characterized by sudden onset of severe abdominal pain, nausea, vomiting, and absence of bowel sounds (indicating paralytic ileus). The absence of bowel sounds is particularly significant in differentiating this from other gastrointestinal conditions. Gastroenteritis typically presents with diarrhea, abdominal cramping, and increased bowel sounds due to hyperperistalsis. Irritable bowel syndrome is a chronic condition with recurrent abdominal pain and altered bowel habits but normal bowel sounds. Ulcerative colitis is an inflammatory bowel disease that typically presents with bloody diarrhea, abdominal pain, and normal or hyperactive bowel sounds.",
+      "category": "med-surg",
+      "subcategory": "gastrointestinal",
+      "difficulty": "medium"
+    }
+  ]
+}
