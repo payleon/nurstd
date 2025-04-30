@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,6 +15,30 @@ interface TooltipProps {
   contentClassName?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+}
+
+export function TooltipProvider({ children, delayDuration }: { children: React.ReactNode, delayDuration?: number }) {
+  return (
+    <RadixTooltip.Provider delayDuration={delayDuration}>
+      {children}
+    </RadixTooltip.Provider>
+  );
+}
+
+export function TooltipTrigger({ children }: { children: React.ReactNode }) {
+  return (
+    <RadixTooltip.Trigger asChild>
+      {children}
+    </RadixTooltip.Trigger>
+  );
+}
+
+export function TooltipContent({ children, className }: { children: React.ReactNode, className?: string }) {
+  return (
+    <RadixTooltip.Content className={className}>
+      {children}
+    </RadixTooltip.Content>
+  );
 }
 
 export function Tooltip({
