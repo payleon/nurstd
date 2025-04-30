@@ -57,12 +57,13 @@ function PlaceholderPage({ name }: { name: string }) {
 function Router() {
   return (
     <Switch>
-      <LazyRoute path="/" component={Home} />
+      {/* Critical paths should be preloaded */}
+      <LazyRoute path="/" component={Home} preload={true} />
       <LazyRoute path="/achievements" component={Achievements} />
       <LazyRoute path="/profile" component={Profile} />
       
       {/* Study Materials */}
-      <LazyRoute path="/case-studies" component={ExamsAndStudies} />
+      <LazyRoute path="/case-studies" component={ExamsAndStudies} preload={true} />
       <LazyRoute path="/case-study/:id" component={CaseStudyDetail} />
       {/* Redirects from old paths to new path */}
       <Route path="/question-bank">
@@ -81,7 +82,7 @@ function Router() {
       </Route>
       <LazyRoute path="/study-strategies" component={StudyStrategies} />
       <LazyRoute path="/study-timer" component={StudyTimer} />
-      <LazyRoute path="/games" component={Games} />
+      <LazyRoute path="/games" component={Games} preload={true} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">

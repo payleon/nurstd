@@ -366,21 +366,31 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
               className={`p-2 rounded-full border ${isQuestionFlagged(currentQuestion?.id) ? 'bg-amber-50 border-amber-300 text-amber-600' : 'border-gray-300 hover:bg-gray-100 text-gray-600'}`} 
               onClick={toggleFlagQuestion}
               title="Flag for Review"
+              aria-label="Flag this question for review"
             >
-              <Flag className="h-5 w-5" />
+              <Flag className="h-5 w-5" aria-hidden="true" />
             </button>
             <button 
               className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600"
               onClick={() => setShowReviewMode(true)}
               title="Review Flashcards"
+              aria-label="Open flashcard review"
             >
-              <BookOpen className="h-5 w-5" />
+              <BookOpen className="h-5 w-5" aria-hidden="true" />
             </button>
-            <button className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600" title="Calculator">
-              <Calculator className="h-5 w-5" />
+            <button 
+              className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600" 
+              title="Calculator"
+              aria-label="Open calculator"
+            >
+              <Calculator className="h-5 w-5" aria-hidden="true" />
             </button>
-            <button className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600" title="Help">
-              <HelpCircle className="h-5 w-5" />
+            <button 
+              className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600" 
+              title="Help"
+              aria-label="Show help information"
+            >
+              <HelpCircle className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -438,27 +448,38 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                   let buttonStyle = "flex items-center justify-center h-9 w-full rounded font-medium text-sm";
                   let textContent = (index + 1).toString();
                   let icon = null;
+                  let ariaLabel = `Question ${index + 1}`;
+                  let status = '';
                   
                   if (currentQuestionIndex === index) {
                     // Current question
                     buttonStyle += " bg-[#13294B] text-white";
+                    status = 'current';
+                    ariaLabel += ' (current question)';
                   } else if (isQuestionAnswered(question.id)) {
                     if (answerCorrectness[question.id]) {
                       // Answered correctly
                       buttonStyle += " bg-green-600 text-white";
-                      icon = <Check className="h-3 w-3" />;
+                      icon = <Check className="h-3 w-3" aria-hidden="true" />;
+                      status = 'answered correctly';
+                      ariaLabel += ' (answered correctly)';
                     } else {
                       // Answered incorrectly
                       buttonStyle += " bg-red-500 text-white";
-                      icon = <X className="h-3 w-3" />;
+                      icon = <X className="h-3 w-3" aria-hidden="true" />;
+                      status = 'answered incorrectly';
+                      ariaLabel += ' (answered incorrectly)';
                     }
                   } else if (isQuestionFlagged(question.id)) {
                     // Flagged but not answered
                     buttonStyle += " bg-amber-100 border border-amber-300 text-[#13294B]";
-                    icon = <Flag className="h-3 w-3" />;
+                    icon = <Flag className="h-3 w-3" aria-hidden="true" />;
+                    status = 'flagged';
+                    ariaLabel += ' (flagged for review)';
                   } else {
                     // Not answered or flagged
                     buttonStyle += " bg-gray-100 border border-gray-300 hover:bg-gray-200 text-gray-700";
+                    status = 'unanswered';
                   }
                   
                   return (
@@ -466,6 +487,9 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                       key={question.id}
                       className={buttonStyle}
                       onClick={() => goToQuestion(index)}
+                      aria-label={ariaLabel}
+                      aria-current={currentQuestionIndex === index ? "true" : "false"}
+                      data-status={status}
                     >
                       {icon ? (
                         <div className="flex items-center">
@@ -513,6 +537,12 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                 }`}
                 disabled={Object.keys(userAnswers).length !== totalQuestions || isSubmitting}
                 onClick={handleSubmitExam}
+                aria-label={
+                  Object.keys(userAnswers).length === totalQuestions 
+                    ? "Submit exam for grading" 
+                    : `Answer all ${totalQuestions} questions before submitting`
+                }
+                aria-busy={isSubmitting ? "true" : "false"}
               >
                 {isSubmitting ? (
                   <>
@@ -521,7 +551,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                   </>
                 ) : (
                   <>
-                    <CheckSquare className="mr-2 h-4 w-4" />
+                    <CheckSquare className="mr-2 h-4 w-4" aria-hidden="true" />
                     Submit Exam
                   </>
                 )}
@@ -572,8 +602,9 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                   }`}
                   onClick={goToPreviousQuestion}
                   disabled={currentQuestionIndex === 0}
+                  aria-label="Go to previous question"
                 >
-                  <ChevronLeft className="mr-1.5 h-4 w-4" />
+                  <ChevronLeft className="mr-1.5 h-4 w-4" aria-hidden="true" />
                   Previous
                 </button>
                 
@@ -585,22 +616,36 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                       : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-100'
                   }`}
                   onClick={toggleFlagQuestion}
+                  aria-pressed={isQuestionFlagged(currentQuestion?.id) ? "true" : "false"}
+                  aria-label={isQuestionFlagged(currentQuestion?.id) ? "Unflag this question" : "Flag this question for review"}
                 >
-                  <Flag className="mr-1.5 h-4 w-4" />
+                  <Flag className="mr-1.5 h-4 w-4" aria-hidden="true" />
                   {isQuestionFlagged(currentQuestion?.id) ? 'Flagged' : 'Flag for Review'}
                 </button>
               </div>
               
               <div className="hidden md:flex items-center space-x-2">
-                <div className="flex items-center space-x-1">
-                  <button className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600">
-                    <Smile className="h-4 w-4" />
+                <div className="flex items-center space-x-1" role="group" aria-label="Rate question difficulty">
+                  <button 
+                    className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600"
+                    aria-label="Rate as easy"
+                    title="Easy"
+                  >
+                    <Smile className="h-4 w-4" aria-hidden="true" />
                   </button>
-                  <button className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600">
-                    <Meh className="h-4 w-4" />
+                  <button 
+                    className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600"
+                    aria-label="Rate as moderate"
+                    title="Moderate"
+                  >
+                    <Meh className="h-4 w-4" aria-hidden="true" />
                   </button>
-                  <button className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600">
-                    <Frown className="h-4 w-4" />
+                  <button 
+                    className="p-1.5 rounded-full border border-gray-300 bg-white hover:bg-gray-100 text-gray-600"
+                    aria-label="Rate as difficult"
+                    title="Difficult"
+                  >
+                    <Frown className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </div>
               </div>
@@ -612,9 +657,10 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                     : 'bg-[#4B9CD3] hover:bg-[#3d7eaa] text-white'
                 }`}
                 onClick={goToNextQuestion}
+                aria-label={currentQuestionIndex === totalQuestions - 1 ? "Finish exam" : "Go to next question"}
               >
                 {currentQuestionIndex === totalQuestions - 1 ? 'Finish' : 'Next'}
-                <ChevronRight className="ml-1.5 h-4 w-4" />
+                <ChevronRight className="ml-1.5 h-4 w-4" aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -647,6 +693,12 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                   }`}
                   disabled={Object.keys(userAnswers).length !== totalQuestions || isSubmitting}
                   onClick={handleSubmitExam}
+                  aria-label={
+                    Object.keys(userAnswers).length === totalQuestions 
+                      ? "Submit exam for grading" 
+                      : `Answer all ${totalQuestions} questions before submitting`
+                  }
+                  aria-busy={isSubmitting ? "true" : "false"}
                 >
                   {isSubmitting ? (
                     <>
@@ -655,7 +707,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                     </>
                   ) : (
                     <>
-                      <CheckSquare className="mr-2 h-4 w-4" />
+                      <CheckSquare className="mr-2 h-4 w-4" aria-hidden="true" />
                       Submit Exam
                     </>
                   )}
@@ -695,7 +747,10 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
           >
             <div className="bg-white rounded-lg shadow-xl p-8 max-w-md">
               <div className="flex flex-col items-center">
-                <MedicalSpinner type="heartbeat" size="lg" color="#13294B" />
+                <div aria-label="Loading indicator" role="status">
+                  <MedicalSpinner type="heartbeat" size="lg" color="#13294B" aria-hidden="true" />
+                  <span className="sr-only">Processing your exam submission</span>
+                </div>
                 <h3 className="mt-6 text-xl font-bold text-[#13294B]">Submitting Your Exam</h3>
                 <p className="mt-3 text-gray-600 text-center">
                   Your answers are being processed and your performance is being analyzed.
