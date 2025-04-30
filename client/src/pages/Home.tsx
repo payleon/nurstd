@@ -26,12 +26,27 @@ export default function Home() {
   // Get user stats from the badge context
   const { userStats, unlockedBadges } = useBadges();
   
-  // Check for testId in URL query parameter and load the test if present
+  // Check for testId in URL query parameter or path parameter and load the test if present
   useEffect(() => {
     const loadTestFromUrl = async () => {
+      // Extract testId from URL path parameter (/tests/:id)
+      const pathMatch = location.match(/\/tests\/(\d+|custom)/);
+      
       // Extract testId from URL query parameter
       const searchParams = new URLSearchParams(window.location.search);
-      const testId = searchParams.get('testId');
+      const queryTestId = searchParams.get('testId');
+      
+      // Handle special "custom" test case
+      if (pathMatch && pathMatch[1] === 'custom') {
+        // Show custom test builder interface
+        console.log('Loading custom test builder');
+        // Here you would implement custom test creation logic
+        // For now, we'll just show the test list
+        return;
+      }
+      
+      // Use path parameter first, fall back to query parameter
+      const testId = pathMatch ? pathMatch[1] : queryTestId;
       
       if (testId) {
         try {

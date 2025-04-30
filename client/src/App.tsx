@@ -67,6 +67,7 @@ function Router() {
       {/* Study Materials */}
       <LazyRoute path="/case-studies" component={ExamsAndStudies} preload={true} />
       <LazyRoute path="/case-study/:id" component={CaseStudyDetail} />
+      <LazyRoute path="/tests/:id" component={Home} preload={true} />
       {/* Redirects from old paths to new path */}
       <Route path="/question-bank">
         {() => {
