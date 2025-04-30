@@ -104,11 +104,68 @@ export default {
             opacity: "0.9",
           },
         },
+        "liquid-wave": {
+          "0%": {
+            d: "path('M6.5 15.5c0 0 2.286-0.975 5.5-0.5c3.214 0.475 5.5 0.5 5.5 0.5v4.5h-11v-4.5z')",
+          },
+          "50%": {
+            d: "path('M6.5 15.5c0 0 2.286-0.675 5.5-0.2c3.214 0.475 5.5 0.2 5.5 0.2v4.5h-11v-4.5z')",
+          },
+          "100%": {
+            d: "path('M6.5 15.5c0 0 2.286-0.975 5.5-0.5c3.214 0.475 5.5 0.5 5.5 0.5v4.5h-11v-4.5z')",
+          },
+        },
+        "bubble-float-1": {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: "0.6",
+          },
+          "50%": {
+            transform: "translateY(-5px)",
+            opacity: "0.8",
+          },
+          "100%": {
+            transform: "translateY(-10px)",
+            opacity: "0",
+          },
+        },
+        "bubble-float-2": {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: "0.5",
+          },
+          "65%": {
+            transform: "translateY(-7px)",
+            opacity: "0.7",
+          },
+          "100%": {
+            transform: "translateY(-12px)",
+            opacity: "0",
+          },
+        },
+        "bubble-float-3": {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: "0.7",
+          },
+          "40%": {
+            transform: "translateY(-4px)",
+            opacity: "0.9",
+          },
+          "100%": {
+            transform: "translateY(-8px)",
+            opacity: "0",
+          },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "flask": "flask-bubble 3s ease-in-out infinite",
+        "liquid": "liquid-wave 3s ease-in-out infinite",
+        "bubble-1": "bubble-float-1 4s ease-in-out infinite",
+        "bubble-2": "bubble-float-2 3.5s ease-in-out infinite 0.5s",
+        "bubble-3": "bubble-float-3 3s ease-in-out infinite 1s",
       },
     },
   },

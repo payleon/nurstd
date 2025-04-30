@@ -42,7 +42,7 @@ export function Header({ toggleSidebar }: HeaderProps) {
                 fill="none"
               />
               
-              {/* Blue liquid inside the flask */}
+              {/* Blue liquid inside the flask with wave animation */}
               <path 
                 className="animate-liquid"
                 d="M6.5 15.5c0 0 2.286-0.975 5.5-0.5c3.214 0.475 5.5 0.5 5.5 0.5v4.5h-11v-4.5z" 
@@ -50,7 +50,7 @@ export function Header({ toggleSidebar }: HeaderProps) {
                 opacity="0.8"
               />
               
-              {/* Bubbles in the liquid */}
+              {/* Bubbles in the liquid with float animation */}
               <circle 
                 className="animate-bubble-1" 
                 cx="10" 
