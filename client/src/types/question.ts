@@ -43,12 +43,22 @@ export interface FillInBlankQuestion extends BaseQuestion {
 // Hotspot Question
 export interface HotspotQuestion extends BaseQuestion {
   type: 'hotspot';
-  imageUrl: string;
-  hotspotAreas: {
+  imagePath: string; // Changed from imageUrl to match server schema
+  correctAreas: {
     id: string;
-    coords: number[];
-    isCorrect: boolean;
-    feedback?: string;
+    x: number;  // x coordinate percentage from left
+    y: number;  // y coordinate percentage from top
+    width: number; // width percentage
+    height: number; // height percentage
+    label?: string;
+  }[];
+  distractorAreas?: {
+    id: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    label?: string;
   }[];
 }
 

@@ -474,19 +474,102 @@ export function QuestionRenderer({
               <div className="hotspot-image-wrapper relative">
                 <img 
                   src={question.imagePath} 
-                  alt={question.title} 
+                  alt={question.title || 'Hotspot question image'} 
                   className="max-w-full h-auto"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = "https://placehold.co/600x400/e2e8f0/475569?text=Image+Not+Found";
                   }}
                 />
-                {/* Clickable hotspot areas would be rendered here */}
+                {/* Interactive hotspot areas */}
                 <div className="absolute inset-0">
-                  {/* We'll implement the interactive hotspot areas in the next iteration */}
-                  <div className="text-center p-4 bg-gray-100 bg-opacity-70">
-                    <p className="text-gray-700">Image interaction will be implemented soon</p>
-                  </div>
+                  {/* Render correct areas */}
+                  {question.correctAreas.map((area) => (
+                    <div
+                      key={area.id}
+                      className={`absolute cursor-pointer ${
+                        selectedAnswers.includes(area.id)
+                          ? 'bg-blue-500 bg-opacity-40 border-2 border-blue-700'
+                          : showRationale
+                            ? 'bg-green-500 bg-opacity-30 border-2 border-green-600'
+                            : 'hover:bg-blue-200 hover:bg-opacity-30'
+                      }`}
+                      style={{
+                        left: `${area.x}%`,
+                        top: `${area.y}%`,
+                        width: `${area.width}%`,
+                        height: `${area.height}%`,
+                      }}
+                      onClick={() => {
+                        if (!showRationale) {
+                          const newSelectedAnswers = [...selectedAnswers];
+                          // Toggle selection
+                          if (newSelectedAnswers.includes(area.id)) {
+                            setSelectedAnswers(newSelectedAnswers.filter(id => id !== area.id));
+                          } else {
+                            newSelectedAnswers.push(area.id);
+                            setSelectedAnswers(newSelectedAnswers);
+                          }
+                        }
+                      }}
+                      aria-label={area.label || `Hotspot area ${area.id}`}
+                    >
+                      {showRationale && (
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-green-700 border border-green-600">
+                          <CheckCircle2 className="h-4 w-4" />
+                        </div>
+                      )}
+                      {selectedAnswers.includes(area.id) && !showRationale && (
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-blue-700 border border-blue-600">
+                          <span className="font-bold text-sm">✓</span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                  
+                  {/* Render distractor areas if any */}
+                  {question.distractorAreas?.map((area) => (
+                    <div
+                      key={area.id}
+                      className={`absolute cursor-pointer ${
+                        selectedAnswers.includes(area.id)
+                          ? 'bg-blue-500 bg-opacity-40 border-2 border-blue-700'
+                          : showRationale
+                            ? 'bg-red-500 bg-opacity-30 border-2 border-red-600'
+                            : 'hover:bg-blue-200 hover:bg-opacity-30'
+                      }`}
+                      style={{
+                        left: `${area.x}%`,
+                        top: `${area.y}%`,
+                        width: `${area.width}%`,
+                        height: `${area.height}%`,
+                      }}
+                      onClick={() => {
+                        if (!showRationale) {
+                          const newSelectedAnswers = [...selectedAnswers];
+                          // Toggle selection
+                          if (newSelectedAnswers.includes(area.id)) {
+                            setSelectedAnswers(newSelectedAnswers.filter(id => id !== area.id));
+                          } else {
+                            newSelectedAnswers.push(area.id);
+                            setSelectedAnswers(newSelectedAnswers);
+                          }
+                        }
+                      }}
+                      aria-label={area.label || `Hotspot area ${area.id}`}
+                    >
+                      {showRationale && (
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-red-700 border border-red-600">
+                          <XCircle className="h-4 w-4" />
+                        </div>
+                      )}
+                      {selectedAnswers.includes(area.id) && !showRationale && (
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-blue-700 border border-blue-600">
+                          <span className="font-bold text-sm">✓</span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
