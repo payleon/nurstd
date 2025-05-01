@@ -53,7 +53,7 @@ export function TestList({ onSelectTest }: TestListProps) {
 
   return (
     <div>
-      {/* Welcome Card */}
+      {/* Welcome Card - Moved to the top */}
       <div className="neuro-card mb-6 bg-[#4B9CD3] text-white overflow-hidden neuro-noise">
         <div className="p-6">
           <h2 className="text-3xl font-bold mb-3 uppercase tracking-tight">Welcome to NURS'TD NCLEX Prep</h2>
