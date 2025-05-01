@@ -48,455 +48,192 @@ export function QuestionRenderer({
   const [showHint, setShowHint] = useState(false);
   const [showKeyPoints, setShowKeyPoints] = useState(false);
   const [highlightedText, setHighlightedText] = useState("");
-  const [highlights, setHighlights] = useState<string[]>([]);
   const [showReferencePopup, setShowReferencePopup] = useState(false);
   const [showKeywordList, setShowKeywordList] = useState(false);
 
-  const questionContentRef = useRef<HTMLDivElement>(null);
+  // References for the question (hardcoded for now, would come from data in real app)
+  const references = [
+    "Potter, P. A., & Perry, A. G. (2021). Fundamentals of nursing (10th ed.). Mosby.",
+    "Lewis, S. L., Bucher, L., Heitkemper, M. M., & Harding, M. M. (2022). Medical-surgical nursing: Assessment and management of clinical problems (11th ed.). Elsevier.",
+    "Ignatavicius, D. D., Workman, M. L., & Rebar, C. R. (2021). Medical-surgical nursing: Concepts for interprofessional collaborative care (10th ed.). Elsevier."
+  ];
 
-  // Define question type checks
-  const isSingleChoice = question.type === "mc";
-  const isMultiChoice = question.type === "sata";
+  // Keywords for popup glossary (hardcoded for now)
+  const keywords = [
+    { word: "Hypoxemia", definition: "Abnormally low oxygen content in arterial blood." },
+    { word: "Perfusion", definition: "The passage of fluid through the circulatory system to an organ or tissue." },
+    { word: "Tachycardia", definition: "Abnormally rapid heart rate, usually defined as greater than 100 beats per minute." }
+  ];
+
+  // Determine question type
+  const isMultiChoice = question.type === "mc";
+  const isSelectAll = question.type === "sata";
   const isFillInBlank = question.type === "fill_in_blank";
   const isHotspot = question.type === "hotspot";
   const isOrderedResponse = question.type === "ordered-response";
   const isChartExhibit = question.type === "chart-exhibit";
 
-  // Type guards for type safety
-  // For multiple choice questions
-  const hasMCChoices = (q: Question): q is Extract<Question, { type: "mc" }> => {
-    return q.type === "mc";
-  };
-
-  // For select all that apply questions
-  const hasSATAChoices = (q: Question): q is Extract<Question, { type: "sata" }> => {
-    return q.type === "sata";
-  };
-
-  // For fill in the blank questions
-  const hasFillInBlank = (q: Question): q is Extract<Question, { type: "fill_in_blank" }> => {
-    return q.type === "fill_in_blank";
-  };
-
-  // For hotspot questions
-  const hasHotspotAreas = (q: Question): q is Extract<Question, { type: "hotspot" }> => {
-    return q.type === "hotspot";
-  };
-
-  // For ordered response questions
-  const hasOrderedItems = (q: Question): q is Extract<Question, { type: "ordered-response" }> => {
-    return q.type === "ordered-response";
-  };
-
-  // For chart exhibit questions
-  const hasChartExhibit = (q: Question): q is Extract<Question, { type: "chart-exhibit" }> => {
-    return q.type === "chart-exhibit" && 
-           'exhibitType' in q && 
-           'exhibitData' in q && 
-           'questions' in q &&
-           Array.isArray(q.questions);
-  };
-
-  // Reset state when question changes
+  // Update answers based on props changes
   useEffect(() => {
-    if (isOrderedResponse && hasOrderedItems(question) && question.items?.length > 0) {
-      // For ordered response questions, initialize with item IDs in their current order
-      // if no user answer is provided
-      const initialOrder = Array.isArray(userAnswer) && userAnswer.length > 0 
-        ? userAnswer 
-        : question.items.map(item => item.id);
-      setSelectedAnswers(initialOrder);
-    } else {
-      setSelectedAnswers(Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []);
-    }
-    
-    setTextAnswer(typeof userAnswer === 'string' ? userAnswer : '');
-    setShowHint(false);
-    setShowKeyPoints(false);
-    setHighlights([]);
-    setShowReferencePopup(false);
-  }, [question.id, userAnswer, isOrderedResponse]);
-
-  // Helper function to get correct answer(s) regardless of question type
-  const getCorrectAnswer = (q: Question): string | string[] => {
-    try {
-      if (hasMCChoices(q)) {
-        if (!q.correctAnswer) return "Missing answer";
-        return q.correctAnswer;
-      } else if (hasSATAChoices(q)) {
-        if (!q.correctAnswer || !Array.isArray(q.correctAnswer)) return ["Missing answers"];
-        return q.correctAnswer;
-      } else if (q.type === "fill_in_blank") {
-        if (!q.correctAnswer) return "Missing answer";
-        return q.correctAnswer;
-      } else if (hasHotspotAreas(q)) {
-        if (!q.correctAreas || !Array.isArray(q.correctAreas) || q.correctAreas.length === 0) {
-          return ["No correct areas defined"];
-        }
-        return q.correctAreas.map(area => area.id);
-      } else if (hasOrderedItems(q)) {
-        if (!q.correctOrder || !Array.isArray(q.correctOrder) || q.correctOrder.length === 0) {
-          return ["No correct order defined"];
-        }
-        return q.correctOrder;
-      } else if (hasChartExhibit(q)) {
-        // This assumes we're showing the first sub-question by default
-        if (!q.questions || !Array.isArray(q.questions) || q.questions.length === 0) {
-          return "No questions defined";
-        }
-        const firstQuestion = q.questions[0];
-        if (!firstQuestion || !firstQuestion.correctAnswer) {
-          return "Missing answer for first question";
-        }
-        return firstQuestion.correctAnswer;
+    if (Array.isArray(userAnswer)) {
+      setSelectedAnswers(userAnswer);
+    } else if (userAnswer && typeof userAnswer === 'string') {
+      if (isFillInBlank) {
+        setTextAnswer(userAnswer);
+      } else {
+        setSelectedAnswers([userAnswer]);
       }
-      return "";
-    } catch (error) {
-      console.error("Error in getCorrectAnswer:", error);
-      return "Error retrieving answer";
     }
-  };
+  }, [userAnswer, isFillInBlank]);
 
-  // Mock data for demonstration
-  const hint = "Look for interventions that ensure patient safety first.";
-  const keyPoints = [
-    "Remember the ABCs (Airway, Breathing, Circulation) of patient care",
-    "Prioritize Maslow's hierarchy when determining needs",
-    "Consider therapeutic communication principles"
-  ];
-  const keywords = [
-    { word: "prioritize", definition: "To arrange in order of importance" },
-    { word: "safety", definition: "Freedom from harm or danger" },
-    { word: "assess", definition: "To evaluate or estimate" }
-  ];
-  const references = [
-    "Potter, P., & Perry, A. (2021). Fundamentals of Nursing, 10th ed.",
-    "Lewis, S. (2019). Medical-Surgical Nursing, 11th ed."
-  ];
+  // Initialize ordered response items state on load
+  useEffect(() => {
+    if (isOrderedResponse && hasOrderedItems(question) && 
+        (!selectedAnswers.length || selectedAnswers.length !== question.items.length)) {
+      // If no selection yet, or selection is incomplete, initialize with current order
+      const initialOrder = question.items.map(item => item.id);
+      setSelectedAnswers(initialOrder);
+    }
+  }, [question, isOrderedResponse, selectedAnswers.length]);
 
-  const handleAnswerSelect = (answerId: string) => {
-    if (isSingleChoice) {
+  // Handle multi-choice selection
+  const handleAnswerSelect = (choiceId: string) => {
+    let newSelectedAnswers: string[];
+
+    if (isMultiChoice) {
       // For multiple choice, only one answer can be selected
-      setSelectedAnswers([answerId]);
-      onAnswer(answerId);
-    } else if (isMultiChoice) {
-      // For select all that apply
-      const updatedAnswers = selectedAnswers.includes(answerId)
-        ? selectedAnswers.filter(id => id !== answerId)
-        : [...selectedAnswers, answerId];
+      newSelectedAnswers = [choiceId];
+    } else if (isSelectAll) {
+      // For select-all-that-apply, toggle the selection
+      if (selectedAnswers.includes(choiceId)) {
+        newSelectedAnswers = selectedAnswers.filter(id => id !== choiceId);
+      } else {
+        newSelectedAnswers = [...selectedAnswers, choiceId];
+      }
+    } else {
+      // Default
+      newSelectedAnswers = [choiceId];
+    }
 
-      setSelectedAnswers(updatedAnswers);
-      // Don't submit answer automatically for SATA questions
-      // User will need to click a submit button
+    setSelectedAnswers(newSelectedAnswers);
+    
+    // For select-all-that-apply, automatically notify parent
+    if (isSelectAll) {
+      onAnswer(newSelectedAnswers);
     }
   };
 
-  const handleTextInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setTextAnswer(value);
-    // Don't submit answer automatically for fill-in-blank
-    // User will need to press Enter or click a submit button
+  // Handle fill-in-blank text input
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTextAnswer(e.target.value);
   };
 
+  // Handle submit button click
   const handleSubmitAnswer = () => {
     if (isMultiChoice) {
-      onAnswer(selectedAnswers);
+      onAnswer(selectedAnswers[0] || "");
     } else if (isFillInBlank) {
       onAnswer(textAnswer);
     } else if (isHotspot) {
-      // Also submit hotspot answers when the submit button is clicked
       onAnswer(selectedAnswers);
-    } else if (isOrderedResponse) {
-      // Also submit ordered response answers when the submit button is clicked
+    } else {
       onAnswer(selectedAnswers);
     }
   };
 
-  const handleMouseUp = () => {
-    const selection = window.getSelection();
-    if (selection && selection.toString().trim().length > 0) {
-      setHighlightedText(selection.toString().trim());
-
-      // Save the highlight
-      if (selection.toString().trim().length > 0) {
-        setHighlights([...highlights, selection.toString().trim()]);
-      }
-    }
+  // Type guard functions
+  const hasMCChoices = (q: Question): q is Extract<Question, { type: "mc" }> => {
+    return q.type === "mc" && 'choices' in q;
   };
 
-  // Letter options for choices
-  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  const hasSATAChoices = (q: Question): q is Extract<Question, { type: "sata" }> => {
+    return q.type === "sata" && 'choices' in q;
+  };
+
+  const hasFillInBlank = (q: Question): q is Extract<Question, { type: "fill_in_blank" }> => {
+    return q.type === "fill_in_blank" && 'answer' in q;
+  };
+
+  const hasHotspotAreas = (q: Question): q is Extract<Question, { type: "hotspot" }> => {
+    return q.type === "hotspot" && 'correctAreas' in q;
+  };
+
+  const hasOrderedItems = (q: Question): q is Extract<Question, { type: "ordered-response" }> => {
+    return q.type === "ordered-response" && 'items' in q;
+  };
+
+  const hasChartExhibit = (q: Question): q is Extract<Question, { type: "chart-exhibit" }> => {
+    return q.type === "chart-exhibit" && 'exhibitType' in q;
+  };
+
+  const getCorrectAnswer = (q: Question): string | string[] => {
+    if (q.type === "mc" && 'correctAnswer' in q) {
+      return q.correctAnswer;
+    } else if (q.type === "sata" && 'correctAnswers' in q) {
+      return q.correctAnswers;
+    } else if (q.type === "fill_in_blank" && 'answer' in q) {
+      return q.answer;
+    } else if (q.type === "hotspot" && 'correctAreas' in q) {
+      return q.correctAreas.map(area => area.id);
+    } else if (q.type === "ordered-response" && 'correctOrder' in q) {
+      return q.correctOrder;
+    } else if (q.type === "chart-exhibit" && 'questions' in q && q.questions.length > 0) {
+      return q.questions[0].correctAnswer;
+    }
+    return "";
+  };
+
+  // Define letters for choice labeling
+  const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
   return (
-    <div className="question-container">
-      {/* Toolbar */}
-      <div className="flex justify-between items-center mb-4 bg-gray-100 rounded-md p-2">
-        <div className="flex space-x-2">
-          <button 
-            className={`text-sm px-3 py-1.5 rounded-md flex items-center ${showHint ? 'bg-amber-100 text-amber-800' : 'hover:bg-gray-200'}`}
-            onClick={() => setShowHint(!showHint)}
-          >
-            <Lightbulb className="h-4 w-4 mr-1.5" />
-            Hint
-          </button>
-          <button 
-            className={`text-sm px-3 py-1.5 rounded-md flex items-center ${showKeyPoints ? 'bg-blue-100 text-blue-800' : 'hover:bg-gray-200'}`}
-            onClick={() => setShowKeyPoints(!showKeyPoints)}
-          >
-            <Info className="h-4 w-4 mr-1.5" />
-            Key Points
-          </button>
-        </div>
-        <div className="flex space-x-2">
-          <button 
-            className="text-sm px-3 py-1.5 rounded-md flex items-center hover:bg-gray-200"
-            onClick={() => setShowKeywordList(!showKeywordList)}
-          >
-            <Menu className="h-4 w-4 mr-1.5" />
-            Keywords
-          </button>
-          <button 
-            className="text-sm px-3 py-1.5 rounded-md flex items-center hover:bg-gray-200"
-            onClick={() => setShowReferencePopup(!showReferencePopup)}
-          >
-            <Bookmark className="h-4 w-4 mr-1.5" />
-            References
-          </button>
-        </div>
-      </div>
-
-      {/* Hint Panel */}
-      <AnimatePresence>
-        {showHint && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="mb-4 overflow-hidden"
-          >
-            <div className="bg-amber-50 border border-amber-200 rounded-md p-3 flex items-start">
-              <Lightbulb className="h-5 w-5 text-amber-500 mr-2 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="font-medium text-amber-800 mb-1">Study Hint</p>
-                <p className="text-sm text-amber-700">{hint}</p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Key Points Panel */}
-      <AnimatePresence>
-        {showKeyPoints && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="mb-4 overflow-hidden"
-          >
-            <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
-              <p className="font-medium text-blue-800 mb-2 flex items-center">
-                <Info className="h-5 w-5 mr-2" />
-                NCLEX Key Points
-              </p>
-              <ul className="space-y-1 text-sm text-blue-700 pl-7 list-disc">
-                {keyPoints.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Question Content */}
-      <div 
-        className="question-header mb-6 bg-white rounded-lg p-5 border border-gray-200 shadow-sm"
-        ref={questionContentRef}
-        onMouseUp={handleMouseUp}
-      >
-        <div className="question-stem">
-          <div className="flex justify-between items-start mb-3">
-            <span className="inline-flex items-center justify-center rounded-md bg-[#13294B] text-xs font-medium text-white px-2 py-1">NCLEX-RN Style</span>
-            <span className="text-xs text-gray-500">
-              {question.type === "mc" ? "Multiple Choice" : 
-              question.type === "sata" ? "Select All That Apply" : 
-              question.type === "fill_in_blank" ? "Fill in the Blank" :
-              question.type === "hotspot" ? "Hotspot" :
-              question.type === "ordered-response" ? "Ordered Response" :
-              question.type === "chart-exhibit" ? "Chart/Exhibit" : 
-              "Unknown Question Type"}
-            </span>
-          </div>
-
-          <h3 className="text-lg font-bold text-[#13294B] mb-3">{question.title}</h3>
-          <div className="text-gray-800 text-base leading-relaxed">
-            {/* Real questions would have complex formatting - this is a simplified version */}
-            <p>{question.text}</p>
-
-            {/* Highlighted text will be shown here */}
-            {highlights.length > 0 && (
-              <div className="mt-3 pt-3 border-t border-dashed border-gray-300">
-                <p className="text-xs font-medium text-gray-500 mb-2 flex items-center">
-                  <Highlighter className="h-3 w-3 mr-1" />
-                  Your Highlights:
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {highlights.map((highlight, idx) => (
-                    <span key={idx} className="bg-yellow-100 text-xs px-2 py-1 rounded">
-                      "{highlight}"
-                    </span>
-                  ))}
-                </div>
+    <div className="question-renderer">
+      {/* Question Text */}
+      <div className="question-text mb-6">
+        <h3 className="text-lg font-medium mb-3 text-gray-900">{question.title || "Question"}:</h3>
+        <p className="text-gray-800 whitespace-pre-line">{question.text}</p>
+        
+        {/* Optional hint button */}
+        {question.hint && (
+          <div className="mt-3">
+            <button 
+              onClick={() => setShowHint(!showHint)}
+              className="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              <Info className="h-4 w-4 mr-1" />
+              {showHint ? "Hide Hint" : "Show Hint"}
+            </button>
+            
+            {showHint && (
+              <div className="mt-2 p-3 bg-indigo-50 rounded-md text-sm text-indigo-700">
+                {question.hint}
               </div>
             )}
           </div>
-        </div>
+        )}
       </div>
 
-      {/* Answer Section */}
-      <div className="answer-section bg-white rounded-lg p-5 border border-gray-200 shadow-sm">
-        <div className="text-sm text-gray-500 mb-4 flex items-center">
-          <p>
-            {isFillInBlank ? (
-              "Type your answer in the field below"
-            ) : isMultiChoice ? (
-              <span className="flex items-center">
-                <span className="font-medium mr-1">Instructions:</span> Select all answer choices that apply
-              </span>
-            ) : isHotspot ? (
-              <span className="flex items-center">
-                <span className="font-medium mr-1">Instructions:</span> Click on the correct area(s) in the image
-              </span>
-            ) : isOrderedResponse ? (
-              <span className="flex items-center">
-                <span className="font-medium mr-1">Instructions:</span> Use the arrows to reorder the items
-              </span>
-            ) : isChartExhibit ? (
-              <span className="flex items-center">
-                <span className="font-medium mr-1">Instructions:</span> Review the chart data and answer the questions
-              </span>
-            ) : (
-              <span className="flex items-center">
-                <span className="font-medium mr-1">Instructions:</span> Select the correct answer
-              </span>
-            )}
-          </p>
-        </div>
-
-        {/* Fill in the Blank Question */}
-        {isFillInBlank && (
-          <div className="fill-blank-container">
-            <input
-              type="text"
-              className="w-full p-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#4B9CD3] focus:border-transparent text-base"
-              placeholder="Enter your answer here..."
-              value={textAnswer}
-              onChange={handleTextInputChange}
-              disabled={showRationale}
-            />
-          </div>
-        )}
-
-        {/* Multiple Choice Questions */}
-        {isSingleChoice && hasMCChoices(question) && (
-          <div className="answer-options space-y-3">
-            {!question.choices || !Array.isArray(question.choices) || question.choices.length === 0 ? (
-              <p className="text-red-500">Error: No choices available for this question</p>
-            ) : (
-              question.choices.map((choice, index) => {
-                // Determine if this choice is selected
+      {/* Answer area */}
+      <div className="answer-area mb-6">
+        {/* Multiple Choice Question */}
+        {isMultiChoice && hasMCChoices(question) && (
+          <div className="multiple-choice-container">
+            <div className="space-y-3">
+              {question.choices.map((choice, index) => {
                 const isSelected = selectedAnswers.includes(choice.id);
-                // Determine if this choice is correct (only show when showing rationale)
-                const isCorrectChoice = showRationale && question.correctAnswer === choice.id;
-                // Style based on selection and correct/incorrect status
-                let choiceStyle = "border border-gray-300 p-3 transition-colors flex items-start";
-                if (showRationale) {
-                  if (isSelected && isCorrectChoice) {
-                    // Selected and correct
-                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start";
-                  } else if (isSelected && !isCorrectChoice) {
-                    // Selected but incorrect
-                    choiceStyle = "border-2 border-red-500 bg-red-50 p-3 flex items-start";
-                  } else if (!isSelected && isCorrectChoice) {
-                    // Not selected but was correct
-                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start opacity-70";
-                  } else {
-                    // Not selected and not correct
-                    choiceStyle = "border border-gray-300 p-3 flex items-start opacity-70";
-                  }
-                } else {
-                  // Normal mode - just show selected state
-                  choiceStyle = isSelected 
-                    ? "border-2 border-[#4B9CD3] bg-blue-50 p-3 flex items-start" 
-                    : "border border-gray-300 p-3 hover:border-[#4B9CD3] hover:bg-blue-50 transition-colors flex items-start";
-                }
+                const isCorrectChoice = showRationale && 
+                  hasMCChoices(question) && 
+                  question.correctAnswer === choice.id;
                 
-                return (
-                  <div 
-                    key={choice.id}
-                    className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
-                    onClick={() => !showRationale && handleAnswerSelect(choice.id)}
-                  >
-                    <div className="flex-shrink-0 mr-3">
-                      <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium text-sm
-                        ${isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'}`}
-                      >
-                        {letters[index]}
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-gray-800">{choice.text}</p>
-                    </div>
-                    {showRationale && (
-                      <div className="flex-shrink-0 ml-2">
-                        {isCorrectChoice ? (
-                          <CheckCircle2 className="h-5 w-5 text-green-600" />
-                        ) : isSelected ? (
-                          <XCircle className="h-5 w-5 text-red-600" />
-                        ) : null}
-                      </div>
-                    )}
-                  </div>
-                );
-              })
-            )}
-          </div>
-        )}
-
-        {/* Select All That Apply (SATA) Questions */}
-        {isMultiChoice && hasSATAChoices(question) && (
-          <div className="answer-options space-y-3">
-            {!question.choices || !Array.isArray(question.choices) || question.choices.length === 0 ? (
-              <p className="text-red-500">Error: No choices available for this question</p>
-            ) : (
-              question.choices.map((choice, index) => {
-                // Determine if this choice is selected
-                const isSelected = selectedAnswers.includes(choice.id);
-                // Determine if this choice is correct (only show when showing rationale)
-                const isCorrectChoice = showRationale && (question.correctAnswer as string[]).includes(choice.id);
-                
-                // Style based on selection and correct/incorrect status
-                let choiceStyle = "border border-gray-300 p-3 transition-colors flex items-start";
+                let choiceStyle;
                 if (showRationale) {
-                  if (isSelected && isCorrectChoice) {
-                    // Selected and correct
-                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start";
-                  } else if (isSelected && !isCorrectChoice) {
-                    // Selected but incorrect
-                    choiceStyle = "border-2 border-red-500 bg-red-50 p-3 flex items-start";
-                  } else if (!isSelected && isCorrectChoice) {
-                    // Not selected but was correct
-                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start opacity-70";
-                  } else {
-                    // Not selected and not correct
-                    choiceStyle = "border border-gray-300 p-3 flex items-start opacity-70";
-                  }
+                  choiceStyle = isCorrectChoice
+                    ? "border-2 border-green-200 bg-green-50 p-3 flex items-start"
+                    : isSelected
+                    ? "border-2 border-amber-200 bg-amber-50 p-3 flex items-start" 
+                    : "border border-gray-300 p-3 flex items-start";
                 } else {
-                  // Normal mode - just show selected state
-                  choiceStyle = isSelected 
+                  choiceStyle = isSelected
                     ? "border-2 border-[#4B9CD3] bg-blue-50 p-3 flex items-start" 
                     : "border border-gray-300 p-3 hover:border-[#4B9CD3] hover:bg-blue-50 transition-colors flex items-start";
                 }
@@ -528,7 +265,103 @@ export function QuestionRenderer({
                     )}
                   </div>
                 );
-              })
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Select All That Apply Question */}
+        {isSelectAll && hasSATAChoices(question) && (
+          <div className="select-all-container">
+            <p className="mb-3 text-sm font-medium text-gray-500">
+              Select all that apply:
+            </p>
+            <div className="space-y-3">
+              {question.choices.map((choice, index) => {
+                const isSelected = selectedAnswers.includes(choice.id);
+                const isCorrectChoice = showRationale && 
+                  hasSATAChoices(question) && 
+                  question.correctAnswers.includes(choice.id);
+                
+                let choiceStyle;
+                if (showRationale) {
+                  if (isCorrectChoice && isSelected) {
+                    choiceStyle = "border-2 border-green-200 bg-green-50";
+                  } else if (isCorrectChoice && !isSelected) {
+                    choiceStyle = "border-2 border-amber-200 bg-amber-50"; // Should have selected
+                  } else if (!isCorrectChoice && isSelected) {
+                    choiceStyle = "border-2 border-red-200 bg-red-50"; // Incorrect selection
+                  } else {
+                    choiceStyle = "border border-gray-300"; // Correctly didn't select
+                  }
+                } else {
+                  choiceStyle = isSelected
+                    ? "border-2 border-[#4B9CD3] bg-blue-50" 
+                    : "border border-gray-300 hover:border-[#4B9CD3] hover:bg-blue-50 transition-colors";
+                }
+                
+                return (
+                  <div 
+                    key={choice.id}
+                    className={`p-3 ${choiceStyle} rounded-md flex items-start ${showRationale ? '' : 'cursor-pointer'}`}
+                    onClick={() => !showRationale && handleAnswerSelect(choice.id)}
+                  >
+                    <div className="flex-shrink-0 mr-3">
+                      <div className={`h-6 w-6 flex items-center justify-center rounded-md
+                        ${isSelected ? 'bg-[#4B9CD3] text-white' : 'border border-gray-300 bg-white'}`}
+                      >
+                        {isSelected && <CheckCircle2 className="h-4 w-4" />}
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-gray-800">{choice.text}</p>
+                    </div>
+                    {showRationale && (
+                      <div className="flex-shrink-0 ml-2">
+                        {isCorrectChoice ? (
+                          <CheckCircle2 className="h-5 w-5 text-green-600" />
+                        ) : isSelected ? (
+                          <XCircle className="h-5 w-5 text-red-600" />
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Fill in the Blank Question */}
+        {isFillInBlank && hasFillInBlank(question) && (
+          <div className="fill-in-blank-container">
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Answer:
+              </label>
+              <input 
+                type="text" 
+                value={textAnswer}
+                onChange={handleTextChange}
+                disabled={showRationale}
+                className={`w-full p-3 border ${showRationale ? 'bg-gray-100' : ''} rounded-md focus:ring-blue-500 focus:border-blue-500`}
+                placeholder="Type your answer here"
+              />
+            </div>
+            
+            {showRationale && (
+              <div className="mt-3">
+                <div className={`p-3 rounded-md ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200'}`}>
+                  <div className="font-medium mb-1">
+                    {isCorrect ? "Correct" : "Incorrect"} - Expected Answer:
+                  </div>
+                  <div className="text-sm">
+                    {Array.isArray(question.answer) 
+                      ? question.answer.join(" OR ") 
+                      : question.answer}
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         )}
@@ -536,77 +369,95 @@ export function QuestionRenderer({
         {/* Hotspot Question */}
         {isHotspot && hasHotspotAreas(question) && (
           <div className="hotspot-container">
-            {!question.image ? (
+            {!question.imagePath ? (
               <p className="text-red-500">Error: No image provided for hotspot question</p>
             ) : (
               <div className="relative border border-gray-300 rounded-md overflow-hidden">
                 <img 
-                  src={question.image} 
+                  src={question.imagePath} 
                   alt="Hotspot image" 
                   className="max-w-full h-auto"
                   onError={(e) => {
-                    console.error(`Failed to load hotspot image: ${question.image}`);
+                    console.error(`Failed to load hotspot image: ${question.imagePath}`);
                     e.currentTarget.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f3f4f6" /><text x="50%" y="50%" font-family="sans-serif" font-size="14" text-anchor="middle" fill="%236b7280">Image failed to load</text></svg>';
                   }}
                   loading="eager"
                 />
-                {question.areas && Array.isArray(question.areas) && question.areas.map(area => {
-                  const isSelected = selectedAnswers.includes(area.id);
-                  const isCorrect = showRationale && hasHotspotAreas(question) && 
-                    question.correctAreas && 
-                    question.correctAreas.some(correctArea => correctArea.id === area.id);
+                
+                {/* Combine correctAreas and distractorAreas for combined display */}
+                {(() => {
+                  // Create a combined array of all areas to display
+                  const allAreas = [
+                    ...question.correctAreas.map(area => ({
+                      ...area,
+                      top: area.y, // Map y to top for positioning
+                      left: area.x, // Map x to left for positioning
+                      isCorrect: true
+                    })),
+                    ...(question.distractorAreas || []).map(area => ({
+                      ...area,
+                      top: area.y,
+                      left: area.x,
+                      isCorrect: false
+                    }))
+                  ];
                   
-                  let areaStyle = "absolute border-2 cursor-pointer";
-                  if (showRationale) {
-                    if (isSelected && isCorrect) {
-                      areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-50";
-                    } else if (isSelected && !isCorrect) {
-                      areaStyle = "absolute border-2 border-red-500 bg-red-200 bg-opacity-50";
-                    } else if (!isSelected && isCorrect) {
-                      areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-30";
+                  return allAreas.map(area => {
+                    const isSelected = selectedAnswers.includes(area.id);
+                    const isCorrect = area.isCorrect;
+                    
+                    let areaStyle = "absolute border-2 cursor-pointer";
+                    if (showRationale) {
+                      if (isSelected && isCorrect) {
+                        areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-50";
+                      } else if (isSelected && !isCorrect) {
+                        areaStyle = "absolute border-2 border-red-500 bg-red-200 bg-opacity-50";
+                      } else if (!isSelected && isCorrect) {
+                        areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-30";
+                      } else {
+                        areaStyle = "absolute border-2 border-transparent";
+                      }
                     } else {
-                      areaStyle = "absolute border-2 border-transparent";
+                      areaStyle = isSelected 
+                        ? "absolute border-2 border-blue-500 bg-blue-200 bg-opacity-50" 
+                        : "absolute border-2 border-transparent hover:border-blue-500 hover:bg-blue-100 hover:bg-opacity-25 cursor-pointer";
                     }
-                  } else {
-                    areaStyle = isSelected 
-                      ? "absolute border-2 border-blue-500 bg-blue-200 bg-opacity-50" 
-                      : "absolute border-2 border-transparent hover:border-blue-500 hover:bg-blue-100 hover:bg-opacity-25 cursor-pointer";
-                  }
-                  
-                  return (
-                    <div
-                      key={area.id}
-                      className={areaStyle}
-                      style={{
-                        top: `${area.top}%`,
-                        left: `${area.left}%`,
-                        width: `${area.width}%`,
-                        height: `${area.height}%`,
-                      }}
-                      onClick={() => {
-                        if (!showRationale) {
-                          const newSelectedAreas = isSelected
-                            ? selectedAnswers.filter(id => id !== area.id)
-                            : [...selectedAnswers, area.id];
-                          setSelectedAnswers(newSelectedAreas);
-                          // Notify parent component
-                          onAnswer(newSelectedAreas);
-                        }
-                      }}
-                    >
-                      {showRationale && isCorrect && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <CheckCircle2 className="h-8 w-8 text-green-600" />
-                        </div>
-                      )}
-                      {showRationale && isSelected && !isCorrect && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <XCircle className="h-8 w-8 text-red-600" />
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                    
+                    return (
+                      <div
+                        key={area.id}
+                        className={areaStyle}
+                        style={{
+                          top: `${area.top}%`,
+                          left: `${area.left}%`,
+                          width: `${area.width}%`,
+                          height: `${area.height}%`,
+                        }}
+                        onClick={() => {
+                          if (!showRationale) {
+                            const newSelectedAreas = isSelected
+                              ? selectedAnswers.filter(id => id !== area.id)
+                              : [...selectedAnswers, area.id];
+                            setSelectedAnswers(newSelectedAreas);
+                            // Notify parent component
+                            onAnswer(newSelectedAreas);
+                          }
+                        }}
+                      >
+                        {showRationale && isCorrect && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <CheckCircle2 className="h-8 w-8 text-green-600" />
+                          </div>
+                        )}
+                        {showRationale && isSelected && !isCorrect && (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <XCircle className="h-8 w-8 text-red-600" />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  });
+                })()}
               </div>
             )}
           </div>
@@ -620,72 +471,81 @@ export function QuestionRenderer({
                 <p className="font-medium">Error: No items provided for ordered response question</p>
               </div>
             ) : (
-              <div className="space-y-2">
-                {question.items.map((item, index) => (
-                <div 
-                  key={item.id}
-                  className="p-3 bg-white border border-gray-300 rounded-md flex items-center"
-                >
-                  <div className="flex-shrink-0 mr-3">
-                    <div className="h-7 w-7 rounded-full bg-gray-100 flex items-center justify-center font-medium text-gray-700">
-                      {index + 1}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[15px]">{item.text}</p>
-                  </div>
-                  <div className="flex-shrink-0 flex space-x-1">
-                    {/* Move up button - disabled for first item */}
-                    <button
-                      className={`p-1 rounded ${index === 0 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
-                      disabled={index === 0 || showRationale}
-                      onClick={() => {
-                        if (index > 0 && !showRationale) {
-                          // Get current selected answers (item IDs in order)
-                          const currentOrder = [...selectedAnswers];
-                          // Swap this item with the one above it
-                          const temp = currentOrder[index];
-                          currentOrder[index] = currentOrder[index - 1];
-                          currentOrder[index - 1] = temp;
-                          // Update state and notify parent
-                          setSelectedAnswers(currentOrder);
-                          onAnswer(currentOrder);
-                        }
-                      }}
-                      aria-label="Move item up"
-                    >
-                      <ChevronUp className="h-4 w-4" />
-                    </button>
-                    {/* Move down button - disabled for last item */}
-                    <button
-                      className={`p-1 rounded ${index === question.items.length - 1 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
-                      disabled={index === question.items.length - 1 || showRationale}
-                      onClick={() => {
-                        if (index < question.items.length - 1 && !showRationale) {
-                          // Get current selected answers (item IDs in order)
-                          const currentOrder = [...selectedAnswers];
-                          // Swap this item with the one below it
-                          const temp = currentOrder[index];
-                          currentOrder[index] = currentOrder[index + 1];
-                          currentOrder[index + 1] = temp;
-                          // Update state and notify parent
-                          setSelectedAnswers(currentOrder);
-                          onAnswer(currentOrder);
-                        }
-                      }}
-                      aria-label="Move item down"
-                    >
-                      <ChevronDown className="h-4 w-4" />
-                    </button>
-                  </div>
+              <>
+                <div className="space-y-2">
+                  {question.items.map((item, index) => {
+                    // Find the actual position of this item in the selected answer array
+                    const currentPosition = selectedAnswers.findIndex(id => id === item.id);
+                    const displayIndex = currentPosition !== -1 ? currentPosition : index;
+                    
+                    return (
+                      <div 
+                        key={item.id}
+                        className="p-3 bg-white border border-gray-300 rounded-md flex items-center"
+                      >
+                        <div className="flex-shrink-0 mr-3">
+                          <div className="h-7 w-7 rounded-full bg-gray-100 flex items-center justify-center font-medium text-gray-700">
+                            {displayIndex + 1}
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-[15px]">{item.text}</p>
+                        </div>
+                        <div className="flex-shrink-0 flex space-x-1">
+                          {/* Move up button - disabled for first item */}
+                          <button
+                            className={`p-1 rounded ${displayIndex === 0 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
+                            disabled={displayIndex === 0 || showRationale}
+                            onClick={() => {
+                              if (displayIndex > 0 && !showRationale) {
+                                // Get current selected answers (item IDs in order)
+                                const currentOrder = [...selectedAnswers];
+                                // Swap this item with the one above it
+                                const temp = currentOrder[displayIndex];
+                                currentOrder[displayIndex] = currentOrder[displayIndex - 1];
+                                currentOrder[displayIndex - 1] = temp;
+                                // Update state and notify parent
+                                setSelectedAnswers(currentOrder);
+                                onAnswer(currentOrder);
+                              }
+                            }}
+                            aria-label="Move item up"
+                          >
+                            <ChevronUp className="h-4 w-4" />
+                          </button>
+                          {/* Move down button - disabled for last item */}
+                          <button
+                            className={`p-1 rounded ${displayIndex === question.items.length - 1 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
+                            disabled={displayIndex === question.items.length - 1 || showRationale}
+                            onClick={() => {
+                              if (displayIndex < question.items.length - 1 && !showRationale) {
+                                // Get current selected answers (item IDs in order)
+                                const currentOrder = [...selectedAnswers];
+                                // Swap this item with the one below it
+                                const temp = currentOrder[displayIndex];
+                                currentOrder[displayIndex] = currentOrder[displayIndex + 1];
+                                currentOrder[displayIndex + 1] = temp;
+                                // Update state and notify parent
+                                setSelectedAnswers(currentOrder);
+                                onAnswer(currentOrder);
+                              }
+                            }}
+                            aria-label="Move item down"
+                          >
+                            <ChevronDown className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
-            </div>
-            <div className="mt-4 text-center text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
-              <p className="font-medium">Instructions:</p>
-              <p>Use the up/down arrows to reorder the items. The current order will be submitted as your answer.</p>
-              <p className="text-xs mt-1 text-gray-500">(Full drag and drop functionality coming soon)</p>
-            </div>
+                <div className="mt-4 text-center text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
+                  <p className="font-medium">Instructions:</p>
+                  <p>Use the up/down arrows to reorder the items. The current order will be submitted as your answer.</p>
+                  <p className="text-xs mt-1 text-gray-500">(Full drag and drop functionality coming soon)</p>
+                </div>
+              </>
+            )}
           </div>
         )}
 
