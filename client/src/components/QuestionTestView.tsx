@@ -91,11 +91,14 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     if (currentQuestionIndex < questions.length - 1) {
       // Hide rationale when moving to next question if not answered
       const nextQuestionId = questions[currentQuestionIndex + 1]?.id;
-      if (nextQuestionId && !userAnswers[nextQuestionId]) {
-        setShowRationale({
-          ...showRationale,
-          [nextQuestionId]: false
-        });
+      if (nextQuestionId) {
+        // If the question has been answered, show the rationale, otherwise hide it
+        const showRationaleForNext = userAnswers[nextQuestionId] !== undefined;
+        setShowRationale(prevState => ({
+          ...prevState,
+          [nextQuestionId]: showRationaleForNext
+        }));
+        console.log(`Going to next question ${nextQuestionId}, rationale shown:`, showRationaleForNext);
       }
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
@@ -119,11 +122,11 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const handleAnswerSubmit = (answer: string | string[]) => {
     if (!currentQuestion) return;
     
-    // Store the answer
-    setUserAnswers({
-      ...userAnswers,
+    // Store the answer using functional update pattern
+    setUserAnswers(prevAnswers => ({
+      ...prevAnswers,
       [currentQuestion.id]: answer
-    });
+    }));
     
     // Check if the answer is correct
     checkAnswer(currentQuestion.id, answer);
@@ -192,11 +195,11 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
       }
     }
     
-    // Update answer correctness state
-    setAnswerCorrectness({
-      ...answerCorrectness,
+    // Update answer correctness state using functional update for consistency
+    setAnswerCorrectness(prevState => ({
+      ...prevState,
       [questionId]: isCorrect
-    });
+    }));
     
     // Track incorrect answers for review
     if (!isCorrect && !incorrectAnswers.includes(questionId)) {
