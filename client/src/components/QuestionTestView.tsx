@@ -55,6 +55,14 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const questions = typeof questionsData === 'object' && questionsData?.questions ? questionsData.questions : [];
   const currentQuestion = questions[currentQuestionIndex] || null;
   const totalQuestions = questions.length;
+
+  // Debug current state of showRationale when it changes
+  useEffect(() => {
+    if (currentQuestion) {
+      console.log(`DEBUG - Current showRationale state for question ${currentQuestion.id}:`, showRationale);
+      console.log(`DEBUG - Should show rationale for current question: ${showRationale[currentQuestion.id] || false}`);
+    }
+  }, [showRationale, currentQuestion]);
   
   // Mock decreasing timer for demo purposes
   useEffect(() => {
@@ -626,6 +634,36 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                 />
               )}
             </div>
+            
+            {/* Submit Answer Button - Only show if question hasn't been answered yet */}
+            {currentQuestion && userAnswers[currentQuestion.id] === undefined && (
+              <div className="px-6 pb-4 border-b border-gray-200">
+                <button
+                  onClick={() => {
+                    // Only allow submission if an answer has been selected
+                    const answer = document.querySelector('.multiple-choice-container .bg-blue-50');
+                    if (answer) {
+                      const choiceId = answer.getAttribute('data-choice-id');
+                      if (choiceId) {
+                        console.log('Manual submit with choice:', choiceId);
+                        handleAnswerSubmit(choiceId);
+                      }
+                    } else {
+                      console.log('No answer selected');
+                      toast({
+                        title: "No Answer Selected",
+                        description: "Please select an answer before submitting.",
+                        variant: "destructive"
+                      });
+                    }
+                  }}
+                  className="w-full py-3 px-6 bg-[#13294B] text-white rounded-md hover:bg-[#0A1E3A] transition-colors flex items-center justify-center"
+                >
+                  <span className="font-medium">Submit Answer</span>
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+            )}
             
             {/* Question Navigation - Improved professional style */}
             <div className="bg-[#f3f4f6] p-4 border-t border-gray-200 flex justify-between items-center">

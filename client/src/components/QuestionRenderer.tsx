@@ -244,6 +244,7 @@ export function QuestionRenderer({
                 return (
                   <div 
                     key={choice.id}
+                    data-choice-id={choice.id}
                     className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
                     onClick={() => !showRationale && handleAnswerSelect(choice.id)}
                   >
