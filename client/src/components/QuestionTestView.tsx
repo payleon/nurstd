@@ -544,8 +544,8 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
               </div>
             </div>
             
-            {/* Submit exam button */}
-            <div className="p-4 bg-gray-50 border-t border-gray-200">
+            {/* Submit exam button - Desktop only */}
+            <div className="p-4 bg-gray-50 border-t border-gray-200 hidden md:block">
               <button 
                 className={`w-full py-2.5 px-4 rounded font-medium transition-colors flex items-center justify-center ${
                   Object.keys(userAnswers).length === totalQuestions
