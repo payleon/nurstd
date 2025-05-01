@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Question } from "@shared/schema";
-import { AlertCircle, CheckCircle2, Lightbulb, Info, XCircle, ArrowRight, Highlighter, Bookmark, Eye, EyeOff, MoveRight, Menu } from "lucide-react";
+import { AlertCircle, CheckCircle2, Lightbulb, Info, XCircle, ArrowRight, Highlighter, Bookmark, Eye, EyeOff, MoveRight, Menu, ChevronUp, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface QuestionRendererProps {
@@ -54,22 +54,68 @@ export function QuestionRenderer({
 
   const questionContentRef = useRef<HTMLDivElement>(null);
 
-  // Reset state when question changes
-  useEffect(() => {
-    setSelectedAnswers(Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []);
-    setTextAnswer(typeof userAnswer === 'string' ? userAnswer : '');
-    setShowHint(false);
-    setShowKeyPoints(false);
-    setHighlights([]);
-    setShowReferencePopup(false);
-  }, [question.id, userAnswer]);
-
+  // Define question type checks
   const isSingleChoice = question.type === "mc";
   const isMultiChoice = question.type === "sata";
   const isFillInBlank = question.type === "fill_in_blank";
   const isHotspot = question.type === "hotspot";
   const isOrderedResponse = question.type === "ordered-response";
   const isChartExhibit = question.type === "chart-exhibit";
+
+  // Type guards for type safety
+  // For multiple choice questions
+  const hasMCChoices = (q: Question): q is Extract<Question, { type: "mc" }> => {
+    return q.type === "mc";
+  };
+
+  // For select all that apply questions
+  const hasSATAChoices = (q: Question): q is Extract<Question, { type: "sata" }> => {
+    return q.type === "sata";
+  };
+
+  // For fill in the blank questions
+  const hasFillInBlank = (q: Question): q is Extract<Question, { type: "fill_in_blank" }> => {
+    return q.type === "fill_in_blank";
+  };
+
+  // For hotspot questions
+  const hasHotspotAreas = (q: Question): q is Extract<Question, { type: "hotspot" }> => {
+    return q.type === "hotspot";
+  };
+
+  // For ordered response questions
+  const hasOrderedItems = (q: Question): q is Extract<Question, { type: "ordered-response" }> => {
+    return q.type === "ordered-response";
+  };
+
+  // For chart exhibit questions
+  const hasChartExhibit = (q: Question): q is Extract<Question, { type: "chart-exhibit" }> => {
+    return q.type === "chart-exhibit" && 
+           'exhibitType' in q && 
+           'exhibitData' in q && 
+           'questions' in q &&
+           Array.isArray(q.questions);
+  };
+
+  // Reset state when question changes
+  useEffect(() => {
+    if (isOrderedResponse && hasOrderedItems(question) && question.items?.length > 0) {
+      // For ordered response questions, initialize with item IDs in their current order
+      // if no user answer is provided
+      const initialOrder = Array.isArray(userAnswer) && userAnswer.length > 0 
+        ? userAnswer 
+        : question.items.map(item => item.id);
+      setSelectedAnswers(initialOrder);
+    } else {
+      setSelectedAnswers(Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []);
+    }
+    
+    setTextAnswer(typeof userAnswer === 'string' ? userAnswer : '');
+    setShowHint(false);
+    setShowKeyPoints(false);
+    setHighlights([]);
+    setShowReferencePopup(false);
+  }, [question.id, userAnswer, isOrderedResponse]);
 
   // Type guards for type safety
   // Type guard functions
@@ -688,14 +734,57 @@ export function QuestionRenderer({
                   <div className="flex-1">
                     <p className="text-[15px]">{item.text}</p>
                   </div>
-                  <div className="flex-shrink-0">
-                    <Menu className="h-5 w-5 text-gray-400" />
+                  <div className="flex-shrink-0 flex space-x-1">
+                    {/* Move up button - disabled for first item */}
+                    <button
+                      className={`p-1 rounded ${index === 0 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
+                      disabled={index === 0 || showRationale}
+                      onClick={() => {
+                        if (index > 0 && !showRationale) {
+                          // Get current selected answers (item IDs in order)
+                          const currentOrder = [...selectedAnswers];
+                          // Swap this item with the one above it
+                          const temp = currentOrder[index];
+                          currentOrder[index] = currentOrder[index - 1];
+                          currentOrder[index - 1] = temp;
+                          // Update state and notify parent
+                          setSelectedAnswers(currentOrder);
+                          onAnswer(currentOrder);
+                        }
+                      }}
+                      aria-label="Move item up"
+                    >
+                      <ChevronUp className="h-4 w-4" />
+                    </button>
+                    {/* Move down button - disabled for last item */}
+                    <button
+                      className={`p-1 rounded ${index === question.items.length - 1 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
+                      disabled={index === question.items.length - 1 || showRationale}
+                      onClick={() => {
+                        if (index < question.items.length - 1 && !showRationale) {
+                          // Get current selected answers (item IDs in order)
+                          const currentOrder = [...selectedAnswers];
+                          // Swap this item with the one below it
+                          const temp = currentOrder[index];
+                          currentOrder[index] = currentOrder[index + 1];
+                          currentOrder[index + 1] = temp;
+                          // Update state and notify parent
+                          setSelectedAnswers(currentOrder);
+                          onAnswer(currentOrder);
+                        }
+                      }}
+                      aria-label="Move item down"
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="mt-4 text-center text-sm text-gray-500">
-              <p>Drag and drop functionality will be implemented soon</p>
+            <div className="mt-4 text-center text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
+              <p className="font-medium">Instructions:</p>
+              <p>Use the up/down arrows to reorder the items. The current order will be submitted as your answer.</p>
+              <p className="text-xs mt-1 text-gray-500">(Full drag and drop functionality coming soon)</p>
             </div>
           </div>
         )}
