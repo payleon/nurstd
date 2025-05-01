@@ -193,6 +193,12 @@ export function QuestionRenderer({
       onAnswer(selectedAnswers);
     } else if (isFillInBlank) {
       onAnswer(textAnswer);
+    } else if (isHotspot) {
+      // Also submit hotspot answers when the submit button is clicked
+      onAnswer(selectedAnswers);
+    } else if (isOrderedResponse) {
+      // Also submit ordered response answers when the submit button is clicked
+      onAnswer(selectedAnswers);
     }
   };
 
@@ -584,10 +590,15 @@ export function QuestionRenderer({
                           const newSelectedAnswers = [...selectedAnswers];
                           // Toggle selection
                           if (newSelectedAnswers.includes(area.id)) {
-                            setSelectedAnswers(newSelectedAnswers.filter(id => id !== area.id));
+                            const filtered = newSelectedAnswers.filter(id => id !== area.id);
+                            setSelectedAnswers(filtered);
+                            // Notify parent component of answer change
+                            onAnswer(filtered);
                           } else {
                             newSelectedAnswers.push(area.id);
                             setSelectedAnswers(newSelectedAnswers);
+                            // Notify parent component of answer change
+                            onAnswer(newSelectedAnswers);
                           }
                         }
                       }}
@@ -628,10 +639,15 @@ export function QuestionRenderer({
                           const newSelectedAnswers = [...selectedAnswers];
                           // Toggle selection
                           if (newSelectedAnswers.includes(area.id)) {
-                            setSelectedAnswers(newSelectedAnswers.filter(id => id !== area.id));
+                            const filtered = newSelectedAnswers.filter(id => id !== area.id);
+                            setSelectedAnswers(filtered);
+                            // Notify parent component of answer change
+                            onAnswer(filtered);
                           } else {
                             newSelectedAnswers.push(area.id);
                             setSelectedAnswers(newSelectedAnswers);
+                            // Notify parent component of answer change
+                            onAnswer(newSelectedAnswers);
                           }
                         }
                       }}
@@ -733,6 +749,15 @@ export function QuestionRenderer({
                       <div 
                         key={choice.id}
                         className="flex items-start p-3 border border-gray-200 rounded-md hover:border-blue-300 cursor-pointer"
+                        onClick={() => {
+                          if (!showRationale) {
+                            // For simplicity, we're just using the first subquestion
+                            // In a real app with multiple sub-questions, you'd need to track state separately
+                            setSelectedAnswers([choice.id]);
+                            // Notify parent component of the chosen answer
+                            onAnswer([choice.id]);
+                          }
+                        }}
                       >
                         <div className="flex-shrink-0 mr-3">
                           <div className="h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center font-medium text-gray-700 text-sm">
@@ -751,8 +776,8 @@ export function QuestionRenderer({
           </div>
         )}
 
-        {/* Submit Button for SATA and Fill in Blank questions - hidden in test view */}
-        {!showRationale && (isMultiChoice || isFillInBlank) && !hideSubmitButton && (
+        {/* Submit Button for applicable questions - hidden in test view */}
+        {!showRationale && (isMultiChoice || isFillInBlank || isHotspot || isChartExhibit) && !hideSubmitButton && (
           <div className="mt-6">
             <button
               onClick={handleSubmitAnswer}
