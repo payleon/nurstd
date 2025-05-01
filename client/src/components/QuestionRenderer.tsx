@@ -544,6 +544,11 @@ export function QuestionRenderer({
                   src={question.image} 
                   alt="Hotspot image" 
                   className="max-w-full h-auto"
+                  onError={(e) => {
+                    console.error(`Failed to load hotspot image: ${question.image}`);
+                    e.currentTarget.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f3f4f6" /><text x="50%" y="50%" font-family="sans-serif" font-size="14" text-anchor="middle" fill="%236b7280">Image failed to load</text></svg>';
+                  }}
+                  loading="eager"
                 />
                 {question.areas && Array.isArray(question.areas) && question.areas.map(area => {
                   const isSelected = selectedAnswers.includes(area.id);
@@ -610,8 +615,13 @@ export function QuestionRenderer({
         {/* Ordered Response Question */}
         {isOrderedResponse && hasOrderedItems(question) && (
           <div className="ordered-response-container">
-            <div className="space-y-2">
-              {question.items.map((item, index) => (
+            {!question.items || !Array.isArray(question.items) || question.items.length === 0 ? (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-md text-red-700">
+                <p className="font-medium">Error: No items provided for ordered response question</p>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {question.items.map((item, index) => (
                 <div 
                   key={item.id}
                   className="p-3 bg-white border border-gray-300 rounded-md flex items-center"
