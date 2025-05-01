@@ -106,10 +106,11 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
       // When going back to a previous question, show rationale if it was answered
       const prevQuestionId = questions[currentQuestionIndex - 1]?.id;
       if (prevQuestionId && userAnswers[prevQuestionId] !== undefined) {
-        setShowRationale({
-          ...showRationale,
+        setShowRationale(prevState => ({
+          ...prevState,
           [prevQuestionId]: true
-        });
+        }));
+        console.log(`Going to previous question ${prevQuestionId}, rationale shown:`, true);
       }
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
@@ -118,19 +119,23 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const handleAnswerSubmit = (answer: string | string[]) => {
     if (!currentQuestion) return;
     
+    // Store the answer
     setUserAnswers({
       ...userAnswers,
       [currentQuestion.id]: answer
     });
     
-    // If this is a change to an existing answer, check if it was correct
+    // Check if the answer is correct
     checkAnswer(currentQuestion.id, answer);
     
-    // Show rationale after answering
-    setShowRationale({
-      ...showRationale,
+    // Show rationale after answering - ensure this is properly updated
+    setShowRationale(prevState => ({
+      ...prevState,
       [currentQuestion.id]: true
-    });
+    }));
+
+    // Log the state for debugging
+    console.log(`Question ${currentQuestion.id} answered, showing rationale:`, true);
   };
   
   const checkAnswer = (questionId: number, answer: string | string[]) => {
@@ -241,10 +246,11 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
       const questionId = question.id;
       // If the question has been answered, make sure the rationale is shown
       if (userAnswers[questionId] !== undefined) {
-        setShowRationale({
-          ...showRationale,
+        setShowRationale(prevState => ({
+          ...prevState,
           [questionId]: true
-        });
+        }));
+        console.log(`Going to question ${questionId}, rationale shown:`, true);
       }
     }
     setCurrentQuestionIndex(index);
