@@ -233,6 +233,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
+  
+  // Get questions filtered by category and limited by count
+  app.get("/api/questions/filter", async (req, res) => {
+    try {
+      // Extract query parameters
+      const category = req.query.category as string;
+      const count = req.query.count ? parseInt(req.query.count as string) : 10; // Default to 10 if not specified
+      
+      const publishedDir = path.join(import.meta.dirname, "../published");
+      const questionsFilePath = path.join(publishedDir, "all_questions.json");
+      
+      try {
+        await fs.access(questionsFilePath);
+      } catch (error) {
+        console.error("Questions file not found at", questionsFilePath);
+        return res.json({ 
+          questions: [] 
+        });
+      }
+      
+      // Read and parse the questions file
+      const questionsContent = await fs.readFile(questionsFilePath, 'utf-8');
+      const questionsData = JSON.parse(questionsContent);
+      
+      // Validate the data
+      const validatedData = QuestionsResponseSchema.parse(questionsData);
+      
+      // Filter questions by category if specified
+      let filteredQuestions = validatedData.questions;
+      if (category && category !== 'all') {
+        filteredQuestions = filteredQuestions.filter(q => {
+          // Check both title and category fields
+          const titleMatch = q.title && q.title.toLowerCase().includes(category.toLowerCase());
+          const categoryMatch = q.category && q.category.toLowerCase().includes(category.toLowerCase());
+          return titleMatch || categoryMatch;
+        });
+      }
+      
+      // Limit the number of questions
+      const limitedQuestions = filteredQuestions.slice(0, count);
+      
+      // Return the filtered and limited questions
+      res.json({ questions: limitedQuestions });
+      
+    } catch (error) {
+      console.error("Error filtering questions:", error);
+      res.status(500).json({ 
+        message: "Failed to filter questions",
+        error: (error as Error).message 
+      });
+    }
+  });
 
   // Get a specific question by ID
   app.get("/api/questions/:id", async (req, res) => {
