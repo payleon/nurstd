@@ -641,14 +641,20 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                 <button
                   onClick={() => {
                     // Only allow submission if an answer has been selected
+                    // Find any selected choice on the current question
                     const answer = document.querySelector('.multiple-choice-container .bg-blue-50');
                     if (answer) {
                       const choiceId = answer.getAttribute('data-choice-id');
                       if (choiceId) {
                         console.log('Manual submit with choice:', choiceId);
-                        handleAnswerSubmit(choiceId);
+                        // Add delay to ensure DOM updates have been processed
+                        setTimeout(() => {
+                          handleAnswerSubmit(choiceId);
+                        }, 50);
                       }
                     } else {
+                      // Check for other question types...
+                      // For now, just show a toast message
                       console.log('No answer selected');
                       toast({
                         title: "No Answer Selected",

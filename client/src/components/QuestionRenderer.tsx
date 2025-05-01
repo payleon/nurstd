@@ -172,10 +172,10 @@ export function QuestionRenderer({
   const getCorrectAnswer = (q: Question): string | string[] => {
     if (q.type === "mc" && 'correctAnswer' in q) {
       return q.correctAnswer;
-    } else if (q.type === "sata" && 'correctAnswers' in q) {
-      return q.correctAnswers;
-    } else if (q.type === "fill_in_blank" && 'answer' in q) {
-      return q.answer;
+    } else if (q.type === "sata" && 'correctAnswer' in q) {
+      return q.correctAnswer;
+    } else if (q.type === "fill_in_blank" && 'correctAnswer' in q) {
+      return q.correctAnswer;
     } else if (q.type === "hotspot" && 'correctAreas' in q) {
       return q.correctAreas.map(area => area.id);
     } else if (q.type === "ordered-response" && 'correctOrder' in q) {
@@ -197,7 +197,7 @@ export function QuestionRenderer({
         <p className="text-gray-800 whitespace-pre-line">{question.text}</p>
         
         {/* Optional hint button */}
-        {question.hint && (
+        {'hint' in question && question.hint && (
           <div className="mt-3">
             <button 
               onClick={() => setShowHint(!showHint)}
@@ -285,7 +285,7 @@ export function QuestionRenderer({
                 const isSelected = selectedAnswers.includes(choice.id);
                 const isCorrectChoice = showRationale && 
                   hasSATAChoices(question) && 
-                  question.correctAnswers.includes(choice.id);
+                  question.correctAnswer.includes(choice.id);
                 
                 let choiceStyle;
                 if (showRationale) {
@@ -360,9 +360,9 @@ export function QuestionRenderer({
                     {isCorrect ? "Correct" : "Incorrect"} - Expected Answer:
                   </div>
                   <div className="text-sm">
-                    {Array.isArray(question.answer) 
-                      ? question.answer.join(" OR ") 
-                      : question.answer}
+                    {Array.isArray(question.correctAnswer) 
+                      ? question.correctAnswer.join(" OR ") 
+                      : question.correctAnswer}
                   </div>
                 </div>
               </div>
