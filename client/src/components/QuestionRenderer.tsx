@@ -117,42 +117,6 @@ export function QuestionRenderer({
     setShowReferencePopup(false);
   }, [question.id, userAnswer, isOrderedResponse]);
 
-  // Type guards for type safety
-  // Type guard functions
-  // For multiple choice questions
-  const hasMCChoices = (q: Question): q is Extract<Question, { type: "mc" }> => {
-    return q.type === "mc";
-  };
-
-  // For select all that apply questions
-  const hasSATAChoices = (q: Question): q is Extract<Question, { type: "sata" }> => {
-    return q.type === "sata";
-  };
-
-  // For fill in the blank questions
-  const hasFillInBlank = (q: Question): q is Extract<Question, { type: "fill_in_blank" }> => {
-    return q.type === "fill_in_blank";
-  };
-
-  // For hotspot questions
-  const hasHotspotAreas = (q: Question): q is Extract<Question, { type: "hotspot" }> => {
-    return q.type === "hotspot";
-  };
-
-  // For ordered response questions
-  const hasOrderedItems = (q: Question): q is Extract<Question, { type: "ordered-response" }> => {
-    return q.type === "ordered-response";
-  };
-
-  // For chart exhibit questions
-  const hasChartExhibit = (q: Question): q is Extract<Question, { type: "chart-exhibit" }> => {
-    return q.type === "chart-exhibit" && 
-           'exhibitType' in q && 
-           'exhibitData' in q && 
-           'questions' in q &&
-           Array.isArray(q.questions);
-  };
-
   // Helper function to get correct answer(s) regardless of question type
   const getCorrectAnswer = (q: Question): string | string[] => {
     try {
@@ -408,7 +372,7 @@ export function QuestionRenderer({
               </span>
             ) : isOrderedResponse ? (
               <span className="flex items-center">
-                <span className="font-medium mr-1">Instructions:</span> Drag and drop the items in the correct order
+                <span className="font-medium mr-1">Instructions:</span> Use the arrows to reorder the items
               </span>
             ) : isChartExhibit ? (
               <span className="flex items-center">
@@ -440,160 +404,131 @@ export function QuestionRenderer({
         {isSingleChoice && hasMCChoices(question) && (
           <div className="answer-options space-y-3">
             {!question.choices || !Array.isArray(question.choices) || question.choices.length === 0 ? (
-              <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-md text-yellow-700">
-                <p>No answer choices available for this question.</p>
-              </div>
+              <p className="text-red-500">Error: No choices available for this question</p>
             ) : (
-              <>
-                {question.choices.map((choice, index) => {
-                  if (!choice || !choice.id) {
-                    return (
-                      <div key={`invalid-${index}`} className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700">
-                        <p>Invalid choice data at position {index + 1}</p>
-                      </div>
-                    );
+              question.choices.map((choice, index) => {
+                // Determine if this choice is selected
+                const isSelected = selectedAnswers.includes(choice.id);
+                // Determine if this choice is correct (only show when showing rationale)
+                const isCorrectChoice = showRationale && question.correctAnswer === choice.id;
+                // Style based on selection and correct/incorrect status
+                let choiceStyle = "border border-gray-300 p-3 transition-colors flex items-start";
+                if (showRationale) {
+                  if (isSelected && isCorrectChoice) {
+                    // Selected and correct
+                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start";
+                  } else if (isSelected && !isCorrectChoice) {
+                    // Selected but incorrect
+                    choiceStyle = "border-2 border-red-500 bg-red-50 p-3 flex items-start";
+                  } else if (!isSelected && isCorrectChoice) {
+                    // Not selected but was correct
+                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start opacity-70";
+                  } else {
+                    // Not selected and not correct
+                    choiceStyle = "border border-gray-300 p-3 flex items-start opacity-70";
                   }
-
-                  const isSelected = selectedAnswers.includes(choice.id);
-                  const isCorrectChoice = Array.isArray(question.correctAnswer) 
-  ? question.correctAnswer.includes(choice.id)
-  : question.correctAnswer === choice.id || 
-    (typeof choice.id === 'string' && typeof question.correctAnswer === 'string' && 
-     choice.id.toUpperCase() === question.correctAnswer.toUpperCase());
-
-                  // Determine styling for answered questions when showing rationale
-                  let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
-                  if (showRationale) {
-                    if (isCorrectChoice) {
-                      choiceStyle = "border-2 border-green-500 bg-green-50";
-                    } else if (isSelected && !isCorrectChoice) {
-                      choiceStyle = "border-2 border-red-500 bg-red-50";
-                    }
-                  } else if (isSelected) {
-                    choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
-                  }
-
-                  return (
-                    <div 
-                      key={choice.id}
-                      className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
-                      onClick={() => !showRationale && handleAnswerSelect(choice.id)}
-                    >
-                      <div className="flex items-start p-4">
-                        <div className="flex-shrink-0 mr-3">
-                          <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium ${
-                            isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'
-                          }`}>
-                            {letters[index]}
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-[15px] leading-relaxed">{choice.text}</p>
-                        </div>
+                } else {
+                  // Normal mode - just show selected state
+                  choiceStyle = isSelected 
+                    ? "border-2 border-[#4B9CD3] bg-blue-50 p-3 flex items-start" 
+                    : "border border-gray-300 p-3 hover:border-[#4B9CD3] hover:bg-blue-50 transition-colors flex items-start";
+                }
+                
+                return (
+                  <div 
+                    key={choice.id}
+                    className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
+                    onClick={() => !showRationale && handleAnswerSelect(choice.id)}
+                  >
+                    <div className="flex-shrink-0 mr-3">
+                      <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium text-sm
+                        ${isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'}`}
+                      >
+                        {letters[index]}
                       </div>
-
-                      {/* Rationale specific to each option - shown when the answer is revealed */}
-                      {showRationale && (
-                        <div className={`text-sm p-3 rounded-b-md ${
-                          isCorrectChoice ? 'bg-green-100 text-green-800' : 
-                          (isSelected && !isCorrectChoice) ? 'bg-red-100 text-red-800' : 'hidden'
-                        }`}>
-                          {isCorrectChoice ? (
-                            <div className="flex items-start">
-                              <CheckCircle2 className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                              <span><span className="font-semibold">Correct. </span>This answer represents the best nursing action for the situation described.</span>
-                            </div>
-                          ) : (isSelected && !isCorrectChoice) ? (
-                            <div className="flex items-start">
-                              <XCircle className="h-4 w-4 text-red-600 mr-2 mt-0.5" />
-                              <span><span className="font-semibold">Incorrect. </span>This option is not the best nursing action for this scenario.</span>
-                            </div>
-                          ) : null}
-                        </div>
-                      )}
                     </div>
-                  );
-                })}
-              </>
+                    <div className="flex-1">
+                      <p className="text-gray-800">{choice.text}</p>
+                    </div>
+                    {showRationale && (
+                      <div className="flex-shrink-0 ml-2">
+                        {isCorrectChoice ? (
+                          <CheckCircle2 className="h-5 w-5 text-green-600" />
+                        ) : isSelected ? (
+                          <XCircle className="h-5 w-5 text-red-600" />
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
+                );
+              })
             )}
           </div>
         )}
 
-        {/* Select All That Apply Questions */}
+        {/* Select All That Apply (SATA) Questions */}
         {isMultiChoice && hasSATAChoices(question) && (
           <div className="answer-options space-y-3">
             {!question.choices || !Array.isArray(question.choices) || question.choices.length === 0 ? (
-              <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-md text-yellow-700">
-                <p>No answer choices available for this question.</p>
-              </div>
+              <p className="text-red-500">Error: No choices available for this question</p>
             ) : (
-              <>
-                {question.choices.map((choice, index) => {
-                  if (!choice || !choice.id) {
-                    return (
-                      <div key={`invalid-${index}`} className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700">
-                        <p>Invalid choice data at position {index + 1}</p>
-                      </div>
-                    );
+              question.choices.map((choice, index) => {
+                // Determine if this choice is selected
+                const isSelected = selectedAnswers.includes(choice.id);
+                // Determine if this choice is correct (only show when showing rationale)
+                const isCorrectChoice = showRationale && (question.correctAnswer as string[]).includes(choice.id);
+                
+                // Style based on selection and correct/incorrect status
+                let choiceStyle = "border border-gray-300 p-3 transition-colors flex items-start";
+                if (showRationale) {
+                  if (isSelected && isCorrectChoice) {
+                    // Selected and correct
+                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start";
+                  } else if (isSelected && !isCorrectChoice) {
+                    // Selected but incorrect
+                    choiceStyle = "border-2 border-red-500 bg-red-50 p-3 flex items-start";
+                  } else if (!isSelected && isCorrectChoice) {
+                    // Not selected but was correct
+                    choiceStyle = "border-2 border-green-500 bg-green-50 p-3 flex items-start opacity-70";
+                  } else {
+                    // Not selected and not correct
+                    choiceStyle = "border border-gray-300 p-3 flex items-start opacity-70";
                   }
-
-                  const isSelected = selectedAnswers.includes(choice.id);
-                  const isCorrectChoice = Array.isArray(question.correctAnswer) && question.correctAnswer.includes(choice.id);
-
-                  // Determine styling for answered questions when showing rationale
-                  let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
-                  if (showRationale) {
-                    if (isCorrectChoice) {
-                      choiceStyle = "border-2 border-green-500 bg-green-50";
-                    } else if (isSelected && !isCorrectChoice) {
-                      choiceStyle = "border-2 border-red-500 bg-red-50";
-                    }
-                  } else if (isSelected) {
-                    choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
-                  }
-
-                  return (
-                    <div 
-                      key={choice.id}
-                      className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
-                      onClick={() => !showRationale && handleAnswerSelect(choice.id)}
-                    >
-                      <div className="flex items-start p-4">
-                        <div className="flex-shrink-0 mr-3">
-                          <div className={`h-7 w-7 rounded-full flex items-center justify-center font-medium ${
-                            isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'
-                          }`}>
-                            {letters[index]}
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-[15px] leading-relaxed">{choice.text}</p>
-                        </div>
+                } else {
+                  // Normal mode - just show selected state
+                  choiceStyle = isSelected 
+                    ? "border-2 border-[#4B9CD3] bg-blue-50 p-3 flex items-start" 
+                    : "border border-gray-300 p-3 hover:border-[#4B9CD3] hover:bg-blue-50 transition-colors flex items-start";
+                }
+                
+                return (
+                  <div 
+                    key={choice.id}
+                    className={`rounded-md ${choiceStyle} ${showRationale ? '' : 'cursor-pointer'}`}
+                    onClick={() => !showRationale && handleAnswerSelect(choice.id)}
+                  >
+                    <div className="flex-shrink-0 mr-3">
+                      <div className={`h-7 w-7 rounded flex items-center justify-center font-medium text-sm
+                        ${isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'}`}
+                      >
+                        {letters[index]}
                       </div>
-
-                      {/* Rationale specific to each option - shown when the answer is revealed */}
-                      {showRationale && (
-                        <div className={`text-sm p-3 rounded-b-md ${
-                          isCorrectChoice ? 'bg-green-100 text-green-800' : 
-                          (isSelected && !isCorrectChoice) ? 'bg-red-100 text-red-800' : 'hidden'
-                        }`}>
-                          {isCorrectChoice ? (
-                            <div className="flex items-start">
-                              <CheckCircle2 className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                              <span><span className="font-semibold">Correct. </span>This is one of the correct answers for this situation.</span>
-                            </div>
-                          ) : (isSelected && !isCorrectChoice) ? (
-                            <div className="flex items-start">
-                              <XCircle className="h-4 w-4 text-red-600 mr-2 mt-0.5" />
-                              <span><span className="font-semibold">Incorrect. </span>This option should not have been selected.</span>
-                            </div>
-                          ) : null}
-                        </div>
-                      )}
                     </div>
-                  );
-                })}
-              </>
+                    <div className="flex-1">
+                      <p className="text-gray-800">{choice.text}</p>
+                    </div>
+                    {showRationale && (
+                      <div className="flex-shrink-0 ml-2">
+                        {isCorrectChoice ? (
+                          <CheckCircle2 className="h-5 w-5 text-green-600" />
+                        ) : isSelected ? (
+                          <XCircle className="h-5 w-5 text-red-600" />
+                        ) : null}
+                      </div>
+                    )}
+                  </div>
+                );
+              })
             )}
           </div>
         )}
@@ -601,119 +536,74 @@ export function QuestionRenderer({
         {/* Hotspot Question */}
         {isHotspot && hasHotspotAreas(question) && (
           <div className="hotspot-container">
-            <div className="relative border border-gray-300 rounded-md overflow-hidden max-w-full">
-              <div className="hotspot-image-wrapper relative">
+            {!question.image ? (
+              <p className="text-red-500">Error: No image provided for hotspot question</p>
+            ) : (
+              <div className="relative border border-gray-300 rounded-md overflow-hidden">
                 <img 
-                  src={question.imagePath} 
-                  alt={question.title || 'Hotspot question image'} 
+                  src={question.image} 
+                  alt="Hotspot image" 
                   className="max-w-full h-auto"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = "https://placehold.co/600x400/e2e8f0/475569?text=Image+Not+Found";
-                  }}
                 />
-                {/* Interactive hotspot areas */}
-                <div className="absolute inset-0">
-                  {/* Render correct areas */}
-                  {question.correctAreas.map((area) => (
+                {question.areas && Array.isArray(question.areas) && question.areas.map(area => {
+                  const isSelected = selectedAnswers.includes(area.id);
+                  const isCorrect = showRationale && hasHotspotAreas(question) && 
+                    question.correctAreas && 
+                    question.correctAreas.some(correctArea => correctArea.id === area.id);
+                  
+                  let areaStyle = "absolute border-2 cursor-pointer";
+                  if (showRationale) {
+                    if (isSelected && isCorrect) {
+                      areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-50";
+                    } else if (isSelected && !isCorrect) {
+                      areaStyle = "absolute border-2 border-red-500 bg-red-200 bg-opacity-50";
+                    } else if (!isSelected && isCorrect) {
+                      areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-30";
+                    } else {
+                      areaStyle = "absolute border-2 border-transparent";
+                    }
+                  } else {
+                    areaStyle = isSelected 
+                      ? "absolute border-2 border-blue-500 bg-blue-200 bg-opacity-50" 
+                      : "absolute border-2 border-transparent hover:border-blue-500 hover:bg-blue-100 hover:bg-opacity-25 cursor-pointer";
+                  }
+                  
+                  return (
                     <div
                       key={area.id}
-                      className={`absolute cursor-pointer ${
-                        selectedAnswers.includes(area.id)
-                          ? 'bg-blue-500 bg-opacity-40 border-2 border-blue-700'
-                          : showRationale
-                            ? 'bg-green-500 bg-opacity-30 border-2 border-green-600'
-                            : 'hover:bg-blue-200 hover:bg-opacity-30'
-                      }`}
+                      className={areaStyle}
                       style={{
-                        left: `${area.x}%`,
-                        top: `${area.y}%`,
+                        top: `${area.top}%`,
+                        left: `${area.left}%`,
                         width: `${area.width}%`,
                         height: `${area.height}%`,
                       }}
                       onClick={() => {
                         if (!showRationale) {
-                          const newSelectedAnswers = [...selectedAnswers];
-                          // Toggle selection
-                          if (newSelectedAnswers.includes(area.id)) {
-                            const filtered = newSelectedAnswers.filter(id => id !== area.id);
-                            setSelectedAnswers(filtered);
-                            // Notify parent component of answer change
-                            onAnswer(filtered);
-                          } else {
-                            newSelectedAnswers.push(area.id);
-                            setSelectedAnswers(newSelectedAnswers);
-                            // Notify parent component of answer change
-                            onAnswer(newSelectedAnswers);
-                          }
+                          const newSelectedAreas = isSelected
+                            ? selectedAnswers.filter(id => id !== area.id)
+                            : [...selectedAnswers, area.id];
+                          setSelectedAnswers(newSelectedAreas);
+                          // Notify parent component
+                          onAnswer(newSelectedAreas);
                         }
                       }}
-                      aria-label={area.label || `Hotspot area ${area.id}`}
                     >
-                      {showRationale && (
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-green-700 border border-green-600">
-                          <CheckCircle2 className="h-4 w-4" />
+                      {showRationale && isCorrect && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <CheckCircle2 className="h-8 w-8 text-green-600" />
                         </div>
                       )}
-                      {selectedAnswers.includes(area.id) && !showRationale && (
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-blue-700 border border-blue-600">
-                          <span className="font-bold text-sm">✓</span>
+                      {showRationale && isSelected && !isCorrect && (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <XCircle className="h-8 w-8 text-red-600" />
                         </div>
                       )}
                     </div>
-                  ))}
-
-                  {/* Render distractor areas if any */}
-                  {question.distractorAreas?.map((area) => (
-                    <div
-                      key={area.id}
-                      className={`absolute cursor-pointer ${
-                        selectedAnswers.includes(area.id)
-                          ? 'bg-blue-500 bg-opacity-40 border-2 border-blue-700'
-                          : showRationale
-                            ? 'bg-red-500 bg-opacity-30 border-2 border-red-600'
-                            : 'hover:bg-blue-200 hover:bg-opacity-30'
-                      }`}
-                      style={{
-                        left: `${area.x}%`,
-                        top: `${area.y}%`,
-                        width: `${area.width}%`,
-                        height: `${area.height}%`,
-                      }}
-                      onClick={() => {
-                        if (!showRationale) {
-                          const newSelectedAnswers = [...selectedAnswers];
-                          // Toggle selection
-                          if (newSelectedAnswers.includes(area.id)) {
-                            const filtered = newSelectedAnswers.filter(id => id !== area.id);
-                            setSelectedAnswers(filtered);
-                            // Notify parent component of answer change
-                            onAnswer(filtered);
-                          } else {
-                            newSelectedAnswers.push(area.id);
-                            setSelectedAnswers(newSelectedAnswers);
-                            // Notify parent component of answer change
-                            onAnswer(newSelectedAnswers);
-                          }
-                        }
-                      }}
-                      aria-label={area.label || `Hotspot area ${area.id}`}
-                    >
-                      {showRationale && (
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-red-700 border border-red-600">
-                          <XCircle className="h-4 w-4" />
-                        </div>
-                      )}
-                      {selectedAnswers.includes(area.id) && !showRationale && (
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full w-6 h-6 flex items-center justify-center text-blue-700 border border-blue-600">
-                          <span className="font-bold text-sm">✓</span>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
-            </div>
+            )}
           </div>
         )}
 
@@ -955,7 +845,7 @@ export function QuestionRenderer({
               ))}
             </ul>
             <button 
-              className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 rounded-md text-sm transition-colors"
+              className="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md w-full hover:bg-gray-200 transition-colors"
               onClick={() => setShowReferencePopup(false)}
             >
               Close
@@ -968,17 +858,17 @@ export function QuestionRenderer({
       {showKeywordList && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowKeywordList(false)}>
           <div className="bg-white rounded-lg max-w-md w-full p-6" onClick={e => e.stopPropagation()}>
-            <h3 className="text-lg font-bold mb-3 text-[#13294B]">Important Keywords</h3>
+            <h3 className="text-lg font-bold mb-3 text-[#13294B]">Key Terms</h3>
             <div className="space-y-3">
               {keywords.map((keyword, idx) => (
                 <div key={idx} className="border-b border-gray-100 pb-2 last:border-0">
-                  <div className="font-medium text-[#13294B]">{keyword.word}</div>
+                  <div className="font-medium text-blue-700">{keyword.word}</div>
                   <div className="text-sm text-gray-600">{keyword.definition}</div>
                 </div>
               ))}
             </div>
             <button 
-              className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 rounded-md text-sm transition-colors"
+              className="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md w-full hover:bg-gray-200 transition-colors"
               onClick={() => setShowKeywordList(false)}
             >
               Close
