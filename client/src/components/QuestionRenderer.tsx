@@ -197,7 +197,7 @@ export function QuestionRenderer({
         <p className="text-gray-800 whitespace-pre-line">{question.text}</p>
         
         {/* Optional hint button */}
-        {'hint' in question && question.hint && (
+        {'hint' in question && (question as any).hint && (
           <div className="mt-3">
             <button 
               onClick={() => setShowHint(!showHint)}
@@ -209,7 +209,7 @@ export function QuestionRenderer({
             
             {showHint && (
               <div className="mt-2 p-3 bg-indigo-50 rounded-md text-sm text-indigo-700">
-                {question.hint}
+                {(question as any).hint}
               </div>
             )}
           </div>

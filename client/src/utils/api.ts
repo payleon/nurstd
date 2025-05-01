@@ -21,49 +21,45 @@ export async function fetchQuestions(): Promise<QuestionsResponse> {
 // Fetch questions filtered by category and limited by count
 export async function fetchQuizQuestions(category: string, count: number): Promise<QuestionsResponse> {
   try {
-    // Use the same endpoint but process the data client-side for simplicity
-    const response = await fetch('/api/questions');
+    // Map frontend category to backend category for filtering
+    let categoryParam = category;
+    if (category !== 'All') {
+      if (category === 'Medical-Surgical') {
+        categoryParam = 'Cardiac';
+      } else if (category === 'Pediatric') {
+        categoryParam = 'Pediatric';
+      } else if (category === 'Obstetric') {
+        categoryParam = 'Maternity';
+      } else if (category === 'Mental Health') {
+        categoryParam = 'Mental';
+      } else if (category === 'Pharmacology') {
+        categoryParam = 'Pharmacology';
+      } else if (category === 'Leadership') {
+        categoryParam = 'Leadership';
+      } else if (category === 'Fundamentals') {
+        categoryParam = 'Fundamentals';
+      }
+    }
+
+    // Now use the new filter endpoint
+    const response = await fetch(
+      `/api/questions/filter?${category === 'All' ? '' : `category=${categoryParam}&`}count=${count}`
+    );
     
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
     
     const data = await response.json() as QuestionsResponse;
+    console.log('Filtered questions response:', data);
     
-    // Filter by category if not 'All'
-    let filteredQuestions = data.questions;
-    if (category !== 'All') {
-      filteredQuestions = filteredQuestions.filter(question => {
-        const qCategory = question.category?.toLowerCase() || '';
-        const requestedCategory = category.toLowerCase();
-        
-        if (requestedCategory === 'medical-surgical') {
-          return qCategory.includes('med') || qCategory.includes('surg');
-        } else if (requestedCategory === 'pediatric') {
-          return qCategory.includes('ped');
-        } else if (requestedCategory === 'obstetric') {
-          return qCategory.includes('ob');
-        } else if (requestedCategory === 'mental health') {
-          return qCategory.includes('psych') || qCategory.includes('mental');
-        } else if (requestedCategory === 'pharmacology') {
-          return qCategory.includes('pharm');
-        } else if (requestedCategory === 'leadership') {
-          return qCategory.includes('lead') || qCategory.includes('manage');
-        } else if (requestedCategory === 'fundamentals') {
-          return qCategory.includes('fund');
-        }
-        
-        return false;
-      });
+    // If we don't get enough questions with our category filter, fall back to getting some from all categories
+    if (data.questions.length === 0 && category !== 'All') {
+      console.log('No questions found for category, falling back to all categories');
+      return fetchQuizQuestions('All', count);
     }
     
-    // Shuffle the questions
-    const shuffled = [...filteredQuestions].sort(() => 0.5 - Math.random());
-    
-    // Take only the requested number of questions
-    const limitedQuestions = shuffled.slice(0, count);
-    
-    return { questions: limitedQuestions };
+    return data;
   } catch (error) {
     console.error('Error fetching quiz questions:', error);
     return { questions: [] };
