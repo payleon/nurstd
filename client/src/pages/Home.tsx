@@ -133,6 +133,9 @@ export default function Home() {
       <div className="flex h-screen pt-16">
         <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
           <div className="max-w-5xl mx-auto">
+            {/* Added the TestList at the top to show the Welcome Card first */}
+            <TestList onSelectTest={handleSelectTest} />
+            
             <div className="grid grid-cols-1 gap-6 mb-6">
               {/* Learning Progress Chart */}
               <div className="mb-6">
@@ -153,7 +156,6 @@ export default function Home() {
               />
             </div>
             
-            <TestList onSelectTest={handleSelectTest} />
             <LearningRecommendations />
           </div>
         </main>
