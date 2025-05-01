@@ -13,6 +13,15 @@ app.use(express.urlencoded({ extended: false }));
 // Apply XSS protection middleware
 app.use(xssClean());
 
+// Serve static files from public directory with proper content types
+app.use(express.static(path.join(import.meta.dirname, '../public')));
+// Handle image files with proper content types
+app.use('/images', (req, res, next) => {
+  const filePath = path.join(import.meta.dirname, '../public/images', req.path);
+  res.type(path.extname(filePath));
+  next();
+});
+
 // CORS middleware - restrict to specific origins in production
 app.use((req, res, next) => {
   const isDevelopment = process.env.NODE_ENV === 'development';
