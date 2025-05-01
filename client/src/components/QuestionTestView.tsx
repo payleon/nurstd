@@ -4,7 +4,7 @@ import { Test, Question, QuestionsResponse } from "@shared/schema";
 import { fetchQuestions, fetchTestContent } from "@/lib/api";
 import { MedicalSpinner, LoadingScreen, QuestionLoader } from "@/components/ui/medical-spinner";
 import { 
-  ArrowLeft, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
+  ArrowLeft, ArrowRight, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
   ChevronRight, Check, Award, BookOpen, Lightbulb, Bell, AlertTriangle,
   User, LogOut, Monitor, Maximize, Minimize, Meh, Smile, Frown, Clipboard,
   CheckSquare, PauseCircle, PlayCircle, RotateCcw, X, Menu, Calculator
