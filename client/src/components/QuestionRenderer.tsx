@@ -51,9 +51,9 @@ export function QuestionRenderer({
   const [highlights, setHighlights] = useState<string[]>([]);
   const [showReferencePopup, setShowReferencePopup] = useState(false);
   const [showKeywordList, setShowKeywordList] = useState(false);
-  
+
   const questionContentRef = useRef<HTMLDivElement>(null);
-  
+
   // Reset state when question changes
   useEffect(() => {
     setSelectedAnswers(Array.isArray(userAnswer) ? userAnswer : userAnswer ? [userAnswer] : []);
@@ -63,41 +63,41 @@ export function QuestionRenderer({
     setHighlights([]);
     setShowReferencePopup(false);
   }, [question.id, userAnswer]);
-  
+
   const isSingleChoice = question.type === "mc";
   const isMultiChoice = question.type === "sata";
   const isFillInBlank = question.type === "fill_in_blank";
   const isHotspot = question.type === "hotspot";
   const isOrderedResponse = question.type === "ordered-response";
   const isChartExhibit = question.type === "chart-exhibit";
-  
+
   // Type guards for type safety
   // Type guard functions
   // For multiple choice questions
   const hasMCChoices = (q: Question): q is Extract<Question, { type: "mc" }> => {
     return q.type === "mc";
   };
-  
+
   // For select all that apply questions
   const hasSATAChoices = (q: Question): q is Extract<Question, { type: "sata" }> => {
     return q.type === "sata";
   };
-  
+
   // For fill in the blank questions
   const hasFillInBlank = (q: Question): q is Extract<Question, { type: "fill_in_blank" }> => {
     return q.type === "fill_in_blank";
   };
-  
+
   // For hotspot questions
   const hasHotspotAreas = (q: Question): q is Extract<Question, { type: "hotspot" }> => {
     return q.type === "hotspot";
   };
-  
+
   // For ordered response questions
   const hasOrderedItems = (q: Question): q is Extract<Question, { type: "ordered-response" }> => {
     return q.type === "ordered-response";
   };
-  
+
   // For chart exhibit questions
   const hasChartExhibit = (q: Question): q is Extract<Question, { type: "chart-exhibit" }> => {
     return q.type === "chart-exhibit" && 
@@ -106,7 +106,7 @@ export function QuestionRenderer({
            'questions' in q &&
            Array.isArray(q.questions);
   };
-  
+
   // Helper function to get correct answer(s) regardless of question type
   const getCorrectAnswer = (q: Question): string | string[] => {
     try {
@@ -146,7 +146,7 @@ export function QuestionRenderer({
       return "Error retrieving answer";
     }
   };
-  
+
   // Mock data for demonstration
   const hint = "Look for interventions that ensure patient safety first.";
   const keyPoints = [
@@ -163,7 +163,7 @@ export function QuestionRenderer({
     "Potter, P., & Perry, A. (2021). Fundamentals of Nursing, 10th ed.",
     "Lewis, S. (2019). Medical-Surgical Nursing, 11th ed."
   ];
-  
+
   const handleAnswerSelect = (answerId: string) => {
     if (isSingleChoice) {
       // For multiple choice, only one answer can be selected
@@ -174,7 +174,7 @@ export function QuestionRenderer({
       const updatedAnswers = selectedAnswers.includes(answerId)
         ? selectedAnswers.filter(id => id !== answerId)
         : [...selectedAnswers, answerId];
-      
+
       setSelectedAnswers(updatedAnswers);
       // Don't submit answer automatically for SATA questions
       // User will need to click a submit button
@@ -187,7 +187,7 @@ export function QuestionRenderer({
     // Don't submit answer automatically for fill-in-blank
     // User will need to press Enter or click a submit button
   };
-  
+
   const handleSubmitAnswer = () => {
     if (isMultiChoice) {
       onAnswer(selectedAnswers);
@@ -195,19 +195,19 @@ export function QuestionRenderer({
       onAnswer(textAnswer);
     }
   };
-  
+
   const handleMouseUp = () => {
     const selection = window.getSelection();
     if (selection && selection.toString().trim().length > 0) {
       setHighlightedText(selection.toString().trim());
-      
+
       // Save the highlight
       if (selection.toString().trim().length > 0) {
         setHighlights([...highlights, selection.toString().trim()]);
       }
     }
   };
-  
+
   // Letter options for choices
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
@@ -248,7 +248,7 @@ export function QuestionRenderer({
           </button>
         </div>
       </div>
-      
+
       {/* Hint Panel */}
       <AnimatePresence>
         {showHint && (
@@ -269,7 +269,7 @@ export function QuestionRenderer({
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Key Points Panel */}
       <AnimatePresence>
         {showKeyPoints && (
@@ -294,7 +294,7 @@ export function QuestionRenderer({
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Question Content */}
       <div 
         className="question-header mb-6 bg-white rounded-lg p-5 border border-gray-200 shadow-sm"
@@ -314,12 +314,12 @@ export function QuestionRenderer({
               "Unknown Question Type"}
             </span>
           </div>
-          
+
           <h3 className="text-lg font-bold text-[#13294B] mb-3">{question.title}</h3>
           <div className="text-gray-800 text-base leading-relaxed">
             {/* Real questions would have complex formatting - this is a simplified version */}
             <p>{question.text}</p>
-            
+
             {/* Highlighted text will be shown here */}
             {highlights.length > 0 && (
               <div className="mt-3 pt-3 border-t border-dashed border-gray-300">
@@ -339,7 +339,7 @@ export function QuestionRenderer({
           </div>
         </div>
       </div>
-      
+
       {/* Answer Section */}
       <div className="answer-section bg-white rounded-lg p-5 border border-gray-200 shadow-sm">
         <div className="text-sm text-gray-500 mb-4 flex items-center">
@@ -369,7 +369,7 @@ export function QuestionRenderer({
             )}
           </p>
         </div>
-        
+
         {/* Fill in the Blank Question */}
         {isFillInBlank && (
           <div className="fill-blank-container">
@@ -383,7 +383,7 @@ export function QuestionRenderer({
             />
           </div>
         )}
-        
+
         {/* Multiple Choice Questions */}
         {isSingleChoice && hasMCChoices(question) && (
           <div className="answer-options space-y-3">
@@ -401,13 +401,14 @@ export function QuestionRenderer({
                       </div>
                     );
                   }
-                  
+
                   const isSelected = selectedAnswers.includes(choice.id);
                   const isCorrectChoice = Array.isArray(question.correctAnswer) 
   ? question.correctAnswer.includes(choice.id)
   : question.correctAnswer === choice.id || 
-    (typeof question.correctAnswer === 'string' && question.correctAnswer.includes(choice.id));
-                  
+    (typeof choice.id === 'string' && typeof question.correctAnswer === 'string' && 
+     choice.id.toUpperCase() === question.correctAnswer.toUpperCase());
+
                   // Determine styling for answered questions when showing rationale
                   let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
                   if (showRationale) {
@@ -419,7 +420,7 @@ export function QuestionRenderer({
                   } else if (isSelected) {
                     choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
                   }
-                  
+
                   return (
                     <div 
                       key={choice.id}
@@ -438,7 +439,7 @@ export function QuestionRenderer({
                           <p className="text-[15px] leading-relaxed">{choice.text}</p>
                         </div>
                       </div>
-                      
+
                       {/* Rationale specific to each option - shown when the answer is revealed */}
                       {showRationale && (
                         <div className={`text-sm p-3 rounded-b-md ${
@@ -465,7 +466,7 @@ export function QuestionRenderer({
             )}
           </div>
         )}
-        
+
         {/* Select All That Apply Questions */}
         {isMultiChoice && hasSATAChoices(question) && (
           <div className="answer-options space-y-3">
@@ -483,10 +484,10 @@ export function QuestionRenderer({
                       </div>
                     );
                   }
-                  
+
                   const isSelected = selectedAnswers.includes(choice.id);
                   const isCorrectChoice = Array.isArray(question.correctAnswer) && question.correctAnswer.includes(choice.id);
-                
+
                   // Determine styling for answered questions when showing rationale
                   let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
                   if (showRationale) {
@@ -498,7 +499,7 @@ export function QuestionRenderer({
                   } else if (isSelected) {
                     choiceStyle = "border-2 border-[#4B9CD3] bg-blue-50";
                   }
-                  
+
                   return (
                     <div 
                       key={choice.id}
@@ -517,7 +518,7 @@ export function QuestionRenderer({
                           <p className="text-[15px] leading-relaxed">{choice.text}</p>
                         </div>
                       </div>
-                      
+
                       {/* Rationale specific to each option - shown when the answer is revealed */}
                       {showRationale && (
                         <div className={`text-sm p-3 rounded-b-md ${
@@ -544,7 +545,7 @@ export function QuestionRenderer({
             )}
           </div>
         )}
-        
+
         {/* Hotspot Question */}
         {isHotspot && hasHotspotAreas(question) && (
           <div className="hotspot-container">
@@ -604,7 +605,7 @@ export function QuestionRenderer({
                       )}
                     </div>
                   ))}
-                  
+
                   {/* Render distractor areas if any */}
                   {question.distractorAreas?.map((area) => (
                     <div
@@ -653,7 +654,7 @@ export function QuestionRenderer({
             </div>
           </div>
         )}
-        
+
         {/* Ordered Response Question */}
         {isOrderedResponse && hasOrderedItems(question) && (
           <div className="ordered-response-container">
@@ -682,13 +683,13 @@ export function QuestionRenderer({
             </div>
           </div>
         )}
-        
+
         {/* Chart/Exhibit Question */}
         {isChartExhibit && hasChartExhibit(question) && (
           <div className="chart-exhibit-container">
             <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
               <h4 className="font-medium text-gray-700 mb-3">{question.exhibitType.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
-              
+
               {/* Lab Results Table */}
               {question.exhibitType === 'lab-results' && (
                 <div className="overflow-x-auto">
@@ -717,16 +718,16 @@ export function QuestionRenderer({
                   </table>
                 </div>
               )}
-              
+
               {/* Other exhibit types would be handled here */}
             </div>
-            
+
             {/* Sub-questions for this chart/exhibit */}
             <div className="space-y-6">
               {question.questions.map((subQuestion, idx) => (
                 <div key={subQuestion.id} className="p-4 border border-gray-200 rounded-md">
                   <p className="font-medium text-gray-800 mb-3">{idx + 1}. {subQuestion.text}</p>
-                  
+
                   <div className="space-y-2">
                     {subQuestion.choices.map((choice, choiceIdx) => (
                       <div 
@@ -749,7 +750,7 @@ export function QuestionRenderer({
             </div>
           </div>
         )}
-        
+
         {/* Submit Button for SATA and Fill in Blank questions - hidden in test view */}
         {!showRationale && (isMultiChoice || isFillInBlank) && !hideSubmitButton && (
           <div className="mt-6">
@@ -766,7 +767,7 @@ export function QuestionRenderer({
           </div>
         )}
       </div>
-      
+
       {/* Rationale Section */}
       {showRationale && question.rationale && (
         <div className="mt-6">
@@ -781,7 +782,7 @@ export function QuestionRenderer({
                 {isCorrect ? 'Correct Answer' : 'Incorrect Answer'}
               </h4>
             </div>
-            
+
             <div className="mb-4 pb-4 border-b border-dashed border-gray-300">
               <span className="font-medium text-gray-700">Expected Answer: </span>
               <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium">
@@ -792,7 +793,7 @@ export function QuestionRenderer({
                 )}
               </span>
             </div>
-            
+
             <div className="rationale">
               <h5 className="font-medium mb-2 flex items-center text-gray-800">
                 <Lightbulb className="h-5 w-5 text-amber-500 mr-2" />
@@ -801,7 +802,7 @@ export function QuestionRenderer({
               <div className="text-gray-700 leading-relaxed bg-white rounded-md p-4 border border-gray-200">
                 {question.rationale}
               </div>
-              
+
               {/* NCLEX Test-Taking Strategy */}
               <div className="mt-4 bg-blue-50 border border-blue-200 rounded-md p-4">
                 <h5 className="font-medium mb-2 text-blue-800">Test-Taking Strategy:</h5>
@@ -809,7 +810,7 @@ export function QuestionRenderer({
                   Use the process of elimination to rule out incorrect options. Remember to prioritize nursing actions according to Maslow's hierarchy of needs, with physiological needs taking precedence. Also, apply the nursing process (assess, diagnose, plan, implement, evaluate) to determine the appropriate nursing action.
                 </p>
               </div>
-              
+
               {/* Related Topics */}
               <div className="mt-4">
                 <h5 className="font-medium mb-2 text-gray-700">Related Topics:</h5>
@@ -825,7 +826,7 @@ export function QuestionRenderer({
           </div>
         </div>
       )}
-      
+
       {/* References Popup */}
       {showReferencePopup && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowReferencePopup(false)}>
@@ -848,7 +849,7 @@ export function QuestionRenderer({
           </div>
         </div>
       )}
-      
+
       {/* Keywords Popup */}
       {showKeywordList && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowKeywordList(false)}>
