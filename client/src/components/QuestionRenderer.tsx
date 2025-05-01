@@ -20,6 +20,9 @@ export function QuestionRenderer({
   isCorrect = false,
   hideSubmitButton = false
 }: QuestionRendererProps) {
+  // Debug log for showRationale prop
+  console.log(`QuestionRenderer for question ${question.id}: showRationale=${showRationale}, isCorrect=${isCorrect}`);
+
   // Validate question data to prevent errors
   if (!question || typeof question !== 'object') {
     return (

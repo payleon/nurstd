@@ -122,23 +122,33 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
   const handleAnswerSubmit = (answer: string | string[]) => {
     if (!currentQuestion) return;
     
+    const questionId = currentQuestion.id;
+    console.log(`handleAnswerSubmit for question ${questionId} with answer:`, answer);
+    
     // Store the answer using functional update pattern
-    setUserAnswers(prevAnswers => ({
-      ...prevAnswers,
-      [currentQuestion.id]: answer
-    }));
+    setUserAnswers(prevAnswers => {
+      const newAnswers = {
+        ...prevAnswers,
+        [questionId]: answer
+      };
+      console.log('Updated userAnswers:', newAnswers);
+      return newAnswers;
+    });
     
     // Check if the answer is correct
-    checkAnswer(currentQuestion.id, answer);
+    checkAnswer(questionId, answer);
     
-    // Show rationale after answering - ensure this is properly updated
-    setShowRationale(prevState => ({
-      ...prevState,
-      [currentQuestion.id]: true
-    }));
-
-    // Log the state for debugging
-    console.log(`Question ${currentQuestion.id} answered, showing rationale:`, true);
+    // Force show rationale to true for this question
+    // The key issue was likely here - we need to make sure rationale is shown
+    console.log(`Setting showRationale[${questionId}] = true`);
+    setShowRationale(prevState => {
+      const newState = {
+        ...prevState,
+        [questionId]: true
+      };
+      console.log('New showRationale state:', newState);
+      return newState;
+    });
   };
   
   const checkAnswer = (questionId: number, answer: string | string[]) => {
