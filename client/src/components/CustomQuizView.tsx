@@ -71,6 +71,9 @@ export function CustomQuizView() {
     path: '',
     description: 'Your custom generated quiz',
     questionCount: quizData.questions.length,
+    timeLimit: null,
+    category: null,
+    createdAt: null,
     questionsData: { questions: quizData.questions }
   };
 

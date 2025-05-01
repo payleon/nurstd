@@ -24,6 +24,9 @@ const Games = lazy(() => import("@/pages/Games"));
 const LearningProgress = lazy(() => import("@/pages/LearningProgress"));
 const TooltipDemo = lazy(() => import("@/pages/TooltipDemo"));
 
+// Importing the CustomQuizView component
+const CustomQuizView = lazy(() => import("@/components/CustomQuizView").then(module => ({ default: module.CustomQuizView })));
+
 // Create a placeholder component for routes that aren't fully implemented yet
 function PlaceholderPage({ name }: { name: string }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -88,6 +91,7 @@ function Router() {
       <LazyRoute path="/games" component={Games} preload={true} />
       <LazyRoute path="/learning-progress" component={LearningProgress} />
       <LazyRoute path="/tooltip-demo" component={TooltipDemo} />
+      <LazyRoute path="/custom-quiz" component={CustomQuizView} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">
