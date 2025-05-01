@@ -11,6 +11,7 @@ import { Test } from '@shared/schema';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { QuizGenerator } from '../components/QuizGenerator';
 
 // Define case study categories
 const categories = [
@@ -393,7 +394,7 @@ export default function ExamsAndStudies() {
                   value="question-bank"
                   className="whitespace-nowrap px-4 py-2 font-medium text-sm rounded-md bg-gray-50 data-[state=active]:bg-[#4B9CD3] data-[state=active]:text-white"
                 >
-                  Question Bank
+                  Create a Quiz
                 </TabsTrigger>
                 <TabsTrigger 
                   value="practice-tests"
@@ -464,94 +465,12 @@ export default function ExamsAndStudies() {
               </TabsContent>
               
               <TabsContent value="question-bank">
-                <div className="mb-6">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <Input
-                      type="text"
-                      placeholder="Search questions..."
-                      className="pl-10 bg-white"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
+                <div className="flex justify-center items-start py-8">
+                  <div className="w-full max-w-2xl">
+                    {/* Quiz Generator Component */}
+                    <QuizGenerator />
                   </div>
                 </div>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {questionCategories.map(category => (
-                    <button
-                      key={category}
-                      className={`px-4 py-2 rounded-md text-sm font-medium transition-colors neuro-button-lite
-                        ${activeQuestionCategory === category ? 'bg-[#13294B] text-white' : 'bg-white text-[#333333] hover:bg-gray-100'}`}
-                      onClick={() => setActiveQuestionCategory(category)}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-                
-                {loading ? (
-                  <div className="flex justify-center items-center h-64">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-                    <span className="ml-3 text-lg">Loading questions...</span>
-                  </div>
-                ) : error ? (
-                  <div className="text-center py-10">
-                    <div className="text-red-500 mb-4">{error}</div>
-                    <button 
-                      className="neuro-button-primary"
-                      onClick={() => {
-                        setError(null);
-                        setActiveTab('question-bank');
-                      }}
-                    >
-                      Retry
-                    </button>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {filteredQuestions.length > 0 ? (
-                      filteredQuestions.slice(0, 12).map((question, index) => (
-                        <div key={question.id} className="neuro-card p-4 flex flex-col h-full">
-                          <div className="mb-3">
-                            <span className={`inline-block ${
-                              question.category?.includes('med') || question.category?.includes('surg') ? 'bg-blue-100 text-blue-800' :
-                              question.category?.includes('ped') ? 'bg-green-100 text-green-800' :
-                              question.category?.includes('ob') ? 'bg-purple-100 text-purple-800' :
-                              question.category?.includes('psych') ? 'bg-yellow-100 text-yellow-800' :
-                              question.category?.includes('pharm') ? 'bg-red-100 text-red-800' :
-                              'bg-gray-100 text-gray-800'
-                            } px-2 py-1 text-xs rounded`}>
-                              {question.type === 'mc' ? 'Multiple Choice' : 
-                               question.type === 'sata' ? 'Select All That Apply' : 
-                               question.type === 'fill_in_blank' ? 'Fill in Blank' :
-                               question.type === 'ordered-response' ? 'Ordered Response' :
-                               question.type === 'hotspot' ? 'Hotspot' :
-                               question.type === 'chart-exhibit' ? 'Chart Exhibit' : 
-                               'Question'}
-                            </span>
-                          </div>
-                          <h3 className="font-bold text-[#13294B] mb-2 text-lg line-clamp-2">
-                            {question.title || `Question #${question.id}`}
-                          </h3>
-                          <p className="text-gray-700 mb-4 text-sm flex-grow line-clamp-3">
-                            {question.text || "Start practicing this question..."}
-                          </p>
-                          <div className="mt-auto">
-                            <Link href={`/question/${question.id}`} className="neuro-button-primary inline-block w-full text-center">
-                              Practice Question
-                            </Link>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="col-span-full text-center py-10">
-                        <h3 className="text-xl font-medium text-gray-600">No questions found</h3>
-                        <p className="text-gray-500 mt-2">Try adjusting your search or category filter</p>
-                      </div>
-                    )}
-                  </div>
-                )}
               </TabsContent>
               
               <TabsContent value="practice-tests">
