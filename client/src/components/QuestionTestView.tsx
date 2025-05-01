@@ -155,11 +155,12 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
           answer.every(a => question.correctAnswer.includes(a));
       }
     } else if (question.type === 'hotspot') {
-      // For hotspot questions, we'd compare the selected areas with correct areas
-      // This is simplified; would need more complex validation in a real app
-      if ('correctAreas' in question && question.correctAreas.length > 0) {
-        // Simplified validation - would need to check if selected coordinates match correct areas
-        isCorrect = true; // Placeholder
+      // For hotspot questions, compare the selected areas with correct areas
+      if (Array.isArray(answer) && 'correctAreas' in question && question.correctAreas.length > 0) {
+        const correctAreaIds = question.correctAreas.map(area => area.id);
+        // Check if the user selected all correct areas and no incorrect areas
+        isCorrect = answer.length === correctAreaIds.length && 
+                   answer.every(selected => correctAreaIds.includes(selected as string));
       }
     } else if (question.type === 'ordered-response') {
       // For ordered response questions
@@ -167,10 +168,22 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
         isCorrect = JSON.stringify(answer) === JSON.stringify(question.correctOrder);
       }
     } else if (question.type === 'chart-exhibit') {
-      // For chart exhibit questions
+      // For chart exhibit questions with nested sub-questions
       if ('questions' in question && Array.isArray(question.questions) && question.questions.length > 0) {
-        // Simplified validation - would validate nested questions
-        isCorrect = true; // Placeholder
+        // In the actual app, chart-exhibit would have multiple sub-questions
+        // For now, we'll check the first sub-question as it's the only one we're showing
+        const subQuestion = question.questions[0];
+        if (subQuestion && 'correctAnswer' in subQuestion) {
+          // Check if the answer is correct based on the first sub-question
+          if (Array.isArray(subQuestion.correctAnswer) && Array.isArray(answer)) {
+            // Handle multi-select sub-questions
+            isCorrect = answer.length === subQuestion.correctAnswer.length && 
+                       answer.every(a => subQuestion.correctAnswer.includes(a));
+          } else if (!Array.isArray(subQuestion.correctAnswer) && !Array.isArray(answer)) {
+            // Handle single-select sub-questions
+            isCorrect = answer === subQuestion.correctAnswer;
+          }
+        }
       }
     }
     
