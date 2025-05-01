@@ -403,7 +403,9 @@ export function QuestionRenderer({
                   }
                   
                   const isSelected = selectedAnswers.includes(choice.id);
-                  const isCorrectChoice = question.correctAnswer === choice.id;
+                  const isCorrectChoice = Array.isArray(question.correctAnswer) 
+  ? question.correctAnswer.includes(choice.id)
+  : question.correctAnswer === choice.id;
                   
                   // Determine styling for answered questions when showing rationale
                   let choiceStyle = "border-2 border-gray-200 hover:border-[#4B9CD3] transition-colors";
