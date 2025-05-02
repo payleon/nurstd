@@ -18,8 +18,12 @@ export async function fetchQuestions(): Promise<QuestionsResponse> {
   }
 }
 
-// Fetch questions filtered by categories and limited by count
-export async function fetchQuizQuestions(categories: string[] | string, count: number): Promise<QuestionsResponse> {
+// Fetch questions filtered by categories, difficulty and limited by count
+export async function fetchQuizQuestions(
+  categories: string[] | string, 
+  count: number, 
+  difficulty?: 'beginner' | 'intermediate' | 'advanced'
+): Promise<QuestionsResponse> {
   try {
     // Handle both array and string inputs for backward compatibility
     const categoryArray = Array.isArray(categories) ? categories : [categories];
@@ -56,6 +60,12 @@ export async function fetchQuizQuestions(categories: string[] | string, count: n
     
     // Add count parameter
     queryParams.append('count', count.toString());
+    
+    // Add difficulty parameter if provided
+    if (difficulty) {
+      queryParams.append('difficulty', difficulty);
+      console.log(`Filtering for ${difficulty} difficulty level`);
+    }
     
     // Now use the new filter endpoint with multiple categories
     const response = await fetch(`/api/questions/filter?${queryParams.toString()}`);

@@ -37,6 +37,7 @@ const questionCategories = [
 export function QuizGenerator() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [questionCount, setQuestionCount] = useState(10);
+  const [difficultyLevel, setDifficultyLevel] = useState<'beginner' | 'intermediate' | 'advanced'>('intermediate');
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [, setLocation] = useLocation();
@@ -67,8 +68,8 @@ export function QuizGenerator() {
       setIsGenerating(true);
       setError(null);
 
-      // Fetch questions based on selected categories and count
-      const quizData = await fetchQuizQuestions(selectedCategories, questionCount);
+      // Fetch questions based on selected categories, count, and difficulty level
+      const quizData = await fetchQuizQuestions(selectedCategories, questionCount, difficultyLevel);
 
       if (!quizData.questions || quizData.questions.length === 0) {
         setError('No questions found for the selected categories. Please try different categories or count.');
@@ -180,7 +181,7 @@ export function QuizGenerator() {
           </div>
         </div>
 
-        <div className="mb-8">
+        <div className="mb-6">
           <Label htmlFor="question-count" className="block mb-2 font-medium">
             Number of Questions: {questionCount}
           </Label>
@@ -196,6 +197,62 @@ export function QuizGenerator() {
           <div className="flex justify-between text-sm text-gray-500">
             <span>5</span>
             <span>30</span>
+          </div>
+        </div>
+        
+        <div className="mb-8">
+          <Label className="block mb-3 font-medium">Difficulty Level</Label>
+          <div className="grid grid-cols-3 gap-3">
+            <button
+              type="button"
+              onClick={() => setDifficultyLevel('beginner')}
+              className={`flex flex-col items-center justify-center p-3 rounded-md transition-colors ${difficultyLevel === 'beginner' ? 'bg-green-100 border border-green-300' : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'}`}
+            >
+              <div className="w-8 h-8 flex items-center justify-center text-green-600 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                  <line x1="9" y1="9" x2="9.01" y2="9"/>
+                  <line x1="15" y1="9" x2="15.01" y2="9"/>
+                </svg>
+              </div>
+              <span className="font-medium text-sm">Beginner</span>
+              <span className="text-xs text-gray-500 mt-1">Foundation level</span>
+            </button>
+            
+            <button
+              type="button"
+              onClick={() => setDifficultyLevel('intermediate')}
+              className={`flex flex-col items-center justify-center p-3 rounded-md transition-colors ${difficultyLevel === 'intermediate' ? 'bg-blue-100 border border-blue-300' : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'}`}
+            >
+              <div className="w-8 h-8 flex items-center justify-center text-blue-600 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="8" y1="15" x2="16" y2="15"/>
+                  <line x1="9" y1="9" x2="9.01" y2="9"/>
+                  <line x1="15" y1="9" x2="15.01" y2="9"/>
+                </svg>
+              </div>
+              <span className="font-medium text-sm">Intermediate</span>
+              <span className="text-xs text-gray-500 mt-1">Clinical thinking</span>
+            </button>
+            
+            <button
+              type="button"
+              onClick={() => setDifficultyLevel('advanced')}
+              className={`flex flex-col items-center justify-center p-3 rounded-md transition-colors ${difficultyLevel === 'advanced' ? 'bg-purple-100 border border-purple-300' : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'}`}
+            >
+              <div className="w-8 h-8 flex items-center justify-center text-purple-600 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M16 16s-1.5-2-4-2-4 2-4 2"/>
+                  <line x1="9" y1="9" x2="9.01" y2="9"/>
+                  <line x1="15" y1="9" x2="15.01" y2="9"/>
+                </svg>
+              </div>
+              <span className="font-medium text-sm">Advanced</span>
+              <span className="text-xs text-gray-500 mt-1">NCLEX-level</span>
+            </button>
           </div>
         </div>
 

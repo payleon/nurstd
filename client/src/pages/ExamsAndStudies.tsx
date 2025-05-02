@@ -465,10 +465,37 @@ export default function ExamsAndStudies() {
               </TabsContent>
               
               <TabsContent value="question-bank">
-                <div className="flex justify-center items-start py-8">
-                  <div className="w-full max-w-2xl">
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="w-full md:w-2/3 lg:w-3/4">
                     {/* Quiz Generator Component */}
                     <QuizGenerator />
+                  </div>
+                  <div className="w-full md:w-1/3 lg:w-1/4">
+                    <div className="bg-white rounded-lg shadow-md p-6 border-2 border-[#e2e8f0] sticky top-24">
+                      <h3 className="text-lg font-bold text-[#13294B] mb-4">Quiz Generator Tips</h3>
+                      <ul className="space-y-3 text-sm">
+                        <li className="flex gap-2">
+                          <span className="text-blue-600 mt-0.5">•</span>
+                          <span>Select multiple categories to create a comprehensive quiz</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-blue-600 mt-0.5">•</span>
+                          <span>Medical-Surgical questions include Cardiovascular content</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-blue-600 mt-0.5">•</span>
+                          <span>Set question count based on your study time availability</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-blue-600 mt-0.5">•</span>
+                          <span>Balance questions across body systems for comprehensive review</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-blue-600 mt-0.5">•</span>
+                          <span>Use the difficulty slider to match your current knowledge level</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </TabsContent>
