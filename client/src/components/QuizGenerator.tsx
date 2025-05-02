@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Slider } from './ui/slider';
 import { fetchQuizQuestions } from '../utils/api';
 import { QuestionsResponse } from '../types/question';
+import { MedicalSpinner } from './ui/medical-spinner';
 
 const questionCategories = [
   'All',
@@ -111,13 +112,22 @@ export function QuizGenerator() {
           </div>
         )}
 
-        <Button 
-          onClick={handleGenerateQuiz} 
-          disabled={isGenerating}
-          className="w-full py-6 text-lg font-semibold bg-[#4B9CD3] hover:bg-[#13294B] text-white rounded-md transition-colors"
-        >
-          {isGenerating ? 'Generating...' : 'Generate Quiz'}
-        </Button>
+        {isGenerating ? (
+          <div className="flex flex-col items-center justify-center space-y-4 py-4">
+            <MedicalSpinner type="nurse" size="md" text="Preparing your nursing questions..." />
+            <div className="text-sm text-gray-500">
+              Selecting {questionCount} questions about {selectedCategory !== 'All' ? selectedCategory : 'nursing topics'}
+            </div>
+          </div>
+        ) : (
+          <Button 
+            onClick={handleGenerateQuiz} 
+            disabled={isGenerating}
+            className="w-full py-6 text-lg font-semibold bg-[#4B9CD3] hover:bg-[#13294B] text-white rounded-md transition-colors"
+          >
+            Generate Quiz
+          </Button>
+        )}
       </div>
     </div>
   );
