@@ -1,75 +1,64 @@
 import { useEffect } from 'react';
 
 /**
- * FontLoader - A component that optimizes font loading
+ * FontLoader - Dynamically loads fonts to prevent render blocking
  * 
  * This component:
- * 1. Delays Google Fonts loading until after the page has rendered
- * 2. Uses the "swap" display strategy to show text immediately with fallback fonts
- * 3. Preconnects to font domains for faster resolution
+ * 1. Asynchronously loads font stylesheets
+ * 2. Implements fallbacks to prevent layout shifts
+ * 3. Optimizes font loading for better performance 
  */
-export function FontLoader() {
+export default function FontLoader() {
   useEffect(() => {
     // Only run in browser environment
     if (typeof window === 'undefined') return;
-
-    // Add preconnect links
-    const addPreconnect = () => {
-      const links = [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' }
-      ];
-
-      links.forEach(linkData => {
-        const link = document.createElement('link');
-        link.rel = linkData.rel;
-        link.href = linkData.href;
-        if (linkData.crossOrigin) {
-          link.crossOrigin = linkData.crossOrigin;
-        }
-        document.head.appendChild(link);
-      });
-    };
-
-    // Load Google Fonts asynchronously
-    const loadFonts = () => {
+    
+    // Function to load a font stylesheet dynamically
+    const loadFontStylesheet = (href: string) => {
       const link = document.createElement('link');
-      link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
       link.rel = 'stylesheet';
+      link.href = href;
       link.media = 'print';
-      link.onload = function() {
+      link.onload = () => {
+        // Switch to 'all' media once loaded to apply styles
         link.media = 'all';
       };
       document.head.appendChild(link);
     };
-
-    // Add font-display: swap to ensure text is visible during font loading
-    const addFontDisplaySwap = () => {
-      const style = document.createElement('style');
-      style.textContent = `
-        @font-face {
-          font-display: swap;
-        }
-      `;
-      document.head.appendChild(style);
-    };
-
-    // Execute optimizations
-    addPreconnect();
     
-    if (document.readyState === 'complete') {
-      loadFonts();
-      addFontDisplaySwap();
-    } else {
-      window.addEventListener('load', () => {
-        loadFonts();
-        addFontDisplaySwap();
-      });
-    }
+    // Preload font files (individual font files for critical fonts)
+    const preloadFontFile = (href: string) => {
+      // Skip if already preloaded
+      if (document.querySelector(`link[rel="preload"][href="${href}"]`)) return;
+      
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = href;
+      link.as = 'font';
+      link.type = 'font/woff2';
+      link.crossOrigin = 'anonymous';
+      document.head.appendChild(link);
+    };
+    
+    // For additional non-critical fonts that aren't in the initial HTML
+    // Note: Keep this list minimal to avoid overhead
+    const additionalFonts = [
+      // Example of additional font that may be needed but not on the critical path
+      // 'https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap',
+    ];
+    
+    // Load any additional fonts that aren't part of the critical path
+    additionalFonts.forEach(loadFontStylesheet);
+    
+    // Potentially preload individual font files if they are critical
+    // but not already handled in the HTML
+    // Example:
+    // preloadFontFile('https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2');
+    
+    return () => {
+      // Cleanup is optional as links typically stay in the DOM
+    };
   }, []);
-
-  // This component doesn't render anything
-  return null;
+  
+  return null; // This component doesn't render anything
 }
-
-export default FontLoader;

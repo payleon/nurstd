@@ -6,6 +6,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5"
     />
+    <!-- Performance optimization meta tags -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <meta name="theme-color" content="#4B9CD3">
+    <meta name="color-scheme" content="light dark">
     <title>NURS'TD - NCLEX Study Platform</title>
     <meta
       name="description"
@@ -26,6 +30,10 @@
     <meta property="og:url" content="https://nclexxx.me/" />
     <meta property="og:image" content="https://nclexxx.me/og-image.svg" />
     <link rel="canonical" href="https://nclexxx.me/" />
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/index.css" as="style">
+    <link rel="modulepreload" href="/src/main.tsx" as="script">
     
     <!-- Font Loading Strategy: Optimized to eliminate render blocking using the FOUT technique -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +57,8 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
-      media="all"
+      media="print"
+      onload="this.media='all'"
     />
     
     <!-- Fallback font metrics to prevent CLS (Cumulative Layout Shift) -->

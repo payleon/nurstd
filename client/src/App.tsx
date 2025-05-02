@@ -5,11 +5,12 @@ import { Toaster } from "@/components/ui/toaster";
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import { BadgeProvider } from "@/contexts/BadgeContext";
 
-import { useState, Suspense, lazy } from "react";
+import { useState, Suspense, lazy, useEffect } from "react";
 import { Header } from "@/components/ui/header";
 import { Sidebar } from "@/components/ui/sidebar";
 import { Loader2 } from "lucide-react";
 import { LazyRoute } from "@/components/LazyRoute";
+import PerformanceOptimizer from "@/components/performance/PerformanceOptimizer";
 
 // Lazy load page components
 const Home = lazy(() => import("@/pages/Home"));
@@ -125,10 +126,15 @@ function Router() {
 }
 
 function App() {
+  // Performance optimizations for production build
+  const isProduction = process.env.NODE_ENV === 'production';
+
   return (
     <QueryClientProvider client={queryClient}>
       <RadixTooltip.Provider delayDuration={300}>
         <BadgeProvider>
+          {/* Apply performance optimizations in production */}
+          {isProduction && <PerformanceOptimizer />}
           <Toaster />
           <Router />
         </BadgeProvider>
