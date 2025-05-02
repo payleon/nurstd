@@ -159,7 +159,7 @@ export function QuestionRenderer({
   };
 
   const hasFillInBlank = (q: Question): q is Extract<Question, { type: "fill_in_blank" }> => {
-    return q.type === "fill_in_blank" && 'answer' in q;
+    return q.type === "fill_in_blank" && 'correctAnswer' in q;
   };
 
   const hasHotspotAreas = (q: Question): q is Extract<Question, { type: "hotspot" }> => {
