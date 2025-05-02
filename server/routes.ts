@@ -234,17 +234,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Get questions filtered by category and limited by count
+  // Get questions filtered by categories and limited by count
   app.get("/api/questions/filter", async (req, res) => {
     try {
       // Extract query parameters
-      const category = req.query.category as string;
+      // Support both single category and multiple categories
+      const categoryParam = req.query.category;
+      const categories = Array.isArray(categoryParam) ? categoryParam : categoryParam ? [categoryParam] : [];
       const count = req.query.count ? parseInt(req.query.count as string) : 10; // Default to 10 if not specified
       
       const publishedDir = path.join(import.meta.dirname, "../published");
       const questionsFilePath = path.join(publishedDir, "all_questions.json");
       
-      console.log(`Received request for ${count} questions in category: ${category || 'All'}`);
+      console.log(`Received request for ${count} questions in categories: ${categories.length > 0 ? categories.join(', ') : 'All'}`);
       
       try {
         await fs.access(questionsFilePath);
@@ -262,19 +264,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Validate the data
       const validatedData = QuestionsResponseSchema.parse(questionsData);
       
-      // Filter questions by category if specified
+      // Filter questions by categories if specified
       let filteredQuestions = validatedData.questions;
-      if (category && category !== 'all') {
+      if (categories.length > 0) {
         filteredQuestions = filteredQuestions.filter(q => {
-          // Check both title and category fields for expanded matching
-          // Using more flexible matching to increase the pool of questions
-          const titleMatch = q.title && q.title.toLowerCase().includes(category.toLowerCase());
-          const categoryMatch = q.category && (
-            q.category === category || 
-            q.category.toLowerCase().includes(category.toLowerCase()) ||
-            category.toLowerCase().includes(q.category.toLowerCase())
-          );
-          return titleMatch || categoryMatch;
+          // Check if the question matches any of the selected categories
+          return categories.some(category => {
+            // Skip 'all' category as it matches everything
+            if (category.toLowerCase() === 'all') return true;
+            
+            // Check both title and category fields for expanded matching
+            // Using more flexible matching to increase the pool of questions
+            const titleMatch = q.title && q.title.toLowerCase().includes(category.toLowerCase());
+            const categoryMatch = q.category && (
+              q.category === category || 
+              q.category.toLowerCase().includes(category.toLowerCase()) ||
+              category.toLowerCase().includes(q.category.toLowerCase())
+            );
+            return titleMatch || categoryMatch;
+          });
         });
       }
       
@@ -317,9 +325,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
             resultQuestions = [...resultQuestions, ...remainderQuestions];
           }
         }
-      } else if (category && category !== 'all') {
-        // If no questions match the specified category, try to get questions from all categories
-        console.log('No questions found for category, falling back to all categories');
+      } else if (categories.length > 0) {
+        // If no questions match the specified categories, try to get questions from all categories
+        console.log('No questions found for selected categories, falling back to all categories');
         const allQuestions = validatedData.questions;
         
         if (allQuestions.length > 0) {
