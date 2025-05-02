@@ -244,6 +244,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const publishedDir = path.join(import.meta.dirname, "../published");
       const questionsFilePath = path.join(publishedDir, "all_questions.json");
       
+      console.log(`Received request for ${count} questions in category: ${category || 'All'}`);
+      
       try {
         await fs.access(questionsFilePath);
       } catch (error) {
@@ -264,46 +266,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let filteredQuestions = validatedData.questions;
       if (category && category !== 'all') {
         filteredQuestions = filteredQuestions.filter(q => {
-          // Check both title and category fields
+          // Check both title and category fields for expanded matching
+          // Using more flexible matching to increase the pool of questions
           const titleMatch = q.title && q.title.toLowerCase().includes(category.toLowerCase());
-          const categoryMatch = q.category && q.category === category;
+          const categoryMatch = q.category && (
+            q.category === category || 
+            q.category.toLowerCase().includes(category.toLowerCase()) ||
+            category.toLowerCase().includes(q.category.toLowerCase())
+          );
           return titleMatch || categoryMatch;
         });
       }
+      
+      console.log(`Found ${filteredQuestions.length} matching questions before duplication`);
       
       // Ensure we have enough questions to meet the requested count
       // If we don't have enough questions, duplicate existing ones
       let resultQuestions = [];
       
       if (filteredQuestions.length > 0) {
-        // If we have some questions but not enough, duplicate them
-        if (filteredQuestions.length < count) {
+        // Shuffle the questions first for randomness
+        const shuffledQuestions = [...filteredQuestions].sort(() => Math.random() - 0.5);
+
+        // If we have enough questions, just take what we need
+        if (shuffledQuestions.length >= count) {
+          resultQuestions = shuffledQuestions.slice(0, count);
+        } else {
+          // If we don't have enough, create multiple sets of questions with modified IDs
           // Calculate how many complete sets we need
-          const sets = Math.floor(count / filteredQuestions.length);
-          const remainder = count % filteredQuestions.length;
+          const sets = Math.floor(count / shuffledQuestions.length);
+          const remainder = count % shuffledQuestions.length;
           
           // Add complete sets
           for (let i = 0; i < sets; i++) {
-            const duplicatedQuestions = filteredQuestions.map((q, index) => ({
+            const duplicatedQuestions = shuffledQuestions.map((q, index) => ({
               ...q,
-              id: q.id + (i * filteredQuestions.length * 1000) // Ensure unique IDs
+              id: q.id + (i * shuffledQuestions.length * 1000), // Ensure unique IDs
+              text: i > 0 ? `[Variant ${i+1}] ${q.text}` : q.text // Optionally mark duplicated questions
             }));
             resultQuestions = [...resultQuestions, ...duplicatedQuestions];
           }
           
           // Add remaining questions to reach the requested count
           if (remainder > 0) {
-            const remainderQuestions = filteredQuestions.slice(0, remainder).map((q, index) => ({
+            const remainderQuestions = shuffledQuestions.slice(0, remainder).map((q, index) => ({
               ...q,
-              id: q.id + (sets * filteredQuestions.length * 1000) // Ensure unique IDs
+              id: q.id + (sets * shuffledQuestions.length * 1000), // Ensure unique IDs
+              text: sets > 0 ? `[Variant ${sets+1}] ${q.text}` : q.text // Optionally mark duplicated questions
             }));
             resultQuestions = [...resultQuestions, ...remainderQuestions];
           }
-        } else {
-          // If we have enough questions, just take what we need
-          // Shuffle the questions to get random ones each time
-          const shuffled = [...filteredQuestions].sort(() => Math.random() - 0.5);
-          resultQuestions = shuffled.slice(0, count);
         }
       } else if (category && category !== 'all') {
         // If no questions match the specified category, try to get questions from all categories
@@ -313,28 +325,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (allQuestions.length > 0) {
           // Shuffle and select from all questions
           const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
-          resultQuestions = shuffled.slice(0, Math.min(count, allQuestions.length));
           
-          // If still not enough, duplicate as needed
-          if (resultQuestions.length < count) {
-            const sets = Math.floor(count / resultQuestions.length);
-            const remainder = count % resultQuestions.length;
+          if (shuffled.length >= count) {
+            resultQuestions = shuffled.slice(0, count);
+          } else {
+            // If still not enough, duplicate as needed
+            const sets = Math.floor(count / shuffled.length);
+            const remainder = count % shuffled.length;
             
             let duplicatedResults = [];
             // Add complete sets
             for (let i = 0; i < sets; i++) {
-              const duplicatedQuestions = resultQuestions.map((q, index) => ({
+              const duplicatedQuestions = shuffled.map((q, index) => ({
                 ...q,
-                id: q.id + (i * resultQuestions.length * 1000) // Ensure unique IDs
+                id: q.id + (i * shuffled.length * 1000), // Ensure unique IDs
+                text: i > 0 ? `[Variant ${i+1}] ${q.text}` : q.text // Optionally mark duplicated questions
               }));
               duplicatedResults = [...duplicatedResults, ...duplicatedQuestions];
             }
             
             // Add remaining questions
             if (remainder > 0) {
-              const remainderQuestions = resultQuestions.slice(0, remainder).map((q, index) => ({
+              const remainderQuestions = shuffled.slice(0, remainder).map((q, index) => ({
                 ...q,
-                id: q.id + (sets * resultQuestions.length * 1000) // Ensure unique IDs
+                id: q.id + (sets * shuffled.length * 1000), // Ensure unique IDs
+                text: sets > 0 ? `[Variant ${sets+1}] ${q.text}` : q.text // Optionally mark duplicated questions 
               }));
               duplicatedResults = [...duplicatedResults, ...remainderQuestions];
             }
@@ -343,6 +358,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           }
         }
       }
+      
+      console.log(`Returning ${resultQuestions.length} questions after processing`);
       
       // Return the filtered and processed questions
       res.json({ questions: resultQuestions });
