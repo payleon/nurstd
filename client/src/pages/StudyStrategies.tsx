@@ -54,7 +54,7 @@ export default function StudyStrategies() {
             <h1 className="text-3xl font-bold mb-6 text-[#13294B]">Study Strategies</h1>
             
             <Tabs defaultValue="personalized" className="w-full">
-              <div className="relative mb-6">
+              <div className="relative mb-6 overflow-hidden">
                 <Carousel 
                   opts={{
                     align: "start",
@@ -62,26 +62,28 @@ export default function StudyStrategies() {
                   }}
                   className="w-full"
                 >
-                  <CarouselContent className="flex">
-                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
-                      <TabsTrigger value="personalized" className="w-full py-2">Personalized Plan</TabsTrigger>
-                    </CarouselItem>
-                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
-                      <TabsTrigger value="general" className="w-full py-2">General Strategies</TabsTrigger>
-                    </CarouselItem>
-                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
-                      <TabsTrigger value="time-management" className="w-full py-2">Time Management</TabsTrigger>
-                    </CarouselItem>
-                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
-                      <TabsTrigger value="question-strategies" className="w-full py-2">Question Strategies</TabsTrigger>
-                    </CarouselItem>
-                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
-                      <TabsTrigger value="study-resources" className="w-full py-2">Study Resources</TabsTrigger>
-                    </CarouselItem>
-                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
-                      <TabsTrigger value="analytics" className="w-full py-2">Study Analytics</TabsTrigger>
-                    </CarouselItem>
-                  </CarouselContent>
+                  <TabsList className="w-full h-auto p-0 bg-transparent">
+                    <CarouselContent>
+                      <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max pl-1">
+                        <TabsTrigger value="personalized" className="w-full py-2">Personalized Plan</TabsTrigger>
+                      </CarouselItem>
+                      <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max pl-1">
+                        <TabsTrigger value="general" className="w-full py-2">General Strategies</TabsTrigger>
+                      </CarouselItem>
+                      <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max pl-1">
+                        <TabsTrigger value="time-management" className="w-full py-2">Time Management</TabsTrigger>
+                      </CarouselItem>
+                      <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max pl-1">
+                        <TabsTrigger value="question-strategies" className="w-full py-2">Question Strategies</TabsTrigger>
+                      </CarouselItem>
+                      <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max pl-1">
+                        <TabsTrigger value="study-resources" className="w-full py-2">Study Resources</TabsTrigger>
+                      </CarouselItem>
+                      <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max pl-1">
+                        <TabsTrigger value="analytics" className="w-full py-2">Study Analytics</TabsTrigger>
+                      </CarouselItem>
+                    </CarouselContent>
+                  </TabsList>
                   <div className="hidden md:flex absolute -right-4 top-0 h-full items-center">
                     <CarouselNext className="relative h-7 w-7 !-right-0 !translate-y-0 shadow-md" />
                   </div>
