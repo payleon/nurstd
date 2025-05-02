@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Question } from "@shared/schema";
+import { cleanQuestionTitle } from "../utils/formatting";
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Flag, Maximize2, RotateCcw, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -124,7 +125,7 @@ export function Flashcard({ question, onNext, onPrev, currentIndex, totalCards }
             <div className="w-full h-full bg-white rounded-xl shadow-lg border-2 border-[#4B9CD3] overflow-hidden flex flex-col">
               <div className="bg-[#13294B] text-white p-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-xl">{question.title}</h3>
+                  <h3 className="font-bold text-xl">{cleanQuestionTitle(question.title)}</h3>
                   <div className="text-xs bg-white/20 px-2 py-0.5 rounded-md">
                     {question.type === "mc" && "Multiple Choice"}
                     {question.type === "sata" && "Select All That Apply"}

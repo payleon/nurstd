@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Question } from "@shared/schema";
 import { AlertCircle, CheckCircle2, Lightbulb, Info, XCircle, ArrowRight, Highlighter, Bookmark, Eye, EyeOff, MoveRight, Menu, ChevronUp, ChevronDown } from "lucide-react";
+import { cleanQuestionTitle } from '../utils/formatting';
 import { motion, AnimatePresence } from "framer-motion";
 
 interface QuestionRendererProps {
@@ -194,16 +195,11 @@ export function QuestionRenderer({
   // Define letters for choice labeling
   const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   
-  // Remove variant text from title
-  const cleanTitle = (title: string): string => {
-    return title ? title.replace(/\[Variant \d+\]\s*/g, '') : "Question";
-  };
-
   return (
     <div className="question-renderer">
       {/* Question Text */}
       <div className="question-text mb-6">
-        <h3 className="text-lg font-medium mb-3 text-gray-900">{cleanTitle(question.title)}:</h3>
+        <h3 className="text-lg font-medium mb-3 text-gray-900">{cleanQuestionTitle(question.title)}:</h3>
         <p className="text-gray-800 whitespace-pre-line">{question.text}</p>
         
         {/* Optional hint button */}
