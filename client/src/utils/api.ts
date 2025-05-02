@@ -26,13 +26,19 @@ export async function fetchQuizQuestions(categories: string[] | string, count: n
     
     // Map frontend categories to backend categories for filtering
     const mappedCategories = categoryArray.map(category => {
+      // System categories
       if (category === 'Medical-Surgical') return 'Cardiovascular';
-      if (category === 'Pediatric') return 'Pediatric';
       if (category === 'Obstetric') return 'Maternity';
-      if (category === 'Mental Health') return 'Mental Health';
-      if (category === 'Pharmacology') return 'Pharmacology';
-      if (category === 'Leadership') return 'Leadership';
-      if (category === 'Fundamentals') return 'Fundamentals';
+      
+      // Direct match categories
+      if (['Cardiovascular', 'Pediatric', 'Maternity', 'Mental Health', 
+           'Pharmacology', 'Leadership', 'Fundamentals', 'Respiratory',
+           'Neurological', 'Endocrine', 'Oncology', 'Emergency', 'Geriatric',
+           'Critical Care'].includes(category)) {
+        return category;
+      }
+      
+      // Handle remaining categories with their original names
       return category;
     });
     

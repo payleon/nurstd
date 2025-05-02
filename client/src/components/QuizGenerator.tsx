@@ -11,11 +11,27 @@ import { MedicalSpinner } from './ui/medical-spinner';
 const questionCategories = [
   'Fundamentals',
   'Medical-Surgical',
+  'Cardiovascular',
+  'Respiratory',
+  'Neurological',
+  'Gastrointestinal',
+  'Renal',
+  'Endocrine',
+  'Hematologic',
+  'Oncology',
+  'Infectious Disease',
   'Pediatric',
   'Obstetric',
+  'Maternity',
   'Mental Health',
   'Pharmacology',
-  'Leadership'
+  'Critical Care',
+  'Emergency',
+  'Geriatric',
+  'Community Health',
+  'Leadership',
+  'Ethics',
+  'Prioritization'
 ];
 
 export function QuizGenerator() {
@@ -82,19 +98,85 @@ export function QuizGenerator() {
           <Label className="block mb-3 font-medium text-base">
             Select Categories
           </Label>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {questionCategories.map((category) => (
-              <div key={category} className="flex items-center space-x-2 hover:bg-gray-50 p-2 rounded-md">
-                <Checkbox 
-                  id={category} 
-                  checked={selectedCategories.includes(category)}
-                  onCheckedChange={(checked) => handleCategoryChange(category, checked === true)}
-                />
-                <Label htmlFor={category} className="cursor-pointer">
-                  {category}
-                </Label>
-              </div>
-            ))}
+          
+          <div className="border rounded-md p-2 mb-4">
+            <div className="font-medium mb-2 text-[#13294B]">
+              Core Nursing
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {['Fundamentals', 'Medical-Surgical', 'Pharmacology', 'Leadership'].map((category) => (
+                <div key={category} className="flex items-center space-x-2 hover:bg-gray-50 p-2 rounded-md">
+                  <Checkbox 
+                    id={category} 
+                    checked={selectedCategories.includes(category)}
+                    onCheckedChange={(checked) => handleCategoryChange(category, checked === true)}
+                  />
+                  <Label htmlFor={category} className="cursor-pointer">
+                    {category}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="border rounded-md p-2 mb-4">
+            <div className="font-medium mb-2 text-[#13294B]">
+              Specialty Areas
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {['Cardiovascular', 'Respiratory', 'Neurological', 'Gastrointestinal', 'Renal', 'Endocrine', 'Hematologic', 'Oncology', 'Infectious Disease'].map((category) => (
+                <div key={category} className="flex items-center space-x-2 hover:bg-gray-50 p-2 rounded-md">
+                  <Checkbox 
+                    id={category} 
+                    checked={selectedCategories.includes(category)}
+                    onCheckedChange={(checked) => handleCategoryChange(category, checked === true)}
+                  />
+                  <Label htmlFor={category} className="cursor-pointer">
+                    {category}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="border rounded-md p-2 mb-4">
+            <div className="font-medium mb-2 text-[#13294B]">
+              Population Focus
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {['Pediatric', 'Obstetric', 'Maternity', 'Mental Health', 'Geriatric', 'Community Health'].map((category) => (
+                <div key={category} className="flex items-center space-x-2 hover:bg-gray-50 p-2 rounded-md">
+                  <Checkbox 
+                    id={category} 
+                    checked={selectedCategories.includes(category)}
+                    onCheckedChange={(checked) => handleCategoryChange(category, checked === true)}
+                  />
+                  <Label htmlFor={category} className="cursor-pointer">
+                    {category}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="border rounded-md p-2">
+            <div className="font-medium mb-2 text-[#13294B]">
+              Practice Focus
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {['Critical Care', 'Emergency', 'Ethics', 'Prioritization'].map((category) => (
+                <div key={category} className="flex items-center space-x-2 hover:bg-gray-50 p-2 rounded-md">
+                  <Checkbox 
+                    id={category} 
+                    checked={selectedCategories.includes(category)}
+                    onCheckedChange={(checked) => handleCategoryChange(category, checked === true)}
+                  />
+                  <Label htmlFor={category} className="cursor-pointer">
+                    {category}
+                  </Label>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
