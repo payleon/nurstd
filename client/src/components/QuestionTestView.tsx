@@ -391,7 +391,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
               className="border border-red-300 text-red-600 hover:bg-red-50 py-1 px-3 rounded flex items-center text-sm"
             >
               <LogOut className="h-4 w-4 mr-1" />
-              Exit
+              Exit Exam
             </button>
           </div>
         </div>
