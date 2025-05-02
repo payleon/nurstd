@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sidebar } from "@/components/ui/sidebar";
 import { Header } from "@/components/ui/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { StudyStrategyPlanner } from "@/components/StudyStrategyPlanner";
 import { 
   BookOpen, 
@@ -11,7 +14,19 @@ import {
   Clock, 
   Lightbulb, 
   BrainCircuit,
-  FileText
+  FileText,
+  BarChart2,
+  Bookmark,
+  Brain,
+  Award,
+  BookMarked,
+  Calendar,
+  Download,
+  Library,
+  Link2,
+  ExternalLink,
+  FileQuestion,
+  GraduationCap
 } from "lucide-react";
 
 export default function StudyStrategies() {
@@ -37,6 +52,8 @@ export default function StudyStrategies() {
                 <TabsTrigger value="general">General Strategies</TabsTrigger>
                 <TabsTrigger value="time-management">Time Management</TabsTrigger>
                 <TabsTrigger value="question-strategies">Question Strategies</TabsTrigger>
+                <TabsTrigger value="study-resources">Study Resources</TabsTrigger>
+                <TabsTrigger value="analytics">Study Analytics</TabsTrigger>
               </TabsList>
               
               <TabsContent value="personalized">
