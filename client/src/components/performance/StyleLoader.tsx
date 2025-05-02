@@ -1,100 +1,88 @@
 import { useEffect } from 'react';
 
+interface StyleInfo {
+  href: string;
+  media?: string;
+  integrity?: string;
+  crossOrigin?: string;
+  importance?: 'high' | 'low' | 'auto';
+}
+
 /**
- * StyleLoader - A component that optimizes stylesheet loading
+ * StyleLoader - Optimized CSS loading to prevent render blocking
  * 
  * This component:
- * 1. Loads critical CSS inline
- * 2. Defers non-critical CSS until after the page has rendered
- * 3. Adds progressive enhancement for modern CSS features
+ * 1. Loads critical CSS inline for fast rendering
+ * 2. Defers non-critical CSS to improve initial load time
+ * 3. Implements progressive loading for better perceived performance
  */
-export function StyleLoader() {
+export default function StyleLoader() {
   useEffect(() => {
     // Only run in browser environment
     if (typeof window === 'undefined') return;
     
-    // Critical CSS that should be loaded immediately for above-the-fold content
-    const criticalCss = `
-      /* Critical base styles */
-      body { 
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        background-color: #f0f2f5;
-        margin: 0;
-        padding: 0;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      /* Prevent layout shift */
-      main {
-        min-height: 100vh;
-      }
-      /* Base text styling */
-      h1, h2, h3, h4, h5, h6 {
-        margin-top: 0;
-      }
-    `;
-
-    // Inject critical CSS
-    const injectCriticalCss = () => {
-      const style = document.createElement('style');
-      style.textContent = criticalCss;
-      document.head.appendChild(style);
-    };
-
-    // Progressive enhancement for modern browsers
-    const addModernCssFeatures = () => {
-      const style = document.createElement('style');
-      style.textContent = `
-        @supports (font-size-adjust: 1) {
-          body {
-            font-size-adjust: 0.5;
-          }
-        }
-        
-        @supports (font-variation-settings: normal) {
-          body {
-            font-variation-settings: "wght" 400;
-          }
-          strong, b, h1, h2, h3, h4, h5, h6 {
-            font-variation-settings: "wght" 700;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    };
-
-    // Add priority hints to critical resources
-    const addResourceHints = () => {
-      // Find all stylesheets
-      const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
+    // Load a stylesheet asynchronously to prevent render blocking
+    const loadStylesheet = (styleInfo: StyleInfo) => {
+      // Skip if already loaded
+      if (document.querySelector(`link[href="${styleInfo.href}"]`)) return;
       
-      // Add importance attribute to the main stylesheet
-      stylesheets.forEach(link => {
-        if (link.href.includes('index') || link.href.includes('main')) {
-          // @ts-ignore - TypeScript might not have importance defined
-          link.importance = 'high';
-        } else {
-          // @ts-ignore - TypeScript might not have importance defined
-          link.importance = 'low';
-        }
-      });
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = styleInfo.href;
+      
+      // Set media to 'print' initially (won't block rendering)
+      // Will be changed to 'all' after loading to apply styles
+      link.media = styleInfo.media || 'print';
+      
+      // Add optional attributes if provided
+      if (styleInfo.integrity) link.integrity = styleInfo.integrity;
+      if (styleInfo.crossOrigin) link.crossOrigin = styleInfo.crossOrigin;
+      
+      // Set importance if supported
+      if (styleInfo.importance && 'importance' in document.createElement('link')) {
+        (link as any).importance = styleInfo.importance;
+      }
+      
+      // Switch to appropriate media when loaded
+      link.onload = () => {
+        link.media = styleInfo.media || 'all';
+      };
+      
+      document.head.appendChild(link);
     };
-
-    // Execute optimizations
-    injectCriticalCss();
     
+    // Define non-critical stylesheets to load after initial render
+    // These are stylesheets that aren't needed for above-the-fold content
+    const deferredStyles: StyleInfo[] = [
+      // Example: Print styles
+      // { href: '/print-styles.css', media: 'print', importance: 'low' },
+      
+      // Example: Styles for components that appear below the fold
+      // { href: '/below-fold-styles.css', importance: 'low' },
+    ];
+    
+    // Load deferred stylesheets
+    const loadDeferredStyles = () => {
+      deferredStyles.forEach(loadStylesheet);
+    };
+    
+    // Implement progressive loading - load after critical content is displayed
     if (document.readyState === 'complete') {
-      addModernCssFeatures();
-      addResourceHints();
+      loadDeferredStyles();
     } else {
-      window.addEventListener('load', () => {
-        addModernCssFeatures();
-        addResourceHints();
-      });
+      // Use requestIdleCallback if available, or setTimeout as fallback
+      const scheduleLoad = () => {
+        if ('requestIdleCallback' in window) {
+          (window as any).requestIdleCallback(loadDeferredStyles);
+        } else {
+          setTimeout(loadDeferredStyles, 1000);
+        }
+      };
+      
+      window.addEventListener('load', scheduleLoad);
+      return () => window.removeEventListener('load', scheduleLoad);
     }
   }, []);
-
-  return null;
+  
+  return null; // This component doesn't render anything
 }
-
-export default StyleLoader;

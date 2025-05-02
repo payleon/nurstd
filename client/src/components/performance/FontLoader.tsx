@@ -42,7 +42,7 @@ export default function FontLoader() {
     
     // For additional non-critical fonts that aren't in the initial HTML
     // Note: Keep this list minimal to avoid overhead
-    const additionalFonts = [
+    const additionalFonts: string[] = [
       // Example of additional font that may be needed but not on the critical path
       // 'https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap',
     ];

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import FontLoader from './FontLoader';
 import ScriptLoader from './ScriptLoader';
 import StyleLoader from './StyleLoader';
+import InlineCriticalCSS from './InlineCriticalCSS';
 
 /**
  * PerformanceOptimizer - A component that combines all performance optimizations
@@ -92,6 +93,7 @@ export function PerformanceOptimizer() {
 
   return (
     <>
+      <InlineCriticalCSS />
       <FontLoader />
       <ScriptLoader />
       <StyleLoader />
