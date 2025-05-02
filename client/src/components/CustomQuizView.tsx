@@ -34,7 +34,7 @@ export function CustomQuizView() {
 
   // Handle back button
   const handleBack = () => {
-    setLocation('/exams-and-studies');
+    setLocation('/case-studies');
   };
 
   // If there's an error, display it with a button to go back
