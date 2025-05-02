@@ -137,6 +137,9 @@ export function QuestionRenderer({
   const handleSubmitAnswer = () => {
     if (isMultiChoice) {
       onAnswer(selectedAnswers[0] || "");
+    } else if (isSelectAll) {
+      // For select all that apply, send the array of selected answers
+      onAnswer(selectedAnswers);
     } else if (isFillInBlank) {
       onAnswer(textAnswer);
     } else if (isHotspot) {
@@ -632,13 +635,14 @@ export function QuestionRenderer({
         )}
 
         {/* Submit Button for applicable questions - hidden in test view */}
-        {!showRationale && (isMultiChoice || isFillInBlank || isHotspot || isChartExhibit) && !hideSubmitButton && (
+        {!showRationale && (isMultiChoice || isSelectAll || isFillInBlank || isHotspot || isChartExhibit) && !hideSubmitButton && (
           <div className="mt-6">
             <button
               onClick={handleSubmitAnswer}
               className="px-6 py-3 bg-[#13294B] text-white rounded-md hover:bg-[#0A1E3A] transition-colors flex items-center"
               disabled={
                 (isMultiChoice && selectedAnswers.length === 0) || 
+                (isSelectAll && selectedAnswers.length === 0) || 
                 (isFillInBlank && textAnswer.trim() === '')
               }
             >
