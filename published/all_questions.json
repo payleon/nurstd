@@ -28855,6 +28855,1671 @@
       ],
       "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
       "category": "Leadership"
+    },
+    {
+      "id": 102736,
+      "title": "Fundamentals - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with a serious medical condition is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Fundamentals"
+    },
+    {
+      "id": 69155,
+      "title": "Fundamentals - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with an infection."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who is showing signs of clinical deterioration."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for a diagnostic procedure."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Fundamentals"
+    },
+    {
+      "id": 59178,
+      "title": "Fundamentals - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Fundamentals"
+    },
+    {
+      "id": 19111,
+      "title": "Fundamentals - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Fundamentals"
+    },
+    {
+      "id": 47315,
+      "title": "Fundamentals - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Fundamentals"
+    },
+    {
+      "id": 80005,
+      "title": "Medical-Surgical - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Medical-Surgical"
+    },
+    {
+      "id": 60786,
+      "title": "Medical-Surgical - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Medical-Surgical"
+    },
+    {
+      "id": 12482,
+      "title": "Medical-Surgical - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with a serious medical condition is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Medical-Surgical"
+    },
+    {
+      "id": 44353,
+      "title": "Medical-Surgical - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Medical-Surgical"
+    },
+    {
+      "id": 93233,
+      "title": "Medical-Surgical - Emergency Response",
+      "type": "ordered-response",
+      "text": "A nurse responds to an emergency situation for a patient with a life-threatening condition. Arrange the following interventions in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Document the interventions and outcomes."
+        },
+        {
+          "id": "B",
+          "text": "Activate the emergency response system."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's condition."
+        },
+        {
+          "id": "D",
+          "text": "Implement appropriate interventions based on assessment findings."
+        },
+        {
+          "id": "E",
+          "text": "Communicate with the healthcare team about the situation."
+        }
+      ],
+      "correctOrder": [
+        "C",
+        "B",
+        "D",
+        "E",
+        "A"
+      ],
+      "rationale": "In an emergency, the nurse should first quickly assess the patient (C) to determine the nature of the emergency. After confirming an emergency exists, activating the emergency response system (B) is crucial to get help. The nurse then begins appropriate interventions (D) based on their assessment. Effective communication with the healthcare team (E) ensures coordinated care. Documentation (A), while important, is completed after the immediate emergency is addressed.",
+      "category": "Medical-Surgical"
+    },
+    {
+      "id": 77582,
+      "title": "Cardiovascular - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with heart failure for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Cardiovascular"
+    },
+    {
+      "id": 85112,
+      "title": "Cardiovascular - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with an infection."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who is complaining of new-onset chest pain."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for an echocardiogram."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Cardiovascular"
+    },
+    {
+      "id": 44879,
+      "title": "Cardiovascular - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with heart failure for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Cardiovascular"
+    },
+    {
+      "id": 74261,
+      "title": "Cardiovascular - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with an infection."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who is complaining of new-onset chest pain."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for an echocardiogram."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Cardiovascular"
+    },
+    {
+      "id": 37191,
+      "title": "Cardiovascular - Emergency Response",
+      "type": "ordered-response",
+      "text": "A nurse responds to an emergency situation for a patient with cardiac arrest. Arrange the following interventions in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Document the interventions and outcomes."
+        },
+        {
+          "id": "B",
+          "text": "Activate the emergency response system."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's condition."
+        },
+        {
+          "id": "D",
+          "text": "Implement appropriate interventions based on assessment findings."
+        },
+        {
+          "id": "E",
+          "text": "Communicate with the healthcare team about the situation."
+        }
+      ],
+      "correctOrder": [
+        "C",
+        "B",
+        "D",
+        "E",
+        "A"
+      ],
+      "rationale": "In an emergency, the nurse should first quickly assess the patient (C) to determine the nature of the emergency. After confirming an emergency exists, activating the emergency response system (B) is crucial to get help. The nurse then begins appropriate interventions (D) based on their assessment. Effective communication with the healthcare team (E) ensures coordinated care. Documentation (A), while important, is completed after the immediate emergency is addressed.",
+      "category": "Cardiovascular"
+    },
+    {
+      "id": 35228,
+      "title": "Respiratory - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with COPD for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Respiratory"
+    },
+    {
+      "id": 52280,
+      "title": "Respiratory - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with pneumonia."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who has increased work of breathing and oxygen saturation of 88%."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for a bronchoscopy."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Respiratory"
+    },
+    {
+      "id": 29304,
+      "title": "Respiratory - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with COPD for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Respiratory"
+    },
+    {
+      "id": 104006,
+      "title": "Respiratory - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with pneumonia is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Respiratory"
+    },
+    {
+      "id": 19433,
+      "title": "Respiratory - Emergency Response",
+      "type": "ordered-response",
+      "text": "A nurse responds to an emergency situation for a patient with respiratory failure. Arrange the following interventions in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Document the interventions and outcomes."
+        },
+        {
+          "id": "B",
+          "text": "Activate the emergency response system."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's condition."
+        },
+        {
+          "id": "D",
+          "text": "Implement appropriate interventions based on assessment findings."
+        },
+        {
+          "id": "E",
+          "text": "Communicate with the healthcare team about the situation."
+        }
+      ],
+      "correctOrder": [
+        "C",
+        "B",
+        "D",
+        "E",
+        "A"
+      ],
+      "rationale": "In an emergency, the nurse should first quickly assess the patient (C) to determine the nature of the emergency. After confirming an emergency exists, activating the emergency response system (B) is crucial to get help. The nurse then begins appropriate interventions (D) based on their assessment. Effective communication with the healthcare team (E) ensures coordinated care. Documentation (A), while important, is completed after the immediate emergency is addressed.",
+      "category": "Respiratory"
+    },
+    {
+      "id": 65130,
+      "title": "Maternity - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with an infection."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who is 8 cm dilated and having contractions every 2 minutes."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for a non-stress test."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Maternity"
+    },
+    {
+      "id": 64175,
+      "title": "Maternity - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with preeclampsia is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Maternity"
+    },
+    {
+      "id": 58579,
+      "title": "Maternity - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with preeclampsia is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Maternity"
+    },
+    {
+      "id": 55472,
+      "title": "Maternity - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with a cesarean delivery for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Maternity"
+    },
+    {
+      "id": 96850,
+      "title": "Maternity - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with an infection."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who is 8 cm dilated and having contractions every 2 minutes."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for a non-stress test."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Maternity"
+    },
+    {
+      "id": 67817,
+      "title": "Pediatric - Emergency Response",
+      "type": "ordered-response",
+      "text": "A nurse responds to an emergency situation for a patient with anaphylactic shock. Arrange the following interventions in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Document the interventions and outcomes."
+        },
+        {
+          "id": "B",
+          "text": "Activate the emergency response system."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's condition."
+        },
+        {
+          "id": "D",
+          "text": "Implement appropriate interventions based on assessment findings."
+        },
+        {
+          "id": "E",
+          "text": "Communicate with the healthcare team about the situation."
+        }
+      ],
+      "correctOrder": [
+        "C",
+        "B",
+        "D",
+        "E",
+        "A"
+      ],
+      "rationale": "In an emergency, the nurse should first quickly assess the patient (C) to determine the nature of the emergency. After confirming an emergency exists, activating the emergency response system (B) is crucial to get help. The nurse then begins appropriate interventions (D) based on their assessment. Effective communication with the healthcare team (E) ensures coordinated care. Documentation (A), while important, is completed after the immediate emergency is addressed.",
+      "category": "Pediatric"
+    },
+    {
+      "id": 84241,
+      "title": "Pediatric - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing an intravenous insertion on a child. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Pediatric"
+    },
+    {
+      "id": 77909,
+      "title": "Pediatric - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing an intravenous insertion on a child. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Pediatric"
+    },
+    {
+      "id": 64460,
+      "title": "Pediatric - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with newly diagnosed diabetes for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Pediatric"
+    },
+    {
+      "id": 59753,
+      "title": "Pediatric - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing an intravenous insertion on a child. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Pediatric"
+    },
+    {
+      "id": 71379,
+      "title": "Mental Health - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a suicide risk assessment. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Mental Health"
+    },
+    {
+      "id": 20284,
+      "title": "Mental Health - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with delirium is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Mental Health"
+    },
+    {
+      "id": 45457,
+      "title": "Mental Health - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a suicide risk assessment. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Mental Health"
+    },
+    {
+      "id": 10609,
+      "title": "Mental Health - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with an infection."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who is expressing suicidal thoughts."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for a family therapy session."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Mental Health"
+    },
+    {
+      "id": 56807,
+      "title": "Mental Health - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with delirium is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Mental Health"
+    },
+    {
+      "id": 80378,
+      "title": "Pharmacology - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with a chronic condition for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Pharmacology"
+    },
+    {
+      "id": 48963,
+      "title": "Pharmacology - Emergency Response",
+      "type": "ordered-response",
+      "text": "A nurse responds to an emergency situation for a patient with a life-threatening condition. Arrange the following interventions in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Document the interventions and outcomes."
+        },
+        {
+          "id": "B",
+          "text": "Activate the emergency response system."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's condition."
+        },
+        {
+          "id": "D",
+          "text": "Implement appropriate interventions based on assessment findings."
+        },
+        {
+          "id": "E",
+          "text": "Communicate with the healthcare team about the situation."
+        }
+      ],
+      "correctOrder": [
+        "C",
+        "B",
+        "D",
+        "E",
+        "A"
+      ],
+      "rationale": "In an emergency, the nurse should first quickly assess the patient (C) to determine the nature of the emergency. After confirming an emergency exists, activating the emergency response system (B) is crucial to get help. The nurse then begins appropriate interventions (D) based on their assessment. Effective communication with the healthcare team (E) ensures coordinated care. Documentation (A), while important, is completed after the immediate emergency is addressed.",
+      "category": "Pharmacology"
+    },
+    {
+      "id": 10850,
+      "title": "Pharmacology - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with a serious medical condition is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Pharmacology"
+    },
+    {
+      "id": 24568,
+      "title": "Pharmacology - Discharge Planning",
+      "type": "ordered-response",
+      "text": "A nurse is preparing a patient with a chronic condition for discharge. Arrange the discharge planning steps in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Provide written discharge instructions."
+        },
+        {
+          "id": "B",
+          "text": "Assess the patient's understanding of self-care requirements."
+        },
+        {
+          "id": "C",
+          "text": "Coordinate follow-up appointments and services."
+        },
+        {
+          "id": "D",
+          "text": "Reconcile medications and provide a medication schedule."
+        },
+        {
+          "id": "E",
+          "text": "Evaluate the home environment and support system."
+        }
+      ],
+      "correctOrder": [
+        "E",
+        "B",
+        "D",
+        "C",
+        "A"
+      ],
+      "rationale": "Effective discharge planning follows a logical sequence. First, the nurse evaluates the home environment and support system (E) to identify potential challenges. Next, the nurse assesses the patient's understanding of self-care (B) to determine educational needs. Medication reconciliation (D) ensures the patient leaves with a clear medication plan. Coordinating follow-up (C) ensures continuity of care. Finally, providing written instructions (A) gives the patient a reference after discharge.",
+      "category": "Pharmacology"
+    },
+    {
+      "id": 36634,
+      "title": "Pharmacology - Nursing Prioritization",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients on a busy medical unit. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Administer scheduled antibiotics to a patient with an infection."
+        },
+        {
+          "id": "B",
+          "text": "Assess a patient who is showing signs of clinical deterioration."
+        },
+        {
+          "id": "C",
+          "text": "Document nursing interventions from the previous shift."
+        },
+        {
+          "id": "D",
+          "text": "Prepare a patient for a diagnostic procedure."
+        },
+        {
+          "id": "E",
+          "text": "Change the bed linens for a patient who had an incontinent episode."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "A",
+        "E",
+        "D",
+        "C"
+      ],
+      "rationale": "This question tests your ability to prioritize nursing care using the ABC (Airway, Breathing, Circulation) and Maslow's hierarchy principles. The patient with clinical deterioration (B) requires immediate assessment (life-threatening). Administering antibiotics (A) is time-sensitive for infection control. Addressing the incontinent episode (E) relates to immediate comfort and dignity needs. Preparing for a diagnostic procedure (D) is important but can wait. Documentation (C), while necessary, is the lowest priority when compared to direct patient care needs.",
+      "category": "Pharmacology"
+    },
+    {
+      "id": 76220,
+      "title": "Leadership - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Leadership"
+    },
+    {
+      "id": 51097,
+      "title": "Leadership - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Leadership"
+    },
+    {
+      "id": 35678,
+      "title": "Leadership - Deteriorating Patient",
+      "type": "ordered-response",
+      "text": "A nurse notices that a patient with a serious medical condition is showing signs of deterioration. Place the following nursing actions in order of priority.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Update the patient's family on the change in condition."
+        },
+        {
+          "id": "B",
+          "text": "Perform a focused assessment of vital signs and symptoms."
+        },
+        {
+          "id": "C",
+          "text": "Notify the healthcare provider of the assessment findings."
+        },
+        {
+          "id": "D",
+          "text": "Implement immediate nursing interventions within your scope of practice."
+        },
+        {
+          "id": "E",
+          "text": "Document the event, interventions, and patient response."
+        }
+      ],
+      "correctOrder": [
+        "B",
+        "D",
+        "C",
+        "A",
+        "E"
+      ],
+      "rationale": "When a patient shows signs of deterioration, rapid assessment and intervention are critical. The nurse should first perform a focused assessment (B) to gather data about the patient's condition. Based on these findings, the nurse should implement immediate interventions within their scope of practice (D), such as administering oxygen or positioning the patient. Notifying the provider (C) with complete assessment data follows these immediate actions. Updating the family (A) is important but comes after clinical stabilization measures. Documentation (E) is necessary but should not delay patient care.",
+      "category": "Leadership"
+    },
+    {
+      "id": 38091,
+      "title": "Leadership - Clinical Procedure",
+      "type": "ordered-response",
+      "text": "A nurse is performing a complex clinical procedure. Arrange the steps in the correct order.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Explain the procedure to the patient."
+        },
+        {
+          "id": "B",
+          "text": "Gather necessary equipment and supplies."
+        },
+        {
+          "id": "C",
+          "text": "Perform hand hygiene and don appropriate PPE."
+        },
+        {
+          "id": "D",
+          "text": "Verify patient identity using two identifiers."
+        },
+        {
+          "id": "E",
+          "text": "Document the procedure and patient response."
+        }
+      ],
+      "correctOrder": [
+        "D",
+        "C",
+        "B",
+        "A",
+        "E"
+      ],
+      "rationale": "When performing any clinical procedure, proper sequence is important for both safety and efficiency. First, verify the correct patient (D) to prevent errors. Next, perform hand hygiene and don PPE (C) to prevent infection transmission. Gathering equipment (B) before starting ensures the procedure won't be interrupted. Explaining the procedure (A) immediately before performing it reduces patient anxiety and promotes cooperation. Documentation (E) is completed after the procedure is finished.",
+      "category": "Leadership"
+    },
+    {
+      "id": 46642,
+      "title": "Leadership - Emergency Response",
+      "type": "ordered-response",
+      "text": "A nurse responds to an emergency situation for a patient with a life-threatening condition. Arrange the following interventions in the correct sequence.",
+      "items": [
+        {
+          "id": "A",
+          "text": "Document the interventions and outcomes."
+        },
+        {
+          "id": "B",
+          "text": "Activate the emergency response system."
+        },
+        {
+          "id": "C",
+          "text": "Assess the patient's condition."
+        },
+        {
+          "id": "D",
+          "text": "Implement appropriate interventions based on assessment findings."
+        },
+        {
+          "id": "E",
+          "text": "Communicate with the healthcare team about the situation."
+        }
+      ],
+      "correctOrder": [
+        "C",
+        "B",
+        "D",
+        "E",
+        "A"
+      ],
+      "rationale": "In an emergency, the nurse should first quickly assess the patient (C) to determine the nature of the emergency. After confirming an emergency exists, activating the emergency response system (B) is crucial to get help. The nurse then begins appropriate interventions (D) based on their assessment. Effective communication with the healthcare team (E) ensures coordinated care. Documentation (A), while important, is completed after the immediate emergency is addressed.",
+      "category": "Leadership"
     }
   ]
 }

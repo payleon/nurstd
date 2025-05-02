@@ -129,7 +129,10 @@ function createPrioritizationQuestion(category, existingIds) {
     title: template.title,
     type: "ordered-response",
     text: template.text,
-    options: template.options,
+    items: template.options.map(option => ({
+      id: option.id,
+      text: option.text
+    })),
     correctOrder: template.correctOrder,
     rationale: template.rationale,
     category: category
