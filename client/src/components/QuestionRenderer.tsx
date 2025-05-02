@@ -193,12 +193,17 @@ export function QuestionRenderer({
 
   // Define letters for choice labeling
   const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+  
+  // Remove variant text from title
+  const cleanTitle = (title: string): string => {
+    return title ? title.replace(/\[Variant \d+\]\s*/g, '') : "Question";
+  };
 
   return (
     <div className="question-renderer">
       {/* Question Text */}
       <div className="question-text mb-6">
-        <h3 className="text-lg font-medium mb-3 text-gray-900">{question.title || "Question"}:</h3>
+        <h3 className="text-lg font-medium mb-3 text-gray-900">{cleanTitle(question.title)}:</h3>
         <p className="text-gray-800 whitespace-pre-line">{question.text}</p>
         
         {/* Optional hint button */}
