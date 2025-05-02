@@ -534,7 +534,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
                   
                   return (
                     <button
-                      key={question.id}
+                      key={`question-${question.id}-${index}`}
                       className={buttonStyle}
                       onClick={() => goToQuestion(index)}
                       aria-label={ariaLabel}
