@@ -22,7 +22,14 @@ const targetCategories = [
   'Pediatric',
   'Mental Health',
   'Pharmacology',
-  'Leadership'
+  'Leadership',
+  'Respiratory',
+  'Neurological',
+  'Endocrine',
+  'Oncology',
+  'Emergency',
+  'Geriatric',
+  'Critical Care'
 ];
 
 // Template functions to generate unique questions based on existing ones
@@ -82,7 +89,14 @@ function createQuestionVariant(question, index, category) {
     'Pediatric': ['developmental milestone', 'child health', 'pediatric medication', 'family-centered care'],
     'Mental Health': ['therapeutic communication', 'psychiatric assessment', 'behavioral intervention', 'crisis management'],
     'Pharmacology': ['medication administration', 'drug interaction', 'pharmacokinetics', 'adverse reaction'],
-    'Leadership': ['delegation', 'care coordination', 'staff management', 'quality improvement']
+    'Leadership': ['delegation', 'care coordination', 'staff management', 'quality improvement'],
+    'Respiratory': ['respiratory assessment', 'oxygen therapy', 'ventilation management', 'pulmonary function'],
+    'Neurological': ['neurological assessment', 'intracranial pressure', 'level of consciousness', 'pupillary response'],
+    'Endocrine': ['glucose management', 'hormone imbalance', 'endocrine disorder', 'metabolic function'],
+    'Oncology': ['cancer treatment', 'chemotherapy management', 'palliative care', 'tumor marker'],
+    'Emergency': ['triage assessment', 'emergency protocol', 'rapid intervention', 'disaster management'],
+    'Geriatric': ['geriatric assessment', 'elder care', 'cognitive function', 'fall prevention'],
+    'Critical Care': ['hemodynamic monitoring', 'critical intervention', 'intensive care', 'multi-system failure']
   };
   
   // Select variants for this question
