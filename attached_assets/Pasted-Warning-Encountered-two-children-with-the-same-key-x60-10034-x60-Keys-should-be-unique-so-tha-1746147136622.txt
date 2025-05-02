@@ -1,0 +1,81 @@
+Warning: Encountered two children with the same key, &#x60;10034&#x60;. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at div
+    at div
+    at QuestionTestView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/QuestionTestView.tsx:48:36)
+    at CustomQuizView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/CustomQuizView.tsx:24:35)
+    at Suspense
+    at Route (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:323:16)
+    at LazyRoute (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/LazyRoute.tsx:20:29)
+    at Switch (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:379:17)
+    at Router
+    at BadgeProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+    at Provider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XIZKKOCE.js?v=d36394b5:22:15)
+    at TooltipProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=d36394b5:59:5)
+    at QueryClientProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d36394b5:2805:3)
+    at App
+QuestionRenderer for question 14: showRationale=false, isCorrect=false
+Warning: Encountered two children with the same key, &#x60;10034&#x60;. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at div
+    at div
+    at QuestionTestView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/QuestionTestView.tsx:48:36)
+    at CustomQuizView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/CustomQuizView.tsx:24:35)
+    at Suspense
+    at Route (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:323:16)
+    at LazyRoute (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/LazyRoute.tsx:20:29)
+    at Switch (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:379:17)
+    at Router
+    at BadgeProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+    at Provider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XIZKKOCE.js?v=d36394b5:22:15)
+    at TooltipProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=d36394b5:59:5)
+    at QueryClientProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d36394b5:2805:3)
+    at App
+at div
+at div
+at div
+at div
+at div
+at div
+at QuestionTestView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/QuestionTestView.tsx:48:36)
+at CustomQuizView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/CustomQuizView.tsx:24:35)
+at Suspense
+at Route (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:323:16)
+at LazyRoute (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/LazyRoute.tsx:20:29)
+at Switch (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:379:17)
+at Router
+at BadgeProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+at Provider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XIZKKOCE.js?v=d36394b5:22:15)
+at TooltipProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=d36394b5:59:5)
+at QueryClientProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d36394b5:2805:3)
+at App
+at t.value (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+QuestionRenderer for question 14: showRationale=false, isCorrect=false
+Warning: Encountered two children with the same key, &#x60;10034&#x60;. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+    at div
+    at div
+    at div
+    at div
+    at div
+    at div
+    at QuestionTestView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/QuestionTestView.tsx:48:36)
+    at CustomQuizView (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/CustomQuizView.tsx:24:35)
+    at Suspense
+    at Route (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:323:16)
+    at LazyRoute (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/components/LazyRoute.tsx:20:29)
+    at Switch (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=d36394b5:379:17)
+    at Router
+    at BadgeProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+    at Provider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-XIZKKOCE.js?v=d36394b5:22:15)
+    at TooltipProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=d36394b5:59:5)
+    at QueryClientProvider (https://54cceeb5-6406-4834-829d-ceefcd2c87cc-00-249ov44u3762x.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=d36394b5:2805:3)
+    at App
