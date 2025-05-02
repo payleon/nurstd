@@ -120,8 +120,10 @@ export function QuestionRenderer({
 
     setSelectedAnswers(newSelectedAnswers);
     
-    // For select-all-that-apply, automatically notify parent
-    if (isSelectAll) {
+    // For multiple choice questions, we used to automatically notify the parent with select-all-that-apply
+    // But now we want the user to explicitly submit their answer
+    // We only auto-submit for standard multiple choice questions
+    if (isMultiChoice) {
       onAnswer(newSelectedAnswers);
     }
   };

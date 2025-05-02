@@ -23,6 +23,7 @@ const StudyTimer = lazy(() => import("@/pages/StudyTimer"));
 const Games = lazy(() => import("@/pages/Games"));
 const LearningProgress = lazy(() => import("@/pages/LearningProgress"));
 const TooltipDemo = lazy(() => import("@/pages/TooltipDemo"));
+const FlashcardStudy = lazy(() => import("@/pages/FlashcardStudy"));
 
 // Importing the CustomQuizView component
 const CustomQuizView = lazy(() => import("@/components/CustomQuizView").then(module => ({ default: module.CustomQuizView })));
@@ -92,6 +93,7 @@ function Router() {
       <LazyRoute path="/learning-progress" component={LearningProgress} />
       <LazyRoute path="/tooltip-demo" component={TooltipDemo} />
       <LazyRoute path="/custom-quiz" component={CustomQuizView} />
+      <LazyRoute path="/flashcards" component={FlashcardStudy} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">
