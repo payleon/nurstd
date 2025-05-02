@@ -669,13 +669,61 @@ export function QuestionRenderer({
 
             <div className="mb-4 pb-4 border-b border-dashed border-gray-300">
               <span className="font-medium text-gray-700">Expected Answer: </span>
-              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-medium">
-                {Array.isArray(getCorrectAnswer(question)) ? (
-                  (getCorrectAnswer(question) as string[]).join(', ')
-                ) : (
-                  getCorrectAnswer(question)
+              <div className="bg-blue-100 text-blue-800 px-3 py-2 rounded text-sm font-medium mt-2">
+                {/* For multiple choice questions, show the letter and full text */}
+                {isMultiChoice && hasMCChoices(question) && (
+                  <>
+                    {question.choices.map((choice, index) => {
+                      if (choice.id === question.correctAnswer) {
+                        return (
+                          <div key={choice.id} className="flex items-start">
+                            <span className="font-bold mr-2">{letters[index]}:</span>
+                            <span>{choice.text}</span>
+                          </div>
+                        );
+                      }
+                      return null;
+                    })}
+                  </>
                 )}
-              </span>
+                
+                {/* For select all that apply questions, show all correct options with letters */}
+                {isSelectAll && hasSATAChoices(question) && (
+                  <div className="space-y-1">
+                    {question.choices.map((choice, index) => {
+                      if (question.correctAnswer.includes(choice.id)) {
+                        return (
+                          <div key={choice.id} className="flex items-start">
+                            <span className="font-bold mr-2">{letters[index]}:</span>
+                            <span>{choice.text}</span>
+                          </div>
+                        );
+                      }
+                      return null;
+                    })}
+                  </div>
+                )}
+                
+                {/* For fill in the blank, just show the text answer */}
+                {isFillInBlank && hasFillInBlank(question) && (
+                  <div>
+                    {Array.isArray(question.correctAnswer) 
+                      ? question.correctAnswer.join(" OR ") 
+                      : question.correctAnswer}
+                  </div>
+                )}
+                
+                {/* For other question types, fall back to the original display */}
+                {!isMultiChoice && !isSelectAll && !isFillInBlank && (
+                  <div>
+                    {Array.isArray(getCorrectAnswer(question)) ? (
+                      (getCorrectAnswer(question) as string[]).join(', ')
+                    ) : (
+                      getCorrectAnswer(question)
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="rationale">
