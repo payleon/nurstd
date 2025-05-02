@@ -37,28 +37,117 @@ function createQuestionVariant(question, index, category) {
   variant.category = category;
   
   // Create a variant of the question text
-  const variantTexts = [
-    `Based on current best practices, ${question.text.toLowerCase()}`,
-    `According to nursing standards, ${question.text.toLowerCase()}`,
-    `In a hospital setting, ${question.text.toLowerCase()}`,
-    `During your clinical rotation, ${question.text.toLowerCase()}`,
-    `A new graduate nurse asks you: ${question.text}`,
-    `A patient's family member asks: ${question.text}`,
-    `For a patient with multiple comorbidities, ${question.text.toLowerCase()}`,
-    `In an outpatient setting, ${question.text.toLowerCase()}`,
-    `From an evidence-based perspective, ${question.text.toLowerCase()}`,
-    `From a nursing management viewpoint, ${question.text.toLowerCase()}`
+  const variantPrefixes = [
+    `Based on current best practices, `,
+    `According to nursing standards, `,
+    `In a hospital setting, `,
+    `During your clinical rotation, `,
+    `A new graduate nurse asks you: "`,
+    `A patient's family member asks: "`,
+    `For a patient with multiple comorbidities, `,
+    `In an outpatient setting, `,
+    `From an evidence-based perspective, `,
+    `From a nursing management viewpoint, `,
+    `When implementing the nursing process, `,
+    `As a charge nurse, `,
+    `During shift handover, `,
+    `In an emergency situation, `,
+    `For a culturally diverse patient population, `,
+    `When working in a rural healthcare setting, `,
+    `In a long-term care facility, `,
+    `As part of interdisciplinary team planning, `,
+    `During a telehealth consultation, `,
+    `When reviewing a patient's medication history, `
   ];
   
-  // Select a variant text based on the index
-  const variantIndex = index % variantTexts.length;
-  variant.text = variantTexts[variantIndex];
+  const variantSuffixes = [
+    ``,
+    ` when following evidence-based guidelines?`,
+    ` according to current nursing practice?`,
+    ` to ensure patient safety?`,
+    ` to promote optimal patient outcomes?`,
+    ` based on priority assessment data?`,
+    ` to demonstrate clinical competence?`,
+    ` while adhering to ethical principles?`,
+    ` while promoting patient autonomy?`,
+    ` to maintain standard precautions?`
+  ];
   
-  // If it's a multiple choice question, we can modify the choices slightly
+  // Create different question text scenarios based on category
+  const categorySpecificPhrases = {
+    'Fundamentals': ['fundamental nursing care', 'basic patient needs', 'nursing foundations', 'standard precautions'],
+    'Medical-Surgical': ['post-operative care', 'wound management', 'pain assessment', 'medical intervention'],
+    'Cardiovascular': ['cardiac monitoring', 'heart rhythm', 'circulation assessment', 'cardiovascular symptoms'],
+    'Maternity': ['prenatal care', 'labor progression', 'postpartum assessment', 'newborn care'],
+    'Pediatric': ['developmental milestone', 'child health', 'pediatric medication', 'family-centered care'],
+    'Mental Health': ['therapeutic communication', 'psychiatric assessment', 'behavioral intervention', 'crisis management'],
+    'Pharmacology': ['medication administration', 'drug interaction', 'pharmacokinetics', 'adverse reaction'],
+    'Leadership': ['delegation', 'care coordination', 'staff management', 'quality improvement']
+  };
+  
+  // Select variants for this question
+  const prefixIndex = index % variantPrefixes.length;
+  const suffixIndex = Math.floor(index / variantPrefixes.length) % variantSuffixes.length;
+  
+  let questionText = question.text;
+  // If we know the category, potentially add a category-specific phrase
+  if (categorySpecificPhrases[category] && Math.random() > 0.5) {
+    const phrases = categorySpecificPhrases[category];
+    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    
+    // Find a good place to insert the phrase
+    if (questionText.includes('Which') || questionText.includes('What')) {
+      questionText = questionText.replace(/Which|What/, `Which ${phrase}`).replace('  ', ' ');
+    }
+  }
+  
+  // Add prefix and suffix
+  let newText = variantPrefixes[prefixIndex];
+  
+  // If the new text ends with a quote and the original doesn't start with one, add quotes
+  if (newText.endsWith('"') && !questionText.startsWith('"')) {
+    newText += questionText + '"';
+  } else {
+    // Otherwise just make sure the first letter of the original text is lowercase if preceded by a comma or space
+    if (newText && newText.endsWith(', ') || newText.endsWith(' ')) {
+      newText += questionText.charAt(0).toLowerCase() + questionText.slice(1);
+    } else {
+      newText += questionText;
+    }
+  }
+  
+  // Add suffix if it's not empty
+  if (variantSuffixes[suffixIndex]) {
+    // If the text already ends with a question mark, replace it
+    if (newText.endsWith('?')) {
+      newText = newText.slice(0, -1) + variantSuffixes[suffixIndex];
+    } else {
+      newText += variantSuffixes[suffixIndex];
+    }
+  }
+  
+  variant.text = newText;
+  
+  // If it's a multiple choice question, we can modify the choices and potentially add more context
   if (variant.type === 'mc' && variant.choices && Array.isArray(variant.choices)) {
     // Shuffle the order of choices without changing the correct answer
     const correctChoiceId = variant.correctAnswer;
-    const correctChoice = variant.choices.find(c => c.id === correctChoiceId);
+    let parsedId = correctChoiceId;
+    
+    // Handle various formats of correctAnswer (string, JSON string, etc.)
+    if (typeof correctChoiceId === 'string') {
+      // Try to parse it if it looks like JSON (starts with a quote)
+      if (correctChoiceId.startsWith('"') && correctChoiceId.endsWith('"')) {
+        try {
+          parsedId = JSON.parse(correctChoiceId);
+        } catch (e) {
+          // If it fails, just use the raw value
+          parsedId = correctChoiceId.replace(/^"|"$/g, '');
+        }
+      }
+    }
+    
+    const correctChoice = variant.choices.find(c => c.id === correctChoiceId || c.id === parsedId);
     
     // Only shuffle if we found the correct choice
     if (correctChoice) {
@@ -72,11 +161,60 @@ function createQuestionVariant(question, index, category) {
       }
       
       variant.choices = shuffledChoices;
+      
+      // Sometimes add more detail to the choices
+      if (Math.random() > 0.7) {
+        variant.choices = variant.choices.map(choice => {
+          // Only modify some of the choices
+          if (Math.random() > 0.3) {
+            return choice;
+          }
+          
+          // Add more detail or context to the choice text
+          const detailPhrases = [
+            `${choice.text}, which is recommended for this situation`,
+            `${choice.text}, following best practice guidelines`,
+            `${choice.text}, as indicated by assessment findings`,
+            `${choice.text}, in accordance with facility protocol`,
+            `${choice.text}, to promote patient safety`
+          ];
+          
+          const detailIndex = Math.floor(Math.random() * detailPhrases.length);
+          return {
+            ...choice,
+            text: detailPhrases[detailIndex]
+          };
+        });
+      }
     }
   }
   
-  // Modify the rationale slightly
-  variant.rationale = `${variant.rationale} This principle is important for safe, effective nursing practice.`;
+  // Create different rationale enhancements
+  const rationaleEnhancements = [
+    `This principle is important for safe, effective nursing practice.`,
+    `Understanding this concept is crucial for providing evidence-based care.`,
+    `This knowledge helps nurses prioritize interventions appropriately.`,
+    `This represents a key concept in ${category.toLowerCase()} nursing.`,
+    `Application of this principle promotes positive patient outcomes.`,
+    `This information guides proper clinical decision-making.`,
+    `Recognizing this is essential for maintaining patient safety.`,
+    `This reflects current best practices in nursing care.`
+  ];
+  
+  // Select a rationale enhancement
+  const rationaleIndex = Math.floor(Math.random() * rationaleEnhancements.length);
+  variant.rationale = `${variant.rationale} ${rationaleEnhancements[rationaleIndex]}`;
+  
+  // Add title variation
+  if (variant.title) {
+    if (variant.title.includes(category)) {
+      // If the title already includes the category, keep it
+      variant.title = variant.title;
+    } else {
+      // Otherwise add the category to the title
+      variant.title = `${category} Nursing`;
+    }
+  }
   
   return variant;
 }
@@ -120,7 +258,7 @@ try {
     
     // Calculate how many new questions we need
     const existingCount = categoryCounts[category] || 0;
-    const neededCount = Math.max(0, 50 - existingCount);
+    const neededCount = Math.max(0, 100 - existingCount); // Updated to 100 questions per category
     
     console.log(`\nExpanding ${category} category: Need ${neededCount} more questions`);
     
