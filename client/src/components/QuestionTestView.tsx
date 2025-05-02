@@ -7,7 +7,8 @@ import {
   ArrowLeft, ArrowRight, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
   ChevronRight, Check, Award, BookOpen, Lightbulb, Bell, AlertTriangle,
   User, LogOut, Monitor, Maximize, Minimize, Meh, Smile, Frown, Clipboard,
-  CheckSquare, PauseCircle, PlayCircle, RotateCcw, X, Menu, Calculator
+  CheckSquare, PauseCircle, PlayCircle, RotateCcw, X, Menu, Calculator,
+  Bookmark, BookmarkCheck
 } from "lucide-react";
 import { QuestionRenderer } from "./QuestionRenderer";
 import { FlashcardReview } from "./FlashcardReview";
@@ -20,9 +21,18 @@ import { motion, AnimatePresence } from "framer-motion";
 interface QuestionTestViewProps {
   test: Test & { questionsData?: QuestionsResponse };
   onBack: () => void;
+  onComplete?: (score: number, totalQuestions: number) => void;
+  onBookmarkQuestion?: (question: Question) => void;
+  bookmarkedQuestions?: number[];
 }
 
-export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
+export function QuestionTestView({ 
+  test, 
+  onBack, 
+  onComplete,
+  onBookmarkQuestion,
+  bookmarkedQuestions = []
+}: QuestionTestViewProps) {
   // Use the directly passed questions data if available, otherwise fetch from API for the specific test
   const { data: apiQuestionsData, isLoading: apiLoading, error: apiError } = useQuery({
     queryKey: [`/api/tests/${test.id}/content`],
@@ -277,6 +287,18 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     setCurrentQuestionIndex(index);
   };
   
+  // Handle bookmarking the current question
+  const handleBookmarkQuestion = () => {
+    if (!currentQuestion || !onBookmarkQuestion) return;
+    
+    onBookmarkQuestion(currentQuestion);
+  };
+  
+  // Check if current question is bookmarked
+  const isQuestionBookmarked = (questionId: number) => {
+    return bookmarkedQuestions.includes(questionId);
+  };
+  
   const handleSubmitExam = () => {
     // Only allow submission if all questions are answered
     if (Object.keys(userAnswers).length !== totalQuestions) {
@@ -303,6 +325,11 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
       // Set test as submitted
       setTestSubmitted(true);
       setIsSubmitting(false);
+      
+      // Call onComplete callback if provided
+      if (onComplete) {
+        onComplete(correctCount, totalQuestions);
+      }
       
       toast({
         title: "Exam Submitted Successfully",
@@ -420,6 +447,20 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
             >
               <Flag className="h-5 w-5" aria-hidden="true" />
             </button>
+            {onBookmarkQuestion && currentQuestion && (
+              <button 
+                className={`p-2 rounded-full border ${currentQuestion && isQuestionBookmarked(currentQuestion.id) ? 'bg-blue-50 border-blue-300 text-blue-600' : 'border-gray-300 hover:bg-gray-100 text-gray-600'}`}
+                onClick={handleBookmarkQuestion}
+                title={isQuestionBookmarked(currentQuestion.id) ? "Remove Bookmark" : "Bookmark Question"}
+                aria-label={isQuestionBookmarked(currentQuestion.id) ? "Remove this question from bookmarks" : "Bookmark this question for later reference"}
+              >
+                {isQuestionBookmarked(currentQuestion.id) ? (
+                  <BookmarkCheck className="h-5 w-5" aria-hidden="true" />
+                ) : (
+                  <Bookmark className="h-5 w-5" aria-hidden="true" />
+                )}
+              </button>
+            )}
             <button 
               className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 text-gray-600"
               onClick={() => setShowReviewMode(true)}
