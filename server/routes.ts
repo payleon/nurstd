@@ -248,6 +248,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log(`Received request for ${count} questions in categories: ${categories.length > 0 ? categories.join(', ') : 'All'}`);
       
+      // Add a query parameter for difficulty if it exists
+      const difficulty = req.query.difficulty;
+      if (difficulty) {
+        console.log(`Filtering for difficulty level: ${difficulty}`);
+      }
+      
       try {
         await fs.access(questionsFilePath);
       } catch (error) {
@@ -266,6 +272,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Filter questions by categories if specified
       let filteredQuestions = validatedData.questions;
+      console.log(`Total questions available: ${filteredQuestions.length}`);
+      
+      // Log types of questions available
+      const questionTypes = {};
+      filteredQuestions.forEach(q => {
+        questionTypes[q.type] = (questionTypes[q.type] || 0) + 1;
+      });
+      console.log('Question types available:', questionTypes);
+      
+      // Log some sample category data to debug category matching
+      console.log('Sample question categories:');
+      filteredQuestions.slice(0, 10).forEach(q => {
+        console.log(`  Question ID ${q.id}: category="${q.category || 'undefined'}", title="${q.title}"`);
+      });
+      
       if (categories.length > 0) {
         filteredQuestions = filteredQuestions.filter(q => {
           // Check if the question matches any of the selected categories
@@ -281,6 +302,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
               q.category.toLowerCase().includes(category.toLowerCase()) ||
               category.toLowerCase().includes(q.category.toLowerCase())
             );
+            
+            // Log matching information for troubleshooting
+            if (titleMatch || categoryMatch) {
+              console.log(`  Match found: "${category}" matches question ID ${q.id} (${q.category || 'no category'})`);
+            }
+            
             return titleMatch || categoryMatch;
           });
         });
