@@ -332,7 +332,7 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
     return (
       <div className="max-w-5xl mx-auto">
         <div className="bg-white rounded-lg shadow-md p-8">
-          <LoadingScreen text="Preparing your NCLEX practice exam..." />
+          <LoadingScreen text="Preparing your NCLEX practice exam..." spinnerType="iv-drip" />
           
           <div className="mt-8 space-y-3">
             <div className="bg-gray-100 p-3 rounded-md flex items-center animate-pulse">
@@ -350,6 +350,12 @@ export function QuestionTestView({ test, onBack }: QuestionTestViewProps) {
             <div className="bg-gray-100 p-3 rounded-md flex items-center animate-pulse">
               <div className="w-6 h-6 rounded-full bg-[#4B9CD3] mr-3 flex items-center justify-center text-white">
                 3
+              </div>
+              <div className="text-gray-600">Setting up medical knowledge base...</div>
+            </div>
+            <div className="bg-gray-100 p-3 rounded-md flex items-center animate-pulse">
+              <div className="w-6 h-6 rounded-full bg-[#4B9CD3] mr-3 flex items-center justify-center text-white">
+                4
               </div>
               <div className="text-gray-600">Setting up learning analytics...</div>
             </div>

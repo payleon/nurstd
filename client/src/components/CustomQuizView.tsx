@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { Question } from '../types/question';
 import { QuestionTestView } from './QuestionTestView';
+import { MedicalSpinner } from './ui/medical-spinner';
 
 export function CustomQuizView() {
   const [quizData, setQuizData] = useState<{ questions: Question[] } | null>(null);
@@ -59,7 +60,16 @@ export function CustomQuizView() {
   if (!quizData) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#4B9CD3]"></div>
+        <div className="flex flex-col items-center space-y-4">
+          {/* Import the MedicalSpinner component for a more nursing-related loading animation */}
+          <MedicalSpinner type="cardiogram" size="lg" text="Preparing your nursing quiz..." />
+          
+          <div className="mt-6 bg-gray-50 p-4 rounded-md shadow-sm border border-gray-100">
+            <div className="text-sm text-gray-600 italic">
+              Verifying question bank with {quizData?.questions?.length || '...'} questions
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
