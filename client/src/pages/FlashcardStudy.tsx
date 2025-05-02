@@ -15,8 +15,8 @@ import { MedicalSpinner } from '../components/ui/medical-spinner';
 import { Button } from '../components/ui/button';
 import { Progress } from '../components/ui/progress';
 import { Calendar } from '../components/ui/calendar';
-import { Header } from '../components/Header';
-import { Sidebar } from '../components/Sidebar';
+import { Header } from '../components/ui/header';
+import { Sidebar } from '../components/ui/sidebar';
 
 function formatDate(date: Date): string {
   return new Intl.DateTimeFormat('en-US', {
