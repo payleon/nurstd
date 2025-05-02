@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { useLocation } from 'wouter';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Checkbox } from './ui/checkbox';
 import { Slider } from './ui/slider';
 import { fetchQuizQuestions } from '../utils/api';
 import { QuestionsResponse } from '../types/question';
 import { MedicalSpinner } from './ui/medical-spinner';
 
 const questionCategories = [
-  'All',
   'Fundamentals',
   'Medical-Surgical',
   'Pediatric',
@@ -20,15 +19,19 @@ const questionCategories = [
 ];
 
 export function QuizGenerator() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [questionCount, setQuestionCount] = useState(10);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [, setLocation] = useLocation();
 
-  // Handle category change
-  const handleCategoryChange = (value: string) => {
-    setSelectedCategory(value);
+  // Handle checkbox change for categories
+  const handleCategoryChange = (category: string, checked: boolean) => {
+    if (checked) {
+      setSelectedCategories(prev => [...prev, category]);
+    } else {
+      setSelectedCategories(prev => prev.filter(c => c !== category));
+    }
   };
 
   // Handle question count change
@@ -39,14 +42,20 @@ export function QuizGenerator() {
   // Generate quiz
   const handleGenerateQuiz = async () => {
     try {
+      // If no categories selected, show error
+      if (selectedCategories.length === 0) {
+        setError('Please select at least one category.');
+        return;
+      }
+      
       setIsGenerating(true);
       setError(null);
 
-      // Fetch questions based on category and count
-      const quizData = await fetchQuizQuestions(selectedCategory, questionCount);
+      // Fetch questions based on selected categories and count
+      const quizData = await fetchQuizQuestions(selectedCategories, questionCount);
 
       if (!quizData.questions || quizData.questions.length === 0) {
-        setError('No questions found for the selected category. Please try a different category or count.');
+        setError('No questions found for the selected categories. Please try different categories or count.');
         setIsGenerating(false);
         return;
       }
@@ -70,21 +79,23 @@ export function QuizGenerator() {
         <h2 className="text-2xl font-bold text-[#13294B] mb-6">Create Your Own Quiz</h2>
         
         <div className="mb-6">
-          <Label htmlFor="category" className="block mb-2 font-medium">
-            Select Category
+          <Label className="block mb-3 font-medium text-base">
+            Select Categories
           </Label>
-          <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-            <SelectTrigger id="category" className="w-full">
-              <SelectValue placeholder="Select a category" />
-            </SelectTrigger>
-            <SelectContent>
-              {questionCategories.map((category) => (
-                <SelectItem key={category} value={category}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {questionCategories.map((category) => (
+              <div key={category} className="flex items-center space-x-2 hover:bg-gray-50 p-2 rounded-md">
+                <Checkbox 
+                  id={category} 
+                  checked={selectedCategories.includes(category)}
+                  onCheckedChange={(checked) => handleCategoryChange(category, checked === true)}
+                />
+                <Label htmlFor={category} className="cursor-pointer">
                   {category}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+                </Label>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="mb-8">
@@ -116,7 +127,9 @@ export function QuizGenerator() {
           <div className="flex flex-col items-center justify-center space-y-4 py-4">
             <MedicalSpinner type="nurse" size="md" text="Preparing your nursing questions..." />
             <div className="text-sm text-gray-500">
-              Selecting {questionCount} questions about {selectedCategory !== 'All' ? selectedCategory : 'nursing topics'}
+              Selecting {questionCount} questions from {selectedCategories.length === 1 ? 
+                selectedCategories[0] : 
+                `${selectedCategories.length} nursing categories`}
             </div>
           </div>
         ) : (

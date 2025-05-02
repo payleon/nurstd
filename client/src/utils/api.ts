@@ -18,42 +18,48 @@ export async function fetchQuestions(): Promise<QuestionsResponse> {
   }
 }
 
-// Fetch questions filtered by category and limited by count
-export async function fetchQuizQuestions(category: string, count: number): Promise<QuestionsResponse> {
+// Fetch questions filtered by categories and limited by count
+export async function fetchQuizQuestions(categories: string[] | string, count: number): Promise<QuestionsResponse> {
   try {
-    // Map frontend category to backend category for filtering
-    let categoryParam = category;
-    if (category !== 'All') {
-      if (category === 'Medical-Surgical') {
-        categoryParam = 'Cardiovascular';
-      } else if (category === 'Pediatric') {
-        categoryParam = 'Pediatric';
-      } else if (category === 'Obstetric') {
-        categoryParam = 'Maternity';
-      } else if (category === 'Mental Health') {
-        categoryParam = 'Mental Health';
-      } else if (category === 'Pharmacology') {
-        categoryParam = 'Pharmacology';
-      } else if (category === 'Leadership') {
-        categoryParam = 'Leadership';
-      } else if (category === 'Fundamentals') {
-        categoryParam = 'Fundamentals';
-      }
-    }
-
-    console.log(`Fetching ${count} questions for category: ${categoryParam}`);
+    // Handle both array and string inputs for backward compatibility
+    const categoryArray = Array.isArray(categories) ? categories : [categories];
     
-    // Now use the new filter endpoint
-    const response = await fetch(
-      `/api/questions/filter?${category === 'All' ? '' : `category=${categoryParam}&`}count=${count}`
-    );
+    // Map frontend categories to backend categories for filtering
+    const mappedCategories = categoryArray.map(category => {
+      if (category === 'Medical-Surgical') return 'Cardiovascular';
+      if (category === 'Pediatric') return 'Pediatric';
+      if (category === 'Obstetric') return 'Maternity';
+      if (category === 'Mental Health') return 'Mental Health';
+      if (category === 'Pharmacology') return 'Pharmacology';
+      if (category === 'Leadership') return 'Leadership';
+      if (category === 'Fundamentals') return 'Fundamentals';
+      return category;
+    });
+    
+    console.log(`Fetching ${count} questions for categories: ${mappedCategories.join(', ')}`);
+    
+    // Build the query string for multiple categories
+    let queryParams = new URLSearchParams();
+    
+    // Add each category as a separate parameter
+    if (mappedCategories.length > 0 && mappedCategories[0] !== 'All') {
+      mappedCategories.forEach(cat => {
+        queryParams.append('category', cat);
+      });
+    }
+    
+    // Add count parameter
+    queryParams.append('count', count.toString());
+    
+    // Now use the new filter endpoint with multiple categories
+    const response = await fetch(`/api/questions/filter?${queryParams.toString()}`);
     
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
     
     const data = await response.json() as QuestionsResponse;
-    console.log(`Received ${data.questions.length} questions for category: ${categoryParam}`);
+    console.log(`Received ${data.questions.length} questions from selected categories`);
     
     // The server will now handle falling back and duplicating questions as needed,
     // so we can just return the data directly
