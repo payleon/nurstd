@@ -7,6 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { StudyStrategyPlanner } from "@/components/StudyStrategyPlanner";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { 
   BookOpen, 
   CheckCircle2, 
@@ -47,14 +54,39 @@ export default function StudyStrategies() {
             <h1 className="text-3xl font-bold mb-6 text-[#13294B]">Study Strategies</h1>
             
             <Tabs defaultValue="personalized" className="w-full">
-              <TabsList className="mb-6">
-                <TabsTrigger value="personalized">Personalized Plan</TabsTrigger>
-                <TabsTrigger value="general">General Strategies</TabsTrigger>
-                <TabsTrigger value="time-management">Time Management</TabsTrigger>
-                <TabsTrigger value="question-strategies">Question Strategies</TabsTrigger>
-                <TabsTrigger value="study-resources">Study Resources</TabsTrigger>
-                <TabsTrigger value="analytics">Study Analytics</TabsTrigger>
-              </TabsList>
+              <div className="relative mb-6">
+                <Carousel 
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                  className="w-full"
+                >
+                  <CarouselContent className="flex">
+                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
+                      <TabsTrigger value="personalized" className="w-full py-2">Personalized Plan</TabsTrigger>
+                    </CarouselItem>
+                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
+                      <TabsTrigger value="general" className="w-full py-2">General Strategies</TabsTrigger>
+                    </CarouselItem>
+                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
+                      <TabsTrigger value="time-management" className="w-full py-2">Time Management</TabsTrigger>
+                    </CarouselItem>
+                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
+                      <TabsTrigger value="question-strategies" className="w-full py-2">Question Strategies</TabsTrigger>
+                    </CarouselItem>
+                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
+                      <TabsTrigger value="study-resources" className="w-full py-2">Study Resources</TabsTrigger>
+                    </CarouselItem>
+                    <CarouselItem className="basis-1/3 md:basis-1/6 min-w-max">
+                      <TabsTrigger value="analytics" className="w-full py-2">Study Analytics</TabsTrigger>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <div className="hidden md:flex absolute -right-4 top-0 h-full items-center">
+                    <CarouselNext className="relative h-7 w-7 !-right-0 !translate-y-0 shadow-md" />
+                  </div>
+                </Carousel>
+              </div>
               
               <TabsContent value="personalized">
                 <StudyStrategyPlanner />
@@ -554,55 +586,165 @@ export default function StudyStrategies() {
                       </div>
                       
                       <div className="bg-white p-5 rounded-md border-2 border-black">
-                        <h3 className="font-semibold text-lg mb-3">Sample NCLEX Study Schedule</h3>
-                        <div className="overflow-x-auto">
-                          <table className="w-full text-sm">
-                            <thead>
-                              <tr className="bg-gray-100 border-b border-gray-300">
-                                <th className="p-2 text-left">Time</th>
-                                <th className="p-2 text-left">Monday</th>
-                                <th className="p-2 text-left">Tuesday</th>
-                                <th className="p-2 text-left">Wednesday</th>
-                                <th className="p-2 text-left">Thursday</th>
-                                <th className="p-2 text-left">Friday</th>
-                                <th className="p-2 text-left">Weekend</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr className="border-b border-gray-200">
-                                <td className="p-2 font-medium">Morning<br/>(8-11 AM)</td>
-                                <td className="p-2">Content Review:<br/>Med-Surg</td>
-                                <td className="p-2">Content Review:<br/>Pharmacology</td>
-                                <td className="p-2">Content Review:<br/>Pediatrics</td>
-                                <td className="p-2">Content Review:<br/>OB/GYN</td>
-                                <td className="p-2">Content Review:<br/>Mental Health</td>
-                                <td className="p-2">Full Practice Exam<br/>(Saturday)</td>
-                              </tr>
-                              <tr className="border-b border-gray-200">
-                                <td className="p-2 font-medium">Break</td>
-                                <td className="p-2 text-center" colSpan={6}>Lunch + 30 min exercise/relaxation</td>
-                              </tr>
-                              <tr className="border-b border-gray-200">
-                                <td className="p-2 font-medium">Afternoon<br/>(1-4 PM)</td>
-                                <td className="p-2">75 Practice Questions:<br/>Med-Surg</td>
-                                <td className="p-2">75 Practice Questions:<br/>Pharmacology</td>
-                                <td className="p-2">75 Practice Questions:<br/>Pediatrics</td>
-                                <td className="p-2">75 Practice Questions:<br/>OB/GYN</td>
-                                <td className="p-2">75 Practice Questions:<br/>Mental Health</td>
-                                <td className="p-2">Review Exam + Remediation<br/>(Saturday PM)</td>
-                              </tr>
-                              <tr>
-                                <td className="p-2 font-medium">Evening<br/>(6-8 PM)</td>
-                                <td className="p-2">Review Question Rationales</td>
-                                <td className="p-2">Review Question Rationales</td>
-                                <td className="p-2">Review Question Rationales</td>
-                                <td className="p-2">Review Question Rationales</td>
-                                <td className="p-2">Review Weak Areas</td>
-                                <td className="p-2">Day Off<br/>(Sunday)</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
+                        <h3 className="font-semibold text-lg mb-4">Sample NCLEX Study Schedule</h3>
+                        
+                        <Carousel className="w-full relative">
+                          <CarouselContent>
+                            {/* Monday Schedule */}
+                            <CarouselItem>
+                              <div className="border-2 border-blue-200 rounded-md p-4">
+                                <h4 className="font-medium text-center text-blue-700 text-lg mb-2">Monday</h4>
+                                <div className="space-y-3">
+                                  <div className="bg-blue-50 p-3 rounded">
+                                    <p className="font-semibold">Morning (8-11 AM)</p>
+                                    <p>Content Review: Medical-Surgical Nursing</p>
+                                  </div>
+                                  <div className="bg-amber-50 p-3 rounded">
+                                    <p className="font-semibold">Break</p>
+                                    <p>Lunch + 30 min exercise/relaxation</p>
+                                  </div>
+                                  <div className="bg-green-50 p-3 rounded">
+                                    <p className="font-semibold">Afternoon (1-4 PM)</p>
+                                    <p>75 Practice Questions: Med-Surg Focus</p>
+                                  </div>
+                                  <div className="bg-purple-50 p-3 rounded">
+                                    <p className="font-semibold">Evening (6-8 PM)</p>
+                                    <p>Review Question Rationales</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </CarouselItem>
+                            
+                            {/* Tuesday Schedule */}
+                            <CarouselItem>
+                              <div className="border-2 border-green-200 rounded-md p-4">
+                                <h4 className="font-medium text-center text-green-700 text-lg mb-2">Tuesday</h4>
+                                <div className="space-y-3">
+                                  <div className="bg-blue-50 p-3 rounded">
+                                    <p className="font-semibold">Morning (8-11 AM)</p>
+                                    <p>Content Review: Pharmacology</p>
+                                  </div>
+                                  <div className="bg-amber-50 p-3 rounded">
+                                    <p className="font-semibold">Break</p>
+                                    <p>Lunch + 30 min exercise/relaxation</p>
+                                  </div>
+                                  <div className="bg-green-50 p-3 rounded">
+                                    <p className="font-semibold">Afternoon (1-4 PM)</p>
+                                    <p>75 Practice Questions: Pharmacology Focus</p>
+                                  </div>
+                                  <div className="bg-purple-50 p-3 rounded">
+                                    <p className="font-semibold">Evening (6-8 PM)</p>
+                                    <p>Review Question Rationales</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </CarouselItem>
+                            
+                            {/* Wednesday Schedule */}
+                            <CarouselItem>
+                              <div className="border-2 border-purple-200 rounded-md p-4">
+                                <h4 className="font-medium text-center text-purple-700 text-lg mb-2">Wednesday</h4>
+                                <div className="space-y-3">
+                                  <div className="bg-blue-50 p-3 rounded">
+                                    <p className="font-semibold">Morning (8-11 AM)</p>
+                                    <p>Content Review: Pediatrics</p>
+                                  </div>
+                                  <div className="bg-amber-50 p-3 rounded">
+                                    <p className="font-semibold">Break</p>
+                                    <p>Lunch + 30 min exercise/relaxation</p>
+                                  </div>
+                                  <div className="bg-green-50 p-3 rounded">
+                                    <p className="font-semibold">Afternoon (1-4 PM)</p>
+                                    <p>75 Practice Questions: Pediatrics Focus</p>
+                                  </div>
+                                  <div className="bg-purple-50 p-3 rounded">
+                                    <p className="font-semibold">Evening (6-8 PM)</p>
+                                    <p>Review Question Rationales</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </CarouselItem>
+                            
+                            {/* Thursday Schedule */}
+                            <CarouselItem>
+                              <div className="border-2 border-amber-200 rounded-md p-4">
+                                <h4 className="font-medium text-center text-amber-700 text-lg mb-2">Thursday</h4>
+                                <div className="space-y-3">
+                                  <div className="bg-blue-50 p-3 rounded">
+                                    <p className="font-semibold">Morning (8-11 AM)</p>
+                                    <p>Content Review: OB/GYN</p>
+                                  </div>
+                                  <div className="bg-amber-50 p-3 rounded">
+                                    <p className="font-semibold">Break</p>
+                                    <p>Lunch + 30 min exercise/relaxation</p>
+                                  </div>
+                                  <div className="bg-green-50 p-3 rounded">
+                                    <p className="font-semibold">Afternoon (1-4 PM)</p>
+                                    <p>75 Practice Questions: OB/GYN Focus</p>
+                                  </div>
+                                  <div className="bg-purple-50 p-3 rounded">
+                                    <p className="font-semibold">Evening (6-8 PM)</p>
+                                    <p>Review Question Rationales</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </CarouselItem>
+                            
+                            {/* Friday Schedule */}
+                            <CarouselItem>
+                              <div className="border-2 border-red-200 rounded-md p-4">
+                                <h4 className="font-medium text-center text-red-700 text-lg mb-2">Friday</h4>
+                                <div className="space-y-3">
+                                  <div className="bg-blue-50 p-3 rounded">
+                                    <p className="font-semibold">Morning (8-11 AM)</p>
+                                    <p>Content Review: Mental Health</p>
+                                  </div>
+                                  <div className="bg-amber-50 p-3 rounded">
+                                    <p className="font-semibold">Break</p>
+                                    <p>Lunch + 30 min exercise/relaxation</p>
+                                  </div>
+                                  <div className="bg-green-50 p-3 rounded">
+                                    <p className="font-semibold">Afternoon (1-4 PM)</p>
+                                    <p>75 Practice Questions: Mental Health Focus</p>
+                                  </div>
+                                  <div className="bg-purple-50 p-3 rounded">
+                                    <p className="font-semibold">Evening (6-8 PM)</p>
+                                    <p>Review Weak Areas</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </CarouselItem>
+                            
+                            {/* Weekend Schedule */}
+                            <CarouselItem>
+                              <div className="border-2 border-indigo-200 rounded-md p-4">
+                                <h4 className="font-medium text-center text-indigo-700 text-lg mb-2">Weekend</h4>
+                                <div className="space-y-3">
+                                  <div className="bg-blue-50 p-3 rounded">
+                                    <p className="font-semibold">Saturday Morning</p>
+                                    <p>Full-Length Practice Exam (75-145 questions)</p>
+                                  </div>
+                                  <div className="bg-amber-50 p-3 rounded">
+                                    <p className="font-semibold">Saturday Afternoon</p>
+                                    <p>Review Exam Results & Remediate Weak Areas</p>
+                                  </div>
+                                  <div className="bg-green-50 p-3 rounded">
+                                    <p className="font-semibold">Saturday Evening</p>
+                                    <p>Prep Materials for Next Week</p>
+                                  </div>
+                                  <div className="bg-purple-50 p-3 rounded">
+                                    <p className="font-semibold">Sunday</p>
+                                    <p>Rest Day - No Studying</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </CarouselItem>
+                          </CarouselContent>
+                          <div className="flex justify-center gap-2 mt-4">
+                            <CarouselPrevious className="relative !-left-0 !translate-y-0 mr-2" />
+                            <CarouselNext className="relative !-right-0 !translate-y-0 ml-2" />
+                          </div>
+                        </Carousel>
                       </div>
                       
                       <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
