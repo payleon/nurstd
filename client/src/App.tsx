@@ -70,20 +70,21 @@ function Router() {
       
       {/* Study Materials */}
       <LazyRoute path="/case-studies" component={ExamsAndStudies} preload={true} />
+      <LazyRoute path="/exams-and-studies" component={ExamsAndStudies} preload={true} />
       <LazyRoute path="/case-study/:id" component={CaseStudyDetail} />
       <LazyRoute path="/tests/:id" component={Home} preload={true} />
       {/* Redirects from old paths to new path */}
       <Route path="/question-bank">
         {() => {
           // Redirect to unified exams and studies page
-          window.location.href = '/case-studies';
+          window.location.href = '/exams-and-studies';
           return null;
         }}
       </Route>
       <Route path="/nclex-questions">
         {() => {
           // Redirect to unified exams and studies page
-          window.location.href = '/case-studies';
+          window.location.href = '/exams-and-studies';
           return null;
         }}
       </Route>
