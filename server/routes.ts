@@ -266,16 +266,86 @@ export async function registerRoutes(app: Express): Promise<Server> {
         filteredQuestions = filteredQuestions.filter(q => {
           // Check both title and category fields
           const titleMatch = q.title && q.title.toLowerCase().includes(category.toLowerCase());
-          const categoryMatch = q.category && q.category.toLowerCase().includes(category.toLowerCase());
+          const categoryMatch = q.category && q.category === category;
           return titleMatch || categoryMatch;
         });
       }
       
-      // Limit the number of questions
-      const limitedQuestions = filteredQuestions.slice(0, count);
+      // Ensure we have enough questions to meet the requested count
+      // If we don't have enough questions, duplicate existing ones
+      let resultQuestions = [];
       
-      // Return the filtered and limited questions
-      res.json({ questions: limitedQuestions });
+      if (filteredQuestions.length > 0) {
+        // If we have some questions but not enough, duplicate them
+        if (filteredQuestions.length < count) {
+          // Calculate how many complete sets we need
+          const sets = Math.floor(count / filteredQuestions.length);
+          const remainder = count % filteredQuestions.length;
+          
+          // Add complete sets
+          for (let i = 0; i < sets; i++) {
+            const duplicatedQuestions = filteredQuestions.map((q, index) => ({
+              ...q,
+              id: q.id + (i * filteredQuestions.length * 1000) // Ensure unique IDs
+            }));
+            resultQuestions = [...resultQuestions, ...duplicatedQuestions];
+          }
+          
+          // Add remaining questions to reach the requested count
+          if (remainder > 0) {
+            const remainderQuestions = filteredQuestions.slice(0, remainder).map((q, index) => ({
+              ...q,
+              id: q.id + (sets * filteredQuestions.length * 1000) // Ensure unique IDs
+            }));
+            resultQuestions = [...resultQuestions, ...remainderQuestions];
+          }
+        } else {
+          // If we have enough questions, just take what we need
+          // Shuffle the questions to get random ones each time
+          const shuffled = [...filteredQuestions].sort(() => Math.random() - 0.5);
+          resultQuestions = shuffled.slice(0, count);
+        }
+      } else if (category && category !== 'all') {
+        // If no questions match the specified category, try to get questions from all categories
+        console.log('No questions found for category, falling back to all categories');
+        const allQuestions = validatedData.questions;
+        
+        if (allQuestions.length > 0) {
+          // Shuffle and select from all questions
+          const shuffled = [...allQuestions].sort(() => Math.random() - 0.5);
+          resultQuestions = shuffled.slice(0, Math.min(count, allQuestions.length));
+          
+          // If still not enough, duplicate as needed
+          if (resultQuestions.length < count) {
+            const sets = Math.floor(count / resultQuestions.length);
+            const remainder = count % resultQuestions.length;
+            
+            let duplicatedResults = [];
+            // Add complete sets
+            for (let i = 0; i < sets; i++) {
+              const duplicatedQuestions = resultQuestions.map((q, index) => ({
+                ...q,
+                id: q.id + (i * resultQuestions.length * 1000) // Ensure unique IDs
+              }));
+              duplicatedResults = [...duplicatedResults, ...duplicatedQuestions];
+            }
+            
+            // Add remaining questions
+            if (remainder > 0) {
+              const remainderQuestions = resultQuestions.slice(0, remainder).map((q, index) => ({
+                ...q,
+                id: q.id + (sets * resultQuestions.length * 1000) // Ensure unique IDs
+              }));
+              duplicatedResults = [...duplicatedResults, ...remainderQuestions];
+            }
+            
+            resultQuestions = duplicatedResults;
+          }
+        }
+      }
+      
+      // Return the filtered and processed questions
+      res.json({ questions: resultQuestions });
       
     } catch (error) {
       console.error("Error filtering questions:", error);

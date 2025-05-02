@@ -24,7 +24,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Ensuring the 'Right Patient' is a crucial first step in the medication administration process according to the 'Rights of Medication Administration'. This is accomplished by using at least two client identifiers (e.g., name and date of birth, name and medical record number) and comparing them against the medication administration record (MAR). While explaining the medication (C) and performing checks (D) are vital, verifying the patient's identity (B) must occur before proceeding. Documentation (A) occurs after administration."
+      "rationale": "Ensuring the 'Right Patient' is a crucial first step in the medication administration process according to the 'Rights of Medication Administration'. This is accomplished by using at least two client identifiers (e.g., name and date of birth, name and medical record number) and comparing them against the medication administration record (MAR). While explaining the medication (C) and performing checks (D) are vital, verifying the patient's identity (B) must occur before proceeding. Documentation (A) occurs after administration.",
+      "category": "Fundamentals"
     },
     {
       "id": 2,
@@ -50,7 +51,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "The primary ethical responsibility is patient safety. The most direct and often most effective initial step is to address the concern directly and professionally with the colleague (C). This provides an opportunity for immediate correction and education. If the behavior persists or is egregious, escalating the concern through the chain of command (e.g., charge nurse, manager) is necessary. Reporting directly to administration (A) without attempting collegial correction is not the first step. Documenting in the patient record (B) is not appropriate for staff issues. Ignoring a breach in infection control practice (D) puts patients at risk and fails to uphold professional standards."
+      "rationale": "The primary ethical responsibility is patient safety. The most direct and often most effective initial step is to address the concern directly and professionally with the colleague (C). This provides an opportunity for immediate correction and education. If the behavior persists or is egregious, escalating the concern through the chain of command (e.g., charge nurse, manager) is necessary. Reporting directly to administration (A) without attempting collegial correction is not the first step. Documenting in the patient record (B) is not appropriate for staff issues. Ignoring a breach in infection control practice (D) puts patients at risk and fails to uphold professional standards.",
+      "category": "Fundamentals"
     },
     {
       "id": 3,
@@ -76,7 +78,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "In female clients, accidentally inserting the urinary catheter into the vagina instead of the urethra is a common reason for lack of urine return (C). If this occurs, the nurse should leave the misplaced catheter in the vagina as a landmark, obtain a new sterile catheter kit, and attempt insertion again, aiming slightly more anteriorly and superiorly. While dehydration (A) or obstruction (B) could cause low output, complete lack of initial return often points to incorrect placement. Premature balloon inflation (D) can cause urethral trauma but would usually allow some urine return."
+      "rationale": "In female clients, accidentally inserting the urinary catheter into the vagina instead of the urethra is a common reason for lack of urine return (C). If this occurs, the nurse should leave the misplaced catheter in the vagina as a landmark, obtain a new sterile catheter kit, and attempt insertion again, aiming slightly more anteriorly and superiorly. While dehydration (A) or obstruction (B) could cause low output, complete lack of initial return often points to incorrect placement. Premature balloon inflation (D) can cause urethral trauma but would usually allow some urine return.",
+      "category": "Fundamentals"
     },
     {
       "id": 4,
@@ -102,7 +105,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Nägele's rule is calculated by subtracting 3 months from the first day of the LMP and adding 7 days. LMP: June 10th. Subtract 3 months: March 10th. Add 7 days: March 17th. Therefore, the EDD is March 17th."
+      "rationale": "Nägele's rule is calculated by subtracting 3 months from the first day of the LMP and adding 7 days. LMP: June 10th. Subtract 3 months: March 10th. Add 7 days: March 17th. Therefore, the EDD is March 17th.",
+      "category": "Maternity"
     },
     {
       "id": 5,
@@ -128,7 +132,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "During pregnancy, particularly the third trimester, progesterone causes increased sensitivity of the respiratory center to CO2 and maternal oxygen demands increase, leading to increased respiratory rate and tidal volume (depth) (B). Total blood volume significantly increases (A). Heart rate typically increases by 10-15 bpm (C). Dependent edema often worsens in the third trimester due to pressure from the enlarging uterus on pelvic veins and increased fluid volume (D)."
+      "rationale": "During pregnancy, particularly the third trimester, progesterone causes increased sensitivity of the respiratory center to CO2 and maternal oxygen demands increase, leading to increased respiratory rate and tidal volume (depth) (B). Total blood volume significantly increases (A). Heart rate typically increases by 10-15 bpm (C). Dependent edema often worsens in the third trimester due to pressure from the enlarging uterus on pelvic veins and increased fluid volume (D).",
+      "category": "Maternity"
     },
     {
       "id": 6,
@@ -167,7 +172,8 @@
         "D",
         "F"
       ],
-      "rationale": "Vaginal bleeding (A) can indicate issues like placenta previa or abruption. Sudden gush of fluid (C) suggests rupture of membranes. Severe headache (D) can be a sign of preeclampsia. Decreased or absent fetal movement (F) can indicate fetal distress. Mild ankle edema (B) is common and usually benign. Occasional nausea (E) is typical morning sickness."
+      "rationale": "Vaginal bleeding (A) can indicate issues like placenta previa or abruption. Sudden gush of fluid (C) suggests rupture of membranes. Severe headache (D) can be a sign of preeclampsia. Decreased or absent fetal movement (F) can indicate fetal distress. Mild ankle edema (B) is common and usually benign. Occasional nausea (E) is typical morning sickness.",
+      "category": "Maternity"
     },
     {
       "id": 7,
@@ -193,7 +199,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "The FHR pattern described is characteristic of variable decelerations, which are caused by umbilical cord compression (B). Key features include: abrupt onset, rapid drop (often below 100 bpm), variable timing in relation to contractions, and rapid return to baseline. Variable decelerations have a distinctive 'V' or 'U' shape on the monitor. Uteroplacental insufficiency (A) causes late decelerations, which have a gradual onset and recovery, occur after the peak of the contraction, and have a uniform shape. Maternal hypotension (C) typically causes prolonged decelerations. Fetal head compression (D) causes early decelerations, which mirror the contraction and rarely drop below 100 bpm."
+      "rationale": "The FHR pattern described is characteristic of variable decelerations, which are caused by umbilical cord compression (B). Key features include: abrupt onset, rapid drop (often below 100 bpm), variable timing in relation to contractions, and rapid return to baseline. Variable decelerations have a distinctive 'V' or 'U' shape on the monitor. Uteroplacental insufficiency (A) causes late decelerations, which have a gradual onset and recovery, occur after the peak of the contraction, and have a uniform shape. Maternal hypotension (C) typically causes prolonged decelerations. Fetal head compression (D) causes early decelerations, which mirror the contraction and rarely drop below 100 bpm.",
+      "category": "Maternity"
     },
     {
       "id": 8,
@@ -219,7 +226,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Greenish-brown amniotic fluid indicates the presence of meconium, which can be a sign of fetal distress (hypoxia) either past or present. Meconium aspiration syndrome is a potential complication for the newborn. The immediate priority is to assess fetal well-being by evaluating the FHR and pattern (C) for signs of distress (e.g., bradycardia, late decelerations, decreased variability). While notifying the provider (D) and potentially administering oxygen (A) are important, assessing the FHR takes precedence. A vaginal examination (B) is contraindicated when membranes are ruptured and meconium is present due to increased infection risk and potential to advance cord/meconium."
+      "rationale": "Greenish-brown amniotic fluid indicates the presence of meconium, which can be a sign of fetal distress (hypoxia) either past or present. Meconium aspiration syndrome is a potential complication for the newborn. The immediate priority is to assess fetal well-being by evaluating the FHR and pattern (C) for signs of distress (e.g., bradycardia, late decelerations, decreased variability). While notifying the provider (D) and potentially administering oxygen (A) are important, assessing the FHR takes precedence. A vaginal examination (B) is contraindicated when membranes are ruptured and meconium is present due to increased infection risk and potential to advance cord/meconium.",
+      "category": "Maternity"
     },
     {
       "id": 9,
@@ -245,7 +253,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "After delivery, the uterus begins the process of involution. By 24 hours postpartum, the fundus should typically be firm and located approximately 1 cm (or one fingerbreadth) below the umbilicus (B). It continues to descend about 1 cm per day, becoming non-palpable abdominally by around day 10-14. Locating it at the symphysis (A) occurs much later. Midway (C) would be around day 6. Above the umbilicus (D) immediately post-delivery is possible, but it should be below the umbilicus by 24 hours."
+      "rationale": "After delivery, the uterus begins the process of involution. By 24 hours postpartum, the fundus should typically be firm and located approximately 1 cm (or one fingerbreadth) below the umbilicus (B). It continues to descend about 1 cm per day, becoming non-palpable abdominally by around day 10-14. Locating it at the symphysis (A) occurs much later. Midway (C) would be around day 6. Above the umbilicus (D) immediately post-delivery is possible, but it should be below the umbilicus by 24 hours.",
+      "category": "Maternity"
     },
     {
       "id": 10,
@@ -254,7 +263,8 @@
       "text": "The thinning and shortening of the cervix during the first stage of labor is referred to as ____________.",
       "choices": [],
       "correctAnswer": "effacement",
-      "rationale": "Effacement describes the process where the cervix, normally about 2-3 cm long, progressively thins out and shortens, drawing up into the lower uterine segment. It is measured in percentages (0% to 100%). Dilation refers to the opening of the cervical os."
+      "rationale": "Effacement describes the process where the cervix, normally about 2-3 cm long, progressively thins out and shortens, drawing up into the lower uterine segment. It is measured in percentages (0% to 100%). Dilation refers to the opening of the cervical os.",
+      "category": "Maternity"
     },
     {
       "id": 11,
@@ -280,7 +290,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "Erikson's stage for toddlers (1-3 years) is Autonomy vs. Shame and Doubt (D). During this stage, toddlers focus on developing a sense of personal control over physical skills and a sense of independence. Trust vs. Mistrust (A) is infancy (birth-1 year). Initiative vs. Guilt (B) is preschool (3-6 years). Industry vs. Inferiority (C) is school-age (6-12 years)."
+      "rationale": "Erikson's stage for toddlers (1-3 years) is Autonomy vs. Shame and Doubt (D). During this stage, toddlers focus on developing a sense of personal control over physical skills and a sense of independence. Trust vs. Mistrust (A) is infancy (birth-1 year). Initiative vs. Guilt (B) is preschool (3-6 years). Industry vs. Inferiority (C) is school-age (6-12 years).",
+      "category": "Pediatric"
     },
     {
       "id": 12,
@@ -289,7 +300,8 @@
       "text": "A common childhood illness characterized by a high fever for several days followed by the appearance of a maculopapular rash after the fever breaks is known as Roseola infantum, caused by Human __________ 6 or 7.",
       "choices": [],
       "correctAnswer": "Herpesvirus",
-      "rationale": "Roseola infantum (also called sixth disease or exanthem subitum) is typically caused by Human Herpesvirus 6 (HHV-6) or less commonly HHV-7. The classic presentation involves 3-5 days of high fever which resolves abruptly, followed by the onset of a non-itchy, pinkish-red maculopapular rash that often starts on the trunk and spreads."
+      "rationale": "Roseola infantum (also called sixth disease or exanthem subitum) is typically caused by Human Herpesvirus 6 (HHV-6) or less commonly HHV-7. The classic presentation involves 3-5 days of high fever which resolves abruptly, followed by the onset of a non-itchy, pinkish-red maculopapular rash that often starts on the trunk and spreads.",
+      "category": "Pediatric"
     },
     {
       "id": 13,
@@ -315,7 +327,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Meningeal irritation causes inflammation of the meninges, leading to specific signs. Brudzinski's sign is positive when passive flexion of the child's neck causes flexion of the hips and knees (C). Kernig's sign is positive when resistance or pain occurs upon extending the knee while the hip is flexed. Nuchal rigidity (stiff neck) is also common (B is incorrect). A negative Kernig's sign (A) indicates absence of that specific sign of irritation. A sunken fontanelle (D) suggests dehydration rather than meningitis, and by age 4, the fontanelles have typically closed."
+      "rationale": "Meningeal irritation causes inflammation of the meninges, leading to specific signs. Brudzinski's sign is positive when passive flexion of the child's neck causes flexion of the hips and knees (C). Kernig's sign is positive when resistance or pain occurs upon extending the knee while the hip is flexed. Nuchal rigidity (stiff neck) is also common (B is incorrect). A negative Kernig's sign (A) indicates absence of that specific sign of irritation. A sunken fontanelle (D) suggests dehydration rather than meningitis, and by age 4, the fontanelles have typically closed.",
+      "category": "Pediatric"
     },
     {
       "id": 14,
@@ -341,7 +354,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Orthopnea (B) is the term specifically used to describe difficulty breathing when lying flat, which is relieved by sitting or standing up. It's a common symptom of left-sided heart failure due to increased pulmonary venous pressure and congestion when supine. Dyspnea on exertion (A) is shortness of breath with activity. Paroxysmal nocturnal dyspnea (C) is sudden awakening at night with shortness of breath. Tachypnea (D) is rapid breathing."
+      "rationale": "Orthopnea (B) is the term specifically used to describe difficulty breathing when lying flat, which is relieved by sitting or standing up. It's a common symptom of left-sided heart failure due to increased pulmonary venous pressure and congestion when supine. Dyspnea on exertion (A) is shortness of breath with activity. Paroxysmal nocturnal dyspnea (C) is sudden awakening at night with shortness of breath. Tachypnea (D) is rapid breathing.",
+      "category": "Cardiovascular"
     },
     {
       "id": 15,
@@ -380,7 +394,8 @@
         "E",
         "F"
       ],
-      "rationale": "Right-sided heart failure results in systemic venous congestion. Manifestations include JVD (B) due to increased pressure in the superior vena cava, dependent edema (C) in the lower extremities or sacrum, ascites (E - fluid in the peritoneal cavity), and enlargement of the liver and spleen (hepatosplenomegaly) (F) due to venous engorgement. Crackles (A) and orthopnea (D) are primarily associated with left-sided heart failure due to pulmonary congestion."
+      "rationale": "Right-sided heart failure results in systemic venous congestion. Manifestations include JVD (B) due to increased pressure in the superior vena cava, dependent edema (C) in the lower extremities or sacrum, ascites (E - fluid in the peritoneal cavity), and enlargement of the liver and spleen (hepatosplenomegaly) (F) due to venous engorgement. Crackles (A) and orthopnea (D) are primarily associated with left-sided heart failure due to pulmonary congestion.",
+      "category": "Cardiovascular"
     },
     {
       "id": 16,
@@ -406,7 +421,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "The classic presentation of severe, crushing chest pain, often radiating, combined with ST-segment elevation on the ECG is highly indicative of an ST-segment elevation myocardial infarction (STEMI) (C). This signifies transmural myocardial injury requiring immediate reperfusion therapy. Stable angina (A) is typically relieved by rest or nitroglycerin. Pericarditis (B) often presents with pleuritic chest pain relieved by leaning forward and may show diffuse ST elevation. Aortic dissection (D) typically causes tearing/ripping pain that radiates to the back."
+      "rationale": "The classic presentation of severe, crushing chest pain, often radiating, combined with ST-segment elevation on the ECG is highly indicative of an ST-segment elevation myocardial infarction (STEMI) (C). This signifies transmural myocardial injury requiring immediate reperfusion therapy. Stable angina (A) is typically relieved by rest or nitroglycerin. Pericarditis (B) often presents with pleuritic chest pain relieved by leaning forward and may show diffuse ST elevation. Aortic dissection (D) typically causes tearing/ripping pain that radiates to the back.",
+      "category": "Cardiovascular"
     },
     {
       "id": 17,
@@ -432,7 +448,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "Cardiac troponins (Troponin I and Troponin T) (D) are proteins found in heart muscle that are released into the bloodstream when there is myocardial injury, such as during an MI. They are highly specific to cardiac muscle and remain elevated longer than other biomarkers, making them the preferred indicators for diagnosing MI. CK (A) and specifically CK-MB are less specific as they can be elevated with skeletal muscle injury. Myoglobin (B) rises early but is not cardiac-specific. LDH (C) is non-specific and has largely been replaced by more specific markers."
+      "rationale": "Cardiac troponins (Troponin I and Troponin T) (D) are proteins found in heart muscle that are released into the bloodstream when there is myocardial injury, such as during an MI. They are highly specific to cardiac muscle and remain elevated longer than other biomarkers, making them the preferred indicators for diagnosing MI. CK (A) and specifically CK-MB are less specific as they can be elevated with skeletal muscle injury. Myoglobin (B) rises early but is not cardiac-specific. LDH (C) is non-specific and has largely been replaced by more specific markers.",
+      "category": "Cardiovascular"
     },
     {
       "id": 18,
@@ -441,7 +458,8 @@
       "text": "A client is prescribed sublingual nitroglycerin for angina. The nurse instructs the client to take one tablet under the tongue at the onset of chest pain and, if pain persists, repeat the dose every 5 minutes for a maximum of ______ doses.",
       "choices": [],
       "correctAnswer": "3",
-      "rationale": "Standard instructions for sublingual nitroglycerin for acute angina are to take one dose immediately. If pain is not relieved within 5 minutes, a second dose can be taken. If pain still persists after another 5 minutes, a third dose can be taken. If pain continues after three doses (total), the client should seek emergency medical attention immediately as this may indicate an MI."
+      "rationale": "Standard instructions for sublingual nitroglycerin for acute angina are to take one dose immediately. If pain is not relieved within 5 minutes, a second dose can be taken. If pain still persists after another 5 minutes, a third dose can be taken. If pain continues after three doses (total), the client should seek emergency medical attention immediately as this may indicate an MI.",
+      "category": "Cardiovascular"
     },
     {
       "id": 19,
@@ -467,7 +485,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "The therapeutic range for aPTT during heparin therapy is typically 1.5 to 2.5 times the control value (approximately 40-85 seconds in this case). An aPTT of 110 seconds is significantly elevated above the therapeutic range, indicating excessive anticoagulation and placing the client at high risk for bleeding. The priority action is to stop the infusion immediately and notify the healthcare provider (C). Increasing the rate (A) would worsen the situation. Continuing the current rate (B) would maintain the excessive anticoagulation. Vitamin K (D) antagonizes warfarin, not heparin (protamine sulfate is heparin's antidote)."
+      "rationale": "The therapeutic range for aPTT during heparin therapy is typically 1.5 to 2.5 times the control value (approximately 40-85 seconds in this case). An aPTT of 110 seconds is significantly elevated above the therapeutic range, indicating excessive anticoagulation and placing the client at high risk for bleeding. The priority action is to stop the infusion immediately and notify the healthcare provider (C). Increasing the rate (A) would worsen the situation. Continuing the current rate (B) would maintain the excessive anticoagulation. Vitamin K (D) antagonizes warfarin, not heparin (protamine sulfate is heparin's antidote).",
+      "category": "Cardiovascular"
     },
     {
       "id": 20,
@@ -506,7 +525,8 @@
         "D",
         "E"
       ],
-      "rationale": "Lifestyle modifications are crucial for managing hypertension. Key recommendations include adopting the DASH diet (A - rich in fruits, vegetables, whole grains, low-fat dairy), limiting sodium intake (B - usually <1500-2300 mg/day), engaging in regular aerobic exercise (D - e.g., brisk walking for at least 150 minutes/week), and limiting alcohol consumption (E - ≤1 drink/day for women, ≤2 drinks/day for men). Increasing saturated fats (C) contributes to atherosclerosis and can worsen cardiovascular health. Caffeine (F) can cause temporary BP spikes, so limiting (not increasing) intake may be advised."
+      "rationale": "Lifestyle modifications are crucial for managing hypertension. Key recommendations include adopting the DASH diet (A - rich in fruits, vegetables, whole grains, low-fat dairy), limiting sodium intake (B - usually <1500-2300 mg/day), engaging in regular aerobic exercise (D - e.g., brisk walking for at least 150 minutes/week), and limiting alcohol consumption (E - ≤1 drink/day for women, ≤2 drinks/day for men). Increasing saturated fats (C) contributes to atherosclerosis and can worsen cardiovascular health. Caffeine (F) can cause temporary BP spikes, so limiting (not increasing) intake may be advised.",
+      "category": "Cardiovascular"
     },
     {
       "id": 21,
@@ -532,7 +552,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Atrial fibrillation (B) is characterized by chaotic atrial activity (fibrillatory waves instead of P waves), resulting in an irregularly irregular ventricular rhythm. The atrial rate is typically >350 bpm (not measurable), and the ventricular rate varies depending on AV node conduction (in this case, 130 bpm, indicating rapid ventricular response). Sinus tachycardia (A) has regular rhythm with P waves preceding each QRS. Ventricular tachycardia (C) originates in the ventricles and has wide QRS complexes. Atrial flutter (D) has distinct, regular 'sawtooth' flutter waves (usually 250-350 bpm), often with regular ventricular response."
+      "rationale": "Atrial fibrillation (B) is characterized by chaotic atrial activity (fibrillatory waves instead of P waves), resulting in an irregularly irregular ventricular rhythm. The atrial rate is typically >350 bpm (not measurable), and the ventricular rate varies depending on AV node conduction (in this case, 130 bpm, indicating rapid ventricular response). Sinus tachycardia (A) has regular rhythm with P waves preceding each QRS. Ventricular tachycardia (C) originates in the ventricles and has wide QRS complexes. Atrial flutter (D) has distinct, regular 'sawtooth' flutter waves (usually 250-350 bpm), often with regular ventricular response.",
+      "category": "Cardiovascular"
     },
     {
       "id": 22,
@@ -558,7 +579,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Aspirin is an antiplatelet agent. In the context of an acute MI, which is usually caused by thrombus formation on a ruptured atherosclerotic plaque, aspirin works by inhibiting platelet aggregation (clumping), thereby helping to prevent further clot formation and extension (C). Thrombolytics or PCI are used to dissolve/remove the existing clot (A). Nitroglycerin and morphine relieve pain (B). Beta-blockers reduce oxygen demand (D)."
+      "rationale": "Aspirin is an antiplatelet agent. In the context of an acute MI, which is usually caused by thrombus formation on a ruptured atherosclerotic plaque, aspirin works by inhibiting platelet aggregation (clumping), thereby helping to prevent further clot formation and extension (C). Thrombolytics or PCI are used to dissolve/remove the existing clot (A). Nitroglycerin and morphine relieve pain (B). Beta-blockers reduce oxygen demand (D).",
+      "category": "Cardiovascular"
     },
     {
       "id": 23,
@@ -567,7 +589,8 @@
       "text": "When assessing a client's peripheral pulses, a finding described as '2+' typically indicates a pulse that is _________ and easily palpable.",
       "choices": [],
       "correctAnswer": "normal",
-      "rationale": "Peripheral pulses are often graded on a scale (e.g., 0 to 3+ or 0 to 4+). A common scale is: 0 = Absent, 1+ = Weak/Thready, 2+ = Normal/Easily Palpable, 3+ = Bounding. Therefore, a 2+ pulse is considered the expected, normal finding."
+      "rationale": "Peripheral pulses are often graded on a scale (e.g., 0 to 3+ or 0 to 4+). A common scale is: 0 = Absent, 1+ = Weak/Thready, 2+ = Normal/Easily Palpable, 3+ = Bounding. Therefore, a 2+ pulse is considered the expected, normal finding.",
+      "category": "Cardiovascular"
     },
     {
       "id": 24,
@@ -606,7 +629,8 @@
         "D",
         "F"
       ],
-      "rationale": "Worsening heart failure typically involves increased fluid volume overload. Crackles (B) indicate pulmonary edema (left-sided failure). Increased pitting edema (C) and JVD (F) indicate systemic venous congestion (right-sided failure). Orthopnea (shortness of breath when lying flat) (D) indicates increased pulmonary congestion. Weight gain (not loss, A) and increased abdominal girth (due to ascites, not E) would also signify worsening fluid retention."
+      "rationale": "Worsening heart failure typically involves increased fluid volume overload. Crackles (B) indicate pulmonary edema (left-sided failure). Increased pitting edema (C) and JVD (F) indicate systemic venous congestion (right-sided failure). Orthopnea (shortness of breath when lying flat) (D) indicates increased pulmonary congestion. Weight gain (not loss, A) and increased abdominal girth (due to ascites, not E) would also signify worsening fluid retention.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 25,
@@ -632,7 +656,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "In some COPD clients, particularly those with chronic hypercapnia (CO2 retention), excessive oxygen administration can depress the hypoxic drive to breathe, leading to increased CO2 retention, respiratory acidosis, and CNS effects like confusion or drowsiness (carbon dioxide narcosis) (C). While SpO2 of 91% (B) might be acceptable or baseline for some COPD clients, a change in mental status is a more urgent sign requiring assessment. A respiratory rate of 18 (A) and minimal sputum production (D) are not concerning findings in this context."
+      "rationale": "In some COPD clients, particularly those with chronic hypercapnia (CO2 retention), excessive oxygen administration can depress the hypoxic drive to breathe, leading to increased CO2 retention, respiratory acidosis, and CNS effects like confusion or drowsiness (carbon dioxide narcosis) (C). While SpO2 of 91% (B) might be acceptable or baseline for some COPD clients, a change in mental status is a more urgent sign requiring assessment. A respiratory rate of 18 (A) and minimal sputum production (D) are not concerning findings in this context.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 26,
@@ -658,7 +683,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Flushing, itching (pruritus), and hives (urticaria) are signs of a potential allergic reaction, which can range from mild to severe (anaphylaxis). The absolute first priority when any transfusion reaction is suspected is to stop the transfusion immediately (C) to prevent further administration of the offending agent. Subsequent actions include assessing vital signs (D), maintaining IV access with normal saline, notifying the provider and blood bank, and administering medications like antihistamines (A) as ordered. Slowing the rate (B) is never appropriate when a reaction is suspected."
+      "rationale": "Flushing, itching (pruritus), and hives (urticaria) are signs of a potential allergic reaction, which can range from mild to severe (anaphylaxis). The absolute first priority when any transfusion reaction is suspected is to stop the transfusion immediately (C) to prevent further administration of the offending agent. Subsequent actions include assessing vital signs (D), maintaining IV access with normal saline, notifying the provider and blood bank, and administering medications like antihistamines (A) as ordered. Slowing the rate (B) is never appropriate when a reaction is suspected.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 27,
@@ -684,7 +710,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Maintaining hip abduction (keeping the legs apart) is critical after THA to prevent dislocation of the new joint, especially with a posterior approach. An abduction pillow (C) helps maintain this position, particularly during turning or while in bed. Hip flexion beyond 90 degrees, adduction (crossing legs - B), and internal rotation should be avoided. Extending the hip (A) is generally not restricted. Elevating the leg (D) helps with edema but doesn't directly prevent dislocation."
+      "rationale": "Maintaining hip abduction (keeping the legs apart) is critical after THA to prevent dislocation of the new joint, especially with a posterior approach. An abduction pillow (C) helps maintain this position, particularly during turning or while in bed. Hip flexion beyond 90 degrees, adduction (crossing legs - B), and internal rotation should be avoided. Extending the hip (A) is generally not restricted. Elevating the leg (D) helps with edema but doesn't directly prevent dislocation.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 28,
@@ -710,7 +737,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Adequate hydration helps to thin and liquefy respiratory secretions, making them easier to expectorate (cough up). Encouraging fluid intake (unless contraindicated) is a key intervention for ineffective airway clearance (B). Cough suppressants (A) should generally be avoided unless the cough is nonproductive and exhausting, as coughing helps clear secretions. Positioning flat (C) can hinder lung expansion; Fowler's or Semi-Fowler's is preferred. Limiting activity (D) may be necessary based on oxygenation, but mobilization actually helps mobilize secretions."
+      "rationale": "Adequate hydration helps to thin and liquefy respiratory secretions, making them easier to expectorate (cough up). Encouraging fluid intake (unless contraindicated) is a key intervention for ineffective airway clearance (B). Cough suppressants (A) should generally be avoided unless the cough is nonproductive and exhausting, as coughing helps clear secretions. Positioning flat (C) can hinder lung expansion; Fowler's or Semi-Fowler's is preferred. Limiting activity (D) may be necessary based on oxygenation, but mobilization actually helps mobilize secretions.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 29,
@@ -736,7 +764,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "Warfarin inhibits vitamin K-dependent clotting factors. Its therapeutic effect is monitored using the Prothrombin Time (PT) and, more commonly, the International Normalized Ratio (INR) (D). The aPTT (A) is used to monitor heparin therapy. H&H (B) assesses for anemia or blood loss but not warfarin's anticoagulant effect directly. Platelet count (C) assesses for thrombocytopenia, not warfarin efficacy."
+      "rationale": "Warfarin inhibits vitamin K-dependent clotting factors. Its therapeutic effect is monitored using the Prothrombin Time (PT) and, more commonly, the International Normalized Ratio (INR) (D). The aPTT (A) is used to monitor heparin therapy. H&H (B) assesses for anemia or blood loss but not warfarin's anticoagulant effect directly. Platelet count (C) assesses for thrombocytopenia, not warfarin efficacy.",
+      "category": "Pharmacology"
     },
     {
       "id": 30,
@@ -773,7 +802,8 @@
         "A",
         "D"
       ],
-      "rationale": "Aminoglycosides like gentamicin carry significant risks of nephrotoxicity (damage to kidneys) (A) and ototoxicity (damage to the inner ear affecting hearing and balance) (D). These require close monitoring of renal function (BUN, creatinine) and assessing for hearing loss, tinnitus, or vertigo. While GI upset (E) can occur with many antibiotics, kidney and ear toxicity are the major concerns specific to aminoglycosides. Hepatotoxicity (B), photosensitivity (C), and constipation (F) are not typical adverse effects of aminoglycosides."
+      "rationale": "Aminoglycosides like gentamicin carry significant risks of nephrotoxicity (damage to kidneys) (A) and ototoxicity (damage to the inner ear affecting hearing and balance) (D). These require close monitoring of renal function (BUN, creatinine) and assessing for hearing loss, tinnitus, or vertigo. While GI upset (E) can occur with many antibiotics, kidney and ear toxicity are the major concerns specific to aminoglycosides. Hepatotoxicity (B), photosensitivity (C), and constipation (F) are not typical adverse effects of aminoglycosides.",
+      "category": "Pharmacology"
     },
     {
       "id": 31,
@@ -799,7 +829,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Heparin's anticoagulant effect is primarily monitored using the activated partial thromboplastin time (aPTT) (C). The therapeutic range for aPTT during heparin therapy is typically 1.5 to 2.5 times the baseline control value. PT/INR (A, B) are used to monitor warfarin therapy. Platelet count (D) is monitored to detect heparin-induced thrombocytopenia (HIT), a potential adverse effect, but not to assess therapeutic anticoagulation."
+      "rationale": "Heparin's anticoagulant effect is primarily monitored using the activated partial thromboplastin time (aPTT) (C). The therapeutic range for aPTT during heparin therapy is typically 1.5 to 2.5 times the baseline control value. PT/INR (A, B) are used to monitor warfarin therapy. Platelet count (D) is monitored to detect heparin-induced thrombocytopenia (HIT), a potential adverse effect, but not to assess therapeutic anticoagulation.",
+      "category": "Pharmacology"
     },
     {
       "id": 32,
@@ -838,7 +869,8 @@
         "E",
         "F"
       ],
-      "rationale": "Digoxin has a narrow therapeutic range, and toxicity is a significant risk. Common signs include gastrointestinal disturbances (nausea, vomiting, anorexia) (C), cardiac rhythm changes (especially bradycardia (E) or heart block), neurological symptoms (confusion, lethargy) (F), and characteristic visual disturbances (blurred vision, yellow/green halos around lights) (A). Tachycardia (B) is less common than bradycardia. Muscle cramps (D) are often associated with electrolyte imbalances (like hypokalemia, which potentiates digoxin toxicity) but are not a direct sign of digoxin toxicity itself."
+      "rationale": "Digoxin has a narrow therapeutic range, and toxicity is a significant risk. Common signs include gastrointestinal disturbances (nausea, vomiting, anorexia) (C), cardiac rhythm changes (especially bradycardia (E) or heart block), neurological symptoms (confusion, lethargy) (F), and characteristic visual disturbances (blurred vision, yellow/green halos around lights) (A). Tachycardia (B) is less common than bradycardia. Muscle cramps (D) are often associated with electrolyte imbalances (like hypokalemia, which potentiates digoxin toxicity) but are not a direct sign of digoxin toxicity itself.",
+      "category": "Pharmacology"
     },
     {
       "id": 33,
@@ -864,7 +896,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "While all options are appropriate, assessing vital signs and oxygen saturation is the immediate priority to determine the severity of the situation and guide further interventions."
+      "rationale": "While all options are appropriate, assessing vital signs and oxygen saturation is the immediate priority to determine the severity of the situation and guide further interventions.",
+      "category": "Cardiovascular"
     },
     {
       "id": 34,
@@ -899,7 +932,8 @@
         "D",
         "E"
       ],
-      "rationale": "Blood should never be administered with dextrose solutions as they can cause hemolysis of red blood cells."
+      "rationale": "Blood should never be administered with dextrose solutions as they can cause hemolysis of red blood cells.",
+      "category": "Cardiovascular"
     },
     {
       "id": 35,
@@ -925,7 +959,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "While all options are appropriate, assessing vital signs and oxygen saturation is the immediate priority to determine the severity of the situation and guide further interventions."
+      "rationale": "While all options are appropriate, assessing vital signs and oxygen saturation is the immediate priority to determine the severity of the situation and guide further interventions.",
+      "category": "Cardiovascular"
     },
     {
       "id": 36,
@@ -951,7 +986,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "Accurate I&O monitoring is crucial for all three reasons."
+      "rationale": "Accurate I&O monitoring is crucial for all three reasons.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 37,
@@ -977,7 +1013,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Secondary prevention (B) aims to identify diseases in their earliest stages and intervene promptly to slow or stop their progression. Examples include screening tests (e.g., mammograms, blood pressure checks) and treating diseases early. Primary prevention (A) focuses on preventing disease occurrence in the first place (e.g., vaccinations, health education). Tertiary prevention (C) focuses on rehabilitation and reducing complications in people already diagnosed with a disease. Primordial prevention (D) involves addressing broad determinants of health to prevent risk factors from developing."
+      "rationale": "Secondary prevention (B) aims to identify diseases in their earliest stages and intervene promptly to slow or stop their progression. Examples include screening tests (e.g., mammograms, blood pressure checks) and treating diseases early. Primary prevention (A) focuses on preventing disease occurrence in the first place (e.g., vaccinations, health education). Tertiary prevention (C) focuses on rehabilitation and reducing complications in people already diagnosed with a disease. Primordial prevention (D) involves addressing broad determinants of health to prevent risk factors from developing.",
+      "category": "Fundamentals"
     },
     {
       "id": 38,
@@ -1003,7 +1040,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "An oxygen saturation of 88% indicates hypoxemia, a life-threatening condition requiring immediate intervention. The other findings are concerning but not as immediately life-threatening."
+      "rationale": "An oxygen saturation of 88% indicates hypoxemia, a life-threatening condition requiring immediate intervention. The other findings are concerning but not as immediately life-threatening.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 39,
@@ -1029,7 +1067,8 @@
         }
       ],
       "correctAnswer": "A",
-      "rationale": "Dehydration leads to decreased blood volume, resulting in hypotension. Bradycardia, edema, and bounding pulses are not associated with dehydration."
+      "rationale": "Dehydration leads to decreased blood volume, resulting in hypotension. Bradycardia, edema, and bounding pulses are not associated with dehydration.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 40,
@@ -1063,7 +1102,8 @@
         "C",
         "D"
       ],
-      "rationale": "Administering rapid-acting insulin would worsen hypoglycemia. Checking for ketones is relevant for hyperglycemia, not hypoglycemia."
+      "rationale": "Administering rapid-acting insulin would worsen hypoglycemia. Checking for ketones is relevant for hyperglycemia, not hypoglycemia.",
+      "category": "Fundamentals"
     },
     {
       "id": 41,
@@ -1089,7 +1129,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "For conscious clients with hypoglycemia, oral glucose is the first intervention. Orange juice with sugar provides fast-acting carbohydrates to quickly raise blood glucose levels."
+      "rationale": "For conscious clients with hypoglycemia, oral glucose is the first intervention. Orange juice with sugar provides fast-acting carbohydrates to quickly raise blood glucose levels.",
+      "category": "Fundamentals"
     },
     {
       "id": 42,
@@ -1115,7 +1156,8 @@
         }
       ],
       "correctAnswer": "A",
-      "rationale": "Dehydration leads to decreased blood volume, resulting in hypotension. Bradycardia, edema, and bounding pulses are not associated with dehydration."
+      "rationale": "Dehydration leads to decreased blood volume, resulting in hypotension. Bradycardia, edema, and bounding pulses are not associated with dehydration.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 43,
@@ -1141,7 +1183,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "A holistic approach involves addressing the patient's physical, emotional, and social needs."
+      "rationale": "A holistic approach involves addressing the patient's physical, emotional, and social needs.",
+      "category": "Fundamentals"
     },
     {
       "id": 44,
@@ -1167,7 +1210,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Reassessing the blood pressure to confirm the reading is the priority intervention before taking further action."
+      "rationale": "Reassessing the blood pressure to confirm the reading is the priority intervention before taking further action.",
+      "category": "Cardiovascular"
     },
     {
       "id": 45,
@@ -1205,7 +1249,8 @@
         "B",
         "C"
       ],
-      "rationale": "Standard precautions apply to all patients regardless of their diagnosis. Airborne and contact precautions are used in addition to standard precautions for specific infections. Sterile technique is not always required."
+      "rationale": "Standard precautions apply to all patients regardless of their diagnosis. Airborne and contact precautions are used in addition to standard precautions for specific infections. Sterile technique is not always required.",
+      "category": "Fundamentals"
     },
     {
       "id": 46,
@@ -1244,7 +1289,8 @@
         "D",
         "E"
       ],
-      "rationale": "Increased ICP typically presents with changes in level of consciousness, widening pulse pressure (Cushing's triad), irregular respirations (Cheyne-Stokes), and hypertension. Bradycardia and pinpoint pupils are not typical signs of increased ICP."
+      "rationale": "Increased ICP typically presents with changes in level of consciousness, widening pulse pressure (Cushing's triad), irregular respirations (Cheyne-Stokes), and hypertension. Bradycardia and pinpoint pupils are not typical signs of increased ICP.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 47,
@@ -1270,7 +1316,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Effective management involves addressing performance issues directly and seeking to understand the cause. The initial step should be a private conversation with the staff nurse to discuss the specific observations, clarify expectations regarding timely documentation, and explore potential reasons or barriers (e.g., time management issues, workload, lack of knowledge) (C). Disciplinary action (A) or reporting to the board (D) would be premature without investigation and attempts at corrective action. Assigning a mentor (B) might be part of a solution but only after understanding the root cause."
+      "rationale": "Effective management involves addressing performance issues directly and seeking to understand the cause. The initial step should be a private conversation with the staff nurse to discuss the specific observations, clarify expectations regarding timely documentation, and explore potential reasons or barriers (e.g., time management issues, workload, lack of knowledge) (C). Disciplinary action (A) or reporting to the board (D) would be premature without investigation and attempts at corrective action. Assigning a mentor (B) might be part of a solution but only after understanding the root cause.",
+      "category": "Leadership"
     },
     {
       "id": 48,
@@ -1296,7 +1343,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "All three actions are essential steps in medication administration to ensure patient safety."
+      "rationale": "All three actions are essential steps in medication administration to ensure patient safety.",
+      "category": "Fundamentals"
     },
     {
       "id": 49,
@@ -1322,7 +1370,8 @@
         }
       ],
       "correctAnswer": "A",
-      "rationale": "0.125 mg / 0.25 mg/tablet = 0.5 tablets. The nurse would administer half a tablet."
+      "rationale": "0.125 mg / 0.25 mg/tablet = 0.5 tablets. The nurse would administer half a tablet.",
+      "category": "Fundamentals"
     },
     {
       "id": 50,
@@ -1331,7 +1380,8 @@
       "text": "The healthcare provider orders Heparin 1,000 units/hour IV. The label reads 25,000 units/500 mL. Calculate the mL/hour to be administered.",
       "correctAnswer": "20",
       "rationale": "Using dimensional analysis: (1,000 units/hour × 500 mL) ÷ 25,000 units = 20 mL/hour",
-      "choices": []
+      "choices": [],
+      "category": "Fundamentals"
     },
     {
       "id": 51,
@@ -1357,7 +1407,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "Reflecting the client's feelings ('feeling very discouraged') validates their experience and opens the door for further exploration (C). Offering false reassurance (A) dismisses the client's feelings. Asking 'why' questions (B) can sound accusatory and put the client on the defensive. Changing the subject abruptly (D) avoids the client's expressed concern."
+      "rationale": "Reflecting the client's feelings ('feeling very discouraged') validates their experience and opens the door for further exploration (C). Offering false reassurance (A) dismisses the client's feelings. Asking 'why' questions (B) can sound accusatory and put the client on the defensive. Changing the subject abruptly (D) avoids the client's expressed concern.",
+      "category": "Mental Health"
     },
     {
       "id": 52,
@@ -1383,7 +1434,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Akathisia (B) is characterized by motor restlessness, with an inability to sit still, constant pacing, fidgeting, and agitation. This differs from tardive dyskinesia (A), which involves involuntary, repetitive movements, particularly of the face and mouth. Acute dystonia (C) presents as sudden muscle spasms and abnormal posturing. Pseudoparkinsonism (D) involves tremor, rigidity, bradykinesia, and shuffling gait."
+      "rationale": "Akathisia (B) is characterized by motor restlessness, with an inability to sit still, constant pacing, fidgeting, and agitation. This differs from tardive dyskinesia (A), which involves involuntary, repetitive movements, particularly of the face and mouth. Acute dystonia (C) presents as sudden muscle spasms and abnormal posturing. Pseudoparkinsonism (D) involves tremor, rigidity, bradykinesia, and shuffling gait.",
+      "category": "Mental Health"
     },
     {
       "id": 53,
@@ -1409,7 +1461,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "For clients with anorexia nervosa, establishing nutritional stability is a priority. Implementing a structured meal plan with clear expectations for intake (B) provides routine and minimizes negotiation or avoidance behaviors around food. While exploring feelings (A) and providing education (C) are important therapeutic interventions, addressing the immediate nutritional deficit through structured eating is often the initial focus. Leading group therapy (D) is not appropriate initially and would not address the nutritional deficit."
+      "rationale": "For clients with anorexia nervosa, establishing nutritional stability is a priority. Implementing a structured meal plan with clear expectations for intake (B) provides routine and minimizes negotiation or avoidance behaviors around food. While exploring feelings (A) and providing education (C) are important therapeutic interventions, addressing the immediate nutritional deficit through structured eating is often the initial focus. Leading group therapy (D) is not appropriate initially and would not address the nutritional deficit.",
+      "category": "Mental Health"
     },
     {
       "id": 54,
@@ -1435,7 +1488,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Checking NG tube placement is the priority to ensure that the feeding is not entering the lungs."
+      "rationale": "Checking NG tube placement is the priority to ensure that the feeding is not entering the lungs.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 55,
@@ -1474,7 +1528,8 @@
         "D",
         "E"
       ],
-      "rationale": "Increased ICP typically presents with changes in level of consciousness, widening pulse pressure (Cushing's triad), irregular respirations (Cheyne-Stokes), and hypertension. Bradycardia and pinpoint pupils are not typical signs of increased ICP."
+      "rationale": "Increased ICP typically presents with changes in level of consciousness, widening pulse pressure (Cushing's triad), irregular respirations (Cheyne-Stokes), and hypertension. Bradycardia and pinpoint pupils are not typical signs of increased ICP.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 56,
@@ -1500,7 +1555,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Checking NG tube placement is the priority to ensure that the feeding is not entering the lungs."
+      "rationale": "Checking NG tube placement is the priority to ensure that the feeding is not entering the lungs.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 57,
@@ -1526,7 +1582,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Higher flow rates with nasal cannulas can cause nasal dryness and irritation, and may not increase oxygen saturation significantly."
+      "rationale": "Higher flow rates with nasal cannulas can cause nasal dryness and irritation, and may not increase oxygen saturation significantly.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 58,
@@ -1552,7 +1609,8 @@
         }
       ],
       "correctAnswer": "A",
-      "rationale": "Given the high pain level, administering the prescribed analgesic is the most appropriate initial action."
+      "rationale": "Given the high pain level, administering the prescribed analgesic is the most appropriate initial action.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 59,
@@ -1586,7 +1644,8 @@
         "C",
         "E"
       ],
-      "rationale": "Appropriate interventions include notifying the provider about inadequate pain control, performing a comprehensive pain assessment, and offering non-pharmacological measures. The nurse should not administer another dose if it's too early per orders, and should not encourage the client to simply endure uncontrolled pain."
+      "rationale": "Appropriate interventions include notifying the provider about inadequate pain control, performing a comprehensive pain assessment, and offering non-pharmacological measures. The nurse should not administer another dose if it's too early per orders, and should not encourage the client to simply endure uncontrolled pain.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 60,
@@ -1612,7 +1671,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "A holistic approach involves addressing the patient's physical, emotional, and social needs."
+      "rationale": "A holistic approach involves addressing the patient's physical, emotional, and social needs.",
+      "category": "Mental Health"
     },
     {
       "id": 61,
@@ -1638,7 +1698,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "All three are crucial for postoperative patient safety and recovery."
+      "rationale": "All three are crucial for postoperative patient safety and recovery.",
+      "category": "Fundamentals"
     },
     {
       "id": 62,
@@ -1664,7 +1725,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "All three are crucial for postoperative patient safety and recovery."
+      "rationale": "All three are crucial for postoperative patient safety and recovery.",
+      "category": "Fundamentals"
     },
     {
       "id": 63,
@@ -1698,7 +1760,8 @@
         "B",
         "E"
       ],
-      "rationale": "Decreased urinary output, elevated temperature, and elevated blood pressure require immediate provider notification as they may indicate complications like infection or preeclampsia. Lochia rubra with small clots and a firm, midline fundus are normal findings in the immediate postpartum period."
+      "rationale": "Decreased urinary output, elevated temperature, and elevated blood pressure require immediate provider notification as they may indicate complications like infection or preeclampsia. Lochia rubra with small clots and a firm, midline fundus are normal findings in the immediate postpartum period.",
+      "category": "Maternity"
     },
     {
       "id": 64,
@@ -1724,7 +1787,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "An oxygen saturation of 88% indicates hypoxemia, a life-threatening condition requiring immediate intervention. The other findings are concerning but not as immediately life-threatening."
+      "rationale": "An oxygen saturation of 88% indicates hypoxemia, a life-threatening condition requiring immediate intervention. The other findings are concerning but not as immediately life-threatening.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 65,
@@ -1750,7 +1814,8 @@
         }
       ],
       "correctAnswer": "A",
-      "rationale": "High Fowler's position (sitting upright at a 60-90 degree angle) allows for maximum lung expansion, especially in the bases, which helps mobilize secretions and improve ventilation in clients with crackles."
+      "rationale": "High Fowler's position (sitting upright at a 60-90 degree angle) allows for maximum lung expansion, especially in the bases, which helps mobilize secretions and improve ventilation in clients with crackles.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 66,
@@ -1776,7 +1841,8 @@
         }
       ],
       "correctAnswer": "C",
-      "rationale": "The priority during a seizure is to protect the patient from injury by removing nearby objects that could cause harm."
+      "rationale": "The priority during a seizure is to protect the patient from injury by removing nearby objects that could cause harm.",
+      "category": "Neurological"
     },
     {
       "id": 67,
@@ -1815,7 +1881,8 @@
         "E",
         "F"
       ],
-      "rationale": "Hyperthyroidism causes increased metabolism, leading to weight loss, heat intolerance, and tremors. A goiter may also be present. Bradycardia and constipation are associated with hypothyroidism."
+      "rationale": "Hyperthyroidism causes increased metabolism, leading to weight loss, heat intolerance, and tremors. A goiter may also be present. Bradycardia and constipation are associated with hypothyroidism.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 68,
@@ -1841,7 +1908,8 @@
         }
       ],
       "correctAnswer": "D",
-      "rationale": "Accurate I&O monitoring is crucial for all three reasons."
+      "rationale": "Accurate I&O monitoring is crucial for all three reasons.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 69,
@@ -1867,7 +1935,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Sterile saline solution is the most appropriate solution for wound cleaning to minimize tissue damage and infection risk."
+      "rationale": "Sterile saline solution is the most appropriate solution for wound cleaning to minimize tissue damage and infection risk.",
+      "category": "Medical-Surgical"
     },
     {
       "id": 70,
@@ -1893,7 +1962,8 @@
         }
       ],
       "correctAnswer": "B",
-      "rationale": "Soap and water are the best way to clean a new wound to minimize infection."
+      "rationale": "Soap and water are the best way to clean a new wound to minimize infection.",
+      "category": "Medical-Surgical"
     }
   ]
 }

@@ -25,13 +25,13 @@ export async function fetchQuizQuestions(category: string, count: number): Promi
     let categoryParam = category;
     if (category !== 'All') {
       if (category === 'Medical-Surgical') {
-        categoryParam = 'Cardiac';
+        categoryParam = 'Cardiovascular';
       } else if (category === 'Pediatric') {
         categoryParam = 'Pediatric';
       } else if (category === 'Obstetric') {
         categoryParam = 'Maternity';
       } else if (category === 'Mental Health') {
-        categoryParam = 'Mental';
+        categoryParam = 'Mental Health';
       } else if (category === 'Pharmacology') {
         categoryParam = 'Pharmacology';
       } else if (category === 'Leadership') {
@@ -41,6 +41,8 @@ export async function fetchQuizQuestions(category: string, count: number): Promi
       }
     }
 
+    console.log(`Fetching ${count} questions for category: ${categoryParam}`);
+    
     // Now use the new filter endpoint
     const response = await fetch(
       `/api/questions/filter?${category === 'All' ? '' : `category=${categoryParam}&`}count=${count}`
@@ -51,14 +53,10 @@ export async function fetchQuizQuestions(category: string, count: number): Promi
     }
     
     const data = await response.json() as QuestionsResponse;
-    console.log('Filtered questions response:', data);
+    console.log(`Received ${data.questions.length} questions for category: ${categoryParam}`);
     
-    // If we don't get enough questions with our category filter, fall back to getting some from all categories
-    if (data.questions.length === 0 && category !== 'All') {
-      console.log('No questions found for category, falling back to all categories');
-      return fetchQuizQuestions('All', count);
-    }
-    
+    // The server will now handle falling back and duplicating questions as needed,
+    // so we can just return the data directly
     return data;
   } catch (error) {
     console.error('Error fetching quiz questions:', error);
