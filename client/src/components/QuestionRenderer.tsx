@@ -177,10 +177,24 @@ export function QuestionRenderer({
 
   // Normalize answer strings by removing quotes if present
   const normalizeAnswerString = (value: string): string => {
-    // If the string has surrounding quotes (like "A"), remove them
-    if (value.startsWith('"') && value.endsWith('"')) {
-      return value.substring(1, value.length - 1);
+    // Handle nested quotes from JSON stringification (e.g., "\"A\"") 
+    // First try to parse it as JSON if it looks like a JSON string
+    if ((value.startsWith('"') && value.endsWith('"')) || 
+        (value.startsWith('\"') && value.endsWith('\"'))) {
+      try {
+        // Try to parse as JSON first - this handles cases like "\"A\""
+        const parsed = JSON.parse(value);
+        if (typeof parsed === 'string') {
+          // If the result is still a string, it might have more quotes to remove
+          return normalizeAnswerString(parsed); // Recursively normalize
+        }
+        return String(parsed);
+      } catch (e) {
+        // If parsing fails, just remove the outer quotes
+        return value.substring(1, value.length - 1);
+      }
     }
+    // Return as is if no quotes
     return value;
   };
 
