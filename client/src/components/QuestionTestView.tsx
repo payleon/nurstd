@@ -727,16 +727,16 @@ export function QuestionTestView({
             <div className="p-4 bg-gray-50 border-t border-gray-200 hidden md:block">
               <button 
                 className={`w-full py-2.5 px-4 rounded font-medium transition-colors flex items-center justify-center ${
-                  Object.keys(userAnswers).length === totalQuestions
+                  Object.keys(userAnswers).length > 0
                     ? "bg-green-600 hover:bg-green-700 text-white" 
                     : "bg-gray-200 text-gray-500 cursor-not-allowed"
                 }`}
-                disabled={Object.keys(userAnswers).length !== totalQuestions || isSubmitting}
+                disabled={Object.keys(userAnswers).length === 0 || isSubmitting}
                 onClick={handleSubmitExam}
                 aria-label={
                   Object.keys(userAnswers).length === totalQuestions 
                     ? "Submit exam for grading" 
-                    : `Answer all ${totalQuestions} questions before submitting`
+                    : "Submit exam with some unanswered questions"
                 }
                 aria-busy={isSubmitting ? "true" : "false"}
               >
@@ -966,16 +966,16 @@ export function QuestionTestView({
               <div className="mt-3">
                 <button 
                   className={`w-full py-3 px-4 rounded-md font-medium text-white transition-colors flex items-center justify-center ${
-                    Object.keys(userAnswers).length === totalQuestions
+                    Object.keys(userAnswers).length > 0
                       ? "bg-green-600 hover:bg-green-700" 
                       : "bg-gray-400 cursor-not-allowed"
                   }`}
-                  disabled={Object.keys(userAnswers).length !== totalQuestions || isSubmitting}
+                  disabled={Object.keys(userAnswers).length === 0 || isSubmitting}
                   onClick={handleSubmitExam}
                   aria-label={
                     Object.keys(userAnswers).length === totalQuestions 
                       ? "Submit exam for grading" 
-                      : `Answer all ${totalQuestions} questions before submitting`
+                      : "Submit exam with some unanswered questions"
                   }
                   aria-busy={isSubmitting ? "true" : "false"}
                 >
