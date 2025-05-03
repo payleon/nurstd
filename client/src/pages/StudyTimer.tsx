@@ -22,7 +22,9 @@ import {
   BarChart4,
   Award,
   PenLine,
-  Check
+  Check,
+  Trophy,
+  Lightbulb
 } from "lucide-react";
 
 // Study session history type
@@ -480,99 +482,583 @@ export default function StudyTimer() {
               
               <TabsContent value="achievements" className="space-y-6">
                 <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
-                    <Award className="mr-2 h-5 w-5 text-yellow-500" />
-                    Study Achievements
-                  </h2>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+                    <h2 className="text-xl font-semibold text-gray-900 flex items-center">
+                      <Award className="mr-2 h-5 w-5 text-yellow-500" />
+                      Study Achievements
+                    </h2>
+                    
+                    <div className="mt-2 sm:mt-0 flex items-center bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100">
+                      <Trophy className="h-4 w-4 text-blue-500 mr-2" />
+                      <div>
+                        <span className="text-sm font-medium text-blue-800">Total XP: </span>
+                        <span className="text-sm font-bold text-blue-900">
+                          {Math.floor(totalStudyMinutes * 0.5) + (totalSessions * 10) + (currentStreak * 5)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Achievement Progress Summary */}
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mb-6 border border-blue-100">
+                    <h3 className="font-medium text-blue-800 mb-3">Achievement Progress</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-blue-200 flex items-center">
+                        <span className="text-blue-700 mr-1">{
+                          [
+                            totalSessions >= 1 ? 1 : 0,
+                            totalSessions >= 10 ? 1 : 0, 
+                            totalSessions >= 25 ? 1 : 0,
+                            totalSessions >= 50 ? 1 : 0,
+                            totalStudyMinutes >= 1000 ? 1 : 0,
+                            totalStudyMinutes >= 3000 ? 1 : 0,
+                            currentStreak >= 3 ? 1 : 0,
+                            currentStreak >= 7 ? 1 : 0,
+                            currentStreak >= 14 ? 1 : 0,
+                            weeklyProgress >= weeklyGoal ? 1 : 0,
+                            sessionHistory.some(s => s.notes && s.notes.length > 50) ? 1 : 0,
+                            sessionHistory.filter(s => s.duration >= 60).length >= 1 ? 1 : 0
+                          ].reduce((a, b) => a + b, 0)
+                        }</span>
+                        <span className="text-gray-500">/ 12 Unlocked</span>
+                      </div>
+                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-purple-200 flex items-center">
+                        <span className="text-purple-700 mr-1">{Math.floor((totalStudyMinutes / 60) * 10) / 10}</span>
+                        <span className="text-gray-500">Hours Studied</span>
+                      </div>
+                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-green-200 flex items-center">
+                        <span className="text-green-700 mr-1">{totalSessions}</span>
+                        <span className="text-gray-500">Sessions</span>
+                      </div>
+                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-amber-200 flex items-center">
+                        <span className="text-amber-700 mr-1">{currentStreak}</span>
+                        <span className="text-gray-500">Day Streak</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* CATEGORY: GETTING STARTED */}
+                    <div className="md:col-span-3">
+                      <h3 className="font-semibold text-gray-800 mb-3 pb-2 border-b flex items-center">
+                        <Zap className="w-4 h-4 mr-2 text-amber-500" /> 
+                        Getting Started
+                      </h3>
+                    </div>
+                    
                     {/* Early Bird */}
-                    <div className={`border rounded-lg p-4 ${totalSessions >= 1 ? 'bg-yellow-50 border-yellow-200' : 'bg-gray-50 border-gray-200 opacity-60'}`}>
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${totalSessions >= 1 ? 'bg-yellow-50 border-yellow-200' : 'bg-gray-50 border-gray-200 opacity-70'}`}>
+                      {totalSessions >= 1 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-yellow-400 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
                       <div className="flex items-center gap-3">
-                        <div className={`text-2xl ${totalSessions >= 1 ? '' : 'grayscale'}`}>🌅</div>
+                        <div className={`text-2xl ${totalSessions >= 1 ? '' : 'grayscale opacity-70'}`}>🌅</div>
                         <div>
                           <h3 className="font-medium text-gray-900">Early Bird</h3>
                           <p className="text-sm text-gray-600">Complete your first study session</p>
                         </div>
                       </div>
-                      <div className="mt-2">
-                        <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
-                            className="bg-yellow-500 h-1.5 rounded-full" 
+                            className="bg-yellow-500 h-2 rounded-full transition-all duration-700" 
                             style={{ width: `${Math.min(100, (totalSessions / 1) * 100)}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1 text-right">
-                          {totalSessions >= 1 ? 'Completed!' : `${totalSessions}/1 sessions`}
-                        </p>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {totalSessions >= 1 ? '+10 XP' : '0/1 sessions'}
+                          </p>
+                          <p className="text-xs font-medium text-yellow-600">
+                            {totalSessions >= 1 ? 'Completed!' : `${Math.round((totalSessions / 1) * 100)}%`}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     
-                    {/* Focused Learner */}
-                    <div className={`border rounded-lg p-4 ${totalSessions >= 10 ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200 opacity-60'}`}>
+                    {/* Note Taker */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      sessionHistory.some(s => s.notes && s.notes.length > 50) 
+                        ? 'bg-emerald-50 border-emerald-200' 
+                        : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {sessionHistory.some(s => s.notes && s.notes.length > 50) && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-emerald-400 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
                       <div className="flex items-center gap-3">
-                        <div className={`text-2xl ${totalSessions >= 10 ? '' : 'grayscale'}`}>🧠</div>
+                        <div className={`text-2xl ${
+                          sessionHistory.some(s => s.notes && s.notes.length > 50) ? '' : 'grayscale opacity-70'
+                        }`}>📝</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Note Taker</h3>
+                          <p className="text-sm text-gray-600">Take detailed notes during a study session</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-emerald-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ 
+                              width: sessionHistory.some(s => s.notes && s.notes.length > 50) ? '100%' : '0%' 
+                            }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {sessionHistory.some(s => s.notes && s.notes.length > 50) ? '+15 XP' : 'Add session notes'}
+                          </p>
+                          <p className="text-xs font-medium text-emerald-600">
+                            {sessionHistory.some(s => s.notes && s.notes.length > 50) ? 'Completed!' : 'Incomplete'}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Goal Setter */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      weeklyProgress >= weeklyGoal 
+                        ? 'bg-sky-50 border-sky-200' 
+                        : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {weeklyProgress >= weeklyGoal && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-sky-400 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${weeklyProgress >= weeklyGoal ? '' : 'grayscale opacity-70'}`}>🎯</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Goal Setter</h3>
+                          <p className="text-sm text-gray-600">Complete your weekly study goal</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-sky-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ width: `${Math.min(100, (weeklyProgress / weeklyGoal) * 100)}%` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {weeklyProgress >= weeklyGoal ? '+20 XP' : `${weeklyProgress}/${weeklyGoal} min`}
+                          </p>
+                          <p className="text-xs font-medium text-sky-600">
+                            {weeklyProgress >= weeklyGoal 
+                              ? 'Completed!' 
+                              : `${Math.round((weeklyProgress / weeklyGoal) * 100)}%`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* CATEGORY: SESSION MILESTONES */}
+                    <div className="md:col-span-3 mt-2">
+                      <h3 className="font-semibold text-gray-800 mb-3 pb-2 border-b flex items-center">
+                        <Award className="w-4 h-4 mr-2 text-blue-500" /> 
+                        Session Milestones
+                      </h3>
+                    </div>
+                    
+                    {/* Focused Learner */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      totalSessions >= 10 ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {totalSessions >= 10 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-green-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${totalSessions >= 10 ? '' : 'grayscale opacity-70'}`}>🧠</div>
                         <div>
                           <h3 className="font-medium text-gray-900">Focused Learner</h3>
                           <p className="text-sm text-gray-600">Complete 10 study sessions</p>
                         </div>
                       </div>
-                      <div className="mt-2">
-                        <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
-                            className="bg-green-500 h-1.5 rounded-full" 
+                            className="bg-green-500 h-2 rounded-full transition-all duration-700" 
                             style={{ width: `${Math.min(100, (totalSessions / 10) * 100)}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1 text-right">
-                          {totalSessions >= 10 ? 'Completed!' : `${totalSessions}/10 sessions`}
-                        </p>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {totalSessions >= 10 ? '+25 XP' : `${totalSessions}/10 sessions`}
+                          </p>
+                          <p className="text-xs font-medium text-green-600">
+                            {totalSessions >= 10 
+                              ? 'Completed!' 
+                              : `${Math.round((totalSessions / 10) * 100)}%`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Study Champion */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      totalSessions >= 25 ? 'bg-indigo-50 border-indigo-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {totalSessions >= 25 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-indigo-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${totalSessions >= 25 ? '' : 'grayscale opacity-70'}`}>🏆</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Study Champion</h3>
+                          <p className="text-sm text-gray-600">Complete 25 study sessions</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-indigo-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ width: `${Math.min(100, (totalSessions / 25) * 100)}%` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {totalSessions >= 25 ? '+50 XP' : `${totalSessions}/25 sessions`}
+                          </p>
+                          <p className="text-xs font-medium text-indigo-600">
+                            {totalSessions >= 25 
+                              ? 'Completed!' 
+                              : `${Math.round((totalSessions / 25) * 100)}%`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Study Master */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      totalSessions >= 50 ? 'bg-violet-50 border-violet-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {totalSessions >= 50 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-violet-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${totalSessions >= 50 ? '' : 'grayscale opacity-70'}`}>🎓</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Study Master</h3>
+                          <p className="text-sm text-gray-600">Complete 50 study sessions</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-violet-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ width: `${Math.min(100, (totalSessions / 50) * 100)}%` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {totalSessions >= 50 ? '+100 XP' : `${totalSessions}/50 sessions`}
+                          </p>
+                          <p className="text-xs font-medium text-violet-600">
+                            {totalSessions >= 50 
+                              ? 'Completed!' 
+                              : `${Math.round((totalSessions / 50) * 100)}%`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* CATEGORY: TIME INVESTMENT */}
+                    <div className="md:col-span-3 mt-2">
+                      <h3 className="font-semibold text-gray-800 mb-3 pb-2 border-b flex items-center">
+                        <Clock className="w-4 h-4 mr-2 text-blue-500" /> 
+                        Time Investment
+                      </h3>
+                    </div>
+                    
+                    {/* Hour Power */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      sessionHistory.filter(s => s.duration >= 60).length >= 1 ? 'bg-amber-50 border-amber-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {sessionHistory.filter(s => s.duration >= 60).length >= 1 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-amber-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${
+                          sessionHistory.filter(s => s.duration >= 60).length >= 1 ? '' : 'grayscale opacity-70'
+                        }`}>⏰</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Hour Power</h3>
+                          <p className="text-sm text-gray-600">Complete a 60+ minute session</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-amber-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ 
+                              width: sessionHistory.filter(s => s.duration >= 60).length >= 1 ? '100%' : '0%' 
+                            }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {sessionHistory.filter(s => s.duration >= 60).length >= 1 
+                              ? '+30 XP' 
+                              : 'Complete 60 min session'}
+                          </p>
+                          <p className="text-xs font-medium text-amber-600">
+                            {sessionHistory.filter(s => s.duration >= 60).length >= 1 
+                              ? 'Completed!' 
+                              : 'Incomplete'}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     
                     {/* Marathon Runner */}
-                    <div className={`border rounded-lg p-4 ${totalStudyMinutes >= 1000 ? 'bg-blue-50 border-blue-200' : 'bg-gray-50 border-gray-200 opacity-60'}`}>
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      totalStudyMinutes >= 1000 ? 'bg-blue-50 border-blue-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {totalStudyMinutes >= 1000 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-blue-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
                       <div className="flex items-center gap-3">
-                        <div className={`text-2xl ${totalStudyMinutes >= 1000 ? '' : 'grayscale'}`}>⏱️</div>
+                        <div className={`text-2xl ${totalStudyMinutes >= 1000 ? '' : 'grayscale opacity-70'}`}>⏱️</div>
                         <div>
                           <h3 className="font-medium text-gray-900">Marathon Runner</h3>
                           <p className="text-sm text-gray-600">Study for 1000 minutes total</p>
                         </div>
                       </div>
-                      <div className="mt-2">
-                        <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
-                            className="bg-blue-500 h-1.5 rounded-full" 
+                            className="bg-blue-500 h-2 rounded-full transition-all duration-700" 
                             style={{ width: `${Math.min(100, (totalStudyMinutes / 1000) * 100)}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1 text-right">
-                          {totalStudyMinutes >= 1000 ? 'Completed!' : `${totalStudyMinutes}/1000 minutes`}
-                        </p>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {totalStudyMinutes >= 1000 ? '+75 XP' : `${totalStudyMinutes}/1000 minutes`}
+                          </p>
+                          <p className="text-xs font-medium text-blue-600">
+                            {totalStudyMinutes >= 1000 
+                              ? 'Completed!' 
+                              : `${Math.round((totalStudyMinutes / 1000) * 100)}%`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Study Olympian */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      totalStudyMinutes >= 3000 ? 'bg-cyan-50 border-cyan-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {totalStudyMinutes >= 3000 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-cyan-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${totalStudyMinutes >= 3000 ? '' : 'grayscale opacity-70'}`}>🏊</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Study Olympian</h3>
+                          <p className="text-sm text-gray-600">Study for 3000 minutes total (50 hours)</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-cyan-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ width: `${Math.min(100, (totalStudyMinutes / 3000) * 100)}%` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {totalStudyMinutes >= 3000 ? '+200 XP' : `${totalStudyMinutes}/3000 minutes`}
+                          </p>
+                          <p className="text-xs font-medium text-cyan-600">
+                            {totalStudyMinutes >= 3000 
+                              ? 'Completed!' 
+                              : `${Math.round((totalStudyMinutes / 3000) * 100)}%`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* CATEGORY: CONSISTENCY */}
+                    <div className="md:col-span-3 mt-2">
+                      <h3 className="font-semibold text-gray-800 mb-3 pb-2 border-b flex items-center">
+                        <CalendarDays className="w-4 h-4 mr-2 text-purple-500" /> 
+                        Consistency Streaks
+                      </h3>
+                    </div>
+                    
+                    {/* Habit Builder */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      currentStreak >= 3 ? 'bg-rose-50 border-rose-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {currentStreak >= 3 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-rose-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${currentStreak >= 3 ? '' : 'grayscale opacity-70'}`}>🔥</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Habit Builder</h3>
+                          <p className="text-sm text-gray-600">Maintain a 3-day study streak</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-rose-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ width: `${Math.min(100, (currentStreak / 3) * 100)}%` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {currentStreak >= 3 ? '+20 XP' : `${currentStreak}/3 days`}
+                          </p>
+                          <p className="text-xs font-medium text-rose-600">
+                            {currentStreak >= 3 
+                              ? 'Completed!' 
+                              : `${Math.round((currentStreak / 3) * 100)}%`}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     
                     {/* Consistency King */}
-                    <div className={`border rounded-lg p-4 ${currentStreak >= 7 ? 'bg-purple-50 border-purple-200' : 'bg-gray-50 border-gray-200 opacity-60'}`}>
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      currentStreak >= 7 ? 'bg-purple-50 border-purple-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {currentStreak >= 7 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-purple-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
                       <div className="flex items-center gap-3">
-                        <div className={`text-2xl ${currentStreak >= 7 ? '' : 'grayscale'}`}>👑</div>
+                        <div className={`text-2xl ${currentStreak >= 7 ? '' : 'grayscale opacity-70'}`}>👑</div>
                         <div>
                           <h3 className="font-medium text-gray-900">Consistency King</h3>
                           <p className="text-sm text-gray-600">Maintain a 7-day study streak</p>
                         </div>
                       </div>
-                      <div className="mt-2">
-                        <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
-                            className="bg-purple-500 h-1.5 rounded-full" 
+                            className="bg-purple-500 h-2 rounded-full transition-all duration-700" 
                             style={{ width: `${Math.min(100, (currentStreak / 7) * 100)}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1 text-right">
-                          {currentStreak >= 7 ? 'Completed!' : `${currentStreak}/7 days`}
-                        </p>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {currentStreak >= 7 ? '+50 XP' : `${currentStreak}/7 days`}
+                          </p>
+                          <p className="text-xs font-medium text-purple-600">
+                            {currentStreak >= 7 
+                              ? 'Completed!' 
+                              : `${Math.round((currentStreak / 7) * 100)}%`}
+                          </p>
+                        </div>
                       </div>
                     </div>
+                    
+                    {/* Study Legend */}
+                    <div className={`border rounded-lg p-4 relative overflow-hidden ${
+                      currentStreak >= 14 ? 'bg-fuchsia-50 border-fuchsia-200' : 'bg-gray-50 border-gray-200 opacity-70'
+                    }`}>
+                      {currentStreak >= 14 && (
+                        <div className="absolute top-0 right-0">
+                          <div className="bg-fuchsia-500 text-white text-xs font-bold px-2 py-1 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                            UNLOCKED
+                          </div>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <div className={`text-2xl ${currentStreak >= 14 ? '' : 'grayscale opacity-70'}`}>⭐</div>
+                        <div>
+                          <h3 className="font-medium text-gray-900">Study Legend</h3>
+                          <p className="text-sm text-gray-600">Maintain a 14-day study streak</p>
+                        </div>
+                      </div>
+                      <div className="mt-3">
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-fuchsia-500 h-2 rounded-full transition-all duration-700" 
+                            style={{ width: `${Math.min(100, (currentStreak / 14) * 100)}%` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                          <p className="text-xs text-gray-500">
+                            {currentStreak >= 14 ? '+100 XP' : `${currentStreak}/14 days`}
+                          </p>
+                          <p className="text-xs font-medium text-fuchsia-600">
+                            {currentStreak >= 14 
+                              ? 'Completed!' 
+                              : `${Math.round((currentStreak / 14) * 100)}%`}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Achievement Tips */}
+                  <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                    <h3 className="font-medium text-blue-800 mb-2 flex items-center">
+                      <Lightbulb className="w-4 h-4 mr-2" />
+                      Tips to Earn More Achievements
+                    </h3>
+                    <ul className="space-y-2 text-sm text-blue-700">
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <p>Complete at least one study session every day to build your streak</p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <p>Take detailed notes during your sessions to unlock the Note Taker achievement</p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <p>Try longer focused sessions (60+ minutes) for Hour Power achievement</p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <p>Meet your weekly study goal to earn Goal Setter achievement and XP</p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </TabsContent>
