@@ -236,12 +236,22 @@ export function QuestionRenderer({
                 
                 let choiceStyle;
                 if (showRationale) {
-                  choiceStyle = isCorrectChoice
-                    ? "border-2 border-green-200 bg-green-50 p-3 flex items-start"
-                    : isSelected
-                    ? "border-2 border-amber-200 bg-amber-50 p-3 flex items-start" 
-                    : "border border-gray-300 p-3 flex items-start";
+                  // When showing rationale, apply different styles based on correctness:
+                  // 1. If this is the correct choice, highlight it in green
+                  // 2. If user selected this but it's wrong, highlight in amber/orange
+                  // 3. If not selected and not correct, just show normal style
+                  if (isCorrectChoice) {
+                    // This is the correct answer - always show in green
+                    choiceStyle = "border-2 border-green-200 bg-green-50 p-3 flex items-start"; 
+                  } else if (isSelected) { 
+                    // User selected this but it's wrong
+                    choiceStyle = "border-2 border-red-200 bg-red-50 p-3 flex items-start";
+                  } else {
+                    // Not selected and not correct
+                    choiceStyle = "border border-gray-300 p-3 flex items-start";
+                  }
                 } else {
+                  // When not showing rationale (during question answering)
                   choiceStyle = isSelected
                     ? "border-2 border-[#4B9CD3] bg-blue-50 p-3 flex items-start" 
                     : "border border-gray-300 p-3 hover:border-[#4B9CD3] hover:bg-blue-50 transition-colors flex items-start";
@@ -656,14 +666,14 @@ export function QuestionRenderer({
       {/* Rationale Section */}
       {showRationale && question.rationale && (
         <div className="mt-6">
-          <div className={`p-5 rounded-lg border-2 ${isCorrect ? 'border-green-200 bg-green-50' : 'border-amber-200 bg-amber-50'}`}>
+          <div className={`p-5 rounded-lg border-2 ${isCorrect ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
             <div className="flex items-center font-medium text-lg mb-3">
               {isCorrect ? (
                 <CheckCircle2 className="mr-2 text-green-600 h-6 w-6" />
               ) : (
-                <AlertCircle className="mr-2 text-amber-600 h-6 w-6" />
+                <XCircle className="mr-2 text-red-600 h-6 w-6" />
               )}
-              <h4 className={isCorrect ? 'text-green-800' : 'text-amber-800'}>
+              <h4 className={isCorrect ? 'text-green-800' : 'text-red-800'}>
                 {isCorrect ? 'Correct Answer' : 'Incorrect Answer'}
               </h4>
             </div>
