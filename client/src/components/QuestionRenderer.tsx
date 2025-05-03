@@ -275,7 +275,7 @@ export function QuestionRenderer({
                 const isSelected = selectedAnswers.includes(choice.id);
                 const isCorrectChoice = showRationale && 
                   hasMCChoices(question) && 
-                  question.correctAnswer === choice.id;
+                  normalizeAnswerString(String(question.correctAnswer)) === choice.id;
                 
                 let choiceStyle;
                 if (showRationale) {
@@ -286,8 +286,8 @@ export function QuestionRenderer({
                   if (isCorrectChoice) {
                     // This is the correct answer - always show in green
                     choiceStyle = "border-2 border-green-200 bg-green-50 p-3 flex items-start"; 
-                  } else if (isSelected) { 
-                    // User selected this but it's wrong
+                  } else if (isSelected && !isCorrect) { 
+                    // User selected this but it's wrong (only show red if their overall answer was wrong)
                     choiceStyle = "border-2 border-red-200 bg-red-50 p-3 flex items-start";
                   } else {
                     // Not selected and not correct
@@ -321,7 +321,7 @@ export function QuestionRenderer({
                       <div className="flex-shrink-0 ml-2">
                         {isCorrectChoice ? (
                           <CheckCircle2 className="h-5 w-5 text-green-600" />
-                        ) : isSelected ? (
+                        ) : isSelected && !isCorrect ? (
                           <XCircle className="h-5 w-5 text-red-600" />
                         ) : null}
                       </div>
@@ -369,11 +369,14 @@ export function QuestionRenderer({
                     className={`p-3 ${choiceStyle} rounded-md flex items-start ${showRationale ? '' : 'cursor-pointer'}`}
                     onClick={() => !showRationale && handleAnswerSelect(choice.id)}
                   >
-                    <div className="flex-shrink-0 mr-3">
-                      <div className={`h-6 w-6 flex items-center justify-center rounded-md
-                        ${isSelected ? 'bg-[#4B9CD3] text-white' : 'border border-gray-300 bg-white'}`}
+                    <div 
+                      className="flex-shrink-0 mr-3"
+                      data-choice-id={choice.id}
+                    >
+                      <div className={`h-7 w-7 rounded flex items-center justify-center font-medium text-sm
+                        ${isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'}`}
                       >
-                        {isSelected && <CheckCircle2 className="h-4 w-4" />}
+                        {letters[index]}
                       </div>
                     </div>
                     <div className="flex-1">
@@ -398,131 +401,100 @@ export function QuestionRenderer({
         {/* Fill in the Blank Question */}
         {isFillInBlank && hasFillInBlank(question) && (
           <div className="fill-in-blank-container">
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Answer:
-              </label>
+            <div className="p-3 rounded-md border border-gray-300">
               <input 
                 type="text" 
                 value={textAnswer}
                 onChange={handleTextChange}
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#4B9CD3] focus:border-transparent"
+                placeholder="Type your answer here..."
                 disabled={showRationale}
-                className={`w-full p-3 border ${showRationale ? 'bg-gray-100' : ''} rounded-md focus:ring-blue-500 focus:border-blue-500`}
-                placeholder="Type your answer here"
               />
-            </div>
-            
-            {showRationale && (
-              <div className="mt-3">
+              
+              {showRationale && (
                 <div className={`p-3 rounded-md ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-amber-50 border border-amber-200'}`}>
-                  <div className="font-medium mb-1">
+                  <p className="text-sm font-medium mb-1">
                     {isCorrect ? "Correct" : "Incorrect"} - Expected Answer:
-                  </div>
-                  <div className="text-sm">
-                    {Array.isArray(question.correctAnswer) 
-                      ? question.correctAnswer.join(" OR ") 
-                      : question.correctAnswer}
-                  </div>
+                  </p>
+                  <p className="font-medium">
+                    {getCorrectAnswer(question)}
+                  </p>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
 
         {/* Hotspot Question */}
         {isHotspot && hasHotspotAreas(question) && (
           <div className="hotspot-container">
-            {!question.imagePath ? (
-              <p className="text-red-500">Error: No image provided for hotspot question</p>
-            ) : (
-              <div className="relative border border-gray-300 rounded-md overflow-hidden">
-                <img 
-                  src={question.imagePath} 
-                  alt="Hotspot image" 
-                  className="max-w-full h-auto"
-                  onError={(e) => {
-                    console.error(`Failed to load hotspot image: ${question.imagePath}`);
-                    e.currentTarget.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f3f4f6" /><text x="50%" y="50%" font-family="sans-serif" font-size="14" text-anchor="middle" fill="%236b7280">Image failed to load</text></svg>';
-                  }}
-                  loading="eager"
-                />
+            <div className="relative border border-gray-300 rounded-md overflow-hidden">
+              {/* Image container with clickable areas */}
+              <div className="relative">
+                {'imageUrl' in question && (
+                  <img 
+                    src={question.imageUrl} 
+                    alt="Hotspot image" 
+                    className="w-full h-auto"
+                  />
+                )}
                 
-                {/* Combine correctAreas and distractorAreas for combined display */}
-                {(() => {
-                  // Create a combined array of all areas to display
-                  const allAreas = [
-                    ...question.correctAreas.map(area => ({
-                      ...area,
-                      top: area.y, // Map y to top for positioning
-                      left: area.x, // Map x to left for positioning
-                      isCorrect: true
-                    })),
-                    ...(question.distractorAreas || []).map(area => ({
-                      ...area,
-                      top: area.y,
-                      left: area.x,
-                      isCorrect: false
-                    }))
-                  ];
-                  
-                  return allAreas.map(area => {
+                {/* Clickable areas */}
+                <div className="absolute top-0 left-0 w-full h-full">
+                  {'areas' in question && question.areas && question.areas.map(area => {
+                    // Determine if this area is selected
                     const isSelected = selectedAnswers.includes(area.id);
+                    // Determine if this area is correct (for feedback)
                     const isCorrect = area.isCorrect;
                     
-                    let areaStyle = "absolute border-2 cursor-pointer";
+                    // Styles based on selection and correctness
+                    let areaStyle = '';
                     if (showRationale) {
                       if (isSelected && isCorrect) {
-                        areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-50";
+                        areaStyle = 'border-2 border-green-500 bg-green-200 bg-opacity-30';
                       } else if (isSelected && !isCorrect) {
-                        areaStyle = "absolute border-2 border-red-500 bg-red-200 bg-opacity-50";
+                        areaStyle = 'border-2 border-red-500 bg-red-200 bg-opacity-30';
                       } else if (!isSelected && isCorrect) {
-                        areaStyle = "absolute border-2 border-green-500 bg-green-200 bg-opacity-30";
+                        areaStyle = 'border-2 border-yellow-500 bg-yellow-200 bg-opacity-30';
                       } else {
-                        areaStyle = "absolute border-2 border-transparent";
+                        areaStyle = 'border border-transparent';
                       }
                     } else {
-                      areaStyle = isSelected 
-                        ? "absolute border-2 border-blue-500 bg-blue-200 bg-opacity-50" 
-                        : "absolute border-2 border-transparent hover:border-blue-500 hover:bg-blue-100 hover:bg-opacity-25 cursor-pointer";
+                      areaStyle = isSelected
+                        ? 'border-2 border-[#4B9CD3] bg-blue-200 bg-opacity-30'
+                        : 'border border-transparent hover:border-[#4B9CD3] hover:bg-blue-100 hover:bg-opacity-30';
                     }
                     
                     return (
                       <div
                         key={area.id}
-                        className={areaStyle}
+                        className={`absolute cursor-pointer ${areaStyle}`}
                         style={{
                           top: `${area.top}%`,
                           left: `${area.left}%`,
                           width: `${area.width}%`,
                           height: `${area.height}%`,
                         }}
-                        onClick={() => {
-                          if (!showRationale) {
-                            const newSelectedAreas = isSelected
-                              ? selectedAnswers.filter(id => id !== area.id)
-                              : [...selectedAnswers, area.id];
-                            setSelectedAnswers(newSelectedAreas);
-                            // Notify parent component
-                            onAnswer(newSelectedAreas);
-                          }
-                        }}
+                        onClick={() => !showRationale && handleAnswerSelect(area.id)}
                       >
                         {showRationale && isCorrect && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <CheckCircle2 className="h-8 w-8 text-green-600" />
-                          </div>
+                          <CheckCircle2 className="absolute top-1 right-1 h-5 w-5 text-green-600" />
                         )}
                         {showRationale && isSelected && !isCorrect && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <XCircle className="h-8 w-8 text-red-600" />
-                          </div>
+                          <XCircle className="absolute top-1 right-1 h-5 w-5 text-red-600" />
                         )}
                       </div>
                     );
-                  });
-                })()}
+                  })}
+                </div>
               </div>
-            )}
+              
+              {/* Legend */}
+              <div className="p-3 bg-gray-50 border-t border-gray-300">
+                <p className="text-sm font-medium text-gray-700 mb-2">Click on the areas that match the criteria:</p>
+                <p className="text-sm text-gray-600">{question.criteria || "Select all appropriate areas"}</p>
+              </div>
+            </div>
           </div>
         )}
 
@@ -552,61 +524,64 @@ export function QuestionRenderer({
                           </div>
                         </div>
                         <div className="flex-1">
-                          <p className="text-[15px]">{item.text}</p>
+                          <p className="text-gray-800">{item.text}</p>
                         </div>
-                        <div className="flex-shrink-0 flex space-x-1">
-                          {/* Move up button - disabled for first item */}
-                          <button
-                            className={`p-1 rounded ${displayIndex === 0 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
-                            disabled={displayIndex === 0 || showRationale}
-                            onClick={() => {
-                              if (displayIndex > 0 && !showRationale) {
-                                // Get current selected answers (item IDs in order)
-                                const currentOrder = [...selectedAnswers];
-                                // Swap this item with the one above it
-                                const temp = currentOrder[displayIndex];
-                                currentOrder[displayIndex] = currentOrder[displayIndex - 1];
-                                currentOrder[displayIndex - 1] = temp;
-                                // Update state and notify parent
-                                setSelectedAnswers(currentOrder);
-                                onAnswer(currentOrder);
-                              }
-                            }}
-                            aria-label="Move item up"
-                          >
-                            <ChevronUp className="h-4 w-4" />
-                          </button>
-                          {/* Move down button - disabled for last item */}
-                          <button
-                            className={`p-1 rounded ${displayIndex === question.items.length - 1 ? 'text-gray-300' : 'text-blue-500 hover:bg-blue-50'}`}
-                            disabled={displayIndex === question.items.length - 1 || showRationale}
-                            onClick={() => {
-                              if (displayIndex < question.items.length - 1 && !showRationale) {
-                                // Get current selected answers (item IDs in order)
-                                const currentOrder = [...selectedAnswers];
-                                // Swap this item with the one below it
-                                const temp = currentOrder[displayIndex];
-                                currentOrder[displayIndex] = currentOrder[displayIndex + 1];
-                                currentOrder[displayIndex + 1] = temp;
-                                // Update state and notify parent
-                                setSelectedAnswers(currentOrder);
-                                onAnswer(currentOrder);
-                              }
-                            }}
-                            aria-label="Move item down"
-                          >
-                            <ChevronDown className="h-4 w-4" />
-                          </button>
-                        </div>
+                        {!showRationale && (
+                          <div className="flex-shrink-0 ml-3 space-x-2">
+                            <button 
+                              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50"
+                              onClick={() => {
+                                // Move item up in the order (reduce index)
+                                if (currentPosition > 0) {
+                                  const newOrder = [...selectedAnswers];
+                                  const temp = newOrder[currentPosition];
+                                  newOrder[currentPosition] = newOrder[currentPosition - 1];
+                                  newOrder[currentPosition - 1] = temp;
+                                  setSelectedAnswers(newOrder);
+                                }
+                              }}
+                              disabled={currentPosition <= 0}
+                            >
+                              <ChevronUp className="h-5 w-5" />
+                            </button>
+                            <button 
+                              className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-50"
+                              onClick={() => {
+                                // Move item down in the order (increase index)
+                                if (currentPosition < selectedAnswers.length - 1) {
+                                  const newOrder = [...selectedAnswers];
+                                  const temp = newOrder[currentPosition];
+                                  newOrder[currentPosition] = newOrder[currentPosition + 1];
+                                  newOrder[currentPosition + 1] = temp;
+                                  setSelectedAnswers(newOrder);
+                                }
+                              }}
+                              disabled={currentPosition >= selectedAnswers.length - 1}
+                            >
+                              <ChevronDown className="h-5 w-5" />
+                            </button>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
                 </div>
-                <div className="mt-4 text-center text-sm text-gray-600 bg-blue-50 p-3 rounded-md">
-                  <p className="font-medium">Instructions:</p>
-                  <p>Use the up/down arrows to reorder the items. The current order will be submitted as your answer.</p>
-                  <p className="text-xs mt-1 text-gray-500">(Full drag and drop functionality coming soon)</p>
-                </div>
+                
+                {showRationale && 'correctOrder' in question && (
+                  <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                    <h4 className="font-medium text-[#13294B] mb-2">Correct Order:</h4>
+                    <ol className="list-decimal pl-5 space-y-2">
+                      {Array.isArray(question.correctOrder) && question.correctOrder.map((itemId, index) => {
+                        const item = question.items.find(i => i.id === itemId);
+                        return (
+                          <li key={itemId} className="text-gray-800">
+                            {item?.text || `Item ${itemId}`}
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </div>
+                )}
               </>
             )}
           </div>
@@ -615,282 +590,279 @@ export function QuestionRenderer({
         {/* Chart/Exhibit Question */}
         {isChartExhibit && hasChartExhibit(question) && (
           <div className="chart-exhibit-container">
-            <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-md">
-              <h4 className="font-medium text-gray-700 mb-3">{question.exhibitType.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h4>
-
-              {/* Lab Results Table */}
-              {question.exhibitType === 'lab-results' && (
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-100">
-                      <tr>
-                        <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
-                        <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Result</th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {Object.entries(question.exhibitData).map(([category, tests]) => (
-                        <React.Fragment key={category}>
-                          <tr className="bg-gray-50">
-                            <td colSpan={2} className="px-4 py-2 text-sm font-medium text-gray-700">{category}</td>
+            <div className="mb-6 border border-gray-300 rounded-md overflow-hidden">
+              {/* Chart or Exhibit Container */}
+              <div className="p-4 bg-white">
+                {question.exhibitType === 'chart' && (
+                  <div className="chart-container">
+                    {/* If chart data is provided, render the appropriate chart */}
+                    {'chartUrl' in question && (
+                      <img 
+                        src={question.chartUrl} 
+                        alt="Chart data" 
+                        className="max-w-full h-auto mx-auto"
+                      />
+                    )}
+                  </div>
+                )}
+                
+                {question.exhibitType === 'text' && (
+                  <div className="text-exhibit p-4 bg-gray-50 rounded-md">
+                    {'exhibitContent' in question && (
+                      <p className="whitespace-pre-line text-gray-800">{question.exhibitContent}</p>
+                    )}
+                  </div>
+                )}
+                
+                {question.exhibitType === 'lab' && (
+                  <div className="lab-results">
+                    {'labResults' in question && Array.isArray(question.labResults) && (
+                      <table className="min-w-full divide-y divide-gray-300">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test</th>
+                            <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Result</th>
+                            <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reference Range</th>
                           </tr>
-                          {Object.entries(tests as Record<string, string>).map(([test, result]) => (
-                            <tr key={`${category}-${test}`}>
-                              <td className="px-4 py-2 text-sm text-gray-700">{test}</td>
-                              <td className="px-4 py-2 text-sm text-gray-700">{result}</td>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          {question.labResults.map((result, index) => (
+                            <tr key={index}>
+                              <td className="py-2 px-4 text-sm text-gray-900">{result.name}</td>
+                              <td className="py-2 px-4 text-sm text-gray-900">
+                                <span 
+                                  className={
+                                    result.flagged ? 'font-bold text-red-600' : 'text-gray-900'
+                                  }
+                                >
+                                  {result.value}
+                                </span>
+                              </td>
+                              <td className="py-2 px-4 text-sm text-gray-600">{result.range}</td>
                             </tr>
                           ))}
-                        </React.Fragment>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-
-              {/* Other exhibit types would be handled here */}
-            </div>
-
-            {/* Sub-questions for this chart/exhibit */}
-            <div className="space-y-6">
-              {question.questions.map((subQuestion, idx) => (
-                <div key={subQuestion.id} className="p-4 border border-gray-200 rounded-md">
-                  <p className="font-medium text-gray-800 mb-3">{idx + 1}. {subQuestion.text}</p>
-
-                  <div className="space-y-2">
-                    {subQuestion.choices.map((choice, choiceIdx) => (
-                      <div 
-                        key={choice.id}
-                        className="flex items-start p-3 border border-gray-200 rounded-md hover:border-blue-300 cursor-pointer"
-                        onClick={() => {
-                          if (!showRationale) {
-                            // For simplicity, we're just using the first subquestion
-                            // In a real app with multiple sub-questions, you'd need to track state separately
-                            setSelectedAnswers([choice.id]);
-                            // Notify parent component of the chosen answer
-                            onAnswer([choice.id]);
+                        </tbody>
+                      </table>
+                    )}
+                  </div>
+                )}
+              </div>
+              
+              {/* Sub-questions related to the chart/exhibit */}
+              {'questions' in question && Array.isArray(question.questions) && question.questions.length > 0 && (
+                <div className="border-t border-gray-300">
+                  <div className="p-4 bg-gray-50">
+                    <h4 className="font-medium text-gray-900 mb-3">{question.questions[0].text}</h4>
+                    
+                    {/* Sub-question choices */}
+                    {'choices' in question.questions[0] && (
+                      <div className="space-y-3">
+                        {question.questions[0].choices.map((choice, index) => {
+                          const isSelected = selectedAnswers.includes(choice.id);
+                          const isCorrectChoice = showRationale && 
+                            'correctAnswer' in question.questions[0] && 
+                            (
+                              Array.isArray(question.questions[0].correctAnswer)
+                                ? question.questions[0].correctAnswer.includes(choice.id)
+                                : question.questions[0].correctAnswer === choice.id
+                            );
+                          
+                          let choiceStyle;
+                          if (showRationale) {
+                            if (isCorrectChoice) {
+                              choiceStyle = "border-2 border-green-200 bg-green-50";
+                            } else if (isSelected) {
+                              choiceStyle = "border-2 border-red-200 bg-red-50";
+                            } else {
+                              choiceStyle = "border border-gray-300";
+                            }
+                          } else {
+                            choiceStyle = isSelected
+                              ? "border-2 border-[#4B9CD3] bg-blue-50"
+                              : "border border-gray-300 hover:border-[#4B9CD3] hover:bg-blue-50";
                           }
-                        }}
-                      >
-                        <div className="flex-shrink-0 mr-3">
-                          <div className="h-6 w-6 rounded-full bg-gray-100 flex items-center justify-center font-medium text-gray-700 text-sm">
-                            {letters[choiceIdx]}
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-sm">{choice.text}</p>
-                        </div>
+                          
+                          return (
+                            <div 
+                              key={choice.id}
+                              className={`p-3 ${choiceStyle} rounded-md flex items-start ${showRationale ? '' : 'cursor-pointer'}`}
+                              onClick={() => !showRationale && handleAnswerSelect(choice.id)}
+                            >
+                              <div className="flex-shrink-0 mr-3">
+                                <div className={`h-6 w-6 rounded flex items-center justify-center font-medium text-sm
+                                  ${isSelected ? 'bg-[#4B9CD3] text-white' : 'bg-gray-100 text-gray-700'}`}
+                                >
+                                  {letters[index]}
+                                </div>
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-gray-800">{choice.text}</p>
+                              </div>
+                              {showRationale && (
+                                <div className="flex-shrink-0 ml-2">
+                                  {isCorrectChoice ? (
+                                    <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                  ) : isSelected ? (
+                                    <XCircle className="h-5 w-5 text-red-600" />
+                                  ) : null}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
-                    ))}
+                    )}
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         )}
-
-        {/* Submit Button for applicable questions - hidden in test view */}
-        {!showRationale && (isMultiChoice || isSelectAll || isFillInBlank || isHotspot || isChartExhibit) && !hideSubmitButton && (
+        
+        {/* Submit button - only show if not already showing rationale and answers exist */}
+        {!hideSubmitButton && !showRationale && (
           <div className="mt-6">
-            <button
+            <button 
               onClick={handleSubmitAnswer}
-              className="px-6 py-3 bg-[#13294B] text-white rounded-md hover:bg-[#0A1E3A] transition-colors flex items-center"
               disabled={
-                (isMultiChoice && selectedAnswers.length === 0) || 
-                (isSelectAll && selectedAnswers.length === 0) || 
+                (isMultiChoice && selectedAnswers.length === 0) ||
+                (isSelectAll && selectedAnswers.length === 0) ||
                 (isFillInBlank && textAnswer.trim() === '')
               }
+              className="bg-[#13294B] text-white px-4 py-2 rounded-md hover:bg-[#0d1f3a] focus:outline-none focus:ring-2 focus:ring-[#4B9CD3] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit Answer <ArrowRight className="ml-2 h-4 w-4" />
+              Submit Answer
             </button>
           </div>
         )}
       </div>
-
-      {/* Rationale Section */}
-      {showRationale && question.rationale && (
-        <div className="mt-6">
+      
+      {/* Rationale area - only show after answering */}
+      {showRationale && (
+        <div className="rationale-area mt-8">
           <div className={`p-5 rounded-lg border-2 ${isCorrect ? 'border-green-200 bg-green-50' : 'border-red-200 bg-red-50'}`}>
-            <div className="flex items-center font-medium text-lg mb-3">
+            <div className="flex items-center mb-4">
               {isCorrect ? (
-                <CheckCircle2 className="mr-2 text-green-600 h-6 w-6" />
+                <CheckCircle2 className="h-6 w-6 text-green-600 mr-2" />
               ) : (
-                <XCircle className="mr-2 text-red-600 h-6 w-6" />
+                <XCircle className="h-6 w-6 text-red-600 mr-2" />
               )}
               <h4 className={isCorrect ? 'text-green-800' : 'text-red-800'}>
                 {isCorrect ? 'Correct Answer' : 'Incorrect Answer'}
               </h4>
             </div>
-
-            <div className="mb-4 pb-4 border-b border-dashed border-gray-300">
-              <span className="font-medium text-gray-700">Expected Answer: </span>
-              <div className="bg-blue-100 text-blue-800 px-3 py-2 rounded text-sm font-medium mt-2">
-                {/* For multiple choice questions, show the letter and full text */}
-                {isMultiChoice && hasMCChoices(question) && (
-                  <>
-                    {(() => {
-                      // Normalize the correct answer to handle quoted strings
-                      const normalizedCorrectAnswer = 
-                        typeof question.correctAnswer === 'string' 
-                          ? normalizeAnswerString(question.correctAnswer) 
-                          : question.correctAnswer;
-                      
-                      console.log('Rendering MC expected answer, normalized:', normalizedCorrectAnswer);
-                      
-                      // Find the matching choice
-                      return question.choices.map((choice, index) => {
-                        // Check if this choice matches the normalized correct answer
-                        if (choice.id === normalizedCorrectAnswer) {
-                          return (
-                            <div key={choice.id} className="flex items-start">
-                              <span className="font-bold mr-2">{letters[index]}:</span>
-                              <span>{choice.text}</span>
-                            </div>
-                          );
-                        }
-                        return null;
-                      });
-                    })()}
-                  </>
-                )}
-                
-                {/* For select all that apply questions, show all correct options with letters */}
-                {isSelectAll && hasSATAChoices(question) && (
-                  <div className="space-y-1">
-                    {(() => {
-                      // Normalize the correct answers array
-                      const normalizedCorrectAnswers = 
-                        Array.isArray(question.correctAnswer) 
-                          ? question.correctAnswer.map(
-                              ans => typeof ans === 'string' ? normalizeAnswerString(ans) : ans
-                            )
-                          : question.correctAnswer;
-                      
-                      console.log('Rendering SATA expected answers, normalized:', normalizedCorrectAnswers);
-                      
-                      return question.choices.map((choice, index) => {
-                        // Check if this choice is in the normalized correct answers
-                        if (Array.isArray(normalizedCorrectAnswers) && 
-                            normalizedCorrectAnswers.includes(choice.id)) {
-                          return (
-                            <div key={choice.id} className="flex items-start">
-                              <span className="font-bold mr-2">{letters[index]}:</span>
-                              <span>{choice.text}</span>
-                            </div>
-                          );
-                        }
-                        return null;
-                      });
-                    })()}
-                  </div>
-                )}
-                
-                {/* For fill in the blank, just show the text answer */}
-                {isFillInBlank && hasFillInBlank(question) && (
-                  <div>
-                    {(() => {
-                      // Normalize fill-in-blank answers
-                      if (Array.isArray(question.correctAnswer)) {
-                        // Handle multiple possible correct answers
-                        return question.correctAnswer
-                          .map(ans => typeof ans === 'string' ? normalizeAnswerString(ans) : ans)
-                          .join(" OR ");
-                      } else if (typeof question.correctAnswer === 'string') {
-                        return normalizeAnswerString(question.correctAnswer);
-                      } else {
-                        return question.correctAnswer;
-                      }
-                    })()}
-                  </div>
-                )}
-                
-                {/* For other question types, fall back to the original display */}
-                {!isMultiChoice && !isSelectAll && !isFillInBlank && (
-                  <div>
-                    {Array.isArray(getCorrectAnswer(question)) ? (
-                      (getCorrectAnswer(question) as string[]).join(', ')
-                    ) : (
-                      getCorrectAnswer(question)
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="rationale">
-              <h5 className="font-medium mb-2 flex items-center text-gray-800">
-                <Lightbulb className="h-5 w-5 text-amber-500 mr-2" />
-                Rationale:
-              </h5>
-              <div className="text-gray-700 leading-relaxed bg-white rounded-md p-4 border border-gray-200">
-                {question.rationale}
-              </div>
-
-              {/* NCLEX Test-Taking Strategy */}
-              <div className="mt-4 bg-blue-50 border border-blue-200 rounded-md p-4">
-                <h5 className="font-medium mb-2 text-blue-800">Test-Taking Strategy:</h5>
-                <p className="text-sm text-blue-700">
-                  Use the process of elimination to rule out incorrect options. Remember to prioritize nursing actions according to Maslow's hierarchy of needs, with physiological needs taking precedence. Also, apply the nursing process (assess, diagnose, plan, implement, evaluate) to determine the appropriate nursing action.
-                </p>
-              </div>
-
-              {/* Related Topics */}
-              <div className="mt-4">
-                <h5 className="font-medium mb-2 text-gray-700">Related Topics:</h5>
-                <div className="flex flex-wrap gap-2">
-                  {["Patient Safety", "Nursing Process", "Prioritization", "Communication"].map((topic, idx) => (
-                    <span key={idx} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
-                      {topic}
-                    </span>
-                  ))}
+            
+            <div className="rationale-content">
+              <h5 className="font-medium mb-2">Rationale:</h5>
+              <p className="text-gray-800 mb-3 whitespace-pre-line">{question.rationale}</p>
+              
+              <div className="expected-answer mb-4">
+                <h5 className="font-medium mb-1">Expected Answer:</h5>
+                <div className="text-gray-800">
+                  {Array.isArray(getCorrectAnswer(question)) ? (
+                    getCorrectAnswer(question) as string[]
+                  ) : (
+                    getCorrectAnswer(question)
+                  )}
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* References Popup */}
-      {showReferencePopup && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowReferencePopup(false)}>
-          <div className="bg-white rounded-lg max-w-md w-full p-6" onClick={e => e.stopPropagation()}>
-            <h3 className="text-lg font-bold mb-3 text-[#13294B]">References</h3>
-            <ul className="space-y-2 text-sm text-gray-700">
-              {references.map((ref, idx) => (
-                <li key={idx} className="flex items-start">
-                  <MoveRight className="h-4 w-4 mr-2 mt-0.5 text-gray-400" />
-                  {ref}
-                </li>
-              ))}
-            </ul>
-            <button 
-              className="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md w-full hover:bg-gray-200 transition-colors"
-              onClick={() => setShowReferencePopup(false)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Keywords Popup */}
-      {showKeywordList && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowKeywordList(false)}>
-          <div className="bg-white rounded-lg max-w-md w-full p-6" onClick={e => e.stopPropagation()}>
-            <h3 className="text-lg font-bold mb-3 text-[#13294B]">Key Terms</h3>
-            <div className="space-y-3">
-              {keywords.map((keyword, idx) => (
-                <div key={idx} className="border-b border-gray-100 pb-2 last:border-0">
-                  <div className="font-medium text-blue-700">{keyword.word}</div>
-                  <div className="text-sm text-gray-600">{keyword.definition}</div>
-                </div>
-              ))}
+            
+            {/* Optional learning tools */}
+            <div className="learning-tools border-t border-gray-300 pt-3 mt-3">
+              <div className="flex flex-wrap gap-2">
+                <button 
+                  onClick={() => setShowKeyPoints(!showKeyPoints)}
+                  className="flex items-center text-sm bg-white px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50"
+                >
+                  <Lightbulb className="h-4 w-4 mr-1 text-amber-500" />
+                  Key Points
+                </button>
+                
+                <button 
+                  onClick={() => setShowReferencePopup(!showReferencePopup)}
+                  className="flex items-center text-sm bg-white px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50"
+                >
+                  <Bookmark className="h-4 w-4 mr-1 text-blue-500" />
+                  References
+                </button>
+                
+                <button 
+                  onClick={() => setShowKeywordList(!showKeywordList)}
+                  className="flex items-center text-sm bg-white px-3 py-1 rounded-md border border-gray-300 hover:bg-gray-50"
+                >
+                  <Highlighter className="h-4 w-4 mr-1 text-purple-500" />
+                  Key Terms
+                </button>
+              </div>
+              
+              {/* Key Points Panel */}
+              <AnimatePresence>
+                {showKeyPoints && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-3 overflow-hidden"
+                  >
+                    <div className="p-3 bg-amber-50 border border-amber-200 rounded-md">
+                      <h5 className="font-medium text-amber-800 mb-2">Key Learning Points:</h5>
+                      <ul className="list-disc pl-5 space-y-1 text-amber-900">
+                        <li>Oxygen saturation below 90% requires immediate intervention.</li>
+                        <li>Hypoxemia can rapidly progress to respiratory failure.</li>
+                        <li>Prioritize assessment findings based on ABC (Airway, Breathing, Circulation).</li>
+                        <li>Normal oxygen saturation is 95-100% in most adults.</li>
+                      </ul>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              
+              {/* References Popup */}
+              <AnimatePresence>
+                {showReferencePopup && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-3 overflow-hidden"
+                  >
+                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
+                      <h5 className="font-medium text-blue-800 mb-2">References:</h5>
+                      <ul className="space-y-1 text-blue-900 text-sm">
+                        {references.map((ref, index) => (
+                          <li key={index}>{ref}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              
+              {/* Key Terms Glossary */}
+              <AnimatePresence>
+                {showKeywordList && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-3 overflow-hidden"
+                  >
+                    <div className="p-3 bg-purple-50 border border-purple-200 rounded-md">
+                      <h5 className="font-medium text-purple-800 mb-2">Key Terms:</h5>
+                      <dl className="space-y-2">
+                        {keywords.map((term, index) => (
+                          <div key={index}>
+                            <dt className="font-medium text-purple-900">{term.word}</dt>
+                            <dd className="text-purple-800 text-sm ml-4">{term.definition}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-            <button 
-              className="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md w-full hover:bg-gray-200 transition-colors"
-              onClick={() => setShowKeywordList(false)}
-            >
-              Close
-            </button>
           </div>
         </div>
       )}
