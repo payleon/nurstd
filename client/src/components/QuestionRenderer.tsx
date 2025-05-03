@@ -773,9 +773,19 @@ export function QuestionRenderer({
                 {/* For fill in the blank, just show the text answer */}
                 {isFillInBlank && hasFillInBlank(question) && (
                   <div>
-                    {Array.isArray(question.correctAnswer) 
-                      ? question.correctAnswer.join(" OR ") 
-                      : question.correctAnswer}
+                    {(() => {
+                      // Normalize fill-in-blank answers
+                      if (Array.isArray(question.correctAnswer)) {
+                        // Handle multiple possible correct answers
+                        return question.correctAnswer
+                          .map(ans => typeof ans === 'string' ? normalizeAnswerString(ans) : ans)
+                          .join(" OR ");
+                      } else if (typeof question.correctAnswer === 'string') {
+                        return normalizeAnswerString(question.correctAnswer);
+                      } else {
+                        return question.correctAnswer;
+                      }
+                    })()}
                   </div>
                 )}
                 

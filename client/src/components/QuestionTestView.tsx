@@ -747,21 +747,68 @@ export function QuestionTestView({
               <div className="px-6 pb-4 border-b border-gray-200">
                 <button
                   onClick={() => {
-                    // Only allow submission if an answer has been selected
-                    // Find any selected choice on the current question
-                    const answer = document.querySelector('.multiple-choice-container .bg-blue-50');
-                    if (answer) {
-                      const choiceId = answer.getAttribute('data-choice-id');
-                      if (choiceId) {
-                        console.log('Manual submit with choice:', choiceId);
-                        // Add delay to ensure DOM updates have been processed
-                        setTimeout(() => {
-                          handleAnswerSubmit(choiceId);
-                        }, 50);
+                    if (!currentQuestion) return;
+                    
+                    // This will store the answer we need to submit
+                    let answer: string | string[] | null = null;
+                    
+                    // Handle different question types
+                    if (currentQuestion.type === 'mc') {
+                      // Find any selected choice on the current question
+                      const selectedElement = document.querySelector('.multiple-choice-container .bg-blue-50');
+                      if (selectedElement) {
+                        const choiceId = selectedElement.getAttribute('data-choice-id');
+                        if (choiceId) {
+                          answer = choiceId;
+                          console.log('Submitting MC answer:', answer);
+                        }
                       }
+                    } else if (currentQuestion.type === 'sata') {
+                      // For select-all-that-apply, find all selected choices
+                      const selectedElements = document.querySelectorAll('.select-all-container .bg-blue-50');
+                      if (selectedElements.length > 0) {
+                        const choiceIds: string[] = [];
+                        selectedElements.forEach(element => {
+                          const choiceId = element.getAttribute('data-choice-id');
+                          if (choiceId) choiceIds.push(choiceId);
+                        });
+                        answer = choiceIds;
+                        console.log('Submitting SATA answer:', answer);
+                      }
+                    } else if (currentQuestion.type === 'fill_in_blank') {
+                      // For fill-in-blank, get text from the input
+                      const inputElement = document.querySelector('.fill-in-blank-container input') as HTMLInputElement;
+                      if (inputElement && inputElement.value.trim() !== '') {
+                        answer = inputElement.value.trim();
+                        console.log('Submitting fill-in-blank answer:', answer);
+                      }
+                    } else if (currentQuestion.type === 'ordered-response') {
+                      // For ordered response, get the current order
+                      // (this is handled directly by the component, so we don't need to do anything here)
+                      console.log('Ordered response answers are submitted automatically.');
+                      return;
+                    } else if (currentQuestion.type === 'hotspot') {
+                      // For hotspot, get selected areas
+                      const selectedAreas = document.querySelectorAll('.hotspot-container .hotspot-area.selected');
+                      if (selectedAreas.length > 0) {
+                        const areaIds: string[] = [];
+                        selectedAreas.forEach(area => {
+                          const areaId = area.getAttribute('data-area-id');
+                          if (areaId) areaIds.push(areaId);
+                        });
+                        answer = areaIds;
+                        console.log('Submitting hotspot answer:', answer);
+                      }
+                    }
+                    
+                    // If we have an answer, submit it
+                    if (answer !== null) {
+                      // Add delay to ensure DOM updates have been processed
+                      setTimeout(() => {
+                        handleAnswerSubmit(answer as string | string[]);
+                      }, 50);
                     } else {
-                      // Check for other question types...
-                      // For now, just show a toast message
+                      // No answer selected
                       console.log('No answer selected');
                       toast({
                         title: "No Answer Selected",
