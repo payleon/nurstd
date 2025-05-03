@@ -24,11 +24,7 @@ import {
   PenLine,
   Check,
   Trophy,
-  Lightbulb,
-  Seedling,
-  Leaf,
-  Medal,
-  Crown
+  Lightbulb
 } from "lucide-react";
 
 // Study session history type
@@ -660,8 +656,16 @@ export default function StudyTimer() {
                   
                   <div className="space-y-6">
                     {/* Break Suggestions Card */}
-                    <Card className="neuro-shadow border-2 border-[#13294B]">
-                      <CardHeader className="bg-[#13294B] text-white pb-3">
+                    <Card className={`neuro-shadow border-2 transition-all duration-500
+                      ${themeLevel === 'beginner' ? 'border-[#13294B]' : 
+                       themeLevel === 'intermediate' ? 'border-emerald-600' : 
+                       themeLevel === 'advanced' ? 'border-indigo-700' : 'border-amber-600'}`}
+                    >
+                      <CardHeader className={`text-white pb-3 transition-all duration-500
+                        ${themeLevel === 'beginner' ? 'bg-[#13294B]' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-600' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-700' : 'bg-gradient-to-r from-amber-600 to-orange-500'}`}
+                      >
                         <CardTitle className="text-lg flex items-center gap-2">
                           <Zap className="w-5 h-5" /> Break Suggestions
                         </CardTitle>
@@ -672,7 +676,11 @@ export default function StudyTimer() {
                             <h3 className="text-sm font-medium text-gray-600 mb-2">5-Minute Break Ideas:</h3>
                             <ul className="space-y-2">
                               {getBreakSuggestions(5).map((suggestion, idx) => (
-                                <li key={idx} className="flex items-start p-2 bg-blue-50 rounded-lg">
+                                <li key={idx} className={`flex items-start p-2 rounded-lg transition-colors duration-500
+                                  ${themeLevel === 'beginner' ? 'bg-blue-50' : 
+                                   themeLevel === 'intermediate' ? 'bg-emerald-50' : 
+                                   themeLevel === 'advanced' ? 'bg-indigo-50' : 'bg-amber-50'}`}
+                                >
                                   <span className="text-xl mr-2">{suggestion.icon}</span>
                                   <span className="text-sm">{suggestion.activity}</span>
                                 </li>
@@ -684,7 +692,11 @@ export default function StudyTimer() {
                             <h3 className="text-sm font-medium text-gray-600 mb-2">15-Minute Break Ideas:</h3>
                             <ul className="space-y-2">
                               {getBreakSuggestions(15).map((suggestion, idx) => (
-                                <li key={idx} className="flex items-start p-2 bg-green-50 rounded-lg">
+                                <li key={idx} className={`flex items-start p-2 rounded-lg transition-colors duration-500
+                                  ${themeLevel === 'beginner' ? 'bg-blue-50/70' : 
+                                   themeLevel === 'intermediate' ? 'bg-emerald-50/70' : 
+                                   themeLevel === 'advanced' ? 'bg-indigo-50/70' : 'bg-amber-50/70'}`}
+                                >
                                   <span className="text-xl mr-2">{suggestion.icon}</span>
                                   <span className="text-sm">{suggestion.activity}</span>
                                 </li>
@@ -696,10 +708,15 @@ export default function StudyTimer() {
                     </Card>
                     
                     {/* Study Techniques Card */}
-                    <Card className="neuro-shadow">
+                    <Card className="neuro-shadow border border-gray-200">
                       <CardHeader className="pb-3">
                         <CardTitle className="text-lg flex items-center gap-2">
-                          <BookOpen className="w-5 h-5 text-blue-600" /> Study Techniques
+                          <BookOpen className={`w-5 h-5 transition-colors duration-500
+                            ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                             themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                             themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`} 
+                          /> 
+                          Study Techniques
                         </CardTitle>
                         <CardDescription>
                           Research-backed methods for effective learning
@@ -707,20 +724,50 @@ export default function StudyTimer() {
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="space-y-3">
-                          <div className="bg-blue-50 rounded-lg p-3">
-                            <h3 className="font-medium text-blue-800 mb-1">Pomodoro Technique</h3>
+                          <div className={`rounded-lg p-3 transition-colors duration-500
+                            ${themeLevel === 'beginner' ? 'bg-blue-50' : 
+                             themeLevel === 'intermediate' ? 'bg-emerald-50' : 
+                             themeLevel === 'advanced' ? 'bg-indigo-50' : 'bg-amber-50'}`}
+                          >
+                            <h3 className={`font-medium mb-1 transition-colors duration-500
+                              ${themeLevel === 'beginner' ? 'text-blue-800' : 
+                               themeLevel === 'intermediate' ? 'text-emerald-800' : 
+                               themeLevel === 'advanced' ? 'text-indigo-800' : 'text-amber-800'}`}
+                            >
+                              Pomodoro Technique
+                            </h3>
                             <p className="text-sm text-gray-700">
                               Study for 25 minutes, then take a 5-minute break. After 4 sessions, take a longer 15-30 minute break.
                             </p>
                           </div>
-                          <div className="bg-green-50 rounded-lg p-3">
-                            <h3 className="font-medium text-green-800 mb-1">Active Recall</h3>
+                          <div className={`rounded-lg p-3 transition-colors duration-500
+                            ${themeLevel === 'beginner' ? 'bg-blue-50/70' : 
+                             themeLevel === 'intermediate' ? 'bg-emerald-50/70' : 
+                             themeLevel === 'advanced' ? 'bg-indigo-50/70' : 'bg-amber-50/70'}`}
+                          >
+                            <h3 className={`font-medium mb-1 transition-colors duration-500
+                              ${themeLevel === 'beginner' ? 'text-blue-800' : 
+                               themeLevel === 'intermediate' ? 'text-emerald-800' : 
+                               themeLevel === 'advanced' ? 'text-indigo-800' : 'text-amber-800'}`}
+                            >
+                              Active Recall
+                            </h3>
                             <p className="text-sm text-gray-700">
                               Test yourself on material instead of passively reading. Create practice questions to enhance retention.
                             </p>
                           </div>
-                          <div className="bg-purple-50 rounded-lg p-3">
-                            <h3 className="font-medium text-purple-800 mb-1">Spaced Repetition</h3>
+                          <div className={`rounded-lg p-3 transition-colors duration-500
+                            ${themeLevel === 'beginner' ? 'bg-blue-50/50' : 
+                             themeLevel === 'intermediate' ? 'bg-emerald-50/50' : 
+                             themeLevel === 'advanced' ? 'bg-indigo-50/50' : 'bg-amber-50/50'}`}
+                          >
+                            <h3 className={`font-medium mb-1 transition-colors duration-500
+                              ${themeLevel === 'beginner' ? 'text-blue-800' : 
+                               themeLevel === 'intermediate' ? 'text-emerald-800' : 
+                               themeLevel === 'advanced' ? 'text-indigo-800' : 'text-amber-800'}`}
+                            >
+                              Spaced Repetition
+                            </h3>
                             <p className="text-sm text-gray-700">
                               Review material at increasing intervals to strengthen memory retention over time.
                             </p>
@@ -737,7 +784,11 @@ export default function StudyTimer() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
                     <div>
                       <h2 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
-                        <PenLine className="mr-2 h-5 w-5 text-blue-600" />
+                        <PenLine className={`mr-2 h-5 w-5 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                           themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`} 
+                        />
                         Session Notes
                       </h2>
                       <p className="text-sm text-gray-600">
@@ -751,22 +802,45 @@ export default function StudyTimer() {
                     </div>
                   </div>
                   
-                  <div className="bg-blue-50/50 rounded-lg p-4 mb-5 border border-blue-100/80">
-                    <h3 className="text-sm font-medium text-blue-800 mb-2 flex items-center">
+                  <div className={`rounded-lg p-4 mb-5 border transition-colors duration-500
+                    ${themeLevel === 'beginner' 
+                      ? 'bg-blue-50/50 border-blue-100/80' 
+                      : themeLevel === 'intermediate'
+                        ? 'bg-emerald-50/50 border-emerald-100/80'
+                        : themeLevel === 'advanced'
+                          ? 'bg-indigo-50/50 border-indigo-100/80'
+                          : 'bg-amber-50/50 border-amber-100/80'
+                    }`}>
+                    <h3 className={`text-sm font-medium mb-2 flex items-center transition-colors duration-500
+                      ${themeLevel === 'beginner' ? 'text-blue-800' : 
+                       themeLevel === 'intermediate' ? 'text-emerald-800' : 
+                       themeLevel === 'advanced' ? 'text-indigo-800' : 'text-amber-800'}`}>
                       <FileText className="h-4 w-4 mr-2" />
                       Note-Taking Tips
                     </h3>
-                    <ul className="space-y-1.5 text-sm text-blue-700">
+                    <ul className={`space-y-1.5 text-sm transition-colors duration-500
+                      ${themeLevel === 'beginner' ? 'text-blue-700' : 
+                       themeLevel === 'intermediate' ? 'text-emerald-700' : 
+                       themeLevel === 'advanced' ? 'text-indigo-700' : 'text-amber-700'}`}>
                       <li className="flex items-start">
-                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <div className={`flex-shrink-0 w-5 h-5 mr-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-500' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-500' : 
+                           themeLevel === 'advanced' ? 'text-indigo-500' : 'text-amber-500'}`}>•</div>
                         <p>Summarize key concepts in your own words to improve retention</p>
                       </li>
                       <li className="flex items-start">
-                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <div className={`flex-shrink-0 w-5 h-5 mr-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-500' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-500' : 
+                           themeLevel === 'advanced' ? 'text-indigo-500' : 'text-amber-500'}`}>•</div>
                         <p>Use the Cornell note-taking method: questions on left, notes on right</p>
                       </li>
                       <li className="flex items-start">
-                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <div className={`flex-shrink-0 w-5 h-5 mr-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-500' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-500' : 
+                           themeLevel === 'advanced' ? 'text-indigo-500' : 'text-amber-500'}`}>•</div>
                         <p>Create mnemonics for complex information you need to memorize</p>
                       </li>
                     </ul>
