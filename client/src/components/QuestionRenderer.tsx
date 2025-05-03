@@ -145,7 +145,14 @@ export function QuestionRenderer({
       onAnswer(textAnswer);
     } else if (isHotspot) {
       onAnswer(selectedAnswers);
+    } else if (isOrderedResponse) {
+      // For ordered response, send the current order of items
+      onAnswer(selectedAnswers);
+    } else if (isChartExhibit) {
+      // For chart/exhibit questions, send the selected answer
+      onAnswer(selectedAnswers);
     } else {
+      // Default fallback
       onAnswer(selectedAnswers);
     }
   };
@@ -728,6 +735,7 @@ export function QuestionRenderer({
                 (isMultiChoice && selectedAnswers.length === 0) ||
                 (isSelectAll && selectedAnswers.length === 0) ||
                 (isFillInBlank && textAnswer.trim() === '')
+                // Note: We don't disable for ordered-response because it always has a valid order
               }
               className="bg-[#13294B] text-white px-4 py-2 rounded-md hover:bg-[#0d1f3a] focus:outline-none focus:ring-2 focus:ring-[#4B9CD3] disabled:opacity-50 disabled:cursor-not-allowed"
             >

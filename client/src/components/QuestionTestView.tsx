@@ -402,14 +402,17 @@ export function QuestionTestView({
   };
   
   const handleSubmitExam = () => {
-    // Only allow submission if all questions are answered
-    if (Object.keys(userAnswers).length !== totalQuestions) {
-      toast({
-        title: "Incomplete Exam",
-        description: "Please answer all questions before submitting the exam.",
-        variant: "destructive"
-      });
-      return;
+    // Get all answered questions
+    const answeredCount = Object.keys(userAnswers).length;
+    
+    // Show a warning if not all questions are answered, but still allow submission
+    if (answeredCount < totalQuestions) {
+      const unansweredCount = totalQuestions - answeredCount;
+      
+      // Show a confirmation dialog
+      if (!window.confirm(`You have ${unansweredCount} unanswered question(s). Are you sure you want to submit the exam?`)) {
+        return; // User canceled submission
+      }
     }
     
     // Show loading animation
