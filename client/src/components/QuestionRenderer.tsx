@@ -175,19 +175,48 @@ export function QuestionRenderer({
     return q.type === "chart-exhibit" && 'exhibitType' in q;
   };
 
+  // Normalize answer strings by removing quotes if present
+  const normalizeAnswerString = (value: string): string => {
+    // If the string has surrounding quotes (like "A"), remove them
+    if (value.startsWith('"') && value.endsWith('"')) {
+      return value.substring(1, value.length - 1);
+    }
+    return value;
+  };
+
+  // Get the correct answer with proper normalization
   const getCorrectAnswer = (q: Question): string | string[] => {
     if (q.type === "mc" && 'correctAnswer' in q) {
-      return q.correctAnswer;
+      // Normalize MC answers to remove any quotes
+      return typeof q.correctAnswer === 'string' 
+        ? normalizeAnswerString(q.correctAnswer)
+        : q.correctAnswer;
     } else if (q.type === "sata" && 'correctAnswer' in q) {
-      return q.correctAnswer;
+      // Normalize each answer in the array
+      return Array.isArray(q.correctAnswer) 
+        ? q.correctAnswer.map(ans => typeof ans === 'string' ? normalizeAnswerString(ans) : ans)
+        : q.correctAnswer;
     } else if (q.type === "fill_in_blank" && 'correctAnswer' in q) {
-      return q.correctAnswer;
+      // Normalize fill-in-blank answers
+      return typeof q.correctAnswer === 'string' 
+        ? normalizeAnswerString(q.correctAnswer)
+        : q.correctAnswer;
     } else if (q.type === "hotspot" && 'correctAreas' in q) {
       return q.correctAreas.map(area => area.id);
     } else if (q.type === "ordered-response" && 'correctOrder' in q) {
-      return q.correctOrder;
+      // Normalize ordered response answers
+      return Array.isArray(q.correctOrder)
+        ? q.correctOrder.map(item => typeof item === 'string' ? normalizeAnswerString(item) : item)
+        : q.correctOrder;
     } else if (q.type === "chart-exhibit" && 'questions' in q && q.questions.length > 0) {
-      return q.questions[0].correctAnswer;
+      const subAnswer = q.questions[0].correctAnswer;
+      // Normalize chart/exhibit sub-question answers
+      if (typeof subAnswer === 'string') {
+        return normalizeAnswerString(subAnswer);
+      } else if (Array.isArray(subAnswer)) {
+        return subAnswer.map(ans => typeof ans === 'string' ? normalizeAnswerString(ans) : ans);
+      }
+      return subAnswer;
     }
     return "";
   };
@@ -684,34 +713,60 @@ export function QuestionRenderer({
                 {/* For multiple choice questions, show the letter and full text */}
                 {isMultiChoice && hasMCChoices(question) && (
                   <>
-                    {question.choices.map((choice, index) => {
-                      if (choice.id === question.correctAnswer) {
-                        return (
-                          <div key={choice.id} className="flex items-start">
-                            <span className="font-bold mr-2">{letters[index]}:</span>
-                            <span>{choice.text}</span>
-                          </div>
-                        );
-                      }
-                      return null;
-                    })}
+                    {(() => {
+                      // Normalize the correct answer to handle quoted strings
+                      const normalizedCorrectAnswer = 
+                        typeof question.correctAnswer === 'string' 
+                          ? normalizeAnswerString(question.correctAnswer) 
+                          : question.correctAnswer;
+                      
+                      console.log('Rendering MC expected answer, normalized:', normalizedCorrectAnswer);
+                      
+                      // Find the matching choice
+                      return question.choices.map((choice, index) => {
+                        // Check if this choice matches the normalized correct answer
+                        if (choice.id === normalizedCorrectAnswer) {
+                          return (
+                            <div key={choice.id} className="flex items-start">
+                              <span className="font-bold mr-2">{letters[index]}:</span>
+                              <span>{choice.text}</span>
+                            </div>
+                          );
+                        }
+                        return null;
+                      });
+                    })()}
                   </>
                 )}
                 
                 {/* For select all that apply questions, show all correct options with letters */}
                 {isSelectAll && hasSATAChoices(question) && (
                   <div className="space-y-1">
-                    {question.choices.map((choice, index) => {
-                      if (question.correctAnswer.includes(choice.id)) {
-                        return (
-                          <div key={choice.id} className="flex items-start">
-                            <span className="font-bold mr-2">{letters[index]}:</span>
-                            <span>{choice.text}</span>
-                          </div>
-                        );
-                      }
-                      return null;
-                    })}
+                    {(() => {
+                      // Normalize the correct answers array
+                      const normalizedCorrectAnswers = 
+                        Array.isArray(question.correctAnswer) 
+                          ? question.correctAnswer.map(
+                              ans => typeof ans === 'string' ? normalizeAnswerString(ans) : ans
+                            )
+                          : question.correctAnswer;
+                      
+                      console.log('Rendering SATA expected answers, normalized:', normalizedCorrectAnswers);
+                      
+                      return question.choices.map((choice, index) => {
+                        // Check if this choice is in the normalized correct answers
+                        if (Array.isArray(normalizedCorrectAnswers) && 
+                            normalizedCorrectAnswers.includes(choice.id)) {
+                          return (
+                            <div key={choice.id} className="flex items-start">
+                              <span className="font-bold mr-2">{letters[index]}:</span>
+                              <span>{choice.text}</span>
+                            </div>
+                          );
+                        }
+                        return null;
+                      });
+                    })()}
                   </div>
                 )}
                 

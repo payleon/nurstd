@@ -137,27 +137,38 @@ export function QuestionTestView({
     }
   };
 
+  // Normalize a single answer or an array of answers
+  const normalizeAnswer = (answer: string | string[]): string | string[] => {
+    if (Array.isArray(answer)) {
+      return answer.map(a => typeof a === 'string' ? normalizeAnswerString(a) : a);
+    }
+    return typeof answer === 'string' ? normalizeAnswerString(answer) : answer;
+  };
+
   const handleAnswerSubmit = (answer: string | string[]) => {
     if (!currentQuestion) return;
     
     const questionId = currentQuestion.id;
-    console.log(`handleAnswerSubmit for question ${questionId} with answer:`, answer);
     
-    // Store the answer using functional update pattern
+    // Normalize the answer before storing it
+    const normalizedAnswer = normalizeAnswer(answer);
+    console.log(`handleAnswerSubmit for question ${questionId} with answer:`, answer);
+    console.log(`Normalized answer:`, normalizedAnswer);
+    
+    // Store the normalized answer using functional update pattern
     setUserAnswers(prevAnswers => {
       const newAnswers = {
         ...prevAnswers,
-        [questionId]: answer
+        [questionId]: normalizedAnswer
       };
       console.log('Updated userAnswers:', newAnswers);
       return newAnswers;
     });
     
-    // Check if the answer is correct
-    checkAnswer(questionId, answer);
+    // Check if the answer is correct with normalized answer
+    checkAnswer(questionId, normalizedAnswer);
     
     // Force show rationale to true for this question
-    // The key issue was likely here - we need to make sure rationale is shown
     console.log(`Setting showRationale[${questionId}] = true`);
     setShowRationale(prevState => {
       const newState = {
