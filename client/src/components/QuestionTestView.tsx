@@ -8,10 +8,11 @@ import {
   ChevronRight, Check, Award, BookOpen, Lightbulb, Bell, AlertTriangle,
   User, LogOut, Monitor, Maximize, Minimize, Meh, Smile, Frown, Clipboard,
   CheckSquare, PauseCircle, PlayCircle, RotateCcw, X, Menu, Calculator,
-  Bookmark, BookmarkCheck
+  Bookmark, BookmarkCheck, XCircle, CheckCircle2
 } from "lucide-react";
 import { QuestionRenderer } from "./QuestionRenderer";
 import { FlashcardReview } from "./FlashcardReview";
+import { ExamReviewScreen } from "./ExamReviewScreen";
 import { useBadges } from "@/contexts/BadgeContext";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
