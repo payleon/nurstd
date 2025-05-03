@@ -428,7 +428,7 @@ export function ExamReviewScreen({
                     <div key={category.category} className="bg-amber-50 border border-amber-100 rounded-lg p-3">
                       <div className="flex justify-between items-center mb-1">
                         <h5 className="font-medium text-amber-800">{category.category}</h5>
-                        <Badge variant="warning">{category.percentage}%</Badge>
+                        <Badge variant="default" className="bg-amber-600">{category.percentage}%</Badge>
                       </div>
                       <div className="flex items-center text-sm text-amber-700">
                         <span>{category.correct} correct</span>
@@ -498,10 +498,11 @@ export function ExamReviewScreen({
                           {category.category}
                         </h5>
                         <Badge 
-                          variant={
-                            category.percentage >= 80 ? "success" : 
-                            category.percentage >= 65 ? "default" : 
-                            "warning"
+                          variant="default"
+                          className={
+                            category.percentage >= 80 ? "bg-green-600" : 
+                            category.percentage >= 65 ? "bg-blue-600" : 
+                            "bg-amber-600"
                           }
                         >
                           {category.percentage}%
@@ -763,10 +764,11 @@ export function ExamReviewScreen({
                         </div>
                       </div>
                       <Badge
-                        variant={
-                          category.percentage >= 80 ? "success" : 
-                          category.percentage >= 65 ? "default" : 
-                          "warning"
+                        variant="default"
+                        className={
+                          category.percentage >= 80 ? "bg-green-600" : 
+                          category.percentage >= 65 ? "bg-blue-600" : 
+                          "bg-amber-600"
                         }
                       >
                         {category.percentage}%
@@ -1112,7 +1114,7 @@ export function ExamReviewScreen({
                         {isPassing ? "You're on track!" : "Keep practicing!"}
                       </span>
                     </div>
-                    <Badge variant={isPassing ? "success" : "warning"}>
+                    <Badge variant="default" className={isPassing ? "bg-green-600" : "bg-amber-600"}>
                       {percentage}% Score
                     </Badge>
                   </div>
