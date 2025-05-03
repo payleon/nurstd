@@ -1311,29 +1311,142 @@ export function StudyStrategyPlanner() {
             </Card>
           </div>
           
-          {/* Focus Areas with Progress Bars */}
+          {/* Focus Areas with Enhanced Visualization */}
           <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg">Recommended Focus Areas</CardTitle>
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-lg flex items-center">
+                  <LineChart className="mr-2 h-5 w-5 text-purple-500" />
+                  Recommended Focus Areas
+                </CardTitle>
+                <Tabs defaultValue="bars" className="w-[180px]">
+                  <TabsList className="grid w-full grid-cols-2">
+                    <TabsTrigger value="bars">Bars</TabsTrigger>
+                    <TabsTrigger value="pie">Pie Chart</TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
               <CardDescription>Allocate your study time according to these percentages</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {studyPlan.focusAreas.map((area, index) => (
-                  <div key={index}>
-                    <div className="flex justify-between mb-1">
-                      <span className="font-medium">{area.area}</span>
-                      <span>{area.percentage}%</span>
+              <TabsContent value="bars" className="mt-0">
+                <div className="space-y-4">
+                  {studyPlan.focusAreas.map((area, index) => (
+                    <div key={index}>
+                      <div className="flex justify-between mb-1">
+                        <span className="font-medium flex items-center">
+                          <span className={`inline-block h-3 w-3 rounded-full mr-2 bg-blue-${300 + (index * 100)}`}></span>
+                          {area.area}
+                        </span>
+                        <span className="text-sm">{area.percentage}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div 
+                          className={`bg-blue-${500 + (index * 100)} h-2.5 rounded-full`}
+                          style={{ width: `${area.percentage}%` }}
+                        ></div>
+                      </div>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5">
-                      <div 
-                        className="bg-blue-600 h-2.5 rounded-full" 
-                        style={{ width: `${area.percentage}%` }}
-                      ></div>
+                  ))}
+                  
+                  <div className="mt-4 border-t pt-4 border-gray-200">
+                    <h4 className="text-sm font-medium mb-2">Recommended Daily Time (Based on {preferences.timeCommitment} commitment)</h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
+                      {studyPlan.focusAreas.map((area, index) => {
+                        // Calculate minutes based on time commitment
+                        const minutesPerDay = preferences.timeCommitment === 'minimal' ? 
+                          Math.round((area.percentage / 100) * 90) : // 1.5 hours total
+                          preferences.timeCommitment === 'moderate' ?
+                            Math.round((area.percentage / 100) * 180) : // 3 hours total
+                            Math.round((area.percentage / 100) * 300); // 5 hours total for intensive
+                            
+                        return (
+                          <div key={`time-${index}`} className="flex justify-between">
+                            <span>{area.area}:</span>
+                            <span className="font-medium">
+                              {minutesPerDay} min/day
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="pie" className="mt-0">
+                <div className="p-4 flex justify-center">
+                  {/* Simple SVG Pie Chart */}
+                  <svg viewBox="0 0 100 100" width="200" height="200">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#e5e7eb" strokeWidth="10" />
+                    
+                    {/* Generate pie segments */}
+                    {(() => {
+                      let startAngle = 0;
+                      return studyPlan.focusAreas.map((area, index) => {
+                        const endAngle = startAngle + (area.percentage / 100 * 360);
+                        
+                        // Calculate SVG arc path
+                        const x1 = 50 + 45 * Math.cos((startAngle - 90) * Math.PI / 180);
+                        const y1 = 50 + 45 * Math.sin((startAngle - 90) * Math.PI / 180);
+                        const x2 = 50 + 45 * Math.cos((endAngle - 90) * Math.PI / 180);
+                        const y2 = 50 + 45 * Math.sin((endAngle - 90) * Math.PI / 180);
+                        
+                        // Determine if angle is large (more than 180 degrees)
+                        const largeArcFlag = (endAngle - startAngle <= 180) ? "0" : "1";
+                        
+                        // Create SVG arc
+                        const pathData = `M 50 50 L ${x1} ${y1} A 45 45 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
+                        
+                        const element = (
+                          <path 
+                            key={`pie-${index}`}
+                            d={pathData} 
+                            fill={`hsl(${210 + index * 30}, 70%, ${60 - index * 5}%)`}
+                          />
+                        );
+                        
+                        // Update start angle for next segment
+                        startAngle = endAngle;
+                        return element;
+                      });
+                    })()}
+                  </svg>
+                </div>
+                
+                <div className="grid grid-cols-2 mt-4 gap-2">
+                  {studyPlan.focusAreas.map((area, index) => (
+                    <div key={`legend-${index}`} className="flex items-center text-sm">
+                      <span 
+                        className="inline-block h-3 w-3 rounded-full mr-2" 
+                        style={{ backgroundColor: `hsl(${210 + index * 30}, 70%, ${60 - index * 5}%)` }}
+                      ></span>
+                      <span className="truncate">{area.area}</span>
+                      <span className="ml-1 text-gray-500">({area.percentage}%)</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="mt-4 border-t pt-4 border-gray-200">
+                  <p className="text-sm text-center mb-2">
+                    <span className="font-medium">Total weekly study time:</span>{' '}
+                    {preferences.timeCommitment === 'minimal' ? '10-12' : 
+                      preferences.timeCommitment === 'moderate' ? '20-25' : '35-40'} hours
+                  </p>
+                  <div className="flex justify-center">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        // This would open a modal with detailed breakdown in a real app
+                        alert('This would show a detailed weekly schedule with subject-specific time blocks');
+                      }}
+                    >
+                      View Detailed Breakdown
+                    </Button>
+                  </div>
+                </div>
+              </TabsContent>
             </CardContent>
           </Card>
           
@@ -1437,10 +1550,30 @@ export function StudyStrategyPlanner() {
           {/* Weekly Schedule */}
           <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center">
-                <Calendar className="mr-2 h-5 w-5 text-indigo-500" />
-                Weekly Schedule
-              </CardTitle>
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-lg flex items-center">
+                  <Calendar className="mr-2 h-5 w-5 text-indigo-500" />
+                  Weekly Schedule
+                </CardTitle>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setIsEditingWeekSchedule(!isEditingWeekSchedule)}
+                  className="text-sm"
+                >
+                  {isEditingWeekSchedule ? (
+                    <>
+                      <Save className="h-4 w-4 mr-1" />
+                      Save Changes
+                    </>
+                  ) : (
+                    <>
+                      <Edit2 className="h-4 w-4 mr-1" />
+                      Customize
+                    </>
+                  )}
+                </Button>
+              </div>
               <CardDescription>Your personalized weekly study plan</CardDescription>
             </CardHeader>
             <CardContent>
@@ -1451,39 +1584,144 @@ export function StudyStrategyPlanner() {
                       <th className="border px-2 py-2 bg-gray-100 text-left">Day</th>
                       <th className="border px-2 py-2 bg-gray-100 text-left">Focus Area</th>
                       <th className="border px-2 py-2 bg-gray-100 text-left">Tasks</th>
-                      <th className="border px-2 py-2 bg-gray-100 text-center">Status</th>
+                      <th className="border px-2 py-2 bg-gray-100 text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {Object.entries(studyPlan.weekSchedule).map(([day, data]) => (
-                      <tr key={day}>
+                      <tr key={day} className={activeEditingDay === day as DayOfWeek ? 'bg-blue-50' : ''}>
                         <td className="border px-2 py-2 font-medium capitalize">{day}</td>
-                        <td className="border px-2 py-2">{data.focus}</td>
                         <td className="border px-2 py-2">
-                          <ul className="list-disc pl-5 space-y-1">
-                            {data.tasks.map((task, i) => (
-                              <li key={i}>{task}</li>
-                            ))}
-                          </ul>
+                          {activeEditingDay === day as DayOfWeek ? (
+                            <input
+                              type="text"
+                              value={editedWeekSchedule[day as DayOfWeek]?.focus || data.focus}
+                              onChange={(e) => {
+                                const updatedSchedule = {
+                                  ...editedWeekSchedule,
+                                  [day as DayOfWeek]: {
+                                    ...editedWeekSchedule[day as DayOfWeek] || { tasks: data.tasks },
+                                    focus: e.target.value
+                                  }
+                                };
+                                setEditedWeekSchedule(updatedSchedule);
+                              }}
+                              className="w-full p-1 border rounded"
+                            />
+                          ) : (
+                            data.focus
+                          )}
+                        </td>
+                        <td className="border px-2 py-2">
+                          {activeEditingDay === day as DayOfWeek ? (
+                            <div className="space-y-2">
+                              {(editedWeekSchedule[day as DayOfWeek]?.tasks || data.tasks).map((task, i) => (
+                                <div key={i} className="flex items-center gap-1">
+                                  <input
+                                    type="text"
+                                    value={task}
+                                    onChange={(e) => {
+                                      const updatedTasks = [...(editedWeekSchedule[day as DayOfWeek]?.tasks || data.tasks)];
+                                      updatedTasks[i] = e.target.value;
+                                      
+                                      const updatedSchedule = {
+                                        ...editedWeekSchedule,
+                                        [day as DayOfWeek]: {
+                                          ...editedWeekSchedule[day as DayOfWeek] || { focus: data.focus },
+                                          tasks: updatedTasks
+                                        }
+                                      };
+                                      setEditedWeekSchedule(updatedSchedule);
+                                    }}
+                                    className="flex-1 p-1 border rounded text-sm"
+                                  />
+                                  <button
+                                    onClick={() => {
+                                      const updatedTasks = [...(editedWeekSchedule[day as DayOfWeek]?.tasks || data.tasks)];
+                                      updatedTasks.splice(i, 1);
+                                      
+                                      const updatedSchedule = {
+                                        ...editedWeekSchedule,
+                                        [day as DayOfWeek]: {
+                                          ...editedWeekSchedule[day as DayOfWeek] || { focus: data.focus },
+                                          tasks: updatedTasks
+                                        }
+                                      };
+                                      setEditedWeekSchedule(updatedSchedule);
+                                    }}
+                                    className="text-red-500 hover:text-red-700"
+                                  >
+                                    <X className="h-4 w-4" />
+                                  </button>
+                                </div>
+                              ))}
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => {
+                                  const updatedTasks = [...(editedWeekSchedule[day as DayOfWeek]?.tasks || data.tasks), "New task"];
+                                  
+                                  const updatedSchedule = {
+                                    ...editedWeekSchedule,
+                                    [day as DayOfWeek]: {
+                                      ...editedWeekSchedule[day as DayOfWeek] || { focus: data.focus },
+                                      tasks: updatedTasks
+                                    }
+                                  };
+                                  setEditedWeekSchedule(updatedSchedule);
+                                }}
+                                className="w-full text-xs"
+                              >
+                                <Plus className="h-3 w-3 mr-1" /> Add Task
+                              </Button>
+                            </div>
+                          ) : (
+                            <ul className="list-disc pl-5 space-y-1">
+                              {data.tasks.map((task, i) => (
+                                <li key={i} className={data.completed ? 'line-through text-gray-400' : ''}>
+                                  {task}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </td>
                         <td className="border px-2 py-2 text-center">
-                          <button
-                            onClick={() => {
-                              // Clone the schedule and update the completion status
-                              const newSchedule = { ...studyPlan.weekSchedule };
-                              newSchedule[day as DayOfWeek].completed = !data.completed;
-                              
-                              // We would normally update the state here
-                              // This is just a UI demonstration for now
-                            }}
-                            className={`w-6 h-6 rounded-full ${
-                              data.completed ? 'bg-green-500' : 'bg-gray-200'
-                            } flex items-center justify-center`}
-                          >
-                            {data.completed && (
-                              <CheckCircle2 className="h-4 w-4 text-white" />
-                            )}
-                          </button>
+                          {isEditingWeekSchedule ? (
+                            <Button
+                              size="sm"
+                              variant={activeEditingDay === day as DayOfWeek ? "default" : "outline"}
+                              onClick={() => {
+                                if (activeEditingDay === day as DayOfWeek) {
+                                  setActiveEditingDay(null);
+                                } else {
+                                  setActiveEditingDay(day as DayOfWeek);
+                                }
+                              }}
+                              className="w-full text-xs"
+                            >
+                              {activeEditingDay === day as DayOfWeek ? "Done" : "Edit Day"}
+                            </Button>
+                          ) : (
+                            <div className="flex justify-center">
+                              <button
+                                onClick={() => {
+                                  // Clone the schedule and update the completion status
+                                  const newSchedule = { ...studyPlan.weekSchedule };
+                                  newSchedule[day as DayOfWeek].completed = !data.completed;
+                                  
+                                  // We would normally update the state here
+                                  // This is just a UI demonstration for now
+                                }}
+                                className={`w-6 h-6 rounded-full ${
+                                  data.completed ? 'bg-green-500' : 'bg-gray-200'
+                                } flex items-center justify-center`}
+                              >
+                                {data.completed && (
+                                  <CheckCircle2 className="h-4 w-4 text-white" />
+                                )}
+                              </button>
+                            </div>
+                          )}
                         </td>
                       </tr>
                     ))}
