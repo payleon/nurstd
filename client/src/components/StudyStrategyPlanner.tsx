@@ -63,18 +63,55 @@ interface UserPreferences {
   studyName: string;
 }
 
-// Study plan interface
+// Goal types
+type GoalCategory = 'content-mastery' | 'practice' | 'exam-prep' | 'time-management' | 'custom';
+
+// Task type for time blocks
+interface ScheduleTask {
+  id: string;
+  content: string;
+  duration: number; // in minutes
+  isCompleted: boolean;
+  priority: 'high' | 'medium' | 'low';
+}
+
+// Time blocks for more detailed scheduling
+interface TimeBlock {
+  id: string;
+  startTime: string;
+  endTime: string;
+  tasks: ScheduleTask[];
+}
+
+// Daily schedule with timeblocks
+interface EnhancedDailySchedule {
+  morning: string;
+  afternoon: string;
+  evening: string;
+  timeBlocks?: TimeBlock[];
+  useDetailedSchedule?: boolean;
+}
+
+// Structured goal with tracking
+interface StudyGoal {
+  id: string;
+  content: string;
+  category: GoalCategory;
+  deadline?: string;
+  isCompleted: boolean;
+  progress?: number;
+  priority: 'high' | 'medium' | 'low';
+}
+
+// Study plan interface with enhanced features
 interface StudyPlan {
   name: string;
   createdAt: string;
   lastEdited: string;
-  dailySchedule: {
-    morning: string;
-    afternoon: string;
-    evening: string;
-  };
+  dailySchedule: EnhancedDailySchedule;
   weeklyGoals: string[];
   customGoals: string[];
+  structuredGoals?: StudyGoal[];
   recommendedResources: {
     title: string;
     description: string;
@@ -91,6 +128,8 @@ interface StudyPlan {
       tasks: string[];
       focus: string;
       completed: boolean;
+      customTasks?: ScheduleTask[];
+      useDetailedSchedule?: boolean;
     }
   };
 }
@@ -128,6 +167,47 @@ export function StudyStrategyPlanner() {
     evening: ""
   });
   
+  // State for detailed schedule
+  const [useDetailedSchedule, setUseDetailedSchedule] = useState(false);
+  const [timeBlocks, setTimeBlocks] = useState<TimeBlock[]>([
+    {
+      id: "morning-1",
+      startTime: "08:00",
+      endTime: "10:00",
+      tasks: []
+    },
+    {
+      id: "afternoon-1",
+      startTime: "13:00",
+      endTime: "15:00",
+      tasks: []
+    },
+    {
+      id: "evening-1",
+      startTime: "19:00",
+      endTime: "21:00",
+      tasks: []
+    }
+  ]);
+  
+  // State for tracking what's being edited
+  const [activeEditingDay, setActiveEditingDay] = useState<DayOfWeek | null>(null);
+  const [isEditingWeekSchedule, setIsEditingWeekSchedule] = useState(false);
+  const [editedWeekSchedule, setEditedWeekSchedule] = useState<{[key in DayOfWeek]?: {tasks: string[], focus: string}}>({});
+  
+  // State for structured goals
+  const [structuredGoals, setStructuredGoals] = useState<StudyGoal[]>([]);
+  const [newGoal, setNewGoal] = useState<{
+    content: string;
+    category: GoalCategory;
+    deadline?: string;
+    priority: 'high' | 'medium' | 'low';
+  }>({
+    content: '',
+    category: 'content-mastery',
+    priority: 'medium'
+  });
+  
   // State for custom tips and goals
   const [customTip, setCustomTip] = useState("");
   const [customGoal, setCustomGoal] = useState("");
@@ -143,29 +223,36 @@ export function StudyStrategyPlanner() {
     // For now, we'll use preferences to create a semi-customized plan
     
     // Adjust daily schedule based on time commitment
-    let dailySchedule = {
+    let dailySchedule: EnhancedDailySchedule = {
       morning: "Review flashcards for 30 minutes",
       afternoon: "Complete 20 practice questions",
-      evening: "Study content review for 1 hour"
+      evening: "Study content review for 1 hour",
+      useDetailedSchedule: useDetailedSchedule
     };
     
     if (preferences.timeCommitment === 'minimal') {
       dailySchedule = {
         morning: "Review 10 flashcards",
         afternoon: "Complete 10 practice questions",
-        evening: "Review weak areas for 30 minutes"
+        evening: "Review weak areas for 30 minutes",
+        useDetailedSchedule: useDetailedSchedule
       };
     } else if (preferences.timeCommitment === 'intensive') {
       dailySchedule = {
         morning: "Content review for 2 hours",
         afternoon: "Complete 50 practice questions and analyze results",
-        evening: "Study summary notes and prepare for tomorrow"
+        evening: "Study summary notes and prepare for tomorrow",
+        useDetailedSchedule: useDetailedSchedule
       };
     }
     
     // Override with edited schedule if available
     if (isEditingSchedule && editedSchedule.morning && editedSchedule.afternoon && editedSchedule.evening) {
-      dailySchedule = editedSchedule;
+      dailySchedule = {
+        ...editedSchedule,
+        useDetailedSchedule: useDetailedSchedule,
+        timeBlocks: timeBlocks.length > 0 ? timeBlocks : undefined
+      };
     }
     
     // Weekly goals based on days until exam
@@ -249,6 +336,49 @@ export function StudyStrategyPlanner() {
       }
     };
     
+    // Apply any edited weekly schedule tasks
+    if (isEditingWeekSchedule && Object.keys(editedWeekSchedule).length > 0) {
+      Object.keys(editedWeekSchedule).forEach(day => {
+        const typedDay = day as DayOfWeek;
+        if (editedWeekSchedule[typedDay]) {
+          weekSchedule[typedDay] = {
+            ...weekSchedule[typedDay],
+            ...editedWeekSchedule[typedDay],
+            completed: false
+          };
+        }
+      });
+    }
+    
+    // Add default structured goals based on preferences
+    const defaultStructuredGoals: StudyGoal[] = [
+      {
+        id: 'goal-1',
+        content: `Complete ${weeklyQuestions} practice questions`,
+        category: 'practice',
+        isCompleted: false,
+        priority: 'high'
+      },
+      {
+        id: 'goal-2',
+        content: `Master ${preferences.weaknessAreas.length * 2} concepts in your weak areas`,
+        category: 'content-mastery',
+        isCompleted: false,
+        priority: 'high',
+        deadline: new Date(Date.now() + preferences.daysUntilExam * 86400000 * 0.7).toISOString().split('T')[0]
+      },
+      {
+        id: 'goal-3',
+        content: `Take at least 3 practice mini-exams`,
+        category: 'exam-prep',
+        isCompleted: false,
+        priority: 'medium'
+      }
+    ];
+    
+    // Combine default and user-created structured goals
+    const combinedStructuredGoals = [...defaultStructuredGoals, ...structuredGoals];
+    
     return {
       name: preferences.studyName,
       createdAt: new Date().toISOString(),
@@ -261,6 +391,7 @@ export function StudyStrategyPlanner() {
         `Set aside 3 blocks of time for simulated mini-exams`
       ],
       customGoals: customGoals,
+      structuredGoals: combinedStructuredGoals,
       recommendedResources: getRecommendedResources(preferences),
       focusAreas,
       studyTips,
@@ -427,6 +558,134 @@ export function StudyStrategyPlanner() {
   // Edit preferences
   const handleEditPreferences = () => {
     setCurrentStep('preferences');
+  };
+  
+  // Add new structured goal
+  const handleAddStructuredGoal = () => {
+    if (newGoal.content.trim() === '') return;
+    
+    const newStructuredGoal: StudyGoal = {
+      id: `goal-${Date.now()}`,
+      content: newGoal.content,
+      category: newGoal.category,
+      isCompleted: false,
+      priority: newGoal.priority,
+      deadline: newGoal.deadline
+    };
+    
+    setStructuredGoals([...structuredGoals, newStructuredGoal]);
+    setNewGoal({
+      content: '',
+      category: 'content-mastery',
+      priority: 'medium'
+    });
+  };
+  
+  // Toggle goal completion
+  const toggleGoalCompletion = (goalId: string) => {
+    setStructuredGoals(structuredGoals.map(goal => 
+      goal.id === goalId ? {...goal, isCompleted: !goal.isCompleted} : goal
+    ));
+  };
+  
+  // Delete a structured goal
+  const deleteStructuredGoal = (goalId: string) => {
+    setStructuredGoals(structuredGoals.filter(goal => goal.id !== goalId));
+  };
+  
+  // Add time block
+  const addTimeBlock = () => {
+    const newTimeBlock: TimeBlock = {
+      id: `time-block-${Date.now()}`,
+      startTime: '12:00',
+      endTime: '13:00',
+      tasks: []
+    };
+    
+    setTimeBlocks([...timeBlocks, newTimeBlock]);
+  };
+  
+  // Edit time block
+  const updateTimeBlock = (id: string, updates: Partial<TimeBlock>) => {
+    setTimeBlocks(timeBlocks.map(block => 
+      block.id === id ? {...block, ...updates} : block
+    ));
+  };
+  
+  // Add task to time block
+  const addTaskToTimeBlock = (blockId: string, task: ScheduleTask) => {
+    setTimeBlocks(timeBlocks.map(block => 
+      block.id === blockId 
+        ? {...block, tasks: [...block.tasks, task]} 
+        : block
+    ));
+  };
+  
+  // Delete time block
+  const deleteTimeBlock = (blockId: string) => {
+    setTimeBlocks(timeBlocks.filter(block => block.id !== blockId));
+  };
+  
+  // Edit weekly schedule for a specific day
+  const handleEditDaySchedule = (day: DayOfWeek, focus: string, tasks: string[]) => {
+    setEditedWeekSchedule({
+      ...editedWeekSchedule,
+      [day]: { focus, tasks }
+    });
+  };
+  
+  // Save the current plan
+  const handleSavePlan = () => {
+    const plan = generateStudyPlan();
+    const savedPlan: SavedPlan = {
+      id: `plan-${Date.now()}`,
+      name: plan.name,
+      createdAt: plan.createdAt,
+      preferences,
+      plan
+    };
+    
+    setSavedPlans([...savedPlans, savedPlan]);
+  };
+  
+  // Helper to get category label and icon
+  const getCategoryInfo = (category: GoalCategory) => {
+    switch(category) {
+      case 'content-mastery':
+        return { 
+          label: 'Content Mastery', 
+          icon: <BookOpen className="h-4 w-4 text-blue-600" /> 
+        };
+      case 'practice':
+        return { 
+          label: 'Practice', 
+          icon: <CheckSquare className="h-4 w-4 text-green-600" /> 
+        };
+      case 'exam-prep':
+        return { 
+          label: 'Exam Preparation', 
+          icon: <FileQuestion className="h-4 w-4 text-purple-600" /> 
+        };
+      case 'time-management':
+        return { 
+          label: 'Time Management', 
+          icon: <Clock className="h-4 w-4 text-amber-600" /> 
+        };
+      case 'custom':
+        return { 
+          label: 'Custom Goal', 
+          icon: <Lightbulb className="h-4 w-4 text-orange-600" /> 
+        };
+    }
+  };
+  
+  // Helper to get priority color
+  const getPriorityColor = (priority: 'high' | 'medium' | 'low') => {
+    switch(priority) {
+      case 'high': return 'text-red-600 bg-red-50 border-red-200';
+      case 'medium': return 'text-amber-600 bg-amber-50 border-amber-200';
+      case 'low': return 'text-green-600 bg-green-50 border-green-200';
+    }
   };
   
   // Get the personalized study plan
@@ -676,94 +935,305 @@ export function StudyStrategyPlanner() {
             {/* Daily Schedule */}
             <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg flex items-center">
-                  <Clock className="mr-2 h-5 w-5 text-blue-500" />
-                  Daily Schedule
-                </CardTitle>
+                <div className="flex justify-between items-center">
+                  <CardTitle className="text-lg flex items-center">
+                    <Clock className="mr-2 h-5 w-5 text-blue-500" />
+                    Daily Schedule
+                  </CardTitle>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-500">Detailed View</span>
+                    <Switch 
+                      checked={useDetailedSchedule}
+                      onCheckedChange={(checked) => setUseDetailedSchedule(checked)}
+                    />
+                  </div>
+                </div>
+                <CardDescription>Your daily study routine</CardDescription>
               </CardHeader>
               <CardContent>
-                {isEditingSchedule ? (
-                  <div className="space-y-3">
-                    <div className="space-y-2">
-                      <label className="font-medium">Morning:</label>
-                      <input
-                        type="text"
-                        value={editedSchedule.morning}
-                        onChange={(e) => setEditedSchedule({...editedSchedule, morning: e.target.value})}
-                        placeholder="Enter morning activity"
-                        className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="font-medium">Afternoon:</label>
-                      <input
-                        type="text"
-                        value={editedSchedule.afternoon}
-                        onChange={(e) => setEditedSchedule({...editedSchedule, afternoon: e.target.value})}
-                        placeholder="Enter afternoon activity"
-                        className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="font-medium">Evening:</label>
-                      <input
-                        type="text"
-                        value={editedSchedule.evening}
-                        onChange={(e) => setEditedSchedule({...editedSchedule, evening: e.target.value})}
-                        placeholder="Enter evening activity"
-                        className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                      />
-                    </div>
-                    <div className="flex gap-2 mt-2">
-                      <Button 
-                        size="sm" 
-                        onClick={() => {
-                          setIsEditingSchedule(false);
-                        }}
-                      >
-                        Save Changes
-                      </Button>
-                      <Button 
-                        size="sm"
-                        variant="outline"
-                        onClick={() => {
-                          setIsEditingSchedule(false);
-                          setEditedSchedule({
-                            morning: studyPlan.dailySchedule.morning,
-                            afternoon: studyPlan.dailySchedule.afternoon,
-                            evening: studyPlan.dailySchedule.evening
-                          });
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
+                {!useDetailedSchedule ? (
+                  // Simple schedule view
+                  <>
+                    {isEditingSchedule ? (
+                      <div className="space-y-3">
+                        <div className="space-y-2">
+                          <label className="font-medium">Morning:</label>
+                          <input
+                            type="text"
+                            value={editedSchedule.morning}
+                            onChange={(e) => setEditedSchedule({...editedSchedule, morning: e.target.value})}
+                            placeholder="Enter morning activity"
+                            className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="font-medium">Afternoon:</label>
+                          <input
+                            type="text"
+                            value={editedSchedule.afternoon}
+                            onChange={(e) => setEditedSchedule({...editedSchedule, afternoon: e.target.value})}
+                            placeholder="Enter afternoon activity"
+                            className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="font-medium">Evening:</label>
+                          <input
+                            type="text"
+                            value={editedSchedule.evening}
+                            onChange={(e) => setEditedSchedule({...editedSchedule, evening: e.target.value})}
+                            placeholder="Enter evening activity"
+                            className="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:border-[#4B9CD3] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                          />
+                        </div>
+                        <div className="flex gap-2 mt-2">
+                          <Button 
+                            size="sm" 
+                            onClick={() => {
+                              setIsEditingSchedule(false);
+                            }}
+                          >
+                            Save Changes
+                          </Button>
+                          <Button 
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setIsEditingSchedule(false);
+                              setEditedSchedule({
+                                morning: studyPlan.dailySchedule.morning,
+                                afternoon: studyPlan.dailySchedule.afternoon,
+                                evening: studyPlan.dailySchedule.evening
+                              });
+                            }}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        <div className="flex justify-between border-b pb-2">
+                          <span className="font-medium">Morning:</span>
+                          <span>{studyPlan.dailySchedule.morning}</span>
+                        </div>
+                        <div className="flex justify-between border-b pb-2">
+                          <span className="font-medium">Afternoon:</span>
+                          <span>{studyPlan.dailySchedule.afternoon}</span>
+                        </div>
+                        <div className="flex justify-between border-b pb-2">
+                          <span className="font-medium">Evening:</span>
+                          <span>{studyPlan.dailySchedule.evening}</span>
+                        </div>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => {
+                            setEditedSchedule(studyPlan.dailySchedule);
+                            setIsEditingSchedule(true);
+                          }}
+                          className="w-full mt-2"
+                        >
+                          Customize Schedule
+                        </Button>
+                      </div>
+                    )}
+                  </>
                 ) : (
-                  <div className="space-y-3">
-                    <div className="flex justify-between border-b pb-2">
-                      <span className="font-medium">Morning:</span>
-                      <span>{studyPlan.dailySchedule.morning}</span>
+                  // Detailed schedule view with time blocks
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="font-medium">Detailed Time Blocks</h3>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={addTimeBlock}
+                        className="border-2 border-black hover:bg-gray-100"
+                      >
+                        <Plus className="h-4 w-4 mr-1" /> Add Time Block
+                      </Button>
                     </div>
-                    <div className="flex justify-between border-b pb-2">
-                      <span className="font-medium">Afternoon:</span>
-                      <span>{studyPlan.dailySchedule.afternoon}</span>
+                    
+                    <div className="space-y-4">
+                      {timeBlocks.length === 0 ? (
+                        <div className="text-center p-4 border-2 border-dashed border-gray-300 rounded-md">
+                          <p className="text-gray-500">No time blocks added yet. Add your first time block to create a detailed schedule.</p>
+                        </div>
+                      ) : (
+                        <Accordion type="single" collapsible className="w-full">
+                          {timeBlocks.map((block, index) => (
+                            <AccordionItem key={block.id} value={block.id} className="border-2 border-black rounded-md mb-3 overflow-hidden">
+                              <AccordionTrigger className="px-4 py-2 hover:bg-gray-50">
+                                <div className="flex justify-between items-center w-full">
+                                  <div className="flex items-center">
+                                    <Clock className="h-4 w-4 mr-2 text-blue-500" />
+                                    <span className="font-medium">{block.startTime} - {block.endTime}</span>
+                                  </div>
+                                  <span className="text-sm text-gray-500">
+                                    {block.tasks.length} {block.tasks.length === 1 ? 'task' : 'tasks'}
+                                  </span>
+                                </div>
+                              </AccordionTrigger>
+                              <AccordionContent className="px-4 py-3 border-t border-gray-200">
+                                <div className="space-y-3">
+                                  {/* Time block settings */}
+                                  <div className="flex flex-wrap gap-4 mb-3">
+                                    <div className="flex-1 min-w-[120px]">
+                                      <label className="block text-sm font-medium mb-1">Start Time</label>
+                                      <input
+                                        type="time"
+                                        value={block.startTime}
+                                        onChange={(e) => updateTimeBlock(block.id, { startTime: e.target.value })}
+                                        className="w-full p-2 border-2 border-black rounded-md"
+                                      />
+                                    </div>
+                                    <div className="flex-1 min-w-[120px]">
+                                      <label className="block text-sm font-medium mb-1">End Time</label>
+                                      <input
+                                        type="time"
+                                        value={block.endTime}
+                                        onChange={(e) => updateTimeBlock(block.id, { endTime: e.target.value })}
+                                        className="w-full p-2 border-2 border-black rounded-md"
+                                      />
+                                    </div>
+                                  </div>
+                                  
+                                  {/* Task list */}
+                                  <div>
+                                    <h4 className="text-sm font-medium mb-2">Tasks</h4>
+                                    <div className="space-y-2 mb-3">
+                                      {block.tasks.length === 0 ? (
+                                        <p className="text-sm text-gray-500 italic">No tasks added yet</p>
+                                      ) : (
+                                        block.tasks.map((task, taskIndex) => (
+                                          <div 
+                                            key={task.id} 
+                                            className="flex items-center justify-between p-2 border border-gray-200 rounded-md"
+                                          >
+                                            <div className="flex items-center">
+                                              <input 
+                                                type="checkbox" 
+                                                checked={task.isCompleted}
+                                                onChange={() => {
+                                                  const updatedTasks = [...block.tasks];
+                                                  updatedTasks[taskIndex].isCompleted = !task.isCompleted;
+                                                  updateTimeBlock(block.id, { tasks: updatedTasks });
+                                                }}
+                                                className="mr-2 h-4 w-4"
+                                              />
+                                              <span className={`text-sm ${task.isCompleted ? 'line-through text-gray-400' : ''}`}>
+                                                {task.content} ({task.duration} min)
+                                              </span>
+                                            </div>
+                                            <div className="flex items-center">
+                                              <span className={`text-xs px-2 py-0.5 rounded-full mr-2 ${
+                                                task.priority === 'high' ? 'bg-red-100 text-red-700' :
+                                                task.priority === 'medium' ? 'bg-amber-100 text-amber-700' :
+                                                'bg-green-100 text-green-700'
+                                              }`}>
+                                                {task.priority}
+                                              </span>
+                                              <button
+                                                onClick={() => {
+                                                  const updatedTasks = block.tasks.filter(t => t.id !== task.id);
+                                                  updateTimeBlock(block.id, { tasks: updatedTasks });
+                                                }}
+                                                className="text-red-500 hover:text-red-700"
+                                              >
+                                                <Trash2 className="h-4 w-4" />
+                                              </button>
+                                            </div>
+                                          </div>
+                                        ))
+                                      )}
+                                    </div>
+                                    
+                                    {/* Add task form */}
+                                    <div className="flex items-end gap-2">
+                                      <div className="flex-1">
+                                        <input
+                                          type="text"
+                                          placeholder="Add a new task"
+                                          className="w-full p-2 border-2 border-gray-300 rounded-md"
+                                          onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && e.currentTarget.value.trim()) {
+                                              const newTask: ScheduleTask = {
+                                                id: `task-${Date.now()}`,
+                                                content: e.currentTarget.value.trim(),
+                                                duration: 30,
+                                                isCompleted: false,
+                                                priority: 'medium'
+                                              };
+                                              addTaskToTimeBlock(block.id, newTask);
+                                              e.currentTarget.value = '';
+                                            }
+                                          }}
+                                        />
+                                      </div>
+                                      <Select defaultValue="medium">
+                                        <SelectTrigger className="w-24">
+                                          <SelectValue placeholder="Priority" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                          <SelectItem value="high">High</SelectItem>
+                                          <SelectItem value="medium">Medium</SelectItem>
+                                          <SelectItem value="low">Low</SelectItem>
+                                        </SelectContent>
+                                      </Select>
+                                      <input
+                                        type="number"
+                                        min="5"
+                                        max="120"
+                                        step="5"
+                                        defaultValue="30"
+                                        className="w-20 p-2 border-2 border-gray-300 rounded-md"
+                                        placeholder="Minutes"
+                                      />
+                                      <Button
+                                        size="sm"
+                                        variant="outline"
+                                        className="border-2 border-black"
+                                        onClick={(e) => {
+                                          const input = e.currentTarget.parentElement?.querySelector('input');
+                                          const prioritySelect = e.currentTarget.parentElement?.querySelector('select');
+                                          const durationInput = e.currentTarget.parentElement?.querySelectorAll('input')[1];
+                                          
+                                          if (input && input.value.trim()) {
+                                            const newTask: ScheduleTask = {
+                                              id: `task-${Date.now()}`,
+                                              content: input.value.trim(),
+                                              duration: parseInt(durationInput?.value || '30'),
+                                              isCompleted: false,
+                                              priority: (prioritySelect?.value || 'medium') as 'high' | 'medium' | 'low'
+                                            };
+                                            addTaskToTimeBlock(block.id, newTask);
+                                            input.value = '';
+                                          }
+                                        }}
+                                      >
+                                        Add
+                                      </Button>
+                                    </div>
+                                  </div>
+                                  
+                                  {/* Delete time block */}
+                                  <div className="flex justify-end mt-4">
+                                    <Button
+                                      size="sm"
+                                      variant="destructive"
+                                      onClick={() => deleteTimeBlock(block.id)}
+                                      className="border border-red-300"
+                                    >
+                                      <Trash2 className="h-3 w-3 mr-1" /> Delete Block
+                                    </Button>
+                                  </div>
+                                </div>
+                              </AccordionContent>
+                            </AccordionItem>
+                          ))}
+                        </Accordion>
+                      )}
                     </div>
-                    <div className="flex justify-between border-b pb-2">
-                      <span className="font-medium">Evening:</span>
-                      <span>{studyPlan.dailySchedule.evening}</span>
-                    </div>
-                    <Button 
-                      size="sm" 
-                      variant="outline" 
-                      onClick={() => {
-                        setEditedSchedule(studyPlan.dailySchedule);
-                        setIsEditingSchedule(true);
-                      }}
-                      className="w-full mt-2"
-                    >
-                      Customize Schedule
-                    </Button>
                   </div>
                 )}
               </CardContent>
