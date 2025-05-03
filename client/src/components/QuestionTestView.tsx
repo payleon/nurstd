@@ -211,35 +211,63 @@ export function QuestionTestView({
     
     // Handle different question types
     if (question.type === 'mc') {
-      if (!Array.isArray(answer)) {
-        // For multiple choice, normalize both the user answer and correct answer
-        const normalizedUserAnswer = normalizeAnswerString(answer);
+      // For multiple choice, normalize both the user answer and correct answer
+      // Handle the case when answer is a string or an array with a single element
+      let normalizedUserAnswer = '';
+      
+      if (Array.isArray(answer) && answer.length === 1) {
+        // If answer is an array with a single element, extract it
+        normalizedUserAnswer = normalizeAnswerString(answer[0]);
+      } else if (!Array.isArray(answer)) {
+        // If answer is a string, normalize it directly
+        normalizedUserAnswer = normalizeAnswerString(answer);
+      }
+      
+      // Get the correct answer and normalize it
+      let correctAnswer = '';
+      if ('correctAnswer' in question) {
+        correctAnswer = typeof question.correctAnswer === 'string' 
+                        ? normalizeAnswerString(question.correctAnswer) 
+                        : '';
+      }
+      
+      console.log(`Question ${questionId} - MC comparison:`, {
+        userAnswer: answer,
+        normalizedUserAnswer,
+        correctAnswer: question.correctAnswer,
+        normalizedCorrectAnswer: correctAnswer
+      });
+      
+      // Compare normalized values
+      isCorrect = normalizedUserAnswer === correctAnswer;
+    } else if (question.type === 'fill_in_blank') {
+      if ('correctAnswer' in question) {
+        // Handle both string and array cases
+        let normalizedUserAnswer = '';
         
-        // Get the correct answer and normalize it
-        let correctAnswer = '';
-        if ('correctAnswer' in question) {
-          correctAnswer = typeof question.correctAnswer === 'string' 
-                          ? normalizeAnswerString(question.correctAnswer) 
-                          : '';
+        if (Array.isArray(answer) && answer.length === 1) {
+          // If the answer is an array with a single element, extract it
+          normalizedUserAnswer = normalizeAnswerString(answer[0]);
+        } else if (!Array.isArray(answer)) {
+          // If the answer is a string, normalize it directly
+          normalizedUserAnswer = normalizeAnswerString(answer);
         }
         
-        console.log(`Question ${questionId} - MC comparison:`, {
+        // Normalize correct answer
+        let correctAnswer = '';
+        if (typeof question.correctAnswer === 'string') {
+          correctAnswer = normalizeAnswerString(question.correctAnswer);
+        } else if (Array.isArray(question.correctAnswer) && question.correctAnswer.length === 1) {
+          correctAnswer = normalizeAnswerString(question.correctAnswer[0]);
+        }
+        
+        console.log(`Question ${questionId} - Fill-in-blank comparison:`, {
           userAnswer: answer,
           normalizedUserAnswer,
           correctAnswer: question.correctAnswer,
           normalizedCorrectAnswer: correctAnswer
         });
         
-        // Compare normalized values
-        isCorrect = normalizedUserAnswer === correctAnswer;
-      }
-    } else if (question.type === 'fill_in_blank') {
-      if (!Array.isArray(answer) && 'correctAnswer' in question) {
-        // Also normalize fill-in-blank answers
-        const normalizedUserAnswer = normalizeAnswerString(answer);
-        const correctAnswer = typeof question.correctAnswer === 'string' 
-                            ? normalizeAnswerString(question.correctAnswer) 
-                            : '';
         isCorrect = normalizedUserAnswer === correctAnswer;
       }
     } else if (question.type === 'sata') {
