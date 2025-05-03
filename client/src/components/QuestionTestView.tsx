@@ -169,6 +169,15 @@ export function QuestionTestView({
     });
   };
   
+  // Helper function to normalize answer strings (remove quotes if present)
+  const normalizeAnswerString = (value: string): string => {
+    // If the string has surrounding quotes (like "A"), remove them
+    if (value.startsWith('"') && value.endsWith('"')) {
+      return value.substring(1, value.length - 1);
+    }
+    return value;
+  };
+  
   const checkAnswer = (questionId: number, answer: string | string[]) => {
     const question = questions.find((q: Question) => q.id === questionId);
     if (!question) return;
@@ -178,17 +187,45 @@ export function QuestionTestView({
     // Handle different question types
     if (question.type === 'mc') {
       if (!Array.isArray(answer)) {
-        isCorrect = answer === question.correctAnswer;
+        // For multiple choice, normalize both the user answer and correct answer
+        const normalizedUserAnswer = normalizeAnswerString(answer);
+        
+        // Get the correct answer and normalize it
+        let correctAnswer = '';
+        if ('correctAnswer' in question) {
+          correctAnswer = typeof question.correctAnswer === 'string' 
+                          ? normalizeAnswerString(question.correctAnswer) 
+                          : '';
+        }
+        
+        console.log(`Question ${questionId} - MC comparison:`, {
+          userAnswer: answer,
+          normalizedUserAnswer,
+          correctAnswer: question.correctAnswer,
+          normalizedCorrectAnswer: correctAnswer
+        });
+        
+        // Compare normalized values
+        isCorrect = normalizedUserAnswer === correctAnswer;
       }
     } else if (question.type === 'fill_in_blank') {
       if (!Array.isArray(answer) && 'correctAnswer' in question) {
-        isCorrect = answer === question.correctAnswer;
+        // Also normalize fill-in-blank answers
+        const normalizedUserAnswer = normalizeAnswerString(answer);
+        const correctAnswer = typeof question.correctAnswer === 'string' 
+                            ? normalizeAnswerString(question.correctAnswer) 
+                            : '';
+        isCorrect = normalizedUserAnswer === correctAnswer;
       }
     } else if (question.type === 'sata') {
       if (Array.isArray(answer) && 'correctAnswer' in question && Array.isArray(question.correctAnswer)) {
+        // For SATA, normalize each answer in both arrays
+        const normalizedUserAnswers = answer.map(normalizeAnswerString);
+        const normalizedCorrectAnswers = question.correctAnswer.map(normalizeAnswerString);
+        
         isCorrect = 
-          answer.length === question.correctAnswer.length && 
-          answer.every(a => question.correctAnswer.includes(a));
+          normalizedUserAnswers.length === normalizedCorrectAnswers.length && 
+          normalizedUserAnswers.every(a => normalizedCorrectAnswers.includes(a));
       }
     } else if (question.type === 'hotspot') {
       // For hotspot questions, compare the selected areas with correct areas
@@ -201,7 +238,11 @@ export function QuestionTestView({
     } else if (question.type === 'ordered-response') {
       // For ordered response questions
       if (Array.isArray(answer) && 'correctOrder' in question && Array.isArray(question.correctOrder)) {
-        isCorrect = JSON.stringify(answer) === JSON.stringify(question.correctOrder);
+        // Normalize all items in both arrays
+        const normalizedUserOrder = answer.map(normalizeAnswerString);
+        const normalizedCorrectOrder = question.correctOrder.map(normalizeAnswerString);
+        
+        isCorrect = JSON.stringify(normalizedUserOrder) === JSON.stringify(normalizedCorrectOrder);
       }
     } else if (question.type === 'chart-exhibit') {
       // For chart exhibit questions with nested sub-questions
@@ -212,12 +253,20 @@ export function QuestionTestView({
         if (subQuestion && 'correctAnswer' in subQuestion) {
           // Check if the answer is correct based on the first sub-question
           if (Array.isArray(subQuestion.correctAnswer) && Array.isArray(answer)) {
-            // Handle multi-select sub-questions
-            isCorrect = answer.length === subQuestion.correctAnswer.length && 
-                       answer.every(a => subQuestion.correctAnswer.includes(a));
+            // Handle multi-select sub-questions - normalize all values
+            const normalizedUserAnswers = answer.map(normalizeAnswerString);
+            const normalizedCorrectAnswers = subQuestion.correctAnswer.map(normalizeAnswerString);
+            
+            isCorrect = normalizedUserAnswers.length === normalizedCorrectAnswers.length && 
+                       normalizedUserAnswers.every(a => normalizedCorrectAnswers.includes(a));
           } else if (!Array.isArray(subQuestion.correctAnswer) && !Array.isArray(answer)) {
-            // Handle single-select sub-questions
-            isCorrect = answer === subQuestion.correctAnswer;
+            // Handle single-select sub-questions - normalize both values
+            const normalizedUserAnswer = normalizeAnswerString(answer);
+            const normalizedCorrectAnswer = typeof subQuestion.correctAnswer === 'string' 
+                                          ? normalizeAnswerString(subQuestion.correctAnswer) 
+                                          : '';
+                                          
+            isCorrect = normalizedUserAnswer === normalizedCorrectAnswer;
           }
         }
       }
