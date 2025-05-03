@@ -438,9 +438,9 @@ export function QuestionRenderer({
             <div className="relative border border-gray-300 rounded-md overflow-hidden">
               {/* Image container with clickable areas */}
               <div className="relative">
-                {'imageUrl' in question && (
+                {question.imagePath && (
                   <img 
-                    src={question.imageUrl} 
+                    src={question.imagePath} 
                     alt="Hotspot image" 
                     className="w-full h-auto"
                   />
@@ -448,21 +448,57 @@ export function QuestionRenderer({
                 
                 {/* Clickable areas */}
                 <div className="absolute top-0 left-0 w-full h-full">
-                  {'areas' in question && question.areas && question.areas.map(area => {
+                  {question.correctAreas.map(area => {
                     // Determine if this area is selected
                     const isSelected = selectedAnswers.includes(area.id);
-                    // Determine if this area is correct (for feedback)
-                    const isCorrect = area.isCorrect;
+                    // For feedback, all correctAreas are correct by definition
+                    const isCorrect = true;
                     
                     // Styles based on selection and correctness
                     let areaStyle = '';
                     if (showRationale) {
-                      if (isSelected && isCorrect) {
+                      if (isSelected) {
                         areaStyle = 'border-2 border-green-500 bg-green-200 bg-opacity-30';
-                      } else if (isSelected && !isCorrect) {
-                        areaStyle = 'border-2 border-red-500 bg-red-200 bg-opacity-30';
-                      } else if (!isSelected && isCorrect) {
+                      } else {
                         areaStyle = 'border-2 border-yellow-500 bg-yellow-200 bg-opacity-30';
+                      }
+                    } else {
+                      areaStyle = isSelected
+                        ? 'border-2 border-[#4B9CD3] bg-blue-200 bg-opacity-30'
+                        : 'border border-transparent hover:border-[#4B9CD3] hover:bg-blue-100 hover:bg-opacity-30';
+                    }
+                    
+                    return (
+                      <div
+                        key={area.id}
+                        className={`absolute cursor-pointer ${areaStyle}`}
+                        style={{
+                          top: `${area.y}%`,
+                          left: `${area.x}%`,
+                          width: `${area.width}%`,
+                          height: `${area.height}%`,
+                        }}
+                        onClick={() => !showRationale && handleAnswerSelect(area.id)}
+                      >
+                        {showRationale && isSelected && (
+                          <CheckCircle2 className="absolute top-1 right-1 h-5 w-5 text-green-600" />
+                        )}
+                      </div>
+                    );
+                  })}
+                  
+                  {/* Display distractor areas if available */}
+                  {question.distractorAreas && question.distractorAreas.map(area => {
+                    // Determine if this area is selected
+                    const isSelected = selectedAnswers.includes(area.id);
+                    // For feedback, all distractorAreas are incorrect by definition
+                    const isCorrect = false;
+                    
+                    // Styles based on selection and correctness
+                    let areaStyle = '';
+                    if (showRationale) {
+                      if (isSelected) {
+                        areaStyle = 'border-2 border-red-500 bg-red-200 bg-opacity-30';
                       } else {
                         areaStyle = 'border border-transparent';
                       }
@@ -477,17 +513,14 @@ export function QuestionRenderer({
                         key={area.id}
                         className={`absolute cursor-pointer ${areaStyle}`}
                         style={{
-                          top: `${area.top}%`,
-                          left: `${area.left}%`,
+                          top: `${area.y}%`,
+                          left: `${area.x}%`,
                           width: `${area.width}%`,
                           height: `${area.height}%`,
                         }}
                         onClick={() => !showRationale && handleAnswerSelect(area.id)}
                       >
-                        {showRationale && isCorrect && (
-                          <CheckCircle2 className="absolute top-1 right-1 h-5 w-5 text-green-600" />
-                        )}
-                        {showRationale && isSelected && !isCorrect && (
+                        {showRationale && isSelected && (
                           <XCircle className="absolute top-1 right-1 h-5 w-5 text-red-600" />
                         )}
                       </div>
@@ -499,7 +532,7 @@ export function QuestionRenderer({
               {/* Legend */}
               <div className="p-3 bg-gray-50 border-t border-gray-300">
                 <p className="text-sm font-medium text-gray-700 mb-2">Click on the areas that match the criteria:</p>
-                <p className="text-sm text-gray-600">{question.criteria || "Select all appropriate areas"}</p>
+                <p className="text-sm text-gray-600">Select all appropriate areas</p>
               </div>
             </div>
           </div>
@@ -600,30 +633,9 @@ export function QuestionRenderer({
             <div className="mb-6 border border-gray-300 rounded-md overflow-hidden">
               {/* Chart or Exhibit Container */}
               <div className="p-4 bg-white">
-                {question.exhibitType === 'chart' && (
-                  <div className="chart-container">
-                    {/* If chart data is provided, render the appropriate chart */}
-                    {'chartUrl' in question && (
-                      <img 
-                        src={question.chartUrl} 
-                        alt="Chart data" 
-                        className="max-w-full h-auto mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-                
-                {question.exhibitType === 'text' && (
-                  <div className="text-exhibit p-4 bg-gray-50 rounded-md">
-                    {'exhibitContent' in question && (
-                      <p className="whitespace-pre-line text-gray-800">{question.exhibitContent}</p>
-                    )}
-                  </div>
-                )}
-                
-                {question.exhibitType === 'lab' && (
+                {question.exhibitType === 'lab-results' && (
                   <div className="lab-results">
-                    {'labResults' in question && Array.isArray(question.labResults) && (
+                    {question.exhibitData && (
                       <table className="min-w-full divide-y divide-gray-300">
                         <thead className="bg-gray-50">
                           <tr>
@@ -633,7 +645,7 @@ export function QuestionRenderer({
                           </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                          {question.labResults.map((result, index) => (
+                          {Array.isArray(question.exhibitData.results) && question.exhibitData.results.map((result: any, index: number) => (
                             <tr key={index}>
                               <td className="py-2 px-4 text-sm text-gray-900">{result.name}</td>
                               <td className="py-2 px-4 text-sm text-gray-900">
@@ -653,10 +665,64 @@ export function QuestionRenderer({
                     )}
                   </div>
                 )}
+                
+                {question.exhibitType === 'vital-signs' && (
+                  <div className="vital-signs p-4 bg-gray-50 rounded-md">
+                    {question.exhibitData && (
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {Object.entries(question.exhibitData).map(([key, value]) => (
+                          <div key={key} className="p-2 bg-white rounded border border-gray-200">
+                            <div className="font-medium text-gray-700">{key}</div>
+                            <div className="text-lg">{String(value)}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {question.exhibitType === 'medication-record' && (
+                  <div className="medication-record">
+                    {question.exhibitData && (
+                      <table className="min-w-full divide-y divide-gray-300">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Medication</th>
+                            <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dosage</th>
+                            <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Route</th>
+                            <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Frequency</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          {Array.isArray(question.exhibitData.medications) && question.exhibitData.medications.map((med: any, index: number) => (
+                            <tr key={index}>
+                              <td className="py-2 px-4 text-sm text-gray-900">{med.name}</td>
+                              <td className="py-2 px-4 text-sm text-gray-900">{med.dosage}</td>
+                              <td className="py-2 px-4 text-sm text-gray-900">{med.route}</td>
+                              <td className="py-2 px-4 text-sm text-gray-500">{med.frequency}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    )}
+                  </div>
+                )}
+                
+                {(question.exhibitType === 'assessment-findings' || question.exhibitType === 'diagnostic-results') && (
+                  <div className="assessment-findings p-4 bg-gray-50 rounded-md">
+                    {question.exhibitData && (
+                      <div className="whitespace-pre-line text-gray-800">
+                        {typeof question.exhibitData.content === 'string' 
+                          ? question.exhibitData.content 
+                          : JSON.stringify(question.exhibitData, null, 2)}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
               
               {/* Sub-questions related to the chart/exhibit */}
-              {'questions' in question && Array.isArray(question.questions) && question.questions.length > 0 && (
+              {question.questions && Array.isArray(question.questions) && question.questions.length > 0 && (
                 <div className="border-t border-gray-300">
                   <div className="p-4 bg-gray-50">
                     <h4 className="font-medium text-gray-900 mb-3">{question.questions[0].text}</h4>
