@@ -24,7 +24,11 @@ import {
   PenLine,
   Check,
   Trophy,
-  Lightbulb
+  Lightbulb,
+  Seedling,
+  Leaf,
+  Medal,
+  Crown
 } from "lucide-react";
 
 // Study session history type
@@ -59,6 +63,9 @@ export default function StudyTimer() {
   // Progress state
   const [weeklyGoal, setWeeklyGoal] = useState(300); // 5 hours per week
   const [weeklyProgress, setWeeklyProgress] = useState(0);
+  
+  // Theme state
+  const [themeLevel, setThemeLevel] = useState<'beginner' | 'intermediate' | 'advanced' | 'expert'>('beginner');
   
   // Break suggestions
   const breakSuggestions: BreakSuggestion[] = [
@@ -116,6 +123,37 @@ export default function StudyTimer() {
   useEffect(() => {
     localStorage.setItem('studyStreak', currentStreak.toString());
   }, [currentStreak]);
+  
+  // Update theme level based on user progress
+  useEffect(() => {
+    // Calculate overall progress metrics
+    const totalXP = Math.floor(totalStudyMinutes * 0.5) + (totalSessions * 10) + (currentStreak * 5);
+    const achievementsUnlocked = [
+      totalSessions >= 1 ? 1 : 0,
+      totalSessions >= 10 ? 1 : 0, 
+      totalSessions >= 25 ? 1 : 0,
+      totalSessions >= 50 ? 1 : 0,
+      totalStudyMinutes >= 1000 ? 1 : 0,
+      totalStudyMinutes >= 3000 ? 1 : 0,
+      currentStreak >= 3 ? 1 : 0,
+      currentStreak >= 7 ? 1 : 0,
+      currentStreak >= 14 ? 1 : 0,
+      weeklyProgress >= weeklyGoal ? 1 : 0,
+      sessionHistory.some(s => s.notes && s.notes.length > 50) ? 1 : 0,
+      sessionHistory.filter(s => s.duration >= 60).length >= 1 ? 1 : 0
+    ].reduce((a, b) => a + b, 0);
+    
+    // Determine theme level based on combined metrics
+    if (achievementsUnlocked >= 10 || totalXP >= 2000 || currentStreak >= 14 || totalStudyMinutes >= 3000) {
+      setThemeLevel('expert');
+    } else if (achievementsUnlocked >= 6 || totalXP >= 1000 || currentStreak >= 7 || totalStudyMinutes >= 1000) {
+      setThemeLevel('advanced');
+    } else if (achievementsUnlocked >= 3 || totalXP >= 500 || currentStreak >= 3 || totalStudyMinutes >= 500) {
+      setThemeLevel('intermediate');
+    } else {
+      setThemeLevel('beginner');
+    }
+  }, [totalStudyMinutes, totalSessions, currentStreak, weeklyProgress, sessionHistory, weeklyGoal]);
   
   // Calculate weekly study progress
   const calculateWeeklyProgress = () => {
@@ -228,8 +266,82 @@ export default function StudyTimer() {
       .slice(0, 2);
   };
   
+  // Get theme colors and styles based on user's progress level
+  const getThemeStyles = () => {
+    switch (themeLevel) {
+      case 'beginner':
+        return {
+          headerBackground: 'bg-gradient-to-r from-[#13294B]/95 to-[#4B9CD3]/95',
+          pageBackground: 'bg-[#f0f2f5]',
+          accentColor: 'blue',
+          headerTitle: 'Focus Timer Dashboard',
+          headerSubtitle: 'Track your progress and maintain your study streak.',
+          stats: {
+            background: 'bg-white/10',
+            textColor: 'text-white'
+          }
+        };
+      
+      case 'intermediate':
+        return {
+          headerBackground: 'bg-gradient-to-r from-green-600/95 to-emerald-500/95',
+          pageBackground: 'bg-gradient-to-b from-[#f0f2f5] to-green-50',
+          accentColor: 'emerald',
+          headerTitle: 'Consistent Learner Dashboard',
+          headerSubtitle: 'You\'re building great study habits! Keep up your consistent progress.',
+          stats: {
+            background: 'bg-white/10',
+            textColor: 'text-white'
+          }
+        };
+      
+      case 'advanced':
+        return {
+          headerBackground: 'bg-gradient-to-r from-purple-800/95 to-indigo-600/95',
+          pageBackground: 'bg-gradient-to-b from-[#f0f2f5] to-indigo-50',
+          accentColor: 'indigo',
+          headerTitle: 'Advanced Scholar Dashboard',
+          headerSubtitle: 'Your dedication is paying off! Continue your impressive study streak.',
+          stats: {
+            background: 'bg-white/15',
+            textColor: 'text-white'
+          }
+        };
+      
+      case 'expert':
+        return {
+          headerBackground: 'bg-gradient-to-r from-amber-600/95 via-orange-500/95 to-pink-600/95',
+          pageBackground: 'bg-gradient-to-b from-[#f0f2f5] to-amber-50',
+          accentColor: 'orange',
+          headerTitle: 'Elite Scholar Dashboard',
+          headerSubtitle: 'Exceptional dedication! Your study habits put you in the top tier of learners.',
+          stats: {
+            background: 'bg-white/15 backdrop-blur-md',
+            textColor: 'text-white'
+          }
+        };
+      
+      default:
+        return {
+          headerBackground: 'bg-gradient-to-r from-[#13294B]/95 to-[#4B9CD3]/95',
+          pageBackground: 'bg-[#f0f2f5]',
+          accentColor: 'blue',
+          headerTitle: 'Focus Timer Dashboard',
+          headerSubtitle: 'Track your progress and maintain your study streak.',
+          stats: {
+            background: 'bg-white/10',
+            textColor: 'text-white'
+          }
+        };
+    }
+  };
+  
+  // Get dynamic theme styles
+  const themeStyles = getThemeStyles();
+  const totalXP = Math.floor(totalStudyMinutes * 0.5) + (totalSessions * 10) + (currentStreak * 5);
+  
   return (
-    <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
+    <div className={`${themeStyles.pageBackground} font-sans text-[#333333] min-h-screen neuro-noise transition-all duration-1000`}>
       <Header toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
@@ -239,16 +351,51 @@ export default function StudyTimer() {
         onClose={() => setShowPlannerOverlay(false)} 
       />
       
+      {/* Theme Level Indicator */}
+      <div className="fixed top-20 right-4 z-50 transition-all duration-500">
+        <div 
+          className={`px-3 py-1.5 rounded-full text-white text-xs font-bold flex items-center shadow-lg
+            ${themeLevel === 'beginner' ? 'bg-blue-600' : 
+              themeLevel === 'intermediate' ? 'bg-emerald-600' : 
+              themeLevel === 'advanced' ? 'bg-indigo-600' : 'bg-amber-600'}`}
+        >
+          <span className="mr-1.5">
+            {themeLevel === 'beginner' ? 'Beginner' : 
+             themeLevel === 'intermediate' ? 'Intermediate' : 
+             themeLevel === 'advanced' ? 'Advanced' : 'Expert'}
+          </span>
+          {themeLevel === 'beginner' ? (
+            <span role="img" aria-label="Seedling" className="text-xs">🌱</span>
+          ) : themeLevel === 'intermediate' ? (
+            <span role="img" aria-label="Growing Plant" className="text-xs">🌿</span>
+          ) : themeLevel === 'advanced' ? (
+            <span role="img" aria-label="Medal" className="text-xs">🏅</span>
+          ) : (
+            <span role="img" aria-label="Crown" className="text-xs">👑</span>
+          )}
+        </div>
+      </div>
+      
       <div className="flex h-screen pt-16">
         <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
           <div className="max-w-6xl mx-auto space-y-6">
             {/* Header with dashboard stats */}
-            <div className="bg-gradient-to-r from-[#13294B]/95 to-[#4B9CD3]/95 rounded-xl p-5 shadow-md mb-2">
+            <div className={`${themeStyles.headerBackground} rounded-xl p-5 shadow-md mb-2 transition-all duration-1000`}>
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div className="text-white">
-                  <h1 className="text-3xl font-bold mb-2">Focus Timer Dashboard</h1>
-                  <p className="text-blue-100 max-w-2xl">
-                    Track your study progress, maintain your streak, and earn achievements through consistent learning.
+                  <div className="flex items-center">
+                    <h1 className="text-3xl font-bold mb-2">
+                      {themeStyles.headerTitle}
+                    </h1>
+                    {themeLevel === 'expert' && (
+                      <div className="ml-3 flex">
+                        <div className="animate-ping absolute h-3 w-3 rounded-full bg-yellow-300 opacity-75"></div>
+                        <div className="relative rounded-full h-3 w-3 bg-yellow-400"></div>
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-white/90 max-w-2xl">
+                    {themeStyles.headerSubtitle}
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -261,7 +408,10 @@ export default function StudyTimer() {
                     Plan Session
                   </Button>
                   <Button
-                    className="bg-white text-[#13294B] hover:bg-blue-100 shadow-sm transition-all duration-300"
+                    className={`bg-white hover:bg-white/90 shadow-sm transition-all duration-300
+                      ${themeLevel === 'beginner' ? 'text-blue-700' : 
+                       themeLevel === 'intermediate' ? 'text-emerald-700' : 
+                       themeLevel === 'advanced' ? 'text-indigo-700' : 'text-amber-700'}`}
                     onClick={() => setShowPlannerOverlay(true)}
                   >
                     <Clock className="mr-2 h-4 w-4" />
@@ -272,53 +422,71 @@ export default function StudyTimer() {
               
               {/* Dashboard Stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
-                  <div className="text-white mb-1 opacity-90 flex items-center">
+                <div className={`${themeStyles.stats.background} backdrop-blur-sm rounded-lg p-4 flex flex-col items-center`}>
+                  <div className={`${themeStyles.stats.textColor} mb-1 opacity-90 flex items-center`}>
                     <Clock className="h-4 w-4 mr-1" />
                     <span className="text-xs font-medium">TOTAL TIME</span>
                   </div>
-                  <p className="text-white text-2xl font-bold">
+                  <p className={`${themeStyles.stats.textColor} text-2xl font-bold`}>
                     {Math.floor(totalStudyMinutes / 60)}h {totalStudyMinutes % 60}m
                   </p>
                 </div>
                 
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
-                  <div className="text-white mb-1 opacity-90 flex items-center">
+                <div className={`${themeStyles.stats.background} backdrop-blur-sm rounded-lg p-4 flex flex-col items-center`}>
+                  <div className={`${themeStyles.stats.textColor} mb-1 opacity-90 flex items-center`}>
                     <Calendar className="h-4 w-4 mr-1" />
                     <span className="text-xs font-medium">SESSIONS</span>
                   </div>
-                  <p className="text-white text-2xl font-bold">{totalSessions}</p>
+                  <p className={`${themeStyles.stats.textColor} text-2xl font-bold`}>{totalSessions}</p>
                 </div>
                 
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
-                  <div className="text-white mb-1 opacity-90 flex items-center">
+                <div className={`${themeStyles.stats.background} backdrop-blur-sm rounded-lg p-4 flex flex-col items-center`}>
+                  <div className={`${themeStyles.stats.textColor} mb-1 opacity-90 flex items-center`}>
                     <Zap className="h-4 w-4 mr-1" />
                     <span className="text-xs font-medium">STREAK</span>
                   </div>
-                  <p className="text-white text-2xl font-bold">{currentStreak} days</p>
+                  <p className={`${themeStyles.stats.textColor} text-2xl font-bold`}>{currentStreak} days</p>
                 </div>
                 
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
-                  <div className="text-white mb-1 opacity-90 flex items-center">
+                <div className={`${themeStyles.stats.background} backdrop-blur-sm rounded-lg p-4 flex flex-col items-center overflow-hidden relative`}>
+                  <div className={`${themeStyles.stats.textColor} mb-1 opacity-90 flex items-center`}>
                     <Trophy className="h-4 w-4 mr-1" />
                     <span className="text-xs font-medium">XP POINTS</span>
                   </div>
-                  <p className="text-white text-2xl font-bold">
-                    {Math.floor(totalStudyMinutes * 0.5) + (totalSessions * 10) + (currentStreak * 5)}
+                  <p className={`${themeStyles.stats.textColor} text-2xl font-bold`}>
+                    {totalXP}
                   </p>
+                  {themeLevel === 'expert' && (
+                    <div className="absolute -right-4 -top-4 w-16 h-16 opacity-20 rotate-12">
+                      <Trophy className="w-full h-full text-white" />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
             
             {/* Weekly Goal Progress */}
-            <div className="bg-white rounded-xl p-5 shadow-md border border-gray-200/50">
+            <div className="bg-white rounded-xl p-5 shadow-md border border-gray-200/50 transition-all duration-500">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                 <h3 className="font-semibold text-gray-900 flex items-center text-lg">
-                  <BarChart4 className="mr-2 h-5 w-5 text-blue-600" />
+                  <BarChart4 
+                    className={`mr-2 h-5 w-5 
+                      ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                       themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                       themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`} 
+                  />
                   Weekly Study Goal
                 </h3>
-                <div className="flex items-center text-sm mt-1 sm:mt-0 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">
-                  <span className="text-blue-700 font-semibold">{weeklyProgress}</span>
+                <div className={`flex items-center text-sm mt-1 sm:mt-0 px-3 py-1.5 rounded-full border transition-all duration-500
+                  ${themeLevel === 'beginner' ? 'bg-blue-50 border-blue-100' : 
+                   themeLevel === 'intermediate' ? 'bg-emerald-50 border-emerald-100' : 
+                   themeLevel === 'advanced' ? 'bg-indigo-50 border-indigo-100' : 'bg-amber-50 border-amber-100'}`}>
+                  <span className={`font-semibold
+                     ${themeLevel === 'beginner' ? 'text-blue-700' : 
+                      themeLevel === 'intermediate' ? 'text-emerald-700' : 
+                      themeLevel === 'advanced' ? 'text-indigo-700' : 'text-amber-700'}`}>
+                    {weeklyProgress}
+                  </span>
                   <span className="mx-1 text-gray-500">/</span>
                   <span className="text-gray-700">{weeklyGoal} minutes</span>
                 </div>
@@ -327,25 +495,40 @@ export default function StudyTimer() {
               <div className="relative pt-2">
                 <div className="flex mb-2 items-center justify-between">
                   <div>
-                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-100">
+                    <span className={`text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full transition-all duration-500
+                      ${themeLevel === 'beginner' ? 'text-blue-600 bg-blue-100' : 
+                       themeLevel === 'intermediate' ? 'text-emerald-600 bg-emerald-100' : 
+                       themeLevel === 'advanced' ? 'text-indigo-600 bg-indigo-100' : 'text-amber-600 bg-amber-100'}`}>
                       Progress
                     </span>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-semibold inline-block text-blue-600">
+                    <span className={`text-xs font-semibold inline-block
+                      ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                       themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                       themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`}>
                       {Math.round((weeklyProgress / weeklyGoal) * 100)}%
                     </span>
                   </div>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3 mb-3">
                   <div 
-                    className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full shadow-inner transition-all duration-500 relative" 
+                    className={`h-3 rounded-full shadow-inner transition-all duration-500 relative
+                      ${themeLevel === 'beginner' ? 'bg-gradient-to-r from-blue-500 to-blue-600' : 
+                       themeLevel === 'intermediate' ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' : 
+                       themeLevel === 'advanced' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' : 'bg-gradient-to-r from-amber-500 to-amber-600'}`} 
                     style={{ width: `${Math.min(100, (weeklyProgress / weeklyGoal) * 100)}%` }}
                   >
                     {weeklyProgress >= weeklyGoal && (
                       <span className="absolute -right-1 -top-1 flex h-5 w-5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-5 w-5 bg-blue-500 items-center justify-center">
+                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75
+                          ${themeLevel === 'beginner' ? 'bg-blue-300' : 
+                           themeLevel === 'intermediate' ? 'bg-emerald-300' : 
+                           themeLevel === 'advanced' ? 'bg-indigo-300' : 'bg-amber-300'}`}></span>
+                        <span className={`relative inline-flex rounded-full h-5 w-5 items-center justify-center
+                          ${themeLevel === 'beginner' ? 'bg-blue-500' : 
+                           themeLevel === 'intermediate' ? 'bg-emerald-500' : 
+                           themeLevel === 'advanced' ? 'bg-indigo-500' : 'bg-amber-500'}`}>
                           <Check className="h-3 w-3 text-white" />
                         </span>
                       </span>
@@ -354,34 +537,15 @@ export default function StudyTimer() {
                 </div>
                 
                 <div className="flex justify-between text-xs text-gray-600 px-1">
-                  <div className="flex flex-col items-center">
-                    <span className="font-semibold">Mon</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="font-semibold">Tue</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="font-semibold">Wed</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="font-semibold">Thu</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="font-semibold">Fri</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="font-semibold">Sat</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
-                  </div>
-                  <div className="flex flex-col items-center">
-                    <span className="font-semibold">Sun</span>
-                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
-                  </div>
+                  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+                    <div key={day} className="flex flex-col items-center">
+                      <span className="font-semibold">{day}</span>
+                      <div className={`h-1.5 w-1.5 rounded-full mt-1 transition-all duration-500
+                        ${themeLevel === 'beginner' ? 'bg-blue-500' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-500' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-500' : 'bg-amber-500'}`}></div>
+                    </div>
+                  ))}
                 </div>
                 
                 <p className="text-sm text-gray-600 mt-4 flex items-center">
@@ -394,7 +558,13 @@ export default function StudyTimer() {
                     ) 
                     : (
                       <span>
-                        <span className="font-medium text-blue-600">{weeklyGoal - weeklyProgress} minutes</span> remaining to reach your weekly goal
+                        <span className={`font-medium transition-all duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                           themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`}>
+                          {weeklyGoal - weeklyProgress} minutes
+                        </span> 
+                        <span> remaining to reach your weekly goal</span>
                       </span>
                     )
                   }
@@ -412,28 +582,64 @@ export default function StudyTimer() {
                 <TabsList className="bg-transparent w-full justify-start mb-0 gap-2">
                   <TabsTrigger 
                     value="timer" 
-                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                    className={`flex items-center rounded-none pb-3 px-4 transition-all duration-500
+                      data-[state=active]:border-b-2 data-[state=active]:shadow-none
+                      ${themeLevel === 'beginner' 
+                        ? 'data-[state=active]:text-blue-600 data-[state=active]:border-blue-600' 
+                        : themeLevel === 'intermediate'
+                          ? 'data-[state=active]:text-emerald-600 data-[state=active]:border-emerald-600'
+                          : themeLevel === 'advanced'
+                            ? 'data-[state=active]:text-indigo-600 data-[state=active]:border-indigo-600'
+                            : 'data-[state=active]:text-amber-600 data-[state=active]:border-amber-600'
+                      }`}
                   >
                     <Clock className="mr-2 h-4 w-4" />
                     Timer
                   </TabsTrigger>
                   <TabsTrigger 
                     value="notes" 
-                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                    className={`flex items-center rounded-none pb-3 px-4 transition-all duration-500
+                      data-[state=active]:border-b-2 data-[state=active]:shadow-none
+                      ${themeLevel === 'beginner' 
+                        ? 'data-[state=active]:text-blue-600 data-[state=active]:border-blue-600' 
+                        : themeLevel === 'intermediate'
+                          ? 'data-[state=active]:text-emerald-600 data-[state=active]:border-emerald-600'
+                          : themeLevel === 'advanced'
+                            ? 'data-[state=active]:text-indigo-600 data-[state=active]:border-indigo-600'
+                            : 'data-[state=active]:text-amber-600 data-[state=active]:border-amber-600'
+                      }`}
                   >
                     <PenLine className="mr-2 h-4 w-4" />
                     Session Notes
                   </TabsTrigger>
                   <TabsTrigger 
                     value="history" 
-                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                    className={`flex items-center rounded-none pb-3 px-4 transition-all duration-500
+                      data-[state=active]:border-b-2 data-[state=active]:shadow-none
+                      ${themeLevel === 'beginner' 
+                        ? 'data-[state=active]:text-blue-600 data-[state=active]:border-blue-600' 
+                        : themeLevel === 'intermediate'
+                          ? 'data-[state=active]:text-emerald-600 data-[state=active]:border-emerald-600'
+                          : themeLevel === 'advanced'
+                            ? 'data-[state=active]:text-indigo-600 data-[state=active]:border-indigo-600'
+                            : 'data-[state=active]:text-amber-600 data-[state=active]:border-amber-600'
+                      }`}
                   >
                     <History className="mr-2 h-4 w-4" />
                     History
                   </TabsTrigger>
                   <TabsTrigger 
                     value="achievements" 
-                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                    className={`flex items-center rounded-none pb-3 px-4 transition-all duration-500
+                      data-[state=active]:border-b-2 data-[state=active]:shadow-none
+                      ${themeLevel === 'beginner' 
+                        ? 'data-[state=active]:text-blue-600 data-[state=active]:border-blue-600' 
+                        : themeLevel === 'intermediate'
+                          ? 'data-[state=active]:text-emerald-600 data-[state=active]:border-emerald-600'
+                          : themeLevel === 'advanced'
+                            ? 'data-[state=active]:text-indigo-600 data-[state=active]:border-indigo-600'
+                            : 'data-[state=active]:text-amber-600 data-[state=active]:border-amber-600'
+                      }`}
                   >
                     <Award className="mr-2 h-4 w-4" />
                     Achievements
