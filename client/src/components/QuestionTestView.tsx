@@ -423,12 +423,13 @@ export function QuestionTestView({
     setTimeout(() => {
       // Calculate score
       const correctCount = Object.entries(answerCorrectness).filter(([_, isCorrect]) => isCorrect).length;
+      
       const isPerfectScore = correctCount === totalQuestions;
       
       // Update badges and progress
       updateAfterTestCompleted(correctCount, totalQuestions, isPerfectScore);
       
-      // Set test as submitted
+      // Set test as submitted to show the review screen
       setTestSubmitted(true);
       setIsSubmitting(false);
       
@@ -460,6 +461,33 @@ export function QuestionTestView({
     );
   }
   
+  // Show review screen if the test is submitted
+  if (testSubmitted) {
+    const correctCount = Object.entries(answerCorrectness).filter(([_, isCorrect]) => isCorrect).length;
+    
+    return (
+      <ExamReviewScreen 
+        score={correctCount}
+        totalQuestions={totalQuestions}
+        questions={questions}
+        userAnswers={userAnswers}
+        answerCorrectness={answerCorrectness}
+        timeTaken={timer}
+        onBack={onBack}
+        onRetakeExam={() => {
+          // Reset all states to start the exam again
+          setUserAnswers({});
+          setShowRationale({});
+          setAnswerCorrectness({});
+          setCurrentQuestionIndex(0);
+          setFlaggedQuestions([]);
+          setTestSubmitted(false);
+          setTimer("02:00:00");
+        }}
+      />
+    );
+  }
+
   // Show loading screen when initially loading test data
   if (isLoading && questions.length === 0) {
     return (
