@@ -7,7 +7,8 @@ import { Label } from '@/components/ui/label';
 import { 
   CheckCircle2, Calendar, Clock, BookOpen, BrainCircuit, Divide, LineChart, 
   Lightbulb, ArrowRight, Edit2, Plus, Trash2, Save, X, ChevronDown, ChevronUp,
-  AlertCircle, CheckSquare, Download, Upload, Award, BarChart2, BookOpen as BookOpenIcon, PlusCircle
+  AlertCircle, CheckSquare, Download, Upload, Award, BarChart2, BookOpen as BookOpenIcon, PlusCircle,
+  FileQuestion, FileText
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
