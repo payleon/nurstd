@@ -215,6 +215,25 @@ export function StudyStrategyPlanner() {
   const [customTips, setCustomTips] = useState<string[]>([]);
   const [customGoals, setCustomGoals] = useState<string[]>([]);
   
+  // Weekly schedule editing state
+  const [isEditingWeekSchedule, setIsEditingWeekSchedule] = useState(false);
+  const [activeEditingDay, setActiveEditingDay] = useState<DayOfWeek | null>(null);
+  const [editedWeekSchedule, setEditedWeekSchedule] = useState<{
+    [key in DayOfWeek]?: {
+      focus: string;
+      tasks: string[];
+    }
+  }>({});
+  
+  // Structured goals state
+  const [newGoal, setNewGoal] = useState<StudyGoal>({
+    id: '',
+    content: '',
+    category: 'content-mastery',
+    isCompleted: false,
+    priority: 'medium'
+  });
+  
   // Track which step of the planner we're on
   const [currentStep, setCurrentStep] = useState<'preferences' | 'plan'>('preferences');
   
@@ -461,6 +480,126 @@ export function StudyStrategyPlanner() {
     };
     
     return [...baseResources, ...styleSpecificResources[prefs.learningStyle]];
+  };
+  
+  // Helper function to toggle goal completion
+  const toggleGoalCompletion = (goalId: string) => {
+    if (!studyPlan.structuredGoals) return;
+    
+    const updatedGoals = studyPlan.structuredGoals.map(goal => 
+      goal.id === goalId ? { ...goal, isCompleted: !goal.isCompleted } : goal
+    );
+    
+    setStudyPlan({
+      ...studyPlan,
+      structuredGoals: updatedGoals
+    });
+  };
+  
+  // Function to delete a structured goal
+  const deleteStructuredGoal = (goalId: string) => {
+    if (!studyPlan.structuredGoals) return;
+    
+    const updatedGoals = studyPlan.structuredGoals.filter(goal => goal.id !== goalId);
+    
+    setStudyPlan({
+      ...studyPlan,
+      structuredGoals: updatedGoals
+    });
+  };
+  
+  // Helper function to add a structured goal
+  const handleAddStructuredGoal = () => {
+    if (!newGoal.content.trim()) return;
+    
+    const updatedGoals = studyPlan.structuredGoals ? [...studyPlan.structuredGoals] : [];
+    updatedGoals.push({
+      ...newGoal,
+      id: `goal-${Date.now()}`
+    });
+    
+    // Reset form
+    setNewGoal({
+      id: '',
+      content: '',
+      category: 'content-mastery',
+      isCompleted: false,
+      priority: 'medium'
+    });
+    
+    // Update study plan
+    setStudyPlan({
+      ...studyPlan,
+      structuredGoals: updatedGoals
+    });
+  };
+  
+  // Helper function to get priority badge color
+  const getPriorityColor = (priority: 'high' | 'medium' | 'low') => {
+    switch (priority) {
+      case 'high':
+        return 'bg-red-100 text-red-800';
+      case 'medium':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'low':
+        return 'bg-green-100 text-green-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+  
+  // Helper function to get color for chart based on index
+  const getColorByIndex = (index: number) => {
+    const colors = ['blue', 'green', 'purple', 'red', 'orange', 'yellow'];
+    return colors[index % colors.length];
+  };
+  
+  // Helper function to render pie chart SVG segments
+  const renderPieChart = (areas: {area: string, percentage: number}[]) => {
+    let startAngle = 0;
+    return areas.map((area, index) => {
+      const endAngle = startAngle + (area.percentage / 100 * 360);
+      
+      // Calculate SVG arc path
+      const x1 = 50 + 45 * Math.cos((startAngle - 90) * Math.PI / 180);
+      const y1 = 50 + 45 * Math.sin((startAngle - 90) * Math.PI / 180);
+      const x2 = 50 + 45 * Math.cos((endAngle - 90) * Math.PI / 180);
+      const y2 = 50 + 45 * Math.sin((endAngle - 90) * Math.PI / 180);
+      
+      // Determine if angle is large (more than 180 degrees)
+      const largeArcFlag = (endAngle - startAngle <= 180) ? "0" : "1";
+      
+      // Create SVG arc
+      const pathData = `M 50 50 L ${x1} ${y1} A 45 45 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
+      
+      const element = (
+        <path 
+          key={`pie-${index}`}
+          d={pathData} 
+          fill={`hsl(${210 + index * 30}, 70%, ${60 - index * 5}%)`}
+        />
+      );
+      
+      // Update start angle for next segment
+      startAngle = endAngle;
+      return element;
+    });
+  };
+  
+  // Helper function to get recommended daily study time in minutes
+  const getRecommendedDailyMinutes = (commitment: TimeCommitment, percentage: number) => {
+    const totalMinutes = 
+      commitment === 'minimal' ? 90 : // 1.5 hours
+      commitment === 'moderate' ? 180 : // 3 hours
+      300; // 5 hours for intensive
+      
+    return Math.round((percentage / 100) * totalMinutes);
+  };
+  
+  // Helper function to get the total weekly hours
+  const getTotalWeeklyHours = (commitment: TimeCommitment) => {
+    return commitment === 'minimal' ? '10-12' : 
+           commitment === 'moderate' ? '20-25' : '35-40';
   };
   
   // Get study tips based on learning style
