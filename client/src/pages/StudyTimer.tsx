@@ -876,7 +876,11 @@ export default function StudyTimer() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
                     <div>
                       <h2 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
-                        <History className="mr-2 h-5 w-5 text-blue-600" />
+                        <History className={`mr-2 h-5 w-5 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                           themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`} 
+                        />
                         Study Session History
                       </h2>
                       <p className="text-sm text-gray-600">
@@ -886,39 +890,115 @@ export default function StudyTimer() {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white shadow-md relative overflow-hidden">
+                    {/* Total Sessions Card */}
+                    <div className={`rounded-xl p-4 text-white shadow-md relative overflow-hidden transition-all duration-500
+                      ${themeLevel === 'beginner' 
+                        ? 'bg-gradient-to-br from-blue-500 to-blue-600' 
+                        : themeLevel === 'intermediate'
+                          ? 'bg-gradient-to-br from-emerald-500 to-emerald-600'
+                          : themeLevel === 'advanced'
+                            ? 'bg-gradient-to-br from-indigo-500 to-indigo-600'
+                            : 'bg-gradient-to-br from-amber-500 to-amber-600'
+                      }`}
+                    >
                       <div className="z-10 relative">
-                        <p className="text-xs text-blue-100 uppercase tracking-wider font-medium">Total Sessions</p>
+                        <p className={`text-xs uppercase tracking-wider font-medium transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-100' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-100' : 
+                           themeLevel === 'advanced' ? 'text-indigo-100' : 'text-amber-100'}`}
+                        >
+                          Total Sessions
+                        </p>
                         <p className="text-3xl font-bold mt-1">{totalSessions}</p>
-                        <p className="text-xs mt-1 text-blue-100">
+                        <p className={`text-xs mt-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-100' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-100' : 
+                           themeLevel === 'advanced' ? 'text-indigo-100' : 'text-amber-100'}`}
+                        >
                           {totalSessions === 0 
                             ? "Start your first session today" 
                             : `${sessionHistory.filter(s => s.duration >= 30).length} sessions over 30 min`}
                         </p>
                       </div>
-                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-400/30 rounded-full"></div>
-                      <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-blue-400/30 rounded-full"></div>
+                      <div className={`absolute -bottom-6 -right-6 w-24 h-24 rounded-full transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'bg-blue-400/30' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-400/30' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-400/30' : 'bg-amber-400/30'}`}
+                      ></div>
+                      <div className={`absolute -bottom-2 -right-2 w-16 h-16 rounded-full transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'bg-blue-400/30' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-400/30' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-400/30' : 'bg-amber-400/30'}`}
+                      ></div>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white shadow-md relative overflow-hidden">
+                    {/* Total Study Time Card */}
+                    <div className={`rounded-xl p-4 text-white shadow-md relative overflow-hidden transition-all duration-500
+                      ${themeLevel === 'beginner' 
+                        ? 'bg-gradient-to-br from-blue-600 to-blue-700' 
+                        : themeLevel === 'intermediate'
+                          ? 'bg-gradient-to-br from-emerald-600 to-emerald-700'
+                          : themeLevel === 'advanced'
+                            ? 'bg-gradient-to-br from-indigo-600 to-indigo-700'
+                            : 'bg-gradient-to-br from-amber-600 to-amber-700'
+                      }`}
+                    >
                       <div className="z-10 relative">
-                        <p className="text-xs text-green-100 uppercase tracking-wider font-medium">Total Study Time</p>
+                        <p className={`text-xs uppercase tracking-wider font-medium transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-100' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-100' : 
+                           themeLevel === 'advanced' ? 'text-indigo-100' : 'text-amber-100'}`}
+                        >
+                          Total Study Time
+                        </p>
                         <p className="text-3xl font-bold mt-1">{Math.floor(totalStudyMinutes / 60)}h {totalStudyMinutes % 60}m</p>
-                        <p className="text-xs mt-1 text-green-100">
+                        <p className={`text-xs mt-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-100' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-100' : 
+                           themeLevel === 'advanced' ? 'text-indigo-100' : 'text-amber-100'}`}
+                        >
                           {totalStudyMinutes === 0 
                             ? "No time logged yet" 
                             : `Avg ${Math.floor((totalStudyMinutes / Math.max(1, totalSessions)))} min per session`}
                         </p>
                       </div>
-                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-green-400/30 rounded-full"></div>
-                      <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-green-400/30 rounded-full"></div>
+                      <div className={`absolute -bottom-6 -right-6 w-24 h-24 rounded-full transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'bg-blue-400/30' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-400/30' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-400/30' : 'bg-amber-400/30'}`}
+                      ></div>
+                      <div className={`absolute -bottom-2 -right-2 w-16 h-16 rounded-full transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'bg-blue-400/30' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-400/30' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-400/30' : 'bg-amber-400/30'}`}
+                      ></div>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl p-4 text-white shadow-md relative overflow-hidden">
+                    {/* Current Streak Card */}
+                    <div className={`rounded-xl p-4 text-white shadow-md relative overflow-hidden transition-all duration-500
+                      ${themeLevel === 'beginner' 
+                        ? 'bg-gradient-to-br from-blue-500 to-purple-600' 
+                        : themeLevel === 'intermediate'
+                          ? 'bg-gradient-to-br from-emerald-500 to-teal-600'
+                          : themeLevel === 'advanced'
+                            ? 'bg-gradient-to-br from-indigo-500 to-purple-600'
+                            : 'bg-gradient-to-br from-amber-500 to-orange-600'
+                      }`}
+                    >
                       <div className="z-10 relative">
-                        <p className="text-xs text-amber-100 uppercase tracking-wider font-medium">Current Streak</p>
+                        <p className={`text-xs uppercase tracking-wider font-medium transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-100' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-100' : 
+                           themeLevel === 'advanced' ? 'text-indigo-100' : 'text-amber-100'}`}
+                        >
+                          Current Streak
+                        </p>
                         <p className="text-3xl font-bold mt-1">{currentStreak} days</p>
-                        <p className="text-xs mt-1 text-amber-100">
+                        <p className={`text-xs mt-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-100' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-100' : 
+                           themeLevel === 'advanced' ? 'text-indigo-100' : 'text-amber-100'}`}
+                        >
                           {currentStreak === 0 
                             ? "Study today to start a streak" 
                             : currentStreak === 1 
@@ -926,15 +1006,34 @@ export default function StudyTimer() {
                               : `Keep it going! Study today`}
                         </p>
                       </div>
-                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-amber-400/30 rounded-full"></div>
-                      <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-amber-400/30 rounded-full"></div>
+                      <div className={`absolute -bottom-6 -right-6 w-24 h-24 rounded-full transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'bg-blue-400/30' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-400/30' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-400/30' : 'bg-amber-400/30'}`}
+                      ></div>
+                      <div className={`absolute -bottom-2 -right-2 w-16 h-16 rounded-full transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'bg-blue-400/30' : 
+                         themeLevel === 'intermediate' ? 'bg-emerald-400/30' : 
+                         themeLevel === 'advanced' ? 'bg-indigo-400/30' : 'bg-amber-400/30'}`}
+                      ></div>
+
+                      {/* Special effect for Expert level */}
+                      {themeLevel === 'expert' && (
+                        <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-yellow-400/10 rounded-full animate-pulse"></div>
+                        </div>
+                      )}
                     </div>
                   </div>
                   
-                  {/* Activity Heatmap Placeholder */}
+                  {/* Activity Heatmap */}
                   <div className="mb-6">
                     <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center">
-                      <CalendarDays className="h-4 w-4 mr-2 text-blue-600" />
+                      <CalendarDays className={`h-4 w-4 mr-2 transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                         themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                         themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`} 
+                      />
                       Activity Overview
                     </h3>
                     <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
@@ -951,13 +1050,28 @@ export default function StudyTimer() {
                                   return date.getDay() === (dayIndex + 1) % 7 && 
                                          Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24)) < 28;
                                 });
-                                const intensity = hasSession 
-                                  ? Math.random() > 0.7 ? 'bg-blue-500' : 'bg-blue-300'
-                                  : 'bg-gray-200';
+                                
+                                // Select color based on theme level
+                                const getBgColor = () => {
+                                  if (!hasSession) return 'bg-gray-200';
+                                  
+                                  const isHighIntensity = Math.random() > 0.7;
+                                  
+                                  if (themeLevel === 'beginner') {
+                                    return isHighIntensity ? 'bg-blue-500' : 'bg-blue-300';
+                                  } else if (themeLevel === 'intermediate') {
+                                    return isHighIntensity ? 'bg-emerald-500' : 'bg-emerald-300';
+                                  } else if (themeLevel === 'advanced') {
+                                    return isHighIntensity ? 'bg-indigo-500' : 'bg-indigo-300';
+                                  } else {
+                                    return isHighIntensity ? 'bg-amber-500' : 'bg-amber-300';
+                                  }
+                                };
+                                
                                 return (
                                   <div 
                                     key={weekIndex} 
-                                    className={`w-6 h-6 rounded-sm ${intensity} transition-colors duration-200`}
+                                    className={`w-6 h-6 rounded-sm transition-colors duration-500 ${getBgColor()}`}
                                     title={`${['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayIndex]} Week ${weekIndex + 1}`}
                                   ></div>
                                 );
@@ -971,10 +1085,38 @@ export default function StudyTimer() {
                           <span>Less</span>
                           <div className="flex mx-1.5 space-x-1">
                             <div className="w-3 h-3 bg-gray-200 rounded-sm"></div>
-                            <div className="w-3 h-3 bg-blue-200 rounded-sm"></div>
-                            <div className="w-3 h-3 bg-blue-300 rounded-sm"></div>
-                            <div className="w-3 h-3 bg-blue-400 rounded-sm"></div>
-                            <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+                            {themeLevel === 'beginner' && (
+                              <>
+                                <div className="w-3 h-3 bg-blue-200 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-blue-300 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-blue-400 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+                              </>
+                            )}
+                            {themeLevel === 'intermediate' && (
+                              <>
+                                <div className="w-3 h-3 bg-emerald-200 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-emerald-300 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-emerald-400 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-emerald-500 rounded-sm"></div>
+                              </>
+                            )}
+                            {themeLevel === 'advanced' && (
+                              <>
+                                <div className="w-3 h-3 bg-indigo-200 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-indigo-300 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-indigo-400 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-indigo-500 rounded-sm"></div>
+                              </>
+                            )}
+                            {themeLevel === 'expert' && (
+                              <>
+                                <div className="w-3 h-3 bg-amber-200 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-amber-300 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-amber-400 rounded-sm"></div>
+                                <div className="w-3 h-3 bg-amber-500 rounded-sm"></div>
+                              </>
+                            )}
                           </div>
                           <span>More</span>
                         </div>
@@ -1047,18 +1189,39 @@ export default function StudyTimer() {
               </TabsContent>
               
               <TabsContent value="achievements" className="space-y-6">
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200/50">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                     <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                      <Award className="mr-2 h-5 w-5 text-yellow-500" />
+                      <Award className={`mr-2 h-5 w-5 transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                         themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                         themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`} 
+                      />
                       Study Achievements
                     </h2>
                     
-                    <div className="mt-2 sm:mt-0 flex items-center bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100">
-                      <Trophy className="h-4 w-4 text-blue-500 mr-2" />
-                      <div>
-                        <span className="text-sm font-medium text-blue-800">Total XP: </span>
-                        <span className="text-sm font-bold text-blue-900">
+                    <div className={`mt-2 sm:mt-0 flex items-center px-3 py-1.5 rounded-lg border transition-colors duration-500
+                      ${themeLevel === 'beginner' 
+                        ? 'bg-blue-50 border-blue-100' 
+                        : themeLevel === 'intermediate'
+                          ? 'bg-emerald-50 border-emerald-100'
+                          : themeLevel === 'advanced'
+                            ? 'bg-indigo-50 border-indigo-100'
+                            : 'bg-amber-50 border-amber-100'
+                      }`}
+                    >
+                      <Trophy className={`h-4 w-4 mr-2 transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'text-blue-600' : 
+                         themeLevel === 'intermediate' ? 'text-emerald-600' : 
+                         themeLevel === 'advanced' ? 'text-indigo-600' : 'text-amber-600'}`}
+                      />
+                      <div className={`transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'text-blue-800' : 
+                         themeLevel === 'intermediate' ? 'text-emerald-800' : 
+                         themeLevel === 'advanced' ? 'text-indigo-800' : 'text-amber-800'}`}
+                      >
+                        <span className="text-sm font-medium">Total XP: </span>
+                        <span className="text-sm font-bold">
                           {Math.floor(totalStudyMinutes * 0.5) + (totalSessions * 10) + (currentStreak * 5)}
                         </span>
                       </div>
@@ -1066,11 +1229,34 @@ export default function StudyTimer() {
                   </div>
                   
                   {/* Achievement Progress Summary */}
-                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mb-6 border border-blue-100">
-                    <h3 className="font-medium text-blue-800 mb-3">Achievement Progress</h3>
+                  <div className={`rounded-lg p-4 mb-6 border transition-all duration-500
+                    ${themeLevel === 'beginner' 
+                      ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100' 
+                      : themeLevel === 'intermediate'
+                        ? 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-100'
+                        : themeLevel === 'advanced'
+                          ? 'bg-gradient-to-r from-indigo-50 to-purple-50 border-indigo-100'
+                          : 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-100'
+                    }`}
+                  >
+                    <h3 className={`font-medium mb-3 transition-colors duration-500
+                      ${themeLevel === 'beginner' ? 'text-blue-800' : 
+                       themeLevel === 'intermediate' ? 'text-emerald-800' : 
+                       themeLevel === 'advanced' ? 'text-indigo-800' : 'text-amber-800'}`}
+                    >
+                      Achievement Progress
+                    </h3>
                     <div className="flex flex-wrap gap-2">
-                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-blue-200 flex items-center">
-                        <span className="text-blue-700 mr-1">{
+                      <div className={`bg-white rounded-full px-3 py-1 text-sm font-medium border flex items-center transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'border-blue-200' : 
+                         themeLevel === 'intermediate' ? 'border-emerald-200' : 
+                         themeLevel === 'advanced' ? 'border-indigo-200' : 'border-amber-200'}`}
+                      >
+                        <span className={`mr-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-700' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-700' : 
+                           themeLevel === 'advanced' ? 'text-indigo-700' : 'text-amber-700'}`}
+                        >{
                           [
                             totalSessions >= 1 ? 1 : 0,
                             totalSessions >= 10 ? 1 : 0, 
@@ -1088,16 +1274,40 @@ export default function StudyTimer() {
                         }</span>
                         <span className="text-gray-500">/ 12 Unlocked</span>
                       </div>
-                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-purple-200 flex items-center">
-                        <span className="text-purple-700 mr-1">{Math.floor((totalStudyMinutes / 60) * 10) / 10}</span>
+                      <div className={`bg-white rounded-full px-3 py-1 text-sm font-medium border flex items-center transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'border-purple-200' : 
+                         themeLevel === 'intermediate' ? 'border-teal-200' : 
+                         themeLevel === 'advanced' ? 'border-violet-200' : 'border-orange-200'}`}
+                      >
+                        <span className={`mr-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-purple-700' : 
+                           themeLevel === 'intermediate' ? 'text-teal-700' : 
+                           themeLevel === 'advanced' ? 'text-violet-700' : 'text-orange-700'}`}
+                        >{Math.floor((totalStudyMinutes / 60) * 10) / 10}</span>
                         <span className="text-gray-500">Hours Studied</span>
                       </div>
-                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-green-200 flex items-center">
-                        <span className="text-green-700 mr-1">{totalSessions}</span>
+                      <div className={`bg-white rounded-full px-3 py-1 text-sm font-medium border flex items-center transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'border-blue-200' : 
+                         themeLevel === 'intermediate' ? 'border-emerald-200' : 
+                         themeLevel === 'advanced' ? 'border-indigo-200' : 'border-amber-200'}`}
+                      >
+                        <span className={`mr-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-blue-700' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-700' : 
+                           themeLevel === 'advanced' ? 'text-indigo-700' : 'text-amber-700'}`}
+                        >{totalSessions}</span>
                         <span className="text-gray-500">Sessions</span>
                       </div>
-                      <div className="bg-white rounded-full px-3 py-1 text-sm font-medium border border-amber-200 flex items-center">
-                        <span className="text-amber-700 mr-1">{currentStreak}</span>
+                      <div className={`bg-white rounded-full px-3 py-1 text-sm font-medium border flex items-center transition-colors duration-500
+                        ${themeLevel === 'beginner' ? 'border-amber-200' : 
+                         themeLevel === 'intermediate' ? 'border-emerald-200' : 
+                         themeLevel === 'advanced' ? 'border-indigo-200' : 'border-amber-200'}`}
+                      >
+                        <span className={`mr-1 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-amber-700' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-700' : 
+                           themeLevel === 'advanced' ? 'text-indigo-700' : 'text-amber-700'}`}
+                        >{currentStreak}</span>
                         <span className="text-gray-500">Day Streak</span>
                       </div>
                     </div>
@@ -1107,7 +1317,11 @@ export default function StudyTimer() {
                     {/* CATEGORY: GETTING STARTED */}
                     <div className="md:col-span-3">
                       <h3 className="font-semibold text-gray-800 mb-3 pb-2 border-b flex items-center">
-                        <Zap className="w-4 h-4 mr-2 text-amber-500" /> 
+                        <Zap className={`w-4 h-4 mr-2 transition-colors duration-500
+                          ${themeLevel === 'beginner' ? 'text-amber-500' : 
+                           themeLevel === 'intermediate' ? 'text-emerald-500' : 
+                           themeLevel === 'advanced' ? 'text-indigo-500' : 'text-amber-500'}`} 
+                        /> 
                         Getting Started
                       </h3>
                     </div>
