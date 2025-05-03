@@ -1,12 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
-import { CheckCircle2, Calendar, Clock, BookOpen, BrainCircuit, Divide, LineChart, Lightbulb, ArrowRight } from 'lucide-react';
+import { 
+  CheckCircle2, Calendar, Clock, BookOpen, BrainCircuit, Divide, LineChart, 
+  Lightbulb, ArrowRight, Edit2, Plus, Trash2, Save, X, ChevronDown, ChevronUp,
+  AlertCircle, CheckSquare, Download, Upload, Award, BarChart2, BookOpen as BookOpenIcon, PlusCircle
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { 
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { 
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { 
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 // Types for learning style, study time, and strategies
 type LearningStyle = 'visual' | 'auditory' | 'reading' | 'kinesthetic';
