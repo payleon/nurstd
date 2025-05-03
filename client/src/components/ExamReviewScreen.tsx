@@ -206,13 +206,12 @@ export function ExamReviewScreen({
               <div className="w-full max-w-xs mb-4">
                 <Progress 
                   value={percentage} 
-                  className="h-3"
-                  indicatorClassName={isPassing ? "bg-green-500" : "bg-amber-500"}
+                  className={`h-3 ${isPassing ? "[&>div]:bg-green-500" : "[&>div]:bg-amber-500"}`}
                 />
               </div>
               
               <div className="flex items-center text-sm">
-                <Badge variant={isPassing ? "success" : "warning"} className="mr-2">
+                <Badge variant="default" className={`mr-2 ${isPassing ? "bg-green-600" : "bg-amber-600"}`}>
                   {isPassing ? "PASSING" : "NEEDS IMPROVEMENT"}
                 </Badge>
                 <span className="text-gray-600">
@@ -400,7 +399,7 @@ export function ExamReviewScreen({
                     <div key={category.category} className="bg-green-50 border border-green-100 rounded-lg p-3">
                       <div className="flex justify-between items-center mb-1">
                         <h5 className="font-medium text-green-800">{category.category}</h5>
-                        <Badge variant="success">{category.percentage}%</Badge>
+                        <Badge variant="default" className="bg-green-600">{category.percentage}%</Badge>
                       </div>
                       <div className="flex items-center text-sm text-green-700">
                         <span>{category.correct} correct</span>
@@ -512,12 +511,11 @@ export function ExamReviewScreen({
                       <div className="mt-2">
                         <Progress 
                           value={category.percentage} 
-                          className="h-2"
-                          indicatorClassName={
-                            category.percentage >= 80 ? "bg-green-500" : 
-                            category.percentage >= 65 ? "bg-blue-500" : 
-                            "bg-amber-500"
-                          }
+                          className={`h-2 ${
+                            category.percentage >= 80 ? "[&>div]:bg-green-500" : 
+                            category.percentage >= 65 ? "[&>div]:bg-blue-500" : 
+                            "[&>div]:bg-amber-500"
+                          }`}
                         />
                       </div>
                       
