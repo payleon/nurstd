@@ -242,77 +242,204 @@ export default function StudyTimer() {
       <div className="flex h-screen pt-16">
         <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
           <div className="max-w-6xl mx-auto space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h1 className="text-3xl font-bold text-[#13294B] mb-2">Focus Timer</h1>
-                <p className="text-gray-600">
-                  Improve your study efficiency with our gamified timer. Track your progress, earn badges, and stay focused.
-                </p>
+            {/* Header with dashboard stats */}
+            <div className="bg-gradient-to-r from-[#13294B]/95 to-[#4B9CD3]/95 rounded-xl p-5 shadow-md mb-2">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div className="text-white">
+                  <h1 className="text-3xl font-bold mb-2">Focus Timer Dashboard</h1>
+                  <p className="text-blue-100 max-w-2xl">
+                    Track your study progress, maintain your streak, and earn achievements through consistent learning.
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    className="border-2 border-white text-white hover:bg-white/20 shadow-sm transition-all duration-300"
+                    onClick={() => setShowPlannerOverlay(true)}
+                  >
+                    <AlarmClock className="mr-2 h-4 w-4" />
+                    Plan Session
+                  </Button>
+                  <Button
+                    className="bg-white text-[#13294B] hover:bg-blue-100 shadow-sm transition-all duration-300"
+                    onClick={() => setShowPlannerOverlay(true)}
+                  >
+                    <Clock className="mr-2 h-4 w-4" />
+                    Quick Start
+                  </Button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  className="border-blue-500 text-blue-700 hover:bg-blue-50 shadow-sm"
-                  onClick={() => setShowPlannerOverlay(true)}
-                >
-                  <AlarmClock className="mr-2 h-4 w-4" />
-                  Plan Session
-                </Button>
-                <Button
-                  className="bg-blue-600 hover:bg-blue-700 shadow-sm"
-                  onClick={() => setShowPlannerOverlay(true)}
-                >
-                  <Clock className="mr-2 h-4 w-4" />
-                  Quick Start
-                </Button>
+              
+              {/* Dashboard Stats */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
+                  <div className="text-white mb-1 opacity-90 flex items-center">
+                    <Clock className="h-4 w-4 mr-1" />
+                    <span className="text-xs font-medium">TOTAL TIME</span>
+                  </div>
+                  <p className="text-white text-2xl font-bold">
+                    {Math.floor(totalStudyMinutes / 60)}h {totalStudyMinutes % 60}m
+                  </p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
+                  <div className="text-white mb-1 opacity-90 flex items-center">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    <span className="text-xs font-medium">SESSIONS</span>
+                  </div>
+                  <p className="text-white text-2xl font-bold">{totalSessions}</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
+                  <div className="text-white mb-1 opacity-90 flex items-center">
+                    <Zap className="h-4 w-4 mr-1" />
+                    <span className="text-xs font-medium">STREAK</span>
+                  </div>
+                  <p className="text-white text-2xl font-bold">{currentStreak} days</p>
+                </div>
+                
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col items-center">
+                  <div className="text-white mb-1 opacity-90 flex items-center">
+                    <Trophy className="h-4 w-4 mr-1" />
+                    <span className="text-xs font-medium">XP POINTS</span>
+                  </div>
+                  <p className="text-white text-2xl font-bold">
+                    {Math.floor(totalStudyMinutes * 0.5) + (totalSessions * 10) + (currentStreak * 5)}
+                  </p>
+                </div>
               </div>
             </div>
             
             {/* Weekly Goal Progress */}
-            <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                <h3 className="font-medium text-gray-900 flex items-center">
+            <div className="bg-white rounded-xl p-5 shadow-md border border-gray-200/50">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+                <h3 className="font-semibold text-gray-900 flex items-center text-lg">
                   <BarChart4 className="mr-2 h-5 w-5 text-blue-600" />
                   Weekly Study Goal
                 </h3>
-                <div className="flex items-center text-sm mt-1 sm:mt-0">
-                  <span className="text-blue-600 font-medium">{weeklyProgress} minutes</span>
-                  <span className="mx-1 text-gray-500">of</span>
+                <div className="flex items-center text-sm mt-1 sm:mt-0 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">
+                  <span className="text-blue-700 font-semibold">{weeklyProgress}</span>
+                  <span className="mx-1 text-gray-500">/</span>
                   <span className="text-gray-700">{weeklyGoal} minutes</span>
                 </div>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-2.5 mb-1">
-                <div 
-                  className="bg-blue-600 h-2.5 rounded-full transition-all duration-500" 
-                  style={{ width: `${Math.min(100, (weeklyProgress / weeklyGoal) * 100)}%` }}
-                ></div>
+              
+              <div className="relative pt-2">
+                <div className="flex mb-2 items-center justify-between">
+                  <div>
+                    <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-100">
+                      Progress
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs font-semibold inline-block text-blue-600">
+                      {Math.round((weeklyProgress / weeklyGoal) * 100)}%
+                    </span>
+                  </div>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-3 mb-3">
+                  <div 
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full shadow-inner transition-all duration-500 relative" 
+                    style={{ width: `${Math.min(100, (weeklyProgress / weeklyGoal) * 100)}%` }}
+                  >
+                    {weeklyProgress >= weeklyGoal && (
+                      <span className="absolute -right-1 -top-1 flex h-5 w-5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-300 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-5 w-5 bg-blue-500 items-center justify-center">
+                          <Check className="h-3 w-3 text-white" />
+                        </span>
+                      </span>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="flex justify-between text-xs text-gray-600 px-1">
+                  <div className="flex flex-col items-center">
+                    <span className="font-semibold">Mon</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="font-semibold">Tue</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="font-semibold">Wed</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="font-semibold">Thu</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="font-semibold">Fri</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="font-semibold">Sat</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="font-semibold">Sun</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-blue-500 mt-1"></div>
+                  </div>
+                </div>
+                
+                <p className="text-sm text-gray-600 mt-4 flex items-center">
+                  {weeklyProgress >= weeklyGoal 
+                    ? (
+                      <span className="flex items-center text-green-600">
+                        <Check className="h-4 w-4 mr-1" />
+                        Weekly goal achieved! Great job maintaining your study momentum.
+                      </span>
+                    ) 
+                    : (
+                      <span>
+                        <span className="font-medium text-blue-600">{weeklyGoal - weeklyProgress} minutes</span> remaining to reach your weekly goal
+                      </span>
+                    )
+                  }
+                </p>
               </div>
-              <p className="text-xs text-gray-500 mt-1">
-                {weeklyProgress >= weeklyGoal 
-                  ? "Weekly goal achieved! 🎉" 
-                  : `${weeklyGoal - weeklyProgress} minutes remaining this week`}
-              </p>
             </div>
             
-            <Tabs defaultValue="timer" value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="w-full justify-start mb-6">
-                <TabsTrigger value="timer" className="flex items-center">
-                  <Clock className="mr-2 h-4 w-4" />
-                  Timer
-                </TabsTrigger>
-                <TabsTrigger value="notes" className="flex items-center">
-                  <PenLine className="mr-2 h-4 w-4" />
-                  Session Notes
-                </TabsTrigger>
-                <TabsTrigger value="history" className="flex items-center">
-                  <History className="mr-2 h-4 w-4" />
-                  History
-                </TabsTrigger>
-                <TabsTrigger value="achievements" className="flex items-center">
-                  <Award className="mr-2 h-4 w-4" />
-                  Achievements
-                </TabsTrigger>
-              </TabsList>
+            <Tabs 
+              defaultValue="timer" 
+              value={activeTab} 
+              onValueChange={setActiveTab} 
+              className="w-full"
+            >
+              <div className="border-b border-gray-200 mb-6">
+                <TabsList className="bg-transparent w-full justify-start mb-0 gap-2">
+                  <TabsTrigger 
+                    value="timer" 
+                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                  >
+                    <Clock className="mr-2 h-4 w-4" />
+                    Timer
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="notes" 
+                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                  >
+                    <PenLine className="mr-2 h-4 w-4" />
+                    Session Notes
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="history" 
+                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                  >
+                    <History className="mr-2 h-4 w-4" />
+                    History
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="achievements" 
+                    className="flex items-center data-[state=active]:text-blue-600 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:shadow-none rounded-none pb-3 px-4"
+                  >
+                    <Award className="mr-2 h-4 w-4" />
+                    Achievements
+                  </TabsTrigger>
+                </TabsList>
+              </div>
               
               <TabsContent value="timer" className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -400,45 +527,186 @@ export default function StudyTimer() {
               </TabsContent>
               
               <TabsContent value="notes" className="space-y-6">
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <PenLine className="mr-2 h-5 w-5 text-blue-600" />
-                    Session Notes
-                  </h2>
-                  <p className="text-sm text-gray-600 mb-4">
-                    Take notes during your study session. These will be saved with your session history when you complete the timer.
-                  </p>
-                  <Textarea
-                    placeholder="Write your study notes here..."
-                    className="min-h-[200px] bg-white"
-                    value={currentSessionNotes}
-                    onChange={(e) => setCurrentSessionNotes(e.target.value)}
-                  />
+                <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200/50">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                    <div>
+                      <h2 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                        <PenLine className="mr-2 h-5 w-5 text-blue-600" />
+                        Session Notes
+                      </h2>
+                      <p className="text-sm text-gray-600">
+                        Record key insights during your study session. Notes are saved with your session history.
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-center bg-amber-50 px-3 py-2 rounded-lg border border-amber-100 text-sm text-amber-800">
+                      <Lightbulb className="h-4 w-4 text-amber-500 mr-2 flex-shrink-0" />
+                      <span>Writing detailed notes earns you the <span className="font-medium">Note Taker</span> achievement!</span>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-blue-50/50 rounded-lg p-4 mb-5 border border-blue-100/80">
+                    <h3 className="text-sm font-medium text-blue-800 mb-2 flex items-center">
+                      <FileText className="h-4 w-4 mr-2" />
+                      Note-Taking Tips
+                    </h3>
+                    <ul className="space-y-1.5 text-sm text-blue-700">
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <p>Summarize key concepts in your own words to improve retention</p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <p>Use the Cornell note-taking method: questions on left, notes on right</p>
+                      </li>
+                      <li className="flex items-start">
+                        <div className="flex-shrink-0 w-5 h-5 text-blue-500 mr-1">•</div>
+                        <p>Create mnemonics for complex information you need to memorize</p>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg border border-gray-300 overflow-hidden">
+                    <div className="flex items-center border-b border-gray-200 bg-gray-50 px-4 py-2">
+                      <div className="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
+                      <div className="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
+                      <div className="w-3 h-3 bg-green-400 rounded-full mr-2"></div>
+                      <span className="text-sm text-gray-600 font-medium">Session Notes</span>
+                    </div>
+                    <Textarea
+                      placeholder="# Study Session Notes
+• Topic: 
+• Key concepts:
+• Questions to review:
+• Summary:"
+                      className="min-h-[300px] bg-white border-0 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 resize-y"
+                      value={currentSessionNotes}
+                      onChange={(e) => setCurrentSessionNotes(e.target.value)}
+                    />
+                    <div className="border-t border-gray-200 bg-gray-50 px-4 py-2 text-xs text-gray-500 flex justify-between">
+                      <span>{currentSessionNotes.length} characters</span>
+                      <span>Notes are saved when timer completes</span>
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
               
               <TabsContent value="history" className="space-y-6">
-                <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                    <History className="mr-2 h-5 w-5 text-blue-600" />
-                    Study Session History
-                  </h2>
+                <div className="bg-white rounded-lg p-6 shadow-md border border-gray-200/50">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+                    <div>
+                      <h2 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                        <History className="mr-2 h-5 w-5 text-blue-600" />
+                        Study Session History
+                      </h2>
+                      <p className="text-sm text-gray-600">
+                        Track your progress over time and review past study sessions.
+                      </p>
+                    </div>
+                  </div>
                   
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex gap-6">
-                      <div className="text-center">
-                        <p className="text-xs text-gray-500">Total Sessions</p>
-                        <p className="text-2xl font-bold text-blue-600">{totalSessions}</p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-white shadow-md relative overflow-hidden">
+                      <div className="z-10 relative">
+                        <p className="text-xs text-blue-100 uppercase tracking-wider font-medium">Total Sessions</p>
+                        <p className="text-3xl font-bold mt-1">{totalSessions}</p>
+                        <p className="text-xs mt-1 text-blue-100">
+                          {totalSessions === 0 
+                            ? "Start your first session today" 
+                            : `${sessionHistory.filter(s => s.duration >= 30).length} sessions over 30 min`}
+                        </p>
                       </div>
-                      <div className="text-center">
-                        <p className="text-xs text-gray-500">Hours Studied</p>
-                        <p className="text-2xl font-bold text-green-600">{(totalStudyMinutes / 60).toFixed(1)}</p>
+                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-400/30 rounded-full"></div>
+                      <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-blue-400/30 rounded-full"></div>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-4 text-white shadow-md relative overflow-hidden">
+                      <div className="z-10 relative">
+                        <p className="text-xs text-green-100 uppercase tracking-wider font-medium">Total Study Time</p>
+                        <p className="text-3xl font-bold mt-1">{Math.floor(totalStudyMinutes / 60)}h {totalStudyMinutes % 60}m</p>
+                        <p className="text-xs mt-1 text-green-100">
+                          {totalStudyMinutes === 0 
+                            ? "No time logged yet" 
+                            : `Avg ${Math.floor((totalStudyMinutes / Math.max(1, totalSessions)))} min per session`}
+                        </p>
                       </div>
-                      <div className="text-center">
-                        <p className="text-xs text-gray-500">Current Streak</p>
-                        <p className="text-2xl font-bold text-orange-600">{currentStreak} days</p>
+                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-green-400/30 rounded-full"></div>
+                      <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-green-400/30 rounded-full"></div>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl p-4 text-white shadow-md relative overflow-hidden">
+                      <div className="z-10 relative">
+                        <p className="text-xs text-amber-100 uppercase tracking-wider font-medium">Current Streak</p>
+                        <p className="text-3xl font-bold mt-1">{currentStreak} days</p>
+                        <p className="text-xs mt-1 text-amber-100">
+                          {currentStreak === 0 
+                            ? "Study today to start a streak" 
+                            : currentStreak === 1 
+                              ? "First day of your streak!"
+                              : `Keep it going! Study today`}
+                        </p>
+                      </div>
+                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-amber-400/30 rounded-full"></div>
+                      <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-amber-400/30 rounded-full"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Activity Heatmap Placeholder */}
+                  <div className="mb-6">
+                    <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center">
+                      <CalendarDays className="h-4 w-4 mr-2 text-blue-600" />
+                      Activity Overview
+                    </h3>
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <div className="grid grid-cols-7 gap-2">
+                        {Array.from({ length: 7 }).map((_, dayIndex) => (
+                          <div key={dayIndex} className="flex flex-col items-center">
+                            <span className="text-xs font-medium text-gray-600 mb-2">
+                              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][dayIndex]}
+                            </span>
+                            <div className="space-y-2">
+                              {Array.from({ length: 4 }).map((_, weekIndex) => {
+                                const hasSession = sessionHistory.some(session => {
+                                  const date = new Date(session.date);
+                                  return date.getDay() === (dayIndex + 1) % 7 && 
+                                         Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24)) < 28;
+                                });
+                                const intensity = hasSession 
+                                  ? Math.random() > 0.7 ? 'bg-blue-500' : 'bg-blue-300'
+                                  : 'bg-gray-200';
+                                return (
+                                  <div 
+                                    key={weekIndex} 
+                                    className={`w-6 h-6 rounded-sm ${intensity} transition-colors duration-200`}
+                                    title={`${['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayIndex]} Week ${weekIndex + 1}`}
+                                  ></div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex justify-end mt-3 items-center text-xs text-gray-500">
+                        <div className="flex items-center">
+                          <span>Less</span>
+                          <div className="flex mx-1.5 space-x-1">
+                            <div className="w-3 h-3 bg-gray-200 rounded-sm"></div>
+                            <div className="w-3 h-3 bg-blue-200 rounded-sm"></div>
+                            <div className="w-3 h-3 bg-blue-300 rounded-sm"></div>
+                            <div className="w-3 h-3 bg-blue-400 rounded-sm"></div>
+                            <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
+                          </div>
+                          <span>More</span>
+                        </div>
                       </div>
                     </div>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center">
+                      <Clock className="h-4 w-4 mr-2 text-blue-600" />
+                      Recent Sessions
+                    </h3>
                   </div>
                   
                   {sessionHistory.length === 0 ? (
@@ -448,29 +716,47 @@ export default function StudyTimer() {
                       <p className="text-gray-400 text-sm">Complete a study session to see your history here</p>
                     </div>
                   ) : (
-                    <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+                    <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
                       {sessionHistory.map((session) => (
                         <div 
                           key={session.id} 
-                          className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                          className="border border-gray-200 hover:border-blue-200 rounded-lg p-4 hover:bg-blue-50/30 transition-all duration-200"
                         >
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                            <div className="flex items-center gap-2">
-                              <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                                {session.focusArea}
-                              </span>
-                              <span className="text-sm text-gray-500">{formatDate(session.date)}</span>
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center">
+                              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mr-3">
+                                <Clock className="h-5 w-5" />
+                              </div>
+                              <div>
+                                <h4 className="font-medium text-gray-900">{session.focusArea} Study</h4>
+                                <p className="text-xs text-gray-500">{formatDate(session.date)}</p>
+                              </div>
                             </div>
-                            <div className="mt-1 sm:mt-0">
-                              <span className="text-sm font-medium text-gray-900">
-                                {session.duration} minutes
-                              </span>
+                            <div className="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-1 rounded-lg flex items-center">
+                              <Clock className="w-3.5 h-3.5 mr-1" />
+                              {session.duration} min
                             </div>
                           </div>
-                          {session.notes && (
-                            <div className="mt-2 text-sm bg-gray-50 p-3 rounded border border-gray-100">
-                              <h4 className="font-medium mb-1 text-gray-900">Session Notes:</h4>
-                              <p className="text-gray-700 whitespace-pre-line">{session.notes}</p>
+                          
+                          {session.notes && session.notes.trim() !== '' && (
+                            <div className="mt-3 text-sm bg-white p-3 rounded-lg border border-gray-100 hover:border-blue-100 transition-all">
+                              <div className="flex items-center mb-2">
+                                <FileText className="h-4 w-4 text-blue-600 mr-2" />
+                                <h4 className="font-medium text-gray-900 text-sm">Session Notes</h4>
+                              </div>
+                              <p className="text-gray-700 whitespace-pre-line text-sm">
+                                {session.notes.length > 150 
+                                  ? `${session.notes.substring(0, 150)}...` 
+                                  : session.notes}
+                              </p>
+                              {session.notes.length > 150 && (
+                                <button className="text-xs text-blue-600 hover:text-blue-800 mt-1 font-medium flex items-center">
+                                  View Full Notes
+                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                  </svg>
+                                </button>
+                              )}
                             </div>
                           )}
                         </div>
