@@ -1,275 +1,295 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  BookOpen, 
-  Calendar, 
-  Clock, 
-  Video, 
-  FileText, 
-  Play, 
-  PenTool, 
-  Layers,
-  CheckCircle,
-  CircleSlash,
-  ChevronDown,
-  ChevronUp,
-  ExternalLink,
-} from 'lucide-react';
-import { 
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { 
   LearningPath, 
   LearningPathNode, 
-  updateLearningPathProgress, 
-  getNextRecommendedNode 
+  updateLearningPathProgress,
+  getNextRecommendedNode
 } from '@/lib/learning-path';
+import { 
+  Book, 
+  BookOpen, 
+  Calendar, 
+  CheckCircle, 
+  ChevronDown, 
+  ChevronUp, 
+  Clock, 
+  ExternalLink, 
+  SlidersHorizontal, 
+  Timer, 
+  Video, 
+  FileText, 
+  CircleSlash
+} from 'lucide-react';
 
 export function LearningPathView() {
-  const { toast } = useToast();
   const [_, navigate] = useLocation();
-  const [learningPath, setLearningPath] = useState<LearningPath | null>(null);
-  const [nextNode, setNextNode] = useState<LearningPathNode | null>(null);
+  const [currentPath, setCurrentPath] = useState<LearningPath | null>(null);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
-
+  const [recommendedNode, setRecommendedNode] = useState<LearningPathNode | null>(null);
+  
   // Load learning path from localStorage
   useEffect(() => {
-    const currentPathId = localStorage.getItem('currentLearningPathId');
-    if (currentPathId) {
-      const storedPaths = JSON.parse(localStorage.getItem('learningPaths') || '[]');
-      const currentPath = storedPaths.find((path: LearningPath) => path.id === currentPathId);
-      
-      if (currentPath) {
-        // Convert string date back to Date object
-        currentPath.createdAt = new Date(currentPath.createdAt);
-        setLearningPath(currentPath);
+    const loadLearningPath = () => {
+      try {
+        const currentPathId = localStorage.getItem('currentLearningPathId');
+        if (!currentPathId) {
+          return;
+        }
         
-        // Auto-expand the section containing the next recommended node
-        const recommended = getNextRecommendedNode(currentPath);
-        setNextNode(recommended);
+        const storedPathsString = localStorage.getItem('learningPaths');
+        if (!storedPathsString) {
+          return;
+        }
         
-        if (recommended) {
-          const section = currentPath.sections.find(section => 
-            section.nodes.some(node => node.id === recommended.id)
-          );
-          if (section) {
-            setExpandedSections([section.id]);
+        const storedPaths = JSON.parse(storedPathsString);
+        const currentPath = storedPaths.find((path: LearningPath) => path.id === currentPathId);
+        
+        if (currentPath) {
+          // Convert the string date back to a Date object
+          currentPath.createdAt = new Date(currentPath.createdAt);
+          setCurrentPath(currentPath);
+          
+          // Find recommended node
+          const nextNode = getNextRecommendedNode(currentPath);
+          setRecommendedNode(nextNode);
+          
+          // If we have a recommended node, expand its section
+          if (nextNode) {
+            const section = currentPath.sections.find(section => 
+              section.nodes.some(node => node.id === nextNode.id)
+            );
+            if (section) {
+              setExpandedSections([section.id]);
+            }
           }
         }
-      } else {
-        toast({
-          title: "Path Not Found",
-          description: "The learning path could not be found. Please create a new one.",
-          variant: "destructive"
-        });
-        navigate('/create-learning-path');
+      } catch (error) {
+        console.error('Error loading learning path:', error);
       }
-    } else {
-      toast({
-        title: "No Learning Path",
-        description: "You don't have an active learning path. Create one to get started.",
-        variant: "default"
-      });
-      navigate('/create-learning-path');
-    }
-  }, [toast, navigate]);
-
-  // Handle marking a node as complete/incomplete
+    };
+    
+    loadLearningPath();
+  }, []);
+  
+  // Toggle section expansion
+  const toggleSection = (sectionId: string) => {
+    setExpandedSections(prev => 
+      prev.includes(sectionId)
+        ? prev.filter(id => id !== sectionId)
+        : [...prev, sectionId]
+    );
+  };
+  
+  // Handle marking node as complete/incomplete
   const handleToggleNodeCompletion = (nodeId: string, completed: boolean) => {
-    if (!learningPath) return;
+    if (!currentPath) return;
     
-    const updatedPath = updateLearningPathProgress(learningPath, nodeId, completed);
-    setLearningPath(updatedPath);
-    
-    // Update next recommended node
-    setNextNode(getNextRecommendedNode(updatedPath));
+    // Update the path
+    const updatedPath = updateLearningPathProgress(currentPath, nodeId, completed);
+    setCurrentPath(updatedPath);
     
     // Update in localStorage
-    const storedPaths = JSON.parse(localStorage.getItem('learningPaths') || '[]');
-    const updatedPaths = storedPaths.map((path: LearningPath) => 
-      path.id === updatedPath.id ? updatedPath : path
-    );
-    localStorage.setItem('learningPaths', JSON.stringify(updatedPaths));
-    
-    toast({
-      title: completed ? "Marked as Complete" : "Marked as Incomplete",
-      description: completed 
-        ? "Great job completing this learning resource!" 
-        : "This resource has been marked as incomplete.",
-      variant: "default"
-    });
-  };
-
-  // Handle expanding/collapsing a section
-  const handleToggleSection = (sectionId: string) => {
-    setExpandedSections(prev => {
-      if (prev.includes(sectionId)) {
-        return prev.filter(id => id !== sectionId);
-      } else {
-        return [...prev, sectionId];
-      }
-    });
-  };
-
-  // Get resource type icon
-  const getResourceTypeIcon = (resourceType: string) => {
-    switch (resourceType) {
-      case 'video':
-        return <Video className="h-4 w-4" />;
-      case 'article':
-        return <FileText className="h-4 w-4" />;
-      case 'practice':
-        return <Play className="h-4 w-4" />;
-      case 'quiz':
-        return <PenTool className="h-4 w-4" />;
-      case 'flashcard':
-        return <Layers className="h-4 w-4" />;
-      case 'interactive':
-        return <Play className="h-4 w-4" />;
-      default:
-        return <BookOpen className="h-4 w-4" />;
+    try {
+      const storedPathsString = localStorage.getItem('learningPaths');
+      if (!storedPathsString) return;
+      
+      const storedPaths = JSON.parse(storedPathsString);
+      const updatedPaths = storedPaths.map((path: LearningPath) => 
+        path.id === updatedPath.id ? updatedPath : path
+      );
+      
+      localStorage.setItem('learningPaths', JSON.stringify(updatedPaths));
+      
+      // Update recommended node
+      const nextNode = getNextRecommendedNode(updatedPath);
+      setRecommendedNode(nextNode);
+    } catch (error) {
+      console.error('Error updating learning path:', error);
     }
   };
-
-  // Create a new learning path
-  const handleCreateNewPath = () => {
+  
+  // Handle creating a new path
+  const handleCreateNew = () => {
     navigate('/create-learning-path');
   };
-
-  if (!learningPath) {
+  
+  // Helper to get appropriate icon for resource type
+  const getResourceTypeIcon = (resourceType: string) => {
+    switch (resourceType.toLowerCase()) {
+      case 'video':
+        return <Video className="h-3 w-3" />;
+      case 'article':
+        return <FileText className="h-3 w-3" />;
+      case 'interactive':
+        return <SlidersHorizontal className="h-3 w-3" />;
+      case 'quiz':
+        return <Book className="h-3 w-3" />;
+      case 'flashcard':
+        return <BookOpen className="h-3 w-3" />;
+      case 'practice':
+        return <Timer className="h-3 w-3" />;
+      default:
+        return <Book className="h-3 w-3" />;
+    }
+  };
+  
+  // Helper to calculate total time
+  const calculateTotalTime = () => {
+    if (!currentPath) return 0;
+    
+    return currentPath.sections.reduce((total, section) => {
+      return total + section.nodes.reduce((sectionTotal, node) => {
+        return sectionTotal + node.estimatedTime;
+      }, 0);
+    }, 0);
+  };
+  
+  // If no learning path is found
+  if (!currentPath) {
     return (
-      <div className="flex justify-center items-center min-h-[400px]">
-        <div className="text-center">
-          <p className="mb-4 text-gray-500">Loading your learning path...</p>
-          <Button onClick={handleCreateNewPath}>Create New Learning Path</Button>
-        </div>
+      <div className="flex flex-col items-center justify-center space-y-4 py-12">
+        <BookOpen className="h-16 w-16 text-gray-400" />
+        <h3 className="text-xl font-semibold text-[#13294B]">No Learning Path Found</h3>
+        <p className="text-gray-600 text-center max-w-md">
+          You haven't created a personalized learning path yet. Create one to get started with your NCLEX preparation.
+        </p>
+        <Button onClick={handleCreateNew} className="mt-4">
+          Create Learning Path
+        </Button>
       </div>
     );
   }
-
+  
   return (
-    <div className="w-full max-w-5xl mx-auto space-y-6">
-      {/* Learning Path Header */}
+    <div className="space-y-6">
+      {/* Summary card */}
       <Card>
         <CardHeader>
           <div className="flex justify-between items-start">
             <div>
-              <CardTitle className="text-2xl font-bold text-[#13294B]">{learningPath.title}</CardTitle>
-              <CardDescription className="mt-2">{learningPath.description}</CardDescription>
+              <CardTitle className="text-2xl">{currentPath.title}</CardTitle>
+              <CardDescription className="mt-2">{currentPath.description}</CardDescription>
             </div>
-            <Button variant="outline" onClick={handleCreateNewPath}>
-              Create New Path
+            <Button variant="outline" onClick={handleCreateNew}>
+              Create New
             </Button>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div className="flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-blue-600" />
-              <div>
-                <p className="text-sm font-medium">Created</p>
-                <p className="text-sm text-gray-500">{learningPath.createdAt.toLocaleDateString()}</p>
+          <div className="space-y-4">
+            {/* Progress bar */}
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Progress</span>
+                <span className="font-medium">{currentPath.progress}%</span>
+              </div>
+              <Progress value={currentPath.progress} className="h-2" />
+            </div>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+              <div className="bg-blue-50 p-4 rounded-lg flex items-center space-x-4">
+                <Calendar className="h-5 w-5 text-blue-600" />
+                <div>
+                  <p className="text-sm text-gray-600">Created</p>
+                  <p className="font-medium">{currentPath.createdAt.toLocaleDateString()}</p>
+                </div>
+              </div>
+              
+              <div className="bg-purple-50 p-4 rounded-lg flex items-center space-x-4">
+                <Clock className="h-5 w-5 text-purple-600" />
+                <div>
+                  <p className="text-sm text-gray-600">Est. Time</p>
+                  <p className="font-medium">{Math.round(calculateTotalTime() / 60)} hours</p>
+                </div>
+              </div>
+              
+              <div className="bg-green-50 p-4 rounded-lg flex items-center space-x-4">
+                <BookOpen className="h-5 w-5 text-green-600" />
+                <div>
+                  <p className="text-sm text-gray-600">Learning Style</p>
+                  <p className="font-medium capitalize">{currentPath.learningStyle}</p>
+                </div>
+              </div>
+              
+              <div className="bg-amber-50 p-4 rounded-lg flex items-center space-x-4">
+                <Timer className="h-5 w-5 text-amber-600" />
+                <div>
+                  <p className="text-sm text-gray-600">Time Commitment</p>
+                  <p className="font-medium capitalize">{currentPath.timeCommitment}</p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-5 w-5 text-blue-600" />
-              <div>
-                <p className="text-sm font-medium">Estimated Completion</p>
-                <p className="text-sm text-gray-500">{learningPath.estimatedCompletionWeeks} weeks</p>
+            
+            {/* Next recommended study */}
+            {recommendedNode && (
+              <div className="mt-6 border border-blue-200 bg-blue-50 rounded-lg p-4">
+                <h3 className="font-semibold text-[#13294B] flex items-center">
+                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
+                  Recommended Next Step
+                </h3>
+                <div className="mt-2 p-3 bg-white rounded-md border border-blue-100">
+                  <div className="flex justify-between items-start">
+                    <h4 className="font-medium text-[#13294B]">{recommendedNode.title}</h4>
+                    <Badge variant="outline" className="flex items-center gap-1 ml-2">
+                      <Clock className="h-3 w-3" />
+                      <span>{recommendedNode.estimatedTime} min</span>
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-gray-600 mt-1">{recommendedNode.description}</p>
+                  
+                  <div className="flex justify-between items-center mt-3">
+                    <Badge variant="outline" className="flex items-center gap-1">
+                      {getResourceTypeIcon(recommendedNode.resourceType)}
+                      <span>{recommendedNode.resourceType.charAt(0).toUpperCase() + recommendedNode.resourceType.slice(1)}</span>
+                    </Badge>
+                    
+                    <div className="space-x-2">
+                      {recommendedNode.url && (
+                        <Button size="sm" variant="outline" asChild className="h-8">
+                          <a href={recommendedNode.url} target="_blank" rel="noopener noreferrer" className="flex items-center">
+                            Access
+                            <ExternalLink className="h-3 w-3 ml-1" />
+                          </a>
+                        </Button>
+                      )}
+                      
+                      <Button
+                        size="sm"
+                        onClick={() => handleToggleNodeCompletion(recommendedNode.id, true)}
+                        className="h-8 bg-green-600 hover:bg-green-700"
+                      >
+                        Mark Complete
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-blue-600" />
-              <div>
-                <p className="text-sm font-medium">Learning Style</p>
-                <p className="text-sm text-gray-500">{learningPath.learningStyle.charAt(0).toUpperCase() + learningPath.learningStyle.slice(1)}</p>
-              </div>
-            </div>
+            )}
           </div>
-          
-          {/* Overall Progress */}
-          <div className="space-y-2 mt-4">
-            <div className="flex justify-between items-center">
-              <p className="text-sm font-medium">Overall Progress</p>
-              <p className="text-sm font-medium">{learningPath.progress}%</p>
-            </div>
-            <Progress value={learningPath.progress} className="h-2" />
-          </div>
-          
-          {/* Next Recommended Node */}
-          {nextNode && (
-            <div className="mt-6 border rounded-md p-4 bg-blue-50">
-              <h3 className="font-medium mb-2 flex items-center">
-                <BookOpen className="h-4 w-4 mr-2 text-blue-600" />
-                Next Recommended Resource
-              </h3>
-              <p className="font-semibold text-[#13294B]">{nextNode.title}</p>
-              <p className="text-sm text-gray-600 mt-1">{nextNode.description}</p>
-              <div className="flex flex-wrap gap-2 mt-3">
-                <Badge variant="outline" className="flex items-center gap-1">
-                  {getResourceTypeIcon(nextNode.resourceType)}
-                  <span>{nextNode.resourceType.charAt(0).toUpperCase() + nextNode.resourceType.slice(1)}</span>
-                </Badge>
-                <Badge variant="outline" className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  <span>{nextNode.estimatedTime} min</span>
-                </Badge>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {nextNode.url && (
-                  <Button size="sm" variant="default" asChild>
-                    <a href={nextNode.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
-                      Start Learning
-                      <ExternalLink className="h-3 w-3 ml-1" />
-                    </a>
-                  </Button>
-                )}
-                <Button 
-                  size="sm" 
-                  variant="outline"
-                  onClick={() => handleToggleNodeCompletion(nextNode.id, true)}
-                >
-                  Mark Complete
-                </Button>
-              </div>
-            </div>
-          )}
         </CardContent>
       </Card>
       
-      {/* Learning Path Content */}
+      {/* Learning path content */}
       <Card>
         <CardHeader>
-          <CardTitle>Learning Resources</CardTitle>
+          <CardTitle>Learning Path Content</CardTitle>
           <CardDescription>
-            All study materials organized by nursing topic
+            Work through these sections to complete your personalized learning path
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {learningPath.sections.map((section) => (
-              <div key={section.id} className="border rounded-md overflow-hidden">
+            {currentPath.sections.map((section) => (
+              <div key={section.id} className="border rounded-lg overflow-hidden">
                 <div 
-                  className={`flex justify-between items-center p-4 cursor-pointer ${
-                    section.completed ? 'bg-green-50' : expandedSections.includes(section.id) ? 'bg-blue-50' : 'bg-gray-50'
-                  }`}
-                  onClick={() => handleToggleSection(section.id)}
+                  className="p-4 bg-gray-50 flex justify-between items-center cursor-pointer"
+                  onClick={() => toggleSection(section.id)}
                 >
                   <div className="flex items-center gap-2">
                     {section.completed ? (

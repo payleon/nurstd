@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function PageHeader({
   className,
@@ -9,44 +9,42 @@ export function PageHeader({
   ...props
 }: PageHeaderProps) {
   return (
-    <div
-      className={cn("grid gap-1", className)}
-      {...props}
-    >
+    <div className={cn("flex flex-col space-y-2", className)} {...props}>
       {children}
     </div>
   );
 }
 
-interface PageHeaderHeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {}
+export interface PageHeaderHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {}
 
 export function PageHeaderHeading({
   className,
+  children,
   ...props
 }: PageHeaderHeadingProps) {
   return (
     <h1
-      className={cn(
-        "text-3xl font-bold tracking-tight text-[#13294B]",
-        className
-      )}
+      className={cn("text-3xl font-bold tracking-tight text-[#13294B]", className)}
       {...props}
-    />
+    >
+      {children}
+    </h1>
   );
 }
 
-interface PageHeaderDescriptionProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface PageHeaderDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
 export function PageHeaderDescription({
   className,
+  children,
   ...props
 }: PageHeaderDescriptionProps) {
   return (
     <p
-      className={cn("text-muted-foreground text-gray-500", className)}
+      className={cn("text-muted-foreground text-gray-600", className)}
       {...props}
-    />
+    >
+      {children}
+    </p>
   );
 }
