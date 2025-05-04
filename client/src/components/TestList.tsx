@@ -1,17 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTests } from "@/lib/api";
-import { Button } from "@/components/ui/button";
 import { 
   Card, 
-  CardContent, 
-  CardHeader,
-  CardTitle 
+  CardContent
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Test } from "@shared/schema";
-import { FileText, FileCheck, Clock, Calendar, BarChart, X, AlertCircle, CheckCircle2 } from "lucide-react";
-import { Link } from "wouter";
+import { FileText, Clock, Calendar, BarChart, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useStudyProgress } from "@/hooks/useStudyProgress";
+import { EnhancedStudyTipsDialog } from "@/components/dialogs/EnhancedStudyTipsDialog";
 
 interface TestListProps {
   onSelectTest: (test: Test) => void;
@@ -33,11 +30,12 @@ export function TestList({ onSelectTest }: TestListProps) {
   
   // Use our study progress hook for personalization
   const { 
-    studyAreas, 
-    recommendations, 
-    updateConfidenceLevel, 
-    completeRecommendation 
+    studyAreas,
+    updateConfidence
   } = useStudyProgress();
+  
+  // State for dialogs
+  const [studyTipsOpen, setStudyTipsOpen] = useState(false);
 
   // Mobile dropdown state
   const [selectedTest, setSelectedTest] = useState("");
@@ -225,364 +223,167 @@ export function TestList({ onSelectTest }: TestListProps) {
               </DialogContent>
             </Dialog>
             
-            {/* Study Tips Dialog */}
-            <Dialog>
-              <DialogTrigger asChild>
-                <button 
-                  className="neuro-button-primary min-h-[44px] flex-1 text-md flex items-center justify-center gap-2"
-                  aria-label="View NCLEX Study Tips"
-                >
-                  <BarChart className="h-5 w-5" />
-                  Study Tips
-                </button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-4xl p-0 bg-white overflow-hidden border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
-                <DialogHeader className="bg-[#13294B] text-white py-3 px-6 flex items-center justify-between">
-                  <DialogTitle className="text-xl font-bold uppercase">
-                    <div className="flex items-center">
-                      <BarChart className="h-5 w-5 mr-2" />
-                      NCLEX Study Tips
-                    </div>
-                  </DialogTitle>
-                  <DialogTrigger asChild>
-                    <button 
-                      className="text-white hover:text-gray-200 cursor-pointer"
-                      aria-label="Close"
-                    >
-                      <X className="h-5 w-5" />
-                    </button>
-                  </DialogTrigger>
-                </DialogHeader>
-                <div className="px-6 py-4 max-h-[70vh] overflow-y-auto">
-                  <DialogDescription className="mb-4 text-gray-600">
-                    Evidence-based study techniques to help you succeed on your NCLEX exam.
-                  </DialogDescription>
-                  
-                  {/* Tab-based study tips system */}
-                  <div className="mb-5">
-                    <div className="bg-[#13294B] text-white p-2 border-2 border-black mb-4">
-                      <h2 className="text-lg font-bold">NCLEX Success Formula</h2>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-                      <div 
-                        className={`border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${Object.values(studyAreas).some(area => area.confidenceLevel === 1) ? 'border-l-4 border-l-amber-500' : ''}`}
-                        onClick={() => window.open('https://www.ncsbn.org/nclex-application-and-registration.htm', '_blank')}
-                      >
-                        <div className="flex items-center mb-2">
-                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
-                            <span className="font-bold">1</span>
-                          </div>
-                          <h3 className="font-bold text-[#13294B] text-lg">Content Mastery</h3>
-                        </div>
-                        <p className="text-gray-700">Focus on understanding nursing concepts rather than memorizing facts. Use our practice quizzes to identify knowledge gaps.</p>
-                        <div className="mt-2 flex justify-between items-center">
-                          <div className="text-[#4B9CD3] font-medium">Interactive Focus: NCLEX Test Plan ↗</div>
-                          {Object.values(studyAreas).some(area => area.confidenceLevel === 1) && (
-                            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded border border-amber-300">Recommended for you</span>
-                          )}
-                        </div>
-                      </div>
-                      
-                      <div 
-                        className={`border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${studyAreas['prioritization']?.confidenceLevel === 1 ? 'border-l-4 border-l-amber-500' : ''}`}
-                        onClick={() => window.open('https://www.ncsbn.org/nclex-preparation-materials.htm', '_blank')}
-                      >
-                        <div className="flex items-center mb-2">
-                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
-                            <span className="font-bold">2</span>
-                          </div>
-                          <h3 className="font-bold text-[#13294B] text-lg">Critical Thinking</h3>
-                        </div>
-                        <p className="text-gray-700">Practice answering NCLEX-style questions that test your ability to analyze situations and apply nursing knowledge.</p>
-                        <div className="mt-2 flex justify-between items-center">
-                          <div className="text-[#4B9CD3] font-medium">Interactive Focus: Practice Questions ↗</div>
-                          {studyAreas['prioritization']?.confidenceLevel === 1 && (
-                            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded border border-amber-300">Focus area for you</span>
-                          )}
+            {/* Enhanced Study Tips Dialog */}
+            <button 
+              className="neuro-button-primary min-h-[44px] flex-1 text-md flex items-center justify-center gap-2"
+              aria-label="View NCLEX Study Tips"
+              onClick={() => setStudyTipsOpen(true)}
+            >
+              <BarChart className="h-5 w-5" />
+              Study Tips
+            </button>
+            <EnhancedStudyTipsDialog 
+              open={studyTipsOpen} 
+              onOpenChange={setStudyTipsOpen} 
+            />
+
+          </div>
+        </div>
+      </div>
+      
+      {/* Mobile dropdown - only visible on small screens */}
+      <div className="mb-6 sm:hidden">
+        <div className="mb-2 font-semibold">Select a Practice Exam:</div>
+        <select
+          value={selectedTest}
+          onChange={handleMobileSelect}
+          className="p-2 border-2 border-black rounded w-full"
+        >
+          <option value="">Select an exam...</option>
+          {tests?.map((test) => (
+            <option key={test.id} value={test.path}>
+              {test.title} ({test.questionCount || 75} questions)
+            </option>
+          ))}
+        </select>
+      </div>
+      
+      {/* Main content */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Left column */}
+        <div className="md:col-span-2">
+          <div className="neuro-card mb-6 overflow-hidden">
+            <div className="bg-[#13294B] text-white px-4 py-3 border-b-2 border-black">
+              <h2 className="text-xl font-bold">Practice Exams</h2>
+            </div>
+            
+            <div className="p-4">
+              <h3 className="text-lg font-bold mb-4 text-gray-800">NCLEX Practice Tests</h3>
+              
+              <div className="space-y-4">
+                {isLoading ? (
+                  // Loading skeleton
+                  <div className="space-y-4">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="flex items-center justify-between p-3 border-b-2 border-gray-200">
+                        <Skeleton className="h-5 w-48" />
+                        <div>
+                          <Skeleton className="h-8 w-24" />
                         </div>
                       </div>
-                      
-                      <div 
-                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
-                        onClick={() => window.location.href = '/study-strategies'}
-                      >
-                        <div className="flex items-center mb-2">
-                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
-                            <span className="font-bold">3</span>
-                          </div>
-                          <h3 className="font-bold text-[#13294B] text-lg">Time Management</h3>
-                        </div>
-                        <p className="text-gray-700">Create a structured study schedule using our Study Strategy Planner. Practice with timed quizzes to build test-taking stamina.</p>
-                        <div className="mt-2 flex justify-between">
-                          <div className="text-[#4B9CD3] font-medium">Use our Study Timer tool →</div>
-                          <div className="flex gap-1">
-                            <span className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">1-2 min/question</span>
-                          </div>
-                        </div>
+                    ))}
+                  </div>
+                ) : (
+                  <>
+                    {tests?.length === 0 ? (
+                      <div className="text-center py-6 text-gray-500 font-bold">
+                        No tests available. Add test files to the published/ directory.
                       </div>
-                      
-                      <div 
-                        className={`border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${studyAreas['pharmacology']?.confidenceLevel === 1 ? 'border-l-4 border-l-amber-500' : ''}`}
-                      >
-                        <div className="flex items-center mb-2">
-                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
-                            <span className="font-bold">4</span>
+                    ) : (
+                      <div className="hidden sm:block">
+                        {tests?.slice(0, 3).map((test) => (
+                          <div 
+                            key={test.id} 
+                            className="flex items-center justify-between p-4 mb-3 border-2 border-black bg-white hover:bg-gray-50 cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                            onClick={() => handleSelectTest(test)}
+                          >
+                            <div className="flex items-center">
+                              <div className="bg-[#4B9CD3] text-white p-2 mr-3 rounded-md">
+                                <FileText className="h-5 w-5" />
+                              </div>
+                              <div>
+                                <div className="font-bold">{test.title}</div>
+                                <div className="text-xs text-gray-500">
+                                  {test.questionCount || 75} questions • {test.timeLimit || 2} {test.timeLimit === 1 ? 'hour' : 'hours'}
+                                </div>
+                              </div>
+                            </div>
+                            <button 
+                              className="neuro-button-primary py-1 px-3"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleSelectTest(test);
+                              }}
+                            >
+                              Take Test
+                            </button>
                           </div>
-                          <h3 className="font-bold text-[#13294B] text-lg">Test Strategy</h3>
-                        </div>
-                        <p className="text-gray-700">Learn and practice NCLEX-specific strategies like priority-setting, delegation, and eliminating incorrect options.</p>
-                        <div className="mt-2 flex justify-between items-center">
-                          <div className="text-[#4B9CD3] font-medium">Practice with our Games →</div>
-                          {studyAreas['pharmacology']?.confidenceLevel === 1 ? (
-                            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded border border-amber-300">Recommended for you</span>
-                          ) : (
-                            <span className="bg-[#13294B] text-white text-xs px-2 py-1 rounded">High Value</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-[#F9F9F9] border-2 border-black p-4 mb-4">
-                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Evidence-Based Study Methods</h3>
-                      <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                        <li><span className="font-bold">Spaced Repetition:</span> Study material at increasing intervals to improve long-term retention.</li>
-                        <li><span className="font-bold">Active Recall:</span> Test yourself frequently rather than passive re-reading.</li>
-                        <li><span className="font-bold">Interleaved Practice:</span> Mix different subjects and question types in each study session.</li>
-                        <li><span className="font-bold">Dual Coding:</span> Combine text-based learning with visual aids like diagrams or charts.</li>
-                      </ul>
-                    </div>
-                    
-                    {/* Mini Self-Assessment */}
-                    <div className="border-2 border-black">
-                      <div className="bg-[#13294B] text-white p-2">
-                        <h3 className="font-bold text-lg">Quick Study Readiness Assessment</h3>
-                      </div>
-                      <div className="p-4 bg-white">
-                        <p className="mb-4">Rate your confidence in these key NCLEX areas to get personalized study recommendations:</p>
+                        ))}
                         
-                        <div className="space-y-4 mb-6">
-                          <div>
-                            <label className="font-medium text-[#13294B] block mb-1">Prioritization & Delegation</label>
-                            <div className="flex justify-between gap-1">
-                              <button 
-                                className={`${studyAreas['prioritization']?.confidenceLevel === 1 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('prioritization', 1)}
-                              >
-                                Low
-                              </button>
-                              <button 
-                                className={`${studyAreas['prioritization']?.confidenceLevel === 2 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('prioritization', 2)}
-                              >
-                                Medium
-                              </button>
-                              <button 
-                                className={`${studyAreas['prioritization']?.confidenceLevel === 3 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('prioritization', 3)}
-                              >
-                                High
-                              </button>
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <label className="font-medium text-[#13294B] block mb-1">Pharmacology Knowledge</label>
-                            <div className="flex justify-between gap-1">
-                              <button 
-                                className={`${studyAreas['pharmacology']?.confidenceLevel === 1 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('pharmacology', 1)}
-                              >
-                                Low
-                              </button>
-                              <button 
-                                className={`${studyAreas['pharmacology']?.confidenceLevel === 2 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('pharmacology', 2)}
-                              >
-                                Medium
-                              </button>
-                              <button 
-                                className={`${studyAreas['pharmacology']?.confidenceLevel === 3 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('pharmacology', 3)}
-                              >
-                                High
-                              </button>
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <label className="font-medium text-[#13294B] block mb-1">Maternal-Newborn Nursing</label>
-                            <div className="flex justify-between gap-1">
-                              <button 
-                                className={`${studyAreas['maternal-newborn']?.confidenceLevel === 1 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('maternal-newborn', 1)}
-                              >
-                                Low
-                              </button>
-                              <button 
-                                className={`${studyAreas['maternal-newborn']?.confidenceLevel === 2 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('maternal-newborn', 2)}
-                              >
-                                Medium
-                              </button>
-                              <button 
-                                className={`${studyAreas['maternal-newborn']?.confidenceLevel === 3 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
-                                onClick={() => updateConfidenceLevel('maternal-newborn', 3)}
-                              >
-                                High
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {/* Personalized Recommendations */}
-                        {recommendations.length > 0 && (
-                          <div className="border-2 border-black p-4 mb-4">
-                            <h4 className="font-bold text-[#13294B] mb-2">Your Personalized Recommendations</h4>
-                            <ul className="space-y-3">
-                              {recommendations.map((rec, index) => (
-                                <li key={index} className="flex items-start">
-                                  <div className={`flex-shrink-0 mt-1 mr-2 ${rec.completed ? 'text-green-600' : rec.priority === 3 ? 'text-amber-600' : 'text-blue-600'}`}>
-                                    {rec.completed ? <CheckCircle2 className="h-5 w-5" /> : <AlertCircle className="h-5 w-5" />}
-                                  </div>
-                                  <div className="flex-grow">
-                                    <div className="flex justify-between items-center">
-                                      <span className="font-medium">{rec.title}</span>
-                                      {!rec.completed && (
-                                        <button 
-                                          className="text-xs border border-gray-300 bg-gray-50 px-2 py-1 rounded hover:bg-gray-100"
-                                          onClick={() => completeRecommendation(index)}
-                                        >
-                                          Mark done
-                                        </button>
-                                      )}
-                                    </div>
-                                    <p className="text-sm text-gray-600">{rec.description}</p>
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
+                        {tests && tests.length > 3 && (
+                          <div className="text-center mt-4">
+                            <button 
+                              className="text-blue-600 font-medium hover:underline"
+                              onClick={() => document.querySelector('[aria-label="View Available Practice Exams"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }))}
+                            >
+                              View all {tests.length} available exams
+                            </button>
                           </div>
                         )}
-                        
-                        <div className="flex justify-center">
-                          <Link href="/study-strategies">
-                            <button className="neuro-button-primary min-h-[44px] min-w-[200px]">
-                              View Detailed Study Plan
-                            </button>
-                          </Link>
-                        </div>
                       </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Right column */}
+        <div>
+          <div className="neuro-card mb-6 overflow-hidden">
+            <div className="bg-[#13294B] text-white px-4 py-3 border-b-2 border-black">
+              <h2 className="text-xl font-bold">Study Progress</h2>
+            </div>
+            
+            <div className="p-4">
+              <h3 className="text-lg font-bold mb-4 text-gray-800">Focus Areas</h3>
+              
+              <div className="space-y-3">
+                {Object.entries(studyAreas).map(([area, data]) => (
+                  <div key={area} className="border-2 border-gray-200 rounded-md p-3">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-medium text-[#13294B]">{area.charAt(0).toUpperCase() + area.slice(1)}</span>
+                      <span className={`px-2 py-1 text-xs rounded-md ${data.confidenceLevel === 1 ? 'bg-red-100 text-red-800' : data.confidenceLevel === 2 ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}`}>
+                        {data.confidenceLevel === 1 ? 'Low' : data.confidenceLevel === 2 ? 'Medium' : 'High'} confidence
+                      </span>
                     </div>
                     
-                    {/* Quick Sample Questions */}
-                    <div className="border-2 border-black mt-4">
-                      <div className="bg-[#13294B] text-white p-2">
-                        <h3 className="font-bold text-lg">NCLEX Question Types</h3>
-                      </div>
-                      <div className="p-4 bg-white">
-                        <p className="mb-4">Familiarize yourself with the different types of questions you'll encounter:</p>
-                        
-                        <div className="space-y-6">
-                          {/* Sample Multiple Choice */}
-                          <div className="border border-black p-3">
-                            <div className="flex items-center gap-2 mb-2">
-                              <div className="bg-[#4B9CD3] text-white py-1 px-2 text-xs font-bold rounded">
-                                MULTIPLE CHOICE
-                              </div>
-                              <span className="text-sm text-gray-600">Most common format</span>
-                            </div>
-                            <p className="font-medium mb-3 text-[#13294B]">A nurse is caring for a client with hyperkalemia. Which intervention should the nurse implement first?</p>
-                            <div className="space-y-2 ml-1">
-                              <div className="flex items-center gap-2">
-                                <input type="radio" id="mc1" name="mc-sample" className="w-4 h-4" />
-                                <label htmlFor="mc1" className="text-sm">Administer calcium gluconate</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <input type="radio" id="mc2" name="mc-sample" className="w-4 h-4" />
-                                <label htmlFor="mc2" className="text-sm">Prepare for dialysis</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <input type="radio" id="mc3" name="mc-sample" className="w-4 h-4" />
-                                <label htmlFor="mc3" className="text-sm">Administer furosemide</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <input type="radio" id="mc4" name="mc-sample" className="w-4 h-4" />
-                                <label htmlFor="mc4" className="text-sm">Obtain an ECG</label>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          {/* Sample SATA */}
-                          <div className="border border-black p-3">
-                            <div className="flex items-center gap-2 mb-2">
-                              <div className="bg-[#4B9CD3] text-white py-1 px-2 text-xs font-bold rounded">
-                                SELECT ALL THAT APPLY
-                              </div>
-                              <span className="text-sm text-gray-600">Select multiple correct options</span>
-                            </div>
-                            <p className="font-medium mb-3 text-[#13294B]">Which findings would a nurse expect to observe in a client with left-sided heart failure? Select all that apply.</p>
-                            <div className="space-y-2 ml-1">
-                              <div className="flex items-center gap-2">
-                                <input type="checkbox" id="sata1" className="w-4 h-4" />
-                                <label htmlFor="sata1" className="text-sm">Pulmonary edema</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <input type="checkbox" id="sata2" className="w-4 h-4" />
-                                <label htmlFor="sata2" className="text-sm">Jugular venous distention</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <input type="checkbox" id="sata3" className="w-4 h-4" />
-                                <label htmlFor="sata3" className="text-sm">Crackles in lung bases</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <input type="checkbox" id="sata4" className="w-4 h-4" />
-                                <label htmlFor="sata4" className="text-sm">Dependent edema</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <input type="checkbox" id="sata5" className="w-4 h-4" />
-                                <label htmlFor="sata5" className="text-sm">Dyspnea on exertion</label>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="text-center text-gray-600 flex gap-3 items-center justify-center">
-                            <span>See more question formats in</span>
-                            <Link href="/exams-and-studies">
-                              <button className="neuro-button-secondary min-h-[36px] text-sm">
-                                Practice Exams
-                              </button>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
+                    <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full ${data.confidenceLevel === 1 ? 'bg-red-500' : data.confidenceLevel === 2 ? 'bg-yellow-500' : 'bg-green-500'}`}
+                        style={{ width: `${(data.confidenceLevel / 3) * 100}%` }}
+                      ></div>
+                    </div>
+                    
+                    <div className="text-xs text-gray-500 mt-2">
+                      {data.questionsAttempted > 0 ? (
+                        <span>{data.questionsCorrect}/{data.questionsAttempted} questions correct</span>
+                      ) : (
+                        <span>No questions attempted</span>
+                      )}
                     </div>
                   </div>
-                  
-                  <div className="mt-6 text-center">
-                    <Link href="/study-strategies">
-                      <button 
-                        className="neuro-button-primary min-h-[44px] min-w-[220px]"
-                        aria-label="View Detailed Study Resources and Strategies"
-                      >
-                        View Detailed Study Resources
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
-            
-            {/* Direct link to Study Strategy Planner */}
-            <Link href="/study-strategies">
-              <button 
-                className="neuro-button-primary min-h-[44px] flex-1 text-md flex items-center justify-center gap-2"
-                aria-label="Access Study Strategy Planner"
-              >
-                <Calendar className="h-5 w-5" />
-                Strategy Planner
-              </button>
-            </Link>
+                ))}
+                
+                <button 
+                  className="w-full py-2 px-4 mt-4 bg-[#4B9CD3] text-white font-medium rounded-md hover:bg-[#3d7eaa] transition-colors"
+                  onClick={() => setStudyTipsOpen(true)}
+                >
+                  View Study Recommendations
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
