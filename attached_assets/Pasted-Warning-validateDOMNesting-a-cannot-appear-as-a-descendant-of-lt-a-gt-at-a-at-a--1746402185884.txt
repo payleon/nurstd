@@ -1,0 +1,39 @@
+Warning: validateDOMNesting(...): <a> cannot appear as a descendant of &lt;a&gt;.
+    at a
+    at a
+    at Link (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/components/learning/LearningPathForm.tsx:175:17)
+    at div
+    at LearningPathForm (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/components/learning/LearningPathForm.tsx:194:28)
+    at div
+    at main
+    at div
+    at div
+    at CreateLearningPathPage (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/pages/create-learning-path.tsx:24:41)
+    at Suspense
+    at Route (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=018d5117:323:16)
+    at LazyRoute (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/components/LazyRoute.tsx:20:29)
+    at Switch (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=018d5117:379:17)
+    at Router
+    at BadgeProvider (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/contexts/BadgeContext.tsx:23:33)
+    at Provider (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=eb90bbed:38:15)
+    at TooltipProvider (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=0716057a:61:5)
+    at QueryClientProvider (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=bf8399ef:2805:3)
+    at App
+API Request: POST /api/learning-paths
+API Response status for /api/learning-paths: 500 Internal Server Error
+API Request failed for /api/learning-paths: 
+Error {}
+message: "500: {"message":"Failed to create learning path"}"
+stack: "Error: 500: {"message":"Failed to create learning path"}↵ at throwIfResNotOk (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/lib/queryClient.ts:5:11)↵ at async apiRequest (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/lib/queryClient.ts:18:5)↵ at async generateLearningPath (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/api/learning-path.ts:14:20)↵ at async handleSubmit (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/components/learning/LearningPathForm.tsx:239:24)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+
+Error creating learning path: 
+Error {}
+message: "500: {"message":"Failed to create learning path"}"
+stack: "Error: 500: {"message":"Failed to create learning path"}↵ at throwIfResNotOk (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/lib/queryClient.ts:5:11)↵ at async apiRequest (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/lib/queryClient.ts:18:5)↵ at async generateLearningPath (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/api/learning-path.ts:14:20)↵ at async handleSubmit (https://9350f565-a389-4384-9cd4-d48c76759668-00-2n5xnl2htow3y.riker.replit.dev/src/components/learning/LearningPathForm.tsx:239:24)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+

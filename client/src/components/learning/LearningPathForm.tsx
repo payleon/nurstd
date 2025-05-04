@@ -228,10 +228,10 @@ export function LearningPathForm() {
   return (
     <div className="bg-white shadow-md rounded-lg p-6 border border-gray-200">
       <Link href="/learning-paths">
-        <a className="text-gray-600 hover:text-blue-600 flex items-center mb-6">
+        <div className="text-gray-600 hover:text-blue-600 flex items-center mb-6 cursor-pointer">
           <ArrowLeft className="h-5 w-5 mr-1" />
           <span>Back to Learning Paths</span>
-        </a>
+        </div>
       </Link>
       
       <h1 className="text-3xl font-bold text-[#13294B] mb-2">Create Personalized Learning Path</h1>

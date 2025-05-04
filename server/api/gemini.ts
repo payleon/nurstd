@@ -11,9 +11,9 @@ if (!API_KEY) {
 
 const genAI = new GoogleGenerativeAI(API_KEY || '');
 
-// Gemini Flash 2.0 model (replaced with Gemini Pro for now as Flash 2.0 is not available publicly yet)
-// When Gemini Flash 2.0 is released, update this to the correct model name
-const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+// Use the current version of Gemini model that is available in the API
+// Model name: gemini-1.5-pro is the latest version as of May 2025
+const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
 // Configuration for safety settings
 const generationConfig = {
