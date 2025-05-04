@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 const router = Router();
 
+// In-memory storage for learning paths (temporary until database implementation)
+const learningPathsStorage = new Map<string, any>();
+
 // Get all learning paths for the current user
 router.get('/learning-paths', async (req: Request, res: Response) => {
   try {
@@ -63,8 +66,13 @@ router.get('/learning-paths/:id', async (req: Request, res: Response) => {
 
     const pathId = req.params.id;
 
-    // TODO: Replace with actual database query
-    // For demonstration, return mock data
+    // First check if the path is in our in-memory storage
+    if (learningPathsStorage.has(pathId)) {
+      console.log(`Retrieving learning path with ID: ${pathId} from storage`);
+      return res.status(200).json(learningPathsStorage.get(pathId));
+    }
+
+    // If not in memory, check our mock data examples
     if (pathId === '1') {
       res.status(200).json({
         id: '1',
@@ -258,12 +266,18 @@ router.post('/learning-paths', async (req: Request, res: Response) => {
     // Generate learning path using Gemini AI
     const learningPath = await generateGeminiLearningPath(preferences);
     
-    // TODO: Save the learning path to the database
+    // Store the learning path in memory (temporary solution)
+    // In a production app, this would be saved to a database
+    const id = learningPath.id || uuidv4();
+    learningPath.id = id;
+    learningPathsStorage.set(id, learningPath);
     
+    console.log(`Created learning path with ID: ${id}`);
+    
+    // Return the full learning path with ID
     res.status(201).json({
-      id: uuidv4(),
-      title: preferences.title,
-      message: 'Learning path created successfully'
+      id: id,
+      ...learningPath
     });
   } catch (error) {
     console.error('Error creating learning path:', error);
