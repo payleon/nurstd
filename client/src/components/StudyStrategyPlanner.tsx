@@ -227,6 +227,60 @@ export function StudyStrategyPlanner() {
   const [customTips, setCustomTips] = useState<string[]>([]);
   const [customGoals, setCustomGoals] = useState<string[]>([]);
   
+  // State for collaborative study features
+  const [studyGroupName, setStudyGroupName] = useState("");
+  const [studyGroupMembers, setStudyGroupMembers] = useState<string[]>([]);
+  const [showCollaborativeFeatures, setShowCollaborativeFeatures] = useState(false);
+  
+  // State for AI recommendations 
+  const [showAIRecommendations, setShowAIRecommendations] = useState(false);
+  const [aiSuggestions, setAiSuggestions] = useState<{
+    title: string;
+    description: string;
+    category: 'focus-area' | 'resource' | 'schedule' | 'technique';
+  }[]>([
+    {
+      title: "Spaced Repetition",
+      description: "Based on your learning style, try using spaced repetition for pharmacology concepts",
+      category: 'technique'
+    },
+    {
+      title: "Focus on Pathophysiology",
+      description: "Your practice test results show weakness in disease mechanisms",
+      category: 'focus-area'
+    },
+    {
+      title: "Morning Study Sessions",
+      description: "Your timer data shows better retention in morning sessions",
+      category: 'schedule'
+    }
+  ]);
+  
+  // Analytics data (in real app, this would come from database)
+  const [studyAnalytics, setStudyAnalytics] = useState({
+    weeklyStudyHours: [4.5, 6.2, 5.8, 7.0, 8.5, 6.0, 4.2],
+    topicMastery: {
+      'Medical-Surgical': 72,
+      'Pharmacology': 58, 
+      'Fundamentals': 85,
+      'Pediatrics': 67,
+      'Obstetrics': 70,
+      'Psychiatric': 75
+    },
+    questionAccuracy: {
+      'Multiple Choice': 78,
+      'SATA': 62,
+      'Prioritization': 70,
+      'Exhibit': 65
+    },
+    studyTrends: [
+      { week: 'Week 1', plannedHours: 20, actualHours: 16 },
+      { week: 'Week 2', plannedHours: 25, actualHours: 22 },
+      { week: 'Week 3', plannedHours: 25, actualHours: 24 },
+      { week: 'Week 4', plannedHours: 30, actualHours: 25 }
+    ]
+  });
+  
   // Track which step of the planner we're on
   const [currentStep, setCurrentStep] = useState<'preferences' | 'plan'>('preferences');
   
@@ -845,6 +899,97 @@ export function StudyStrategyPlanner() {
       case 'low': return 'bg-green-100 text-green-800';
       default: return 'bg-gray-100 text-gray-800';
     }
+  };
+  
+  // Handle adding a study group member
+  const addStudyGroupMember = (memberEmail: string) => {
+    if (!memberEmail.trim() || !memberEmail.includes('@')) return;
+    
+    // In a real app, this would validate the email and send an invitation
+    setStudyGroupMembers([...studyGroupMembers, memberEmail]);
+  };
+  
+  // Handle removing a study group member
+  const removeStudyGroupMember = (memberEmail: string) => {
+    setStudyGroupMembers(studyGroupMembers.filter(email => email !== memberEmail));
+  };
+  
+  // Handle creating a new study group
+  const createStudyGroup = () => {
+    if (!studyGroupName.trim()) return;
+    
+    // In a real app, this would create a group in the database
+    setShowCollaborativeFeatures(true);
+    
+    // For demo purposes, add default members if none added
+    if (studyGroupMembers.length === 0) {
+      setStudyGroupMembers(['classmate1@example.com', 'studybuddy@example.com']);
+    }
+  };
+  
+  // Generate AI recommendations based on study habits and performance
+  const generateAIRecommendations = () => {
+    // In a real app, this would make an API call to an AI service
+    
+    // For this demo, we'll just show the pre-populated suggestions
+    setShowAIRecommendations(true);
+    
+    // Add some "freshly generated" suggestions to demonstrate the feature
+    setAiSuggestions([
+      ...aiSuggestions,
+      {
+        title: "Prioritize SATA Questions",
+        description: "Your performance data shows lower accuracy on select-all-that-apply questions",
+        category: 'focus-area'
+      },
+      {
+        title: "Study Group Sessions",
+        description: "Collaborate with your study group on pharmacology practice questions",
+        category: 'technique'
+      }
+    ]);
+  };
+  
+  // Apply an AI recommendation to the study plan
+  const applyAIRecommendation = (recommendationIndex: number) => {
+    const recommendation = aiSuggestions[recommendationIndex];
+    
+    if (recommendation.category === 'focus-area') {
+      // Add a new structured goal based on the recommendation
+      const newAIGoal: StudyGoal = {
+        id: `ai-goal-${Date.now()}`,
+        content: recommendation.title,
+        category: 'content-mastery',
+        isCompleted: false,
+        priority: 'high',
+        progress: 0
+      };
+      
+      setStructuredGoals([...structuredGoals, newAIGoal]);
+      
+      // Update current plan if it exists
+      if (currentPlan && currentPlan.structuredGoals) {
+        setCurrentPlan({
+          ...currentPlan,
+          structuredGoals: [...currentPlan.structuredGoals, newAIGoal]
+        });
+      }
+    }
+    
+    if (recommendation.category === 'technique') {
+      // Add the technique as a custom tip
+      setCustomTips([...customTips, recommendation.description]);
+    }
+    
+    if (recommendation.category === 'schedule') {
+      // Add a schedule-based recommendation
+      // In a real app, this would intelligently update the schedule
+      // For demo purposes, we'll just add a custom goal
+      setCustomGoals([...customGoals, recommendation.title]);
+    }
+    
+    // Remove the applied recommendation from the list
+    setAiSuggestions(aiSuggestions.filter((_, index) => index !== recommendationIndex));
   };
   
   // Get the personalized study plan
@@ -1908,6 +2053,311 @@ export function StudyStrategyPlanner() {
                   </tbody>
                 </table>
               </div>
+            </CardContent>
+          </Card>
+          
+          {/* AI Recommendations */}
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <CardHeader className="pb-2">
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-lg flex items-center">
+                  <BrainCircuit className="mr-2 h-5 w-5 text-purple-600" />
+                  AI Study Recommendations
+                </CardTitle>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={generateAIRecommendations}
+                  className="text-sm"
+                >
+                  <Lightbulb className="h-4 w-4 mr-1" />
+                  Generate Recommendations
+                </Button>
+              </div>
+              <CardDescription>Smart suggestions based on your study habits and performance</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {showAIRecommendations ? (
+                <div className="space-y-3">
+                  {aiSuggestions.map((suggestion, index) => (
+                    <div 
+                      key={index}
+                      className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors"
+                    >
+                      <div className="flex justify-between items-start mb-1">
+                        <div className="flex items-center">
+                          <span className="font-medium">{suggestion.title}</span>
+                        </div>
+                        <button 
+                          onClick={() => applyAIRecommendation(index)}
+                          className="text-blue-600 hover:text-blue-800 ml-2 text-sm font-medium"
+                        >
+                          Apply
+                        </button>
+                      </div>
+                      <p className="text-sm text-gray-600">{suggestion.description}</p>
+                      <div className="mt-1">
+                        <span className={`text-xs px-2 py-0.5 rounded-full ${
+                          suggestion.category === 'focus-area' ? 'bg-red-100 text-red-700' :
+                          suggestion.category === 'resource' ? 'bg-blue-100 text-blue-700' :
+                          suggestion.category === 'schedule' ? 'bg-green-100 text-green-700' :
+                          'bg-purple-100 text-purple-700'
+                        }`}>
+                          {suggestion.category === 'focus-area' ? 'Focus Area' :
+                           suggestion.category === 'resource' ? 'Resource' :
+                           suggestion.category === 'schedule' ? 'Schedule' :
+                           'Technique'}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                  {aiSuggestions.length === 0 && (
+                    <div className="text-center p-4">
+                      <p className="text-gray-500">All recommendations applied!</p>
+                      <Button 
+                        variant="outline" 
+                        className="mt-2"
+                        onClick={generateAIRecommendations}
+                      >
+                        Generate More
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center p-4 border-2 border-dashed border-gray-300 rounded-md">
+                  <BrainCircuit className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-gray-500 mb-2">Get AI-powered study recommendations</p>
+                  <p className="text-xs text-gray-400 mb-3">Our AI analyzes your study patterns and performance to suggest personalized optimizations</p>
+                  <Button onClick={generateAIRecommendations}>
+                    Generate Recommendations
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+          
+          {/* Study Analytics Dashboard */}
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex items-center">
+                <LineChart className="mr-2 h-5 w-5 text-blue-600" />
+                Study Performance Analytics
+              </CardTitle>
+              <CardDescription>Track your progress and identify improvement areas</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                {/* Study Time Breakdown */}
+                <div>
+                  <h4 className="font-medium text-sm mb-2">Weekly Study Hours</h4>
+                  <div className="h-12 flex items-end space-x-1">
+                    {studyAnalytics.weeklyStudyHours.map((hours, idx) => (
+                      <div key={idx} className="relative flex-1 bg-blue-100 rounded-t">
+                        <div 
+                          className="absolute bottom-0 w-full bg-blue-500 rounded-t" 
+                          style={{ height: `${Math.min(100, hours * 10)}%` }} 
+                        ></div>
+                        <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-xs">
+                          {['M','T','W','T','F','S','S'][idx]}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="h-4"></div>
+                </div>
+                
+                {/* Topic Mastery */}
+                <div>
+                  <h4 className="font-medium text-sm mb-2">Topic Mastery</h4>
+                  <div className="space-y-2">
+                    {Object.entries(studyAnalytics.topicMastery).map(([topic, score], idx) => (
+                      <div key={idx}>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-xs">{topic}</span>
+                          <span className="text-xs font-medium">{score}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 h-2 rounded">
+                          <div 
+                            className={`h-2 rounded ${
+                              score < 60 ? 'bg-red-500' : 
+                              score < 75 ? 'bg-yellow-500' : 
+                              'bg-green-500'
+                            }`} 
+                            style={{ width: `${score}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Question Type Performance */}
+                <div>
+                  <h4 className="font-medium text-sm mb-2">Question Type Performance</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {Object.entries(studyAnalytics.questionAccuracy).map(([type, score], idx) => (
+                      <div 
+                        key={idx} 
+                        className="border rounded p-2 flex flex-col items-center justify-center"
+                      >
+                        <div className="w-14 h-14 relative mb-1">
+                          <div className="w-full h-full rounded-full bg-gray-100"></div>
+                          <div 
+                            className={`absolute top-0 left-0 w-full h-full rounded-full border-4 
+                              ${score < 60 ? 'border-red-400' : 
+                                score < 75 ? 'border-yellow-400' : 
+                                'border-green-400'}`} 
+                            style={{ 
+                              clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.sin(score / 100 * Math.PI * 2)}% ${50 - 50 * Math.cos(score / 100 * Math.PI * 2)}%, 50% 50%)`, 
+                              transform: 'rotate(-90deg)' 
+                            }}
+                          ></div>
+                          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                            <span className="text-sm font-bold">{score}%</span>
+                          </div>
+                        </div>
+                        <span className="text-xs">{type}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          {/* Collaborative Study Group */}
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <CardHeader className="pb-2">
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-lg flex items-center">
+                  <CheckSquare className="mr-2 h-5 w-5 text-green-600" />
+                  Collaborative Study Group
+                </CardTitle>
+                {!showCollaborativeFeatures && (
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => setShowCollaborativeFeatures(true)}
+                  >
+                    Create Group
+                  </Button>
+                )}
+              </div>
+              <CardDescription>Share your study plan and collaborate with classmates</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {showCollaborativeFeatures ? (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-medium">{studyGroupName || "My Study Group"}</h4>
+                      <p className="text-xs text-gray-500">{studyGroupMembers.length} members</p>
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => alert("Plan shared with group members")}>
+                      Share Plan
+                    </Button>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-sm font-medium mb-2">Group Members</h4>
+                    <div className="space-y-2">
+                      {studyGroupMembers.map((member, idx) => (
+                        <div key={idx} className="flex justify-between items-center p-2 border rounded">
+                          <span>{member}</span>
+                          <button 
+                            onClick={() => removeStudyGroupMember(member)}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            <X className="h-4 w-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-sm font-medium mb-2">Add Member</h4>
+                    <div className="flex gap-2">
+                      <input 
+                        type="email" 
+                        placeholder="Email address" 
+                        className="flex-1 p-2 border-2 border-black rounded-md"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && e.currentTarget.value) {
+                            addStudyGroupMember(e.currentTarget.value);
+                            e.currentTarget.value = '';
+                          }
+                        }}
+                      />
+                      <Button 
+                        onClick={() => {
+                          const input = document.querySelector('input[type="email"]') as HTMLInputElement;
+                          if (input && input.value) {
+                            addStudyGroupMember(input.value);
+                            input.value = '';
+                          }
+                        }}
+                      >
+                        Add
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="border-t pt-4">
+                    <h4 className="text-sm font-medium mb-2">Group Study Sessions</h4>
+                    <div className="space-y-2">
+                      <div className="border p-3 rounded">
+                        <div className="flex justify-between">
+                          <div>
+                            <h5 className="font-medium">Pharmacology Review</h5>
+                            <p className="text-xs text-gray-500">Friday, 7:00 PM - 9:00 PM</p>
+                          </div>
+                          <Button size="sm" variant="outline">Join</Button>
+                        </div>
+                      </div>
+                      <div className="border p-3 rounded">
+                        <div className="flex justify-between">
+                          <div>
+                            <h5 className="font-medium">Practice Question Review</h5>
+                            <p className="text-xs text-gray-500">Saturday, 10:00 AM - 11:30 AM</p>
+                          </div>
+                          <Button size="sm" variant="outline">Join</Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="text-center p-4 border-2 border-dashed border-gray-300 rounded-md">
+                    <CheckSquare className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                    <p className="text-gray-500 mb-2">Create a study group to collaborate</p>
+                    <p className="text-xs text-gray-400 mb-3">Share your study plan, schedule group sessions, and study together</p>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-1">Group Name</label>
+                      <input 
+                        type="text" 
+                        value={studyGroupName}
+                        onChange={(e) => setStudyGroupName(e.target.value)}
+                        placeholder="Enter group name" 
+                        className="w-full p-2 border-2 border-black rounded-md"
+                      />
+                    </div>
+                    
+                    <Button 
+                      onClick={createStudyGroup}
+                      disabled={!studyGroupName.trim()}
+                      className="w-full"
+                    >
+                      Create Study Group
+                    </Button>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
           
