@@ -13,7 +13,7 @@ import {
   FileText,
   HelpCircle,
   MousePointer,
-  FlashIcon,
+  Zap,
   PenTool,
   ExternalLink,
   Loader2,
@@ -44,7 +44,7 @@ const resourceIcons: Record<string, LucideIcon> = {
   article: FileText,
   quiz: HelpCircle,
   interactive: MousePointer,
-  flashcard: FlashIcon,
+  flashcard: Zap,
   practice: PenTool,
 };
 

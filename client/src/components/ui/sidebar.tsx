@@ -44,6 +44,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/study-strategies": "Study Strategies",
       "/study-timer": "Study Timer",
       "/games": "Learning Games",
+      "/learning-paths": "Learning Paths",
       "/learning-path": "Learning Paths",
       "/create-learning-path": "Learning Paths"
     };
@@ -93,7 +94,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       title: "Learning Paths",
       icon: <GraduationCap className="h-5 w-5 mr-3" />,
       active: activeCategory === "Learning Paths",
-      path: "/learning-path"
+      path: "/learning-paths"
     },
     {
       title: "Study Strategies",
