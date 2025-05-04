@@ -173,78 +173,153 @@ export function TestList({ onSelectTest }: TestListProps) {
 
       {/* We've removed the mobile dropdown and practice exams list section since it's now 
           available through the dialog. This keeps the UI cleaner and more focused. */}
-
-      {/* Recent Activity Section */}
-      <div className="neuro-card mb-6 neuro-noise overflow-hidden">
-        <div className="bg-[#13294B] text-white py-3 px-4 uppercase font-bold text-xl neuro-header flex items-center">
-          <Clock className="h-5 w-5 mr-2" />
-          Recent Activity
-        </div>
-        <div className="p-4 bg-white">
-          <div className="overflow-x-auto">
-            <table className="min-w-full border-2 border-black">
-              <thead>
-                <tr className="border-b-2 border-black bg-gray-100">
-                  <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Test Name</th>
-                  <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Score</th>
-                  <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Date</th>
-                  <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Empty state for recent tests */}
-                <tr>
-                  <td colSpan={4} className="text-center py-6 border-b-2 border-black">
-                    <div className="flex flex-col items-center">
-                      <Calendar className="h-12 w-12 mb-3" />
-                      <span className="font-bold">No recent test attempts</span>
-                      <span className="text-sm mt-1">Your completed exams will appear here</span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+      
+      {/* Action buttons for the different sections moved to modals */}
+      <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8 px-4">
+        <Dialog>
+          <DialogTrigger asChild>
+            <button 
+              className="neuro-button-secondary min-h-[44px] flex items-center justify-center gap-2 flex-1 px-6"
+              aria-label="View Recent Activity"
+            >
+              <Clock className="h-5 w-5" />
+              View Recent Activity
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-4xl p-0 bg-white overflow-hidden border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
+            <DialogHeader className="bg-[#13294B] text-white py-3 px-6 flex items-center justify-between">
+              <DialogTitle className="text-xl font-bold uppercase">
+                <div className="flex items-center">
+                  <Clock className="h-5 w-5 mr-2" />
+                  Recent Activity
+                </div>
+              </DialogTitle>
+              <DialogTrigger asChild>
+                <button 
+                  className="text-white hover:text-gray-200 cursor-pointer"
+                  aria-label="Close"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </DialogTrigger>
+            </DialogHeader>
+            <div className="px-6 py-4 max-h-[70vh] overflow-y-auto">
+              <DialogDescription className="mb-4 text-gray-600">
+                Track your progress and review your recent test attempts.
+              </DialogDescription>
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-black">
+                  <thead>
+                    <tr className="border-b-2 border-black bg-gray-100">
+                      <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Test Name</th>
+                      <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Score</th>
+                      <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Date</th>
+                      <th className="text-left py-3 px-4 font-bold uppercase text-[#13294B]">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* Empty state for recent tests */}
+                    <tr>
+                      <td colSpan={4} className="text-center py-6 border-b-2 border-black">
+                        <div className="flex flex-col items-center">
+                          <Calendar className="h-12 w-12 mb-3" />
+                          <span className="font-bold">No recent test attempts</span>
+                          <span className="text-sm mt-1">Your completed exams will appear here</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+        {/* Study Tips Dialog */}
+        <Dialog>
+          <DialogTrigger asChild>
+            <button 
+              className="neuro-button-secondary min-h-[44px] flex items-center justify-center gap-2 flex-1 px-6"
+              aria-label="View NCLEX Study Tips"
+            >
+              <BarChart className="h-5 w-5" />
+              View Study Tips
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-4xl p-0 bg-white overflow-hidden border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
+            <DialogHeader className="bg-[#13294B] text-white py-3 px-6 flex items-center justify-between">
+              <DialogTitle className="text-xl font-bold uppercase">
+                <div className="flex items-center">
+                  <BarChart className="h-5 w-5 mr-2" />
+                  NCLEX Study Tips
+                </div>
+              </DialogTitle>
+              <DialogTrigger asChild>
+                <button 
+                  className="text-white hover:text-gray-200 cursor-pointer"
+                  aria-label="Close"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </DialogTrigger>
+            </DialogHeader>
+            <div className="px-6 py-4 max-h-[70vh] overflow-y-auto">
+              <DialogDescription className="mb-4 text-gray-600">
+                Expert advice to help you succeed on your NCLEX exam preparation.
+              </DialogDescription>
+              
+              <div className="divide-y-2 divide-black">
+                <div className="py-4">
+                  <h3 className="font-bold text-[#13294B] mb-2 text-lg">Practice Regularly</h3>
+                  <p>Consistent practice with NCLEX-style questions improves critical thinking skills and test familiarity.</p>
+                </div>
+                <div className="py-4">
+                  <h3 className="font-bold text-[#13294B] mb-2 text-lg">Review Test Rationales</h3>
+                  <p>Always read explanations for both correct and incorrect answers to deepen understanding.</p>
+                </div>
+                <div className="py-4">
+                  <h3 className="font-bold text-[#13294B] mb-2 text-lg">Identify Knowledge Gaps</h3>
+                  <p>Focus your study time on areas where you consistently struggle.</p>
+                </div>
+                <div className="py-4">
+                  <h3 className="font-bold text-[#13294B] mb-2 text-lg">Simulate Test Environment</h3>
+                  <p>Take full-length practice tests under timed conditions to build stamina and reduce anxiety.</p>
+                </div>
+                <div className="py-4">
+                  <h3 className="font-bold text-[#13294B] mb-2 text-lg">Use Active Learning</h3>
+                  <p>Take notes, create flashcards, and teach concepts to others to reinforce your understanding.</p>
+                </div>
+                <div className="py-4">
+                  <h3 className="font-bold text-[#13294B] mb-2 text-lg">Manage Test Anxiety</h3>
+                  <p>Practice relaxation techniques and positive visualization to reduce stress during exams.</p>
+                </div>
+              </div>
+              
+              <div className="mt-6 text-center">
+                <Link href="/study-strategies">
+                  <button 
+                    className="neuro-button-primary min-h-[44px] min-w-[220px]"
+                    aria-label="View Detailed Study Resources and Strategies"
+                  >
+                    View Detailed Study Resources
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
-
-      {/* Study Tips */}
-      <div className="neuro-card mb-6 neuro-noise overflow-hidden">
-        <div className="bg-[#13294B] text-white py-3 px-4 uppercase font-bold text-xl neuro-header flex items-center">
-          <BarChart className="h-5 w-5 mr-2" />
-          NCLEX Study Tips
-        </div>
-        <div className="p-4 bg-white">
-          <div className="divide-y-2 divide-black">
-            <div className="py-4">
-              <h3 className="font-bold text-[#13294B] mb-2 text-lg">Practice Regularly</h3>
-              <p>Consistent practice with NCLEX-style questions improves critical thinking skills and test familiarity.</p>
-            </div>
-            <div className="py-4">
-              <h3 className="font-bold text-[#13294B] mb-2 text-lg">Review Test Rationales</h3>
-              <p>Always read explanations for both correct and incorrect answers to deepen understanding.</p>
-            </div>
-            <div className="py-4">
-              <h3 className="font-bold text-[#13294B] mb-2 text-lg">Identify Knowledge Gaps</h3>
-              <p>Focus your study time on areas where you consistently struggle.</p>
-            </div>
-            <div className="py-4">
-              <h3 className="font-bold text-[#13294B] mb-2 text-lg">Simulate Test Environment</h3>
-              <p>Take full-length practice tests under timed conditions to build stamina and reduce anxiety.</p>
-            </div>
-          </div>
-          
-          <div className="mt-6 text-center">
-            <Link href="/study-strategies">
-              <button 
-                className="neuro-button-primary min-h-[44px] min-w-[180px]"
-                aria-label="View Study Resources and Strategies"
-              >
-                View Study Resources
-              </button>
-            </Link>
-          </div>
-        </div>
+      
+      {/* Add a button to the Study Strategy page directly in the main view */}
+      <div className="flex justify-center mb-10">
+        <Link href="/study-strategies">
+          <button 
+            className="neuro-button-primary min-h-[50px] min-w-[260px] text-lg flex items-center justify-center gap-2"
+            aria-label="Access Study Strategy Planner"
+          >
+            <Calendar className="h-5 w-5" />
+            Study Strategy Planner
+          </button>
+        </Link>
       </div>
     </div>
   );
