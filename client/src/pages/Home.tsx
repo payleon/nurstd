@@ -5,6 +5,7 @@ import { TestList } from "@/components/TestList";
 import { LearningRecommendations } from "@/components/LearningRecommendations";
 import { LearningAchievementsSection } from "@/components/LearningAchievementsSection";
 import { LearningProgressChart } from "@/components/progress/LearningProgressChart";
+import { EnhancedDashboard } from "@/components/dashboard/EnhancedDashboard";
 import { Test } from "@shared/schema";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { lazyImport } from "@/lib/lazyImport";
@@ -132,11 +133,24 @@ export default function Home() {
 
       <div className="flex h-screen pt-16">
         <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
-          <div className="max-w-5xl mx-auto">
-            {/* Added the TestList at the top to show the Welcome Card first */}
-            <TestList onSelectTest={handleSelectTest} />
+          <div className="max-w-7xl mx-auto">
+            {/* Welcome and Test selection */}
+            <div className="mb-6">
+              <TestList onSelectTest={handleSelectTest} />
+            </div>
             
-            <div className="grid grid-cols-1 gap-6 mb-6">
+            {/* Enhanced Dashboard Module */}
+            <EnhancedDashboard 
+              userStats={{
+                streakDays: userStats.streakDays,
+                questionsAnswered: userStats.questionsAnswered,
+                questionsCorrect: userStats.questionsCorrect
+              }}
+              unlockedBadges={unlockedBadges}
+            />
+            
+            {/* Legacy Components - can be removed once dashboard fully integrated */}
+            <div className="grid grid-cols-1 gap-6 mb-6 mt-8 hidden">
               {/* Learning Progress Chart */}
               <div className="mb-6">
                 <LearningProgressChart userStats={userStats} />
@@ -154,9 +168,9 @@ export default function Home() {
                 badgesEarned={unlockedBadges.length}
                 improvementRate={12} // This is a placeholder value - in a real app this would be calculated
               />
+              
+              <LearningRecommendations />
             </div>
-            
-            <LearningRecommendations />
           </div>
         </main>
       </div>
