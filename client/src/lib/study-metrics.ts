@@ -16,6 +16,20 @@ interface StudyMetrics {
  * @param lastActivity ISO string representing the time of the last activity
  * @returns Study metrics including overall progress, time stats, and areas of focus
  */
+/**
+ * Helper function to format area names for display
+ */
+function formatAreaName(area: string): string {
+  // Special cases
+  if (area === 'med-surg') return 'Medical-Surgical';
+  
+  // General case: capitalize first letter of each word
+  return area
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('-');
+}
+
 export function calculateStudyMetrics(
   studyAreas: Record<string, StudyArea>,
   lastActivity: Date | string

@@ -110,8 +110,10 @@ export function useStudyProgress() {
         const parsedProgress = JSON.parse(storedProgress);
         
         // Convert string dates back to Date objects
-        Object.values(parsedProgress).forEach((area: StudyArea) => {
-          area.lastUpdated = new Date(area.lastUpdated);
+        Object.values(parsedProgress).forEach((area) => {
+          if (area && typeof area === 'object' && 'lastUpdated' in area) {
+            area.lastUpdated = new Date(area.lastUpdated);
+          }
         });
         
         setStudyAreas(parsedProgress);
