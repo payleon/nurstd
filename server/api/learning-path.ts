@@ -253,10 +253,6 @@ router.get('/learning-paths/:id', async (req: Request, res: Response) => {
 // Create a new learning path
 router.post('/learning-paths', async (req: Request, res: Response) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
-
     const preferences = req.body;
     
     // Generate learning path using Gemini AI
@@ -278,10 +274,6 @@ router.post('/learning-paths', async (req: Request, res: Response) => {
 // Mark a learning path node as complete
 router.post('/learning-paths/:pathId/nodes/:nodeId/complete', async (req: Request, res: Response) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
-
     const { pathId, nodeId } = req.params;
     
     // TODO: Update the node completion status in the database
@@ -296,10 +288,6 @@ router.post('/learning-paths/:pathId/nodes/:nodeId/complete', async (req: Reques
 // Delete a learning path
 router.delete('/learning-paths/:id', async (req: Request, res: Response) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
-
     const pathId = req.params.id;
     
     // TODO: Delete the learning path from the database

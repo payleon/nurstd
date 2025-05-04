@@ -5,11 +5,8 @@ import fs from "fs/promises";
 import path from "path";
 import { QuestionsResponseSchema, QuestionSchema } from "@shared/schema";
 import learningPathRouter from "./api/learning-path";
-import { setupAuth } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Set up authentication
-  setupAuth(app);
   // Serve sitemap.xml and robots.txt at root level
   app.get('/sitemap.xml', async (req, res) => {
     try {
@@ -455,6 +452,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use('/api', learningPathRouter);
 
   const httpServer = createServer(app);
-  console.log('Routes and authentication system initialized successfully.');
+  console.log('Routes initialized successfully (authentication disabled).');
   return httpServer;
 }
