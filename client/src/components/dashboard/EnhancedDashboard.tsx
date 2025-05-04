@@ -39,7 +39,7 @@ import { Badge as UIBadge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { LearningProgressChart } from "@/components/progress/LearningProgressChart";
 import { BadgeCollection } from "@/components/badges/BadgeCollection";
-import type { Badge } from "@/lib/badges";
+import type { Badge, UserStats } from "@/lib/badges";
 
 // Type definitions for our dashboard data
 interface DashboardUserStats {
@@ -204,6 +204,25 @@ export function EnhancedDashboard({
   
   // State for active tabs and panels
   const [activeMainTab, setActiveMainTab] = useState<string>('overview');
+  
+  // Create a compatible UserStats object for LearningProgressChart
+  const userStatsForChart: UserStats = {
+    questionsAnswered: userStats.questionsAnswered,
+    questionsCorrect: userStats.questionsCorrect,
+    questionsIncorrect: userStats.questionsAnswered - userStats.questionsCorrect,
+    streakDays: userStats.streakDays,
+    testsCompleted: 0,
+    specialtyQuestionsCompleted: {
+      "Med-Surg": 45,
+      "Pediatrics": 30,
+      "Obstetrics": 25,
+      "Psychiatric": 20,
+      "Fundamentals": 50
+    },
+    perfectScores: 0,
+    flaggedQuestions: 0,
+    timeSpent: userStats.totalStudyHours * 60 // convert hours to minutes
+  };
   
   // Calculate correct percentage
   const correctPercentage = 
@@ -588,7 +607,7 @@ export function EnhancedDashboard({
             </CardHeader>
             <CardContent>
               <div className="h-64">
-                <LearningProgressChart userStats={userStats} />
+                <LearningProgressChart userStats={userStatsForChart} />
               </div>
             </CardContent>
           </Card>
