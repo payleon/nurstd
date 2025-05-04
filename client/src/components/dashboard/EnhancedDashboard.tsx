@@ -35,13 +35,14 @@ import {
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
+import { Badge as UIBadge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { LearningProgressChart } from "@/components/progress/LearningProgressChart";
 import { BadgeCollection } from "@/components/badges/BadgeCollection";
+import type { Badge } from "@/lib/badges";
 
 // Type definitions for our dashboard data
-interface UserStats {
+interface DashboardUserStats {
   streakDays: number;
   questionsAnswered: number;
   questionsCorrect: number;
@@ -84,7 +85,7 @@ interface UserStats {
 }
 
 // Sample data for demonstration
-const sampleUserStats: UserStats = {
+const sampleUserStats: DashboardUserStats = {
   streakDays: 12,
   questionsAnswered: 457,
   questionsCorrect: 356,
@@ -184,7 +185,7 @@ interface EnhancedDashboardProps {
     questionsCorrect?: number;
     [key: string]: any;
   };
-  unlockedBadges: any[]; // Replace with your actual Badge type
+  unlockedBadges: Badge[]; // Using the Badge type from lib/badges
 }
 
 export function EnhancedDashboard({ 
@@ -212,7 +213,7 @@ export function EnhancedDashboard({
   
   // Calculate the study plan completion for today
   const todayStudyPlan = userStats.studySchedule[0];
-  const completedTasks = todayStudyPlan?.tasks.filter(t => t.completed).length || 0;
+  const completedTasks = todayStudyPlan?.tasks.filter((t: {completed: boolean}) => t.completed).length || 0;
   const totalTasks = todayStudyPlan?.tasks.length || 0;
   const todayCompletionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
   
@@ -402,9 +403,9 @@ export function EnhancedDashboard({
                           <h4 className="font-medium">{exam.name}</h4>
                           <p className="text-sm text-gray-500">{exam.date}</p>
                         </div>
-                        <Badge className={getExamUrgencyColor(exam.daysUntil)}>
+                        <UIBadge className={getExamUrgencyColor(exam.daysUntil)}>
                           {exam.daysUntil} days left
-                        </Badge>
+                        </UIBadge>
                       </div>
                       <div className="mt-2">
                         <div className="flex justify-between mb-1">
@@ -772,7 +773,7 @@ export function EnhancedDashboard({
             <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center text-lg">
-                  <Lightbulb className="h-5 w-5 mr-2 text-amber-600" />
+                  <Brain className="h-5 w-5 mr-2 text-amber-600" />
                   Personalized Recommendations
                 </CardTitle>
                 <CardDescription>AI-powered suggestions for your study</CardDescription>
@@ -784,7 +785,7 @@ export function EnhancedDashboard({
                       <div className="flex items-center">
                         <span className="font-medium">Focus on SATA Questions</span>
                       </div>
-                      <Badge className="bg-red-100 text-red-800 hover:bg-red-200">Focus Area</Badge>
+                      <UIBadge className="bg-red-100 text-red-800 hover:bg-red-200">Focus Area</UIBadge>
                     </div>
                     <p className="text-sm text-gray-600">Your performance data shows lower accuracy on select-all-that-apply questions</p>
                   </div>
@@ -794,7 +795,7 @@ export function EnhancedDashboard({
                       <div className="flex items-center">
                         <span className="font-medium">Morning Study Sessions</span>
                       </div>
-                      <Badge className="bg-green-100 text-green-800 hover:bg-green-200">Schedule</Badge>
+                      <UIBadge className="bg-green-100 text-green-800 hover:bg-green-200">Schedule</UIBadge>
                     </div>
                     <p className="text-sm text-gray-600">Your timer data shows better retention in morning sessions</p>
                   </div>
@@ -804,7 +805,7 @@ export function EnhancedDashboard({
                       <div className="flex items-center">
                         <span className="font-medium">Spaced Repetition</span>
                       </div>
-                      <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200">Technique</Badge>
+                      <UIBadge className="bg-purple-100 text-purple-800 hover:bg-purple-200">Technique</UIBadge>
                     </div>
                     <p className="text-sm text-gray-600">Based on your learning style, try using spaced repetition for pharmacology concepts</p>
                   </div>
@@ -814,7 +815,7 @@ export function EnhancedDashboard({
                       <div className="flex items-center">
                         <span className="font-medium">Interactive Materials</span>
                       </div>
-                      <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200">Resource</Badge>
+                      <UIBadge className="bg-blue-100 text-blue-800 hover:bg-blue-200">Resource</UIBadge>
                     </div>
                     <p className="text-sm text-gray-600">Try using more interactive study materials like case studies and simulations</p>
                   </div>
