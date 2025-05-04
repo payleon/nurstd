@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'wouter';
+import { useLocation } from 'wouter';
 import { Calendar, Clock, BookOpen, Plus } from 'lucide-react';
 import { getUserLearningPaths } from '@/api/learning-path';
 import { LearningPath } from '@/lib/learning-path';
 import { Badge } from '@/components/ui/badge';
+
+// Local Link component that works with wouter
+const Link = ({ href, children }: { href: string; children: React.ReactNode }) => {
+  const [_, setLocation] = useLocation();
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLocation(href);
+  };
+  
+  return (
+    <a href={href} onClick={handleClick}>
+      {children}
+    </a>
+  );
+};
 
 export default function LearningPathsPage() {
   const [learningPaths, setLearningPaths] = useState<LearningPath[]>([]);

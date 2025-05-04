@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'wouter';
+import { useLocation } from 'wouter';
 import { Loader2 } from 'lucide-react';
 import { useStudyProgress } from '@/hooks/useStudyProgress';
 import { generateLearningPath } from '@/api/learning-path';
@@ -42,7 +42,7 @@ const studyAreas = [
 ];
 
 export function LearningPathForm() {
-  const navigate = useNavigate();
+  const [_, setLocation] = useLocation();
   const { getWeakAreas, getStrongAreas } = useStudyProgress();
   
   const [isLoading, setIsLoading] = useState(false);
@@ -82,7 +82,7 @@ export function LearningPathForm() {
       const learningPath = await generateLearningPath(preferences);
       
       // Navigate to the learning path view
-      navigate(`/learning-path/${learningPath.id}`);
+      setLocation(`/learning-path/${learningPath.id}`);
     } catch (error) {
       console.error('Error creating learning path:', error);
       setError((error as Error).message || 'Failed to create learning path');
