@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'wouter';
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -43,7 +43,7 @@ import {
 
 export function LearningPathView() {
   const { toast } = useToast();
-  const navigate = useNavigate();
+  const [_, navigate] = useLocation();
   const [learningPath, setLearningPath] = useState<LearningPath | null>(null);
   const [nextNode, setNextNode] = useState<LearningPathNode | null>(null);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
@@ -279,8 +279,8 @@ export function LearningPathView() {
                     )}
                     <h3 className="font-semibold text-[#13294B]">{section.title}</h3>
                     <Badge 
-                      variant={section.completed ? "success" : "outline"} 
-                      className="ml-2"
+                      variant={section.completed ? "default" : "outline"} 
+                      className={`ml-2 ${section.completed ? "bg-green-100 text-green-800 hover:bg-green-100" : ""}`}
                     >
                       {section.nodes.filter(node => node.completed).length}/{section.nodes.length}
                     </Badge>

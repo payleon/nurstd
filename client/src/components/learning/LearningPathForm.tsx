@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'wouter';
+import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -37,7 +37,7 @@ const NURSING_AREAS = [
 
 export function LearningPathForm() {
   const { toast } = useToast();
-  const navigate = useNavigate();
+  const [_, navigate] = useLocation();
   const { studyAreas } = useStudyProgress();
 
   // State for user preferences
