@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-import { StudyArea } from '@/hooks/useStudyProgress';
 
-// Define types for learning path
+// Types for learning path
 export type LearningStyle = 'visual' | 'auditory' | 'reading' | 'kinesthetic';
 export type TimeCommitment = 'minimal' | 'moderate' | 'intensive';
 export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced';
+export type ResourceType = 'video' | 'article' | 'interactive' | 'quiz' | 'flashcard' | 'practice';
 
 export interface LearningPreferences {
   learningStyle: LearningStyle;
@@ -19,18 +19,20 @@ export interface LearningPathNode {
   id: string;
   title: string;
   description: string;
-  estimatedTime: number; // in minutes
-  resourceType: string; // video, article, practice, quiz, etc.
-  difficulty: string; // beginner, intermediate, advanced
+  resourceType: ResourceType;
   url?: string;
+  estimatedTime: number; // in minutes
+  difficulty: DifficultyLevel;
   completed: boolean;
+  focusArea: string;
+  order: number;
 }
 
 export interface LearningPathSection {
   id: string;
   title: string;
   description: string;
-  area: string;
+  order: number;
   nodes: LearningPathNode[];
   completed: boolean;
 }
@@ -40,697 +42,864 @@ export interface LearningPath {
   title: string;
   description: string;
   createdAt: Date;
+  updatedAt: Date;
   learningStyle: LearningStyle;
   timeCommitment: TimeCommitment;
   difficulty: DifficultyLevel;
-  estimatedCompletionWeeks: number;
-  progress: number;
+  focusAreas: string[];
   sections: LearningPathSection[];
+  progress: number; // 0-100
 }
 
-// Constants for path generation
-const HOURS_PER_WEEK: Record<TimeCommitment, number> = {
-  minimal: 4,
-  moderate: 7,
-  intensive: 12
+// Study area type from useStudyProgress
+export interface StudyArea {
+  confidenceLevel: number; // 1-3
+  lastPracticed?: Date;
+  questionsAttempted?: number;
+  questionsCorrect?: number;
+  recommendedFocus?: boolean;
+}
+
+// Resource database - organized by learning style and type
+const resourceDatabase: Record<string, Record<string, Array<{ title: string; description: string; url?: string; estimatedTime: number; difficulty: DifficultyLevel; }>>> = {
+  fundamentals: {
+    visual: [
+      { 
+        title: 'Introduction to Nursing Fundamentals',
+        description: 'Visual overview of core nursing concepts and principles',
+        url: 'https://www.youtube.com/watch?v=nursing-fundamentals-intro',
+        estimatedTime: 15,
+        difficulty: 'beginner'
+      },
+      { 
+        title: 'Nursing Assessments Visual Guide',
+        description: 'Illustrated guide to conducting thorough patient assessments',
+        url: 'https://www.youtube.com/watch?v=nursing-assessment-visual',
+        estimatedTime: 25,
+        difficulty: 'intermediate'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Nursing Fundamentals Podcast Series',
+        description: 'Audio lessons covering essential nursing fundamentals',
+        url: 'https://nursingpodcast.com/fundamentals-series',
+        estimatedTime: 45,
+        difficulty: 'beginner'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Fundamentals of Nursing: Key Concepts',
+        description: 'Comprehensive reading on essential nursing concepts',
+        url: 'https://nursing-education.org/fundamentals-concepts',
+        estimatedTime: 30,
+        difficulty: 'beginner'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Hands-on Nursing Skills Practice',
+        description: 'Interactive exercises for fundamental nursing skills',
+        url: 'https://nursing-practice.org/interactive-fundamentals',
+        estimatedTime: 60,
+        difficulty: 'intermediate'
+      }
+    ]
+  },
+  pharmacology: {
+    visual: [
+      { 
+        title: 'Pharmacology Mechanisms Visualized',
+        description: 'Visual explanations of drug mechanisms and interactions',
+        url: 'https://www.youtube.com/watch?v=pharm-mechanisms',
+        estimatedTime: 20,
+        difficulty: 'intermediate'
+      },
+      { 
+        title: 'Common Medications Visual Chart',
+        description: 'Visual reference guide for commonly prescribed medications',
+        url: 'https://nursingpharm.edu/visual-med-chart',
+        estimatedTime: 15,
+        difficulty: 'beginner'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Pharmacology Audio Mnemonics',
+        description: 'Memory techniques for drug classifications and effects',
+        url: 'https://nursing-audio.com/pharm-mnemonics',
+        estimatedTime: 30,
+        difficulty: 'intermediate'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Comprehensive Medication Administration Guide',
+        description: 'Detailed guide on safe medication administration practices',
+        url: 'https://nursing-education.org/med-admin-guide',
+        estimatedTime: 40,
+        difficulty: 'intermediate'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Medication Calculation Practice',
+        description: 'Interactive problems for dosage calculations',
+        url: 'https://nursing-calc.org/med-calculations',
+        estimatedTime: 35,
+        difficulty: 'advanced'
+      }
+    ]
+  },
+  'med-surg': {
+    visual: [
+      { 
+        title: 'Medical-Surgical Nursing Visual Cases',
+        description: 'Visual case studies of common med-surg scenarios',
+        url: 'https://www.youtube.com/watch?v=med-surg-cases',
+        estimatedTime: 30,
+        difficulty: 'intermediate'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Med-Surg Audio Lectures Series',
+        description: 'Comprehensive audio lectures on medical-surgical nursing',
+        url: 'https://nursing-audio.com/med-surg-series',
+        estimatedTime: 60,
+        difficulty: 'advanced'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Medical-Surgical Nursing: Critical Thinking Cases',
+        description: 'Text-based case studies requiring critical nursing judgment',
+        url: 'https://nursing-education.org/med-surg-cases',
+        estimatedTime: 45,
+        difficulty: 'advanced'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Interactive Med-Surg Simulations',
+        description: 'Practice scenarios for medical-surgical nursing interventions',
+        url: 'https://nursing-sims.org/med-surg',
+        estimatedTime: 50,
+        difficulty: 'intermediate'
+      }
+    ]
+  },
+  pediatrics: {
+    visual: [
+      { 
+        title: 'Pediatric Assessment Techniques',
+        description: 'Visual demonstration of pediatric-specific assessment approaches',
+        url: 'https://www.youtube.com/watch?v=pediatric-assessment',
+        estimatedTime: 25,
+        difficulty: 'intermediate'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Pediatric Nursing Audio Review',
+        description: 'Comprehensive audio review of pediatric nursing concepts',
+        url: 'https://nursing-audio.com/pediatrics-review',
+        estimatedTime: 40,
+        difficulty: 'intermediate'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Pediatric Medication Safety Guide',
+        description: 'Critical information on safe medication practices for children',
+        url: 'https://nursing-education.org/peds-med-safety',
+        estimatedTime: 35,
+        difficulty: 'intermediate'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Pediatric Growth & Development Activities',
+        description: 'Interactive practice for pediatric developmental assessments',
+        url: 'https://nursing-practice.org/pediatric-development',
+        estimatedTime: 30,
+        difficulty: 'beginner'
+      }
+    ]
+  },
+  obstetrics: {
+    visual: [
+      { 
+        title: 'Fetal Development Visualization',
+        description: 'Detailed visual guide to stages of fetal development',
+        url: 'https://www.youtube.com/watch?v=fetal-development',
+        estimatedTime: 20,
+        difficulty: 'beginner'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Obstetric Complications Review',
+        description: 'Audio review of common OB complications and nursing interventions',
+        url: 'https://nursing-audio.com/ob-complications',
+        estimatedTime: 35,
+        difficulty: 'advanced'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Maternal-Newborn Nursing Care Planning',
+        description: 'Comprehensive guide to nursing care during pregnancy and post-partum',
+        url: 'https://nursing-education.org/maternal-care-planning',
+        estimatedTime: 40,
+        difficulty: 'intermediate'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Labor & Delivery Simulation Activities',
+        description: 'Interactive scenarios for obstetric nursing care',
+        url: 'https://nursing-sims.org/labor-delivery',
+        estimatedTime: 45,
+        difficulty: 'advanced'
+      }
+    ]
+  },
+  psychiatric: {
+    visual: [
+      { 
+        title: 'Mental Health Assessment Techniques',
+        description: 'Visual demonstration of psychiatric assessment approaches',
+        url: 'https://www.youtube.com/watch?v=mental-health-assessment',
+        estimatedTime: 30,
+        difficulty: 'intermediate'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Psychiatric Nursing Discussions',
+        description: 'Audio discussions of key psychiatric nursing topics',
+        url: 'https://nursing-audio.com/psychiatric-discussions',
+        estimatedTime: 45,
+        difficulty: 'intermediate'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Therapeutic Communication Techniques',
+        description: 'Guide to effective therapeutic communication in psychiatric nursing',
+        url: 'https://nursing-education.org/therapeutic-communication',
+        estimatedTime: 25,
+        difficulty: 'beginner'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Psychiatric Crisis Intervention Practice',
+        description: 'Interactive scenarios for psychiatric crisis management',
+        url: 'https://nursing-sims.org/psychiatric-crisis',
+        estimatedTime: 40,
+        difficulty: 'advanced'
+      }
+    ]
+  },
+  prioritization: {
+    visual: [
+      { 
+        title: 'Prioritization Decision Trees',
+        description: 'Visual decision trees for nursing prioritization',
+        url: 'https://www.youtube.com/watch?v=prioritization-trees',
+        estimatedTime: 25,
+        difficulty: 'intermediate'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Prioritization & Delegation Case Reviews',
+        description: 'Audio case studies on prioritization and delegation',
+        url: 'https://nursing-audio.com/prioritization-cases',
+        estimatedTime: 35,
+        difficulty: 'advanced'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Mastering Nursing Prioritization',
+        description: 'Comprehensive text on prioritization strategies for nurses',
+        url: 'https://nursing-education.org/mastering-prioritization',
+        estimatedTime: 30,
+        difficulty: 'intermediate'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Interactive Triage Practice Scenarios',
+        description: 'Practice making prioritization decisions in varied clinical scenarios',
+        url: 'https://nursing-practice.org/triage-scenarios',
+        estimatedTime: 40,
+        difficulty: 'advanced'
+      }
+    ]
+  },
+  leadership: {
+    visual: [
+      { 
+        title: 'Nursing Leadership Models Visualized',
+        description: 'Visual overview of effective nursing leadership approaches',
+        url: 'https://www.youtube.com/watch?v=nursing-leadership',
+        estimatedTime: 20,
+        difficulty: 'intermediate'
+      }
+    ],
+    auditory: [
+      { 
+        title: 'Nursing Management Audio Series',
+        description: 'Audio lectures on effective nursing management techniques',
+        url: 'https://nursing-audio.com/management-series',
+        estimatedTime: 35,
+        difficulty: 'intermediate'
+      }
+    ],
+    reading: [
+      { 
+        title: 'Effective Nursing Team Leadership',
+        description: 'Guide to building and leading successful nursing teams',
+        url: 'https://nursing-education.org/team-leadership',
+        estimatedTime: 30,
+        difficulty: 'intermediate'
+      }
+    ],
+    kinesthetic: [
+      { 
+        title: 'Leadership & Management Simulation',
+        description: 'Interactive scenarios for practicing nursing leadership',
+        url: 'https://nursing-sims.org/leadership',
+        estimatedTime: 45,
+        difficulty: 'advanced'
+      }
+    ]
+  }
 };
 
-const DIFFICULTY_BOOST: Record<DifficultyLevel, number> = {
-  beginner: 0.8,
-  intermediate: 1.0,
-  advanced: 1.3
-};
-
-// Resource repository - organized by nursing area
-const RESOURCE_REPOSITORY: {
-  [key: string]: Array<Omit<LearningPathNode, 'id' | 'completed'>>
-} = {
+// Quiz resources for assessment
+const quizResources: Record<string, Array<{ title: string; description: string; estimatedTime: number; difficulty: DifficultyLevel; }>> = {
   fundamentals: [
-    {
-      title: 'Fundamental Nursing Concepts Overview',
-      description: 'A comprehensive overview of the foundational concepts in nursing practice',
-      estimatedTime: 45,
-      resourceType: 'video',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/nursing-concepts'
-    },
-    {
-      title: 'Essential Nursing Skills',
-      description: 'Learn the essential clinical skills every nurse needs to master',
-      estimatedTime: 60,
-      resourceType: 'interactive',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/essential-skills'
-    },
-    {
-      title: 'Evidence-Based Nursing Practice',
-      description: 'Understanding how to apply research findings to nursing care',
-      estimatedTime: 45,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/evidence-based-practice'
-    },
-    {
-      title: 'Nursing Process & Critical Thinking',
-      description: 'Master the 5-step nursing process and develop critical thinking skills',
-      estimatedTime: 60,
-      resourceType: 'interactive',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/nursing-process'
-    },
-    {
-      title: 'Documentation & Information Management',
-      description: 'Learn proper documentation techniques and information management',
-      estimatedTime: 30,
-      resourceType: 'article',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/documentation'
-    },
-    {
-      title: 'Fundamentals NCLEX Practice Quiz',
-      description: 'Test your knowledge of nursing fundamentals with practice questions',
-      estimatedTime: 30,
-      resourceType: 'quiz',
-      difficulty: 'intermediate'
-    },
-    {
-      title: 'Advanced Nursing Concepts Flashcards',
-      description: 'Review advanced nursing concepts using spaced repetition',
+    { 
+      title: 'Fundamentals of Nursing Practice Quiz',
+      description: 'Test your knowledge of essential nursing fundamentals',
       estimatedTime: 20,
-      resourceType: 'flashcard',
+      difficulty: 'beginner'
+    },
+    { 
+      title: 'Advanced Nursing Fundamentals Assessment',
+      description: 'Comprehensive quiz covering advanced fundamental concepts',
+      estimatedTime: 30,
       difficulty: 'advanced'
     }
   ],
   pharmacology: [
-    {
-      title: 'Pharmacology Basics for NCLEX',
-      description: 'Learn the essential medication classes, mechanisms, and nursing considerations',
-      estimatedTime: 60,
-      resourceType: 'video',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/pharmacology-basics'
+    { 
+      title: 'Basic Pharmacology Quiz',
+      description: 'Test your knowledge of common medications and classifications',
+      estimatedTime: 15,
+      difficulty: 'beginner'
     },
-    {
-      title: 'Medication Calculation Practice',
-      description: 'Practice common medication calculations and dosage problems',
-      estimatedTime: 45,
-      resourceType: 'practice',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/med-calc'
-    },
-    {
-      title: 'High-Alert Medications Review',
-      description: 'In-depth review of high-alert medications and safety protocols',
-      estimatedTime: 50,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/high-alert-meds'
-    },
-    {
-      title: 'Pharmacokinetics & Pharmacodynamics',
-      description: 'Understanding how drugs move through and affect the body',
-      estimatedTime: 55,
-      resourceType: 'video',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/pk-pd'
-    },
-    {
-      title: 'Drug Interactions & Adverse Effects',
-      description: 'Learn to identify and manage common drug interactions and adverse effects',
-      estimatedTime: 40,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/drug-interactions'
-    },
-    {
-      title: 'Pharmacology Practice Questions',
-      description: 'Test your knowledge with NCLEX-style pharmacology questions',
-      estimatedTime: 35,
-      resourceType: 'quiz',
-      difficulty: 'intermediate'
-    },
-    {
-      title: 'Medication Classification Flashcards',
-      description: 'Master medication classifications with spaced repetition',
+    { 
+      title: 'Advanced Pharmacology Assessment',
+      description: 'Complex questions on pharmacokinetics and drug interactions',
       estimatedTime: 25,
-      resourceType: 'flashcard',
-      difficulty: 'intermediate'
+      difficulty: 'advanced'
     }
   ],
   'med-surg': [
-    {
-      title: 'Medical-Surgical Nursing Overview',
-      description: 'Comprehensive overview of medical-surgical nursing concepts',
-      estimatedTime: 60,
-      resourceType: 'video',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/med-surg-overview'
+    { 
+      title: 'Medical-Surgical Nursing Quiz',
+      description: 'Test your knowledge of med-surg nursing concepts',
+      estimatedTime: 25,
+      difficulty: 'intermediate'
     },
-    {
-      title: 'Respiratory System Disorders',
-      description: 'Assessment, diagnosis, and management of common respiratory conditions',
-      estimatedTime: 45,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/respiratory'
-    },
-    {
-      title: 'Cardiovascular Assessment & Care',
-      description: 'Learn proper assessment techniques and care plans for cardiac patients',
-      estimatedTime: 55,
-      resourceType: 'video',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/cardiovascular'
-    },
-    {
-      title: 'Endocrine Disorders Case Studies',
-      description: 'Work through realistic case studies for patients with endocrine disorders',
-      estimatedTime: 50,
-      resourceType: 'interactive',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/endocrine-cases'
-    },
-    {
-      title: 'Gastrointestinal & Hepatic Disorders',
-      description: 'Review GI and hepatic disorders commonly tested on NCLEX',
-      estimatedTime: 45,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/gi-hepatic'
-    },
-    {
-      title: 'Medical-Surgical NCLEX Practice Quiz',
-      description: 'Test your knowledge with med-surg NCLEX-style questions',
-      estimatedTime: 40,
-      resourceType: 'quiz',
-      difficulty: 'advanced'
-    },
-    {
-      title: 'Med-Surg Pathophysiology Flashcards',
-      description: 'Review key pathophysiology concepts for medical-surgical nursing',
-      estimatedTime: 30,
-      resourceType: 'flashcard',
+    { 
+      title: 'Advanced Med-Surg Critical Thinking Assessment',
+      description: 'Complex case scenarios requiring advanced clinical judgment',
+      estimatedTime: 35,
       difficulty: 'advanced'
     }
   ],
   pediatrics: [
-    {
-      title: 'Pediatric Nursing Essentials',
-      description: 'Covers growth and development, assessment, and common pediatric concepts',
-      estimatedTime: 50,
-      resourceType: 'video',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/peds-essentials'
-    },
-    {
-      title: 'Pediatric Assessment Techniques',
-      description: 'Learn age-specific assessment techniques for pediatric patients',
-      estimatedTime: 40,
-      resourceType: 'video',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/peds-assessment'
-    },
-    {
-      title: 'Common Pediatric Disorders',
-      description: 'Review of common disorders and nursing care for pediatric patients',
-      estimatedTime: 45,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/peds-disorders'
-    },
-    {
-      title: 'Pediatric Medication Administration',
-      description: 'Safe medication administration practices for pediatric patients',
-      estimatedTime: 35,
-      resourceType: 'interactive',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/peds-meds'
-    },
-    {
-      title: 'Family-Centered Pediatric Care',
-      description: 'Implementing family-centered care approaches in pediatric nursing',
-      estimatedTime: 30,
-      resourceType: 'article',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/family-centered'
-    },
-    {
-      title: 'Pediatric NCLEX Practice Questions',
-      description: 'Test your knowledge with pediatric NCLEX-style questions',
-      estimatedTime: 35,
-      resourceType: 'quiz',
+    { 
+      title: 'Pediatric Nursing Concepts Quiz',
+      description: 'Test your knowledge of pediatric nursing principles',
+      estimatedTime: 20,
       difficulty: 'intermediate'
-    },
-    {
-      title: 'Pediatric Growth & Development Flashcards',
-      description: 'Review age-specific milestones and considerations',
-      estimatedTime: 25,
-      resourceType: 'flashcard',
-      difficulty: 'beginner'
     }
   ],
   obstetrics: [
-    {
-      title: 'Maternity Nursing Foundations',
-      description: 'Essential concepts in maternal and newborn nursing care',
-      estimatedTime: 55,
-      resourceType: 'video',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/maternity-foundations'
-    },
-    {
-      title: 'Antepartum, Intrapartum & Postpartum Care',
-      description: 'Comprehensive review of nursing care throughout pregnancy and delivery',
-      estimatedTime: 60,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/pregnancy-care'
-    },
-    {
-      title: 'High-Risk Pregnancy & Complications',
-      description: 'Identify and manage common complications in pregnancy',
-      estimatedTime: 50,
-      resourceType: 'video',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/high-risk-pregnancy'
-    },
-    {
-      title: 'Newborn Assessment & Care',
-      description: 'Learn proper assessment and care techniques for newborns',
-      estimatedTime: 45,
-      resourceType: 'interactive',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/newborn-care'
-    },
-    {
-      title: 'Maternal-Newborn Medications',
-      description: 'Review medications commonly used in obstetric and newborn care',
-      estimatedTime: 40,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/ob-medications'
-    },
-    {
-      title: 'OB/Maternity NCLEX Practice Quiz',
-      description: 'Test your knowledge with maternity NCLEX-style questions',
-      estimatedTime: 35,
-      resourceType: 'quiz',
-      difficulty: 'intermediate'
-    },
-    {
-      title: 'Labor & Delivery Stages Flashcards',
-      description: 'Review the stages of labor and appropriate nursing interventions',
+    { 
+      title: 'Maternal-Newborn Nursing Quiz',
+      description: 'Test your knowledge of obstetric and newborn care',
       estimatedTime: 25,
-      resourceType: 'flashcard',
       difficulty: 'intermediate'
     }
   ],
   psychiatric: [
-    {
-      title: 'Psychiatric Nursing Fundamentals',
-      description: 'Introduction to concepts in psychiatric and mental health nursing',
-      estimatedTime: 50,
-      resourceType: 'video',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/psych-fundamentals'
-    },
-    {
-      title: 'Therapeutic Communication Techniques',
-      description: 'Master therapeutic communication skills for psychiatric nursing',
-      estimatedTime: 45,
-      resourceType: 'interactive',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/therapeutic-comm'
-    },
-    {
-      title: 'Common Psychiatric Disorders',
-      description: 'Review of major psychiatric disorders and nursing interventions',
-      estimatedTime: 55,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/psychiatric-disorders'
-    },
-    {
-      title: 'Psychopharmacology for Nurses',
-      description: 'Review of psychiatric medications and nursing considerations',
-      estimatedTime: 50,
-      resourceType: 'video',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/psychopharmacology'
-    },
-    {
-      title: 'Crisis Intervention & De-escalation',
-      description: 'Techniques for crisis management and de-escalation',
-      estimatedTime: 40,
-      resourceType: 'interactive',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/crisis-intervention'
-    },
-    {
-      title: 'Psychiatric NCLEX Practice Questions',
-      description: 'Test your knowledge with psychiatric NCLEX-style questions',
-      estimatedTime: 35,
-      resourceType: 'quiz',
-      difficulty: 'intermediate'
-    },
-    {
-      title: 'Mental Health Disorders Flashcards',
-      description: 'Review key psychiatric disorders and interventions',
-      estimatedTime: 25,
-      resourceType: 'flashcard',
+    { 
+      title: 'Psychiatric Nursing Assessment',
+      description: 'Test your knowledge of mental health nursing concepts',
+      estimatedTime: 20,
       difficulty: 'intermediate'
     }
   ],
   prioritization: [
-    {
-      title: 'Nursing Prioritization Frameworks',
-      description: 'Learn frameworks for prioritizing nursing care and delegating tasks',
-      estimatedTime: 45,
-      resourceType: 'video',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/prioritization'
-    },
-    {
-      title: 'Delegation & Assignment Making',
-      description: 'Master the principles of safe and effective delegation',
-      estimatedTime: 40,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/delegation'
-    },
-    {
-      title: 'Multiple Patient Prioritization',
-      description: 'Practice scenarios involving multiple patients requiring care',
-      estimatedTime: 50,
-      resourceType: 'interactive',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/multiple-patients'
-    },
-    {
-      title: 'NCLEX Prioritization Strategies',
-      description: 'Strategies for answering prioritization questions on NCLEX',
-      estimatedTime: 35,
-      resourceType: 'video',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/prioritization-strategies'
-    },
-    {
-      title: 'Emergency Care Prioritization',
-      description: 'Learn triage and prioritization techniques for emergency situations',
-      estimatedTime: 45,
-      resourceType: 'article',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/emergency-prioritization'
-    },
-    {
-      title: 'Prioritization Practice Questions',
-      description: 'Test your knowledge with NCLEX-style prioritization questions',
-      estimatedTime: 40,
-      resourceType: 'quiz',
+    { 
+      title: 'Nursing Prioritization Quiz',
+      description: 'Test your ability to prioritize nursing actions in various scenarios',
+      estimatedTime: 30,
       difficulty: 'advanced'
-    },
-    {
-      title: 'Delegation Rules Flashcards',
-      description: 'Review key delegation principles and rules',
-      estimatedTime: 20,
-      resourceType: 'flashcard',
-      difficulty: 'intermediate'
     }
   ],
   leadership: [
-    {
-      title: 'Nursing Leadership Fundamentals',
-      description: 'Introduction to leadership concepts in nursing practice',
-      estimatedTime: 45,
-      resourceType: 'video',
-      difficulty: 'beginner',
-      url: 'https://www.example.com/leadership-fundamentals'
-    },
-    {
-      title: 'Management & Organizational Principles',
-      description: 'Nursing management principles and organizational structures',
-      estimatedTime: 50,
-      resourceType: 'article',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/management-principles'
-    },
-    {
-      title: 'Conflict Resolution in Healthcare',
-      description: 'Strategies for effectively resolving conflicts in healthcare settings',
-      estimatedTime: 40,
-      resourceType: 'interactive',
-      difficulty: 'intermediate',
-      url: 'https://www.example.com/conflict-resolution'
-    },
-    {
-      title: 'Quality Improvement & Patient Safety',
-      description: 'Implementing quality improvement initiatives and ensuring patient safety',
-      estimatedTime: 55,
-      resourceType: 'video',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/quality-improvement'
-    },
-    {
-      title: 'Healthcare Policy & Legal Issues',
-      description: 'Understanding healthcare policy and legal/ethical considerations',
-      estimatedTime: 50,
-      resourceType: 'article',
-      difficulty: 'advanced',
-      url: 'https://www.example.com/healthcare-policy'
-    },
-    {
-      title: 'Leadership NCLEX Practice Questions',
-      description: 'Test your knowledge with leadership NCLEX-style questions',
-      estimatedTime: 35,
-      resourceType: 'quiz',
-      difficulty: 'intermediate'
-    },
-    {
-      title: 'Leadership & Management Flashcards',
-      description: 'Review key leadership concepts and principles',
+    { 
+      title: 'Nursing Leadership & Management Quiz',
+      description: 'Test your knowledge of nursing leadership principles',
       estimatedTime: 25,
-      resourceType: 'flashcard',
       difficulty: 'intermediate'
     }
   ]
 };
 
-// Learning style preference mappings
-const PREFERRED_RESOURCE_TYPES: {
-  [key in LearningStyle]: string[]
-} = {
-  visual: ['video', 'interactive'],
-  auditory: ['video', 'interactive'],
-  reading: ['article', 'flashcard'],
-  kinesthetic: ['interactive', 'practice', 'quiz']
+// Practice resources for hands-on application
+const practiceResources: Record<string, Array<{ title: string; description: string; estimatedTime: number; difficulty: DifficultyLevel; }>> = {
+  fundamentals: [
+    { 
+      title: 'Nursing Fundamentals Practice Exercises',
+      description: 'Hands-on practice of fundamental nursing skills',
+      estimatedTime: 45,
+      difficulty: 'intermediate'
+    }
+  ],
+  pharmacology: [
+    { 
+      title: 'Medication Calculation Practice',
+      description: 'Practice calculating medication dosages and IV rates',
+      estimatedTime: 30,
+      difficulty: 'intermediate'
+    }
+  ],
+  'med-surg': [
+    { 
+      title: 'Med-Surg Clinical Scenarios Practice',
+      description: 'Practice clinical decision-making in medical-surgical scenarios',
+      estimatedTime: 40,
+      difficulty: 'advanced'
+    }
+  ],
+  pediatrics: [
+    { 
+      title: 'Pediatric Care Planning Practice',
+      description: 'Practice developing care plans for pediatric patients',
+      estimatedTime: 35,
+      difficulty: 'intermediate'
+    }
+  ],
+  obstetrics: [
+    { 
+      title: 'Obstetric Complication Management Practice',
+      description: 'Practice responding to obstetric emergencies',
+      estimatedTime: 40,
+      difficulty: 'advanced'
+    }
+  ],
+  psychiatric: [
+    { 
+      title: 'Therapeutic Communication Practice',
+      description: 'Practice therapeutic communication techniques for mental health',
+      estimatedTime: 30,
+      difficulty: 'beginner'
+    }
+  ],
+  prioritization: [
+    { 
+      title: 'Multi-patient Prioritization Practice',
+      description: 'Practice prioritizing care for multiple patients',
+      estimatedTime: 35,
+      difficulty: 'advanced'
+    }
+  ],
+  leadership: [
+    { 
+      title: 'Conflict Resolution Practice Scenarios',
+      description: 'Practice resolving conflicts in healthcare team settings',
+      estimatedTime: 30,
+      difficulty: 'intermediate'
+    }
+  ]
 };
 
-// Section descriptions
-const SECTION_DESCRIPTIONS: {
-  [key: string]: string
-} = {
-  fundamentals: 'Master the essential nursing concepts and skills that form the foundation of nursing practice',
-  pharmacology: 'Learn medication classes, calculations, and safety principles essential for nursing care',
-  'med-surg': 'Study common medical-surgical conditions, assessments, and interventions for adult patients',
-  pediatrics: 'Explore growth and development, assessment techniques, and care for pediatric patients',
-  obstetrics: 'Review care for pregnant women, labor and delivery, and newborn care',
-  psychiatric: 'Learn about mental health disorders, therapeutic communication, and psychiatric interventions',
-  prioritization: 'Develop skills in prioritizing care, delegating tasks, and managing multiple patients',
-  leadership: 'Build knowledge in nursing leadership, management principles, and healthcare systems'
-};
-
-/**
- * Generates a personalized learning path based on user preferences and study progress
- */
-export function generateLearningPath(
-  preferences: LearningPreferences,
-  studyAreas: Record<string, StudyArea>
-): LearningPath {
-  const { learningStyle, timeCommitment, difficulty, focusAreas, excludedAreas = [], daysUntilExam } = preferences;
+// AI-enhanced recommendation algorithm
+export function generateLearningPath(preferences: LearningPreferences, studyAreas: Record<string, StudyArea>): LearningPath {
+  // Generate a unique ID for the path
+  const pathId = uuidv4();
   
-  // Create sections for each focus area
+  // Determine title and description based on preferences
+  const title = `Personalized NCLEX Learning Path (${preferences.difficulty.charAt(0).toUpperCase() + preferences.difficulty.slice(1)})`;
+  const description = `Custom ${preferences.learningStyle}-focused learning path with ${preferences.timeCommitment} time commitment, focusing on ${preferences.focusAreas.join(', ')}.`;
+  
+  // Create sections for the learning path
   const sections: LearningPathSection[] = [];
+  let sectionOrder = 1;
   
-  // Filter and sort focus areas based on confidence levels
-  const sortedFocusAreas = [...focusAreas].sort((a, b) => {
-    const aConfidence = studyAreas[a]?.confidenceLevel || 2;
-    const bConfidence = studyAreas[b]?.confidenceLevel || 2;
-    return aConfidence - bConfidence; // Low confidence first
-  });
-  
-  // Calculate total resources needed based on time commitment
-  const hoursPerWeek = HOURS_PER_WEEK[timeCommitment];
-  const totalMinutesPerWeek = hoursPerWeek * 60;
-  
-  // Calculate completion weeks based on focus areas and time commitment
-  const estimatedCompletionWeeks = Math.max(
-    Math.ceil((sortedFocusAreas.length * 3) / (timeCommitment === 'intensive' ? 2 : timeCommitment === 'moderate' ? 1 : 0.7)),
-    daysUntilExam ? Math.ceil(daysUntilExam / 7) : 4
-  );
-  
-  // Calculate resources per area
-  let resourcesPerArea = Math.floor(RESOURCE_REPOSITORY[sortedFocusAreas[0]].length * 0.7); // 70% of available resources
-  if (difficulty === 'beginner') resourcesPerArea = Math.max(3, resourcesPerArea - 1);
-  if (difficulty === 'advanced') resourcesPerArea = Math.min(RESOURCE_REPOSITORY[sortedFocusAreas[0]].length, resourcesPerArea + 1);
-  
-  // Create learning path sections
-  for (const area of sortedFocusAreas) {
-    if (excludedAreas.includes(area)) continue;
+  // For each focus area, create a section
+  preferences.focusAreas.forEach(area => {
+    const isExcluded = preferences.excludedAreas?.includes(area) || false;
+    const areaConfidence = studyAreas[area]?.confidenceLevel || 2; // Default to medium if unknown
     
-    const availableResources = [...RESOURCE_REPOSITORY[area]];
+    // Adjust node count based on confidence level and excluded status
+    const nodeCount = isExcluded 
+      ? 2 // Fewer nodes for excluded areas
+      : areaConfidence === 1 
+        ? 5 // More nodes for low confidence
+        : areaConfidence === 2 
+          ? 4 // Medium for average confidence
+          : 3; // Fewer for high confidence
     
-    // Filter resources based on difficulty preference
-    let filteredResources = availableResources.filter(resource => 
-      resource.difficulty === difficulty || 
-      (difficulty === 'intermediate' && resource.difficulty === 'beginner') ||
-      (difficulty === 'advanced' && resource.difficulty === 'intermediate')
-    );
+    // Create nodes for this section
+    const nodes: LearningPathNode[] = [];
+    let nodeOrder = 1;
     
-    // If not enough resources match difficulty, add some from other difficulty levels
-    if (filteredResources.length < resourcesPerArea) {
-      const additionalResources = availableResources
-        .filter(resource => !filteredResources.includes(resource))
-        .slice(0, resourcesPerArea - filteredResources.length);
+    // Add main learning resource based on learning style
+    const learningStyleResources = resourceDatabase[area]?.[preferences.learningStyle] || [];
+    if (learningStyleResources.length > 0) {
+      // Choose appropriate difficulty resource
+      const filteredResources = learningStyleResources.filter(
+        resource => resource.difficulty === preferences.difficulty || resource.difficulty === 'intermediate'
+      );
       
-      filteredResources = [...filteredResources, ...additionalResources];
+      const resource = filteredResources.length > 0
+        ? filteredResources[0]
+        : learningStyleResources[0];
+      
+      nodes.push({
+        id: uuidv4(),
+        title: resource.title,
+        description: resource.description,
+        resourceType: mapLearningStyleToResourceType(preferences.learningStyle),
+        url: resource.url,
+        estimatedTime: resource.estimatedTime,
+        difficulty: resource.difficulty,
+        completed: false,
+        focusArea: area,
+        order: nodeOrder++
+      });
     }
     
-    // Prioritize resources that match learning style preference
-    filteredResources.sort((a, b) => {
-      const aMatchesStyle = PREFERRED_RESOURCE_TYPES[learningStyle].includes(a.resourceType) ? 1 : 0;
-      const bMatchesStyle = PREFERRED_RESOURCE_TYPES[learningStyle].includes(b.resourceType) ? 1 : 0;
-      return bMatchesStyle - aMatchesStyle;
-    });
+    // Add additional resources and quiz
+    if (nodeCount >= 2) {
+      // Add quiz resource
+      const quizzes = quizResources[area] || [];
+      if (quizzes.length > 0) {
+        const quiz = quizzes.find(q => q.difficulty === preferences.difficulty) || quizzes[0];
+        
+        nodes.push({
+          id: uuidv4(),
+          title: quiz.title,
+          description: quiz.description,
+          resourceType: 'quiz',
+          estimatedTime: quiz.estimatedTime,
+          difficulty: quiz.difficulty,
+          completed: false,
+          focusArea: area,
+          order: nodeOrder++
+        });
+      }
+      
+      // Add practice resource
+      if (nodeCount >= 3) {
+        const practices = practiceResources[area] || [];
+        if (practices.length > 0) {
+          const practice = practices.find(p => p.difficulty === preferences.difficulty) || practices[0];
+          
+          nodes.push({
+            id: uuidv4(),
+            title: practice.title,
+            description: practice.description,
+            resourceType: 'practice',
+            estimatedTime: practice.estimatedTime,
+            difficulty: practice.difficulty,
+            completed: false,
+            focusArea: area,
+            order: nodeOrder++
+          });
+        }
+      }
+      
+      // Add complementary learning style resource (for variety)
+      if (nodeCount >= 4) {
+        const complementaryStyle = getComplementaryLearningStyle(preferences.learningStyle);
+        const complementaryResources = resourceDatabase[area]?.[complementaryStyle] || [];
+        
+        if (complementaryResources.length > 0) {
+          const resource = complementaryResources[0];
+          
+          nodes.push({
+            id: uuidv4(),
+            title: resource.title,
+            description: resource.description,
+            resourceType: mapLearningStyleToResourceType(complementaryStyle),
+            url: resource.url,
+            estimatedTime: resource.estimatedTime,
+            difficulty: resource.difficulty,
+            completed: false,
+            focusArea: area,
+            order: nodeOrder++
+          });
+        }
+      }
+      
+      // Add another complementary learning style resource
+      if (nodeCount >= 5) {
+        const secondaryStyle = getSecondaryLearningStyle(preferences.learningStyle);
+        const secondaryResources = resourceDatabase[area]?.[secondaryStyle] || [];
+        
+        if (secondaryResources.length > 0) {
+          const resource = secondaryResources[0];
+          
+          nodes.push({
+            id: uuidv4(),
+            title: resource.title,
+            description: resource.description,
+            resourceType: mapLearningStyleToResourceType(secondaryStyle),
+            url: resource.url,
+            estimatedTime: resource.estimatedTime,
+            difficulty: resource.difficulty,
+            completed: false,
+            focusArea: area,
+            order: nodeOrder++
+          });
+        }
+      }
+    }
     
-    // Select resources for this area
-    const selectedResources = filteredResources.slice(0, resourcesPerArea);
-    
-    // Create nodes from selected resources
-    const nodes: LearningPathNode[] = selectedResources.map(resource => ({
-      id: uuidv4(),
-      ...resource,
-      completed: false
-    }));
-    
-    // Create section
-    sections.push({
-      id: uuidv4(),
-      title: capitalizeFirstLetter(area),
-      description: SECTION_DESCRIPTIONS[area],
-      area,
-      nodes,
-      completed: false
-    });
-  }
-  
-  // Generate title and description based on preferences
-  const difficultyWords: {
-    [key in DifficultyLevel]: string[]
-  } = {
-    beginner: ['Essential', 'Fundamental', 'Core'],
-    intermediate: ['Comprehensive', 'Complete', 'Structured'],
-    advanced: ['Advanced', 'In-depth', 'Intensive']
-  };
-  
-  const timeWords: {
-    [key in TimeCommitment]: string[]
-  } = {
-    minimal: ['Concise', 'Focused', 'Efficient'],
-    moderate: ['Balanced', 'Strategic', 'Effective'],
-    intensive: ['Thorough', 'Rigorous', 'Extensive']
-  };
-  
-  const randomDifficultyWord = difficultyWords[difficulty][Math.floor(Math.random() * difficultyWords[difficulty].length)];
-  const randomTimeWord = timeWords[timeCommitment][Math.floor(Math.random() * timeWords[timeCommitment].length)];
+    // Only create section if we have nodes
+    if (nodes.length > 0) {
+      sections.push({
+        id: uuidv4(),
+        title: `${formatAreaTitle(area)} Nursing`,
+        description: `Study materials focused on ${formatAreaTitle(area).toLowerCase()} nursing concepts and principles.`,
+        order: sectionOrder++,
+        nodes: nodes,
+        completed: false
+      });
+    }
+  });
   
   // Create the learning path
   const learningPath: LearningPath = {
-    id: uuidv4(),
-    title: `${randomDifficultyWord} ${randomTimeWord} NCLEX Study Path`,
-    description: `A personalized learning path focused on ${sortedFocusAreas.map(area => SECTION_DESCRIPTIONS[area].split(' ')[0]).join(', ')} nursing. Optimized for your ${learningStyle} learning style with a ${timeCommitment} time commitment.`,
+    id: pathId,
+    title,
+    description,
     createdAt: new Date(),
-    learningStyle,
-    timeCommitment,
-    difficulty,
-    estimatedCompletionWeeks,
-    progress: 0,
-    sections
+    updatedAt: new Date(),
+    learningStyle: preferences.learningStyle,
+    timeCommitment: preferences.timeCommitment,
+    difficulty: preferences.difficulty,
+    focusAreas: preferences.focusAreas,
+    sections,
+    progress: 0 // Initial progress is 0%
   };
   
   return learningPath;
 }
 
-/**
- * Updates a learning path's progress based on completed nodes
- */
+// Helper to map learning style to resource type
+function mapLearningStyleToResourceType(style: LearningStyle): ResourceType {
+  switch (style) {
+    case 'visual': return 'video';
+    case 'auditory': return 'video'; // Audio resources are often videos
+    case 'reading': return 'article';
+    case 'kinesthetic': return 'interactive';
+    default: return 'article';
+  }
+}
+
+// Helper to get a complementary learning style
+function getComplementaryLearningStyle(style: LearningStyle): LearningStyle {
+  switch (style) {
+    case 'visual': return 'reading';
+    case 'auditory': return 'visual';
+    case 'reading': return 'auditory';
+    case 'kinesthetic': return 'visual';
+    default: return 'reading';
+  }
+}
+
+// Helper to get a secondary complementary learning style
+function getSecondaryLearningStyle(style: LearningStyle): LearningStyle {
+  switch (style) {
+    case 'visual': return 'kinesthetic';
+    case 'auditory': return 'kinesthetic';
+    case 'reading': return 'visual';
+    case 'kinesthetic': return 'reading';
+    default: return 'visual';
+  }
+}
+
+// Helper to format area title
+function formatAreaTitle(area: string): string {
+  // Special cases
+  if (area === 'med-surg') return 'Medical-Surgical';
+  
+  // General case: capitalize first letter of each word
+  return area
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('-');
+}
+
+// Update learning path progress based on completed nodes
 export function updateLearningPathProgress(
-  learningPath: LearningPath,
+  path: LearningPath,
   nodeId: string,
   completed: boolean
 ): LearningPath {
-  // Create a deep copy of the learning path
-  const updatedPath: LearningPath = {
-    ...learningPath,
-    sections: JSON.parse(JSON.stringify(learningPath.sections))
-  };
+  // Create a deep copy of the path to avoid mutating the original
+  const updatedPath: LearningPath = JSON.parse(JSON.stringify(path));
   
   // Find and update the node
   let totalNodes = 0;
   let completedNodes = 0;
   
   updatedPath.sections.forEach(section => {
-    totalNodes += section.nodes.length;
+    let sectionCompleted = true;
     
-    const nodeIndex = section.nodes.findIndex(node => node.id === nodeId);
-    if (nodeIndex !== -1) {
-      section.nodes[nodeIndex].completed = completed;
-    }
-    
-    // Count completed nodes in this section
-    const sectionCompletedNodes = section.nodes.filter(node => node.completed).length;
-    completedNodes += sectionCompletedNodes;
+    section.nodes.forEach(node => {
+      totalNodes++;
+      
+      // Update the specific node
+      if (node.id === nodeId) {
+        node.completed = completed;
+      }
+      
+      // Count completed nodes
+      if (node.completed) {
+        completedNodes++;
+      } else {
+        sectionCompleted = false;
+      }
+    });
     
     // Update section completion status
-    section.completed = sectionCompletedNodes === section.nodes.length && section.nodes.length > 0;
+    section.completed = sectionCompleted;
   });
   
-  // Update overall progress
-  updatedPath.progress = Math.round((completedNodes / totalNodes) * 100) || 0;
+  // Calculate overall progress
+  updatedPath.progress = totalNodes > 0 
+    ? Math.round((completedNodes / totalNodes) * 100) 
+    : 0;
+  
+  // Update the updated timestamp
+  updatedPath.updatedAt = new Date();
   
   return updatedPath;
 }
 
-/**
- * Recommends the next node for the user to complete
- */
-export function getNextRecommendedNode(learningPath: LearningPath): LearningPathNode | null {
-  // First check for any incomplete nodes in the current section the user is working on
-  for (const section of learningPath.sections) {
-    const hasIncompleteNodes = section.nodes.some(node => !node.completed);
-    const hasCompleteNodes = section.nodes.some(node => node.completed);
+// Get the next recommended node to study
+export function getNextRecommendedNode(path: LearningPath): LearningPathNode | null {
+  // Start with the first incomplete node in order
+  for (const section of path.sections) {
+    if (section.completed) continue;
     
-    if (hasIncompleteNodes && hasCompleteNodes) {
-      // User has started but not completed this section - prioritize it
-      const incompleteNode = section.nodes.find(node => !node.completed);
-      if (incompleteNode) return incompleteNode;
+    // Find the first incomplete node
+    const nextNode = section.nodes
+      .filter(node => !node.completed)
+      .sort((a, b) => a.order - b.order)[0];
+    
+    if (nextNode) {
+      return nextNode;
     }
   }
   
-  // If no sections are in progress, recommend the first incomplete node from the first incomplete section
-  for (const section of learningPath.sections) {
-    if (!section.completed) {
-      const incompleteNode = section.nodes.find(node => !node.completed);
-      if (incompleteNode) return incompleteNode;
-    }
-  }
-  
-  // If all nodes are complete, return null
-  return null;
+  return null; // No incomplete nodes found
 }
 
-/**
- * Utility function to capitalize the first letter of a string
- */
-function capitalizeFirstLetter(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+// Get AI-enhanced recommendations based on path progress
+export function getEnhancedRecommendations(
+  path: LearningPath,
+  studyAreas: Record<string, StudyArea>
+): string[] {
+  const recommendations: string[] = [];
+  
+  // Calculate completion percentages by area
+  const areaCompletion: Record<string, { total: number; completed: number; percentage: number }> = {};
+  
+  path.sections.forEach(section => {
+    section.nodes.forEach(node => {
+      const area = node.focusArea;
+      
+      if (!areaCompletion[area]) {
+        areaCompletion[area] = { total: 0, completed: 0, percentage: 0 };
+      }
+      
+      areaCompletion[area].total++;
+      if (node.completed) {
+        areaCompletion[area].completed++;
+      }
+    });
+  });
+  
+  // Calculate percentages
+  Object.keys(areaCompletion).forEach(area => {
+    const { total, completed } = areaCompletion[area];
+    areaCompletion[area].percentage = total > 0 ? (completed / total) * 100 : 0;
+  });
+  
+  // Generate recommendations based on progress patterns
+  const lowProgressAreas = Object.entries(areaCompletion)
+    .filter(([_, data]) => data.percentage < 33)
+    .map(([area, _]) => area);
+  
+  if (lowProgressAreas.length > 0) {
+    recommendations.push(
+      `Focus on completing resources in these areas: ${lowProgressAreas.map(formatAreaTitle).join(', ')}.`
+    );
+  }
+  
+  // Check if user is neglecting certain areas
+  const neglectedAreas = Object.entries(areaCompletion)
+    .filter(([_, data]) => data.percentage === 0 && data.total > 0)
+    .map(([area, _]) => area);
+  
+  if (neglectedAreas.length > 0) {
+    recommendations.push(
+      `You haven't started any resources in: ${neglectedAreas.map(formatAreaTitle).join(', ')}. Consider beginning with those areas.`
+    );
+  }
+  
+  // Recommendations based on study areas confidence
+  const lowConfidenceAreas = Object.entries(studyAreas)
+    .filter(([_, data]) => data.confidenceLevel === 1)
+    .map(([area, _]) => area)
+    .filter(area => path.focusAreas.includes(area));
+  
+  if (lowConfidenceAreas.length > 0) {
+    recommendations.push(
+      `Based on your confidence levels, prioritize more practice in: ${lowConfidenceAreas.map(formatAreaTitle).join(', ')}.`
+    );
+  }
+  
+  // Recommendation for learning style variation
+  if (path.progress > 30) {
+    recommendations.push(
+      `Try varying your learning approaches. Consider adding more ${getComplementaryLearningStyle(path.learningStyle)}-based resources to reinforce your learning.`
+    );
+  }
+  
+  // If no specific recommendations, give general advice
+  if (recommendations.length === 0) {
+    recommendations.push(
+      "You're making good progress across all areas. Continue with your current learning path and consider attempting practice questions to test your knowledge."
+    );
+  }
+  
+  return recommendations;
 }

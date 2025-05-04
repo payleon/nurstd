@@ -10,7 +10,9 @@ import {
   User,
   BarChart,
   AlarmClock,
-  GamepadIcon
+  GamepadIcon,
+  BookOpen,
+  GraduationCap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -41,7 +43,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       "/question-bank": "Exams & Studies",
       "/study-strategies": "Study Strategies",
       "/study-timer": "Study Timer",
-      "/games": "Learning Games"
+      "/games": "Learning Games",
+      "/learning-path": "Learning Paths",
+      "/create-learning-path": "Learning Paths"
     };
     
     // Special case for exact matches
@@ -86,12 +90,17 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       path: "/case-studies"
     },
     {
+      title: "Learning Paths",
+      icon: <GraduationCap className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Learning Paths",
+      path: "/learning-path"
+    },
+    {
       title: "Study Strategies",
       icon: <Lightbulb className="h-5 w-5 mr-3" />,
       active: activeCategory === "Study Strategies",
       path: "/study-strategies"
     },
-
     {
       title: "Study Timer",
       icon: <AlarmClock className="h-5 w-5 mr-3" />,
@@ -104,7 +113,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       active: activeCategory === "Learning Games",
       path: "/games"
     },
-
     {
       title: "Achievements",
       icon: <Award className="h-5 w-5 mr-3" />,
