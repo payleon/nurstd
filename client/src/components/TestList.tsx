@@ -367,8 +367,8 @@ export function TestList({ onSelectTest }: TestListProps) {
                     </div>
                     
                     <div className="text-xs text-gray-500 mt-2">
-                      {data.questionsAttempted > 0 ? (
-                        <span>{data.questionsCorrect}/{data.questionsAttempted} questions correct</span>
+                      {data.recentActivity && data.recentActivity.totalAnswered > 0 ? (
+                        <span>{data.recentActivity.correct}/{data.recentActivity.totalAnswered} questions correct</span>
                       ) : (
                         <span>No questions attempted</span>
                       )}

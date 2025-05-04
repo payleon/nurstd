@@ -1,10 +1,4 @@
-interface StudyArea {
-  name: string;
-  confidenceLevel: number;
-  questionsAttempted: number;
-  questionsCorrect: number;
-  recommendedFocus: boolean;
-}
+import { StudyArea } from '@/hooks/useStudyProgress';
 
 interface StudyMetrics {
   overallProgress: number;
@@ -24,15 +18,15 @@ interface StudyMetrics {
  */
 export function calculateStudyMetrics(
   studyAreas: Record<string, StudyArea>,
-  lastActivity: string
+  lastActivity: Date | string
 ): StudyMetrics {
-  // Calculate total questions attempted and correct
+  // Calculate total questions attempted and correct based on recentActivity
   const totalAttempted = Object.values(studyAreas).reduce(
-    (sum, area) => sum + area.questionsAttempted, 0
+    (sum, area) => sum + (area.recentActivity?.totalAnswered || 0), 0
   );
   
   const totalCorrect = Object.values(studyAreas).reduce(
-    (sum, area) => sum + area.questionsCorrect, 0
+    (sum, area) => sum + (area.recentActivity?.correct || 0), 0
   );
   
   // Calculate overall confidence (weighted by areas)
@@ -44,18 +38,18 @@ export function calculateStudyMetrics(
   const averageConfidence = totalConfidence / areaCount;
   
   // Calculate time since last activity
-  const lastActivityDate = new Date(lastActivity);
+  const lastActivityDate = typeof lastActivity === 'string' ? new Date(lastActivity) : lastActivity;
   const now = new Date();
   const timeSinceActivity = Math.floor((now.getTime() - lastActivityDate.getTime()) / (1000 * 60 * 60)); // hours
   
   // Identify focus areas (low confidence) and strong areas (high confidence)
-  const focusAreas = Object.values(studyAreas)
-    .filter(area => area.confidenceLevel === 1)
-    .map(area => area.name);
+  const focusAreas = Object.entries(studyAreas)
+    .filter(([_, area]) => area.confidenceLevel === 1)
+    .map(([name, _]) => formatAreaName(name));
   
-  const strongAreas = Object.values(studyAreas)
-    .filter(area => area.confidenceLevel === 3)
-    .map(area => area.name);
+  const strongAreas = Object.entries(studyAreas)
+    .filter(([_, area]) => area.confidenceLevel === 3)
+    .map(([name, _]) => formatAreaName(name));
   
   // Calculate correct rate
   const correctRate = totalAttempted > 0 ? (totalCorrect / totalAttempted) * 100 : 0;

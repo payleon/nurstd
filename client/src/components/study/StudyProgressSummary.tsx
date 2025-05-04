@@ -5,7 +5,10 @@ import { calculateStudyMetrics } from '@/lib/study-metrics';
 import { useStudyProgress } from '@/hooks/useStudyProgress';
 
 export function StudyProgressSummary() {
-  const { studyAreas, lastActivity } = useStudyProgress();
+  const { studyAreas } = useStudyProgress();
+  
+  // Create a placeholder lastActivity for metrics calculation
+  const lastActivity = new Date();
   
   const metrics = calculateStudyMetrics(studyAreas, lastActivity);
   

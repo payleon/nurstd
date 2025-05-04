@@ -51,14 +51,11 @@ export interface LearningPath {
   progress: number; // 0-100
 }
 
-// Study area type from useStudyProgress
-export interface StudyArea {
-  confidenceLevel: number; // 1-3
-  lastPracticed?: Date;
-  questionsAttempted?: number;
-  questionsCorrect?: number;
-  recommendedFocus?: boolean;
-}
+// Import the StudyArea type from useStudyProgress
+import { StudyArea as ImportedStudyArea } from '@/hooks/useStudyProgress';
+
+// Re-export the StudyArea type
+export type StudyArea = ImportedStudyArea;
 
 // Resource database - organized by learning style and type
 const resourceDatabase: Record<string, Record<string, Array<{ title: string; description: string; url?: string; estimatedTime: number; difficulty: DifficultyLevel; }>>> = {
