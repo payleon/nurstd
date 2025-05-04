@@ -1,10 +1,28 @@
 import React from 'react';
+import { Header } from '@/components/ui/header';
+import { Sidebar } from '@/components/ui/sidebar';
 import { LearningPathView } from '@/components/learning/LearningPathView';
+import { useState } from 'react';
 
 export default function LearningPathPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+  
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6">
-      <LearningPathView />
+    <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
+      <Header toggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      
+      <div className="flex h-screen pt-16">
+        <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
+          <div className="max-w-6xl mx-auto px-4">
+            <LearningPathView />
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

@@ -1,115 +1,65 @@
-import { LearningPath } from '@/lib/learning-path';
-
-// Base API URL
-const API_BASE = '/api/learning-path';
+import { apiRequest } from '@/lib/queryClient';
+import { 
+  LearningPath, 
+  LearningPathPreferences, 
+  CreateLearningPathResponse 
+} from '@/lib/learning-path';
 
 /**
- * Fetch all learning paths for the current user
+ * Fetches all learning paths for the current user
  */
 export async function getUserLearningPaths(): Promise<LearningPath[]> {
-  try {
-    const response = await fetch(API_BASE);
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        throw new Error('Please log in to access your learning paths.');
-      }
-      throw new Error(`Failed to fetch learning paths: ${response.statusText}`);
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching learning paths:', error);
-    throw error;
-  }
+  const response = await apiRequest('GET', '/api/learning-paths');
+  return await response.json();
 }
 
 /**
- * Fetch a specific learning path by ID
+ * Fetches a specific learning path by ID
  */
 export async function getLearningPath(id: string): Promise<LearningPath> {
-  try {
-    const response = await fetch(`${API_BASE}/${id}`);
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        throw new Error('Please log in to access this learning path.');
-      } else if (response.status === 404) {
-        throw new Error('Learning path not found.');
-      }
-      throw new Error(`Failed to fetch learning path: ${response.statusText}`);
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error(`Error fetching learning path ${id}:`, error);
-    throw error;
+  const response = await apiRequest('GET', `/api/learning-paths/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch learning path');
+  }
+  return await response.json();
+}
+
+/**
+ * Creates a new personalized learning path based on user preferences
+ */
+export async function createLearningPath(
+  preferences: LearningPathPreferences
+): Promise<CreateLearningPathResponse> {
+  const response = await apiRequest('POST', '/api/learning-paths', preferences);
+  if (!response.ok) {
+    throw new Error('Failed to create learning path');
+  }
+  return await response.json();
+}
+
+/**
+ * Marks a learning path node as complete
+ */
+export async function completePathNode(
+  pathId: string, 
+  nodeId: string
+): Promise<void> {
+  const response = await apiRequest(
+    'POST', 
+    `/api/learning-paths/${pathId}/nodes/${nodeId}/complete`
+  );
+  
+  if (!response.ok) {
+    throw new Error('Failed to mark node as complete');
   }
 }
 
 /**
- * User preferences for generating a learning path
+ * Deletes a learning path
  */
-export interface LearningPathPreferences {
-  learningStyle: 'visual' | 'auditory' | 'reading' | 'kinesthetic';
-  timeCommitment: 'minimal' | 'moderate' | 'intensive';
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  focusAreas: string[];
-  excludedAreas?: string[];
-  daysUntilExam?: number;
-  weakAreas?: string[];
-  strongAreas?: string[];
-}
-
-/**
- * Generate a new learning path based on user preferences
- */
-export async function generateLearningPath(preferences: LearningPathPreferences): Promise<LearningPath> {
-  try {
-    const response = await fetch(`${API_BASE}/generate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(preferences),
-    });
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        throw new Error('Please log in to create a learning path.');
-      } else if (response.status === 400) {
-        const data = await response.json();
-        throw new Error(data.message || 'Invalid preferences');
-      }
-      throw new Error(`Failed to generate learning path: ${response.statusText}`);
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error generating learning path:', error);
-    throw error;
-  }
-}
-
-/**
- * Mark a specific node in a learning path as completed
- */
-export async function completePathNode(pathId: string, nodeId: string): Promise<void> {
-  try {
-    const response = await fetch(`${API_BASE}/${pathId}/complete-node/${nodeId}`, {
-      method: 'POST',
-    });
-    
-    if (!response.ok) {
-      if (response.status === 401) {
-        throw new Error('Please log in to update your learning path.');
-      } else if (response.status === 404) {
-        throw new Error('Learning path or node not found.');
-      }
-      throw new Error(`Failed to mark node as completed: ${response.statusText}`);
-    }
-  } catch (error) {
-    console.error(`Error completing node ${nodeId} in path ${pathId}:`, error);
-    throw error;
+export async function deleteLearningPath(id: string): Promise<void> {
+  const response = await apiRequest('DELETE', `/api/learning-paths/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to delete learning path');
   }
 }

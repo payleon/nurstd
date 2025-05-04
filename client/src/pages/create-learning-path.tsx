@@ -1,41 +1,28 @@
 import React from 'react';
-import { useLocation } from 'wouter';
-import { ArrowLeft } from 'lucide-react';
+import { Header } from '@/components/ui/header';
+import { Sidebar } from '@/components/ui/sidebar';
 import { LearningPathForm } from '@/components/learning/LearningPathForm';
+import { useState } from 'react';
 
-// Local Link component that works with wouter
-const Link = ({ href, children }: { href: string; children: React.ReactNode }) => {
-  const [_, setLocation] = useLocation();
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setLocation(href);
+export default function CreateLearningPathPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
   
   return (
-    <a href={href} onClick={handleClick}>
-      {children}
-    </a>
-  );
-};
-
-export default function CreateLearningPathPage() {
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
-      <div className="mb-6">
-        <Link href="/learning-paths">
-          <a className="text-gray-600 hover:text-blue-600 flex items-center">
-            <ArrowLeft className="h-5 w-5 mr-1" />
-            <span>Back to Learning Paths</span>
-          </a>
-        </Link>
-        
-        <h1 className="text-3xl font-bold mt-4 text-[#13294B]">Create Learning Path</h1>
-        <p className="text-gray-600 mt-1">
-          Customize your learning experience by creating a personalized study path based on your preferences
-        </p>
-      </div>
+    <div className="bg-[#f0f2f5] font-sans text-[#333333] min-h-screen neuro-noise">
+      <Header toggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
-      <LearningPathForm />
+      <div className="flex h-screen pt-16">
+        <main className="flex-1 p-4 md:p-6 lg:pl-72 overflow-auto">
+          <div className="max-w-6xl mx-auto px-4">
+            <LearningPathForm />
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
