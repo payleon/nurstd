@@ -10,8 +10,16 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Test } from "@shared/schema";
-import { FileText, FileCheck, Clock, Calendar, BarChart } from "lucide-react";
+import { FileText, FileCheck, Clock, Calendar, BarChart, X } from "lucide-react";
 import { Link } from "wouter";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface TestListProps {
   onSelectTest: (test: Test) => void;
@@ -57,7 +65,7 @@ export function TestList({ onSelectTest }: TestListProps) {
       <div className="neuro-card mb-6 bg-[#4B9CD3] text-white overflow-hidden neuro-noise">
         <div className="p-6">
           <h2 className="text-3xl font-bold mb-3 uppercase tracking-tight">Welcome to NURS'TD NCLEX Prep</h2>
-          <p className="mb-4 text-lg">Your comprehensive nursing exam preparation platform. Choose from our available practice exams below to begin.</p>
+          <p className="mb-4 text-lg">Your comprehensive nursing exam preparation platform. Use the dashboard to track your progress or take a practice exam to get started.</p>
           <div className="flex flex-wrap gap-4 mt-6">
             <div className="flex items-center bg-white bg-opacity-20 p-3 border-2 border-black">
               <FileText className="h-5 w-5 mr-2" />
@@ -72,93 +80,99 @@ export function TestList({ onSelectTest }: TestListProps) {
               <span className="font-bold">Detailed Analysis</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Mobile dropdown for test selection */}
-      <div className="mb-6 lg:hidden">
-        <label htmlFor="testSelect" className="block text-sm font-bold uppercase mb-2">
-          Select a Practice Exam:
-        </label>
-        <select
-          id="testSelect"
-          className="neuro-input w-full font-bold"
-          value={selectedTest}
-          onChange={handleMobileSelect}
-        >
-          <option value="">Select an exam to begin</option>
-          {tests?.map((test) => (
-            <option key={test.id} value={test.path}>
-              {test.title}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* Practice Exams Section */}
-      <div className="neuro-card mb-6 neuro-noise overflow-hidden">
-        <div className="bg-[#13294B] text-white py-3 px-4 uppercase font-bold text-xl neuro-header flex items-center">
-          <FileCheck className="h-5 w-5 mr-2" />
-          Available Practice Exams
-        </div>
-        <div className="p-4 bg-white">
-          {isLoading ? (
-            // Loading skeleton
-            <div className="space-y-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="flex items-center justify-between p-3 border-b-2 border-gray-200">
-                  <Skeleton className="h-5 w-48" />
-                  <div className="flex items-center space-x-4">
-                    <Skeleton className="h-4 w-24" />
-                    <Skeleton className="h-8 w-24" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {tests?.length === 0 ? (
-                <div className="text-center py-4 text-gray-500 font-bold">
-                  No tests available. Add HTML files to the published/ directory to see them here.
-                </div>
-              ) : (
-                tests?.map((test) => (
-                  <div key={test.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 border-b-2 border-black bg-white hover:bg-gray-50 will-change-transform">
-                    <div className="flex items-center mb-3 md:mb-0">
-                      <div className="bg-[#4B9CD3] text-white p-2 border-2 border-black mr-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] will-change-transform">
-                        <FileText className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <div className="font-bold text-[#13294B] text-lg">{test.title}</div>
-                        <div className="font-medium flex items-center mt-1">
-                          <span className="inline-block bg-[#13294B] text-white text-xs px-2 py-1 mr-2 border border-black will-change-transform">
-                            {test.questionCount || 75} QUESTIONS
-                          </span>
-                          <span className="inline-block bg-[#13294B] text-white text-xs px-2 py-1 border border-black will-change-transform">
-                            {test.timeLimit || 2} {test.timeLimit === 1 ? 'HOUR' : 'HOURS'}
-                          </span>
+          
+          <div className="mt-6">
+            <Dialog>
+              <DialogTrigger asChild>
+                <button 
+                  className="neuro-button-primary min-h-[44px] min-w-[220px] text-lg"
+                  aria-label="View Available Practice Exams"
+                >
+                  View Practice Exams
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-4xl p-0 bg-white overflow-hidden border-2 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)]">
+                <DialogHeader className="bg-[#13294B] text-white py-3 px-6 flex items-center justify-between">
+                  <DialogTitle className="text-xl font-bold uppercase">Available Practice Exams</DialogTitle>
+                  <DialogTrigger asChild>
+                    <button 
+                      className="text-white hover:text-gray-200 cursor-pointer"
+                      aria-label="Close"
+                    >
+                      <X className="h-5 w-5" />
+                    </button>
+                  </DialogTrigger>
+                </DialogHeader>
+                <div className="px-6 py-4 max-h-[70vh] overflow-y-auto">
+                  <DialogDescription className="mb-4 text-gray-600">
+                    Select from our available practice exams to begin your NCLEX preparation journey.
+                  </DialogDescription>
+                  {isLoading ? (
+                    // Loading skeleton
+                    <div className="space-y-4">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="flex items-center justify-between p-3 border-b-2 border-gray-200">
+                          <Skeleton className="h-5 w-48" />
+                          <div className="flex items-center space-x-4">
+                            <Skeleton className="h-4 w-24" />
+                            <Skeleton className="h-8 w-24" />
+                          </div>
                         </div>
-                      </div>
+                      ))}
                     </div>
-                    <div className="flex items-center space-x-4 ml-12 md:ml-0">
-                      <div className="hidden md:flex items-center justify-center border-2 border-black px-3 py-1 bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] will-change-transform">
-                        <span className="text-sm font-bold">NOT ATTEMPTED</span>
-                      </div>
-                      <button 
-                        className="neuro-button-primary min-h-[44px] min-w-[100px]"
-                        onClick={() => handleSelectTest(test)}
-                        aria-label={`Take ${test.title} Exam`}
-                      >
-                        Take Exam
-                      </button>
+                  ) : (
+                    <div className="space-y-4">
+                      {tests?.length === 0 ? (
+                        <div className="text-center py-6 text-gray-500 font-bold">
+                          No tests available. Add test files to the published/ directory.
+                        </div>
+                      ) : (
+                        tests?.map((test) => (
+                          <div key={test.id} className="flex flex-col md:flex-row md:items-center justify-between p-4 border-2 border-black bg-white hover:bg-gray-50 will-change-transform rounded-md">
+                            <div className="flex items-center mb-3 md:mb-0">
+                              <div className="bg-[#4B9CD3] text-white p-2 border-2 border-black mr-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] will-change-transform">
+                                <FileText className="h-6 w-6" />
+                              </div>
+                              <div>
+                                <div className="font-bold text-[#13294B] text-lg">{test.title}</div>
+                                <div className="font-medium flex items-center mt-1">
+                                  <span className="inline-block bg-[#13294B] text-white text-xs px-2 py-1 mr-2 border border-black will-change-transform">
+                                    {test.questionCount || 75} QUESTIONS
+                                  </span>
+                                  <span className="inline-block bg-[#13294B] text-white text-xs px-2 py-1 border border-black will-change-transform">
+                                    {test.timeLimit || 2} {test.timeLimit === 1 ? 'HOUR' : 'HOURS'}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center space-x-4 ml-12 md:ml-0">
+                              <div className="hidden md:flex items-center justify-center border-2 border-black px-3 py-1 bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] will-change-transform">
+                                <span className="text-sm font-bold">NOT ATTEMPTED</span>
+                              </div>
+                              <DialogTrigger asChild>
+                                <button 
+                                  className="neuro-button-primary min-h-[44px] min-w-[100px]"
+                                  onClick={() => handleSelectTest(test)}
+                                  aria-label={`Take ${test.title} Exam`}
+                                >
+                                  Take Exam
+                                </button>
+                              </DialogTrigger>
+                            </div>
+                          </div>
+                        ))
+                      )}
                     </div>
-                  </div>
-                ))
-              )}
-            </div>
-          )}
+                  )}
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </div>
+
+      {/* We've removed the mobile dropdown and practice exams list section since it's now 
+          available through the dialog. This keeps the UI cleaner and more focused. */}
 
       {/* Recent Activity Section */}
       <div className="neuro-card mb-6 neuro-noise overflow-hidden">
