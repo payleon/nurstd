@@ -246,33 +246,217 @@ export function TestList({ onSelectTest }: TestListProps) {
                 </DialogHeader>
                 <div className="px-6 py-4 max-h-[70vh] overflow-y-auto">
                   <DialogDescription className="mb-4 text-gray-600">
-                    Expert advice to help you succeed on your NCLEX exam preparation.
+                    Evidence-based study techniques to help you succeed on your NCLEX exam.
                   </DialogDescription>
                   
-                  <div className="divide-y-2 divide-black">
-                    <div className="py-4">
-                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Practice Regularly</h3>
-                      <p>Consistent practice with NCLEX-style questions improves critical thinking skills and test familiarity.</p>
+                  {/* Tab-based study tips system */}
+                  <div className="mb-5">
+                    <div className="bg-[#13294B] text-white p-2 border-2 border-black mb-4">
+                      <h2 className="text-lg font-bold">NCLEX Success Formula</h2>
                     </div>
-                    <div className="py-4">
-                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Review Test Rationales</h3>
-                      <p>Always read explanations for both correct and incorrect answers to deepen understanding.</p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                      <div 
+                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                        onClick={() => window.open('https://www.ncsbn.org/nclex-application-and-registration.htm', '_blank')}
+                      >
+                        <div className="flex items-center mb-2">
+                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
+                            <span className="font-bold">1</span>
+                          </div>
+                          <h3 className="font-bold text-[#13294B] text-lg">Content Mastery</h3>
+                        </div>
+                        <p className="text-gray-700">Focus on understanding nursing concepts rather than memorizing facts. Use our practice quizzes to identify knowledge gaps.</p>
+                        <div className="mt-2 text-[#4B9CD3] font-medium">Interactive Focus: NCLEX Test Plan ↗</div>
+                      </div>
+                      
+                      <div 
+                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                        onClick={() => window.open('https://www.ncsbn.org/nclex-preparation-materials.htm', '_blank')}
+                      >
+                        <div className="flex items-center mb-2">
+                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
+                            <span className="font-bold">2</span>
+                          </div>
+                          <h3 className="font-bold text-[#13294B] text-lg">Critical Thinking</h3>
+                        </div>
+                        <p className="text-gray-700">Practice answering NCLEX-style questions that test your ability to analyze situations and apply nursing knowledge.</p>
+                        <div className="mt-2 text-[#4B9CD3] font-medium">Interactive Focus: Practice Questions ↗</div>
+                      </div>
+                      
+                      <div 
+                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                      >
+                        <div className="flex items-center mb-2">
+                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
+                            <span className="font-bold">3</span>
+                          </div>
+                          <h3 className="font-bold text-[#13294B] text-lg">Time Management</h3>
+                        </div>
+                        <p className="text-gray-700">Create a structured study schedule using our Study Strategy Planner. Practice with timed quizzes to build test-taking stamina.</p>
+                        <div className="mt-2 flex justify-between">
+                          <div className="text-[#4B9CD3] font-medium">Use our Study Timer tool →</div>
+                          <div className="flex gap-1">
+                            <span className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">1-2 min/question</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div 
+                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                      >
+                        <div className="flex items-center mb-2">
+                          <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
+                            <span className="font-bold">4</span>
+                          </div>
+                          <h3 className="font-bold text-[#13294B] text-lg">Test Strategy</h3>
+                        </div>
+                        <p className="text-gray-700">Learn and practice NCLEX-specific strategies like priority-setting, delegation, and eliminating incorrect options.</p>
+                        <div className="mt-2 flex justify-between">
+                          <div className="text-[#4B9CD3] font-medium">Practice with our Games →</div>
+                          <div className="flex gap-1">
+                            <span className="bg-[#13294B] text-white text-xs px-2 py-1 rounded">High Value</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="py-4">
-                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Identify Knowledge Gaps</h3>
-                      <p>Focus your study time on areas where you consistently struggle.</p>
+                    
+                    <div className="bg-[#F9F9F9] border-2 border-black p-4 mb-4">
+                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Evidence-Based Study Methods</h3>
+                      <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                        <li><span className="font-bold">Spaced Repetition:</span> Study material at increasing intervals to improve long-term retention.</li>
+                        <li><span className="font-bold">Active Recall:</span> Test yourself frequently rather than passive re-reading.</li>
+                        <li><span className="font-bold">Interleaved Practice:</span> Mix different subjects and question types in each study session.</li>
+                        <li><span className="font-bold">Dual Coding:</span> Combine text-based learning with visual aids like diagrams or charts.</li>
+                      </ul>
                     </div>
-                    <div className="py-4">
-                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Simulate Test Environment</h3>
-                      <p>Take full-length practice tests under timed conditions to build stamina and reduce anxiety.</p>
+                    
+                    {/* Mini Self-Assessment */}
+                    <div className="border-2 border-black">
+                      <div className="bg-[#13294B] text-white p-2">
+                        <h3 className="font-bold text-lg">Quick Study Readiness Assessment</h3>
+                      </div>
+                      <div className="p-4 bg-white">
+                        <p className="mb-4">Rate your confidence in these key NCLEX areas to get personalized study recommendations:</p>
+                        
+                        <div className="space-y-4 mb-6">
+                          <div>
+                            <label className="font-medium text-[#13294B] block mb-1">Prioritization & Delegation</label>
+                            <div className="flex justify-between gap-1">
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Low</button>
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Medium</button>
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">High</button>
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <label className="font-medium text-[#13294B] block mb-1">Pharmacology Knowledge</label>
+                            <div className="flex justify-between gap-1">
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Low</button>
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Medium</button>
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">High</button>
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <label className="font-medium text-[#13294B] block mb-1">Select All That Apply (SATA) Questions</label>
+                            <div className="flex justify-between gap-1">
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Low</button>
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Medium</button>
+                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">High</button>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex justify-center">
+                          <button className="neuro-button-primary min-h-[44px] min-w-[200px]">
+                            Get My Study Plan
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <div className="py-4">
-                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Use Active Learning</h3>
-                      <p>Take notes, create flashcards, and teach concepts to others to reinforce your understanding.</p>
-                    </div>
-                    <div className="py-4">
-                      <h3 className="font-bold text-[#13294B] mb-2 text-lg">Manage Test Anxiety</h3>
-                      <p>Practice relaxation techniques and positive visualization to reduce stress during exams.</p>
+                    
+                    {/* Quick Sample Questions */}
+                    <div className="border-2 border-black mt-4">
+                      <div className="bg-[#13294B] text-white p-2">
+                        <h3 className="font-bold text-lg">NCLEX Question Types</h3>
+                      </div>
+                      <div className="p-4 bg-white">
+                        <p className="mb-4">Familiarize yourself with the different types of questions you'll encounter:</p>
+                        
+                        <div className="space-y-6">
+                          {/* Sample Multiple Choice */}
+                          <div className="border border-black p-3">
+                            <div className="flex items-center gap-2 mb-2">
+                              <div className="bg-[#4B9CD3] text-white py-1 px-2 text-xs font-bold rounded">
+                                MULTIPLE CHOICE
+                              </div>
+                              <span className="text-sm text-gray-600">Most common format</span>
+                            </div>
+                            <p className="font-medium mb-3 text-[#13294B]">A nurse is caring for a client with hyperkalemia. Which intervention should the nurse implement first?</p>
+                            <div className="space-y-2 ml-1">
+                              <div className="flex items-center gap-2">
+                                <input type="radio" id="mc1" name="mc-sample" className="w-4 h-4" />
+                                <label htmlFor="mc1" className="text-sm">Administer calcium gluconate</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input type="radio" id="mc2" name="mc-sample" className="w-4 h-4" />
+                                <label htmlFor="mc2" className="text-sm">Prepare for dialysis</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input type="radio" id="mc3" name="mc-sample" className="w-4 h-4" />
+                                <label htmlFor="mc3" className="text-sm">Administer furosemide</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input type="radio" id="mc4" name="mc-sample" className="w-4 h-4" />
+                                <label htmlFor="mc4" className="text-sm">Obtain an ECG</label>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Sample SATA */}
+                          <div className="border border-black p-3">
+                            <div className="flex items-center gap-2 mb-2">
+                              <div className="bg-[#4B9CD3] text-white py-1 px-2 text-xs font-bold rounded">
+                                SELECT ALL THAT APPLY
+                              </div>
+                              <span className="text-sm text-gray-600">Select multiple correct options</span>
+                            </div>
+                            <p className="font-medium mb-3 text-[#13294B]">Which findings would a nurse expect to observe in a client with left-sided heart failure? Select all that apply.</p>
+                            <div className="space-y-2 ml-1">
+                              <div className="flex items-center gap-2">
+                                <input type="checkbox" id="sata1" className="w-4 h-4" />
+                                <label htmlFor="sata1" className="text-sm">Pulmonary edema</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input type="checkbox" id="sata2" className="w-4 h-4" />
+                                <label htmlFor="sata2" className="text-sm">Jugular venous distention</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input type="checkbox" id="sata3" className="w-4 h-4" />
+                                <label htmlFor="sata3" className="text-sm">Crackles in lung bases</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input type="checkbox" id="sata4" className="w-4 h-4" />
+                                <label htmlFor="sata4" className="text-sm">Dependent edema</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input type="checkbox" id="sata5" className="w-4 h-4" />
+                                <label htmlFor="sata5" className="text-sm">Dyspnea on exertion</label>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="text-center text-gray-600 flex gap-3 items-center justify-center">
+                            <span>See more question formats in</span>
+                            <Link href="/exams-and-studies">
+                              <button className="neuro-button-secondary min-h-[36px] text-sm">
+                                Practice Exams
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
