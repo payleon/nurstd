@@ -448,8 +448,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Mount the learning path router
-  app.use('/api', learningPathRouter);
+  // Register learning path routes
+  app.use("/api/learning-paths", learningPathRouter);
+  console.log('Learning path routes registered');
 
   const httpServer = createServer(app);
   console.log('Routes initialized successfully (authentication disabled).');
