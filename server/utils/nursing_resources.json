@@ -1,0 +1,242 @@
+{
+  "med-surg": [
+    {
+      "title": "Medical-Surgical Nursing Study Guide",
+      "url": "https://www.registerednursing.org/nclex/medical-surgical-nursing/",
+      "resourceType": "article",
+      "description": "Comprehensive study guide covering key medical-surgical nursing concepts",
+      "estimatedTime": 45
+    },
+    {
+      "title": "Fluid and Electrolyte Imbalances",
+      "url": "https://nurseslabs.com/fluid-and-electrolytes-imbalances/",
+      "resourceType": "article",
+      "description": "Learn about managing fluid and electrolyte imbalances in various patient conditions",
+      "estimatedTime": 30
+    },
+    {
+      "title": "Respiratory Assessment Quiz",
+      "url": "https://nurseslabs.com/respiratory-system-disorders-nclex-practice-quiz-2-50-items/",
+      "resourceType": "quiz",
+      "description": "Test your knowledge on respiratory assessment techniques and findings",
+      "estimatedTime": 20
+    },
+    {
+      "title": "Cardiac Dysrhythmia Interpretation",
+      "url": "https://www.youtube.com/watch?v=rTnJKaKGnqQ",
+      "resourceType": "video",
+      "description": "Learn how to interpret common cardiac dysrhythmias",
+      "estimatedTime": 35
+    }
+  ],
+  "pediatrics": [
+    {
+      "title": "Pediatric Growth and Development",
+      "url": "https://www.registerednursing.org/nclex/pediatric-nursing/",
+      "resourceType": "article",
+      "description": "Key concepts in pediatric growth and developmental milestones",
+      "estimatedTime": 40
+    },
+    {
+      "title": "Pediatric Medication Calculations",
+      "url": "https://nurseslabs.com/drug-dosage-calculations-nclex-exam-1-20-items/",
+      "resourceType": "quiz",
+      "description": "Practice calculating pediatric medication dosages",
+      "estimatedTime": 30
+    },
+    {
+      "title": "Common Pediatric Respiratory Conditions",
+      "url": "https://nurseslabs.com/pediatric-nursing-respiratory-disorders/",
+      "resourceType": "article",
+      "description": "Overview of respiratory conditions frequently encountered in pediatric patients",
+      "estimatedTime": 25
+    },
+    {
+      "title": "Pediatric Assessment Techniques",
+      "url": "https://www.youtube.com/watch?v=jgTTzWrJ_wI",
+      "resourceType": "video",
+      "description": "Demonstration of proper assessment techniques for pediatric patients",
+      "estimatedTime": 45
+    }
+  ],
+  "obstetrics": [
+    {
+      "title": "Maternal-Newborn Nursing Review",
+      "url": "https://www.registerednursing.org/nclex/maternal-newborn-nursing/",
+      "resourceType": "article",
+      "description": "Comprehensive review of maternal-newborn nursing concepts",
+      "estimatedTime": 50
+    },
+    {
+      "title": "Labor and Delivery Process",
+      "url": "https://nurseslabs.com/labor-delivery-postpartum-findings/",
+      "resourceType": "article",
+      "description": "Detailed breakdown of the labor and delivery process",
+      "estimatedTime": 35
+    },
+    {
+      "title": "Obstetrical Assessment Quiz",
+      "url": "https://nurseslabs.com/maternal-and-child-health-nursing-1/",
+      "resourceType": "quiz",
+      "description": "Test your knowledge on obstetrical assessments",
+      "estimatedTime": 25
+    },
+    {
+      "title": "Fetal Heart Rate Interpretation",
+      "url": "https://www.youtube.com/watch?v=SJwsLX-_6-0",
+      "resourceType": "video",
+      "description": "Learn how to interpret fetal heart rate patterns",
+      "estimatedTime": 40
+    }
+  ],
+  "psych": [
+    {
+      "title": "Psychiatric-Mental Health Nursing Concepts",
+      "url": "https://www.registerednursing.org/nclex/psychiatric-mental-health-nursing/",
+      "resourceType": "article",
+      "description": "Essential concepts in psychiatric-mental health nursing",
+      "estimatedTime": 45
+    },
+    {
+      "title": "Therapeutic Communication Techniques",
+      "url": "https://nurseslabs.com/therapeutic-communication-techniques-barrier/",
+      "resourceType": "article",
+      "description": "Learn effective therapeutic communication techniques for psychiatric patients",
+      "estimatedTime": 30
+    },
+    {
+      "title": "Mental Health Assessment Quiz",
+      "url": "https://nurseslabs.com/nclex-exam-mental-health-disorders-2-50-items/",
+      "resourceType": "quiz",
+      "description": "Test your knowledge on mental health assessments",
+      "estimatedTime": 20
+    },
+    {
+      "title": "Crisis Intervention Strategies",
+      "url": "https://www.youtube.com/watch?v=NLVMzeBCCko",
+      "resourceType": "video",
+      "description": "Effective strategies for crisis intervention in psychiatric care",
+      "estimatedTime": 35
+    }
+  ],
+  "pharmacology": [
+    {
+      "title": "Pharmacology Fundamentals",
+      "url": "https://www.registerednursing.org/nclex/pharmacological-parenteral-therapies/",
+      "resourceType": "article",
+      "description": "Essential pharmacology concepts for nursing practice",
+      "estimatedTime": 50
+    },
+    {
+      "title": "Medication Administration Guidelines",
+      "url": "https://nurseslabs.com/medication-administration/",
+      "resourceType": "article",
+      "description": "Comprehensive guide to safe medication administration",
+      "estimatedTime": 40
+    },
+    {
+      "title": "Pharmacology Quiz",
+      "url": "https://nurseslabs.com/nclex-exam-pharmacology-1-20-items/",
+      "resourceType": "quiz",
+      "description": "Test your pharmacology knowledge",
+      "estimatedTime": 30
+    },
+    {
+      "title": "IV Medication Administration",
+      "url": "https://www.youtube.com/watch?v=kRRY9QQm51c",
+      "resourceType": "video",
+      "description": "Proper techniques for IV medication administration",
+      "estimatedTime": 25
+    }
+  ],
+  "fundamentals": [
+    {
+      "title": "Nursing Fundamentals Review",
+      "url": "https://www.registerednursing.org/nclex/fundamentals-of-nursing/",
+      "resourceType": "article",
+      "description": "Comprehensive review of nursing fundamentals",
+      "estimatedTime": 45
+    },
+    {
+      "title": "Nursing Process Application",
+      "url": "https://nurseslabs.com/nursing-process/",
+      "resourceType": "article",
+      "description": "How to apply the nursing process in patient care",
+      "estimatedTime": 35
+    },
+    {
+      "title": "Vital Signs Assessment Quiz",
+      "url": "https://nurseslabs.com/nclex-practice-questions-fundamentals-of-nursing/",
+      "resourceType": "quiz",
+      "description": "Test your knowledge on vital signs assessment",
+      "estimatedTime": 20
+    },
+    {
+      "title": "Proper Hand Hygiene Technique",
+      "url": "https://www.youtube.com/watch?v=IisgnbMfKvI",
+      "resourceType": "video",
+      "description": "Demonstration of proper hand hygiene technique",
+      "estimatedTime": 15
+    }
+  ],
+  "critical-care": [
+    {
+      "title": "Critical Care Nursing Concepts",
+      "url": "https://www.registerednursing.org/nclex/reduction-risk-potential/",
+      "resourceType": "article",
+      "description": "Essential concepts in critical care nursing",
+      "estimatedTime": 55
+    },
+    {
+      "title": "Ventilator Management",
+      "url": "https://nurseslabs.com/mechanical-ventilation/",
+      "resourceType": "article",
+      "description": "Comprehensive guide to mechanical ventilation management",
+      "estimatedTime": 45
+    },
+    {
+      "title": "Critical Care Nursing Quiz",
+      "url": "https://nurseslabs.com/nclex-practice-quiz-critical-care-nursing/",
+      "resourceType": "quiz",
+      "description": "Test your critical care nursing knowledge",
+      "estimatedTime": 30
+    },
+    {
+      "title": "Arterial Blood Gas Interpretation",
+      "url": "https://www.youtube.com/watch?v=WOWptM6GDBY",
+      "resourceType": "video",
+      "description": "Learn how to interpret arterial blood gas results",
+      "estimatedTime": 40
+    }
+  ],
+  "emergency": [
+    {
+      "title": "Emergency Nursing Principles",
+      "url": "https://www.registerednursing.org/nclex/physiological-adaptation/",
+      "resourceType": "article",
+      "description": "Essential principles in emergency nursing",
+      "estimatedTime": 50
+    },
+    {
+      "title": "Triage Assessment",
+      "url": "https://nurseslabs.com/emergency-triage/",
+      "resourceType": "article",
+      "description": "How to perform effective triage assessment in emergency situations",
+      "estimatedTime": 35
+    },
+    {
+      "title": "Emergency Nursing Quiz",
+      "url": "https://nurseslabs.com/nclex-practice-quiz-emergency-nursing/",
+      "resourceType": "quiz",
+      "description": "Test your emergency nursing knowledge",
+      "estimatedTime": 25
+    },
+    {
+      "title": "Trauma Assessment",
+      "url": "https://www.youtube.com/watch?v=SjnoB7dkPD4",
+      "resourceType": "video",
+      "description": "Demonstration of proper trauma assessment techniques",
+      "estimatedTime": 45
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import { storage } from "./storage";
 import fs from "fs/promises";
 import path from "path";
 import { QuestionsResponseSchema, QuestionSchema } from "@shared/schema";
-import learningPathRouter from "./api/learning-path";
+import learningPathRouter from "./api/learning-path-router";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Serve sitemap.xml and robots.txt at root level

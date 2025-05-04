@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
 import { v4 as uuidv4 } from 'uuid';
 import { LearningPathPreferences } from '../../client/src/lib/learning-path';
+import nursingResources from '../utils/nursing-resources';
 
 // Setup Gemini model with API key
 const API_KEY = process.env.GEMINI_API_KEY;
@@ -131,25 +132,68 @@ export async function generateGeminiLearningPath(preferences: LearningPathPrefer
     
     const learningPathData = JSON.parse(jsonMatch[0]);
     
-    // Add unique IDs if they don't exist
+    // Add unique IDs if they don't exist and ensure real resources
     const processedPath = {
       ...learningPathData,
       id: uuidv4(),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       progress: 0,
-      sections: learningPathData.sections.map((section: any) => ({
+    };
+    
+    // Get real nursing resources based on the focus areas
+    const realResources = nursingResources.getResourcesForLearningPath(
+      preferences.focusAreas as any[], 
+      preferences.learningStyle,
+      preferences.difficultyLevel
+    );
+    
+    // Map of resource index to track used resources
+    let resourceIndex = 0;
+    
+    // Process sections with real resources
+    processedPath.sections = learningPathData.sections.map((section: any) => {
+      const sectionWithId = {
         ...section,
         id: section.id || `section-${uuidv4()}`,
         completed: false,
-        nodes: section.nodes.map((node: any) => ({
-          ...node,
-          id: node.id || `node-${uuidv4()}`,
-          completed: false,
-          requiredForCompletion: node.requiredForCompletion !== undefined ? node.requiredForCompletion : true
-        }))
-      }))
-    };
+      };
+      
+      // Process nodes with real resources
+      sectionWithId.nodes = section.nodes.map((node: any) => {
+        // Get a real resource, or use empty if we've exhausted our resources
+        const realResource = resourceIndex < realResources.length 
+          ? realResources[resourceIndex++]
+          : null;
+          
+        // If we have a real resource, use its properties
+        if (realResource) {
+          return {
+            ...node,
+            id: node.id || `node-${uuidv4()}`,
+            completed: false,
+            requiredForCompletion: node.requiredForCompletion !== undefined ? node.requiredForCompletion : true,
+            url: realResource.url,
+            resourceType: realResource.resourceType,
+            title: node.title || realResource.title,
+            description: node.description || realResource.description,
+            estimatedTime: node.estimatedTime || realResource.estimatedTime,
+            difficulty: node.difficulty || realResource.difficulty || preferences.difficultyLevel
+          };
+        } else {
+          // Use node as is but with empty URL and generated ID
+          return {
+            ...node,
+            id: node.id || `node-${uuidv4()}`,
+            completed: false,
+            url: '', // No placeholder URLs
+            requiredForCompletion: node.requiredForCompletion !== undefined ? node.requiredForCompletion : true
+          };
+        }
+      });
+      
+      return sectionWithId;
+    });
     
     return processedPath;
   } catch (error) {
