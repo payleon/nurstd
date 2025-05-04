@@ -63,12 +63,13 @@ export default function LearningPathsPage() {
           <p className="text-gray-600 mt-1">Personalized study plans tailored to your learning style</p>
         </div>
         
-        <Link href="/create-learning-path">
-          <a className="bg-[#4B9CD3] hover:bg-[#3d7eaa] text-white py-2 px-4 rounded-md flex items-center">
-            <Plus className="h-5 w-5 mr-2" />
-            Create New
-          </a>
-        </Link>
+        <button
+          onClick={() => window.location.href = '/create-learning-path'}
+          className="bg-[#4B9CD3] hover:bg-[#3d7eaa] text-white py-2 px-4 rounded-md flex items-center"
+        >
+          <Plus className="h-5 w-5 mr-2" />
+          Create New
+        </button>
       </div>
       
       {isLoading && (
@@ -89,47 +90,50 @@ export default function LearningPathsPage() {
           <BookOpen className="h-12 w-12 mx-auto mb-4 text-blue-500" />
           <h3 className="text-xl font-bold mb-2">No Learning Paths Found</h3>
           <p className="mb-4">You haven't created any personalized learning paths yet.</p>
-          <Link href="/create-learning-path">
-            <a className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md inline-flex items-center">
-              <Plus className="h-5 w-5 mr-2" />
-              Create Your First Learning Path
-            </a>
-          </Link>
+          <button
+            onClick={() => window.location.href = '/create-learning-path'} 
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md inline-flex items-center"
+          >
+            <Plus className="h-5 w-5 mr-2" />
+            Create Your First Learning Path
+          </button>
         </div>
       )}
       
       {!isLoading && !error && learningPaths.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {learningPaths.map((path) => (
-            <Link key={path.id} href={`/learning-path/${path.id}`}>
-              <a className="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border">
-                <div className={`h-3 ${getProgressColor(path.progress)}`}></div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#13294B] mb-2 line-clamp-2">{path.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{path.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {path.focusAreas.slice(0, 3).map((area, index) => (
-                      <Badge key={index} variant="secondary">{area}</Badge>
-                    ))}
-                    {path.focusAreas.length > 3 && (
-                      <Badge variant="outline">+{path.focusAreas.length - 3} more</Badge>
-                    )}
+            <div 
+              key={path.id} 
+              onClick={() => window.location.href = `/learning-path/${path.id}`}
+              className="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border cursor-pointer"
+            >
+              <div className={`h-3 ${getProgressColor(path.progress)}`}></div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-[#13294B] mb-2 line-clamp-2">{path.title}</h3>
+                <p className="text-gray-600 mb-4 line-clamp-2">{path.description}</p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {path.focusAreas.slice(0, 3).map((area, index) => (
+                    <Badge key={index} variant="secondary">{area}</Badge>
+                  ))}
+                  {path.focusAreas.length > 3 && (
+                    <Badge variant="outline">+{path.focusAreas.length - 3} more</Badge>
+                  )}
+                </div>
+                
+                <div className="flex items-center justify-between pt-4 border-t text-sm">
+                  <div className="flex items-center text-gray-500">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    <span>{formatDate(path.createdAt)}</span>
                   </div>
                   
-                  <div className="flex items-center justify-between pt-4 border-t text-sm">
-                    <div className="flex items-center text-gray-500">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      <span>{formatDate(path.createdAt)}</span>
-                    </div>
-                    
-                    <div className="flex items-center font-medium text-[#4B9CD3]">
-                      <span>{path.progress}% Complete</span>
-                    </div>
+                  <div className="flex items-center font-medium text-[#4B9CD3]">
+                    <span>{path.progress}% Complete</span>
                   </div>
                 </div>
-              </a>
-            </Link>
+              </div>
+            </div>
           ))}
         </div>
       )}

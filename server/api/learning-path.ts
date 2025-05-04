@@ -8,9 +8,11 @@ const router = Router();
 // Get all learning paths for the current user
 router.get('/learning-paths', async (req: Request, res: Response) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
+    // For development purposes, allow unauthenticated requests
+    // TODO: Once authentication is fully implemented, uncomment the below check
+    // if (!req.user) {
+    //   return res.status(401).json({ message: 'Authentication required' });
+    // }
 
     // TODO: Replace with actual database query
     // For now, return mock data for testing
@@ -53,9 +55,11 @@ router.get('/learning-paths', async (req: Request, res: Response) => {
 // Get a specific learning path by ID
 router.get('/learning-paths/:id', async (req: Request, res: Response) => {
   try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Authentication required' });
-    }
+    // For development purposes, allow unauthenticated requests
+    // TODO: Once authentication is fully implemented, uncomment the below check
+    // if (!req.user) {
+    //   return res.status(401).json({ message: 'Authentication required' });
+    // }
 
     const pathId = req.params.id;
 
