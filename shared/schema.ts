@@ -41,6 +41,36 @@ export const insertTestSchema = createInsertSchema(tests).pick({
 export type InsertTest = z.infer<typeof insertTestSchema>;
 export type Test = typeof tests.$inferSelect;
 
+// User Study Progress
+export const userStudyProgress = pgTable("user_study_progress", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
+  category: text("category").notNull(), // e.g., "med-surg", "pharmacology", etc.
+  confidenceLevel: integer("confidence_level").notNull(), // 1-5 scale
+  lastUpdated: timestamp("last_updated").defaultNow().notNull(),
+  questionsAttempted: integer("questions_attempted").default(0),
+  questionsCorrect: integer("questions_correct").default(0),
+  recommendedFocus: boolean("recommended_focus").default(false),
+});
+
+// User Study Recommendations
+export const userRecommendations = pgTable("user_recommendations", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
+  recommendationType: text("recommendation_type").notNull(), // e.g., "content", "strategy", "resource"
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  priority: integer("priority").default(1), // 1-3 with 3 being highest
+  completed: boolean("completed").default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// Define the types for user study progress and recommendations
+export type UserStudyProgress = typeof userStudyProgress.$inferSelect;
+export type InsertUserStudyProgress = typeof userStudyProgress.$inferInsert;
+export type UserRecommendation = typeof userRecommendations.$inferSelect;
+export type InsertUserRecommendation = typeof userRecommendations.$inferInsert;
+
 // Define schemas for question types
 export const QuestionChoiceSchema = z.object({
   id: z.string(),

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTests } from "@/lib/api";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Test } from "@shared/schema";
-import { FileText, FileCheck, Clock, Calendar, BarChart, X } from "lucide-react";
+import { FileText, FileCheck, Clock, Calendar, BarChart, X, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Link } from "wouter";
 import {
   Dialog,
@@ -20,6 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useStudyProgress } from "@/hooks/useStudyProgress";
 
 interface TestListProps {
   onSelectTest: (test: Test) => void;
@@ -29,6 +30,14 @@ export function TestList({ onSelectTest }: TestListProps) {
   const { data: tests, isLoading, error } = useQuery<Test[]>({
     queryKey: ['/api/tests'],
   });
+  
+  // Use our study progress hook for personalization
+  const { 
+    studyAreas, 
+    recommendations, 
+    updateConfidenceLevel, 
+    completeRecommendation 
+  } = useStudyProgress();
 
   // Mobile dropdown state
   const [selectedTest, setSelectedTest] = useState("");
@@ -257,7 +266,7 @@ export function TestList({ onSelectTest }: TestListProps) {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                       <div 
-                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                        className={`border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${Object.values(studyAreas).some(area => area.confidenceLevel === 1) ? 'border-l-4 border-l-amber-500' : ''}`}
                         onClick={() => window.open('https://www.ncsbn.org/nclex-application-and-registration.htm', '_blank')}
                       >
                         <div className="flex items-center mb-2">
@@ -267,11 +276,16 @@ export function TestList({ onSelectTest }: TestListProps) {
                           <h3 className="font-bold text-[#13294B] text-lg">Content Mastery</h3>
                         </div>
                         <p className="text-gray-700">Focus on understanding nursing concepts rather than memorizing facts. Use our practice quizzes to identify knowledge gaps.</p>
-                        <div className="mt-2 text-[#4B9CD3] font-medium">Interactive Focus: NCLEX Test Plan ↗</div>
+                        <div className="mt-2 flex justify-between items-center">
+                          <div className="text-[#4B9CD3] font-medium">Interactive Focus: NCLEX Test Plan ↗</div>
+                          {Object.values(studyAreas).some(area => area.confidenceLevel === 1) && (
+                            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded border border-amber-300">Recommended for you</span>
+                          )}
+                        </div>
                       </div>
                       
                       <div 
-                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                        className={`border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${studyAreas['prioritization']?.confidenceLevel === 1 ? 'border-l-4 border-l-amber-500' : ''}`}
                         onClick={() => window.open('https://www.ncsbn.org/nclex-preparation-materials.htm', '_blank')}
                       >
                         <div className="flex items-center mb-2">
@@ -281,11 +295,17 @@ export function TestList({ onSelectTest }: TestListProps) {
                           <h3 className="font-bold text-[#13294B] text-lg">Critical Thinking</h3>
                         </div>
                         <p className="text-gray-700">Practice answering NCLEX-style questions that test your ability to analyze situations and apply nursing knowledge.</p>
-                        <div className="mt-2 text-[#4B9CD3] font-medium">Interactive Focus: Practice Questions ↗</div>
+                        <div className="mt-2 flex justify-between items-center">
+                          <div className="text-[#4B9CD3] font-medium">Interactive Focus: Practice Questions ↗</div>
+                          {studyAreas['prioritization']?.confidenceLevel === 1 && (
+                            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded border border-amber-300">Focus area for you</span>
+                          )}
+                        </div>
                       </div>
                       
                       <div 
                         className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                        onClick={() => window.location.href = '/study-strategies'}
                       >
                         <div className="flex items-center mb-2">
                           <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
@@ -303,7 +323,7 @@ export function TestList({ onSelectTest }: TestListProps) {
                       </div>
                       
                       <div 
-                        className="border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                        className={`border-2 border-black p-4 bg-white hover:bg-gray-50 transition-all cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] ${studyAreas['pharmacology']?.confidenceLevel === 1 ? 'border-l-4 border-l-amber-500' : ''}`}
                       >
                         <div className="flex items-center mb-2">
                           <div className="bg-[#4B9CD3] text-white p-1 rounded-full w-8 h-8 flex items-center justify-center mr-2 border border-black">
@@ -312,11 +332,13 @@ export function TestList({ onSelectTest }: TestListProps) {
                           <h3 className="font-bold text-[#13294B] text-lg">Test Strategy</h3>
                         </div>
                         <p className="text-gray-700">Learn and practice NCLEX-specific strategies like priority-setting, delegation, and eliminating incorrect options.</p>
-                        <div className="mt-2 flex justify-between">
+                        <div className="mt-2 flex justify-between items-center">
                           <div className="text-[#4B9CD3] font-medium">Practice with our Games →</div>
-                          <div className="flex gap-1">
+                          {studyAreas['pharmacology']?.confidenceLevel === 1 ? (
+                            <span className="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded border border-amber-300">Recommended for you</span>
+                          ) : (
                             <span className="bg-[#13294B] text-white text-xs px-2 py-1 rounded">High Value</span>
-                          </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -343,35 +365,112 @@ export function TestList({ onSelectTest }: TestListProps) {
                           <div>
                             <label className="font-medium text-[#13294B] block mb-1">Prioritization & Delegation</label>
                             <div className="flex justify-between gap-1">
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Low</button>
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Medium</button>
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">High</button>
+                              <button 
+                                className={`${studyAreas['prioritization']?.confidenceLevel === 1 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('prioritization', 1)}
+                              >
+                                Low
+                              </button>
+                              <button 
+                                className={`${studyAreas['prioritization']?.confidenceLevel === 2 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('prioritization', 2)}
+                              >
+                                Medium
+                              </button>
+                              <button 
+                                className={`${studyAreas['prioritization']?.confidenceLevel === 3 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('prioritization', 3)}
+                              >
+                                High
+                              </button>
                             </div>
                           </div>
                           
                           <div>
                             <label className="font-medium text-[#13294B] block mb-1">Pharmacology Knowledge</label>
                             <div className="flex justify-between gap-1">
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Low</button>
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Medium</button>
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">High</button>
+                              <button 
+                                className={`${studyAreas['pharmacology']?.confidenceLevel === 1 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('pharmacology', 1)}
+                              >
+                                Low
+                              </button>
+                              <button 
+                                className={`${studyAreas['pharmacology']?.confidenceLevel === 2 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('pharmacology', 2)}
+                              >
+                                Medium
+                              </button>
+                              <button 
+                                className={`${studyAreas['pharmacology']?.confidenceLevel === 3 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('pharmacology', 3)}
+                              >
+                                High
+                              </button>
                             </div>
                           </div>
                           
                           <div>
-                            <label className="font-medium text-[#13294B] block mb-1">Select All That Apply (SATA) Questions</label>
+                            <label className="font-medium text-[#13294B] block mb-1">Maternal-Newborn Nursing</label>
                             <div className="flex justify-between gap-1">
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Low</button>
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">Medium</button>
-                              <button className="bg-[#F8F8F8] hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors">High</button>
+                              <button 
+                                className={`${studyAreas['maternal-newborn']?.confidenceLevel === 1 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('maternal-newborn', 1)}
+                              >
+                                Low
+                              </button>
+                              <button 
+                                className={`${studyAreas['maternal-newborn']?.confidenceLevel === 2 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('maternal-newborn', 2)}
+                              >
+                                Medium
+                              </button>
+                              <button 
+                                className={`${studyAreas['maternal-newborn']?.confidenceLevel === 3 ? 'bg-[#4B9CD3] text-white' : 'bg-[#F8F8F8]'} hover:bg-[#4B9CD3] hover:text-white border border-black px-3 py-1 text-sm flex-1 transition-colors`}
+                                onClick={() => updateConfidenceLevel('maternal-newborn', 3)}
+                              >
+                                High
+                              </button>
                             </div>
                           </div>
                         </div>
                         
+                        {/* Personalized Recommendations */}
+                        {recommendations.length > 0 && (
+                          <div className="border-2 border-black p-4 mb-4">
+                            <h4 className="font-bold text-[#13294B] mb-2">Your Personalized Recommendations</h4>
+                            <ul className="space-y-3">
+                              {recommendations.map((rec, index) => (
+                                <li key={index} className="flex items-start">
+                                  <div className={`flex-shrink-0 mt-1 mr-2 ${rec.completed ? 'text-green-600' : rec.priority === 3 ? 'text-amber-600' : 'text-blue-600'}`}>
+                                    {rec.completed ? <CheckCircle2 className="h-5 w-5" /> : <AlertCircle className="h-5 w-5" />}
+                                  </div>
+                                  <div className="flex-grow">
+                                    <div className="flex justify-between items-center">
+                                      <span className="font-medium">{rec.title}</span>
+                                      {!rec.completed && (
+                                        <button 
+                                          className="text-xs border border-gray-300 bg-gray-50 px-2 py-1 rounded hover:bg-gray-100"
+                                          onClick={() => completeRecommendation(index)}
+                                        >
+                                          Mark done
+                                        </button>
+                                      )}
+                                    </div>
+                                    <p className="text-sm text-gray-600">{rec.description}</p>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
                         <div className="flex justify-center">
-                          <button className="neuro-button-primary min-h-[44px] min-w-[200px]">
-                            Get My Study Plan
-                          </button>
+                          <Link href="/study-strategies">
+                            <button className="neuro-button-primary min-h-[44px] min-w-[200px]">
+                              View Detailed Study Plan
+                            </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
