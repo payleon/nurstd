@@ -1,393 +1,369 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { useRoute, Link } from 'wouter';
+import { ChevronRight, BookOpen, Clock, ArrowLeft, CheckCircle, Circle } from 'lucide-react';
+import { LearningPath, LearningPathNode } from '@/lib/learning-path';
+import { getLearningPath, markNodeAsCompleted } from '@/api/learning-path';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { 
-  LearningPath, 
-  LearningPathNode, 
-  updateLearningPathProgress,
-  getNextRecommendedNode
-} from '@/lib/learning-path';
-import { 
-  Book, 
-  BookOpen, 
-  Calendar, 
-  CheckCircle, 
-  ChevronDown, 
-  ChevronUp, 
-  Clock, 
-  ExternalLink, 
-  SlidersHorizontal, 
-  Timer, 
-  Video, 
-  FileText, 
-  CircleSlash
-} from 'lucide-react';
 
 export function LearningPathView() {
-  const [_, navigate] = useLocation();
-  const [currentPath, setCurrentPath] = useState<LearningPath | null>(null);
-  const [expandedSections, setExpandedSections] = useState<string[]>([]);
-  const [recommendedNode, setRecommendedNode] = useState<LearningPathNode | null>(null);
+  const [_, params] = useRoute('/learning-path/:id');
+  const [learningPath, setLearningPath] = useState<LearningPath | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   
-  // Load learning path from localStorage
+  // Fetch the learning path
   useEffect(() => {
-    const loadLearningPath = () => {
+    async function fetchLearningPath() {
+      if (!params?.id) return;
+      
       try {
-        const currentPathId = localStorage.getItem('currentLearningPathId');
-        if (!currentPathId) {
-          return;
-        }
+        setIsLoading(true);
+        setError(null);
         
-        const storedPathsString = localStorage.getItem('learningPaths');
-        if (!storedPathsString) {
-          return;
-        }
+        const path = await getLearningPath(params.id);
+        setLearningPath(path);
         
-        const storedPaths = JSON.parse(storedPathsString);
-        const currentPath = storedPaths.find((path: LearningPath) => path.id === currentPathId);
-        
-        if (currentPath) {
-          // Convert the string date back to a Date object
-          currentPath.createdAt = new Date(currentPath.createdAt);
-          setCurrentPath(currentPath);
-          
-          // Find recommended node
-          const nextNode = getNextRecommendedNode(currentPath);
-          setRecommendedNode(nextNode);
-          
-          // If we have a recommended node, expand its section
-          if (nextNode) {
-            const section = currentPath.sections.find(section => 
-              section.nodes.some(node => node.id === nextNode.id)
-            );
-            if (section) {
-              setExpandedSections([section.id]);
-            }
-          }
+        // Set the first section as active by default
+        if (path.sections && path.sections.length > 0) {
+          setActiveSection(path.sections[0].id);
         }
       } catch (error) {
-        console.error('Error loading learning path:', error);
+        console.error('Error fetching learning path:', error);
+        setError((error as Error).message || 'Failed to load learning path');
+      } finally {
+        setIsLoading(false);
       }
-    };
+    }
     
-    loadLearningPath();
-  }, []);
+    fetchLearningPath();
+  }, [params?.id]);
   
-  // Toggle section expansion
-  const toggleSection = (sectionId: string) => {
-    setExpandedSections(prev => 
-      prev.includes(sectionId)
-        ? prev.filter(id => id !== sectionId)
-        : [...prev, sectionId]
-    );
-  };
-  
-  // Handle marking node as complete/incomplete
-  const handleToggleNodeCompletion = (nodeId: string, completed: boolean) => {
-    if (!currentPath) return;
+  // Handle marking a node as completed
+  const handleMarkCompleted = async (nodeId: string) => {
+    if (!learningPath) return;
     
-    // Update the path
-    const updatedPath = updateLearningPathProgress(currentPath, nodeId, completed);
-    setCurrentPath(updatedPath);
-    
-    // Update in localStorage
     try {
-      const storedPathsString = localStorage.getItem('learningPaths');
-      if (!storedPathsString) return;
+      // Call the API to mark the node as completed
+      await markNodeAsCompleted(learningPath.id, nodeId);
       
-      const storedPaths = JSON.parse(storedPathsString);
-      const updatedPaths = storedPaths.map((path: LearningPath) => 
-        path.id === updatedPath.id ? updatedPath : path
-      );
-      
-      localStorage.setItem('learningPaths', JSON.stringify(updatedPaths));
-      
-      // Update recommended node
-      const nextNode = getNextRecommendedNode(updatedPath);
-      setRecommendedNode(nextNode);
+      // Update the local state
+      setLearningPath(prevPath => {
+        if (!prevPath) return null;
+        
+        // Create a deep copy of the learning path
+        const updatedPath = { ...prevPath };
+        
+        // Update the node's completed status
+        updatedPath.sections = prevPath.sections.map(section => ({
+          ...section,
+          nodes: section.nodes.map(node => ({
+            ...node,
+            completed: node.id === nodeId ? true : node.completed,
+          })),
+        }));
+        
+        // Update the section completed status if all nodes are completed
+        updatedPath.sections = updatedPath.sections.map(section => ({
+          ...section,
+          completed: section.nodes.every(node => node.completed),
+        }));
+        
+        // Calculate overall progress
+        const totalNodes = updatedPath.sections.reduce(
+          (sum, section) => sum + section.nodes.length, 0
+        );
+        const completedNodes = updatedPath.sections.reduce(
+          (sum, section) => sum + section.nodes.filter(node => node.completed).length, 0
+        );
+        
+        updatedPath.progress = totalNodes > 0 
+          ? Math.round((completedNodes / totalNodes) * 100)
+          : 0;
+        
+        return updatedPath;
+      });
     } catch (error) {
-      console.error('Error updating learning path:', error);
+      console.error('Error marking node as completed:', error);
+      // You might want to show an error message to the user here
     }
   };
   
-  // Handle creating a new path
-  const handleCreateNew = () => {
-    navigate('/create-learning-path');
-  };
-  
-  // Helper to get appropriate icon for resource type
-  const getResourceTypeIcon = (resourceType: string) => {
-    switch (resourceType.toLowerCase()) {
-      case 'video':
-        return <Video className="h-3 w-3" />;
-      case 'article':
-        return <FileText className="h-3 w-3" />;
-      case 'interactive':
-        return <SlidersHorizontal className="h-3 w-3" />;
-      case 'quiz':
-        return <Book className="h-3 w-3" />;
-      case 'flashcard':
-        return <BookOpen className="h-3 w-3" />;
-      case 'practice':
-        return <Timer className="h-3 w-3" />;
+  // Format difficulty for display
+  const formatDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case 'beginner':
+        return <Badge variant="success">Beginner</Badge>;
+      case 'intermediate':
+        return <Badge variant="warning">Intermediate</Badge>;
+      case 'advanced':
+        return <Badge variant="destructive">Advanced</Badge>;
       default:
-        return <Book className="h-3 w-3" />;
+        return <Badge>{difficulty}</Badge>;
     }
   };
   
-  // Helper to calculate total time
-  const calculateTotalTime = () => {
-    if (!currentPath) return 0;
-    
-    return currentPath.sections.reduce((total, section) => {
-      return total + section.nodes.reduce((sectionTotal, node) => {
-        return sectionTotal + node.estimatedTime;
-      }, 0);
-    }, 0);
+  // Format resource type for display
+  const formatResourceType = (type: string) => {
+    switch (type) {
+      case 'video':
+        return <Badge variant="info">Video</Badge>;
+      case 'article':
+        return <Badge variant="secondary">Article</Badge>;
+      case 'quiz':
+        return <Badge variant="warning">Quiz</Badge>;
+      case 'interactive':
+        return <Badge variant="destructive">Interactive</Badge>;
+      case 'flashcard':
+        return <Badge variant="outline">Flashcards</Badge>;
+      case 'practice':
+        return <Badge variant="success">Practice</Badge>;
+      default:
+        return <Badge>{type}</Badge>;
+    }
   };
   
-  // If no learning path is found
-  if (!currentPath) {
+  // Get the active section
+  const getActiveSection = () => {
+    if (!learningPath || !activeSection) return null;
+    return learningPath.sections.find(section => section.id === activeSection) || null;
+  };
+  
+  if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-4 py-12">
-        <BookOpen className="h-16 w-16 text-gray-400" />
-        <h3 className="text-xl font-semibold text-[#13294B]">No Learning Path Found</h3>
-        <p className="text-gray-600 text-center max-w-md">
-          You haven't created a personalized learning path yet. Create one to get started with your NCLEX preparation.
-        </p>
-        <Button onClick={handleCreateNew} className="mt-4">
-          Create Learning Path
-        </Button>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full"></div>
       </div>
     );
   }
   
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 text-red-700 px-6 py-4 rounded">
+        <h3 className="font-bold mb-2">Error</h3>
+        <p>{error}</p>
+        <Link href="/create-learning-path">
+          <a className="text-blue-500 hover:underline mt-4 inline-block">
+            &larr; Back to Create Learning Path
+          </a>
+        </Link>
+      </div>
+    );
+  }
+  
+  if (!learningPath) {
+    return (
+      <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-6 py-4 rounded">
+        <h3 className="font-bold mb-2">Learning Path Not Found</h3>
+        <p>Unable to load the requested learning path.</p>
+        <Link href="/create-learning-path">
+          <a className="text-blue-500 hover:underline mt-4 inline-block">
+            &larr; Back to Create Learning Path
+          </a>
+        </Link>
+      </div>
+    );
+  }
+  
+  const activePathSection = getActiveSection();
+  
   return (
-    <div className="space-y-6">
-      {/* Summary card */}
-      <Card>
-        <CardHeader>
-          <div className="flex justify-between items-start">
-            <div>
-              <CardTitle className="text-2xl">{currentPath.title}</CardTitle>
-              <CardDescription className="mt-2">{currentPath.description}</CardDescription>
+    <div className="bg-white rounded-lg shadow-md">
+      {/* Header and overview */}
+      <div className="border-b p-6">
+        <div className="flex items-center mb-6">
+          <Link href="/learning-paths">
+            <a className="text-gray-600 hover:text-blue-600 flex items-center mr-4">
+              <ArrowLeft className="h-5 w-5 mr-1" />
+              <span>Back</span>
+            </a>
+          </Link>
+          <div className="flex-1">
+            <h1 className="text-2xl font-bold text-[#13294B]">{learningPath.title}</h1>
+            <div className="flex items-center mt-1 text-sm text-gray-500">
+              <div className="flex items-center mr-4">
+                <Clock className="h-4 w-4 mr-1" />
+                <span>{learningPath.timeCommitment} time commitment</span>
+              </div>
+              <div>{formatDifficulty(learningPath.difficulty)}</div>
             </div>
-            <Button variant="outline" onClick={handleCreateNew}>
-              Create New
-            </Button>
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {/* Progress bar */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Progress</span>
-                <span className="font-medium">{currentPath.progress}%</span>
-              </div>
-              <Progress value={currentPath.progress} className="h-2" />
+          <div className="text-lg font-bold text-[#4B9CD3]">
+            {learningPath.progress}% Complete
+          </div>
+        </div>
+        
+        <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
+          <h3 className="font-bold text-[#13294B] mb-2">Study Plan Overview</h3>
+          <p className="text-gray-700">{learningPath.description}</p>
+          {learningPath.overview && (
+            <div className="mt-3 text-gray-600">{learningPath.overview}</div>
+          )}
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-2">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+            <div className="text-sm text-gray-500 mb-1">Learning Style</div>
+            <div className="font-medium">
+              {learningPath.learningStyle.charAt(0).toUpperCase() + learningPath.learningStyle.slice(1)} Learner
             </div>
-            
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
-              <div className="bg-blue-50 p-4 rounded-lg flex items-center space-x-4">
-                <Calendar className="h-5 w-5 text-blue-600" />
-                <div>
-                  <p className="text-sm text-gray-600">Created</p>
-                  <p className="font-medium">{currentPath.createdAt.toLocaleDateString()}</p>
-                </div>
-              </div>
-              
-              <div className="bg-purple-50 p-4 rounded-lg flex items-center space-x-4">
-                <Clock className="h-5 w-5 text-purple-600" />
-                <div>
-                  <p className="text-sm text-gray-600">Est. Time</p>
-                  <p className="font-medium">{Math.round(calculateTotalTime() / 60)} hours</p>
-                </div>
-              </div>
-              
-              <div className="bg-green-50 p-4 rounded-lg flex items-center space-x-4">
-                <BookOpen className="h-5 w-5 text-green-600" />
-                <div>
-                  <p className="text-sm text-gray-600">Learning Style</p>
-                  <p className="font-medium capitalize">{currentPath.learningStyle}</p>
-                </div>
-              </div>
-              
-              <div className="bg-amber-50 p-4 rounded-lg flex items-center space-x-4">
-                <Timer className="h-5 w-5 text-amber-600" />
-                <div>
-                  <p className="text-sm text-gray-600">Time Commitment</p>
-                  <p className="font-medium capitalize">{currentPath.timeCommitment}</p>
-                </div>
-              </div>
+          </div>
+          
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+            <div className="text-sm text-gray-500 mb-1">Time Commitment</div>
+            <div className="font-medium">
+              {learningPath.timeCommitment.charAt(0).toUpperCase() + learningPath.timeCommitment.slice(1)}
             </div>
-            
-            {/* Next recommended study */}
-            {recommendedNode && (
-              <div className="mt-6 border border-blue-200 bg-blue-50 rounded-lg p-4">
-                <h3 className="font-semibold text-[#13294B] flex items-center">
-                  <CheckCircle className="h-5 w-5 text-blue-600 mr-2" />
-                  Recommended Next Step
-                </h3>
-                <div className="mt-2 p-3 bg-white rounded-md border border-blue-100">
-                  <div className="flex justify-between items-start">
-                    <h4 className="font-medium text-[#13294B]">{recommendedNode.title}</h4>
-                    <Badge variant="outline" className="flex items-center gap-1 ml-2">
-                      <Clock className="h-3 w-3" />
-                      <span>{recommendedNode.estimatedTime} min</span>
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-gray-600 mt-1">{recommendedNode.description}</p>
-                  
-                  <div className="flex justify-between items-center mt-3">
-                    <Badge variant="outline" className="flex items-center gap-1">
-                      {getResourceTypeIcon(recommendedNode.resourceType)}
-                      <span>{recommendedNode.resourceType.charAt(0).toUpperCase() + recommendedNode.resourceType.slice(1)}</span>
-                    </Badge>
-                    
-                    <div className="space-x-2">
-                      {recommendedNode.url && (
-                        <Button size="sm" variant="outline" asChild className="h-8">
-                          <a href={recommendedNode.url} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                            Access
-                            <ExternalLink className="h-3 w-3 ml-1" />
-                          </a>
-                        </Button>
+          </div>
+          
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+            <div className="text-sm text-gray-500 mb-1">Difficulty</div>
+            <div className="font-medium">
+              {learningPath.difficulty.charAt(0).toUpperCase() + learningPath.difficulty.slice(1)}
+            </div>
+          </div>
+          
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+            <div className="text-sm text-gray-500 mb-1">Focus Areas</div>
+            <div className="flex flex-wrap gap-1">
+              {learningPath.focusAreas.map((area, index) => (
+                <span key={index} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                  {area}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Learning path content */}
+      <div className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* Sidebar with sections */}
+          <div className="md:col-span-1">
+            <h3 className="font-semibold text-lg mb-3 text-[#13294B]">Study Sections</h3>
+            <div className="border rounded-lg overflow-hidden">
+              {learningPath.sections.map((section, index) => (
+                <div 
+                  key={section.id}
+                  className={`
+                    border-b last:border-b-0 py-3 px-4 cursor-pointer
+                    ${activeSection === section.id ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''}
+                    ${section.completed ? 'bg-green-50' : ''}
+                  `}
+                  onClick={() => setActiveSection(section.id)}
+                >
+                  <div className="flex items-center">
+                    <div className="mr-3 flex-shrink-0">
+                      {section.completed ? (
+                        <CheckCircle className="h-5 w-5 text-green-500" />
+                      ) : (
+                        <div className="flex items-center justify-center h-6 w-6 rounded-full bg-gray-200 text-gray-700 text-sm font-medium">
+                          {index + 1}
+                        </div>
                       )}
-                      
-                      <Button
-                        size="sm"
-                        onClick={() => handleToggleNodeCompletion(recommendedNode.id, true)}
-                        className="h-8 bg-green-600 hover:bg-green-700"
-                      >
-                        Mark Complete
-                      </Button>
                     </div>
+                    <div className="flex-1">
+                      <div className={`font-medium ${section.completed ? 'text-green-800' : ''}`}>
+                        {section.title}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {section.nodes.filter(n => n.completed).length}/{section.nodes.length} activities
+                      </div>
+                    </div>
+                    <ChevronRight className={`h-5 w-5 text-gray-400 ${activeSection === section.id ? 'transform rotate-90' : ''}`} />
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Main content */}
+          <div className="md:col-span-3">
+            {activePathSection ? (
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-bold text-[#13294B]">{activePathSection.title}</h2>
+                  <div className="text-sm text-gray-500">
+                    {activePathSection.nodes.filter(n => n.completed).length} of {activePathSection.nodes.length} completed
+                  </div>
+                </div>
+                
+                <p className="text-gray-700 mb-6">{activePathSection.description}</p>
+                
+                <div className="space-y-4">
+                  {activePathSection.nodes.map((node) => (
+                    <div 
+                      key={node.id} 
+                      className={`border rounded-lg p-4 transition-colors ${
+                        node.completed ? 'bg-green-50 border-green-200' : 'bg-white'
+                      }`}
+                    >
+                      <div className="flex items-start">
+                        <div className="mr-3 mt-1">
+                          {node.completed ? (
+                            <CheckCircle className="h-5 w-5 text-green-500" />
+                          ) : (
+                            <Circle className="h-5 w-5 text-gray-300" />
+                          )}
+                        </div>
+                        
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="font-bold text-lg">{node.title}</h3>
+                            <div className="flex items-center space-x-2">
+                              {formatResourceType(node.resourceType)}
+                              {formatDifficulty(node.difficulty)}
+                            </div>
+                          </div>
+                          
+                          <p className="text-gray-700 mb-3">{node.description}</p>
+                          
+                          <div className="flex flex-wrap items-center justify-between">
+                            <div className="flex items-center text-sm text-gray-500 mb-2 sm:mb-0">
+                              <Clock className="h-4 w-4 mr-1" />
+                              <span>Estimated time: {node.estimatedTime} minutes</span>
+                            </div>
+                            
+                            <div className="flex space-x-3">
+                              {node.url && (
+                                <a 
+                                  href={node.url} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:text-blue-800 flex items-center"
+                                >
+                                  <BookOpen className="h-4 w-4 mr-1" />
+                                  <span>Open Resource</span>
+                                </a>
+                              )}
+                              
+                              {!node.completed && (
+                                <button
+                                  onClick={() => handleMarkCompleted(node.id)}
+                                  className="text-green-600 hover:text-green-800 flex items-center"
+                                >
+                                  <CheckCircle className="h-4 w-4 mr-1" />
+                                  <span>Mark as Completed</span>
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 p-6 rounded-lg">
+                <h3 className="font-bold mb-2">No Section Selected</h3>
+                <p>Please select a section from the sidebar to view its content.</p>
               </div>
             )}
           </div>
-        </CardContent>
-      </Card>
-      
-      {/* Learning path content */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Learning Path Content</CardTitle>
-          <CardDescription>
-            Work through these sections to complete your personalized learning path
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {currentPath.sections.map((section) => (
-              <div key={section.id} className="border rounded-lg overflow-hidden">
-                <div 
-                  className="p-4 bg-gray-50 flex justify-between items-center cursor-pointer"
-                  onClick={() => toggleSection(section.id)}
-                >
-                  <div className="flex items-center gap-2">
-                    {section.completed ? (
-                      <CheckCircle className="h-5 w-5 text-green-600" />
-                    ) : (
-                      <BookOpen className="h-5 w-5 text-blue-600" />
-                    )}
-                    <h3 className="font-semibold text-[#13294B]">{section.title}</h3>
-                    <Badge 
-                      variant={section.completed ? "default" : "outline"} 
-                      className={`ml-2 ${section.completed ? "bg-green-100 text-green-800 hover:bg-green-100" : ""}`}
-                    >
-                      {section.nodes.filter(node => node.completed).length}/{section.nodes.length}
-                    </Badge>
-                  </div>
-                  {expandedSections.includes(section.id) ? (
-                    <ChevronUp className="h-5 w-5" />
-                  ) : (
-                    <ChevronDown className="h-5 w-5" />
-                  )}
-                </div>
-                
-                {expandedSections.includes(section.id) && (
-                  <div className="p-4 space-y-4">
-                    <p className="text-sm text-gray-600">{section.description}</p>
-                    
-                    <div className="space-y-3">
-                      {section.nodes.map((node) => (
-                        <div 
-                          key={node.id} 
-                          className={`border rounded-md p-3 ${
-                            node.completed ? 'bg-green-50 border-green-200' : 'bg-white'
-                          }`}
-                        >
-                          <div className="flex justify-between">
-                            <h4 className={`font-medium ${node.completed ? 'text-green-800' : 'text-[#13294B]'}`}>
-                              {node.title}
-                            </h4>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleToggleNodeCompletion(node.id, !node.completed)}
-                              className={`h-6 px-2 ${node.completed ? 'text-green-700' : 'text-gray-500'}`}
-                            >
-                              {node.completed ? (
-                                <span className="flex items-center">
-                                  <CheckCircle className="h-4 w-4 mr-1" />
-                                  Completed
-                                </span>
-                              ) : (
-                                <span className="flex items-center">
-                                  <CircleSlash className="h-4 w-4 mr-1" />
-                                  Mark Complete
-                                </span>
-                              )}
-                            </Button>
-                          </div>
-                          
-                          <p className="text-sm text-gray-600 mt-1">{node.description}</p>
-                          
-                          <div className="flex flex-wrap gap-2 mt-3">
-                            <Badge variant="outline" className="flex items-center gap-1">
-                              {getResourceTypeIcon(node.resourceType)}
-                              <span>{node.resourceType.charAt(0).toUpperCase() + node.resourceType.slice(1)}</span>
-                            </Badge>
-                            <Badge variant="outline" className="flex items-center gap-1">
-                              <Clock className="h-3 w-3" />
-                              <span>{node.estimatedTime} min</span>
-                            </Badge>
-                            <Badge variant={
-                              node.difficulty === 'beginner' ? 'default' : 
-                              node.difficulty === 'intermediate' ? 'secondary' : 
-                              'destructive'
-                            } className="flex items-center gap-1">
-                              {node.difficulty.charAt(0).toUpperCase() + node.difficulty.slice(1)}
-                            </Badge>
-                          </div>
-                          
-                          {node.url && (
-                            <div className="mt-3">
-                              <Button size="sm" variant="link" asChild className="h-6 px-0">
-                                <a href={node.url} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                                  Access Resource
-                                  <ExternalLink className="h-3 w-3 ml-1" />
-                                </a>
-                              </Button>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

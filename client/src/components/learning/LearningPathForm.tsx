@@ -1,328 +1,306 @@
 import React, { useState } from 'react';
-import { useLocation } from 'wouter';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { useNavigate } from 'wouter';
+import { Loader2 } from 'lucide-react';
 import { useStudyProgress } from '@/hooks/useStudyProgress';
-import { 
-  generateLearningPath, 
-  LearningPreferences, 
-  LearningStyle, 
-  TimeCommitment, 
-  DifficultyLevel
-} from '@/lib/learning-path';
-
-// Form validation schema
-const formSchema = z.object({
-  learningStyle: z.enum(['visual', 'auditory', 'reading', 'kinesthetic']),
-  timeCommitment: z.enum(['minimal', 'moderate', 'intensive']),
-  difficulty: z.enum(['beginner', 'intermediate', 'advanced']),
-  focusAreas: z.array(z.string()).min(1, "Select at least one focus area"),
-  excludedAreas: z.array(z.string()).optional(),
-  daysUntilExam: z.number().min(1).max(365).optional(),
-});
+import { generateLearningPath } from '@/api/learning-path';
+import { Badge } from '@/components/ui/badge';
 
 // Learning style options
-const learningStyleOptions = [
-  { value: 'visual', label: 'Visual', description: 'Learn best through images, videos, and visual aids' },
-  { value: 'auditory', label: 'Auditory', description: 'Learn best through listening and discussion' },
-  { value: 'reading', label: 'Reading/Writing', description: 'Learn best through reading and note-taking' },
-  { value: 'kinesthetic', label: 'Kinesthetic', description: 'Learn best through practice and hands-on activities' },
+const learningStyles = [
+  { value: 'visual', label: 'Visual', description: 'Prefer diagrams, videos, charts, and color-coded materials' },
+  { value: 'auditory', label: 'Auditory', description: 'Prefer listening to lectures, discussions, and verbal explanations' },
+  { value: 'reading', label: 'Reading', description: 'Prefer text-based resources, articles, and note-taking' },
+  { value: 'kinesthetic', label: 'Kinesthetic', description: 'Prefer hands-on activities, simulations, and practice scenarios' },
 ];
 
 // Time commitment options
-const timeCommitmentOptions = [
-  { value: 'minimal', label: 'Minimal (4 hrs/week)', description: 'For those with very limited study time' },
-  { value: 'moderate', label: 'Moderate (7 hrs/week)', description: 'Balanced approach to study' },
-  { value: 'intensive', label: 'Intensive (12+ hrs/week)', description: 'For dedicated, intensive study sessions' },
-];
-
-// Study area options
-const studyAreaOptions = [
-  { value: 'fundamentals', label: 'Nursing Fundamentals' },
-  { value: 'pharmacology', label: 'Pharmacology' },
-  { value: 'med-surg', label: 'Medical-Surgical' },
-  { value: 'pediatrics', label: 'Pediatrics' },
-  { value: 'obstetrics', label: 'Obstetrics' },
-  { value: 'psychiatric', label: 'Psychiatric' },
-  { value: 'prioritization', label: 'Prioritization & Delegation' },
-  { value: 'leadership', label: 'Leadership & Management' },
+const timeCommitments = [
+  { value: 'minimal', label: 'Minimal', description: '1-2 hours per week' },
+  { value: 'moderate', label: 'Moderate', description: '3-6 hours per week' },
+  { value: 'intensive', label: 'Intensive', description: '7+ hours per week' },
 ];
 
 // Difficulty level options
-const difficultyOptions = [
-  { value: 'beginner', label: 'Beginner', description: 'Foundational content for new learners' },
-  { value: 'intermediate', label: 'Intermediate', description: 'Standard difficulty for most students' },
-  { value: 'advanced', label: 'Advanced', description: 'Challenging content for experienced students' },
+const difficultyLevels = [
+  { value: 'beginner', label: 'Beginner', description: 'New to nursing or need a refresher' },
+  { value: 'intermediate', label: 'Intermediate', description: 'Comfortable with basic concepts, need targeted practice' },
+  { value: 'advanced', label: 'Advanced', description: 'Looking for challenging scenarios and complex problems' },
+];
+
+// Available study areas
+const studyAreas = [
+  { value: 'fundamentals', label: 'Fundamentals of Nursing' },
+  { value: 'med-surg', label: 'Medical-Surgical Nursing' },
+  { value: 'pediatrics', label: 'Pediatric Nursing' },
+  { value: 'maternal', label: 'Maternal-Newborn Nursing' },
+  { value: 'mental-health', label: 'Mental Health Nursing' },
+  { value: 'pharmacology', label: 'Pharmacology' },
+  { value: 'health-assessment', label: 'Health Assessment' },
+  { value: 'community', label: 'Community Health Nursing' },
+  { value: 'leadership', label: 'Leadership & Management' },
+  { value: 'critical-care', label: 'Critical Care Nursing' },
 ];
 
 export function LearningPathForm() {
-  const [selectedLearningStyle, setSelectedLearningStyle] = useState<LearningStyle | null>(null);
-  const [selectedTimeCommitment, setSelectedTimeCommitment] = useState<TimeCommitment | null>(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel | null>(null);
-  const [selectedFocusAreas, setSelectedFocusAreas] = useState<string[]>([]);
-  const [selectedExcludedAreas, setSelectedExcludedAreas] = useState<string[]>([]);
-  const [daysUntilExam, setDaysUntilExam] = useState<number | ''>('');
-  const [isGenerating, setIsGenerating] = useState(false);
+  const navigate = useNavigate();
+  const { getWeakAreas, getStrongAreas } = useStudyProgress();
   
-  const { studyAreas } = useStudyProgress();
-  const [_, navigate] = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Form state
+  const [learningStyle, setLearningStyle] = useState<string>('visual');
+  const [timeCommitment, setTimeCommitment] = useState<string>('moderate');
+  const [difficulty, setDifficulty] = useState<string>('intermediate');
+  const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
+  const [excludedAreas, setExcludedAreas] = useState<string[]>([]);
+  const [daysUntilExam, setDaysUntilExam] = useState<number | undefined>(undefined);
+  const [includeWeakAreas, setIncludeWeakAreas] = useState(true);
+  const [includeStrongAreas, setIncludeStrongAreas] = useState(false);
   
   // Handle form submission
-  const handleSubmit = () => {
-    if (!selectedLearningStyle || !selectedTimeCommitment || !selectedDifficulty || selectedFocusAreas.length === 0) {
-      return;
-    }
-    
-    setIsGenerating(true);
-    
-    // Create learning preferences object
-    const preferences: LearningPreferences = {
-      learningStyle: selectedLearningStyle,
-      timeCommitment: selectedTimeCommitment,
-      difficulty: selectedDifficulty,
-      focusAreas: selectedFocusAreas,
-      excludedAreas: selectedExcludedAreas.length > 0 ? selectedExcludedAreas : undefined,
-      daysUntilExam: daysUntilExam !== '' ? Number(daysUntilExam) : undefined,
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     
     try {
-      // Generate learning path
-      const learningPath = generateLearningPath(preferences, studyAreas);
+      setIsLoading(true);
+      setError(null);
       
-      // Store the learning path in localStorage
-      const existingPaths = JSON.parse(localStorage.getItem('learningPaths') || '[]');
-      localStorage.setItem('learningPaths', JSON.stringify([...existingPaths, learningPath]));
+      // Prepare the preferences object
+      const preferences = {
+        learningStyle: learningStyle as 'visual' | 'auditory' | 'reading' | 'kinesthetic',
+        timeCommitment: timeCommitment as 'minimal' | 'moderate' | 'intensive',
+        difficulty: difficulty as 'beginner' | 'intermediate' | 'advanced',
+        focusAreas: selectedAreas,
+        excludedAreas: excludedAreas.length > 0 ? excludedAreas : undefined,
+        daysUntilExam: daysUntilExam || undefined,
+        weakAreas: includeWeakAreas ? getWeakAreas() : undefined,
+        strongAreas: includeStrongAreas ? getStrongAreas() : undefined,
+      };
       
-      // Set current path ID
-      localStorage.setItem('currentLearningPathId', learningPath.id);
+      // Generate the learning path
+      const learningPath = await generateLearningPath(preferences);
       
-      // Navigate to learning path view
-      navigate('/learning-path');
+      // Navigate to the learning path view
+      navigate(`/learning-path/${learningPath.id}`);
     } catch (error) {
-      console.error('Error generating learning path:', error);
-      setIsGenerating(false);
+      console.error('Error creating learning path:', error);
+      setError((error as Error).message || 'Failed to create learning path');
+    } finally {
+      setIsLoading(false);
     }
   };
   
-  // Helper to determine if form is valid
-  const isFormValid = 
-    selectedLearningStyle !== null && 
-    selectedTimeCommitment !== null && 
-    selectedDifficulty !== null && 
-    selectedFocusAreas.length > 0;
-  
-  // Toggle focus area selection
-  const toggleFocusArea = (area: string) => {
-    if (selectedFocusAreas.includes(area)) {
-      setSelectedFocusAreas(selectedFocusAreas.filter(a => a !== area));
-      
-      // Remove from excluded if deselected from focus
-      if (selectedExcludedAreas.includes(area)) {
-        setSelectedExcludedAreas(selectedExcludedAreas.filter(a => a !== area));
-      }
+  // Toggle a study area in the selected areas list
+  const toggleArea = (area: string) => {
+    if (selectedAreas.includes(area)) {
+      setSelectedAreas(selectedAreas.filter(a => a !== area));
     } else {
-      setSelectedFocusAreas([...selectedFocusAreas, area]);
+      setSelectedAreas([...selectedAreas, area]);
     }
   };
   
-  // Toggle excluded area selection
+  // Toggle a study area in the excluded areas list
   const toggleExcludedArea = (area: string) => {
-    if (!selectedFocusAreas.includes(area)) {
-      return; // Can't exclude an area that's not selected
-    }
-    
-    if (selectedExcludedAreas.includes(area)) {
-      setSelectedExcludedAreas(selectedExcludedAreas.filter(a => a !== area));
+    if (excludedAreas.includes(area)) {
+      setExcludedAreas(excludedAreas.filter(a => a !== area));
     } else {
-      setSelectedExcludedAreas([...selectedExcludedAreas, area]);
+      setExcludedAreas([...excludedAreas, area]);
     }
   };
   
   return (
-    <div className="space-y-8">
-      {/* Learning Style Selection */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-[#13294B]">1. Your Learning Style</h2>
-        <p className="text-gray-600">Select how you prefer to learn new information</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {learningStyleOptions.map((style) => (
-            <div
-              key={style.value}
-              className={`border rounded-md p-4 cursor-pointer transition-colors ${
-                selectedLearningStyle === style.value
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 hover:border-blue-200'
-              }`}
-              onClick={() => setSelectedLearningStyle(style.value as LearningStyle)}
-            >
-              <h3 className="font-medium">{style.label}</h3>
-              <p className="text-sm text-gray-600 mt-1">{style.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="bg-white rounded-lg shadow-md p-6">
+      <h2 className="text-2xl font-bold mb-6 text-[#13294B]">Create Your Personalized Learning Path</h2>
       
-      {/* Time Commitment */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-[#13294B]">2. Your Time Commitment</h2>
-        <p className="text-gray-600">How much time can you dedicate to studying each week?</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {timeCommitmentOptions.map((option) => (
-            <div
-              key={option.value}
-              className={`border rounded-md p-4 cursor-pointer transition-colors ${
-                selectedTimeCommitment === option.value
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 hover:border-blue-200'
-              }`}
-              onClick={() => setSelectedTimeCommitment(option.value as TimeCommitment)}
-            >
-              <h3 className="font-medium">{option.label}</h3>
-              <p className="text-sm text-gray-600 mt-1">{option.description}</p>
-            </div>
-          ))}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
+          {error}
         </div>
-      </div>
+      )}
       
-      {/* Focus Areas */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-[#13294B]">3. Focus Areas</h2>
-        <p className="text-gray-600">Select the nursing areas you want to focus on</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {studyAreaOptions.map((area) => {
-            const isSelected = selectedFocusAreas.includes(area.value);
-            const isExcluded = isSelected && selectedExcludedAreas.includes(area.value);
-            
-            return (
-              <div
-                key={area.value}
-                className={`border rounded-md p-4 transition-colors ${
-                  isSelected
-                    ? isExcluded
-                      ? 'border-yellow-400 bg-yellow-50'
-                      : 'border-blue-500 bg-blue-50'
-                    : 'border-gray-200 hover:border-blue-200'
+      <form onSubmit={handleSubmit}>
+        {/* Learning Style Selection */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3">How do you learn best?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {learningStyles.map(style => (
+              <div 
+                key={style.value}
+                className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                  learningStyle === style.value ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
                 }`}
+                onClick={() => setLearningStyle(style.value)}
               >
-                <div className="flex justify-between">
-                  <h3 className="font-medium">{area.label}</h3>
-                  
-                  <div className="space-x-2">
-                    <button
-                      type="button"
-                      className={`px-2 py-1 text-xs rounded-md ${
-                        isSelected
-                          ? 'bg-blue-500 text-white hover:bg-blue-600'
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                      }`}
-                      onClick={() => toggleFocusArea(area.value)}
-                    >
-                      {isSelected ? 'Selected' : 'Select'}
-                    </button>
-                    
-                    {isSelected && (
-                      <button
-                        type="button"
-                        className={`px-2 py-1 text-xs rounded-md ${
-                          isExcluded
-                            ? 'bg-yellow-400 text-white hover:bg-yellow-500'
-                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                        }`}
-                        onClick={() => toggleExcludedArea(area.value)}
-                      >
-                        {isExcluded ? 'Low Priority' : 'Normal'}
-                      </button>
-                    )}
-                  </div>
-                </div>
-                
-                {studyAreas[area.value] && (
-                  <div className="mt-2 text-sm">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Confidence:</span>
-                      <span className={`px-2 py-0.5 rounded text-xs ${
-                        studyAreas[area.value].confidenceLevel === 1 ? 'bg-red-100 text-red-700' :
-                        studyAreas[area.value].confidenceLevel === 2 ? 'bg-yellow-100 text-yellow-700' :
-                        studyAreas[area.value].confidenceLevel === 3 ? 'bg-green-100 text-green-700' :
-                        'bg-gray-100 text-gray-700'
-                      }`}>
-                        {studyAreas[area.value].confidenceLevel === 1 ? 'Low' :
-                         studyAreas[area.value].confidenceLevel === 2 ? 'Medium' :
-                         studyAreas[area.value].confidenceLevel === 3 ? 'High' : 'Not Rated'}
-                      </span>
-                    </div>
-                  </div>
-                )}
+                <div className="font-medium mb-1">{style.label}</div>
+                <div className="text-sm text-gray-600">{style.description}</div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
         
-        {selectedFocusAreas.length === 0 && (
-          <p className="text-red-500 text-sm">Please select at least one focus area</p>
-        )}
-      </div>
-      
-      {/* Difficulty Level */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-[#13294B]">4. Difficulty Level</h2>
-        <p className="text-gray-600">Select the overall difficulty level for your learning path</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {difficultyOptions.map((option) => (
-            <div
-              key={option.value}
-              className={`border rounded-md p-4 cursor-pointer transition-colors ${
-                selectedDifficulty === option.value
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 hover:border-blue-200'
-              }`}
-              onClick={() => setSelectedDifficulty(option.value as DifficultyLevel)}
-            >
-              <h3 className="font-medium">{option.label}</h3>
-              <p className="text-sm text-gray-600 mt-1">{option.description}</p>
-            </div>
-          ))}
+        {/* Time Commitment */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3">How much time can you commit weekly?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {timeCommitments.map(time => (
+              <div 
+                key={time.value}
+                className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                  timeCommitment === time.value ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                }`}
+                onClick={() => setTimeCommitment(time.value)}
+              >
+                <div className="font-medium mb-1">{time.label}</div>
+                <div className="text-sm text-gray-600">{time.description}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      
-      {/* Days Until Exam (Optional) */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-[#13294B]">5. Days Until Your Exam (Optional)</h2>
-        <p className="text-gray-600">Enter the number of days until your exam to better pace your learning</p>
         
-        <div className="max-w-xs">
-          <input
-            type="number"
+        {/* Difficulty Level */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3">What difficulty level would you prefer?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {difficultyLevels.map(level => (
+              <div 
+                key={level.value}
+                className={`border rounded-lg p-4 cursor-pointer transition-colors ${
+                  difficulty === level.value ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                }`}
+                onClick={() => setDifficulty(level.value)}
+              >
+                <div className="font-medium mb-1">{level.label}</div>
+                <div className="text-sm text-gray-600">{level.description}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Focus Areas */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3">Which areas would you like to focus on?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {studyAreas.map(area => (
+              <div 
+                key={area.value}
+                className={`border rounded-lg p-3 cursor-pointer transition-colors flex items-center ${
+                  selectedAreas.includes(area.value) ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                }`}
+                onClick={() => toggleArea(area.value)}
+              >
+                <input 
+                  type="checkbox" 
+                  checked={selectedAreas.includes(area.value)} 
+                  onChange={() => toggleArea(area.value)}
+                  className="mr-3 h-5 w-5 text-blue-600"
+                />
+                <span>{area.label}</span>
+              </div>
+            ))}
+          </div>
+          {selectedAreas.length === 0 && (
+            <p className="text-sm text-amber-600 mt-2">
+              Please select at least one focus area
+            </p>
+          )}
+        </div>
+        
+        {/* Areas to Exclude */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3">Any areas you'd like to exclude?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {studyAreas.map(area => (
+              <div 
+                key={area.value}
+                className={`border rounded-lg p-3 cursor-pointer transition-colors flex items-center ${
+                  excludedAreas.includes(area.value) ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                } ${selectedAreas.includes(area.value) ? 'opacity-50 pointer-events-none' : ''}`}
+                onClick={() => toggleExcludedArea(area.value)}
+              >
+                <input 
+                  type="checkbox" 
+                  checked={excludedAreas.includes(area.value)} 
+                  onChange={() => toggleExcludedArea(area.value)}
+                  disabled={selectedAreas.includes(area.value)}
+                  className="mr-3 h-5 w-5 text-red-500"
+                />
+                <span className={selectedAreas.includes(area.value) ? 'line-through' : ''}>{area.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Days Until Exam */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3">Days until your exam (optional)</h3>
+          <input 
+            type="number" 
             min="1"
             max="365"
-            value={daysUntilExam}
-            onChange={(e) => setDaysUntilExam(e.target.value === '' ? '' : Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Number of days (optional)"
+            value={daysUntilExam || ''}
+            onChange={(e) => setDaysUntilExam(e.target.value ? parseInt(e.target.value) : undefined)}
+            placeholder="Enter number of days"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
           />
+          <p className="text-sm text-gray-500 mt-2">
+            Providing this helps us optimize your study schedule
+          </p>
         </div>
-      </div>
-      
-      {/* Submit Button */}
-      <div className="pt-4">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          disabled={!isFormValid || isGenerating}
-          className={`px-6 py-3 rounded-md text-white font-medium ${
-            isFormValid && !isGenerating
-              ? 'bg-blue-600 hover:bg-blue-700'
-              : 'bg-gray-400 cursor-not-allowed'
-          }`}
-        >
-          {isGenerating ? 'Generating...' : 'Create Learning Path'}
-        </button>
-      </div>
+        
+        {/* Include Study Performance */}
+        <div className="mb-6">
+          <h3 className="text-lg font-semibold mb-3">Include your study performance?</h3>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center">
+              <input 
+                type="checkbox" 
+                id="include-weak-areas"
+                checked={includeWeakAreas}
+                onChange={() => setIncludeWeakAreas(!includeWeakAreas)}
+                className="mr-3 h-5 w-5 text-blue-600"
+              />
+              <label htmlFor="include-weak-areas" className="cursor-pointer">
+                Include my weak areas in the recommendations
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input 
+                type="checkbox" 
+                id="include-strong-areas"
+                checked={includeStrongAreas}
+                onChange={() => setIncludeStrongAreas(!includeStrongAreas)}
+                className="mr-3 h-5 w-5 text-blue-600"
+              />
+              <label htmlFor="include-strong-areas" className="cursor-pointer">
+                Include my strong areas in the recommendations
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        {/* Submit Button */}
+        <div className="mt-8">
+          <button
+            type="submit"
+            disabled={isLoading || selectedAreas.length === 0}
+            className={`w-full py-3 rounded-lg font-medium text-white flex items-center justify-center
+              ${isLoading || selectedAreas.length === 0 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-[#4B9CD3] hover:bg-[#3d7eaa]'
+              }`}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="animate-spin mr-2 h-5 w-5" />
+                Generating your learning path...
+              </>
+            ) : (
+              'Create My Learning Path'
+            )}
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
