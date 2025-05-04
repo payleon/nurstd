@@ -27,7 +27,7 @@ export async function getLearningPath(id: string): Promise<LearningPath> {
 /**
  * Creates a new personalized learning path based on user preferences
  */
-export async function createLearningPath(
+export async function generateLearningPath(
   preferences: LearningPathPreferences
 ): Promise<CreateLearningPathResponse> {
   const response = await apiRequest('POST', '/api/learning-paths', preferences);

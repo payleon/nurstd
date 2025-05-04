@@ -448,9 +448,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Mount learning path API routes
-  app.use('/api/learning-path', learningPathRouter);
-
   // Mount the learning path router
   app.use('/api', learningPathRouter);
 
