@@ -1,206 +1,247 @@
 import { useState, useEffect } from 'react';
 
-interface StudyArea {
-  name: string;
-  confidenceLevel: number;
-  questionsAttempted: number;
-  questionsCorrect: number;
-  recommendedFocus: boolean;
+// Define confidence levels
+export type ConfidenceLevel = 1 | 2 | 3; // 1 = Low, 2 = Medium, 3 = High
+
+// Define study area structure
+export interface StudyArea {
+  confidenceLevel: ConfidenceLevel;
+  strengthScore: number; // 0-100
+  lastUpdated: Date;
+  recentActivity: {
+    correct: number;
+    incorrect: number;
+    totalAnswered: number;
+  };
 }
 
-interface StudyProgress {
-  studyAreas: Record<string, StudyArea>;
-  lastActivity: string;
-  updateConfidence: (area: string, level: number) => void;
-  updateQuestionStats: (area: string, isCorrect: boolean) => void;
-  toggleRecommendedFocus: (area: string) => void;
-}
-
-// Define study areas
-const DEFAULT_AREAS = [
-  'Med-Surg',
-  'Pediatrics',
-  'OB/Maternal',
-  'Psychiatric',
-  'Pharmacology',
-  'Fundamentals',
-  'Leadership'
-];
-
-// Get initial state from localStorage or use defaults
-function getInitialState(): { 
-  studyAreas: Record<string, StudyArea>, 
-  lastActivity: string 
-} {
-  // Check if localStorage is available
-  if (typeof window === 'undefined' || !window.localStorage) {
-    return createDefaultState();
-  }
-  
-  try {
-    const stored = localStorage.getItem('nclexStudyProgress');
-    
-    if (stored) {
-      return JSON.parse(stored);
+// Default study areas to track
+const DEFAULT_STUDY_AREAS: Record<string, StudyArea> = {
+  'fundamentals': {
+    confidenceLevel: 2,
+    strengthScore: 65,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
     }
-  } catch (error) {
-    console.error('Error reading from localStorage:', error);
+  },
+  'pharmacology': {
+    confidenceLevel: 2,
+    strengthScore: 60,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
+    }
+  },
+  'med-surg': {
+    confidenceLevel: 2,
+    strengthScore: 70,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
+    }
+  },
+  'pediatrics': {
+    confidenceLevel: 2,
+    strengthScore: 60,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
+    }
+  },
+  'obstetrics': {
+    confidenceLevel: 2,
+    strengthScore: 55,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
+    }
+  },
+  'psychiatric': {
+    confidenceLevel: 2,
+    strengthScore: 65,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
+    }
+  },
+  'prioritization': {
+    confidenceLevel: 2,
+    strengthScore: 60,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
+    }
+  },
+  'leadership': {
+    confidenceLevel: 2,
+    strengthScore: 50,
+    lastUpdated: new Date(),
+    recentActivity: {
+      correct: 0,
+      incorrect: 0,
+      totalAnswered: 0
+    }
   }
-  
-  return createDefaultState();
-}
+};
 
-// Create default state
-function createDefaultState(): { 
-  studyAreas: Record<string, StudyArea>, 
-  lastActivity: string 
-} {
-  const studyAreas: Record<string, StudyArea> = {};
-  
-  DEFAULT_AREAS.forEach(area => {
-    studyAreas[area] = {
-      name: area,
-      confidenceLevel: 2, // Medium confidence by default
-      questionsAttempted: 0,
-      questionsCorrect: 0,
-      recommendedFocus: false
-    };
-  });
-  
+export function useStudyProgress() {
+  const [studyAreas, setStudyAreas] = useState<Record<string, StudyArea>>(DEFAULT_STUDY_AREAS);
+
+  // Load study progress from localStorage on initial render
+  useEffect(() => {
+    const storedProgress = localStorage.getItem('studyProgress');
+    if (storedProgress) {
+      try {
+        const parsedProgress = JSON.parse(storedProgress);
+        
+        // Convert string dates back to Date objects
+        Object.values(parsedProgress).forEach((area: StudyArea) => {
+          area.lastUpdated = new Date(area.lastUpdated);
+        });
+        
+        setStudyAreas(parsedProgress);
+      } catch (error) {
+        console.error('Error parsing stored study progress:', error);
+      }
+    }
+  }, []);
+
+  // Update a specific study area's confidence level
+  const updateConfidence = (area: string, confidenceLevel: ConfidenceLevel) => {
+    if (!studyAreas[area]) return;
+    
+    setStudyAreas(prev => {
+      const updated = {
+        ...prev,
+        [area]: {
+          ...prev[area],
+          confidenceLevel,
+          lastUpdated: new Date()
+        }
+      };
+      
+      // Save to localStorage
+      localStorage.setItem('studyProgress', JSON.stringify(updated));
+      
+      return updated;
+    });
+  };
+
+  // Update a study area based on question results
+  const updateStudyAreaProgress = (
+    area: string, 
+    correct: boolean, 
+    totalQuestions: number = 1
+  ) => {
+    if (!studyAreas[area]) return;
+    
+    setStudyAreas(prev => {
+      // Calculate new recent activity stats
+      const recentActivity = {
+        correct: prev[area].recentActivity.correct + (correct ? 1 : 0),
+        incorrect: prev[area].recentActivity.incorrect + (correct ? 0 : 1),
+        totalAnswered: prev[area].recentActivity.totalAnswered + 1
+      };
+      
+      // Adjust strength score based on performance
+      // Correct answers increase score, incorrect answers decrease it
+      const scoreAdjustment = correct ? (5 / totalQuestions) : (-3 / totalQuestions);
+      let newStrengthScore = prev[area].strengthScore + scoreAdjustment;
+      
+      // Keep score within bounds
+      newStrengthScore = Math.max(0, Math.min(100, newStrengthScore));
+      
+      // Determine confidence level based on strength score
+      let confidenceLevel = prev[area].confidenceLevel;
+      
+      // Only update confidence if there's significant activity (5+ questions)
+      if (recentActivity.totalAnswered >= 5) {
+        if (newStrengthScore < 40) {
+          confidenceLevel = 1;
+        } else if (newStrengthScore > 75) {
+          confidenceLevel = 3;
+        } else {
+          confidenceLevel = 2;
+        }
+      }
+      
+      const updated = {
+        ...prev,
+        [area]: {
+          ...prev[area],
+          strengthScore: newStrengthScore,
+          confidenceLevel,
+          lastUpdated: new Date(),
+          recentActivity
+        }
+      };
+      
+      // Save to localStorage
+      localStorage.setItem('studyProgress', JSON.stringify(updated));
+      
+      return updated;
+    });
+  };
+
+  // Identify weak areas that need focus
+  const getWeakAreas = (): string[] => {
+    return Object.entries(studyAreas)
+      .filter(([_, area]) => area.confidenceLevel === 1)
+      .map(([name]) => name);
+  };
+
+  // Identify strong areas
+  const getStrongAreas = (): string[] => {
+    return Object.entries(studyAreas)
+      .filter(([_, area]) => area.confidenceLevel === 3)
+      .map(([name]) => name);
+  };
+
+  // Reset recent activity for all areas
+  const resetRecentActivity = () => {
+    setStudyAreas(prev => {
+      const updated = { ...prev };
+      
+      Object.keys(updated).forEach(area => {
+        updated[area] = {
+          ...updated[area],
+          recentActivity: {
+            correct: 0,
+            incorrect: 0,
+            totalAnswered: 0
+          },
+          lastUpdated: new Date()
+        };
+      });
+      
+      // Save to localStorage
+      localStorage.setItem('studyProgress', JSON.stringify(updated));
+      
+      return updated;
+    });
+  };
+
   return {
     studyAreas,
-    lastActivity: new Date().toISOString()
-  };
-}
-
-export function useStudyProgress(): StudyProgress {
-  const [studyState, setStudyState] = useState<{
-    studyAreas: Record<string, StudyArea>;
-    lastActivity: string;
-  }>(getInitialState);
-  
-  // Persist state changes to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('nclexStudyProgress', JSON.stringify(studyState));
-    } catch (error) {
-      console.error('Error writing to localStorage:', error);
-    }
-  }, [studyState]);
-  
-  // Update confidence level for a study area
-  const updateConfidence = (area: string, level: number) => {
-    setStudyState(prev => {
-      // If area doesn't exist, create it
-      if (!prev.studyAreas[area]) {
-        prev.studyAreas[area] = {
-          name: area,
-          confidenceLevel: 2,
-          questionsAttempted: 0,
-          questionsCorrect: 0,
-          recommendedFocus: false
-        };
-      }
-      
-      // Create a new object to trigger state update
-      const newStudyAreas = {
-        ...prev.studyAreas,
-        [area]: {
-          ...prev.studyAreas[area],
-          confidenceLevel: level,
-          // Automatically set as recommended focus if confidence is low
-          recommendedFocus: level === 1 ? true : prev.studyAreas[area].recommendedFocus
-        }
-      };
-      
-      return {
-        studyAreas: newStudyAreas,
-        lastActivity: new Date().toISOString()
-      };
-    });
-  };
-  
-  // Update question stats for a study area
-  const updateQuestionStats = (area: string, isCorrect: boolean) => {
-    setStudyState(prev => {
-      // If area doesn't exist, create it
-      if (!prev.studyAreas[area]) {
-        prev.studyAreas[area] = {
-          name: area,
-          confidenceLevel: 2,
-          questionsAttempted: 0,
-          questionsCorrect: 0,
-          recommendedFocus: false
-        };
-      }
-      
-      const currentArea = prev.studyAreas[area];
-      const newQuestionStats = {
-        questionsAttempted: currentArea.questionsAttempted + 1,
-        questionsCorrect: isCorrect 
-          ? currentArea.questionsCorrect + 1 
-          : currentArea.questionsCorrect
-      };
-      
-      // Calculate correct rate
-      const correctRate = newQuestionStats.questionsCorrect / newQuestionStats.questionsAttempted;
-      
-      // Automatically update confidence based on performance
-      let newConfidence = currentArea.confidenceLevel;
-      if (newQuestionStats.questionsAttempted >= 10) {
-        if (correctRate >= 0.8) {
-          newConfidence = 3; // High confidence
-        } else if (correctRate <= 0.5) {
-          newConfidence = 1; // Low confidence
-        } else {
-          newConfidence = 2; // Medium confidence
-        }
-      }
-      
-      // Create a new object to trigger state update
-      const newStudyAreas = {
-        ...prev.studyAreas,
-        [area]: {
-          ...prev.studyAreas[area],
-          ...newQuestionStats,
-          confidenceLevel: newConfidence,
-          // Automatically set as recommended focus if correct rate is low
-          recommendedFocus: correctRate <= 0.5 ? true : prev.studyAreas[area].recommendedFocus
-        }
-      };
-      
-      return {
-        studyAreas: newStudyAreas,
-        lastActivity: new Date().toISOString()
-      };
-    });
-  };
-  
-  // Toggle recommended focus for a study area
-  const toggleRecommendedFocus = (area: string) => {
-    setStudyState(prev => {
-      if (!prev.studyAreas[area]) return prev;
-      
-      const newStudyAreas = {
-        ...prev.studyAreas,
-        [area]: {
-          ...prev.studyAreas[area],
-          recommendedFocus: !prev.studyAreas[area].recommendedFocus
-        }
-      };
-      
-      return {
-        studyAreas: newStudyAreas,
-        lastActivity: new Date().toISOString()
-      };
-    });
-  };
-  
-  return {
-    studyAreas: studyState.studyAreas,
-    lastActivity: studyState.lastActivity,
     updateConfidence,
-    updateQuestionStats,
-    toggleRecommendedFocus
+    updateStudyAreaProgress,
+    getWeakAreas,
+    getStrongAreas,
+    resetRecentActivity
   };
 }
