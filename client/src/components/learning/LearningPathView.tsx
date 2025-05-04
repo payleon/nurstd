@@ -280,10 +280,11 @@ export function LearningPathView() {
       <div className="bg-red-50 border border-red-200 text-red-700 p-6 rounded-lg text-center max-w-lg mx-auto">
         <h2 className="text-xl font-bold mb-2">Error Loading Learning Path</h2>
         <p className="mb-4">{error}</p>
-        <Link href="/learning-paths">
-          <a className="text-blue-600 hover:text-blue-800 font-medium">
-            Back to All Learning Paths
-          </a>
+        <Link 
+          href="/learning-paths" 
+          className="text-blue-600 hover:text-blue-800 font-medium"
+        >
+          Back to All Learning Paths
         </Link>
       </div>
     );
@@ -295,10 +296,11 @@ export function LearningPathView() {
       <div className="bg-blue-50 border border-blue-200 text-blue-700 p-6 rounded-lg text-center max-w-lg mx-auto">
         <h2 className="text-xl font-bold mb-2">Learning Path Not Found</h2>
         <p className="mb-4">The learning path you're looking for doesn't exist or has been removed.</p>
-        <Link href="/learning-paths">
-          <a className="text-blue-600 hover:text-blue-800 font-medium">
-            Back to All Learning Paths
-          </a>
+        <Link 
+          href="/learning-paths" 
+          className="text-blue-600 hover:text-blue-800 font-medium"
+        >
+          Back to All Learning Paths
         </Link>
       </div>
     );
@@ -308,11 +310,12 @@ export function LearningPathView() {
     <div>
       {/* Header with navigation */}
       <div className="mb-6">
-        <Link href="/learning-paths">
-          <a className="text-gray-600 hover:text-blue-600 flex items-center mb-4">
-            <ArrowLeft className="h-5 w-5 mr-1" />
-            <span>Back to Learning Paths</span>
-          </a>
+        <Link 
+          href="/learning-paths" 
+          className="text-gray-600 hover:text-blue-600 flex items-center mb-4"
+        >
+          <ArrowLeft className="h-5 w-5 mr-1" />
+          <span>Back to Learning Paths</span>
         </Link>
         
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
