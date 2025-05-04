@@ -24,7 +24,7 @@ import { LearningPath, LearningPathNode } from '@/lib/learning-path';
 import { Badge } from '@/components/ui/badge';
 
 // Local Link component that works with wouter
-const Link = ({ href, children }: { href: string; children: React.ReactNode }) => {
+const Link = ({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) => {
   const [_, setLocation] = useLocation();
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -32,9 +32,12 @@ const Link = ({ href, children }: { href: string; children: React.ReactNode }) =
   };
   
   return (
-    <a href={href} onClick={handleClick}>
+    <span 
+      className={`cursor-pointer ${className}`} 
+      onClick={handleClick}
+    >
       {children}
-    </a>
+    </span>
   );
 };
 
