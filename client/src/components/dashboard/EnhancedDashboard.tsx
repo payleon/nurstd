@@ -25,6 +25,9 @@ import {
   TimerOff,
   Bell,
   AlertCircle,
+  ChevronDown,
+  ChevronUp,
+  Info,
   Lightbulb,
   Divide,
   FileQuestion,
@@ -35,6 +38,7 @@ import {
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Badge as UIBadge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { LearningProgressChart } from "@/components/progress/LearningProgressChart";
@@ -202,6 +206,11 @@ export function EnhancedDashboard({
     questionsCorrect: providedStats.questionsCorrect !== undefined ? providedStats.questionsCorrect : sampleUserStats.questionsCorrect
   };
   
+  // Add state for interactive features
+  const [expandedActivity, setExpandedActivity] = useState<number | null>(null);
+  const [focusedCategory, setFocusedCategory] = useState<string | null>(null);
+  const [showTips, setShowTips] = useState(false);
+  
   // State for active tabs and panels
   const [activeMainTab, setActiveMainTab] = useState<string>('overview');
   
@@ -252,6 +261,49 @@ export function EnhancedDashboard({
 
   return (
     <div className="space-y-6">
+      {/* Quick Study Tips Alert */}
+      {showTips && (
+        <Alert className="bg-blue-50 border-blue-100 mb-4">
+          <AlertCircle className="h-4 w-4 text-blue-500" />
+          <AlertTitle className="text-blue-700">Study Tips</AlertTitle>
+          <AlertDescription className="text-blue-600">
+            <ul className="list-disc pl-5 pt-2 space-y-1 text-sm">
+              <li>Focus on understanding concepts rather than memorizing facts</li>
+              <li>Take regular breaks - 50 minutes of study followed by a 10-minute break works well</li>
+              <li>Review your incorrect answers to understand why you got them wrong</li>
+              <li>Use SATA questions to build critical thinking skills</li>
+              <li>Study in a distraction-free environment for maximum concentration</li>
+            </ul>
+            <div className="flex justify-end mt-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-7 text-xs" 
+                onClick={() => setShowTips(false)}
+              >
+                <X className="h-3 w-3 mr-1" />
+                Close Tips
+              </Button>
+            </div>
+          </AlertDescription>
+        </Alert>
+      )}
+      
+      {/* Study Tips Button (when tips are hidden) */}
+      {!showTips && (
+        <div className="flex justify-end">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="h-7 text-xs border-blue-200 text-blue-700 hover:bg-blue-50" 
+            onClick={() => setShowTips(true)}
+          >
+            <Lightbulb className="h-3 w-3 mr-1 text-amber-500" />
+            Show Study Tips
+          </Button>
+        </div>
+      )}
+      
       {/* Key Metrics Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
@@ -350,17 +402,50 @@ export function EnhancedDashboard({
                 <CardContent>
                   <div className="space-y-4">
                     {userStats.masteryLevels.map((item, index) => (
-                      <div key={index}>
+                      <div 
+                        key={index} 
+                        className={`${focusedCategory === item.category ? 'bg-gray-50 p-3 rounded-md border border-gray-200' : ''}`}
+                        onMouseEnter={() => setFocusedCategory(item.category)}
+                        onMouseLeave={() => setFocusedCategory(null)}
+                      >
                         <div className="flex justify-between mb-1">
                           <span className="text-sm font-medium">{item.category}</span>
                           <span className="text-sm font-medium">{item.progress}%</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
-                            className={`${item.color} h-2 rounded-full`} 
-                            style={{ width: `${item.progress}%` }}
+                            className={`${item.color} h-2 rounded-full transition-all duration-300 ease-in-out`} 
+                            style={{ width: `${focusedCategory === item.category ? Math.min(100, item.progress + 5) : item.progress}%` }}
                           ></div>
                         </div>
+                        
+                        {focusedCategory === item.category && (
+                          <div className="mt-2 text-xs">
+                            <div className="flex justify-between text-gray-500 mb-1">
+                              <span>Questions attempted:</span>
+                              <span className="font-medium">{(userStats.questionsAnswered * (item.progress / 100)).toFixed(0)}</span>
+                            </div>
+                            <div className="flex justify-between text-gray-500">
+                              <span>Learning score:</span>
+                              <span className={`font-medium ${
+                                item.progress >= 80 ? 'text-emerald-600' : 
+                                item.progress >= 60 ? 'text-amber-600' : 
+                                'text-red-600'
+                              }`}>
+                                {item.progress >= 80 ? 'Advanced' : 
+                                 item.progress >= 60 ? 'Intermediate' : 
+                                 'Beginner'}
+                              </span>
+                            </div>
+                            
+                            <Button 
+                              size="sm" 
+                              className="w-full mt-2 h-7 text-xs bg-blue-600 text-white hover:bg-blue-700"
+                            >
+                              Focus on {item.category}
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -388,12 +473,76 @@ export function EnhancedDashboard({
                 <CardContent>
                   <div className="space-y-3">
                     {userStats.recentActivity.map((activity, index) => (
-                      <div key={index} className="flex items-start border-b border-gray-100 pb-2 last:border-b-0">
+                      <div 
+                        key={index} 
+                        className={`flex items-start border-b border-gray-100 pb-2 last:border-b-0 
+                                    ${expandedActivity === index ? 'bg-blue-50 rounded p-2 -m-2' : ''}
+                                    hover:bg-gray-50 cursor-pointer transition-colors duration-150`}
+                        onClick={() => setExpandedActivity(expandedActivity === index ? null : index)}
+                      >
                         <div className="flex-shrink-0 mt-1">{activity.icon}</div>
-                        <div className="ml-2">
-                          <p className="text-sm font-medium">{activity.activity}</p>
+                        <div className="ml-2 flex-1">
+                          <div className="flex justify-between items-center">
+                            <p className="text-sm font-medium">{activity.activity}</p>
+                            {expandedActivity === index ? (
+                              <ChevronUp className="h-4 w-4 text-gray-400" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4 text-gray-400" />
+                            )}
+                          </div>
                           <p className="text-xs text-gray-500">{activity.details}</p>
                           <p className="text-xs text-gray-400">{activity.date}</p>
+                          
+                          {expandedActivity === index && (
+                            <div className="mt-2 text-sm bg-white p-2 rounded border border-blue-100">
+                              <div className="flex items-center mb-1">
+                                <Info className="h-3 w-3 text-blue-500 mr-1" />
+                                <span className="text-blue-600 text-xs font-medium">Activity Details</span>
+                              </div>
+                              {activity.activity === "Completed Test" && (
+                                <>
+                                  <p className="text-xs text-gray-600 mb-1">You've made significant progress in this area!</p>
+                                  <div className="flex justify-between text-xs">
+                                    <span>Accuracy:</span>
+                                    <span className="font-medium text-green-600">75%</span>
+                                  </div>
+                                  <Button size="sm" variant="outline" className="mt-2 text-xs h-7 w-full">Review Test</Button>
+                                </>
+                              )}
+                              
+                              {activity.activity === "Practice Session" && (
+                                <>
+                                  <p className="text-xs text-gray-600 mb-1">Focus on pharmacology is improving your knowledge</p>
+                                  <div className="flex justify-between text-xs">
+                                    <span>Questions:</span>
+                                    <span className="font-medium">24</span>
+                                  </div>
+                                  <Button size="sm" variant="outline" className="mt-2 text-xs h-7 w-full">Continue Practice</Button>
+                                </>
+                              )}
+                              
+                              {activity.activity === "Earned Badge" && (
+                                <>
+                                  <p className="text-xs text-gray-600 mb-1">Congratulations on your achievement!</p>
+                                  <div className="text-center my-1">
+                                    <Trophy className="h-5 w-5 text-amber-500 mx-auto" />
+                                  </div>
+                                  <Button size="sm" variant="outline" className="mt-1 text-xs h-7 w-full">View Badges</Button>
+                                </>
+                              )}
+                              
+                              {activity.activity === "Study Session" && (
+                                <>
+                                  <p className="text-xs text-gray-600 mb-1">Your dedicated study time is paying off</p>
+                                  <div className="flex justify-between text-xs">
+                                    <span>Focus level:</span>
+                                    <span className="font-medium text-green-600">High</span>
+                                  </div>
+                                  <Button size="sm" variant="outline" className="mt-2 text-xs h-7 w-full">Session Stats</Button>
+                                </>
+                              )}
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
