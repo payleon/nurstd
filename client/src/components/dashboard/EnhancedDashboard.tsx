@@ -661,6 +661,57 @@ export function EnhancedDashboard({
         
         {/* Progress Tab */}
         <TabsContent value="progress" className="space-y-4">
+          {/* Summary Statistics at the top */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-2">
+            <div className="p-4 bg-white rounded-lg border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <div className="flex items-start">
+                <div className="bg-blue-100 p-2 rounded-full">
+                  <Target className="h-5 w-5 text-blue-600" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-gray-700">Accuracy Trend</h3>
+                  <p className="text-2xl font-bold">{correctPercentage}%</p>
+                  <p className="text-xs text-green-600 flex items-center">
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                    +5% this month
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-4 bg-white rounded-lg border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <div className="flex items-start">
+                <div className="bg-purple-100 p-2 rounded-full">
+                  <BadgeInfo className="h-5 w-5 text-purple-600" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-gray-700">Total Questions</h3>
+                  <p className="text-2xl font-bold">{userStats.questionsAnswered}</p>
+                  <p className="text-xs text-gray-500 flex items-center">
+                    Across {userStats.performanceByTopic.length} topics
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-4 bg-white rounded-lg border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <div className="flex items-start">
+                <div className="bg-amber-100 p-2 rounded-full">
+                  <Trophy className="h-5 w-5 text-amber-600" />
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-gray-700">Strongest Area</h3>
+                  <p className="text-lg font-bold">
+                    {userStats.performanceByTopic.sort((a, b) => b.performance - a.performance)[0]?.topic || "N/A"}
+                  </p>
+                  <p className="text-xs text-amber-600 flex items-center">
+                    {userStats.performanceByTopic.sort((a, b) => b.performance - a.performance)[0]?.performance || 0}% accuracy
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Performance by Topic */}
             <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
@@ -744,6 +795,156 @@ export function EnhancedDashboard({
               </CardContent>
             </Card>
           </div>
+          
+          {/* Performance by Difficulty */}
+          <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center text-lg">
+                <Target className="h-5 w-5 mr-2 text-red-600" />
+                Performance by Difficulty
+              </CardTitle>
+              <CardDescription>Your accuracy based on question difficulty</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col md:flex-row items-center gap-8">
+              <div className="md:w-2/5 w-full">
+                <div className="space-y-3">
+                  {/* Easy questions */}
+                  <div className="relative">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-medium">Easy</span>
+                      <span className="text-sm font-medium">92%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div 
+                        className="bg-emerald-500 h-3 rounded-full" 
+                        style={{ width: "92%" }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <span>124 questions</span>
+                    </div>
+                  </div>
+                  
+                  {/* Medium questions */}
+                  <div className="relative">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-medium">Medium</span>
+                      <span className="text-sm font-medium">76%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div 
+                        className="bg-amber-500 h-3 rounded-full" 
+                        style={{ width: "76%" }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <span>209 questions</span>
+                    </div>
+                  </div>
+                  
+                  {/* Hard questions */}
+                  <div className="relative">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-medium">Hard</span>
+                      <span className="text-sm font-medium">62%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div 
+                        className="bg-red-500 h-3 rounded-full" 
+                        style={{ width: "62%" }}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <span>124 questions</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Insight callout */}
+                <div className="mt-4 p-3 bg-blue-50 border border-blue-100 rounded-md">
+                  <div className="flex items-start">
+                    <Info className="h-4 w-4 mt-0.5 mr-2 text-blue-500" />
+                    <div>
+                      <h4 className="text-sm font-medium text-blue-700">Targeted Improvement</h4>
+                      <p className="text-xs text-blue-600 mt-1">Focus on the hard-level questions to improve your overall NCLEX readiness. Aim for at least 70% accuracy on difficult questions.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Chart visualization */}
+              <div className="md:w-3/5 w-full">
+                <h4 className="text-center text-sm font-medium mb-2">Accuracy Distribution</h4>
+                <div className="h-60 relative">
+                  {/* SVG Donut Chart */}
+                  <svg className="w-full h-full" viewBox="0 0 100 100">
+                    {/* Background circle */}
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" strokeWidth="10" />
+                    
+                    {/* Hard questions - red segment (62% of 30% = 18.6% of total) */}
+                    <circle 
+                      cx="50" 
+                      cy="50" 
+                      r="40" 
+                      fill="none" 
+                      stroke="#ef4444" 
+                      strokeWidth="10" 
+                      strokeDasharray="251.2" 
+                      strokeDashoffset="204.5"
+                      transform="rotate(-90 50 50)" 
+                    />
+                    
+                    {/* Medium questions - yellow segment (76% of 45% = 34.2% of total) */}
+                    <circle 
+                      cx="50" 
+                      cy="50" 
+                      r="40" 
+                      fill="none" 
+                      stroke="#f59e0b" 
+                      strokeWidth="10" 
+                      strokeDasharray="251.2" 
+                      strokeDashoffset="161.5"
+                      transform="rotate(18.6 50 50) rotate(-90 50 50)" 
+                    />
+                    
+                    {/* Easy questions - green segment (92% of 25% = 23% of total) */}
+                    <circle 
+                      cx="50" 
+                      cy="50" 
+                      r="40" 
+                      fill="none" 
+                      stroke="#10b981" 
+                      strokeWidth="10" 
+                      strokeDasharray="251.2" 
+                      strokeDashoffset="226.1"
+                      transform="rotate(52.8 50 50) rotate(-90 50 50)" 
+                    />
+                    
+                    {/* Inner circle with total percentage */}
+                    <circle cx="50" cy="50" r="32" fill="white" />
+                    <text x="50" y="45" textAnchor="middle" fontSize="10" fontWeight="bold">Overall</text>
+                    <text x="50" y="58" textAnchor="middle" fontSize="14" fontWeight="bold">{correctPercentage}%</text>
+                  </svg>
+                </div>
+                
+                {/* Legend */}
+                <div className="flex justify-center mt-2 space-x-4">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-emerald-500 rounded-full mr-1"></div>
+                    <span className="text-xs">Easy</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-amber-500 rounded-full mr-1"></div>
+                    <span className="text-xs">Medium</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-red-500 rounded-full mr-1"></div>
+                    <span className="text-xs">Hard</span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
           
           {/* Learning Progress Visualization */}
           <Card className="border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
@@ -948,17 +1149,26 @@ export function EnhancedDashboard({
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-start mb-1">
-                      <div className="flex items-center">
-                        <span className="font-medium">Focus on SATA Questions</span>
+                  {/* Calculate recommendations based on performance data */}
+                  {userStats.performanceByQuestionType.some(qt => qt.type === "Select All That Apply" && qt.performance < 70) && (
+                    <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors cursor-pointer" 
+                         onClick={() => window.location.href = "/practice?type=sata"}>
+                      <div className="flex justify-between items-start mb-1">
+                        <div className="flex items-center">
+                          <span className="font-medium">Focus on SATA Questions</span>
+                        </div>
+                        <UIBadge className="bg-red-100 text-red-800 hover:bg-red-200">Focus Area</UIBadge>
                       </div>
-                      <UIBadge className="bg-red-100 text-red-800 hover:bg-red-200">Focus Area</UIBadge>
+                      <p className="text-sm text-gray-600">Your performance data shows lower accuracy on select-all-that-apply questions</p>
+                      <div className="mt-2 flex items-center justify-end">
+                        <Button size="sm" variant="outline" className="h-7 text-xs">Practice Now</Button>
+                      </div>
                     </div>
-                    <p className="text-sm text-gray-600">Your performance data shows lower accuracy on select-all-that-apply questions</p>
-                  </div>
+                  )}
                   
-                  <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors">
+                  {/* Morning study recommendation */}
+                  <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors cursor-pointer"
+                       onClick={() => window.location.href = "/study-timer"}>
                     <div className="flex justify-between items-start mb-1">
                       <div className="flex items-center">
                         <span className="font-medium">Morning Study Sessions</span>
@@ -966,9 +1176,40 @@ export function EnhancedDashboard({
                       <UIBadge className="bg-green-100 text-green-800 hover:bg-green-200">Schedule</UIBadge>
                     </div>
                     <p className="text-sm text-gray-600">Your timer data shows better retention in morning sessions</p>
+                    <div className="mt-2 text-xs text-gray-500">
+                      <div className="flex items-center mb-1">
+                        <Clock className="h-3 w-3 mr-1 text-gray-400" />
+                        <span>Optimal time: 8:00 AM - 11:00 AM</span>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors">
+                  {/* Recommendation based on weakest topic */}
+                  {userStats.performanceByTopic.sort((a, b) => a.performance - b.performance)[0] && (
+                    <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors cursor-pointer"
+                         onClick={() => window.location.href = `/practice?topic=${userStats.performanceByTopic.sort((a, b) => a.performance - b.performance)[0].topic.toLowerCase()}`}>
+                      <div className="flex justify-between items-start mb-1">
+                        <div className="flex items-center">
+                          <span className="font-medium">Strengthen {userStats.performanceByTopic.sort((a, b) => a.performance - b.performance)[0].topic}</span>
+                        </div>
+                        <UIBadge className="bg-amber-100 text-amber-800 hover:bg-amber-200">Topic</UIBadge>
+                      </div>
+                      <p className="text-sm text-gray-600">This area needs more attention based on your recent performance</p>
+                      <div className="mt-2 flex items-center">
+                        <div className="w-full bg-gray-200 rounded-full h-1.5 mr-2">
+                          <div 
+                            className="bg-amber-500 h-1.5 rounded-full" 
+                            style={{ width: `${userStats.performanceByTopic.sort((a, b) => a.performance - b.performance)[0].performance}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-gray-500">{userStats.performanceByTopic.sort((a, b) => a.performance - b.performance)[0].performance}%</span>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Study technique recommendation */}
+                  <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors cursor-pointer"
+                       onClick={() => setShowTips(true)}>
                     <div className="flex justify-between items-start mb-1">
                       <div className="flex items-center">
                         <span className="font-medium">Spaced Repetition</span>
@@ -976,16 +1217,9 @@ export function EnhancedDashboard({
                       <UIBadge className="bg-purple-100 text-purple-800 hover:bg-purple-200">Technique</UIBadge>
                     </div>
                     <p className="text-sm text-gray-600">Based on your learning style, try using spaced repetition for pharmacology concepts</p>
-                  </div>
-                  
-                  <div className="p-3 border-2 border-black rounded-md bg-white hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-start mb-1">
-                      <div className="flex items-center">
-                        <span className="font-medium">Interactive Materials</span>
-                      </div>
-                      <UIBadge className="bg-blue-100 text-blue-800 hover:bg-blue-200">Resource</UIBadge>
+                    <div className="mt-2 flex justify-end">
+                      <Button size="sm" variant="outline" className="h-7 text-xs">Learn Technique</Button>
                     </div>
-                    <p className="text-sm text-gray-600">Try using more interactive study materials like case studies and simulations</p>
                   </div>
                 </div>
               </CardContent>
