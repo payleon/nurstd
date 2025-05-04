@@ -118,6 +118,58 @@ export function StudyStrategyPlanner() {
     difficultyLevel: 'intermediate',
     studyName: 'My NCLEX Study Plan'
   });
+  
+  // Predefined study plan templates
+  const studyPlanTemplates = [
+    {
+      name: "2-Week Intensive",
+      description: "Designed for students with 2 weeks or less before their exam",
+      preferences: {
+        timeCommitment: 'intensive',
+        daysUntilExam: 14,
+        difficultyLevel: 'advanced'
+      }
+    },
+    {
+      name: "1-Month Balanced",
+      description: "Balanced approach for students with approximately 1 month before exam",
+      preferences: {
+        timeCommitment: 'moderate',
+        daysUntilExam: 30,
+        difficultyLevel: 'intermediate'
+      }
+    },
+    {
+      name: "3-Month Gradual",
+      description: "Long-term study strategy with progressive intensity",
+      preferences: {
+        timeCommitment: 'minimal',
+        daysUntilExam: 90,
+        difficultyLevel: 'beginner'
+      }
+    },
+    {
+      name: "Focused Remediation",
+      description: "For retakers who need targeted improvement in specific areas",
+      preferences: {
+        timeCommitment: 'intensive',
+        daysUntilExam: 21,
+        difficultyLevel: 'advanced'
+      }
+    }
+  ];
+  
+  // Apply a template to preferences
+  const applyTemplate = (templateIndex: number) => {
+    const template = studyPlanTemplates[templateIndex];
+    setPreferences({
+      ...preferences,
+      timeCommitment: template.preferences.timeCommitment as TimeCommitment,
+      daysUntilExam: template.preferences.daysUntilExam,
+      difficultyLevel: template.preferences.difficultyLevel as DifficultyLevel,
+      studyName: `${template.name} Study Plan`
+    });
+  };
 
   // Saved plans
   const [savedPlans, setSavedPlans] = useState<SavedPlan[]>([]);
@@ -628,6 +680,24 @@ export function StudyStrategyPlanner() {
     }
   };
   
+  // Update goal progress
+  const updateGoalProgress = (goalId: string, progress: number) => {
+    // Update local state
+    setStructuredGoals(structuredGoals.map(goal => 
+      goal.id === goalId ? {...goal, progress: Math.min(100, Math.max(0, progress))} : goal
+    ));
+    
+    // Update current plan if exists
+    if (currentPlan && currentPlan.structuredGoals) {
+      setCurrentPlan({
+        ...currentPlan,
+        structuredGoals: currentPlan.structuredGoals.map(goal => 
+          goal.id === goalId ? {...goal, progress: Math.min(100, Math.max(0, progress))} : goal
+        )
+      });
+    }
+  };
+  
   // Delete a structured goal
   const deleteStructuredGoal = (goalId: string) => {
     // Update local state
@@ -695,6 +765,40 @@ export function StudyStrategyPlanner() {
     };
     
     setSavedPlans([...savedPlans, savedPlan]);
+    
+    // Show success notification
+    alert("Study plan saved successfully!");
+  };
+  
+  // Export the current plan as JSON
+  const handleExportPlan = () => {
+    const plan = generateStudyPlan();
+    
+    // Create exportable data
+    const exportData = {
+      name: plan.name,
+      createdAt: plan.createdAt,
+      preferences,
+      focusAreas: plan.focusAreas,
+      weeklyGoals: plan.weeklyGoals,
+      customGoals: plan.customGoals,
+      structuredGoals: plan.structuredGoals,
+      weekSchedule: plan.weekSchedule
+    };
+    
+    // Convert to JSON and create download link
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", `${plan.name.replace(/\s+/g, '-').toLowerCase()}_study_plan.json`);
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  };
+  
+  // Export the current plan as PDF (in a real app, this would use a PDF generation library)
+  const handlePrintPlan = () => {
+    window.print();
   };
   
   // Helper to get category label and icon
@@ -754,6 +858,21 @@ export function StudyStrategyPlanner() {
         <CardDescription>
           Answer a few questions to get a customized NCLEX preparation plan
         </CardDescription>
+        <div className="mt-2">
+          <div className="text-sm font-medium mb-2">Or select a template to start with:</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {studyPlanTemplates.map((template, index) => (
+              <button
+                key={index}
+                onClick={() => applyTemplate(index)}
+                className="p-2 text-left border-2 border-black rounded-md hover:bg-blue-50 transition-colors"
+              >
+                <div className="font-medium">{template.name}</div>
+                <div className="text-xs text-gray-500">{template.description}</div>
+              </button>
+            ))}
+          </div>
+        </div>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Learning Style Selection */}
@@ -1275,6 +1394,38 @@ export function StudyStrategyPlanner() {
                                 <Trash2 className="h-4 w-4" />
                               </button>
                             </div>
+                            
+                            {/* Progress tracking bar */}
+                            {!goal.isCompleted && typeof goal.progress === 'number' && (
+                              <div className="pl-6 mb-2">
+                                <div className="flex justify-between items-center text-xs mb-1">
+                                  <span>Progress: {goal.progress}%</span>
+                                  <div className="flex space-x-1">
+                                    <button 
+                                      onClick={() => updateGoalProgress(goal.id, (goal.progress || 0) - 10)}
+                                      className="text-gray-500 hover:text-blue-600"
+                                      aria-label="Decrease progress"
+                                    >
+                                      -
+                                    </button>
+                                    <button
+                                      onClick={() => updateGoalProgress(goal.id, (goal.progress || 0) + 10)}
+                                      className="text-gray-500 hover:text-blue-600"
+                                      aria-label="Increase progress"
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                </div>
+                                <div className="w-full bg-gray-200 h-2 rounded">
+                                  <div 
+                                    className="bg-blue-500 h-2 rounded" 
+                                    style={{ width: `${goal.progress}%` }}
+                                  ></div>
+                                </div>
+                              </div>
+                            )}
+                            
                             <div className="flex justify-between items-center pl-6">
                               <div className="flex items-center space-x-2">
                                 <div className="flex items-center">
@@ -1760,15 +1911,29 @@ export function StudyStrategyPlanner() {
             </CardContent>
           </Card>
           
-          {/* Save and Print Buttons */}
-          <div className="flex justify-center gap-4">
+          {/* Save, Export and Print Buttons */}
+          <div className="flex justify-center gap-3 flex-wrap">
             <Button 
               variant="outline"
               onClick={() => handleSavePlan()}
+              className="flex items-center"
             >
+              <Save className="mr-2 h-4 w-4" />
               Save Plan
             </Button>
-            <Button>
+            <Button
+              variant="outline"
+              onClick={() => handleExportPlan()}
+              className="flex items-center"
+            >
+              <FileQuestion className="mr-2 h-4 w-4" />
+              Export as JSON
+            </Button>
+            <Button
+              onClick={() => handlePrintPlan()}
+              className="flex items-center"
+            >
+              <Pencil className="mr-2 h-4 w-4" />
               Print Study Plan
             </Button>
           </div>
