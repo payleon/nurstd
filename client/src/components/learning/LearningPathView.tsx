@@ -22,6 +22,7 @@ import {
 import { getLearningPath, completePathNode } from '@/api/learning-path';
 import { LearningPath, LearningPathNode } from '@/lib/learning-path';
 import { Badge } from '@/components/ui/badge';
+import { LearningNodeModal } from './LearningNodeModal';
 
 // Local Link component that works with wouter
 const Link = ({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) => {
@@ -71,17 +72,22 @@ const LearningPathNodeCard = ({
   node, 
   onComplete, 
   isCompleting,
+  onNodeClick
 }: { 
   node: LearningPathNode; 
   onComplete: () => void;
   isCompleting: boolean;
+  onNodeClick: () => void;
 }) => {
   const ResourceIcon = resourceIcons[node.resourceType] || BookOpen;
   
   return (
-    <div className={`border rounded-lg overflow-hidden mb-4 shadow-sm hover:shadow-md transition-shadow ${
-      node.completed ? 'bg-gray-50 border-gray-300' : 'bg-white border-gray-200'
-    }`}>
+    <div 
+      className={`border rounded-lg overflow-hidden mb-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer ${
+        node.completed ? 'bg-gray-50 border-gray-300' : 'bg-white border-gray-200'
+      }`}
+      onClick={onNodeClick}
+    >
       <div className="p-5">
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -114,7 +120,25 @@ const LearningPathNodeCard = ({
             </p>
             
             <div className="flex flex-wrap items-center gap-3 mt-4">
-              {/* Main action button to open the resource */}
+              {/* Main action button to view content */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onNodeClick();
+                }}
+                className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                View {node.resourceType === 'video' ? 'Video' : 
+                     node.resourceType === 'article' ? 'Article' : 
+                     node.resourceType === 'quiz' ? 'Quiz' : 
+                     node.resourceType === 'interactive' ? 'Case Study' :
+                     node.resourceType === 'flashcard' ? 'Flashcards' :
+                     node.resourceType === 'practice' ? 'Practice' :
+                     'Content'}
+              </button>
+              
+              {/* External link if available */}
               {node.url && (
                 <a 
                   href={node.url} 
@@ -122,22 +146,21 @@ const LearningPathNodeCard = ({
                   rel="noopener noreferrer"
                   onClick={(e) => {
                     e.stopPropagation();
-                    // Open URL in a new tab
                     window.open(node.url, '_blank', 'noopener,noreferrer');
                   }}
-                  className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
+                  className="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium"
                 >
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  Open {node.resourceType === 'video' ? 'Video' : 
-                       node.resourceType === 'article' ? 'Article' : 
-                       node.resourceType === 'quiz' ? 'Quiz' : 
-                       'Resource'}
+                  <ExternalLink className="h-4 w-4 mr-1" />
+                  External Source
                 </a>
               )}
               
               {/* Secondary action to mark complete */}
               <button
-                onClick={onComplete}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onComplete();
+                }}
                 disabled={node.completed || isCompleting}
                 className={`
                   inline-flex items-center text-sm font-medium px-3 py-2 rounded-md
@@ -182,6 +205,7 @@ export function LearningPathView() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [completingNodeId, setCompletingNodeId] = useState<string | null>(null);
+  const [selectedNode, setSelectedNode] = useState<LearningPathNode | null>(null);
   
   // Fetch the learning path data
   useEffect(() => {
@@ -319,6 +343,14 @@ export function LearningPathView() {
   
   return (
     <div>
+      {/* Learning content modal */}
+      {selectedNode && (
+        <LearningNodeModal 
+          node={selectedNode} 
+          onClose={() => setSelectedNode(null)} 
+        />
+      )}
+      
       {/* Header with navigation */}
       <div className="mb-6">
         <Link 
@@ -427,6 +459,7 @@ export function LearningPathView() {
                   node={node}
                   onComplete={() => handleCompleteNode(node.id)}
                   isCompleting={completingNodeId === node.id}
+                  onNodeClick={() => setSelectedNode(node)}
                 />
               ))}
             </div>
