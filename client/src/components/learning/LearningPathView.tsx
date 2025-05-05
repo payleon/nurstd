@@ -16,10 +16,10 @@ import {
   Zap,
   PenTool,
   ExternalLink,
-  CheckIcon
+  CheckIcon,
+  Loader2
 } from 'lucide-react';
 import { NursingLoadingIndicator } from '@/components/ui/NursingLoadingIndicator';
-} from 'lucide-react';
 import { getLearningPath, completePathNode } from '@/api/learning-path';
 import { LearningPath, LearningPathNode } from '@/lib/learning-path';
 import { Badge } from '@/components/ui/badge';
