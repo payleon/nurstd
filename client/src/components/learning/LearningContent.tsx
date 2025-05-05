@@ -867,7 +867,10 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
             </button>
           </div>
         </div>
-      ) : reviewMode ? (
+      )}
+    </div>
+  );
+};
         <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-lg font-semibold">Question Review</h3>
