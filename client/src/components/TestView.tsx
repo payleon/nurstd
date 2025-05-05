@@ -9,6 +9,7 @@ import { fetchTestContent } from "@/lib/api";
 import { FlashcardReview } from "./FlashcardReview";
 import { QuestionTestView } from "./QuestionTestView";
 import { toast } from "@/hooks/use-toast";
+import { NursingLoadingIndicator } from "@/components/ui/NursingLoadingIndicator";
 
 interface TestViewProps {
   test: Test;
@@ -186,9 +187,16 @@ export function TestView({ test, onBack }: TestViewProps) {
             {/* Exam Content */}
             <div className="p-6 border-b border-gray-200">
               {isLoading ? (
-                <div>
-                  <Skeleton className="h-8 w-1/2 mb-4" />
-                  <Skeleton className="h-96 w-full" />
+                <div className="flex flex-col items-center justify-center py-12">
+                  <NursingLoadingIndicator 
+                    type="medical-spinner" 
+                    size="lg" 
+                    message="Loading test content..." 
+                    showProgress={true}
+                    progress={65}
+                    color="#4B9CD3"
+                  />
+                  <p className="mt-4 text-gray-600">Please wait while we prepare your practice exam materials</p>
                 </div>
               ) : (
                 <>

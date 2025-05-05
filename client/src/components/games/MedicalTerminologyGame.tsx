@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ListRestart, CheckCircle2, Award, XCircle, Heart, Timer, BookOpen, Shuffle, Brain, ArrowRight } from 'lucide-react';
 import { MedicalSpinner } from '@/components/ui/medical-spinner';
+import { NursingLoadingIndicator } from '@/components/ui/NursingLoadingIndicator';
 
 interface MedicalTerminologyGameProps {
   onComplete?: (score: number) => void;
@@ -394,8 +395,17 @@ export function MedicalTerminologyGame({ onComplete, onClose }: MedicalTerminolo
   if (isLoading) {
     return (
       <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center min-h-[600px]">
-        <MedicalSpinner size="lg" type="stethoscope" />
-        <p className="mt-4 text-lg text-center text-gray-700">Loading Medical Terminology Game...</p>
+        <NursingLoadingIndicator 
+          type="brain" 
+          size="lg" 
+          message="Loading Medical Terminology Game..." 
+          showProgress={true}
+          progress={75}
+          color="#4B9CD3"
+        />
+        <p className="mt-4 text-center text-gray-600">
+          Preparing medical terms and definitions for your learning session
+        </p>
       </div>
     );
   }
