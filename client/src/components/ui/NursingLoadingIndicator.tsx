@@ -167,7 +167,7 @@ export function NursingLoadingIndicator({
           style={{ color }}
         >
           <path
-            className="ekg-line"
+            className="ekg-line animate-ekg"
             d="M 0,12 
                L 8,12 
                L 10,4 
@@ -233,7 +233,6 @@ export function NursingLoadingIndicator({
             strokeLinejoin="round"
             strokeDasharray="240"
             strokeDashoffset="240"
-            className="animate-ekg"
           />
         </svg>
       </div>

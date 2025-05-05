@@ -16,8 +16,9 @@ import {
   Zap,
   PenTool,
   ExternalLink,
-  Loader2,
   CheckIcon
+} from 'lucide-react';
+import { NursingLoadingIndicator } from '@/components/ui/NursingLoadingIndicator';
 } from 'lucide-react';
 import { getLearningPath, completePathNode } from '@/api/learning-path';
 import { LearningPath, LearningPathNode } from '@/lib/learning-path';
@@ -302,8 +303,13 @@ export function LearningPathView() {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
         <div className="flex flex-col items-center">
-          <Loader2 className="h-8 w-8 text-blue-600 animate-spin mb-2" />
-          <p className="text-gray-600">Loading learning path...</p>
+          <NursingLoadingIndicator 
+            type="medical-spinner" 
+            size="md" 
+            message="Loading learning path..." 
+            showProgress={false}
+            color="#4B9CD3"
+          />
         </div>
       </div>
     );
