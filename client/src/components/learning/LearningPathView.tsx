@@ -79,10 +79,10 @@ const LearningPathNodeCard = ({
   const ResourceIcon = resourceIcons[node.resourceType] || BookOpen;
   
   return (
-    <div className={`border rounded-lg overflow-hidden mb-4 ${
+    <div className={`border rounded-lg overflow-hidden mb-4 shadow-sm hover:shadow-md transition-shadow ${
       node.completed ? 'bg-gray-50 border-gray-300' : 'bg-white border-gray-200'
     }`}>
-      <div className="p-4">
+      <div className="p-5">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center mb-2">
@@ -113,28 +113,39 @@ const LearningPathNodeCard = ({
               {node.description}
             </p>
             
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-3 mt-4">
+              {/* Main action button to open the resource */}
               {node.url && (
                 <a 
                   href={node.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Open URL in a new tab
+                    window.open(node.url, '_blank', 'noopener,noreferrer');
+                  }}
+                  className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
                 >
-                  Open Resource <ExternalLink className="h-4 w-4 ml-1" />
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Open {node.resourceType === 'video' ? 'Video' : 
+                       node.resourceType === 'article' ? 'Article' : 
+                       node.resourceType === 'quiz' ? 'Quiz' : 
+                       'Resource'}
                 </a>
               )}
               
+              {/* Secondary action to mark complete */}
               <button
                 onClick={onComplete}
                 disabled={node.completed || isCompleting}
                 className={`
-                  inline-flex items-center text-sm font-medium px-3 py-1 rounded-md
+                  inline-flex items-center text-sm font-medium px-3 py-2 rounded-md
                   ${node.completed 
                     ? 'bg-green-100 text-green-800 cursor-default' 
                     : isCompleting 
                       ? 'bg-gray-100 text-gray-500 cursor-wait'
-                      : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                   }
                 `}
               >
