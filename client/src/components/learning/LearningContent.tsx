@@ -447,7 +447,7 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
   const [selectedAnswers, setSelectedAnswers] = useState<{[key: number]: number}>({});
   const [showResults, setShowResults] = useState(false);
   
-  // Generate sample quiz questions based on node title/description
+  // Quiz questions for the node topic
   const questions = [
     {
       question: `Which of the following best describes a key principle of ${node.title}?`,
@@ -457,7 +457,8 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
         'Delegating all care responsibilities to support staff',
         'Documenting only when adverse events occur'
       ],
-      correctAnswer: 1
+      correctAnswer: 1,
+      rationale: "Prioritizing patient needs based on assessment data is a fundamental nursing principle."
     },
     {
       question: 'Which nursing action demonstrates appropriate clinical judgment?',
@@ -467,7 +468,8 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
         'Assessing the patient\'s response to interventions and adjusting care accordingly',
         'Documenting findings without reporting abnormal results'
       ],
-      correctAnswer: 2
+      correctAnswer: 2,
+      rationale: "Clinical judgment involves continuous assessment and adaptation."
     },
     {
       question: 'A priority nursing intervention for a patient with decreased tissue perfusion would be:',
@@ -477,7 +479,8 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
         'Scheduling family visits',
         'Planning discharge education'
       ],
-      correctAnswer: 0
+      correctAnswer: 0,
+      rationale: "For decreased tissue perfusion, improving oxygenation is the priority intervention."
     }
   ];
   
@@ -523,13 +526,24 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
       
       {showResults ? (
         <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
-          <h3 className="text-xl font-semibold mb-4">Quiz Results</h3>
-          <div className="flex items-center justify-center mb-6">
-            <div className="relative h-32 w-32">
+          <h3 className="text-xl font-semibold mb-2">Quiz Results</h3>
+          <p className="text-gray-600 mb-6">
+            You've completed the quiz! Here's how you did:
+          </p>
+          
+          <div className="flex flex-col md:flex-row items-center justify-center mb-6 gap-6">
+            <div className="relative h-40 w-40 flex-shrink-0">
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-2xl font-bold">{calculateScore()}%</span>
+                <div className="text-center">
+                  <span className="text-3xl font-bold text-blue-600">{calculateScore()}%</span>
+                  <p className="text-sm text-gray-500 mt-1">
+                    {Math.round((Object.keys(selectedAnswers).filter(idx => 
+                      selectedAnswers[parseInt(idx)] === questions[parseInt(idx)].correctAnswer
+                    ).length / questions.length) * 100)}% Accuracy
+                  </p>
+                </div>
               </div>
-              <svg className="h-32 w-32" viewBox="0 0 36 36">
+              <svg className="h-40 w-40" viewBox="0 0 36 36">
                 <path
                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                   fill="none"
@@ -542,38 +556,189 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
                   stroke="#3b82f6"
                   strokeWidth="3"
                   strokeDasharray={`${calculateScore()}, 100`}
+                  strokeLinecap="round"
                 />
               </svg>
             </div>
-          </div>
-          
-          <div className="space-y-4">
-            {questions.map((q, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
-                <p className="font-medium mb-2">{index + 1}. {q.question}</p>
-                <div className="space-y-2">
-                  {q.options.map((option, optionIndex) => (
+            
+            <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex-1">
+              <h4 className="font-medium text-blue-800 mb-2">Performance Analysis</h4>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span>Correct Answers</span>
+                    <span className="font-medium">
+                      {Object.keys(selectedAnswers).filter(idx => 
+                        selectedAnswers[parseInt(idx)] === questions[parseInt(idx)].correctAnswer
+                      ).length} of {questions.length}
+                    </span>
+                  </div>
+                  <div className="w-full bg-blue-200 rounded-full h-2">
                     <div 
-                      key={optionIndex} 
-                      className={`p-3 rounded-md ${
-                        selectedAnswers[index] === optionIndex 
-                          ? optionIndex === q.correctAnswer 
-                            ? 'bg-green-100 border border-green-300'
-                            : 'bg-red-100 border border-red-300'
-                          : optionIndex === q.correctAnswer
-                            ? 'bg-green-50 border border-green-200'
-                            : 'bg-gray-50 border border-gray-200'
-                      }`}
-                    >
-                      {option}
-                    </div>
-                  ))}
+                      className="h-2 rounded-full bg-blue-600"
+                      style={{ 
+                        width: `${(Object.keys(selectedAnswers).filter(idx => 
+                          selectedAnswers[parseInt(idx)] === questions[parseInt(idx)].correctAnswer
+                        ).length / questions.length) * 100}%` 
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span>Completion Time</span>
+                    <span className="font-medium">
+                      {formatTime((difficulty === 'easy' ? 90 : difficulty === 'medium' ? 60 : 45) * questions.length - timer)} / {formatTime((difficulty === 'easy' ? 90 : difficulty === 'medium' ? 60 : 45) * questions.length)}
+                    </span>
+                  </div>
+                  <div className="w-full bg-green-200 rounded-full h-2">
+                    <div 
+                      className="h-2 rounded-full bg-green-600"
+                      style={{ 
+                        width: `${(((difficulty === 'easy' ? 90 : difficulty === 'medium' ? 60 : 45) * questions.length - timer) / ((difficulty === 'easy' ? 90 : difficulty === 'medium' ? 60 : 45) * questions.length)) * 100}%` 
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span>Difficulty Level</span>
+                    <span className={`font-medium ${
+                      difficulty === 'easy' 
+                        ? 'text-green-600' 
+                        : difficulty === 'medium' 
+                          ? 'text-blue-600' 
+                          : 'text-red-600'
+                    }`}>
+                      {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                    </span>
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
           
-          <div className="mt-6">
+          <div className="flex flex-col gap-3 mt-6">
+            <button
+              onClick={handleReview}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors font-medium flex items-center justify-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+              Review Questions & Explanations
+            </button>
+            
+            <button
+              onClick={handleRestartQuiz}
+              className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors font-medium flex items-center justify-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Restart Quiz
+            </button>
+          </div>
+        </div>
+      ) : reviewMode ? (
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-semibold">Question Review</h3>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
+                disabled={currentQuestion === 0}
+                className={`p-1 rounded-full ${
+                  currentQuestion === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <span className="text-sm font-medium text-gray-500">
+                {currentQuestion + 1} of {questions.length}
+              </span>
+              <button
+                onClick={() => setCurrentQuestion(Math.min(questions.length - 1, currentQuestion + 1))}
+                disabled={currentQuestion === questions.length - 1}
+                className={`p-1 rounded-full ${
+                  currentQuestion === questions.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <div className="mb-6">
+            <h4 className="text-lg font-medium mb-3">
+              {currentQuestion + 1}. {questions[currentQuestion].question}
+            </h4>
+            
+            <div className="space-y-2 mb-6">
+              {questions[currentQuestion].options.map((option, optionIndex) => (
+                <div 
+                  key={optionIndex} 
+                  className={`p-3 rounded-md ${
+                    selectedAnswers[currentQuestion] === optionIndex 
+                      ? optionIndex === questions[currentQuestion].correctAnswer 
+                        ? 'bg-green-100 border border-green-300'
+                        : 'bg-red-100 border border-red-300'
+                      : optionIndex === questions[currentQuestion].correctAnswer
+                        ? 'bg-green-50 border border-green-200'
+                        : 'bg-gray-50 border border-gray-200'
+                  }`}
+                >
+                  <div className="flex items-start">
+                    <div className={`h-5 w-5 rounded-full flex items-center justify-center mr-2 mt-0.5 text-xs font-medium ${
+                      optionIndex === questions[currentQuestion].correctAnswer 
+                        ? 'bg-green-500 text-white' 
+                        : selectedAnswers[currentQuestion] === optionIndex 
+                          ? 'bg-red-500 text-white'
+                          : 'bg-gray-200 text-gray-700'
+                    }`}>
+                      {String.fromCharCode(65 + optionIndex)}
+                    </div>
+                    <span>{option}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+              <h5 className="font-medium text-blue-800 mb-1">Rationale</h5>
+              <p className="text-blue-800">
+                {questions[currentQuestion].rationale}
+              </p>
+            </div>
+            
+            {selectedAnswers[currentQuestion] !== questions[currentQuestion].correctAnswer && (
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4">
+                <h5 className="font-medium text-yellow-800 mb-1">Study Tip</h5>
+                <p className="text-yellow-800">
+                  Review this concept again, focusing on understanding why the correct answer is {String.fromCharCode(65 + questions[currentQuestion].correctAnswer)}. 
+                  Consider how this information applies in clinical scenarios.
+                </p>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex justify-between">
+            <button
+              onClick={handleRestartQuiz}
+              className="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Results
+            </button>
+            
             {node.url && (
               <a 
                 href={node.url} 
@@ -582,15 +747,38 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
                 className="text-blue-600 hover:text-blue-800 flex items-center"
               >
                 <ExternalLink className="h-4 w-4 mr-1" />
-                <span>Practice More Questions</span>
+                <span>Additional Resources</span>
               </a>
             )}
           </div>
         </div>
       ) : (
         <div className="bg-white border border-gray-200 rounded-lg p-6 mb-4">
-          <div className="mb-4 text-sm font-medium text-gray-500">
-            Question {currentQuestion + 1} of {questions.length}
+          <div className="flex justify-between items-center mb-4">
+            <div className="text-sm font-medium text-gray-500">
+              Question {currentQuestion + 1} of {questions.length}
+            </div>
+            <div className={`text-sm font-medium ${
+              timer <= 15 ? 'text-red-600' : timer <= 30 ? 'text-yellow-600' : 'text-gray-600'
+            } flex items-center`}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {formatTime(timer)}
+            </div>
+          </div>
+          
+          <div className="w-full bg-gray-200 rounded-full h-1.5 mb-6">
+            <div 
+              className={`h-1.5 rounded-full ${
+                currentQuestion / questions.length < 0.33 
+                  ? 'bg-blue-600' 
+                  : currentQuestion / questions.length < 0.66 
+                    ? 'bg-green-600' 
+                    : 'bg-purple-600'
+              }`}
+              style={{ width: `${(currentQuestion / (questions.length - 1)) * 100}%` }}
+            ></div>
           </div>
           
           <div className="mb-8">
@@ -609,35 +797,80 @@ const QuizContent = ({ node }: { node: LearningPathNode }) => {
                       : 'hover:bg-gray-50 border-gray-200'
                   }`}
                 >
-                  {option}
+                  <div className="flex items-start">
+                    <div className={`h-5 w-5 rounded-full flex items-center justify-center mr-2 mt-0.5 text-xs font-medium ${
+                      selectedAnswers[currentQuestion] === index 
+                        ? 'bg-blue-500 text-white' 
+                        : 'bg-gray-200 text-gray-700'
+                    }`}>
+                      {String.fromCharCode(65 + index)}
+                    </div>
+                    <span>{option}</span>
+                  </div>
                 </div>
               ))}
             </div>
+            
+            {showHint && (
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+                <h4 className="font-medium text-yellow-800 mb-1">Hint</h4>
+                <p className="text-yellow-800">{questions[currentQuestion].hint}</p>
+              </div>
+            )}
           </div>
           
-          <div className="flex justify-between">
-            <button
-              onClick={handlePrevious}
-              disabled={currentQuestion === 0}
-              className={`px-4 py-2 border border-gray-300 rounded-md ${
-                currentQuestion === 0
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-white text-gray-700 hover:bg-gray-50'
-              }`}
-            >
-              Previous
-            </button>
+          <div className="flex justify-between items-center">
+            <div className="flex gap-2">
+              <button
+                onClick={handlePrevious}
+                disabled={currentQuestion === 0}
+                className={`px-4 py-2 border border-gray-300 rounded-md flex items-center ${
+                  currentQuestion === 0
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Previous
+              </button>
+              
+              <button
+                onClick={() => setShowHint(!showHint)}
+                className="px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 hover:bg-gray-50 flex items-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {showHint ? 'Hide Hint' : 'Show Hint'}
+              </button>
+            </div>
             
             <button
               onClick={handleNext}
               disabled={selectedAnswers[currentQuestion] === undefined}
-              className={`px-4 py-2 rounded-md ${
+              className={`px-4 py-2 rounded-md flex items-center ${
                 selectedAnswers[currentQuestion] === undefined
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   : 'bg-blue-600 text-white hover:bg-blue-700'
               }`}
             >
-              {currentQuestion < questions.length - 1 ? 'Next' : 'View Results'}
+              {currentQuestion < questions.length - 1 ? (
+                <>
+                  Next
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </>
+              ) : (
+                <>
+                  Submit Quiz
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </>
+              )}
             </button>
           </div>
         </div>
