@@ -148,6 +148,52 @@ export async function generateGeminiLearningPath(preferences: LearningPathPrefer
       preferences.difficultyLevel
     );
     
+    // Create a fallback list with at least one resource of each type for when we run out
+    const fallbackResources = {
+      article: {
+        url: "https://www.registerednursing.org/nclex/",
+        resourceType: "article",
+        title: "NCLEX Study Guide",
+        description: "Comprehensive NCLEX study guide with practice questions",
+        estimatedTime: 45
+      },
+      video: {
+        url: "https://www.youtube.com/watch?v=IisgnbMfKvI",
+        resourceType: "video", 
+        title: "NCLEX Study Tips",
+        description: "Video guide for NCLEX preparation strategies",
+        estimatedTime: 30
+      },
+      quiz: {
+        url: "https://nurseslabs.com/nclex-practice-exam-1-40-items/",
+        resourceType: "quiz",
+        title: "NCLEX Practice Quiz",
+        description: "Practice quiz with NCLEX-style questions",
+        estimatedTime: 20
+      },
+      interactive: {
+        url: "https://nurseslabs.com/nclex-practice-questions/",
+        resourceType: "interactive",
+        title: "Interactive NCLEX Review",
+        description: "Interactive review of key NCLEX concepts",
+        estimatedTime: 25
+      },
+      flashcard: {
+        url: "https://quizlet.com/375587945/nclex-pharmacology-flash-cards/",
+        resourceType: "flashcard",
+        title: "NCLEX Pharmacology Flashcards",
+        description: "Flashcards covering key pharmacology concepts for the NCLEX exam",
+        estimatedTime: 15
+      },
+      practice: {
+        url: "https://www.registerednursing.org/nclex/practice-questions/",
+        resourceType: "practice",
+        title: "NCLEX Practice Questions",
+        description: "Extensive collection of NCLEX practice questions with detailed explanations",
+        estimatedTime: 40
+      }
+    };
+    
     // Map of resource index to track used resources
     let resourceIndex = 0;
     
@@ -161,35 +207,32 @@ export async function generateGeminiLearningPath(preferences: LearningPathPrefer
       
       // Process nodes with real resources
       sectionWithId.nodes = section.nodes.map((node: any) => {
-        // Get a real resource, or use empty if we've exhausted our resources
-        const realResource = resourceIndex < realResources.length 
-          ? realResources[resourceIndex++]
-          : null;
-          
-        // If we have a real resource, use its properties
-        if (realResource) {
-          return {
-            ...node,
-            id: node.id || `node-${uuidv4()}`,
-            completed: false,
-            requiredForCompletion: node.requiredForCompletion !== undefined ? node.requiredForCompletion : true,
-            url: realResource.url,
-            resourceType: realResource.resourceType,
-            title: node.title || realResource.title,
-            description: node.description || realResource.description,
-            estimatedTime: node.estimatedTime || realResource.estimatedTime,
-            difficulty: node.difficulty || realResource.difficulty || preferences.difficultyLevel
-          };
-        } else {
-          // Use node as is but with empty URL and generated ID
-          return {
-            ...node,
-            id: node.id || `node-${uuidv4()}`,
-            completed: false,
-            url: '', // No placeholder URLs
-            requiredForCompletion: node.requiredForCompletion !== undefined ? node.requiredForCompletion : true
-          };
+        let resourceToUse;
+        
+        // First try to get a resource from our real resources
+        if (resourceIndex < realResources.length) {
+          resourceToUse = realResources[resourceIndex++];
+        } 
+        // If we've run out, use a fallback based on the resource type
+        else {
+          const type = node.resourceType || 'article';
+          // Use the appropriate fallback or default to article
+          resourceToUse = fallbackResources[type] || fallbackResources.article;
         }
+        
+        // Always use a resource (either real or fallback)
+        return {
+          ...node,
+          id: node.id || `node-${uuidv4()}`,
+          completed: false,
+          requiredForCompletion: node.requiredForCompletion !== undefined ? node.requiredForCompletion : true,
+          url: resourceToUse.url,
+          resourceType: resourceToUse.resourceType,
+          title: node.title || resourceToUse.title,
+          description: node.description || resourceToUse.description,
+          estimatedTime: node.estimatedTime || resourceToUse.estimatedTime,
+          difficulty: node.difficulty || resourceToUse.difficulty || preferences.difficultyLevel
+        };
       });
       
       return sectionWithId;
