@@ -126,3 +126,60 @@ export async function fetchTest(id: number): Promise<any> {
     throw error;
   }
 }
+
+/**
+ * Fetch test content based on test ID
+ */
+export async function fetchTestContent(id: number): Promise<any> {
+  try {
+    const response = await fetchApi(`/api/tests/${id}/content`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch content for test with ID ${id}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error(`Error fetching content for test with ID ${id}:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Fetch questions based on filter criteria
+ */
+export async function fetchQuestions(
+  categories?: string | string[], 
+  count?: number
+): Promise<any> {
+  try {
+    // Build query parameters
+    const params = new URLSearchParams();
+    
+    if (categories) {
+      if (Array.isArray(categories)) {
+        categories.forEach(category => params.append('category', category));
+      } else {
+        params.append('category', categories);
+      }
+    }
+    
+    if (count) {
+      params.append('count', count.toString());
+    }
+    
+    const queryString = params.toString();
+    const url = `/api/questions/filter${queryString ? `?${queryString}` : ''}`;
+    
+    const response = await fetchApi(url);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch questions with filters`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching questions:', error);
+    throw error;
+  }
+}
