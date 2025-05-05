@@ -18,7 +18,12 @@
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-in-out;
   }
-
+  
+  /* Nursing-themed loading animations */
+  .animate-ekg {
+    animation: ekgAnimation 2s ease-in-out infinite;
+  }
+  
   /* Used for modal and dialog entries */
   .animate-slideUp {
     animation: slideUp 0.4s ease-out;
@@ -53,6 +58,18 @@
   }
   50% {
     opacity: 0.7;
+  }
+}
+
+@keyframes ekgAnimation {
+  0% {
+    stroke-dashoffset: 240;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -240;
   }
 }
 
@@ -195,4 +212,3 @@
     transform: rotateY(180deg);
   }
 }
-
