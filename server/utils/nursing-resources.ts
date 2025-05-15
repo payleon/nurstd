@@ -37,7 +37,13 @@ export interface NursingResourcesByCategory {
 }
 
 // Load the nursing resources from the JSON file
-const resourcesFilePath = path.join(__dirname, 'nursing_resources.json');
+// Determine if we're in production (built) environment or development
+const isDevelopment = process.env.NODE_ENV === 'development';
+const resourcesFilePath = isDevelopment 
+  ? path.join(__dirname, 'nursing_resources.json')
+  : path.join(process.cwd(), 'dist', 'utils', 'nursing_resources.json');
+
+console.log(`Loading nursing resources from: ${resourcesFilePath}`);
 let nursingResources: NursingResourcesByCategory;
 
 try {

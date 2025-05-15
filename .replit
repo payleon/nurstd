@@ -8,14 +8,15 @@ packages = ["gh", "imagemagick", "jq", "nano"]
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["sh", "-c", "npm run dev"]
+run = ["sh", "-c", "node dist/index.js"]
+build = ["sh", "-c", "npm install && npm run build && mkdir -p dist/utils && cp server/utils/nursing_resources.json dist/utils/"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [workflows]
-runButton = "Project"
+runButton = "Build and Deploy"
 
 [[workflows.workflow]]
 name = "Project"
@@ -58,3 +59,24 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Build and Deploy"
+author = 42204270
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "mkdir -p dist/utils"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cp server/utils/nursing_resources.json dist/utils/"
