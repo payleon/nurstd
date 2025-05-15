@@ -97,6 +97,7 @@ export default function AuthPage() {
                       <Label htmlFor="username">Username</Label>
                       <Input
                         id="username"
+                        name="username"
                         placeholder="Enter your username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -108,6 +109,7 @@ export default function AuthPage() {
                       <Label htmlFor="password">Password</Label>
                       <Input
                         id="password"
+                        name="password"
                         type="password"
                         placeholder="Enter your password"
                         value={password}
@@ -152,6 +154,7 @@ export default function AuthPage() {
                       <Label htmlFor="register-username">Username</Label>
                       <Input
                         id="register-username"
+                        name="register-username"
                         placeholder="Choose a username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -163,6 +166,7 @@ export default function AuthPage() {
                       <Label htmlFor="register-password">Password</Label>
                       <Input
                         id="register-password"
+                        name="register-password"
                         type="password"
                         placeholder="Create a password"
                         value={password}
@@ -175,6 +179,7 @@ export default function AuthPage() {
                       <Label htmlFor="confirm-password">Confirm Password</Label>
                       <Input
                         id="confirm-password"
+                        name="confirm-password"
                         type="password"
                         placeholder="Confirm your password"
                         value={confirmPassword}
