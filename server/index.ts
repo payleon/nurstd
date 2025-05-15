@@ -72,8 +72,8 @@ app.use((req, res, next) => {
   
   // In development we need more permissive settings for HMR and debugging
   const cspValue = isDevelopment 
-    ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com; connect-src 'self' https://*.replit.dev wss://*.replit.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self';"
-    : "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests;";
+    ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com data:; connect-src 'self' https://*.replit.dev wss://*.replit.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self';"
+    : "default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com data:; connect-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-ancestors 'self'; base-uri 'self'; upgrade-insecure-requests;";
   
   res.setHeader('Content-Security-Policy', cspValue);
 
