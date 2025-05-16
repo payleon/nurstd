@@ -1,23 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React from "react";
 import { Test, Question, QuestionsResponse } from "@shared/schema";
-import { fetchQuestions, fetchTestContent } from "@/lib/api";
-import { MedicalSpinner, LoadingScreen, QuestionLoader } from "@/components/ui/medical-spinner";
-import { 
-  ArrowLeft, ArrowRight, Clock, Flag, PanelLeftClose, HelpCircle, Save, ChevronLeft, 
-  ChevronRight, Check, Award, BookOpen, Lightbulb, Bell, AlertTriangle,
-  User, LogOut, Monitor, Maximize, Minimize, Meh, Smile, Frown, Clipboard,
-  CheckSquare, PauseCircle, PlayCircle, RotateCcw, X, Menu, Calculator,
-  Bookmark, BookmarkCheck, XCircle, CheckCircle2
-} from "lucide-react";
-import { QuestionRenderer } from "./QuestionRenderer";
-import { FlashcardReview } from "./FlashcardReview";
-import { ExamReviewScreen } from "./ExamReviewScreen";
-import { useBadges } from "@/contexts/BadgeContext";
-import { toast } from "@/hooks/use-toast";
-import { Button } from "./ui/button";
-import { Progress } from "./ui/progress";
-import { motion, AnimatePresence } from "framer-motion";
+import { EnhancedExamView } from "./exam/EnhancedExamView";
 
 interface QuestionTestViewProps {
   test: Test & { questionsData?: QuestionsResponse };
@@ -34,13 +17,15 @@ export function QuestionTestView({
   onBookmarkQuestion,
   bookmarkedQuestions = []
 }: QuestionTestViewProps) {
-  // Use the directly passed questions data if available, otherwise fetch from API for the specific test
-  const { data: apiQuestionsData, isLoading: apiLoading, error: apiError } = useQuery({
-    queryKey: [`/api/tests/${test.id}/content`],
-    queryFn: () => fetchTestContent(test.id),
-    // Skip this query if we already have the questions data
-    enabled: !test.questionsData
-  });
+  // Use the new enhanced exam interface that matches the screenshots
+  return (
+    <EnhancedExamView 
+      test={test}
+      onBack={onBack}
+      onComplete={onComplete}
+    />
+  );
+}
   
   const { updateAfterQuestionAnswered, updateAfterTestCompleted } = useBadges();
   
