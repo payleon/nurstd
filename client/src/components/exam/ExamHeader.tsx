@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, Calculator, FileText, AlertTriangle } from 'lucide-react';
+import { Calculator, FileText, Flag, HelpCircle } from 'lucide-react';
 
 interface ExamHeaderProps {
   examTitle: string;
@@ -25,50 +25,56 @@ export function ExamHeader({
   isQuestionMarkedForReview
 }: ExamHeaderProps) {
   return (
-    <div className="bg-cyan-600 text-white p-3 flex flex-col">
-      <div className="flex justify-between items-center">
-        <div className="text-lg font-medium">
-          {examTitle}
+    <header className="bg-white border-b shadow-sm">
+      <div className="flex items-center justify-between p-2 px-4">
+        <div className="flex items-center">
+          <h1 className="font-semibold text-lg text-blue-700">{examTitle}</h1>
+          <span className="ml-2 bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+            {currentQuestion}/{totalQuestions}
+          </span>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="text-sm">
-            <Clock className="h-4 w-4 inline mr-1" /> {timeElapsed}
+        
+        <div className="flex items-center space-x-4">
+          <div className="hidden md:block text-sm">
+            <span className="text-gray-500">Time: </span>
+            <span className="font-semibold">{timeElapsed}</span>
           </div>
-          <div className="text-sm">
-            Question {currentQuestion} of {totalQuestions}
+          
+          <div className="flex items-center space-x-2">
+            <button 
+              onClick={onCalculatorClick}
+              className="p-1.5 rounded-md hover:bg-gray-100 text-gray-700"
+              title="Calculator"
+            >
+              <Calculator className="h-4 w-4" />
+            </button>
+            
+            <button 
+              onClick={onNotesClick}
+              className="p-1.5 rounded-md hover:bg-gray-100 text-gray-700"
+              title="Notes"
+            >
+              <FileText className="h-4 w-4" />
+            </button>
+            
+            <button 
+              onClick={onReportIssueClick}
+              className="p-1.5 rounded-md hover:bg-gray-100 text-gray-700"
+              title="Report Issue"
+            >
+              <HelpCircle className="h-4 w-4" />
+            </button>
+            
+            <button 
+              onClick={onMarkForReviewClick}
+              className={`p-1.5 rounded-md ${isQuestionMarkedForReview ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100 text-gray-700'}`}
+              title={isQuestionMarkedForReview ? "Marked for Review" : "Mark for Review"}
+            >
+              <Flag className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </div>
-      <div className="flex mt-2 space-x-1">
-        <button 
-          onClick={onNotesClick}
-          className="flex items-center bg-cyan-700 hover:bg-cyan-800 py-1 px-2 rounded text-xs"
-        >
-          <FileText className="h-3 w-3 mr-1" /> Notes
-        </button>
-        <button 
-          onClick={onCalculatorClick}
-          className="flex items-center bg-cyan-700 hover:bg-cyan-800 py-1 px-2 rounded text-xs"
-        >
-          <Calculator className="h-3 w-3 mr-1" /> Calculator
-        </button>
-        <button 
-          onClick={onReportIssueClick}
-          className="flex items-center bg-cyan-700 hover:bg-cyan-800 py-1 px-2 rounded text-xs"
-        >
-          <AlertTriangle className="h-3 w-3 mr-1" /> Report Issue
-        </button>
-        <button 
-          onClick={onMarkForReviewClick}
-          className={`flex items-center py-1 px-2 rounded text-xs ${
-            isQuestionMarkedForReview 
-              ? 'bg-amber-500 hover:bg-amber-600' 
-              : 'bg-cyan-700 hover:bg-cyan-800'
-          }`}
-        >
-          <span className="mr-1">✓</span> Mark for Review
-        </button>
-      </div>
-    </div>
+    </header>
   );
 }

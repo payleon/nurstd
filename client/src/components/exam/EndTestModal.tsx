@@ -8,44 +8,64 @@ interface EndTestModalProps {
   unansweredCount: number;
 }
 
-export function EndTestModal({ isOpen, onClose, onEndTest, unansweredCount }: EndTestModalProps) {
+export function EndTestModal({ 
+  isOpen, 
+  onClose, 
+  onEndTest,
+  unansweredCount
+}: EndTestModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-blue-800 w-full max-w-md p-5 rounded-lg text-white">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium">End Test</h3>
-          <button onClick={onClose} className="text-white hover:text-gray-200">
+          <h2 className="text-xl font-semibold flex items-center text-red-600">
+            <AlertTriangle className="mr-2 h-5 w-5" />
+            End Exam?
+          </h2>
+          <button 
+            onClick={onClose}
+            className="p-1 rounded-full hover:bg-gray-100"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>
         
-        <div className="mb-6 flex flex-col items-center">
-          <AlertTriangle className="h-8 w-8 mb-2 text-white" />
-          <p className="text-center mb-2">
-            Do you want to end this test? Once ended you can review your test results from the previous tests page.
+        <div className="mb-6">
+          <p className="text-gray-700 mb-4">
+            Are you sure you want to end this exam? Once submitted, you will not be able to return to it.
           </p>
           
           {unansweredCount > 0 && (
-            <div className="mt-3 px-4 py-2 bg-orange-500 text-white rounded-md w-full text-center">
-              You have {unansweredCount} unanswered questions. Use the Navigator to identify and complete them.
+            <div className="bg-amber-50 border border-amber-200 p-4 rounded-md">
+              <div className="flex items-start">
+                <AlertTriangle className="h-5 w-5 text-amber-600 mr-2 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-amber-800">Warning</h4>
+                  <p className="text-sm text-amber-800 mt-1">
+                    You have <span className="font-bold">{unansweredCount}</span> unanswered {unansweredCount === 1 ? 'question' : 'questions'}.
+                    All unanswered questions will be marked as incorrect.
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </div>
         
-        <div className="flex justify-center space-x-3">
-          <button 
+        <div className="flex justify-end space-x-3">
+          <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500 min-w-[100px]"
+            className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
           >
-            Return to Test
+            Continue Exam
           </button>
-          <button 
+          
+          <button
             onClick={onEndTest}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 min-w-[100px]"
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md"
           >
-            End Test
+            End Exam
           </button>
         </div>
       </div>
