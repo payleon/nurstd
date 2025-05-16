@@ -1,6 +1,6 @@
 import React from "react";
 import { Test, Question, QuestionsResponse } from "@shared/schema";
-import { EnhancedExamView } from "./exam/EnhancedExamView";
+import { ExamModernView } from "./exam/ExamModernView";
 
 interface QuestionTestViewProps {
   test: Test & { questionsData?: QuestionsResponse };
@@ -17,9 +17,9 @@ export function QuestionTestView({
   onBookmarkQuestion,
   bookmarkedQuestions = []
 }: QuestionTestViewProps) {
-  // Use the new enhanced exam interface that matches the screenshots
+  // Use the new modern exam interface that matches the screenshots
   return (
-    <EnhancedExamView 
+    <ExamModernView 
       test={test}
       onBack={onBack}
       onComplete={onComplete}

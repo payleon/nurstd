@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Test, Question, QuestionsResponse } from '@shared/schema';
 import { useQuery } from '@tanstack/react-query';
 import { fetchTestContent } from '@/lib/api';
-import { MedicalSpinner } from '@/components/ui/medical-spinner';
-import { ExamInstructionsModal } from './ExamInstructionsModal';
 import { ExamHeader } from './ExamHeader';
-import { ExamBody } from './ExamBody';
 import { ExamNavigation } from './ExamNavigation';
+import { QuestionRenderer } from '../QuestionRenderer';
+import { ExamInstructionsModal } from './ExamInstructionsModal';
 import { ExamCalculator } from './ExamCalculator';
 import { ExamNotes } from './ExamNotes';
 import { EndTestModal } from './EndTestModal';
 import { ExplanationPanel } from './ExplanationPanel';
-import { useBadges } from '@/contexts/BadgeContext';
 
 interface EnhancedExamViewProps {
   test: Test & { questionsData?: QuestionsResponse };
@@ -45,8 +43,6 @@ export function EnhancedExamView({
   const [showRationale, setShowRationale] = useState<Record<number, boolean>>({});
   const [answerCorrectness, setAnswerCorrectness] = useState<Record<number, boolean>>({});
   const [markedForReview, setMarkedForReview] = useState<number[]>([]);
-
-  const { updateAfterQuestionAnswered, updateAfterTestCompleted } = useBadges();
 
   // Use direct or API data
   const questionsData = test.questionsData || apiQuestionsData;
@@ -118,55 +114,45 @@ export function EnhancedExamView({
     const questionId = currentQuestion.id;
     const normalizedAnswer = normalizeAnswer(answer);
     
+    // Store the user's answer
     setUserAnswers(prevAnswers => ({
       ...prevAnswers,
       [questionId]: normalizedAnswer
     }));
     
-    checkAnswer(questionId, normalizedAnswer);
-    
-    setShowRationale(prevState => ({
-      ...prevState,
-      [questionId]: true
-    }));
-  };
-
-  // Check if the answer is correct
-  const checkAnswer = (questionId: number, answer: string | string[]) => {
-    const question = questions.find((q: Question) => q.id === questionId);
-    if (!question) return;
-    
+    // Check if the answer is correct
     let isCorrect = false;
     
-    // Handle different question types
-    if (question.type === 'mc' && 'correctAnswer' in question) {
+    if (currentQuestion.type === 'mc' && 'correctAnswer' in currentQuestion) {
       let normalizedUserAnswer = '';
       
-      if (Array.isArray(answer) && answer.length === 1) {
-        normalizedUserAnswer = normalizeAnswerString(answer[0]);
-      } else if (!Array.isArray(answer)) {
-        normalizedUserAnswer = normalizeAnswerString(answer);
+      if (Array.isArray(normalizedAnswer) && normalizedAnswer.length === 1) {
+        normalizedUserAnswer = normalizeAnswerString(normalizedAnswer[0]);
+      } else if (!Array.isArray(normalizedAnswer)) {
+        normalizedUserAnswer = normalizeAnswerString(normalizedAnswer);
       }
       
       let correctAnswer = '';
-      if ('correctAnswer' in question) {
-        correctAnswer = typeof question.correctAnswer === 'string' 
-                        ? normalizeAnswerString(question.correctAnswer) 
+      if ('correctAnswer' in currentQuestion) {
+        correctAnswer = typeof currentQuestion.correctAnswer === 'string' 
+                        ? normalizeAnswerString(currentQuestion.correctAnswer) 
                         : '';
       }
       
       isCorrect = normalizedUserAnswer === correctAnswer;
     } 
-    // Handle other question types (SATA, etc.)
-    // ...similar logic for other question types
     
+    // Store the correctness status
     setAnswerCorrectness(prevState => ({
       ...prevState,
       [questionId]: isCorrect
     }));
     
-    // Update badge progress
-    updateAfterQuestionAnswered(question, isCorrect, 1, false);
+    // Show rationale
+    setShowRationale(prevState => ({
+      ...prevState,
+      [questionId]: true
+    }));
   };
 
   // Toggle mark for review
@@ -205,11 +191,14 @@ export function EnhancedExamView({
     return totalQuestions - Object.keys(userAnswers).length;
   };
 
-  // If loading, show spinner
+  // If loading, show a loading message
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <MedicalSpinner type="cardiogram" size="lg" text="Loading exam content..." />
+        <div className="text-center">
+          <div className="animate-pulse h-16 w-16 mx-auto mb-4 border-4 border-blue-600 border-t-transparent rounded-full"></div>
+          <p className="text-lg font-medium">Loading exam content...</p>
+        </div>
       </div>
     );
   }
@@ -295,7 +284,7 @@ export function EnhancedExamView({
       
       {/* Exam Header */}
       <ExamHeader 
-        examTitle={`Tutored CAT ${currentQuestionIndex+1}/${totalQuestions}`}
+        examTitle={`${test.title} (${currentQuestionIndex+1}/${totalQuestions})`}
         currentQuestion={currentQuestionIndex + 1}
         totalQuestions={totalQuestions}
         timeElapsed={timer}
@@ -309,21 +298,31 @@ export function EnhancedExamView({
       {/* Main Content */}
       <div className="flex-grow flex">
         {/* Left side - Question */}
-        <div className={`flex-1 overflow-auto ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
-          <ExamBody 
-            question={currentQuestion}
-            onAnswer={handleAnswerSubmit}
-            userAnswer={userAnswers[currentQuestion.id]}
-            showRationale={showRationale[currentQuestion.id]}
-            isCorrect={answerCorrectness[currentQuestion.id]}
-          />
+        <div className={`flex-1 overflow-auto p-5 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
+          <div className="flex items-start mb-4">
+            <div className="text-blue-700 mr-2 font-bold">▶</div>
+            <div>
+              <div className="question-content">
+                {currentQuestion.text}
+              </div>
+              <div className="mt-2">
+                <QuestionRenderer 
+                  question={currentQuestion}
+                  onAnswer={handleAnswerSubmit}
+                  userAnswer={userAnswers[currentQuestion.id]}
+                  showRationale={showRationale[currentQuestion.id] || false}
+                  isCorrect={answerCorrectness[currentQuestion.id] || false}
+                />
+              </div>
+            </div>
+          </div>
         </div>
         
         {/* Right side - Explanation (visible when showing rationale) */}
         {showRationale[currentQuestion.id] && (
           <div className="w-1/2 overflow-auto">
             <ExplanationPanel 
-              isVisible={showRationale[currentQuestion.id]}
+              isVisible={true}
               question={currentQuestion}
               correctAnswer={getCorrectAnswer()}
               explanationText={currentQuestion.rationale}
