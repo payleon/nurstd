@@ -1,115 +1,108 @@
 import React from 'react';
-import { X, Check, Info, AlertTriangle } from 'lucide-react';
 
 interface ExamInstructionsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onStart: () => void;
+  examTitle: string;
+  questionCount: number;
+  timeLimit?: number; // in minutes
 }
 
-export function ExamInstructionsModal({ isOpen, onClose, onStart }: ExamInstructionsModalProps) {
+export function ExamInstructionsModal({
+  isOpen,
+  onClose,
+  examTitle,
+  questionCount,
+  timeLimit
+}: ExamInstructionsModalProps) {
   if (!isOpen) return null;
-
+  
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold flex items-center">
-            <Info className="mr-2 text-blue-600 h-5 w-5" />
-            Exam Instructions
-          </h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-lg w-4/5 max-w-3xl overflow-hidden">
+        <div className="p-3 bg-blue-600 text-white flex justify-between items-center">
+          <h3 className="font-medium">Exam Instructions</h3>
           <button 
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-gray-100"
+            className="text-white hover:text-blue-100"
           >
-            <X className="h-5 w-5" />
+            ✕
           </button>
         </div>
         
-        <div className="mb-6 max-h-[60vh] overflow-y-auto">
-          <div className="mb-4">
-            <h3 className="font-bold text-lg mb-2 text-blue-700">NCLEX-Style Exam Rules</h3>
-            <p className="text-gray-700 mb-2">
-              This exam simulates the actual NCLEX exam experience with adaptive testing. 
-              The questions and difficulty will adjust based on your performance.
-            </p>
-          </div>
+        <div className="p-6 max-h-[80vh] overflow-y-auto">
+          <h2 className="text-xl font-semibold text-blue-700 mb-4">{examTitle}</h2>
           
-          <div className="bg-gray-50 p-4 rounded-md mb-4">
-            <h4 className="font-semibold mb-2">Exam Navigation:</h4>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span>You must answer the current question before proceeding to the next.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span>You cannot go back to previous questions once answered.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span>Detailed rationales will be provided after each answer submission.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span>Time remaining is displayed at the top of the screen.</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="mb-4">
-            <h4 className="font-semibold mb-2">Question Types:</h4>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span><strong>Multiple Choice:</strong> Select the single best answer.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span><strong>Select All That Apply (SATA):</strong> Choose all correct options.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span><strong>Ordered Response:</strong> Arrange items in the correct sequence.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span><strong>Hotspot:</strong> Click on the specific area indicated in the question.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span><strong>Chart/Exhibit:</strong> Review provided materials to answer questions.</span>
-              </li>
-              <li className="flex items-start">
-                <Check className="h-4 w-4 text-green-600 mr-2 mt-0.5" />
-                <span><strong>Fill-in-the-Blank:</strong> Enter the appropriate response.</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div className="bg-amber-50 border border-amber-200 p-4 rounded-md">
-            <div className="flex items-start">
-              <AlertTriangle className="h-5 w-5 text-amber-600 mr-2 mt-0.5 flex-shrink-0" />
-              <div>
-                <h4 className="font-semibold text-amber-800">Important Notes:</h4>
-                <ul className="space-y-1 mt-1 text-sm text-amber-800">
-                  <li>The calculator is available throughout the exam for math questions.</li>
-                  <li>You can use the notes feature for any calculations or memory aids.</li>
-                  <li>Once the exam begins, the timer cannot be paused, but you can take breaks.</li>
-                  <li>Make sure to manage your time appropriately for all questions.</li>
-                </ul>
-              </div>
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="border border-gray-200 rounded-md p-4 bg-gray-50">
+              <div className="text-sm text-gray-500">Number of Questions</div>
+              <div className="text-lg font-medium">{questionCount}</div>
             </div>
+            
+            {timeLimit && (
+              <div className="border border-gray-200 rounded-md p-4 bg-gray-50">
+                <div className="text-sm text-gray-500">Time Limit</div>
+                <div className="text-lg font-medium">
+                  {timeLimit} {timeLimit === 1 ? 'minute' : 'minutes'}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-        
-        <div className="flex justify-end">
-          <button
-            onClick={onStart}
-            className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium"
-          >
-            Begin Exam
-          </button>
+          
+          <div className="space-y-4">
+            <section>
+              <h3 className="text-lg font-medium text-gray-800 mb-2">Exam Format</h3>
+              <p className="text-gray-600 mb-2">
+                This exam contains multiple types of questions that simulate the NCLEX exam format:
+              </p>
+              <ul className="list-disc pl-5 text-gray-600 space-y-1">
+                <li>Multiple choice questions (select one correct answer)</li>
+                <li>Select all that apply (SATA) questions</li>
+                <li>Prioritization/ordered response questions</li>
+                <li>Hotspot questions (where applicable)</li>
+                <li>Exhibit or chart-based questions</li>
+              </ul>
+            </section>
+            
+            <section>
+              <h3 className="text-lg font-medium text-gray-800 mb-2">Exam Controls</h3>
+              <ul className="list-disc pl-5 text-gray-600 space-y-1">
+                <li>Use the <strong>Previous</strong> and <strong>Next</strong> buttons to navigate between questions</li>
+                <li>Click <strong>Mark for Review</strong> to flag questions you want to revisit</li>
+                <li>The <strong>Calculator</strong> is available for drug dosage calculations</li>
+                <li>Use <strong>Notes</strong> to jot down important information during the exam</li>
+                <li>You can <strong>Pause</strong> the exam if you need a break</li>
+              </ul>
+            </section>
+            
+            <section>
+              <h3 className="text-lg font-medium text-gray-800 mb-2">Scoring</h3>
+              <p className="text-gray-600">
+                Your performance will be evaluated based on the percentage of questions answered correctly.
+                After submitting, you'll receive detailed feedback with explanations for each question.
+              </p>
+            </section>
+            
+            <section>
+              <h3 className="text-lg font-medium text-gray-800 mb-2">Tips for Success</h3>
+              <ul className="list-disc pl-5 text-gray-600 space-y-1">
+                <li>Read each question carefully before selecting an answer</li>
+                <li>For SATA questions, evaluate each option independently</li>
+                <li>Prioritize based on patient safety and ABC (Airway, Breathing, Circulation) principles</li>
+                <li>Watch your time—pace yourself throughout the exam</li>
+                <li>If unsure, mark the question for review and come back to it later</li>
+              </ul>
+            </section>
+          </div>
+          
+          <div className="mt-6 pt-4 border-t border-gray-200">
+            <button 
+              onClick={onClose}
+              className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
+            >
+              Begin Exam
+            </button>
+          </div>
         </div>
       </div>
     </div>

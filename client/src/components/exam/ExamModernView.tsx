@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Test, Question, QuestionsResponse } from '@shared/schema';
 import { useQuery } from '@tanstack/react-query';
-import { fetchTestContent } from '@/lib/api';
+import { fetchTestContent, submitExamResults } from '@/lib/api';
 import { QuestionRenderer } from '../QuestionRenderer';
+import { ExamCalculator } from './ExamCalculator';
+import { ExamNotes } from './ExamNotes';
+import { ExamInstructionsModal } from './ExamInstructionsModal';
+import { EndTestModal } from './EndTestModal';
+import { useToast } from '@/hooks/use-toast';
 
 interface ExamModernViewProps {
   test: Test & { questionsData?: QuestionsResponse };
@@ -15,6 +20,8 @@ export function ExamModernView({
   onBack, 
   onComplete 
 }: ExamModernViewProps) {
+  const { toast } = useToast();
+  
   // Fetch test content if not already provided
   const { data: apiQuestionsData, isLoading, error } = useQuery({
     queryKey: [`/api/tests/${test.id}/content`],
@@ -24,6 +31,7 @@ export function ExamModernView({
 
   // States
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [timerSeconds, setTimerSeconds] = useState(0);
   const [timer, setTimer] = useState("00:00:00");
   const [userAnswers, setUserAnswers] = useState<Record<number, string | string[]>>({});
   const [showRationale, setShowRationale] = useState<Record<number, boolean>>({});
@@ -34,6 +42,8 @@ export function ExamModernView({
   const [showNotes, setShowNotes] = useState(false);
   const [showInstructions, setShowInstructions] = useState(true);
   const [showEndExam, setShowEndExam] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [testCompleted, setTestCompleted] = useState(false);
 
   // Use direct or API data
   const questionsData = test.questionsData || apiQuestionsData;
@@ -43,22 +53,29 @@ export function ExamModernView({
 
   // Timer effect
   useEffect(() => {
-    let startTime = Date.now();
-    const interval = setInterval(() => {
-      if (!isPaused) {
-        const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-        const hours = Math.floor(elapsedSeconds / 3600);
-        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
-        const seconds = elapsedSeconds % 60;
+    let interval: number;
+    
+    if (!isPaused && !testCompleted) {
+      interval = window.setInterval(() => {
+        setTimerSeconds(prev => prev + 1);
+        
+        const hours = Math.floor(timerSeconds / 3600);
+        const minutes = Math.floor((timerSeconds % 3600) / 60);
+        const seconds = timerSeconds % 60;
         
         setTimer(
           `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
         );
-      }
-    }, 1000);
+      }, 1000);
+    }
     
-    return () => clearInterval(interval);
-  }, [isPaused]);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isPaused, timerSeconds, testCompleted]);
+
+  // Calculate number of answered questions
+  const answeredCount = Object.keys(userAnswers).length;
 
   // Handle answer submission
   const handleAnswerSubmit = (answer: string | string[]) => {
@@ -79,6 +96,13 @@ export function ExamModernView({
         isCorrect = answer[0] === currentQuestion.correctAnswer;
       } else if (!Array.isArray(answer)) {
         isCorrect = answer === currentQuestion.correctAnswer;
+      }
+    } else if (currentQuestion.type === 'sata' && 'correctAnswer' in currentQuestion && Array.isArray(currentQuestion.correctAnswer)) {
+      if (Array.isArray(answer)) {
+        // Check if arrays have same elements
+        isCorrect = 
+          answer.length === currentQuestion.correctAnswer.length &&
+          answer.every(a => currentQuestion.correctAnswer.includes(a));
       }
     }
     
@@ -115,6 +139,55 @@ export function ExamModernView({
       setMarkedForReview(markedForReview.filter(id => id !== currentQuestion.id));
     } else {
       setMarkedForReview([...markedForReview, currentQuestion.id]);
+    }
+  };
+
+  // Submit exam results
+  const handleEndExam = async () => {
+    setIsSubmitting(true);
+    
+    try {
+      // Calculate score
+      const correctAnswers = Object.values(answerCorrectness).filter(Boolean).length;
+      const score = Math.round((correctAnswers / totalQuestions) * 100);
+      
+      // Submit to server
+      await submitExamResults({
+        testId: test.id,
+        answers: userAnswers,
+        score,
+        timeSpent: timerSeconds
+      });
+      
+      // Call onComplete callback
+      if (onComplete) {
+        onComplete(correctAnswers, totalQuestions);
+      }
+      
+      // Show success toast
+      toast({
+        title: "Exam completed",
+        description: `Your score: ${score}% (${correctAnswers}/${totalQuestions})`,
+        type: "success"
+      });
+      
+      setTestCompleted(true);
+      
+      // Navigate back
+      setTimeout(() => {
+        onBack();
+      }, 1000);
+    } catch (error) {
+      console.error("Error submitting exam results:", error);
+      
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your exam results. Please try again.",
+        type: "error"
+      });
+    } finally {
+      setIsSubmitting(false);
+      setShowEndExam(false);
     }
   };
 
@@ -303,10 +376,10 @@ export function ExamModernView({
           </button>
           
           <button
-            onClick={() => alert("Navigator coming soon")}
+            onClick={() => setShowInstructions(true)}
             className="flex items-center text-white bg-blue-600 hover:bg-blue-700 py-1.5 px-3 rounded-r-md border-l border-blue-500"
           >
-            Navigate <span className="ml-1">▶</span>
+            Instructions <span className="ml-1">▶</span>
           </button>
         </div>
         
@@ -341,7 +414,34 @@ export function ExamModernView({
         </div>
       </div>
       
-      {/* Modals will be added here in a full implementation */}
+      {/* Modals */}
+      <ExamCalculator 
+        isOpen={showCalculator}
+        onClose={() => setShowCalculator(false)}
+      />
+      
+      <ExamNotes 
+        isOpen={showNotes}
+        onClose={() => setShowNotes(false)}
+        examId={test.id}
+      />
+      
+      <ExamInstructionsModal 
+        isOpen={showInstructions}
+        onClose={() => setShowInstructions(false)}
+        examTitle={test.title}
+        questionCount={totalQuestions}
+        timeLimit={test.timeLimit}
+      />
+      
+      <EndTestModal 
+        isOpen={showEndExam}
+        onClose={() => setShowEndExam(false)}
+        onConfirmEnd={handleEndExam}
+        answeredCount={answeredCount}
+        totalQuestions={totalQuestions}
+        markedCount={markedForReview.length}
+      />
     </div>
   );
 }

@@ -1,72 +1,103 @@
 import React from 'react';
-import { X, AlertTriangle } from 'lucide-react';
 
 interface EndTestModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onEndTest: () => void;
-  unansweredCount: number;
+  onConfirmEnd: () => void;
+  answeredCount: number;
+  totalQuestions: number;
+  markedCount: number;
 }
 
-export function EndTestModal({ 
-  isOpen, 
-  onClose, 
-  onEndTest,
-  unansweredCount
+export function EndTestModal({
+  isOpen,
+  onClose,
+  onConfirmEnd,
+  answeredCount,
+  totalQuestions,
+  markedCount
 }: EndTestModalProps) {
   if (!isOpen) return null;
-
+  
+  const unansweredCount = totalQuestions - answeredCount;
+  
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold flex items-center text-red-600">
-            <AlertTriangle className="mr-2 h-5 w-5" />
-            End Exam?
-          </h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-md overflow-hidden">
+        <div className="p-3 bg-blue-600 text-white flex justify-between items-center">
+          <h3 className="font-medium">End Test Confirmation</h3>
           <button 
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-gray-100"
+            className="text-white hover:text-blue-100"
           >
-            <X className="h-5 w-5" />
+            ✕
           </button>
         </div>
         
-        <div className="mb-6">
-          <p className="text-gray-700 mb-4">
-            Are you sure you want to end this exam? Once submitted, you will not be able to return to it.
-          </p>
+        <div className="p-6">
+          <div className="mb-5">
+            <h4 className="text-lg font-medium text-gray-800 mb-3">
+              Are you sure you want to end this test?
+            </h4>
+            <p className="text-gray-600">
+              Once you submit your answers, you won't be able to make any changes.
+            </p>
+          </div>
           
-          {unansweredCount > 0 && (
-            <div className="bg-amber-50 border border-amber-200 p-4 rounded-md">
-              <div className="flex items-start">
-                <AlertTriangle className="h-5 w-5 text-amber-600 mr-2 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-amber-800">Warning</h4>
-                  <p className="text-sm text-amber-800 mt-1">
-                    You have <span className="font-bold">{unansweredCount}</span> unanswered {unansweredCount === 1 ? 'question' : 'questions'}.
-                    All unanswered questions will be marked as incorrect.
-                  </p>
-                </div>
+          <div className="bg-gray-50 border border-gray-200 rounded-md p-4 mb-6">
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div>
+                <div className="text-2xl font-bold text-blue-600">{answeredCount}</div>
+                <div className="text-xs text-gray-500">Answered</div>
+              </div>
+              
+              <div>
+                <div className="text-2xl font-bold text-red-500">{unansweredCount}</div>
+                <div className="text-xs text-gray-500">Unanswered</div>
+              </div>
+              
+              <div>
+                <div className="text-2xl font-bold text-amber-500">{markedCount}</div>
+                <div className="text-xs text-gray-500">Marked</div>
               </div>
             </div>
-          )}
-        </div>
-        
-        <div className="flex justify-end space-x-3">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-          >
-            Continue Exam
-          </button>
+            
+            <div className="mt-3 pt-3 border-t border-gray-200">
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-gray-600">Completion:</span>
+                <span className="font-medium">{Math.round((answeredCount / totalQuestions) * 100)}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                <div 
+                  className="bg-blue-600 h-2 rounded-full" 
+                  style={{ width: `${Math.round((answeredCount / totalQuestions) * 100)}%` }}
+                />
+              </div>
+            </div>
+          </div>
           
-          <button
-            onClick={onEndTest}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md"
-          >
-            End Exam
-          </button>
+          {unansweredCount > 0 && (
+            <div className="bg-amber-50 border border-amber-200 rounded-md p-3 mb-4 text-sm text-amber-800">
+              <div className="font-medium">Warning</div>
+              <p>You have {unansweredCount} unanswered {unansweredCount === 1 ? 'question' : 'questions'}. Unanswered questions will be marked as incorrect.</p>
+            </div>
+          )}
+          
+          <div className="flex justify-end space-x-3">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+            >
+              Continue Test
+            </button>
+            
+            <button
+              onClick={onConfirmEnd}
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              End & Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>

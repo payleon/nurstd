@@ -16,3 +16,10 @@ export function toast(options: ToastOptions) {
   // In a real implementation, we would actually show a toast notification
   // This could be enhanced with a proper toast library like react-toast
 }
+
+// Hook for using toast in components
+export function useToast() {
+  return {
+    toast
+  };
+}
