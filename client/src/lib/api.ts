@@ -77,6 +77,7 @@ export async function saveUserProgress(data: any) {
 
 export async function submitExamResults(data: any) {
   try {
+    console.log(`API Request: POST /api/exams/submit`, data);
     const response = await fetch('/api/exams/submit', {
       method: 'POST',
       headers: {
@@ -85,11 +86,21 @@ export async function submitExamResults(data: any) {
       body: JSON.stringify(data),
     });
     
+    console.log(`API Response status for /api/exams/submit:`, response.status, response.statusText);
+    
     if (!response.ok) {
       throw new Error(`Failed to submit exam: ${response.status} ${response.statusText}`);
     }
     
-    return await response.json();
+    // Special handling for exam submission - on some endpoints we might just receive a success message
+    // Check the content type to see if it's JSON or something else
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      return await response.json();
+    } else {
+      // If it's not JSON, just return a success object
+      return { success: true, message: 'Exam completed successfully' };
+    }
   } catch (error) {
     console.error('Error submitting exam results:', error);
     throw error;
