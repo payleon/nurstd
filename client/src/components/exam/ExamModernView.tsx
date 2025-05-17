@@ -236,27 +236,28 @@ export function ExamModernView({
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col h-screen max-h-screen bg-gray-50 overflow-hidden">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b py-2 px-4">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <h1 className="font-medium text-lg text-blue-700">{test.title}</h1>
-            <span className="ml-2 bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">
+      <header className="bg-white shadow-sm border-b py-2 px-2 sm:px-4 flex-shrink-0">
+        <div className="flex flex-wrap justify-between items-center gap-2">
+          <div className="flex items-center flex-grow min-w-0">
+            <h1 className="font-medium text-sm sm:text-lg text-blue-700 truncate">{test.title}</h1>
+            <span className="ml-2 bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full whitespace-nowrap">
               {currentQuestionIndex + 1}/{totalQuestions}
             </span>
           </div>
           
-          <div className="flex space-x-3 items-center">
-            <div className="hidden md:block text-sm">
+          <div className="flex space-x-1 sm:space-x-3 items-center">
+            <div className="hidden sm:block text-xs sm:text-sm whitespace-nowrap">
               <span className="text-gray-500">Time: </span>
               <span className="font-medium">{timer}</span>
             </div>
             
             <button 
-              className="p-1.5 rounded hover:bg-gray-100"
+              className="p-1 sm:p-1.5 rounded hover:bg-gray-100"
               onClick={() => setShowCalculator(true)}
               title="Calculator"
+              aria-label="Open Calculator"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="4" y="2" width="16" height="20" rx="2" />
@@ -271,9 +272,10 @@ export function ExamModernView({
             </button>
             
             <button 
-              className="p-1.5 rounded hover:bg-gray-100"
+              className="p-1 sm:p-1.5 rounded hover:bg-gray-100"
               onClick={() => setShowNotes(true)}
               title="Notes"
+              aria-label="Open Notes"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -285,9 +287,10 @@ export function ExamModernView({
             </button>
             
             <button 
-              className={`p-1.5 rounded ${markedForReview.includes(currentQuestion.id) ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100'}`}
+              className={`p-1 sm:p-1.5 rounded ${markedForReview.includes(currentQuestion.id) ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100'}`}
               onClick={toggleMarkForReview}
               title={markedForReview.includes(currentQuestion.id) ? "Marked for Review" : "Mark for Review"}
+              aria-label={markedForReview.includes(currentQuestion.id) ? "Marked for Review" : "Mark for Review"}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2 L15.09 8.26 L22 9.27 L17 14.14 L18.18 21.02 L12 17.77 L5.82 21.02 L7 14.14 L2 9.27 L8.91 8.26 L12 2 Z" />
@@ -297,13 +300,13 @@ export function ExamModernView({
         </div>
       </header>
       
-      {/* Main content */}
-      <div className="flex flex-1">
-        {/* Question */}
-        <div className={`flex-1 p-5 overflow-auto ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
-          <div className="flex items-start mb-4">
+      {/* Main content - using flex-grow-1 and overflow management */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Question panel with scroll management */}
+        <div className={`flex-1 ${showRationale[currentQuestion.id] ? 'md:w-1/2' : 'w-full'} overflow-auto p-2 sm:p-4 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
+          <div className="flex items-start mb-2 sm:mb-4">
             <div className="text-blue-700 mr-2 font-bold">▶</div>
-            <div>
+            <div className="min-w-0 w-full">
               <div className="mb-2">
                 {currentQuestion.text}
               </div>
@@ -321,11 +324,11 @@ export function ExamModernView({
           </div>
         </div>
         
-        {/* Explanation panel */}
+        {/* Explanation panel - responsive on mobile */}
         {showRationale[currentQuestion.id] && (
-          <div className="w-1/2 bg-white p-5 overflow-auto border-l">
-            <div className="mb-4">
-              <div className="bg-gray-100 inline-block px-3 py-1 rounded-md text-sm font-medium">
+          <div className="hidden md:block md:w-1/2 bg-white p-2 sm:p-4 overflow-auto border-l">
+            <div className="mb-2 sm:mb-4">
+              <div className="bg-gray-100 inline-block px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm font-medium">
                 Explanation
               </div>
             </div>
@@ -348,21 +351,50 @@ export function ExamModernView({
             </div>
           </div>
         )}
+        
+        {/* Mobile explanation panel as a collapsible section */}
+        {showRationale[currentQuestion.id] && (
+          <div className="md:hidden w-full bg-blue-50 p-2 mt-2 rounded-md">
+            <details className="group">
+              <summary className="flex justify-between items-center cursor-pointer list-none">
+                <span className="text-sm font-medium text-blue-700">View Explanation</span>
+                <span className="text-blue-700 transition-transform group-open:rotate-180">↓</span>
+              </summary>
+              <div className="mt-2 text-sm">
+                <p>
+                  <strong>{currentQuestion.title}</strong> {currentQuestion.rationale || 
+                    "The correct answer demonstrates proper nursing principles."}
+                </p>
+                
+                {currentQuestion.type === 'mc' && 'correctAnswer' in currentQuestion && (
+                  <div className="mt-2">
+                    <h4 className="font-bold text-xs">Correct Answer:</h4>
+                    <p className="text-xs">
+                      {currentQuestion.correctAnswer}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </details>
+          </div>
+        )}
       </div>
       
-      {/* Footer navigation */}
-      <div className="bg-gray-100 border-t border-gray-200 py-3 px-4 flex items-center justify-between">
-        <div className="flex space-x-2">
+      {/* Footer navigation - responsive and mobile friendly */}
+      <div className="bg-gray-100 border-t border-gray-200 py-2 px-2 sm:py-3 sm:px-4 flex flex-wrap items-center justify-between gap-y-2 flex-shrink-0">
+        <div className="flex space-x-1 sm:space-x-2">
           <button
             onClick={() => setShowEndExam(true)}
-            className="flex items-center text-white bg-blue-600 hover:bg-blue-700 py-1.5 px-3 rounded-l-md"
+            className="flex items-center text-white bg-blue-600 hover:bg-blue-700 py-1 px-2 sm:py-1.5 sm:px-3 text-xs sm:text-sm rounded-l-md"
+            aria-label="End Exam"
           >
             <span className="mr-1">⊗</span> End
           </button>
           
           <button
             onClick={() => setIsPaused(!isPaused)}
-            className="flex items-center text-white bg-blue-600 hover:bg-blue-700 py-1.5 px-3 border-l border-blue-500"
+            className="flex items-center text-white bg-blue-600 hover:bg-blue-700 py-1 px-2 sm:py-1.5 sm:px-3 text-xs sm:text-sm border-l border-blue-500"
+            aria-label={isPaused ? "Resume Exam" : "Pause Exam"}
           >
             {isPaused ? (
               <>
@@ -377,37 +409,44 @@ export function ExamModernView({
           
           <button
             onClick={() => setShowInstructions(true)}
-            className="flex items-center text-white bg-blue-600 hover:bg-blue-700 py-1.5 px-3 rounded-r-md border-l border-blue-500"
+            className="flex items-center text-white bg-blue-600 hover:bg-blue-700 py-1 px-2 sm:py-1.5 sm:px-3 text-xs sm:text-sm rounded-r-md border-l border-blue-500"
+            aria-label="Show Instructions"
           >
-            Instructions <span className="ml-1">▶</span>
+            <span className="sm:hidden">Help</span>
+            <span className="hidden sm:inline">Instructions</span>
+            <span className="ml-1">▶</span>
           </button>
         </div>
         
-        <div className="hidden md:flex items-center space-x-4 text-xs text-gray-600">
+        {/* Stats - hidden on extra small screens */}
+        <div className="hidden sm:flex items-center space-x-2 sm:space-x-4 text-xs text-gray-600 flex-wrap justify-center">
           <div className="flex items-center">
-            <span className="inline-block w-3 h-3 rounded-full bg-blue-500 mr-1"></span>
+            <span className="inline-block w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-blue-500 mr-1"></span>
             <span className="whitespace-nowrap">{Object.values(answerCorrectness).filter(Boolean).length}/{totalQuestions} Correct</span>
           </div>
           <div className="flex items-center">
-            <span className="inline-block w-3 h-3 rounded-full bg-gray-500 mr-1"></span>
+            <span className="inline-block w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-gray-500 mr-1"></span>
             <span className="whitespace-nowrap">Standard Scoring</span>
           </div>
         </div>
         
-        <div className="flex space-x-2">
+        {/* Navigation buttons */}
+        <div className="flex space-x-1 sm:space-x-2">
           <button
             onClick={goToPreviousQuestion}
             disabled={currentQuestionIndex <= 0}
-            className={`flex items-center bg-blue-600 text-white py-1.5 px-3 rounded-l-md ${
+            className={`flex items-center bg-blue-600 text-white py-1 px-2 sm:py-1.5 sm:px-3 text-xs sm:text-sm rounded-l-md ${
               currentQuestionIndex <= 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'
             }`}
+            aria-label="Previous Question"
           >
-            <span className="h-3 w-3 mr-1">◀</span> Previous
+            <span className="h-3 w-3 mr-1">◀</span> Prev
           </button>
           
           <button
             onClick={goToNextQuestion}
-            className="flex items-center bg-blue-600 text-white py-1.5 px-3 rounded-r-md border-l border-blue-500 hover:bg-blue-700"
+            className="flex items-center bg-blue-600 text-white py-1 px-2 sm:py-1.5 sm:px-3 text-xs sm:text-sm rounded-r-md border-l border-blue-500 hover:bg-blue-700"
+            aria-label="Next Question"
           >
             Next <span className="h-3 w-3 ml-1">▶</span>
           </button>
