@@ -12,9 +12,21 @@ interface Badge {
   icon: string;
 }
 
+// User statistics interface
+interface UserStats {
+  streakDays: number;
+  questionsAnswered: number;
+  questionsCorrect: number;
+  testsCompleted?: number;
+  averageScore?: number;
+  studyTimeMinutes?: number;
+}
+
 interface BadgeContextType {
   badges: Badge[];
   earnedBadges: Badge[];
+  userStats: UserStats;
+  unlockedBadges: Badge[];
   updateAfterQuestionAnswered: (
     question: Question, 
     isCorrect: boolean, 
@@ -66,8 +78,31 @@ const BadgeContext = createContext<BadgeContextType | undefined>(undefined);
 export function BadgeProvider({ children }: { children: React.ReactNode }) {
   const [badges, setBadges] = useState<Badge[]>(defaultBadges);
   
+  // Default user stats with initial values
+  const [userStats, setUserStats] = useState<UserStats>({
+    streakDays: 3,
+    questionsAnswered: 157,
+    questionsCorrect: 121,
+    questionsIncorrect: 36,
+    testsCompleted: 12,
+    averageScore: 77,
+    studyTimeMinutes: 482,
+    perfectScores: 2,
+    flaggedQuestions: 8,
+    timeSpent: 482,
+    specialtyQuestionsCompleted: {
+      'Maternity': 18,
+      'Mental Health': 15,
+      'Medical-Surgical': 35,
+      'Fundamentals': 45,
+      'Pharmacology': 22,
+      'Pediatric': 16
+    }
+  });
+  
   // Get only earned badges
   const earnedBadges = badges.filter(badge => badge.earned);
+  const unlockedBadges = earnedBadges; // Alias for clarity
   
   // Update badges after answering a question
   const updateAfterQuestionAnswered = (
@@ -76,6 +111,14 @@ export function BadgeProvider({ children }: { children: React.ReactNode }) {
     timeSpentMinutes: number,
     isFlagged: boolean
   ) => {
+    // Update user stats
+    setUserStats(prev => ({
+      ...prev,
+      questionsAnswered: prev.questionsAnswered + 1,
+      questionsCorrect: prev.questionsCorrect + (isCorrect ? 1 : 0),
+      studyTimeMinutes: (prev.studyTimeMinutes || 0) + timeSpentMinutes
+    }));
+    
     setBadges(prevBadges => {
       const newBadges = [...prevBadges];
       
@@ -100,6 +143,16 @@ export function BadgeProvider({ children }: { children: React.ReactNode }) {
   ) => {
     const percentage = (score / totalQuestions) * 100;
     
+    // Update user stats
+    setUserStats(prev => ({
+      ...prev,
+      testsCompleted: (prev.testsCompleted || 0) + 1,
+      // Recalculate average score
+      averageScore: prev.averageScore 
+        ? Math.round((prev.averageScore * (prev.testsCompleted || 0) + percentage) / ((prev.testsCompleted || 0) + 1))
+        : Math.round(percentage)
+    }));
+    
     setBadges(prevBadges => {
       const newBadges = [...prevBadges];
       
@@ -121,7 +174,9 @@ export function BadgeProvider({ children }: { children: React.ReactNode }) {
   return (
     <BadgeContext.Provider value={{ 
       badges, 
-      earnedBadges, 
+      earnedBadges,
+      userStats,
+      unlockedBadges,
       updateAfterQuestionAnswered, 
       updateAfterTestCompleted 
     }}>

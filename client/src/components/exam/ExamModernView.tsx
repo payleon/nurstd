@@ -431,7 +431,7 @@ export function ExamModernView({
         onClose={() => setShowInstructions(false)}
         examTitle={test.title}
         questionCount={totalQuestions}
-        timeLimit={test.timeLimit}
+        timeLimit={test.timeLimit ? Number(test.timeLimit) : undefined}
       />
       
       <EndTestModal 

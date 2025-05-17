@@ -242,8 +242,8 @@ function OrderedResponseQuestion({
   if (question.type !== 'ordered-response') return null;
   
   // In schema, items might be stored as choices
-  const items = 'choices' in question 
-    ? question.choices.map(choice => choice.text)
+  const items = 'choices' in question && Array.isArray(question.choices)
+    ? question.choices.map((choice: any) => choice?.text || '')
     : [];
   
   const [dragOrder, setDragOrder] = React.useState<string[]>(
