@@ -300,10 +300,10 @@ export function EnhancedExamView({
       {/* Main Content - Only this section should scroll */}
       <div className="flex-grow flex overflow-hidden">
         {/* Left side - Question (scrollable) */}
-        <div className={`flex-1 overflow-y-auto p-5 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
+        <div className={`${showRationale[currentQuestion.id] ? 'w-1/2' : 'w-full'} overflow-y-auto p-5 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
           <div className="flex items-start mb-4">
-            <div className="text-blue-700 mr-2 font-bold">▶</div>
-            <div>
+            <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
+            <div className="w-full">
               <div className="question-content">
                 {currentQuestion.text}
               </div>
@@ -322,7 +322,7 @@ export function EnhancedExamView({
         
         {/* Right side - Explanation (visible and scrollable when showing rationale) */}
         {showRationale[currentQuestion.id] && (
-          <div className="w-1/2 overflow-y-auto">
+          <div className="w-1/2 overflow-y-auto p-5">
             <ExplanationPanel 
               isVisible={true}
               question={currentQuestion}

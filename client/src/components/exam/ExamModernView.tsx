@@ -303,10 +303,10 @@ export function ExamModernView({
       {/* Main content - using flex-grow-1 and overflow management */}
       <div className="flex-1 flex overflow-hidden">
         {/* Question panel with scroll management - only this should scroll */}
-        <div className={`flex-1 ${showRationale[currentQuestion.id] ? 'md:w-1/2' : 'w-full'} overflow-y-auto p-2 sm:p-4 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
+        <div className={`${showRationale[currentQuestion.id] ? 'md:w-1/2' : 'w-full'} overflow-y-auto p-2 sm:p-4 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
           <div className="flex items-start mb-2 sm:mb-4">
-            <div className="text-blue-700 mr-2 font-bold">▶</div>
-            <div className="min-w-0 w-full">
+            <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
+            <div className="w-full">
               <div className="mb-2">
                 {currentQuestion.text}
               </div>
