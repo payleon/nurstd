@@ -301,9 +301,9 @@ export function ExamModernView({
       </header>
       
       {/* Main content - using flex-grow-1 and overflow management */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Question panel with scroll management */}
-        <div className={`flex-1 ${showRationale[currentQuestion.id] ? 'md:w-1/2' : 'w-full'} overflow-auto p-2 sm:p-4 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
+      <div className="flex-1 flex overflow-hidden">
+        {/* Question panel with scroll management - only this should scroll */}
+        <div className={`flex-1 ${showRationale[currentQuestion.id] ? 'md:w-1/2' : 'w-full'} overflow-y-auto p-2 sm:p-4 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
           <div className="flex items-start mb-2 sm:mb-4">
             <div className="text-blue-700 mr-2 font-bold">▶</div>
             <div className="min-w-0 w-full">
@@ -324,9 +324,9 @@ export function ExamModernView({
           </div>
         </div>
         
-        {/* Explanation panel - responsive on mobile */}
+        {/* Explanation panel - responsive on mobile, scrollable independently */}
         {showRationale[currentQuestion.id] && (
-          <div className="hidden md:block md:w-1/2 bg-white p-2 sm:p-4 overflow-auto border-l">
+          <div className="hidden md:block md:w-1/2 bg-white p-2 sm:p-4 overflow-y-auto border-l">
             <div className="mb-2 sm:mb-4">
               <div className="bg-gray-100 inline-block px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm font-medium">
                 Explanation

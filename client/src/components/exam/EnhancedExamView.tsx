@@ -245,7 +245,7 @@ export function EnhancedExamView({
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-gray-50 overflow-hidden">
       {/* Instruction Modal */}
       <ExamInstructionsModal 
         isOpen={showInstructions} 
@@ -282,23 +282,25 @@ export function EnhancedExamView({
         unansweredCount={calculateUnansweredCount()}
       />
       
-      {/* Exam Header */}
-      <ExamHeader 
-        examTitle={`${test.title} (${currentQuestionIndex+1}/${totalQuestions})`}
-        currentQuestion={currentQuestionIndex + 1}
-        totalQuestions={totalQuestions}
-        timeElapsed={timer}
-        onCalculatorClick={() => setShowCalculator(true)}
-        onNotesClick={() => setShowNotes(true)}
-        onReportIssueClick={() => alert("Report issue feature coming soon")}
-        onMarkForReviewClick={toggleMarkForReview}
-        isQuestionMarkedForReview={isQuestionMarkedForReview(currentQuestion.id)}
-      />
+      {/* Exam Header - Fixed */}
+      <div className="flex-shrink-0">
+        <ExamHeader 
+          examTitle={`${test.title} (${currentQuestionIndex+1}/${totalQuestions})`}
+          currentQuestion={currentQuestionIndex + 1}
+          totalQuestions={totalQuestions}
+          timeElapsed={timer}
+          onCalculatorClick={() => setShowCalculator(true)}
+          onNotesClick={() => setShowNotes(true)}
+          onReportIssueClick={() => alert("Report issue feature coming soon")}
+          onMarkForReviewClick={toggleMarkForReview}
+          isQuestionMarkedForReview={isQuestionMarkedForReview(currentQuestion.id)}
+        />
+      </div>
       
-      {/* Main Content */}
-      <div className="flex-grow flex">
-        {/* Left side - Question */}
-        <div className={`flex-1 overflow-auto p-5 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
+      {/* Main Content - Only this section should scroll */}
+      <div className="flex-grow flex overflow-hidden">
+        {/* Left side - Question (scrollable) */}
+        <div className={`flex-1 overflow-y-auto p-5 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
           <div className="flex items-start mb-4">
             <div className="text-blue-700 mr-2 font-bold">▶</div>
             <div>
@@ -318,9 +320,9 @@ export function EnhancedExamView({
           </div>
         </div>
         
-        {/* Right side - Explanation (visible when showing rationale) */}
+        {/* Right side - Explanation (visible and scrollable when showing rationale) */}
         {showRationale[currentQuestion.id] && (
-          <div className="w-1/2 overflow-auto">
+          <div className="w-1/2 overflow-y-auto">
             <ExplanationPanel 
               isVisible={true}
               question={currentQuestion}
@@ -331,18 +333,20 @@ export function EnhancedExamView({
         )}
       </div>
       
-      {/* Navigation Footer */}
-      <ExamNavigation 
-        currentQuestion={currentQuestionIndex + 1}
-        totalQuestions={totalQuestions}
-        onPrevious={goToPreviousQuestion}
-        onNext={goToNextQuestion}
-        onNavigate={() => alert("Navigator coming soon")}
-        onPause={() => setIsPaused(!isPaused)}
-        onEnd={() => setShowEndTestModal(true)}
-        isPaused={isPaused}
-        stats={stats}
-      />
+      {/* Navigation Footer - Fixed */}
+      <div className="flex-shrink-0">
+        <ExamNavigation 
+          currentQuestion={currentQuestionIndex + 1}
+          totalQuestions={totalQuestions}
+          onPrevious={goToPreviousQuestion}
+          onNext={goToNextQuestion}
+          onNavigate={() => alert("Navigator coming soon")}
+          onPause={() => setIsPaused(!isPaused)}
+          onEnd={() => setShowEndTestModal(true)}
+          isPaused={isPaused}
+          stats={stats}
+        />
+      </div>
     </div>
   );
 }
