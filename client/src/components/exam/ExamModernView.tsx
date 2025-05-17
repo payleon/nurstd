@@ -300,85 +300,110 @@ export function ExamModernView({
         </div>
       </header>
       
-      {/* Main content - using flex-grow-1 and overflow management */}
+      {/* Main content */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Question panel with scroll management - only this should scroll */}
-        <div className={`${showRationale[currentQuestion.id] ? 'md:w-1/2' : 'w-full'} overflow-y-auto p-2 sm:p-4 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
-          <div className="flex items-start mb-2 sm:mb-4">
-            <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
-            <div className="w-full">
-              <div className="mb-2">
-                {currentQuestion.text}
-              </div>
-              
-              <div className="mt-4">
-                <QuestionRenderer 
-                  question={currentQuestion}
-                  onAnswer={handleAnswerSubmit}
-                  userAnswer={userAnswers[currentQuestion.id]}
-                  showRationale={showRationale[currentQuestion.id] || false}
-                  isCorrect={answerCorrectness[currentQuestion.id] || false}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Explanation panel - responsive on mobile, scrollable independently */}
-        {showRationale[currentQuestion.id] && (
-          <div className="hidden md:block md:w-1/2 bg-white p-2 sm:p-4 overflow-y-auto border-l">
-            <div className="mb-2 sm:mb-4">
-              <div className="bg-gray-100 inline-block px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm font-medium">
-                Explanation
+        {showRationale[currentQuestion.id] ? (
+          // Split view with question and explanation side by side
+          <>
+            {/* Left side - Question */}
+            <div className="w-1/2 overflow-y-auto p-2 sm:p-4 border-r">
+              <div className="flex items-start mb-2 sm:mb-4">
+                <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
+                <div className="w-full">
+                  <div className="mb-2">
+                    {currentQuestion.text}
+                  </div>
+                  
+                  <div className="mt-4">
+                    <QuestionRenderer 
+                      question={currentQuestion}
+                      onAnswer={handleAnswerSubmit}
+                      userAnswer={userAnswers[currentQuestion.id]}
+                      showRationale={showRationale[currentQuestion.id] || false}
+                      isCorrect={answerCorrectness[currentQuestion.id] || false}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             
-            <div className="prose prose-sm max-w-none">
-              <p>
-                <strong>{currentQuestion.title}</strong> involves understanding key nursing principles. 
-                {currentQuestion.rationale || 
-                  "The correct answer demonstrates proper prioritization of care based on the patient's condition and nursing principles."}
-              </p>
-              
-              {currentQuestion.type === 'mc' && 'correctAnswer' in currentQuestion && (
-                <div className="mt-4">
-                  <h4 className="font-bold">Correct Answer:</h4>
-                  <p>
-                    {currentQuestion.correctAnswer}
-                  </p>
+            {/* Right side - Explanation */}
+            <div className="hidden md:block w-1/2 bg-white p-2 sm:p-4 overflow-y-auto border-l">
+              <div className="mb-2 sm:mb-4">
+                <div className="bg-gray-100 inline-block px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm font-medium">
+                  Explanation
                 </div>
-              )}
-            </div>
-          </div>
-        )}
-        
-        {/* Mobile explanation panel as a collapsible section */}
-        {showRationale[currentQuestion.id] && (
-          <div className="md:hidden w-full bg-blue-50 p-2 mt-2 rounded-md">
-            <details className="group">
-              <summary className="flex justify-between items-center cursor-pointer list-none">
-                <span className="text-sm font-medium text-blue-700">View Explanation</span>
-                <span className="text-blue-700 transition-transform group-open:rotate-180">↓</span>
-              </summary>
-              <div className="mt-2 text-sm">
+              </div>
+              
+              <div className="prose prose-sm max-w-none">
                 <p>
-                  <strong>{currentQuestion.title}</strong> {currentQuestion.rationale || 
-                    "The correct answer demonstrates proper nursing principles."}
+                  <strong>{currentQuestion.title}</strong> involves understanding key nursing principles. 
+                  {currentQuestion.rationale || 
+                    "The correct answer demonstrates proper prioritization of care based on the patient's condition and nursing principles."}
                 </p>
                 
                 {currentQuestion.type === 'mc' && 'correctAnswer' in currentQuestion && (
-                  <div className="mt-2">
-                    <h4 className="font-bold text-xs">Correct Answer:</h4>
-                    <p className="text-xs">
+                  <div className="mt-4">
+                    <h4 className="font-bold">Correct Answer:</h4>
+                    <p>
                       {currentQuestion.correctAnswer}
                     </p>
                   </div>
                 )}
               </div>
-            </details>
+            </div>
+          </>
+        ) : (
+          // Full width question view (when explanation is not shown)
+          <div className="w-full overflow-y-auto p-2 sm:p-4">
+            <div className="flex items-start mb-2 sm:mb-4">
+              <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
+              <div className="w-full">
+                <div className="mb-2">
+                  {currentQuestion.text}
+                </div>
+                
+                <div className="mt-4">
+                  <QuestionRenderer 
+                    question={currentQuestion}
+                    onAnswer={handleAnswerSubmit}
+                    userAnswer={userAnswers[currentQuestion.id]}
+                    showRationale={showRationale[currentQuestion.id] || false}
+                    isCorrect={answerCorrectness[currentQuestion.id] || false}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
+      
+      {/* Mobile explanation collapsible panel */}
+      {showRationale[currentQuestion.id] && (
+        <div className="md:hidden bg-blue-50 p-2 border-t">
+          <details className="group">
+            <summary className="flex justify-between items-center cursor-pointer list-none">
+              <span className="text-sm font-medium text-blue-700">View Explanation</span>
+              <span className="text-blue-700 transition-transform group-open:rotate-180">↓</span>
+            </summary>
+            <div className="mt-2 text-sm">
+              <p>
+                <strong>{currentQuestion.title}</strong> {currentQuestion.rationale || 
+                  "The correct answer demonstrates proper nursing principles."}
+              </p>
+              
+              {currentQuestion.type === 'mc' && 'correctAnswer' in currentQuestion && (
+                <div className="mt-2">
+                  <h4 className="font-bold text-xs">Correct Answer:</h4>
+                  <p className="text-xs">
+                    {currentQuestion.correctAnswer}
+                  </p>
+                </div>
+              )}
+            </div>
+          </details>
+        </div>
+      )}
       
       {/* Footer navigation - responsive and mobile friendly */}
       <div className="bg-gray-100 border-t border-gray-200 py-2 px-2 sm:py-3 sm:px-4 flex flex-wrap items-center justify-between gap-y-2 flex-shrink-0">

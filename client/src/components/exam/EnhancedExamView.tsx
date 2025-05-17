@@ -299,36 +299,60 @@ export function EnhancedExamView({
       
       {/* Main Content - Only this section should scroll */}
       <div className="flex-grow flex overflow-hidden">
-        {/* Left side - Question (scrollable) */}
-        <div className={`${showRationale[currentQuestion.id] ? 'w-1/2' : 'w-full'} overflow-y-auto p-5 ${showRationale[currentQuestion.id] ? 'border-r' : ''}`}>
-          <div className="flex items-start mb-4">
-            <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
-            <div className="w-full">
-              <div className="question-content">
-                {currentQuestion.text}
-              </div>
-              <div className="mt-2">
-                <QuestionRenderer 
-                  question={currentQuestion}
-                  onAnswer={handleAnswerSubmit}
-                  userAnswer={userAnswers[currentQuestion.id]}
-                  showRationale={showRationale[currentQuestion.id] || false}
-                  isCorrect={answerCorrectness[currentQuestion.id] || false}
-                />
+        {showRationale[currentQuestion.id] ? (
+          // Split view with explanation
+          <>
+            {/* Left side - Question (scrollable) */}
+            <div className="w-1/2 overflow-y-auto p-5 border-r">
+              <div className="flex items-start mb-4">
+                <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
+                <div className="w-full">
+                  <div className="question-content">
+                    {currentQuestion.text}
+                  </div>
+                  <div className="mt-2">
+                    <QuestionRenderer 
+                      question={currentQuestion}
+                      onAnswer={handleAnswerSubmit}
+                      userAnswer={userAnswers[currentQuestion.id]}
+                      showRationale={showRationale[currentQuestion.id] || false}
+                      isCorrect={answerCorrectness[currentQuestion.id] || false}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        
-        {/* Right side - Explanation (visible and scrollable when showing rationale) */}
-        {showRationale[currentQuestion.id] && (
-          <div className="w-1/2 overflow-y-auto p-5">
-            <ExplanationPanel 
-              isVisible={true}
-              question={currentQuestion}
-              correctAnswer={getCorrectAnswer()}
-              explanationText={currentQuestion.rationale}
-            />
+            
+            {/* Right side - Explanation */}
+            <div className="w-1/2 overflow-y-auto p-5">
+              <ExplanationPanel 
+                isVisible={true}
+                question={currentQuestion}
+                correctAnswer={getCorrectAnswer()}
+                explanationText={currentQuestion.rationale}
+              />
+            </div>
+          </>
+        ) : (
+          // Full width question view
+          <div className="w-full overflow-y-auto p-5">
+            <div className="flex items-start mb-4">
+              <div className="text-blue-700 mr-2 font-bold flex-shrink-0">▶</div>
+              <div className="w-full">
+                <div className="question-content">
+                  {currentQuestion.text}
+                </div>
+                <div className="mt-2">
+                  <QuestionRenderer 
+                    question={currentQuestion}
+                    onAnswer={handleAnswerSubmit}
+                    userAnswer={userAnswers[currentQuestion.id]}
+                    showRationale={showRationale[currentQuestion.id] || false}
+                    isCorrect={answerCorrectness[currentQuestion.id] || false}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
