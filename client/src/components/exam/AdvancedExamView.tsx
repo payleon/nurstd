@@ -11,7 +11,7 @@ import { ExamNotes } from './ExamNotes';
 import { EndTestModal } from './EndTestModal';
 import { ExplanationPanel } from './ExplanationPanel';
 import { debounce } from '@/lib/utils';
-import { Confetti } from '@/components/ui/confetti';
+import { Confetti } from '../ui/confetti';
 
 // Define types for the drag and drop functionality
 type QuestionStatus = 'unanswered' | 'answered' | 'marked' | 'correct' | 'incorrect';
@@ -106,7 +106,9 @@ export function AdvancedExamView({
 
   // Use direct or API data
   const questionsData = test.questionsData || apiQuestionsData;
-  const questions = typeof questionsData === 'object' && questionsData?.questions ? questionsData.questions : [];
+  // Safely extract questions from the data
+  const questions = questionsData && typeof questionsData === 'object' && 'questions' in questionsData && 
+                   Array.isArray(questionsData.questions) ? questionsData.questions : [];
   const currentQuestion = questions[currentQuestionIndex] || null;
   const totalQuestions = questions.length;
 
@@ -218,7 +220,7 @@ export function AdvancedExamView({
   // Normalize a single answer or an array of answers
   const normalizeAnswer = (answer: string | string[]): string | string[] => {
     if (Array.isArray(answer)) {
-      return answer.map(a => typeof a === 'string' ? normalizeAnswerString(a) : a);
+      return answer.map((a: any) => typeof a === 'string' ? normalizeAnswerString(a) : a);
     }
     return typeof answer === 'string' ? normalizeAnswerString(answer) : answer;
   };
@@ -259,17 +261,18 @@ export function AdvancedExamView({
     } else if (currentQuestion.type === 'sata' && 'correctAnswer' in currentQuestion) {
       // For SATA questions, check that all correct answers are selected and no incorrect answers are selected
       if (Array.isArray(normalizedAnswer) && Array.isArray(currentQuestion.correctAnswer)) {
-        const correctAnswers = new Set(
-          currentQuestion.correctAnswer.map(a => typeof a === 'string' ? normalizeAnswerString(a) : a)
+        const correctAnswers = new Set<string | unknown>(
+          currentQuestion.correctAnswer.map((a: any) => typeof a === 'string' ? normalizeAnswerString(a) : a)
         );
         
-        const userAnswerSet = new Set(
-          normalizedAnswer.map(a => typeof a === 'string' ? normalizeAnswerString(a) : a)
+        const userAnswerSet = new Set<string | unknown>(
+          normalizedAnswer.map((a: any) => typeof a === 'string' ? normalizeAnswerString(a) : a)
         );
         
         // Check if sets are equal (same size and all elements match)
+        const correctAnswersArr = Array.from(correctAnswers);
         isCorrect = correctAnswers.size === userAnswerSet.size && 
-                   [...correctAnswers].every(value => userAnswerSet.has(value));
+                   correctAnswersArr.every(value => userAnswerSet.has(value));
       }
     } else if (currentQuestion.type === 'ordered-response' && 'correctAnswer' in currentQuestion) {
       // For ordered response, check if the arrays match exactly in order
