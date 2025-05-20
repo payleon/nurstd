@@ -44,6 +44,8 @@ export function ExamModernView({
   const [showEndExam, setShowEndExam] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [testCompleted, setTestCompleted] = useState(false);
+  const [showReviewScreen, setShowReviewScreen] = useState(false);
+  const [examScore, setExamScore] = useState(0);
 
   // Use direct or API data
   const questionsData = test.questionsData || apiQuestionsData;
@@ -172,11 +174,10 @@ export function ExamModernView({
       });
       
       setTestCompleted(true);
+      setExamScore(correctAnswers);
       
-      // Navigate back
-      setTimeout(() => {
-        onBack();
-      }, 1000);
+      // Show review screen instead of navigating back
+      setShowReviewScreen(true);
     } catch (error) {
       console.error("Error submitting exam results:", error);
       
