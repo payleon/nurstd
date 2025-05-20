@@ -1,82 +1,78 @@
 import React, { useState, useEffect } from 'react';
+import { Save } from 'lucide-react';
 
-interface ExamNotesProps {
+export interface ExamNotesProps {
   isOpen: boolean;
   onClose: () => void;
-  examId: number;
+  questionId?: number;
+  initialNotes?: string;
+  onSave?: (notes: string) => void;
 }
 
-export function ExamNotes({ isOpen, onClose, examId }: ExamNotesProps) {
-  const [notes, setNotes] = useState('');
+export function ExamNotes({
+  isOpen,
+  onClose,
+  questionId,
+  initialNotes = '',
+  onSave
+}: ExamNotesProps) {
+  const [notes, setNotes] = useState(initialNotes);
   
-  // Load saved notes on component mount
+  // Update notes when question changes
   useEffect(() => {
-    const savedNotes = localStorage.getItem(`exam_notes_${examId}`);
-    if (savedNotes) {
-      setNotes(savedNotes);
+    setNotes(initialNotes);
+  }, [questionId, initialNotes]);
+  
+  const handleSave = () => {
+    if (onSave) {
+      onSave(notes);
     }
-  }, [examId]);
-  
-  // Save notes to localStorage
-  const saveNotes = () => {
-    localStorage.setItem(`exam_notes_${examId}`, notes);
-  };
-  
-  const handleNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNotes(e.target.value);
+    onClose();
   };
   
   if (!isOpen) return null;
   
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg w-4/5 max-w-2xl overflow-hidden">
-        <div className="p-3 bg-blue-600 text-white flex justify-between items-center">
-          <h3 className="font-medium">Exam Notes</h3>
-          <button 
-            onClick={onClose}
-            className="text-white hover:text-blue-100"
-          >
-            ✕
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-gray-900">
+            {questionId ? `Notes for Question ${questionId}` : 'Exam Notes'}
+          </h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 text-xl">
+            &times;
           </button>
         </div>
         
-        <div className="p-4">
-          <div className="mb-4">
-            <p className="text-sm text-gray-600 mb-2">
-              Use these notes to jot down key concepts or calculations during your exam. 
-              Notes are saved automatically.
-            </p>
-            <div className="bg-blue-50 p-2 rounded text-xs text-blue-800 mb-3">
-              Note: These notes will be available throughout your exam session, but they won't be 
-              accessible once you submit your exam.
-            </div>
-            <textarea 
-              className="w-full h-64 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Type your notes here..."
-              value={notes}
-              onChange={handleNotesChange}
-              onBlur={saveNotes}
-            />
-          </div>
-          
-          <div className="flex justify-end space-x-2">
-            <button 
-              onClick={() => setNotes('')}
-              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-            >
-              Clear All
-            </button>
-            <button 
-              onClick={() => {
-                saveNotes();
-                onClose();
-              }}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
-              Save & Close
-            </button>
-          </div>
+        <div className="mb-4">
+          <textarea
+            className="w-full h-60 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Type your notes here..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          />
+        </div>
+        
+        <div className="bg-yellow-50 p-3 rounded-md mb-4 text-sm text-yellow-800">
+          <p>
+            <strong>Tip:</strong> Use these notes to jot down important concepts, mnemonics, or key points to remember for this question.
+          </p>
+        </div>
+        
+        <div className="flex justify-end space-x-3">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center"
+          >
+            <Save className="h-4 w-4 mr-2" />
+            Save Notes
+          </button>
         </div>
       </div>
     </div>

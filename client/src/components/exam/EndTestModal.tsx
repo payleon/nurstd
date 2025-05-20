@@ -1,103 +1,59 @@
 import React from 'react';
+import { AlertCircle } from 'lucide-react';
 
-interface EndTestModalProps {
+export interface EndTestModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirmEnd: () => void;
-  answeredCount: number;
-  totalQuestions: number;
-  markedCount: number;
+  onEndTest: () => void;
+  unansweredCount: number;
 }
 
 export function EndTestModal({
   isOpen,
   onClose,
-  onConfirmEnd,
-  answeredCount,
-  totalQuestions,
-  markedCount
+  onEndTest,
+  unansweredCount
 }: EndTestModalProps) {
   if (!isOpen) return null;
   
-  const unansweredCount = totalQuestions - answeredCount;
-  
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-md overflow-hidden">
-        <div className="p-3 bg-blue-600 text-white flex justify-between items-center">
-          <h3 className="font-medium">End Test Confirmation</h3>
-          <button 
-            onClick={onClose}
-            className="text-white hover:text-blue-100"
-          >
-            ✕
-          </button>
-        </div>
-        
-        <div className="p-6">
-          <div className="mb-5">
-            <h4 className="text-lg font-medium text-gray-800 mb-3">
-              Are you sure you want to end this test?
-            </h4>
-            <p className="text-gray-600">
-              Once you submit your answers, you won't be able to make any changes.
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 animate-in zoom-in-95">
+        <div className="flex items-start mb-4">
+          <div className="bg-red-100 p-2 rounded-full mr-3">
+            <AlertCircle className="h-6 w-6 text-red-600" />
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">End Exam?</h2>
+            <p className="text-gray-500 mt-1">
+              Are you sure you want to end this exam? All your answers will be submitted for grading.
             </p>
           </div>
-          
-          <div className="bg-gray-50 border border-gray-200 rounded-md p-4 mb-6">
-            <div className="grid grid-cols-3 gap-2 text-center">
-              <div>
-                <div className="text-2xl font-bold text-blue-600">{answeredCount}</div>
-                <div className="text-xs text-gray-500">Answered</div>
-              </div>
-              
-              <div>
-                <div className="text-2xl font-bold text-red-500">{unansweredCount}</div>
-                <div className="text-xs text-gray-500">Unanswered</div>
-              </div>
-              
-              <div>
-                <div className="text-2xl font-bold text-amber-500">{markedCount}</div>
-                <div className="text-xs text-gray-500">Marked</div>
-              </div>
-            </div>
-            
-            <div className="mt-3 pt-3 border-t border-gray-200">
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-600">Completion:</span>
-                <span className="font-medium">{Math.round((answeredCount / totalQuestions) * 100)}%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-                <div 
-                  className="bg-blue-600 h-2 rounded-full" 
-                  style={{ width: `${Math.round((answeredCount / totalQuestions) * 100)}%` }}
-                />
-              </div>
-            </div>
+        </div>
+        
+        {unansweredCount > 0 && (
+          <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+            <p className="text-yellow-800 font-medium">Warning</p>
+            <p className="text-yellow-700 text-sm">
+              You have {unansweredCount} unanswered {unansweredCount === 1 ? 'question' : 'questions'}.
+              Ending now may affect your score.
+            </p>
           </div>
-          
-          {unansweredCount > 0 && (
-            <div className="bg-amber-50 border border-amber-200 rounded-md p-3 mb-4 text-sm text-amber-800">
-              <div className="font-medium">Warning</div>
-              <p>You have {unansweredCount} unanswered {unansweredCount === 1 ? 'question' : 'questions'}. Unanswered questions will be marked as incorrect.</p>
-            </div>
-          )}
-          
-          <div className="flex justify-end space-x-3">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-            >
-              Continue Test
-            </button>
-            
-            <button
-              onClick={onConfirmEnd}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
-              End & Submit
-            </button>
-          </div>
+        )}
+        
+        <div className="flex justify-end space-x-3 mt-6">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            Continue Exam
+          </button>
+          <button
+            onClick={onEndTest}
+            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+          >
+            End Exam
+          </button>
         </div>
       </div>
     </div>
