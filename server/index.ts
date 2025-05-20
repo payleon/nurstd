@@ -137,13 +137,37 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
+    // Get status code from error object or default to 500
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
-
-    res.status(status).json({ message });
-    console.error(err);
-    // Removed the throw as it causes uncaught exceptions after responding
+    
+    // Add request ID for tracking in logs
+    const requestId = req.headers['x-request-id'] || 
+                     `err-${Math.random().toString(36).substring(2, 15)}`;
+    
+    // Handle different error types appropriately
+    if (status === 404) {
+      console.warn(`[${requestId}] Resource not found: ${req.method} ${req.path}`);
+    } else if (status >= 500) {
+      console.error(`[${requestId}] Server error:`, err);
+    } else {
+      console.warn(`[${requestId}] Client error (${status}):`, message);
+    }
+    
+    // Only include stack trace in development environment
+    const errorResponse: Record<string, any> = { 
+      message,
+      requestId,
+      status
+    };
+    
+    // Add stack trace only in development
+    if (process.env.NODE_ENV === 'development' && err.stack) {
+      errorResponse.stack = err.stack.split('\n');
+    }
+    
+    res.status(status).json(errorResponse);
   });
 
   // Configure MIME types for XML files
