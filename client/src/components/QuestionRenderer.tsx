@@ -40,6 +40,16 @@ export function QuestionRenderer({
     return [];
   };
   
+  // Helper to extract choice ID
+  const getChoiceId = (choice: any): string => {
+    return typeof choice === 'object' && choice.id ? choice.id : choice;
+  };
+  
+  // Helper to extract choice text
+  const getChoiceText = (choice: any): string => {
+    return typeof choice === 'object' && choice.text ? choice.text : choice;
+  };
+  
   const getItems = () => {
     if ('items' in question && Array.isArray(question.items)) {
       return question.items;
@@ -69,20 +79,22 @@ export function QuestionRenderer({
   };
   
   // Handle multiple choice selection
-  const handleMcOptionSelect = (option: string) => {
+  const handleMcOptionSelect = (option: any) => {
     if (showRationale) return; // Prevent changing after seeing rationale
     
-    setSelectedOption(option);
-    onAnswer(option);
+    const optionId = getChoiceId(option);
+    setSelectedOption(optionId);
+    onAnswer(optionId);
   };
   
   // Handle SATA selection
-  const handleSataOptionToggle = (option: string) => {
+  const handleSataOptionToggle = (option: any) => {
     if (showRationale) return; // Prevent changing after seeing rationale
     
-    const newSelection = selectedOptions.includes(option)
-      ? selectedOptions.filter(opt => opt !== option)
-      : [...selectedOptions, option];
+    const optionId = getChoiceId(option);
+    const newSelection = selectedOptions.includes(optionId)
+      ? selectedOptions.filter(opt => opt !== optionId)
+      : [...selectedOptions, optionId];
     
     setSelectedOptions(newSelection);
     onAnswer(newSelection);
@@ -136,15 +148,15 @@ export function QuestionRenderer({
                 <div className="flex items-center">
                   <div className={`
                     w-5 h-5 flex-shrink-0 rounded-full border mr-3
-                    ${selectedOption === choice ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
-                    ${showRationale && getCorrectAnswer() === choice ? 'border-green-500 bg-green-500' : ''}
-                    ${showRationale && selectedOption === choice && getCorrectAnswer() !== choice ? 'border-red-500 bg-red-500' : ''}
+                    ${selectedOption === getChoiceId(choice) ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
+                    ${showRationale && getCorrectAnswer() === getChoiceId(choice) ? 'border-green-500 bg-green-500' : ''}
+                    ${showRationale && selectedOption === getChoiceId(choice) && getCorrectAnswer() !== getChoiceId(choice) ? 'border-red-500 bg-red-500' : ''}
                   `}>
-                    {(selectedOption === choice || (showRationale && getCorrectAnswer() === choice)) && (
+                    {(selectedOption === getChoiceId(choice) || (showRationale && getCorrectAnswer() === getChoiceId(choice))) && (
                       <Check className="text-white h-4 w-4 m-auto" />
                     )}
                   </div>
-                  <div className="text-gray-800">{choice}</div>
+                  <div className="text-gray-800">{getChoiceText(choice)}</div>
                 </div>
               </div>
             ))}
@@ -198,7 +210,7 @@ export function QuestionRenderer({
                       <Check className="text-white h-4 w-4 m-auto" />
                     )}
                   </div>
-                  <div className="text-gray-800">{choice}</div>
+                  <div className="text-gray-800">{typeof choice === 'object' && choice.text ? choice.text : choice}</div>
                 </div>
               </div>
             ))}
