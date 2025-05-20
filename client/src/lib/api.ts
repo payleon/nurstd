@@ -38,7 +38,12 @@ async function enhancedFetch(
 ): Promise<Response> {
   const requestId = uniqueId('req');
   const mergedOptions = { ...defaultOptions, ...options };
-  const { timeout, retries, retryDelay, ...fetchOptions } = mergedOptions;
+  const { 
+    timeout = 30000, 
+    retries = 2, 
+    retryDelay = 1000, 
+    ...fetchOptions 
+  } = mergedOptions;
   
   // Create controller for timeout
   const controller = new AbortController();
