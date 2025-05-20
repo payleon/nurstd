@@ -35,10 +35,17 @@ function AdvancedExamPageComponent() {
     const historyKey = `exam_history_${testId}`;
     const existingHistory = localStorage.getItem(historyKey);
     const historyArray = existingHistory ? JSON.parse(existingHistory) : [];
+    
+    // Safely get test title
+    const testObj = test as Record<string, any>;
+    const testTitle = typeof testObj === 'object' && testObj && 'title' in testObj 
+      ? testObj.title 
+      : 'Unknown Test';
+    
     historyArray.push({
       ...results,
       testId,
-      testTitle: test?.title || 'Unknown Test',
+      testTitle,
       timestamp: new Date().toISOString()
     });
     localStorage.setItem(historyKey, JSON.stringify(historyArray));
@@ -61,6 +68,11 @@ function AdvancedExamPageComponent() {
   const renderExamSetup = () => {
     if (!test) return null;
     
+    // Safely access test properties
+    const testObj = test as Record<string, any>;
+    const title = testObj.title || 'Exam';
+    const description = testObj.description || 'No description available';
+    
     return (
       <div className="max-w-3xl mx-auto px-4 py-8">
         <Button 
@@ -74,8 +86,8 @@ function AdvancedExamPageComponent() {
         
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-[#13294B] mb-2">{test.title}</h2>
-            <p className="text-gray-600 mb-6">{test.description}</p>
+            <h2 className="text-2xl font-bold text-[#13294B] mb-2">{title}</h2>
+            <p className="text-gray-600 mb-6">{description}</p>
             
             <div className="space-y-6">
               <div className="flex items-start space-x-6">
@@ -154,6 +166,10 @@ function AdvancedExamPageComponent() {
     const scorePercentage = Math.round((examResults.correctAnswers / examResults.totalQuestions) * 100);
     const isPassing = scorePercentage >= 65;
     
+    // Safely access test properties
+    const testObj = test as Record<string, any>;
+    const title = testObj.title || 'Exam';
+    
     return (
       <div className="max-w-4xl mx-auto px-4 py-8">
         <Button 
@@ -168,7 +184,7 @@ function AdvancedExamPageComponent() {
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-6">
             <h2 className="text-2xl font-bold text-[#13294B] mb-2">
-              {test.title} - Exam Results
+              {title} - Exam Results
             </h2>
             
             <div className="mt-6 text-center">
@@ -324,7 +340,7 @@ function AdvancedExamPageComponent() {
   // Otherwise show the exam
   return (
     <AdvancedExamView
-      test={test}
+      test={testData}
       onBack={handleBack}
       onComplete={handleExamComplete}
       adaptiveDifficulty={true}

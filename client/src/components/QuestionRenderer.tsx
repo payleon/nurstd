@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Question } from '@shared/schema';
+import { Button } from '@/components/ui/button';
+import { OrderedResponseQuestion } from '@/components/exam/OrderedResponseQuestion';
+import { InteractiveDiagram } from '@/components/exam/InteractiveDiagram';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { AlertCircle, Check, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface QuestionRendererProps {
   question: Question;
@@ -14,413 +19,277 @@ export function QuestionRenderer({
   onAnswer,
   userAnswer,
   showRationale = false,
-  isCorrect = false
+  isCorrect
 }: QuestionRendererProps) {
-  // Handle different question types
-  switch (question.type) {
-    case 'mc':
-      return <MultipleChoiceQuestion 
-        question={question} 
-        onAnswer={onAnswer} 
-        userAnswer={userAnswer as string} 
-        showRationale={showRationale}
-        isCorrect={isCorrect}
-      />;
-    case 'sata':
-      return <SelectAllThatApplyQuestion 
-        question={question} 
-        onAnswer={onAnswer} 
-        userAnswer={userAnswer as string[]} 
-        showRationale={showRationale}
-        isCorrect={isCorrect}
-      />;
-    case 'ordered-response':
-      return <OrderedResponseQuestion 
-        question={question} 
-        onAnswer={onAnswer} 
-        userAnswer={userAnswer as string[]} 
-        showRationale={showRationale}
-        isCorrect={isCorrect}
-      />;
-    case 'hotspot':
-      return <HotspotQuestion 
-        question={question} 
-        onAnswer={onAnswer} 
-        userAnswer={userAnswer as string} 
-        showRationale={showRationale}
-        isCorrect={isCorrect}
-      />;
-    default:
-      return <div className="p-4 border rounded bg-red-50 text-red-800">
-        Unsupported question type: {question.type}
-      </div>;
-  }
-}
-
-// Multiple choice question component
-function MultipleChoiceQuestion({
-  question,
-  onAnswer,
-  userAnswer,
-  showRationale,
-  isCorrect
-}: QuestionRendererProps & { userAnswer?: string }) {
-  if (question.type !== 'mc') return null;
-
-  const handleSelect = (value: string) => {
-    if (!userAnswer) {
-      onAnswer(value);
+  const [selectedOption, setSelectedOption] = useState<string | null>(
+    typeof userAnswer === 'string' ? userAnswer : null
+  );
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    Array.isArray(userAnswer) ? userAnswer : []
+  );
+  const [orderedItems, setOrderedItems] = useState<string[]>([]);
+  const [selectedHotspots, setSelectedHotspots] = useState<string[]>(
+    Array.isArray(userAnswer) ? userAnswer : []
+  );
+  
+  // Get type-specific properties safely
+  const getChoices = () => {
+    if ('choices' in question && Array.isArray(question.choices)) {
+      return question.choices;
     }
+    return [];
   };
-
-  const getOptionClass = (option: string) => {
-    if (!showRationale) {
-      return userAnswer === option ? 'bg-blue-100 border-blue-300' : 'hover:bg-gray-50';
+  
+  const getItems = () => {
+    if ('items' in question && Array.isArray(question.items)) {
+      return question.items;
     }
-    
-    if ('correctAnswer' in question && question.correctAnswer === option) {
-      return 'bg-green-100 border-green-300';
-    } else if (userAnswer === option) {
-      return 'bg-red-100 border-red-300';
+    return [];
+  };
+  
+  const getHotspots = () => {
+    if ('hotspots' in question && Array.isArray(question.hotspots)) {
+      return question.hotspots;
     }
-    
+    return [];
+  };
+  
+  const getImage = () => {
+    if ('image' in question && typeof question.image === 'string') {
+      return question.image;
+    }
     return '';
   };
 
-  // In the schema choices is used instead of options
-  const options = 'choices' in question 
-    ? question.choices.map(choice => choice.text) 
-    : [];
-
-  return (
-    <div className="space-y-3">
-      {options.map((option: string, index: number) => (
-        <div 
-          key={index} 
-          onClick={() => handleSelect(option)}
-          className={`p-3 border rounded-md cursor-pointer transition ${getOptionClass(option)} ${userAnswer ? '' : 'hover:border-blue-300'}`}
-        >
-          <div className="flex items-start">
-            <div className={`flex-shrink-0 w-5 h-5 border rounded-full mr-2 flex items-center justify-center ${
-              userAnswer === option ? 'bg-blue-500 border-blue-500' : 'border-gray-400'
-            }`}>
-              {userAnswer === option && <div className="w-2 h-2 bg-white rounded-full"></div>}
-            </div>
-            <div className="text-sm">{option}</div>
-          </div>
-        </div>
-      ))}
-      
-      {showRationale && (
-        <div className={`mt-4 p-3 border rounded-md ${isCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
-          <div className={`font-semibold mb-1 ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-            {isCorrect ? 'Correct!' : 'Incorrect'}
-          </div>
-          <div className="text-sm text-gray-700">
-            {question.rationale || 'No explanation provided.'}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Select All That Apply question component
-function SelectAllThatApplyQuestion({
-  question,
-  onAnswer,
-  userAnswer = [],
-  showRationale,
-  isCorrect
-}: QuestionRendererProps & { userAnswer?: string[] }) {
-  if (question.type !== 'sata') return null;
-
-  const handleSelect = (value: string) => {
-    if (showRationale) return; // No changes after showing rationale
-    
-    let newSelectedOptions: string[];
-    
-    if (userAnswer.includes(value)) {
-      newSelectedOptions = userAnswer.filter(option => option !== value);
-    } else {
-      newSelectedOptions = [...userAnswer, value];
+  const getCorrectAnswer = () => {
+    if ('correctAnswer' in question) {
+      return question.correctAnswer;
     }
-    
-    onAnswer(newSelectedOptions);
-  };
-
-  const getOptionClass = (option: string) => {
-    const isSelected = userAnswer.includes(option);
-    
-    if (!showRationale) {
-      return isSelected ? 'bg-blue-100 border-blue-300' : 'hover:bg-gray-50';
-    }
-    
-    if ('correctAnswer' in question && Array.isArray(question.correctAnswer) && question.correctAnswer.includes(option)) {
-      return isSelected ? 'bg-green-100 border-green-300' : 'bg-green-50 border-green-200';
-    } else if (isSelected) {
-      return 'bg-red-100 border-red-300';
-    }
-    
     return '';
   };
-
-  const handleSubmit = () => {
-    if (userAnswer.length > 0 && !showRationale) {
-      onAnswer(userAnswer);
-    }
-  };
-
-  // In the schema choices is used instead of options
-  const options = 'choices' in question 
-    ? question.choices.map(choice => choice.text) 
-    : [];
-
-  return (
-    <div>
-      <div className="mb-3 bg-blue-50 p-2 rounded text-sm text-blue-800">
-        Select all options that apply. There may be multiple correct answers.
-      </div>
-      
-      <div className="space-y-3 mb-4">
-        {options.map((option: string, index: number) => (
-          <div 
-            key={index} 
-            onClick={() => handleSelect(option)}
-            className={`p-3 border rounded-md cursor-pointer transition ${getOptionClass(option)} ${!showRationale ? 'hover:border-blue-300' : ''}`}
-          >
-            <div className="flex items-start">
-              <div className={`flex-shrink-0 w-5 h-5 border rounded mr-2 flex items-center justify-center ${
-                userAnswer.includes(option) ? 'bg-blue-500 border-blue-500' : 'border-gray-400'
-              }`}>
-                {userAnswer.includes(option) && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                )}
-              </div>
-              <div className="text-sm">{option}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      {!showRationale && (
-        <button 
-          onClick={handleSubmit} 
-          disabled={userAnswer.length === 0}
-          className={`w-full py-2 px-4 bg-blue-600 text-white rounded-md ${
-            userAnswer.length === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'
-          }`}
-        >
-          Submit Answer
-        </button>
-      )}
-      
-      {showRationale && (
-        <div className={`mt-4 p-3 border rounded-md ${isCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
-          <div className={`font-semibold mb-1 ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-            {isCorrect ? 'Correct!' : 'Incorrect'}
-          </div>
-          <div className="text-sm text-gray-700">
-            {question.rationale || 'No explanation provided.'}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Ordered Response question component
-function OrderedResponseQuestion({
-  question,
-  onAnswer,
-  userAnswer = [],
-  showRationale,
-  isCorrect
-}: QuestionRendererProps & { userAnswer?: string[] }) {
-  if (question.type !== 'ordered-response') return null;
   
-  // In schema, items might be stored as choices
-  const items = 'choices' in question && Array.isArray(question.choices)
-    ? question.choices.map((choice: any) => choice?.text || '')
-    : [];
+  // Handle multiple choice selection
+  const handleMcOptionSelect = (option: string) => {
+    if (showRationale) return; // Prevent changing after seeing rationale
+    
+    setSelectedOption(option);
+    onAnswer(option);
+  };
   
-  const [dragOrder, setDragOrder] = React.useState<string[]>(
-    userAnswer.length > 0 ? userAnswer : [...items]
-  );
-
-  React.useEffect(() => {
-    if (userAnswer.length > 0) {
-      setDragOrder(userAnswer);
+  // Handle SATA selection
+  const handleSataOptionToggle = (option: string) => {
+    if (showRationale) return; // Prevent changing after seeing rationale
+    
+    const newSelection = selectedOptions.includes(option)
+      ? selectedOptions.filter(opt => opt !== option)
+      : [...selectedOptions, option];
+    
+    setSelectedOptions(newSelection);
+    onAnswer(newSelection);
+  };
+  
+  // Handle ordered response changes
+  const handleOrderedResponse = (items: string[]) => {
+    if (showRationale) return; // Prevent changing after seeing rationale
+    
+    setOrderedItems(items);
+    onAnswer(items);
+  };
+  
+  // Handle hotspot selection
+  const handleHotspotClick = (id: string) => {
+    if (showRationale) return; // Prevent changing after seeing rationale
+    
+    // For single-selection hotspot
+    if (!question.allowMultipleHotspots) {
+      setSelectedHotspots([id]);
+      onAnswer([id]);
+      return;
     }
-  }, [userAnswer]);
-
-  const handleDragStart = (e: React.DragEvent, index: number) => {
-    e.dataTransfer.setData('text/plain', index.toString());
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: React.DragEvent, dropIndex: number) => {
-    if (showRationale) return; // No changes after showing rationale
     
-    const dragIndex = Number(e.dataTransfer.getData('text/plain'));
-    const newOrder = [...dragOrder];
-    const draggedItem = newOrder[dragIndex];
+    // For multi-selection hotspot
+    const newSelection = selectedHotspots.includes(id)
+      ? selectedHotspots.filter(hotspotId => hotspotId !== id)
+      : [...selectedHotspots, id];
     
-    // Remove the dragged item
-    newOrder.splice(dragIndex, 1);
-    // Insert it at the drop position
-    newOrder.splice(dropIndex, 0, draggedItem);
-    
-    setDragOrder(newOrder);
-    onAnswer(newOrder);
+    setSelectedHotspots(newSelection);
+    onAnswer(newSelection);
   };
-
-  const handleSubmit = () => {
-    if (!showRationale) {
-      onAnswer(dragOrder);
-    }
-  };
-
-  return (
-    <div>
-      <div className="mb-3 bg-blue-50 p-2 rounded text-sm text-blue-800">
-        Drag and drop the items below to arrange them in the correct order.
-      </div>
-      
-      <div className="space-y-2 mb-4">
-        {dragOrder.map((item, index) => (
-          <div 
-            key={index}
-            draggable={!showRationale}
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, index)}
-            className={`p-3 border rounded-md ${showRationale ? '' : 'cursor-move'} bg-white shadow-sm hover:shadow transition`}
-          >
-            <div className="flex items-center">
-              <div className="flex-shrink-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center mr-2">
-                {index + 1}
-              </div>
-              <div>{item}</div>
-              {!showRationale && (
-                <div className="ml-auto text-gray-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <polyline points="19 12 12 19 5 12"></polyline>
-                  </svg>
+  
+  // Render question based on type
+  const renderQuestionContent = () => {
+    switch (question.type) {
+      case 'mc':
+        return (
+          <div className="space-y-3">
+            {getChoices().map((choice, index) => (
+              <div 
+                key={index} 
+                className={`
+                  p-4 border rounded-md cursor-pointer transition-all
+                  ${selectedOption === choice ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'}
+                  ${showRationale && getCorrectAnswer() === choice ? 'border-green-500 bg-green-50' : ''}
+                  ${showRationale && selectedOption === choice && getCorrectAnswer() !== choice ? 'border-red-500 bg-red-50' : ''}
+                `}
+                onClick={() => handleMcOptionSelect(choice)}
+              >
+                <div className="flex items-center">
+                  <div className={`
+                    w-5 h-5 flex-shrink-0 rounded-full border mr-3
+                    ${selectedOption === choice ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
+                    ${showRationale && getCorrectAnswer() === choice ? 'border-green-500 bg-green-500' : ''}
+                    ${showRationale && selectedOption === choice && getCorrectAnswer() !== choice ? 'border-red-500 bg-red-500' : ''}
+                  `}>
+                    {(selectedOption === choice || (showRationale && getCorrectAnswer() === choice)) && (
+                      <Check className="text-white h-4 w-4 m-auto" />
+                    )}
+                  </div>
+                  <div className="text-gray-800">{choice}</div>
                 </div>
-              )}
-            </div>
+              </div>
+            ))}
+            
+            {showRationale && !isCorrect && (
+              <Alert className="mt-4 bg-red-50 border-red-200">
+                <AlertCircle className="h-4 w-4 text-red-600" />
+                <AlertTitle className="text-red-700">Incorrect Answer</AlertTitle>
+                <AlertDescription className="text-red-600">
+                  The correct answer is: {getCorrectAnswer()}
+                </AlertDescription>
+              </Alert>
+            )}
+            
+            {showRationale && isCorrect && (
+              <Alert className="mt-4 bg-green-50 border-green-200">
+                <Check className="h-4 w-4 text-green-600" />
+                <AlertTitle className="text-green-700">Correct Answer!</AlertTitle>
+              </Alert>
+            )}
           </div>
-        ))}
-      </div>
+        );
       
-      {!showRationale && (
-        <button 
-          onClick={handleSubmit}
-          className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-        >
-          Submit Order
-        </button>
-      )}
-      
-      {showRationale && (
-        <div className={`mt-4 p-3 border rounded-md ${isCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
-          <div className={`font-semibold mb-1 ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-            {isCorrect ? 'Correct order!' : 'Incorrect order'}
-          </div>
-          {!isCorrect && 'correctOrder' in question && (
-            <div className="mb-2">
-              <div className="font-medium text-sm text-gray-700">Correct order:</div>
-              <ol className="pl-5 text-sm text-gray-700 list-decimal">
-                {question.correctOrder.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ol>
+      case 'sata':
+        return (
+          <div className="space-y-3">
+            <div className="p-3 bg-blue-50 border border-blue-200 rounded-md mb-4 text-sm">
+              <p className="font-medium text-blue-700">Select All That Apply</p>
+              <p className="text-blue-600">Choose all correct options.</p>
             </div>
-          )}
-          <div className="text-sm text-gray-700 mt-2">
-            {question.rationale || 'No explanation provided.'}
+            
+            {getChoices().map((choice, index) => (
+              <div 
+                key={index} 
+                className={`
+                  p-4 border rounded-md cursor-pointer transition-all
+                  ${selectedOptions.includes(choice) ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'}
+                  ${showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(choice) ? 'border-green-500 bg-green-50' : ''}
+                  ${showRationale && selectedOptions.includes(choice) && Array.isArray(getCorrectAnswer()) && !getCorrectAnswer().includes(choice) ? 'border-red-500 bg-red-50' : ''}
+                `}
+                onClick={() => handleSataOptionToggle(choice)}
+              >
+                <div className="flex items-center">
+                  <div className={`
+                    w-5 h-5 flex-shrink-0 rounded-sm border mr-3
+                    ${selectedOptions.includes(choice) ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
+                    ${showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(choice) ? 'border-green-500 bg-green-500' : ''}
+                    ${showRationale && selectedOptions.includes(choice) && Array.isArray(getCorrectAnswer()) && !getCorrectAnswer().includes(choice) ? 'border-red-500 bg-red-500' : ''}
+                  `}>
+                    {(selectedOptions.includes(choice) || (showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(choice))) && (
+                      <Check className="text-white h-4 w-4 m-auto" />
+                    )}
+                  </div>
+                  <div className="text-gray-800">{choice}</div>
+                </div>
+              </div>
+            ))}
+            
+            {!showRationale && (
+              <div className="flex justify-end mt-4">
+                <Button 
+                  onClick={() => onAnswer(selectedOptions)}
+                  disabled={selectedOptions.length === 0}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  Submit Answer
+                </Button>
+              </div>
+            )}
+            
+            {showRationale && (
+              <Alert className={`mt-4 ${isCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
+                {isCorrect ? (
+                  <Check className="h-4 w-4 text-green-600" />
+                ) : (
+                  <AlertCircle className="h-4 w-4 text-red-600" />
+                )}
+                <AlertTitle className={isCorrect ? 'text-green-700' : 'text-red-700'}>
+                  {isCorrect ? 'Correct Answer!' : 'Incorrect Answer'}
+                </AlertTitle>
+                {!isCorrect && Array.isArray(getCorrectAnswer()) && (
+                  <AlertDescription className="text-red-600">
+                    <p>The correct options are:</p>
+                    <ul className="list-disc ml-5 mt-1">
+                      {getCorrectAnswer().map((answer, index) => (
+                        <li key={index}>{answer}</li>
+                      ))}
+                    </ul>
+                  </AlertDescription>
+                )}
+              </Alert>
+            )}
           </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Hotspot question component (simplified)
-function HotspotQuestion({
-  question,
-  onAnswer,
-  userAnswer,
-  showRationale,
-  isCorrect
-}: QuestionRendererProps & { userAnswer?: string }) {
-  if (question.type !== 'hotspot') return null;
-  
-  const [selectedArea, setSelectedArea] = React.useState<string | null>(userAnswer || null);
-  
-  const handleAreaClick = (area: string) => {
-    if (!showRationale) {
-      setSelectedArea(area);
-      onAnswer(area);
+        );
+      
+      case 'ordered-response':
+        return (
+          <OrderedResponseQuestion
+            items={getItems()}
+            correctOrder={showRationale ? (Array.isArray(getCorrectAnswer()) ? getCorrectAnswer() : []) : undefined}
+            onChange={handleOrderedResponse}
+            userAnswer={Array.isArray(userAnswer) ? userAnswer : []}
+            showFeedback={showRationale}
+            disabled={showRationale}
+          />
+        );
+      
+      case 'hotspot':
+        return (
+          <div className="space-y-4">
+            <InteractiveDiagram
+              imageSrc={getImage()}
+              imageAlt="Interactive diagram"
+              hotspots={getHotspots()}
+              onHotspotClick={handleHotspotClick}
+              showFeedback={showRationale}
+              selectedHotspots={selectedHotspots}
+            />
+            
+            {!showRationale && question.allowMultipleHotspots && (
+              <div className="flex justify-end mt-4">
+                <Button 
+                  onClick={() => onAnswer(selectedHotspots)}
+                  disabled={selectedHotspots.length === 0}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  Submit Answer
+                </Button>
+              </div>
+            )}
+          </div>
+        );
+      
+      default:
+        return (
+          <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-md">
+            <p className="text-yellow-700">This question type is not supported.</p>
+          </div>
+        );
     }
   };
   
-  // Areas can be constructed from correctAreas and distractorAreas
-  const areas = 'correctAreas' in question 
-    ? question.correctAreas.map(area => area.id)
-    : [];
-  
   return (
-    <div>
-      <div className="mb-3 bg-blue-50 p-2 rounded text-sm text-blue-800">
-        Click on the appropriate area of the image to answer the question.
-      </div>
-      
-      <div className="relative inline-block mb-4">
-        {/* Image would go here in a real implementation */}
-        <div className="bg-gray-200 w-full h-64 flex items-center justify-center text-gray-500">
-          {question.imagePath ? (
-            <img 
-              src={question.imagePath} 
-              alt="Hotspot question image" 
-              className="max-w-full max-h-full"
-            />
-          ) : (
-            "Image placeholder"
-          )}
-        </div>
-        
-        {/* Clickable areas */}
-        <div className="absolute inset-0 flex flex-wrap">
-          {areas.map((area: string, index: number) => (
-            <div 
-              key={index}
-              className={`w-1/3 h-1/3 border ${
-                selectedArea === area ? 'border-blue-500 bg-blue-100 bg-opacity-50' : 'border-transparent'
-              } cursor-pointer hover:bg-blue-50 hover:bg-opacity-30`}
-              onClick={() => handleAreaClick(area)}
-            />
-          ))}
-        </div>
-      </div>
-      
-      {showRationale && (
-        <div className={`mt-4 p-3 border rounded-md ${isCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
-          <div className={`font-semibold mb-1 ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-            {isCorrect ? 'Correct area selected!' : 'Incorrect area selected'}
-          </div>
-          <div className="text-sm text-gray-700">
-            {question.rationale || 'No explanation provided.'}
-          </div>
-        </div>
-      )}
+    <div className="question-renderer">
+      {renderQuestionContent()}
     </div>
   );
 }

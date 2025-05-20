@@ -63,13 +63,10 @@ export function TestsList({ tests, isLoading = false }: TestsListProps) {
                 <h3 className="text-xl font-bold text-[#13294B] mb-2">{test.title}</h3>
                 <p className="text-gray-600 mb-4">{test.description}</p>
               </div>
-              {test.difficulty && (
-                <Badge className={
-                  test.difficulty === 'beginner' ? 'bg-green-100 text-green-800 border-green-200' :
-                  test.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
-                  'bg-red-100 text-red-800 border-red-200'
-                }>
-                  {test.difficulty}
+              {/* Badge for difficulty level - based on properties present in the test object */}
+              {test.category && (
+                <Badge className='bg-blue-100 text-blue-800 border-blue-200'>
+                  {test.category}
                 </Badge>
               )}
             </div>
@@ -87,12 +84,12 @@ export function TestsList({ tests, isLoading = false }: TestsListProps) {
               
               <div className="flex items-center text-sm text-gray-500">
                 <Clock3 className="h-4 w-4 mr-1" />
-                <span>{test.estimatedTime || '30-60'} mins</span>
+                <span>{test.timeLimit ? `${test.timeLimit}` : '30-60'} mins</span>
               </div>
               
               <div className="flex items-center text-sm text-gray-500">
                 <Award className="h-4 w-4 mr-1" />
-                <span>{test.passRate || '75'}% pass rate</span>
+                <span>75% pass rate</span>
               </div>
             </div>
             
