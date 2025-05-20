@@ -28,6 +28,7 @@ const FlashcardStudy = lazy(() => import("@/pages/FlashcardStudy"));
 const LearningPaths = lazy(() => import("@/pages/learning-paths"));
 const CreateLearningPath = lazy(() => import("@/pages/create-learning-path"));
 const LearningPath = lazy(() => import("@/pages/learning-path"));
+const AdvancedExamPage = lazy(() => import("@/pages/AdvancedExamPage"));
 
 // Importing the CustomQuizView component
 const CustomQuizView = lazy(() => import("@/components/CustomQuizView").then(module => ({ default: module.CustomQuizView })));
@@ -77,6 +78,7 @@ function Router() {
       <LazyRoute path="/exams-and-studies" component={ExamsAndStudies} preload={true} />
       <LazyRoute path="/case-study/:id" component={CaseStudyDetail} />
       <LazyRoute path="/tests/:id" component={Home} preload={true} />
+      <LazyRoute path="/advanced-exam/:id" component={AdvancedExamPage} />
       {/* Redirects from old paths to new path */}
       <Route path="/question-bank">
         {() => {
