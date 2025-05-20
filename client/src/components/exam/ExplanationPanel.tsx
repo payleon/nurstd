@@ -9,13 +9,6 @@ export interface ExplanationPanelProps {
   explanationText?: string;
 }
 
-// Define a type for enhanced question properties
-interface QuestionEnhancements {
-  rationale?: string;
-  concepts?: string[];
-  references?: string[];
-}
-
 export function ExplanationPanel({
   isVisible,
   question,
@@ -23,9 +16,6 @@ export function ExplanationPanel({
   explanationText
 }: ExplanationPanelProps) {
   if (!isVisible) return null;
-  
-  // Access question properties safely
-  const questionAny = question as any;
   
   // Format answer for display
   const formatAnswer = (answer: string | string[]) => {
@@ -40,8 +30,9 @@ export function ExplanationPanel({
   const isMcQuestion = question.type === 'mc';
   
   // Get concepts and references from the question if available
-  const concepts: string[] = enhancedQuestion.concepts || [];
-  const references: string[] = enhancedQuestion.references || [];
+  const questionObj = question as Record<string, any>;
+  const concepts: string[] = Array.isArray(questionObj.concepts) ? questionObj.concepts : [];
+  const references: string[] = Array.isArray(questionObj.references) ? questionObj.references : [];
   
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
