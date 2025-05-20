@@ -152,7 +152,7 @@ export function OrderedResponseQuestion({
                           <button
                             type="button"
                             onClick={() => moveItemDown(index)}
-                            disabled={index === orderedItems.length - The value of the variable "index" is redacted.}
+                            disabled={index === orderedItems.length - 1}
                             className={`p-1 rounded-full ${
                               index === orderedItems.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-100'
                             }`}
