@@ -142,7 +142,8 @@ app.use((req, res, next) => {
     const message = err.message || "Internal Server Error";
 
     res.status(status).json({ message });
-    throw err;
+    console.error(err);
+    // Removed the throw as it causes uncaught exceptions after responding
   });
 
   // Configure MIME types for XML files
