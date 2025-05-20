@@ -73,7 +73,16 @@ export function QuestionRenderer({
 
   const getCorrectAnswer = () => {
     if ('correctAnswer' in question) {
-      return question.correctAnswer;
+      if (Array.isArray(question.correctAnswer)) {
+        // If it's an array of answers (for SATA questions)
+        return question.correctAnswer.map(answer => {
+          return typeof answer === 'object' && answer.id ? answer.id : answer;
+        });
+      }
+      // For single answers
+      return typeof question.correctAnswer === 'object' && question.correctAnswer.id 
+        ? question.correctAnswer.id 
+        : question.correctAnswer;
     }
     return '';
   };
@@ -139,9 +148,9 @@ export function QuestionRenderer({
                 key={index} 
                 className={`
                   p-4 border rounded-md cursor-pointer transition-all
-                  ${selectedOption === choice ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'}
-                  ${showRationale && getCorrectAnswer() === choice ? 'border-green-500 bg-green-50' : ''}
-                  ${showRationale && selectedOption === choice && getCorrectAnswer() !== choice ? 'border-red-500 bg-red-50' : ''}
+                  ${selectedOption === getChoiceId(choice) ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'}
+                  ${showRationale && getCorrectAnswer() === getChoiceId(choice) ? 'border-green-500 bg-green-50' : ''}
+                  ${showRationale && selectedOption === getChoiceId(choice) && getCorrectAnswer() !== getChoiceId(choice) ? 'border-red-500 bg-red-50' : ''}
                 `}
                 onClick={() => handleMcOptionSelect(choice)}
               >
@@ -202,15 +211,15 @@ export function QuestionRenderer({
                 <div className="flex items-center">
                   <div className={`
                     w-5 h-5 flex-shrink-0 rounded-sm border mr-3
-                    ${selectedOptions.includes(choice) ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
-                    ${showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(choice) ? 'border-green-500 bg-green-500' : ''}
-                    ${showRationale && selectedOptions.includes(choice) && Array.isArray(getCorrectAnswer()) && !getCorrectAnswer().includes(choice) ? 'border-red-500 bg-red-500' : ''}
+                    ${selectedOptions.includes(getChoiceId(choice)) ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}
+                    ${showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(getChoiceId(choice)) ? 'border-green-500 bg-green-500' : ''}
+                    ${showRationale && selectedOptions.includes(getChoiceId(choice)) && Array.isArray(getCorrectAnswer()) && !getCorrectAnswer().includes(getChoiceId(choice)) ? 'border-red-500 bg-red-500' : ''}
                   `}>
-                    {(selectedOptions.includes(choice) || (showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(choice))) && (
+                    {(selectedOptions.includes(getChoiceId(choice)) || (showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(getChoiceId(choice)))) && (
                       <Check className="text-white h-4 w-4 m-auto" />
                     )}
                   </div>
-                  <div className="text-gray-800">{typeof choice === 'object' && choice.text ? choice.text : choice}</div>
+                  <div className="text-gray-800">{getChoiceText(choice)}</div>
                 </div>
               </div>
             ))}
