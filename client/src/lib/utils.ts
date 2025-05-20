@@ -93,6 +93,9 @@ export function createUniqueId(prefix: string = ''): string {
   return `${prefix}${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 9)}`;
 }
 
+// Alias for backward compatibility
+export const uniqueId = createUniqueId;
+
 /**
  * Safely parses JSON with error handling
  */
