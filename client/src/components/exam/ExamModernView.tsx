@@ -7,6 +7,7 @@ import { ExamCalculator } from './ExamCalculator';
 import { ExamNotes } from './ExamNotes';
 import { ExamInstructionsModal } from './ExamInstructionsModal';
 import { EndTestModal } from './EndTestModal';
+import { ExamReviewScreen } from '../ExamReviewScreen';
 import { useToast } from '@/hooks/use-toast';
 
 interface ExamModernViewProps {
@@ -191,6 +192,33 @@ export function ExamModernView({
       setShowEndExam(false);
     }
   };
+
+  // Show review screen if exam is completed
+  if (showReviewScreen) {
+    return (
+      <ExamReviewScreen
+        score={examScore}
+        totalQuestions={totalQuestions}
+        questions={questions}
+        userAnswers={userAnswers}
+        answerCorrectness={answerCorrectness}
+        timeTaken={timer}
+        onBack={onBack}
+        onRetakeExam={() => {
+          // Reset exam state for retake
+          setUserAnswers({});
+          setShowRationale({});
+          setAnswerCorrectness({});
+          setMarkedForReview([]);
+          setTimerSeconds(0);
+          setTimer("00:00:00");
+          setCurrentQuestionIndex(0);
+          setTestCompleted(false);
+          setShowReviewScreen(false);
+        }}
+      />
+    );
+  }
 
   // Loading state
   if (isLoading) {
