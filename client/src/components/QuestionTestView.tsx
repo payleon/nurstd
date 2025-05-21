@@ -1,6 +1,6 @@
 import React from "react";
 import { Test, Question, QuestionsResponse } from "@shared/schema";
-import { ImprovedExamView } from "./exam/ImprovedExamView";
+import { FixedExamView } from "./exam/FixedExamView";
 
 interface QuestionTestViewProps {
   test: Test & { questionsData?: QuestionsResponse };
@@ -19,7 +19,7 @@ export function QuestionTestView({
 }: QuestionTestViewProps) {
   // Use the new modern exam interface that matches the screenshots
   return (
-    <ImprovedExamView 
+    <FixedExamView 
       test={test}
       onBack={onBack}
       onComplete={onComplete}

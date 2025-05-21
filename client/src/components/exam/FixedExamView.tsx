@@ -48,13 +48,15 @@ export function FixedExamView({
   const [showReviewScreen, setShowReviewScreen] = useState(false);
   const [examScore, setExamScore] = useState(0);
 
-  // Get questions from data
+  // Get questions from data with type safety
   const getQuestions = (): Question[] => {
-    if (test.questionsData && test.questionsData.questions) {
+    if (test.questionsData && typeof test.questionsData === 'object' && 
+        'questions' in test.questionsData && Array.isArray(test.questionsData.questions)) {
       return test.questionsData.questions;
     }
     
-    if (apiQuestionsData && apiQuestionsData.questions) {
+    if (apiQuestionsData && typeof apiQuestionsData === 'object' && 
+        'questions' in apiQuestionsData && Array.isArray(apiQuestionsData.questions)) {
       return apiQuestionsData.questions;
     }
     
@@ -279,7 +281,7 @@ export function FixedExamView({
 
     // Format correct answer text based on question type
     const getCorrectAnswerDisplay = () => {
-      if (!('correctAnswer' in currentQuestion)) return null;
+      if (!currentQuestion || !('correctAnswer' in currentQuestion)) return null;
       
       const correctAnswer = currentQuestion.correctAnswer;
       
@@ -288,10 +290,17 @@ export function FixedExamView({
           <div>
             <h4 className="font-medium text-blue-800 mb-2">Correct Order:</h4>
             <ol className="list-decimal pl-5 space-y-1">
-              {correctAnswer.map((item, index) => {
-                const text = typeof item === 'object' && item !== null && 'text' in item 
-                  ? item.text 
-                  : String(item);
+              {correctAnswer.map((item: any, index: number) => {
+                let text = '';
+                if (typeof item === 'object' && item !== null) {
+                  if ('text' in item) {
+                    text = item.text as string;
+                  } else if ('id' in item) {
+                    text = String(item.id);
+                  }
+                } else {
+                  text = String(item);
+                }
                 return <li key={index} className="mb-1">{text}</li>;
               })}
             </ol>
@@ -304,10 +313,17 @@ export function FixedExamView({
           <div>
             <h4 className="font-medium text-blue-800 mb-2">Correct Options:</h4>
             <ul className="list-disc pl-5 space-y-1">
-              {correctAnswer.map((item, index) => {
-                const text = typeof item === 'object' && item !== null && 'text' in item 
-                  ? item.text 
-                  : String(item);
+              {correctAnswer.map((item: any, index: number) => {
+                let text = '';
+                if (typeof item === 'object' && item !== null) {
+                  if ('text' in item) {
+                    text = item.text as string;
+                  } else if ('id' in item) {
+                    text = String(item.id);
+                  }
+                } else {
+                  text = String(item);
+                }
                 return <li key={index} className="mb-1">{text}</li>;
               })}
             </ul>
@@ -316,9 +332,16 @@ export function FixedExamView({
       }
       
       // For single-choice questions
-      const answerText = typeof correctAnswer === 'object' && correctAnswer !== null && 'text' in correctAnswer 
-        ? correctAnswer.text 
-        : String(correctAnswer);
+      let answerText = '';
+      if (typeof correctAnswer === 'object' && correctAnswer !== null) {
+        if ('text' in correctAnswer) {
+          answerText = correctAnswer.text as string;
+        } else if ('id' in correctAnswer) {
+          answerText = String(correctAnswer.id);
+        }
+      } else {
+        answerText = String(correctAnswer);
+      }
         
       return (
         <div>
