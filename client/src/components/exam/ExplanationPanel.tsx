@@ -10,7 +10,7 @@ interface OrderedResponseItem {
 export interface ExplanationPanelProps {
   isVisible: boolean;
   question: Question;
-  correctAnswer: string | string[] | OrderedResponseItem[];
+  correctAnswer: string | string[] | Record<string, any>[];
   explanationText?: string;
 }
 
@@ -22,20 +22,15 @@ export function ExplanationPanel({
 }: ExplanationPanelProps) {
   if (!isVisible) return null;
   
-  // Format answer for display
-  const formatAnswer = (answer: string | string[] | OrderedResponseItem[]) => {
-    if (Array.isArray(answer)) {
-      // Check if array contains objects with id/text structure
-      if (answer.length > 0 && typeof answer[0] === 'object' && 'text' in (answer[0] as any)) {
-        return answer.map(item => (item as OrderedResponseItem).text).join(', ');
-      }
-      return answer.join(', ');
+  // Get string representation of an answer for display
+  const getAnswerText = (item: any): string => {
+    if (item === null || item === undefined) return '';
+    
+    if (typeof item === 'object' && 'text' in item) {
+      return item.text;
     }
-    // Check if answer is an object with text property
-    if (typeof answer === 'object' && answer !== null && 'text' in (answer as any)) {
-      return (answer as OrderedResponseItem).text;
-    }
-    return answer;
+    
+    return String(item);
   };
   
   // Determine question type
@@ -47,6 +42,49 @@ export function ExplanationPanel({
   const questionObj = question as Record<string, any>;
   const concepts: string[] = Array.isArray(questionObj.concepts) ? questionObj.concepts : [];
   const references: string[] = Array.isArray(questionObj.references) ? questionObj.references : [];
+  
+  // Render the correct answer based on question type
+  const renderCorrectAnswer = () => {
+    if (isMcQuestion) {
+      return <div>{getAnswerText(correctAnswer)}</div>;
+    }
+    
+    if (isSataQuestion && Array.isArray(correctAnswer)) {
+      return (
+        <div>
+          <p className="mb-2">Select all that apply:</p>
+          <ul className="list-disc ml-5 space-y-1">
+            {correctAnswer.map((answer, index) => {
+              const displayText = getAnswerText(answer);
+              return <li key={index}>{displayText}</li>;
+            })}
+          </ul>
+        </div>
+      );
+    }
+    
+    if (isOrderedResponseQuestion && Array.isArray(correctAnswer)) {
+      return (
+        <div>
+          <p className="mb-2">Correct order:</p>
+          <ol className="list-decimal ml-5 space-y-1">
+            {correctAnswer.map((answer, index) => {
+              const displayText = getAnswerText(answer);
+              return <li key={index}>{displayText}</li>;
+            })}
+          </ol>
+        </div>
+      );
+    }
+    
+    // Fallback for other question types
+    if (Array.isArray(correctAnswer)) {
+      const displayText = correctAnswer.map(getAnswerText).join(', ');
+      return <div>{displayText}</div>;
+    }
+    
+    return <div>{getAnswerText(correctAnswer)}</div>;
+  };
   
   return (
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
@@ -60,29 +98,7 @@ export function ExplanationPanel({
       <div className="p-4 border-b border-gray-100">
         <h4 className="text-sm font-medium text-gray-500 mb-1">Correct Answer</h4>
         <div className="font-medium text-gray-900">
-          {isMcQuestion ? (
-            formatAnswer(correctAnswer)
-          ) : isSataQuestion ? (
-            <div>
-              <p className="mb-2">Select all that apply:</p>
-              <ul className="list-disc ml-5 space-y-1">
-                {Array.isArray(correctAnswer) && correctAnswer.map((answer, index) => (
-                  <li key={index}>{typeof answer === 'object' && 'text' in (answer as any) ? (answer as OrderedResponseItem).text : answer}</li>
-                ))}
-              </ul>
-            </div>
-          ) : isOrderedResponseQuestion ? (
-            <div>
-              <p className="mb-2">Correct order:</p>
-              <ol className="list-decimal ml-5 space-y-1">
-                {Array.isArray(correctAnswer) && correctAnswer.map((answer, index) => (
-                  <li key={index}>{typeof answer === 'object' && 'text' in (answer as any) ? (answer as OrderedResponseItem).text : answer}</li>
-                ))}
-              </ol>
-            </div>
-          ) : (
-            formatAnswer(correctAnswer)
-          )}
+          {renderCorrectAnswer()}
         </div>
       </div>
       
