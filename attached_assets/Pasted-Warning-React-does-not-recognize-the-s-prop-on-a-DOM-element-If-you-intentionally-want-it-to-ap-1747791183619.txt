@@ -1,0 +1,39 @@
+Warning: React does not recognize the `%s` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `%s` instead. If you accidentally passed it from a parent component, remove it from the DOM element.%s indicatorClassName indicatorclassname 
+    at div
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EQT6PU6X.js?v=84b3d3aa:170:13
+    at Provider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=84b3d3aa:38:15)
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-progress.js?v=84b3d3aa:29:7
+    at _c (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/ui/progress.tsx:22:11)
+    at div
+    at div
+    at _c9 (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/ui/card.tsx:114:12)
+    at div
+    at _c (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/ui/card.tsx:20:11)
+    at div
+    at MotionComponent (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/framer-motion.js?v=84b3d3aa:945:40)
+    at EnhancedTestCard (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/exam/EnhancedTestCard.tsx:24:36)
+    at div
+    at div
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EQT6PU6X.js?v=84b3d3aa:170:13
+    at Presence (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-KRRFLQDO.js?v=84b3d3aa:24:11)
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=84b3d3aa:383:13
+    at _c5 (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/ui/tabs.tsx:72:12)
+    at div
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EQT6PU6X.js?v=84b3d3aa:170:13
+    at Provider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=84b3d3aa:38:15)
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tabs.js?v=84b3d3aa:261:7
+    at div
+    at main
+    at div
+    at div
+    at ExamsAndStudies (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/pages/ExamsAndStudies.tsx:50:41)
+    at Suspense
+    at Route (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=84b3d3aa:323:16)
+    at LazyRoute (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/LazyRoute.tsx:20:29)
+    at Switch (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=84b3d3aa:379:17)
+    at Router
+    at BadgeProvider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/contexts/BadgeContext.tsx:52:33)
+    at Provider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=84b3d3aa:38:15)
+    at TooltipProvider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=84b3d3aa:59:5)
+    at QueryClientProvider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=84b3d3aa:2805:3)
+    at App

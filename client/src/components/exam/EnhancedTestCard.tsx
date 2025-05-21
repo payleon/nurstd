@@ -124,8 +124,7 @@ export function EnhancedTestCard({ test, userProgress, isRecommended = false }: 
               </div>
               <Progress 
                 value={userProgress?.bestScore || 0} 
-                className="h-2"
-                indicatorClassName={userProgress?.bestScore && userProgress.bestScore >= 70 ? 'bg-green-500' : 'bg-amber-500'}
+                className={`h-2 ${userProgress?.bestScore && userProgress.bestScore >= 70 ? '[&>div]:bg-green-500' : '[&>div]:bg-amber-500'}`}
               />
               <div className="text-xs text-gray-500 mt-1">
                 Last taken: {formatDate(userProgress?.lastCompleted)}
