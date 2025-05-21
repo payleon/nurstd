@@ -381,7 +381,8 @@ export default function StudyDashboard() {
                         description: "Practice with advanced NCLEX questions including prioritization scenarios, chart interpretation, and hotspot questions. Designed to simulate the latest NCLEX exam format.",
                         questionCount: 7,
                         timeLimit: 20,
-                        category: "Mixed"
+                        category: "Mixed",
+                        createdAt: new Date()
                       }}
                       isRecommended={true}
                     />
@@ -394,7 +395,8 @@ export default function StudyDashboard() {
                         description: "Focused practice on medication administration, drug classes, side effects, and dosage calculations to strengthen your weakest area.",
                         questionCount: 40,
                         timeLimit: 60,
-                        category: "Pharmacology"
+                        category: "Pharmacology",
+                        createdAt: new Date()
                       }}
                       isRecommended={true}
                     />
