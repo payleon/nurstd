@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { ChevronUp, ChevronDown, GripVertical, Check, X } from 'lucide-react';
 
+export interface OrderedResponseItem {
+  id: string;
+  text: string;
+}
+
 export interface OrderedResponseProps {
-  items: string[];
-  correctOrder?: string[];
+  items: OrderedResponseItem[] | string[];
+  correctOrder?: OrderedResponseItem[] | string[];
   onChange: (orderedItems: string[]) => void;
   userAnswer?: string[];
   showFeedback?: boolean;
@@ -21,13 +26,28 @@ export function OrderedResponseQuestion({
 }: OrderedResponseProps) {
   const [orderedItems, setOrderedItems] = useState<string[]>([]);
   
+  // Convert complex items to string IDs if needed
+  const getItemId = (item: string | OrderedResponseItem): string => {
+    return typeof item === 'string' ? item : item.id;
+  };
+
+  // Get the display text for an item
+  const getItemText = (item: string | OrderedResponseItem): string => {
+    return typeof item === 'string' ? item : item.text;
+  };
+  
+  // Process items to get their IDs
+  const getItemIds = (itemArray: (string | OrderedResponseItem)[]): string[] => {
+    return itemArray.map(getItemId);
+  };
+  
   // Initialize with either user's previous answer or shuffled items
   useEffect(() => {
     if (userAnswer && userAnswer.length > 0) {
       setOrderedItems(userAnswer);
     } else if (orderedItems.length === 0) {
       // Initialize with shuffled items
-      setOrderedItems([...items].sort(() => Math.random() - 0.5));
+      setOrderedItems([...getItemIds(items)].sort(() => Math.random() - 0.5));
     }
   }, [items, userAnswer]);
   
@@ -75,7 +95,12 @@ export function OrderedResponseQuestion({
   
   // Check if item is in correct position
   const isItemCorrect = (item: string, index: number): boolean => {
-    return correctOrder ? correctOrder[index] === item : false;
+    if (!correctOrder) return false;
+    
+    const correctItem = correctOrder[index];
+    const correctItemId = correctItem ? getItemId(correctItem) : '';
+    
+    return correctItemId === item;
   };
   
   return (
@@ -123,7 +148,10 @@ export function OrderedResponseQuestion({
                       </div>
                       
                       <div className="flex-grow">
-                        {item}
+                        {/* Find the original item text for display */}
+                        {items.find(i => getItemId(i) === item) ? 
+                          getItemText(items.find(i => getItemId(i) === item) as string | OrderedResponseItem) : 
+                          item}
                       </div>
                       
                       {showFeedback && (
@@ -178,7 +206,7 @@ export function OrderedResponseQuestion({
           <ol className="list-decimal pl-5 text-blue-700">
             {correctOrder.map((item, index) => (
               <li key={index} className="mb-1">
-                {item}
+                {getItemText(item as string | OrderedResponseItem)}
               </li>
             ))}
           </ol>
