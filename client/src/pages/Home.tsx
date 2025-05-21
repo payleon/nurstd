@@ -6,6 +6,8 @@ import { LearningRecommendations } from "@/components/LearningRecommendations";
 import { LearningAchievementsSection } from "@/components/LearningAchievementsSection";
 import { LearningProgressChart } from "@/components/progress/LearningProgressChart";
 import { EnhancedDashboard } from "@/components/dashboard/EnhancedDashboard";
+import { TeachingSection } from "@/components/teaching/TeachingSection"; 
+import { ConceptVisualizer } from "@/components/teaching/ConceptVisualizer";
 import { Test } from "@shared/schema";
 import { MessageCircle, Loader2 } from "lucide-react";
 import { lazyImport } from "@/lib/lazyImport";
@@ -148,6 +150,16 @@ export default function Home() {
               }}
               unlockedBadges={unlockedBadges}
             />
+            
+            {/* Teaching Section */}
+            <div className="mt-8 mb-6 bg-white rounded-lg shadow-sm p-6">
+              <TeachingSection />
+            </div>
+            
+            {/* Concept Visualizer */}
+            <div className="mb-8 bg-white rounded-lg shadow-sm p-6">
+              <ConceptVisualizer />
+            </div>
             
             {/* Legacy Components - can be removed once dashboard fully integrated */}
             <div className="grid grid-cols-1 gap-6 mb-6 mt-8 hidden">
