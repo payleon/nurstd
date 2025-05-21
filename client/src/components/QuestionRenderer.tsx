@@ -76,11 +76,11 @@ export function QuestionRenderer({
       if (Array.isArray(question.correctAnswer)) {
         // If it's an array of answers (for SATA questions)
         return question.correctAnswer.map(answer => {
-          return typeof answer === 'object' && answer.id ? answer.id : answer;
+          return typeof answer === 'object' && answer !== null && 'id' in answer ? answer.id : answer;
         });
       }
       // For single answers
-      return typeof question.correctAnswer === 'object' && question.correctAnswer.id 
+      return typeof question.correctAnswer === 'object' && question.correctAnswer !== null && 'id' in question.correctAnswer
         ? question.correctAnswer.id 
         : question.correctAnswer;
     }
@@ -202,9 +202,9 @@ export function QuestionRenderer({
                 key={index} 
                 className={`
                   p-4 border rounded-md cursor-pointer transition-all
-                  ${selectedOptions.includes(choice) ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'}
-                  ${showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(choice) ? 'border-green-500 bg-green-50' : ''}
-                  ${showRationale && selectedOptions.includes(choice) && Array.isArray(getCorrectAnswer()) && !getCorrectAnswer().includes(choice) ? 'border-red-500 bg-red-50' : ''}
+                  ${selectedOptions.includes(getChoiceId(choice)) ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-300'}
+                  ${showRationale && Array.isArray(getCorrectAnswer()) && getCorrectAnswer().includes(getChoiceId(choice)) ? 'border-green-500 bg-green-50' : ''}
+                  ${showRationale && selectedOptions.includes(getChoiceId(choice)) && Array.isArray(getCorrectAnswer()) && !getCorrectAnswer().includes(getChoiceId(choice)) ? 'border-red-500 bg-red-50' : ''}
                 `}
                 onClick={() => handleSataOptionToggle(choice)}
               >
@@ -228,7 +228,6 @@ export function QuestionRenderer({
               <div className="flex justify-end mt-4">
                 <Button 
                   onClick={() => onAnswer(selectedOptions)}
-                  disabled={selectedOptions.length === 0}
                   className="bg-blue-600 hover:bg-blue-700"
                 >
                   Submit Answer
@@ -250,9 +249,13 @@ export function QuestionRenderer({
                   <AlertDescription className="text-red-600">
                     <p>The correct options are:</p>
                     <ul className="list-disc ml-5 mt-1">
-                      {getCorrectAnswer().map((answer, index) => (
-                        <li key={index}>{answer}</li>
-                      ))}
+                      {(getCorrectAnswer() as string[]).map((answerId: string, index: number) => {
+                        // Find the matching choice text for this ID
+                        const matchingChoice = getChoices().find(c => getChoiceId(c) === answerId);
+                        return (
+                          <li key={index}>{matchingChoice ? getChoiceText(matchingChoice) : answerId}</li>
+                        );
+                      })}
                     </ul>
                   </AlertDescription>
                 )}
