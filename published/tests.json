@@ -1,5 +1,14 @@
 [
   {
+    "id": 11,
+    "title": "Advanced NCLEX Practice",
+    "path": "published/advanced_nclex_questions.json",
+    "description": "Practice with advanced NCLEX questions including prioritization scenarios, chart interpretation, and hotspot questions. Designed to simulate the latest NCLEX exam format.",
+    "questionCount": 7,
+    "timeLimit": 20,
+    "category": "Mixed"
+  },
+  {
     "id": 10,
     "title": "Cardiac & Emergency Nursing",
     "path": "published/cardiac_emergency_exam.json",

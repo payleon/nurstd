@@ -1,0 +1,345 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "title": "Nursing Prioritization: Post-Operative Patient",
+      "type": "ordered-response",
+      "text": "A nurse is caring for multiple patients. Order the following situations from highest to lowest priority.",
+      "rationale": "The correct priority order follows nursing principles for acute care: airway always comes first (patient with respiratory distress), followed by circulation (bleeding), then neurological changes (altered mental status), followed by pain (which is significant but not immediately life-threatening), and finally routine care (discharge teaching).",
+      "items": [
+        {
+          "id": "1",
+          "text": "A post-operative patient reporting pain level of 8/10"
+        },
+        {
+          "id": "2",
+          "text": "A patient showing signs of respiratory distress with O2 saturation of 88%"
+        },
+        {
+          "id": "3",
+          "text": "A patient due for discharge teaching"
+        },
+        {
+          "id": "4",
+          "text": "A patient with sudden onset of confusion and disorientation"
+        },
+        {
+          "id": "5",
+          "text": "A patient with bright red blood in surgical dressing"
+        }
+      ],
+      "correctOrder": ["2", "5", "4", "1", "3"],
+      "category": "Fundamentals"
+    },
+    {
+      "id": 2,
+      "title": "Managing Multiple Patients",
+      "type": "ordered-response",
+      "text": "A nurse on a medical-surgical unit has five patients. Arrange these nursing actions in order of priority.",
+      "rationale": "The nurse prioritizes care based on Maslow's hierarchy of needs and ABC (Airway, Breathing, Circulation) principles. Administering the blood transfusion comes first as it requires immediate attention and is time-sensitive for a patient with hemoglobin of 6.5 g/dL. The new insulin order is next as it affects metabolism and requires prompt attention. The third priority is mediating the family conflict which is causing immediate psychological distress, followed by the patient awaiting wound care, and finally calling the pharmacy about a non-urgent medication.",
+      "items": [
+        {
+          "id": "1",
+          "text": "Call pharmacy about a missing oral antibiotic due in 2 hours"
+        },
+        {
+          "id": "2",
+          "text": "Mediate a conflict between a patient and their family members who are arguing loudly"
+        },
+        {
+          "id": "3",
+          "text": "Administer a blood transfusion to a patient with hemoglobin of 6.5 g/dL"
+        },
+        {
+          "id": "4",
+          "text": "Implement a new insulin order for a patient with blood glucose of 280 mg/dL"
+        },
+        {
+          "id": "5",
+          "text": "Change a wound dressing for a patient with a surgical site from 3 days ago"
+        }
+      ],
+      "correctOrder": ["3", "4", "2", "5", "1"],
+      "category": "Fundamentals"
+    },
+    {
+      "id": 3,
+      "title": "Cardiac Rhythm Interpretation",
+      "type": "chart-exhibit",
+      "text": "Review the following ECG strip for a 68-year-old patient complaining of palpitations and dizziness.",
+      "rationale": "The ECG strip shows atrial fibrillation evidenced by the irregular rhythm, absence of P waves, and irregular R-R intervals. In atrial fibrillation, the atria quiver rather than contract effectively, which can lead to blood pooling and potential clot formation. The irregular ventricular response is caused by the bombardment of the AV node with chaotic atrial impulses.",
+      "exhibitType": "diagnostic-results",
+      "exhibitData": {
+        "ECG": {
+          "Rate": "110-150 beats per minute, irregular",
+          "Rhythm": "Irregularly irregular",
+          "P Waves": "Absent, replaced with fibrillatory waves",
+          "PR Interval": "Not measurable",
+          "QRS Complex": "0.08 seconds (normal)",
+          "QT Interval": "Variable",
+          "Other": "Irregular R-R intervals"
+        }
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "text": "Based on the ECG data provided, which cardiac rhythm is the patient most likely experiencing?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "Sinus tachycardia"
+            },
+            {
+              "id": "B",
+              "text": "Atrial fibrillation"
+            },
+            {
+              "id": "C",
+              "text": "Ventricular tachycardia"
+            },
+            {
+              "id": "D",
+              "text": "Second-degree heart block"
+            }
+          ],
+          "correctAnswer": "B"
+        },
+        {
+          "id": "q2",
+          "text": "Which assessment finding would be most consistent with this cardiac rhythm?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "Cannon a waves in the jugular venous pulse"
+            },
+            {
+              "id": "B",
+              "text": "Regular, bounding pulses"
+            },
+            {
+              "id": "C",
+              "text": "Irregular pulse with pulse deficit"
+            },
+            {
+              "id": "D",
+              "text": "Slow, regular pulse with occasional pauses"
+            }
+          ],
+          "correctAnswer": "C"
+        }
+      ],
+      "category": "Medical-Surgical"
+    },
+    {
+      "id": 4,
+      "title": "Chest Tube Placement",
+      "type": "hotspot",
+      "text": "Click on the appropriate location for insertion of a chest tube to drain a pneumothorax.",
+      "rationale": "The optimal placement for a chest tube to drain air from a pneumothorax is in the mid-axillary line at the 4th or 5th intercostal space. This location is above the diaphragm but sufficiently lateral and superior to effectively drain air, which rises to the highest point in the thoracic cavity when the patient is supine. The placement avoids major blood vessels, nerves, and organs while providing effective drainage of the pleural space.",
+      "imagePath": "/images/chest_anatomy.jpg",
+      "correctAreas": [
+        {
+          "id": "4th-5th-ics",
+          "x": 120,
+          "y": 100,
+          "width": 30,
+          "height": 30,
+          "label": "4th-5th intercostal space, mid-axillary line"
+        }
+      ],
+      "distractorAreas": [
+        {
+          "id": "2nd-ics",
+          "x": 100,
+          "y": 60,
+          "width": 30,
+          "height": 30,
+          "label": "2nd intercostal space, mid-clavicular line"
+        },
+        {
+          "id": "lower-chest",
+          "x": 130,
+          "y": 160,
+          "width": 30,
+          "height": 30,
+          "label": "Lower chest (risk of diaphragm/abdominal penetration)"
+        },
+        {
+          "id": "midline",
+          "x": 70,
+          "y": 100,
+          "width": 30,
+          "height": 30,
+          "label": "Midline (risk of great vessels)"
+        }
+      ],
+      "category": "Medical-Surgical"
+    },
+    {
+      "id": 5,
+      "title": "Medication Administration Sequence",
+      "type": "ordered-response",
+      "text": "Place the following steps in the correct order for administering an intramuscular injection.",
+      "rationale": "The correct sequence for IM injection administration follows standard nursing procedure. First, verify the medication order for accuracy and check for allergies. Perform hand hygiene before gathering supplies to maintain asepsis. Prepare the medication using appropriate technique, then identify the patient using two identifiers to ensure the right patient receives the medication. Select the appropriate site based on medication requirements and patient factors, then clean the site properly. Administer the injection using correct technique including appropriate angle and aspiration. Document the administration promptly, and finally monitor the patient for adverse effects.",
+      "items": [
+        {
+          "id": "1",
+          "text": "Verify medication order and check for allergies"
+        },
+        {
+          "id": "2",
+          "text": "Perform hand hygiene"
+        },
+        {
+          "id": "3",
+          "text": "Gather supplies and prepare medication"
+        },
+        {
+          "id": "4",
+          "text": "Identify patient using two identifiers"
+        },
+        {
+          "id": "5",
+          "text": "Select appropriate injection site"
+        },
+        {
+          "id": "6",
+          "text": "Clean site with antiseptic"
+        },
+        {
+          "id": "7",
+          "text": "Administer injection at correct angle and aspirate"
+        },
+        {
+          "id": "8",
+          "text": "Document medication administration"
+        },
+        {
+          "id": "9",
+          "text": "Monitor patient for adverse reactions"
+        }
+      ],
+      "correctOrder": ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+      "category": "Fundamentals"
+    },
+    {
+      "id": 6,
+      "title": "Newborn Assessment",
+      "type": "hotspot",
+      "text": "Identify the location where you would best auscultate heart sounds in a newborn.",
+      "rationale": "Heart sounds in a newborn are best auscultated slightly to the left of the sternum in the 3rd to 4th intercostal space. This location differs from adults due to the newborn's heart being positioned more horizontally in the chest. Proper placement is essential for accurate assessment of heart rate and heart sounds in the newborn.",
+      "imagePath": "/images/newborn_chest.jpg",
+      "correctAreas": [
+        {
+          "id": "apical",
+          "x": 75,
+          "y": 65,
+          "width": 20,
+          "height": 20,
+          "label": "3rd-4th intercostal space, left of sternum"
+        }
+      ],
+      "distractorAreas": [
+        {
+          "id": "right-upper",
+          "x": 105,
+          "y": 45,
+          "width": 20,
+          "height": 20,
+          "label": "Right upper chest"
+        },
+        {
+          "id": "left-lower",
+          "x": 60,
+          "y": 85,
+          "width": 20,
+          "height": 20,
+          "label": "Left lower chest"
+        },
+        {
+          "id": "midline",
+          "x": 90,
+          "y": 65,
+          "width": 20,
+          "height": 20,
+          "label": "Midline sternum"
+        }
+      ],
+      "category": "Maternity"
+    },
+    {
+      "id": 7,
+      "title": "ABG Interpretation",
+      "type": "chart-exhibit",
+      "text": "Analyze the following arterial blood gas results for a 65-year-old patient with COPD who presents with increased respiratory distress.",
+      "rationale": "These ABG results indicate chronic respiratory acidosis with partial compensation. The low pH and elevated PaCO2 confirm respiratory acidosis from CO2 retention, typical in COPD exacerbation. The elevated HCO3- suggests renal compensation has begun but isn't complete, which is typical of chronic respiratory acidosis. The low PaO2 indicates significant hypoxemia, and the relatively normal SaO2 reflects the right-shifted oxygen dissociation curve in chronic COPD, allowing reasonable saturation despite low PaO2.",
+      "exhibitType": "lab-results",
+      "exhibitData": {
+        "Arterial Blood Gas": {
+          "pH": "7.32 (Normal: 7.35-7.45)",
+          "PaCO2": "58 mmHg (Normal: 35-45 mmHg)",
+          "PaO2": "58 mmHg (Normal: 80-100 mmHg)",
+          "HCO3-": "29 mEq/L (Normal: 22-26 mEq/L)",
+          "SaO2": "88% (Normal: 95-100%)"
+        },
+        "Additional Labs": {
+          "Hemoglobin": "16.5 g/dL (Normal: 12-16 g/dL)",
+          "Hematocrit": "49% (Normal: 37-47%)"
+        }
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "text": "Which acid-base imbalance do these results primarily indicate?",
+          "choices": [
+            {
+              "id": "A",
+              "text": "Respiratory acidosis with partial compensation"
+            },
+            {
+              "id": "B",
+              "text": "Metabolic acidosis with respiratory compensation"
+            },
+            {
+              "id": "C",
+              "text": "Respiratory alkalosis with metabolic compensation"
+            },
+            {
+              "id": "D",
+              "text": "Mixed metabolic and respiratory acidosis"
+            }
+          ],
+          "correctAnswer": "A"
+        },
+        {
+          "id": "q2",
+          "text": "Which clinical findings would you expect in this patient? Select all that apply.",
+          "choices": [
+            {
+              "id": "A",
+              "text": "Tachypnea"
+            },
+            {
+              "id": "B",
+              "text": "Use of accessory muscles for breathing"
+            },
+            {
+              "id": "C",
+              "text": "Decreased level of consciousness"
+            },
+            {
+              "id": "D",
+              "text": "Kussmaul respirations"
+            },
+            {
+              "id": "E",
+              "text": "Peripheral cyanosis"
+            }
+          ],
+          "correctAnswer": ["A", "B", "C", "E"]
+        }
+      ],
+      "category": "Medical-Surgical"
+    }
+  ]
+}
