@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Book, BookOpen, Video, FileText, PenTool, Brain, Lightbulb, ChevronRight } from "lucide-react";
+import { Link } from "wouter";
 
 interface Resource {
   id: string;
@@ -208,10 +209,10 @@ export function TeachingSection() {
                   </CardContent>
                   <CardFooter>
                     <Button variant="outline" className="w-full" asChild>
-                      <a href={resource.link} className="flex items-center justify-center">
+                      <Link href={resource.link} className="flex items-center justify-center">
                         <span>Start Learning</span>
                         <ChevronRight className="h-4 w-4 ml-1" />
-                      </a>
+                      </Link>
                     </Button>
                   </CardFooter>
                 </Card>
