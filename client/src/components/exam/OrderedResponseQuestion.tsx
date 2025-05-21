@@ -200,6 +200,17 @@ export function OrderedResponseQuestion({
         </Droppable>
       </DragDropContext>
       
+      {!showFeedback && !disabled && (
+        <div className="p-4 border-t border-gray-200 flex justify-end">
+          <button
+            onClick={() => onChange(orderedItems)}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Submit Answer
+          </button>
+        </div>
+      )}
+      
       {showFeedback && correctOrder && (
         <div className="p-4 border-t border-gray-200 bg-blue-50">
           <h4 className="font-medium text-blue-800 mb-2">Correct Order:</h4>
