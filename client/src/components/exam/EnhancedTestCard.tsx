@@ -35,7 +35,7 @@ export function EnhancedTestCard({ test, userProgress, isRecommended = false }: 
     return categoryMap[category] || { bg: 'bg-gray-100', text: 'text-gray-800', border: 'border-gray-200' };
   };
   
-  const categoryColor = getCategoryColor(test.category);
+  const categoryColor = getCategoryColor(test.category || 'Mixed');
   const hasTakenTest = userProgress?.attempts && userProgress.attempts > 0;
   
   // Format the time nicely

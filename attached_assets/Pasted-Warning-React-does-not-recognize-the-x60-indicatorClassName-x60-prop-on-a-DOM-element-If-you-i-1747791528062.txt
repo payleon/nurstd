@@ -1,0 +1,32 @@
+Warning: React does not recognize the &#x60;indicatorClassName&#x60; prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase &#x60;indicatorclassname&#x60; instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at div
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-EQT6PU6X.js?v=84b3d3aa:170:13
+    at Provider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=84b3d3aa:38:15)
+    at https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-progress.js?v=84b3d3aa:29:7
+    at _c (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/ui/progress.tsx:22:11)
+    at div
+    at div
+    at div
+    at _c9 (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/ui/card.tsx:114:12)
+    at div
+    at _c (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/ui/card.tsx:20:11)
+    at div
+    at StudyRecommendations (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/exam/StudyRecommendations.tsx:23:3)
+    at div
+    at div
+    at div
+    at main
+    at div
+    at div
+    at StudyDashboard (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/pages/StudyDashboard.tsx?t=1747791212216:36:41)
+    at Suspense
+    at Route (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=84b3d3aa:323:16)
+    at LazyRoute (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/components/LazyRoute.tsx:20:29)
+    at Switch (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=84b3d3aa:379:17)
+    at Router
+    at BadgeProvider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/src/contexts/BadgeContext.tsx:52:33)
+    at Provider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=84b3d3aa:38:15)
+    at TooltipProvider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=84b3d3aa:59:5)
+    at QueryClientProvider (https://eb2195df-a46d-49a2-acfd-29d6ae78f8e4-00-1tokps2u8qgne.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=84b3d3aa:2805:3)
+    at App
+[vite] connected.

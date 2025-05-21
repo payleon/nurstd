@@ -149,10 +149,7 @@ export function StudyRecommendations({
                     <h4 className="font-semibold text-gray-800">{area.category}</h4>
                     <span className="text-sm font-medium text-red-600">{area.score}%</span>
                   </div>
-                  <Progress value={area.score} className="h-2" 
-                    // @ts-ignore - we're adding our own prop for styling
-                    indicatorClassName="bg-red-500"
-                  />
+                  <Progress value={area.score} className="h-2 [&>div]:bg-red-500" />
                   <div className="flex justify-between text-xs text-gray-500">
                     <span>{area.questionCount} questions attempted</span>
                     <span>Target: 75%+</span>
