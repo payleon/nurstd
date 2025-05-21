@@ -68,7 +68,7 @@ export function OrderedResponseQuestion({
     newItems.splice(destination.index, 0, removed);
     
     setOrderedItems(newItems);
-    onChange(newItems);
+    // Only notify parent when Submit button is clicked, not during drag
   };
   
   // Move item up
@@ -79,7 +79,7 @@ export function OrderedResponseQuestion({
     [newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]];
     
     setOrderedItems(newItems);
-    onChange(newItems);
+    // Don't notify parent until Submit is clicked
   };
   
   // Move item down
@@ -90,7 +90,7 @@ export function OrderedResponseQuestion({
     [newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]];
     
     setOrderedItems(newItems);
-    onChange(newItems);
+    // Don't notify parent until Submit is clicked
   };
   
   // Check if item is in correct position

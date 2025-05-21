@@ -106,7 +106,7 @@ export function QuestionRenderer({
       : [...selectedOptions, optionId];
     
     setSelectedOptions(newSelection);
-    onAnswer(newSelection);
+    // Only update parent component when submit button is clicked
   };
   
   // Handle ordered response changes
