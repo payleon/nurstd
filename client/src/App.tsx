@@ -115,6 +115,7 @@ function Router() {
       {/* Learning Content Pages */}
       <LazyRoute path="/learning/abg-interpretation" component={AbgInterpretation} />
       <LazyRoute path="/learning/heart-sounds" component={HeartSounds} />
+      <LazyRoute path="/learning/resources" component={ResourcesIndex} />
       
       {/* Content Review */}
       <Route path="/content/medical-surgical">
