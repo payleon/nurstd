@@ -30,6 +30,7 @@ const CreateLearningPath = lazy(() => import("@/pages/create-learning-path"));
 const LearningPath = lazy(() => import("@/pages/learning-path"));
 const AdvancedExamPage = lazy(() => import("@/pages/AdvancedExamPage"));
 const StudyDashboard = lazy(() => import("@/pages/StudyDashboard"));
+const QuickReview = lazy(() => import("@/pages/QuickReview"));
 
 // Learning content pages
 const AbgInterpretation = lazy(() => import("@/pages/learning/AbgInterpretation"));
@@ -108,6 +109,7 @@ function Router() {
       <LazyRoute path="/tooltip-demo" component={TooltipDemo} />
       <LazyRoute path="/custom-quiz" component={CustomQuizView} />
       <LazyRoute path="/flashcards" component={FlashcardStudy} />
+      <LazyRoute path="/quick-review" component={QuickReview} />
       <LazyRoute path="/learning-paths" component={LearningPaths} />
       <LazyRoute path="/create-learning-path" component={CreateLearningPath} />
       <LazyRoute path="/learning-path/:id" component={LearningPath} />

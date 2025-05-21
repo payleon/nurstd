@@ -12,7 +12,9 @@ import {
   AlarmClock,
   GamepadIcon,
   BookOpen,
-  GraduationCap
+  GraduationCap,
+  Clock,
+  FlashlightIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -95,6 +97,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       icon: <BarChart className="h-5 w-5 mr-3" />,
       active: activeCategory === "Study Dashboard",
       path: "/study-dashboard"
+    },
+    {
+      title: "Quick Review",
+      icon: <FlashlightIcon className="h-5 w-5 mr-3" />,
+      active: activeCategory === "Quick Review",
+      path: "/quick-review"
     },
     {
       title: "Learning Paths",
