@@ -34,6 +34,7 @@ const StudyDashboard = lazy(() => import("@/pages/StudyDashboard"));
 // Learning content pages
 const AbgInterpretation = lazy(() => import("@/pages/learning/AbgInterpretation"));
 const HeartSounds = lazy(() => import("@/pages/learning/HeartSounds"));
+const ResourcesIndex = lazy(() => import("@/pages/learning/ResourcesIndex"));
 
 // Importing the CustomQuizView component
 const CustomQuizView = lazy(() => import("@/components/CustomQuizView").then(module => ({ default: module.CustomQuizView })));
