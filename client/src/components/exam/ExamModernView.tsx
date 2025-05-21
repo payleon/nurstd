@@ -109,6 +109,13 @@ export function ExamModernView({
           answer.length === currentQuestion.correctAnswer.length &&
           answer.every(a => currentQuestion.correctAnswer.includes(a));
       }
+    } else if (currentQuestion.type === 'ordered-response' && 'correctOrder' in currentQuestion && Array.isArray(currentQuestion.correctOrder)) {
+      if (Array.isArray(answer)) {
+        // Check if ordered list matches the correct order
+        isCorrect = 
+          answer.length === currentQuestion.correctOrder.length &&
+          answer.every((a, index) => a === currentQuestion.correctOrder[index]);
+      }
     }
     
     // Store correctness and show rationale

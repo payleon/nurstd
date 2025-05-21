@@ -274,14 +274,23 @@ export function AdvancedExamView({
         isCorrect = correctAnswers.size === userAnswerSet.size && 
                    correctAnswersArr.every(value => userAnswerSet.has(value));
       }
-    } else if (currentQuestion.type === 'ordered-response' && 'correctAnswer' in currentQuestion) {
+    } else if (currentQuestion.type === 'ordered-response') {
       // For ordered response, check if the arrays match exactly in order
-      if (Array.isArray(normalizedAnswer) && Array.isArray(currentQuestion.correctAnswer)) {
-        isCorrect = normalizedAnswer.length === currentQuestion.correctAnswer.length &&
-                   normalizedAnswer.every((value, index) => {
-                     const correctItem = currentQuestion.correctAnswer[index];
-                     return value === correctItem;
-                   });
+      if (Array.isArray(normalizedAnswer)) {
+        // First, try with correctOrder property which is the standard for ordered-response
+        if ('correctOrder' in currentQuestion && Array.isArray(currentQuestion.correctOrder)) {
+          isCorrect = 
+            normalizedAnswer.length === currentQuestion.correctOrder.length &&
+            normalizedAnswer.every((a, index) => a === currentQuestion.correctOrder[index]);
+        } 
+        // Fallback to correctAnswer property if available
+        else if ('correctAnswer' in currentQuestion && Array.isArray(currentQuestion.correctAnswer)) {
+          isCorrect = normalizedAnswer.length === currentQuestion.correctAnswer.length &&
+                     normalizedAnswer.every((value, index) => {
+                       const correctItem = currentQuestion.correctAnswer[index];
+                       return value === correctItem;
+                     });
+        }
       }
     }
     
