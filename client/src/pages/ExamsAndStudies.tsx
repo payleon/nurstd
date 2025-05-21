@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Input } from '../components/ui/input';
-import { Search, Book, FileText, HelpCircle, BookOpen } from 'lucide-react';
+import { Search, Book, FileText, HelpCircle, BookOpen, Filter, Award } from 'lucide-react';
 import { Header } from '../components/ui/header';
 import { Sidebar } from '../components/ui/sidebar';
 import { fetchQuestions, fetchTests } from '../utils/api'; 
@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { QuizGenerator } from '../components/QuizGenerator';
+import { EnhancedTestCard } from '../components/exam/EnhancedTestCard';
 
 // Define case study categories
 const categories = [
@@ -501,105 +502,100 @@ export default function ExamsAndStudies() {
               </TabsContent>
               
               <TabsContent value="practice-tests">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="mb-4 flex flex-col md:flex-row justify-between items-center">
+                  <div className="relative w-full md:w-64 mb-4 md:mb-0">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <Input
+                      type="text"
+                      placeholder="Search exams..."
+                      className="pl-10 bg-white"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                  </div>
+                  
+                  <div className="flex space-x-2">
+                    <Button variant="outline" className="flex items-center">
+                      <Filter className="h-4 w-4 mr-2" />
+                      Filter
+                    </Button>
+                    <Button variant="outline" className="flex items-center">
+                      <Award className="h-4 w-4 mr-2" />
+                      Show recommended
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* New test with enhanced card */}
+                  <EnhancedTestCard 
+                    test={tests.find(t => t.id === 11) || {
+                      id: 11,
+                      title: "Advanced NCLEX Practice",
+                      path: "published/advanced_nclex_questions.json",
+                      description: "Practice with advanced NCLEX questions including prioritization scenarios, chart interpretation, and hotspot questions. Designed to simulate the latest NCLEX exam format.",
+                      questionCount: 7,
+                      timeLimit: 20,
+                      category: "Mixed"
+                    }}
+                    isRecommended={true}
+                  />
+                  
                   {/* Dynamic test cards from API */}
                   {tests && tests.length > 0 ? (
-                    tests.map((test) => (
-                      <div key={test.id} className="neuro-card p-4 flex flex-col h-full">
-                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">{test.title}</h3>
-                        <div className="mb-2">
-                          <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">
-                            {test.questionCount || 75} Questions
-                          </span>
-                          <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
-                            {test.timeLimit || 2} {test.timeLimit === 1 ? 'Hour' : 'Hours'}
-                          </span>
-                        </div>
-                        <p className="text-gray-700 mb-4 text-sm flex-grow">
-                          {test.description || `Practice test covering ${test.category || 'nursing'} content.`}
-                        </p>
-                        <div className="mt-auto">
-                          <button 
-                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation(`/tests/${test.id}`)}
-                            aria-label={`Start ${test.title} Test`}
-                          >
-                            Start Test
-                          </button>
-                        </div>
-                      </div>
+                    tests.filter(test => test.id !== 11).map((test) => (
+                      <EnhancedTestCard 
+                        key={test.id}
+                        test={test}
+                        userProgress={
+                          // Example user progress data (replace with real data when available)
+                          test.id % 3 === 0 ? {
+                            attempts: Math.floor(Math.random() * 5) + 1,
+                            bestScore: Math.floor(Math.random() * 40) + 60,
+                            lastCompleted: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString(),
+                            isCompleted: true
+                          } : undefined
+                        }
+                      />
                     ))
                   ) : (
                     <>
-                      {/* Fallback for when no tests are available or loading */}
-                      <div className="neuro-card p-4 flex flex-col h-full">
-                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">Full NCLEX Practice Test</h3>
-                        <div className="mb-2">
-                          <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">
-                            175 Questions
-                          </span>
-                          <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
-                            5 Hours
-                          </span>
-                        </div>
-                        <p className="text-gray-700 mb-4 text-sm flex-grow">
-                          A comprehensive exam that simulates the full NCLEX experience with adaptive difficulty.
-                        </p>
-                        <div className="mt-auto">
-                          <button 
-                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation("/tests/1")}
-                            aria-label="Start Full NCLEX Practice Test"
-                          >
-                            Start Test
-                          </button>
-                        </div>
-                      </div>
+                      {/* Fallback in case API tests don't load */}
+                      <EnhancedTestCard 
+                        test={{
+                          id: 999,
+                          title: "Full NCLEX Practice Test",
+                          path: "",
+                          description: "A comprehensive exam that simulates the full NCLEX experience with adaptive difficulty.",
+                          questionCount: 175,
+                          timeLimit: 300, // 5 hours in minutes
+                          category: "Mixed"
+                        }}
+                      />
                       
-                      <div className="neuro-card p-4 flex flex-col h-full">
-                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">Mini NCLEX Practice</h3>
-                        <div className="mb-2">
-                          <span className="inline-block bg-green-100 text-green-800 px-2 py-1 text-xs rounded">
-                            75 Questions
-                          </span>
-                          <span className="inline-block bg-gray-100 text-gray-800 px-2 py-1 text-xs rounded ml-2">
-                            2 Hours
-                          </span>
-                        </div>
-                        <p className="text-gray-700 mb-4 text-sm flex-grow">
-                          A shorter version of the NCLEX exam, perfect for when you're short on time.
-                        </p>
-                        <div className="mt-auto">
-                          <button 
-                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation("/tests/2")}
-                            aria-label="Start Mini NCLEX Practice Test"
-                          >
-                            Start Test
-                          </button>
-                        </div>
-                      </div>
+                      <EnhancedTestCard 
+                        test={{
+                          id: 998,
+                          title: "Mini NCLEX Practice",
+                          path: "",
+                          description: "A shorter version of the NCLEX exam, perfect for when you're short on time.",
+                          questionCount: 75,
+                          timeLimit: 120, // 2 hours in minutes
+                          category: "Mixed"
+                        }}
+                      />
                       
-                      <div className="neuro-card p-4 flex flex-col h-full">
-                        <h3 className="font-bold text-[#13294B] mb-2 text-lg">Custom Practice Test</h3>
-                        <div className="mb-2">
-                          <span className="inline-block bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">
-                            Customizable
-                          </span>
-                        </div>
-                        <p className="text-gray-700 mb-4 text-sm flex-grow">
-                          Create your own practice test by selecting the number of questions, time limit, and specific content areas.
-                        </p>
-                        <div className="mt-auto">
-                          <button 
-                            className="neuro-button-primary inline-block w-full text-center min-h-[44px]"
-                            onClick={() => setLocation("/tests/custom")}
-                            aria-label="Create Custom Practice Test"
-                          >
-                            Create Test
-                          </button>
-                        </div>
-                      </div>
+                      <EnhancedTestCard 
+                        test={{
+                          id: 997,
+                          title: "Custom Practice Test",
+                          path: "",
+                          description: "Create your own practice test by selecting the number of questions, time limit, and specific content areas.",
+                          questionCount: 0,
+                          timeLimit: 0,
+                          category: "Customizable"
+                        }}
+                      />
                     </>
                   )}
                 </div>
