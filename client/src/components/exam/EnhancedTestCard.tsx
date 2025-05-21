@@ -39,12 +39,15 @@ export function EnhancedTestCard({ test, userProgress, isRecommended = false }: 
   const hasTakenTest = userProgress?.attempts && userProgress.attempts > 0;
   
   // Format the time nicely
-  const formatTimeLimit = (minutes: number) => {
-    if (minutes < 60) {
-      return `${minutes} min`;
+  const formatTimeLimit = (minutes: number | null) => {
+    // Use default value of 60 minutes if null
+    const mins = minutes ?? 60;
+    
+    if (mins < 60) {
+      return `${mins} min`;
     } else {
-      const hours = Math.floor(minutes / 60);
-      const remainingMinutes = minutes % 60;
+      const hours = Math.floor(mins / 60);
+      const remainingMinutes = mins % 60;
       return remainingMinutes > 0 
         ? `${hours}h ${remainingMinutes}m` 
         : `${hours}h`;
