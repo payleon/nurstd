@@ -8,6 +8,8 @@ import { ExamNotes } from './ExamNotes';
 import { ExamInstructionsModal } from './ExamInstructionsModal';
 import { EndTestModal } from './EndTestModal';
 import { ExamReviewScreen } from '../ExamReviewScreen';
+// Import directly 
+import { ExplanationPanel } from './ExplanationPanel.tsx';
 import { useToast } from '@/hooks/use-toast';
 
 interface ExamModernViewProps {
@@ -392,19 +394,38 @@ export function ExamModernView({
                 
                 <div className="prose prose-sm max-w-none">
                   <p>
-                    <strong>{currentQuestion.title}</strong> involves understanding key nursing principles. 
+                    <strong>{currentQuestion.title}</strong> 
+                  </p>
+                  <div className="mt-2 text-gray-700 whitespace-pre-line">
                     {currentQuestion.rationale || 
                       "The correct answer demonstrates proper prioritization of care based on the patient's condition and nursing principles."}
-                  </p>
+                  </div>
                   
-                  {currentQuestion.type === 'mc' && 'correctAnswer' in currentQuestion && (
-                    <div className="mt-4">
-                      <h4 className="font-bold">Correct Answer:</h4>
-                      <p>
-                        {currentQuestion.correctAnswer}
-                      </p>
-                    </div>
-                  )}
+                  {/* Display correct answer with different formats based on question type */}
+                  <div className="mt-4">
+                    <h4 className="font-bold">Correct Answer:</h4>
+                    {currentQuestion.type === 'ordered-response' && 'correctAnswer' in currentQuestion && Array.isArray(currentQuestion.correctAnswer) ? (
+                      <ol className="list-decimal ml-5 mt-2">
+                        {currentQuestion.correctAnswer.map((answer, index) => (
+                          <li key={index} className="mt-1">
+                            {typeof answer === 'object' && answer !== null && 'text' in answer ? answer.text : answer}
+                          </li>
+                        ))}
+                      </ol>
+                    ) : currentQuestion.type === 'sata' && 'correctAnswer' in currentQuestion && Array.isArray(currentQuestion.correctAnswer) ? (
+                      <ul className="list-disc ml-5 mt-2">
+                        {currentQuestion.correctAnswer.map((answer, index) => (
+                          <li key={index} className="mt-1">
+                            {typeof answer === 'object' && answer !== null && 'text' in answer ? answer.text : answer}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : 'correctAnswer' in currentQuestion ? (
+                      <p>{typeof currentQuestion.correctAnswer === 'object' && currentQuestion.correctAnswer !== null && 'text' in currentQuestion.correctAnswer 
+                        ? currentQuestion.correctAnswer.text 
+                        : currentQuestion.correctAnswer}</p>
+                    ) : null}
+                  </div>
                 </div>
               </div>
             </>
