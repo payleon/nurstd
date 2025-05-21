@@ -122,7 +122,7 @@ export function QuestionRenderer({
     if (showRationale) return; // Prevent changing after seeing rationale
     
     // For single-selection hotspot
-    if (!question.allowMultipleHotspots) {
+    if (question.type === 'hotspot' && 'allowMultipleHotspots' in question && !question.allowMultipleHotspots) {
       setSelectedHotspots([id]);
       onAnswer([id]);
       return;
@@ -288,7 +288,7 @@ export function QuestionRenderer({
               selectedHotspots={selectedHotspots}
             />
             
-            {!showRationale && question.allowMultipleHotspots && (
+            {!showRationale && question.type === 'hotspot' && 'allowMultipleHotspots' in question && question.allowMultipleHotspots && (
               <div className="flex justify-end mt-4">
                 <Button 
                   onClick={() => onAnswer(selectedHotspots)}
