@@ -29,6 +29,7 @@ const LearningPaths = lazy(() => import("@/pages/learning-paths"));
 const CreateLearningPath = lazy(() => import("@/pages/create-learning-path"));
 const LearningPath = lazy(() => import("@/pages/learning-path"));
 const AdvancedExamPage = lazy(() => import("@/pages/AdvancedExamPage"));
+const StudyDashboard = lazy(() => import("@/pages/StudyDashboard"));
 
 // Importing the CustomQuizView component
 const CustomQuizView = lazy(() => import("@/components/CustomQuizView").then(module => ({ default: module.CustomQuizView })));
@@ -94,6 +95,7 @@ function Router() {
           return null;
         }}
       </Route>
+      <LazyRoute path="/study-dashboard" component={StudyDashboard} />
       <LazyRoute path="/study-strategies" component={StudyStrategies} />
       <LazyRoute path="/study-timer" component={StudyTimer} />
       <LazyRoute path="/games" component={Games} preload={true} />
